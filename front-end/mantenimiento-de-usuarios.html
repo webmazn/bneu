@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MRV Plataforma del Sector Energía | Mantenimiento de Usuarios</title>
+    <meta name="description" content="MRV Plataforma del Sector Energía">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-76x76.png" sizes="76x76">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-114x114.png" sizes="114x114">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-144x144.png" sizes="144x144">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-180x180.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="images/favicon/android-icon-192x192.png" sizes="192x192">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+    <meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!--script(src="https://www.google.com/recaptcha/api.js", async, defer)-->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcKud4UAAAAAIWfqQyeI8l83jWB4WlvDkpWMWKC"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
+      <div class="container-fluid bg-nuevo-azul">
+        <div class="container menu-main">
+          <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
+            <ul class="navbar-nav mr-md-auto">
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="https://www.gob.pe/minem" target="_blank"><img src="./images/logo_mem.svg" height="48"></a></li>
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="./images/logo_dgee.svg" height="48"></a></li>
+            </ul>
+            <ul class="navbar-nav ml-md-auto">
+              <li class="nav-item align-self-center"><a class="btn btn-danger btn-md px-4 font-weight-bold" href="./login.html" role="button">CERRAR SESIÓN</a></li>
+            </ul>
+          </header>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container menu-sub">
+          <nav class="navbar navbar-expand-lg p-0 py-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="./index.html"><img src="./images/logo_web.svg" height="33"></a></li>
+                <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-4" href="./index.html">INICIO</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./campanas.html">CAMPAÑAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
+              </ul>
+              <div class="btn-group w-sm-100"><a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>USU0001 - JUAN PEREZ SANCHEZ <br></b></small><small class="text-truncate">20105678910 - NOMBRE EMPRESA</small></a>
+                <div class="dropdown-menu dropdown-menu-right w-sm-100"><span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-actor-02">Administrado</span><br><span class="badge badge-actor-03">Especialista</span><br><span class="badge badge-actor-04">Evaluador MINAM</span><br><span class="badge badge-actor-05">Verificador Externo</span><br><span class="badge badge-actor-06">Administrador MINEM</span></span><a class="dropdown-item" href="./mantenimiento-de-tablas.html"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="./login.html"><i class="fas fa-sign-out-alt pr-1"></i>Salir del sistema</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="flecha-top d-print-none"><i class="fas fa-angle-double-right fa-2x text-dark btn-slider-bottom"></i></div>
+    <div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_fb.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ig.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_tw.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_yt.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_wp.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ld.svg"></a></div>
+    <div class="container-fluid map-root" id="historia"></div>
+    <div class="container my-4" id="cuerpo">
+      <div class="row">
+        <div class="col-12">
+          <div class="container m-0 px-0 py-4">
+            <div class="row">
+              <div class="col-md-12 col-lg-9 p-4 bg-light">
+                <div class="h4 text-cyan">Mantenimiento de Usuarios&nbsp;</div>
+                <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+              </div>
+              <div class="col-md-12 col-lg-3">
+                <div class="row">
+                  <div class="col-12"><span data-toggle="modal" data-target="#modal-usuario">
+                      <button class="btn btn-azul w-100 mb-3" href="#" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nuevo usuario</button></span>
+                    <button class="btn btn-plomo w-100 mb-3" href="#">Regresar</button>
+                    <button class="btn btn-warning w-100 mb-3" href="#">Ayuda</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6 pt-4">
+                <form>
+                  <div class="form-group">
+                    <label for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Ingrese si conoce el nombre de la iniciativa o la(s) palabra(s) asociada(s) a las iniciativas de interés. En caso de no encontrar resultados acceda a la búsqueda avanzada."></i></label>
+                    <div class="input-group">
+                      <!--.input-group-prepend
+                      span.input-group-text#inputGroup1
+                        i.fas.fa-search
+                      -->
+                      <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
+                      <div class="input-group-append">
+                        <!--span.input-group-text-->
+                        <button class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
+                      </div>
+                      <!---->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12 text-right">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="titulo-avanzado" data-toggle="collapse" href="#busqueda-avanzada" aria-expanded="false" aria-controls="busqueda-avanzada"><span>Búsqueda avanzada&nbsp;<i class="fas fa-sort"></i></span></div>
+                            <div class="collapse" id="busqueda-avanzada">
+                              <div class="card card-body">
+                                <div class="row">
+                                  <div class="col-sm-12 pb-2 text-left">
+                                    <div class="titulo-avanzado" data-toggle="collapse" href="#datos-principales" aria-expanded="false" aria-controls="datos-principales"><span><i class="far fa-list-alt"></i>&nbsp;
+                                        Datos Principales</span></div>
+                                    <div class="collapse" id="datos-principales">
+                                      <div class="card card-body">
+                                        <!--.row
+                                        .col-sm-12
+                                          .form-group
+                                            label(for="cbo-medida-mitigacion") Medida de Mitigación&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Seleccione, de la lista desplegable, la medida de mitigación de interés")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup2
+                                                  i.fas.fa-tachometer-alt
+                                              select.form-control(id="cbo-medida-mitigacion", aria-describedby="inputGroup2")
+                                                option -Seleccione una Medida de Mitigación-
+                                                option Medida de Mitigación 01
+                                                option Medida de Mitigación 02
+                                                option Medida de Mitigación 03
+                                        -->
+                                        <!--.row
+                                        .col-sm-12
+                                          .form-group
+                                            label(for="txa-descripcion-medida") Descripción de la medida
+                                              span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Indicar la ubicación, tecnología considerada y cantidades de la misma.")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup5
+                                                  i.fas.fa-tachometer-alt
+                                              textarea.form-control(id="txa-descripcion-medida", aria-describedby="inputGroup5", cols="30", rows="4", required, placeholder="Ingrese una descripción para su iniciativa")
+                                        -->
+                                        <!--.row
+                                        .col-sm-12
+                                          .form-group
+                                            label(for="txt-nombre-iniciativa") Nombre de la Iniciativa&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Texto de ayuda que describe el funcionamiento general del módulo [...]")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup3
+                                                  i.far.fa-comment-alt
+                                              input.form-control(type="text", id="txt-nombre-iniciativa", placeholder="Ingrese nombre de la iniciativa", aria-describedby="inputGroup3")
+                                        -->
+                                        <div class="row">
+                                          <div class="col-sm-12">
+                                            <div class="form-group">
+                                              <label for="txt-fecha-inicio">Fecha desde&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Indique la fecha de inicio del registro"></i></label>
+                                              <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text" id="inputGroup4"><i class="fas fa-calendar-alt"></i></span></div>
+                                                <input class="form-control" type="date" id="txt-fecha-inicio" placeholder="Ingrese fecha de ejecución de la iniciativa" aria-describedby="inputGroup4" min="2010-01-01" max="2030-12-01">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-sm-12">
+                                            <div class="form-group">
+                                              <label for="txt-fecha-fin">Fecha hasta&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Indique la fecha de finalización del registro"></i></label>
+                                              <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text" id="inputGroup4"><i class="fas fa-calendar-alt"></i></span></div>
+                                                <input class="form-control" type="date" id="txt-fecha-fin" placeholder="Ingrese fecha de ejecución de la iniciativa" aria-describedby="inputGroup4" min="2010-01-01" max="2030-12-01">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!--.col-sm-6
+                                          .form-group
+                                            label(for="cbo-duracion-proyecto") Duración del proyecto&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Texto de ayuda que describe el funcionamiento general del módulo [...]")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup5
+                                                  i.fas.fa-calendar-alt
+                                              select.form-control(id="cbo-duracion-proyecto", aria-describedby="inputGroup5")
+                                                option -Duración en años-
+                                                option 1 año
+                                                option 2 años
+                                                option 3 años
+                                                option 4 años
+                                                option 5 años
+                                                option 6 años
+                                                option 7 años
+                                                option 8 años
+                                                option 9 años
+                                                option 10 años
+                                          -->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--.col-sm-12.pb-2.text-left
+                                  .titulo-avanzado(data-toggle="collapse", href="#datos-generales", aria-expanded="false", aria-controls="datos-generales")
+                                    span
+                                      i.far.fa-list-alt
+                                      | &nbsp;
+                                      | Datos Generales
+                                  .collapse(id="datos-generales")
+                                    .card.card-body
+                                      .row
+                                        .col-sm-12
+                                          .form-group
+                                            label(for="cbo-sector") Sector&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Seleccione, de la lista desplegable, el sector de la iniciativa de mitigación de interés")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup6
+                                                  i.fas.fa-landmark
+                                              select.form-control(id="cbo-sector", aria-describedby="inputGroup6")
+                                                option -Seleccione-
+                                                option Privado - Micro empresa (10 < colaboradores)
+                                                option Privado - Pequeña empresa (> 10 - < 50 colaboradores)
+                                                option Privado - Mediana empresa (> 50 - < 250 colaboradores)
+                                                option Privado - Gran empresa (> 250 colaboradores)
+                                                option Público - (50 < colaboradores)
+                                                option Público - (> 50  < 250 colaboradores)
+                                                option Público - (> 250 colaboradores)
+                                                option Público - Hospitales (< 50 camas)
+                                                option Público - Hospitales (> 50 camas)
+                                      //.row
+                                        .col-sm-6
+                                          .form-group
+                                            label(for="cbo-moneda") Moneda&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Texto de ayuda que describe el funcionamiento general del módulo [...]")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup7
+                                                  i.far.fa-money-bill-alt
+                                              select.form-control(id="cbo-moneda", aria-describedby="inputGroup7")
+                                                option -Seleccione-
+                                                option Soles
+                                                option Dólares
+                                        .col-sm-6
+                                          .form-group
+                                            label(for="txt-monto-inversion") Monto de inversión&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Texto de ayuda que describe el funcionamiento general del módulo [...]")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup8
+                                                  i.fas.fa-wallet
+                                              input.form-control(type="text", id="txt-monto-inversion", placeholder="Ingrese monto", aria-describedby="inputGroup8")
+                                  -->
+                                  <!--.col-sm-12.pb-2.text-left
+                                  .titulo-avanzado(data-toggle="collapse", href="#indicadores", aria-expanded="false", aria-controls="indicadores")
+                                    span
+                                      i.far.fa-list-alt
+                                      | &nbsp;
+                                      | Indicadores
+                                  .collapse(id="indicadores")
+                                    .card.card-body
+                                      .row
+                                        .col-sm-6
+                                          .form-group
+                                            label(for="cbo-energetico-base") Energético de linea base&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Seleccione, de la lista desplegable, el tipo de energía que se consumía antes de la iniciativa")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup9
+                                                  i.fas.fa-bolt
+                                              select.form-control(id="cbo-energetico-base", aria-describedby="inputGroup9")
+                                                option -Seleccione-
+                                                option Diesel
+                                                option Electricidad
+                                                option Gas Licuado de petróleo
+                                                option Gas Natural
+                                                option Gasolina
+                                                option Leña
+                                                option Petróleo residual
+                                        .col-sm-6
+                                          .form-group
+                                            label(for="cbo-energetico-proyecto") Energético de proyecto&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Seleccione, de la lista desplegable, el tipo de energía que se consume en la iniciativa")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup10
+                                                  i.fas.fa-bolt
+                                              select.form-control(id="cbo-energetico-proyecto", aria-describedby="inputGroup10")
+                                                option -Seleccione-
+                                                option Diesel
+                                                option Electricidad
+                                                option Gas Licuado de petróleo
+                                                option Gas Natural
+                                                option Gasolina
+                                                option Leña
+                                                option Petróleo residual
+                                  -->
+                                  <!--.col-sm-12.pb-2.text-left
+                                  .titulo-avanzado(data-toggle="collapse", href="#bloackchain", aria-expanded="false", aria-controls="bloackchain")
+                                    span
+                                      i.far.fa-list-alt
+                                      | &nbsp;
+                                      | Blockchain
+                                  .collapse(id="bloackchain")
+                                    .card.card-body
+                                      .row
+                                        .col-sm-12
+                                          .form-group
+                                            label(for="txa-bloackchain") Código blockchain
+                                              span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
+                                              i.fas.fa-question-circle.ayuda-tooltip(data-toggle="tooltip", data-placement="right", title="Ingrese el código de blockchain a localizar.")
+                                            .input-group
+                                              .input-group-prepend
+                                                span.input-group-text#inputGroup5
+                                                  i.fas.fa-tachometer-alt
+                                              textarea.form-control(id="txa-bloackchain", aria-describedby="inputGroup5", cols="30", rows="4", required, placeholder="Ingrese el código blockchain")
+                                  -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                      <!--button.btn.btn-success.w-100.mb-2
+                      i.fas.fa-file-download.px-1
+                      | Descargar Excel
+                      -->
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                      <!--button.btn.btn-info.w-100.mb-2(type="submit")
+                      i.fas.fa-search.px-1
+                      | Buscar
+                      -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-12 col-lg-6 pt-4">
+                <!--&nbsp;-->
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid py-4">
+            <div class="row">
+              <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
+                <div class="h5">Bandeja de Usuarios&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+              </div>
+              <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
+                <button class="btn btn-success w-100">Descargar Excel</button>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-12 px-0">
+                <div class="table-responsive tabla-principal">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr class="bg-azul text-white">
+                        <th class="text-center" scope="col" style="width: 50px;">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>ITEM&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col" style="min-width: 300px;">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>NOMBRE Y APELLIDO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>TIPO USUARIO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>ADMINISTRADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Fecha de inicialización del proyecto"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th class="text-center" scope="col">GESTIÓN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">1</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">2</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">3</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">4</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">5</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Deshabilitado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">6</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">7</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Especialista</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">8</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Administrador</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">9</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">10</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Especialista</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tfoot>
+                        <tr>
+                          <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
+                          <td class="text-right text-xs-left pr-0" colspan="5"><span>Registros por página&nbsp;</span>
+                            <select id="catidad-rgistros">
+                              <option value="10" selected>10</option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                            </select>&nbsp;
+                            1 de 75 páginas&nbsp;
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-double-left"></i></button>
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-left"></i></button>
+                              <input class="ir-pagina" type="number" value="1" min="1">
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-right"></i></button>
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-double-right"></i></button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modal-usuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Registro/Verificación de Nuevo Usuario <br><small class="text-muted">Complete los siguientes campos para registrar un nuevo usuario</small><small class="text-danger d-block"><strong>(*)&nbsp;</strong>Campos obligatorios</small></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body medidas-modal">
+            <form>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="txt-user">Correo electrónico</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup1"><i class="fas fa-envelope"></i></span></div>
+                      <input class="form-control" type="text" id="txt-user" placeholder="Dirección de email" aria-describedby="inputGroup1" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-institucion">Empresa</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup6"><i class="fas fa-landmark"></i></span></div>
+                      <input class="form-control" type="text" id="txt-institucion" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-ruc">RUC</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup7"><i class="fas fa-landmark"></i></span></div>
+                      <input class="form-control" type="text" id="txt-ruc" placeholder="Ingrese su RUC" aria-describedby="inputGroup7" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-nombre">Nombre del representante</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup3"><i class="fas fa-user"></i></span></div>
+                      <input class="form-control" type="text" id="txt-nombre" placeholder="Ingrese su nombre" aria-describedby="inputGroup3" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-ruc">DNI</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup7"><i class="fas fa-landmark"></i></span></div>
+                      <input class="form-control" type="text" id="txt-ruc" placeholder="Ingrese su DNI" aria-describedby="inputGroup7" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-telefono">Teléfono</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup11"><i class="fas fa-phone-alt"></i></span></div>
+                      <input class="form-control" type="text" id="txt-telefono" placeholder="Ingrese su teléfono" aria-describedby="inputGroup11" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-pswd">Contraseña</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup2"><i class="fas fa-key"></i></span></div>
+                      <input class="form-control" type="password" id="txt-pswd" placeholder="Ingresar contraseña" aria-describedby="inputGroup2" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cbo-perfil">Perfil</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup10"><i class="fas fa-user"></i></span></div>
+                      <select class="form-control" id="cbo-perfil" aria-describedby="inputGroup10" required>
+                        <option>-Seleccione un perfil de usuario-</option>
+                        <option class="badge-actor-02 font-weight-bold">Administrado</option>
+                        <option class="badge-actor-03 font-weight-bold">Especialista</option>
+                        <option class="badge-actor-04 font-weight-bold">Encuestado</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="mlt-gei">Estado<span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span></label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroup9"><i class="fas fa-shield-alt"></i></span></div>
+                      <div class="form-control" style="height:90px; overflow-y: auto;">
+                        <div class="col-auto my-1">
+                          <div class="custom-control custom-radio mr-sm-2">
+                            <input class="custom-control-input" type="radio" name="rad-estado" id="rad-01">
+                            <label class="custom-control-label badge badge-actor-aprobado" for="rad-01"><i class="fas fa-check-circle mr-1"></i>Habilitar</label>
+                          </div>
+                        </div>
+                        <div class="col-auto my-1">
+                          <div class="custom-control custom-radio mr-sm-2">
+                            <input class="custom-control-input" type="radio" name="rad-estado" id="rad-02">
+                            <label class="custom-control-label badge badge-actor-desaprobado" for="rad-02"><i class="fas fa-times-circle mr-1"></i>Deshabilitar</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-danger d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-error">
+                          <div class="sa-error-x">
+                            <div class="sa-error-left"></div>
+                            <div class="sa-error-right"></div>
+                          </div>
+                          <div class="sa-error-placeholder"></div>
+                          <div class="sa-error-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Error de registro</h6>
+                      <hr><small class="mb-0">Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.</small>
+                    </div>
+                  </div>
+                  <div class="alert alert-success d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-success">
+                          <div class="sa-success-tip"></div>
+                          <div class="sa-success-long"></div>
+                          <div class="sa-success-placeholder"></div>
+                          <div class="sa-success-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Bien hecho</h6>
+                      <hr><small class="mb-0">Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="button">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script></script>
+    <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
+      <footer class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Contáctenos</div>
+                <ul class="list-unstyled mr-0">
+                  <li class="py-1"><a class="text-white" href="tel: +5114111100">Teléfono: (+511) 411-1100</a></li>
+                  <li class="py-1"><a class="text-white" href="mailto:webmaster@minem.gob.pe?Subject=Contacto%20desde%20la%20web%20de%20MRV%20Plataforma%20del%20Sector%20Energético">webmaster@minem.gob.pe</a></li>
+                  <li class="py-1">Dirección General de Eficiencia Energética</li>
+                  <li class="py-1"><a class="text-white" href="https://www.google.com/maps/d/u/0/viewer?msa=0&amp;hl=en&amp;ie=UTF8&amp;ll=-12.097192999999981%2C-77.00643500000001&amp;spn=0%2C0&amp;t=m&amp;source=embed&amp;mid=1oiTLqK_OscJsqGYEQbVNHyO68Dw&amp;z=17" target="_blank">Av. Las Artes Sur 260. San Borja. Lima. Perú</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Enlaces</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="http://eficienciaenergetica.minem.gob.pe/" target="_blank">Sistema Interactivo de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank">Dirección General de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="https://www.gob.pe/minem" target="_blank">Ministerio de Energía y Minas</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Más información</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="./documentos/Manual_Usuario_MRV.pdf" download>Manual de Usuario</a></li>
+                  <li class="py-1"><a class="text-white" href="./terminos-y-condiciones.html">Términos y Condiciones</a></li>
+                  <li class="py-1"><a class="text-white" href="./mapa-del-ditio.html" target="_blank">Mapa del Sitio</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="dropdown-divider"></div>
+          </div>
+          <div class="col-sm-12 col-md-12 text-right text-white">
+            <div class="row">
+              <div class="col-6 text-left"><img src="./images/logo_web_footer.svg" height="18"></div>
+              <div class="col-6"><small>&copy; Ministerio de Energía y Minas | Todos los derechos reservados</small></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

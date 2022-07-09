@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Ingreso</title>
+    <title>Balance Nacional de Energía Útil | Recuperar clave</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -72,70 +72,34 @@
           <div class="col-md-2 d-flex flex-row justify-content-center align-items-center wrap-slider-right"><i class="fas fa-chevron-right fa-3x text-white btn-slider-right d-none"></i></div>
         </div>
         <div class="row dentro-banner rounded">
-          <div class="col-md-6 col-lg-8 p-4 d-none d-md-block bg-img-login">
+          <div class="col-md-6 col-lg-8 p-4 d-none d-md-block bg-img-recuperar">
             <div class="h-100 w-100 d-flex align-items-center justify-content-center">
-              <p class="p-0 m-0 linea-derecha lead text-white animated bounceInUp">Accede a nuestra plataforma de <br><strong>Balance Nacional de Energía Útil <br></strong>Ingresa con tu&nbsp;<strong>correo electrónico&nbsp;</strong>y&nbsp;<strong>contraseña&nbsp; <br></strong>previamente registrados a nuestro sistema.</p>
+              <p class="p-0 m-0 linea-derecha lead text-white animated bounceInUp">Accede a nuestra plataforma de <br><strong>Balance Nacional de Energía Útil <br></strong>recupere su clave de acceso con su&nbsp;<strong>correo electrónico.</strong></p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 p-4 bg-light rounded-right">
-            <div class="h4">Ingresar <br><small class="text-muted">Accede con tus credenciales</small></div>
-            <form class="pt-4" id="frmLogin" action="./index.html" autocomplete="off">
+            <div class="h4">Reestablecer <br><small class="text-muted">recupere su acceso</small></div>
+            <form class="pt-4" id="frmRecuperarClave" action="./index.html">
               <div class="form-group">
-                <label for="txt-user">Usuario</label>
+                <label for="txt-user">Correo electrónico</label>
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text" id="inputGroup1"><i class="fas fa-envelope"></i></span></div>
-                  <input class="form-control" type="email" id="USUARIO" placeholder="Tu dirección de email" aria-describedby="inputGroup1" maxlength="50" pattern="^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$" title="Ingrese una dirección de correo válida." autocomplete="new-user" required>
+                  <input class="form-control" type="email" id="txt-user" placeholder="Tu dirección de email" aria-describedby="inputGroup1" required>
                 </div>
               </div>
               <div class="form-group">
-                <div class="row">
-                  <div class="col-6">
-                    <label for="txt-pswd">Contraseña</label>
-                  </div>
-                  <div class="col-6 text-right"><a class="link-verde" href="./recuperar.html"><small>¿Olvidó su contraseña?</small></a></div>
-                </div>
+                <label for="txt-user">D.N.I.</label>
                 <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup2"><i class="fas fa-key"></i></span></div>
-                  <input class="form-control" type="password" id="txt-pswd" placeholder="Tu contraseña" aria-describedby="inputGroup2" maxlength="30" title="Ingrese su contraseña." autocomplete="new-password" required>
-                  <div class="input-group-append">
-                    <label class="input-group-text cursor-pointer ver-clave"><i class="fas fa-eye mr-1"></i>Mostrar</label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-6">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="chk-recd">
-                      <label class="custom-control-label" for="chk-recd">Recordar email</label>
-                    </div>
-                  </div>
-                  <div class="col-6 text-right"><a class="link-verde" href="./registro.html"><small>Regístrar mi empresa</small></a></div>
-                </div>
-              </div>
-              <div class="alert alert-danger d-flex align-items-stretch" role="alert">
-                <div class="alert-wrap mr-3">
-                  <div class="sa">
-                    <div class="sa-error">
-                      <div class="sa-error-x">
-                        <div class="sa-error-left"></div>
-                        <div class="sa-error-right"></div>
-                      </div>
-                      <div class="sa-error-placeholder"></div>
-                      <div class="sa-error-fix"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="alert-wrap">
-                  <h6>Error de acceso</h6>
-                  <hr><small class="mb-0">Su cuenta está&nbsp;<strong>pendiente&nbsp;</strong>de aprobación</small>
+                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup1"><i class="fas fa-id-card"></i></span></div>
+                  <input class="form-control" type="email" id="txt-user" placeholder="Tu número de documento" aria-describedby="inputGroup1" required>
                 </div>
               </div>
               <div class="form-group">
                 <div class="g-recaptcha" data-sitekey="6Ldr7tIgAAAAAOWtuqMBi3UiB-FKURz7LTVCSG6B"></div>
               </div>
-              <button class="btn-lg btn-azul w-100" type="submit">Ingresar</button>
+              <button class="btn-lg btn-primary w-100" type="submit"> Recuperar</button>
             </form>
+            <p class="pt-4 mb-0 text-center"><small>¿No tienes una cuenta?&nbsp;</small><a class="link-verde" href="./registro.html"><small>Regístrar mi empresa</small></a></p>
           </div>
         </div>
       </div>

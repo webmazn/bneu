@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Ingreso</title>
+    <title>Balance Nacional de Energía Útil | Registro</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -74,43 +74,52 @@
         <div class="row dentro-banner rounded">
           <div class="col-md-6 col-lg-8 p-4 d-none d-md-block bg-img-login">
             <div class="h-100 w-100 d-flex align-items-center justify-content-center">
-              <p class="p-0 m-0 linea-derecha lead text-white animated bounceInUp">Accede a nuestra plataforma de <br><strong>Balance Nacional de Energía Útil <br></strong>Ingresa con tu&nbsp;<strong>correo electrónico&nbsp;</strong>y&nbsp;<strong>contraseña&nbsp; <br></strong>previamente registrados a nuestro sistema.</p>
+              <p class="p-0 m-0 linea-derecha lead text-white animated bounceInUp">Accede a nuestra plataforma de <br><strong>Balance Nacional de Energía Útil <br></strong>completando todos los&nbsp;<strong>datos personales</strong></p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 p-4 bg-light rounded-right">
-            <div class="h4">Ingresar <br><small class="text-muted">Accede con tus credenciales</small></div>
+            <div class="h4">Registro de intensión <br><small class="text-muted">de participar en una campaña</small></div>
             <form class="pt-4" id="frmLogin" action="./index.html" autocomplete="off">
               <div class="form-group">
-                <label for="txt-user">Usuario</label>
+                <label for="txt-user">Correo electrónico</label>
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text" id="inputGroup1"><i class="fas fa-envelope"></i></span></div>
                   <input class="form-control" type="email" id="USUARIO" placeholder="Tu dirección de email" aria-describedby="inputGroup1" maxlength="50" pattern="^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$" title="Ingrese una dirección de correo válida." autocomplete="new-user" required>
                 </div>
               </div>
               <div class="form-group">
-                <div class="row">
-                  <div class="col-6">
-                    <label for="txt-pswd">Contraseña</label>
-                  </div>
-                  <div class="col-6 text-right"><a class="link-verde" href="./recuperar.html"><small>¿Olvidó su contraseña?</small></a></div>
-                </div>
+                <label for="txt-user">Nombre de la empresa</label>
                 <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup2"><i class="fas fa-key"></i></span></div>
-                  <input class="form-control" type="password" id="txt-pswd" placeholder="Tu contraseña" aria-describedby="inputGroup2" maxlength="30" title="Ingrese su contraseña." autocomplete="new-password" required>
-                  <div class="input-group-append">
-                    <label class="input-group-text cursor-pointer ver-clave"><i class="fas fa-eye mr-1"></i>Mostrar</label>
-                  </div>
+                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup1"><i class="fas fa-landmark"></i></span></div>
+                  <input class="form-control" type="text" id="USUARIO" placeholder="Tu nombre de empresa" aria-describedby="inputGroup1" maxlength="50" title="Tu nombre de empresa" autocomplete="new-user" required>
                 </div>
               </div>
               <div class="form-group">
-                <div class="row">
-                  <div class="col-6">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="chk-recd">
-                      <label class="custom-control-label" for="chk-recd">Recordar email</label>
-                    </div>
-                  </div>
-                  <div class="col-6 text-right"><a class="link-verde" href="./registro.html"><small>Regístrar mi empresa</small></a></div>
+                <label for="txt-user">R.U.C.</label>
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup2"><i class="fas fa-landmark"></i></span></div>
+                  <input class="form-control" type="text" id="RUC" placeholder="Tu número de RUC" aria-describedby="inputGroup2" maxlength="50" title="Tu número de RUC" autocomplete="new-user" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="txt-user">Representante legal</label>
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup3"><i class="fas fa-user"></i></span></div>
+                  <input class="form-control" type="text" id="REPLEGAL" placeholder="Tu nombre representante" aria-describedby="inputGroup3" maxlength="50" title="Tu nombre representante" autocomplete="new-user" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="txt-user">D.N.I.</label>
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup4"><i class="fas fa-id-card"></i></span></div>
+                  <input class="form-control" type="text" id="DNI" placeholder="Tu número de DNI" aria-describedby="inputGroup4" maxlength="50" title="Tu número de DNI" autocomplete="new-user" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="txt-user">Teléfono de contacto</label>
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="input-group-text" id="inputGroup5"><i class="fas fa-phone-alt"></i></span></div>
+                  <input class="form-control" type="text" id="TEL" placeholder="Tu teléfono de contacto" aria-describedby="inputGroup5" maxlength="50" title="Tu teléfono de contacto" autocomplete="new-user" required>
                 </div>
               </div>
               <div class="alert alert-danger d-flex align-items-stretch" role="alert">
@@ -134,7 +143,7 @@
               <div class="form-group">
                 <div class="g-recaptcha" data-sitekey="6Ldr7tIgAAAAAOWtuqMBi3UiB-FKURz7LTVCSG6B"></div>
               </div>
-              <button class="btn-lg btn-azul w-100" type="submit">Ingresar</button>
+              <button class="btn-lg btn-azul w-100" type="submit">Registrar</button>
             </form>
           </div>
         </div>
