@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.web.Filter;
 using sisceusi.web.Models;
 using sres.ut;
 using System;
@@ -15,12 +16,11 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
-        // GET: Login
-        public ActionResult Login()
+        [NoLoginRequiredAttribute]
+        public ActionResult Index()
         {
-            ViewData["keySiteCaptcha"] = ConfigurationManager.AppSettings["ReCAPTCHA_Site_Key"];
             return View();
         }
 
@@ -64,38 +64,5 @@ namespace sisceusi.web.Controllers
             catch (Exception ex) { Log.Error(ex); }
             return Json(response);
         }
-
-        private async Task<bool> IsCaptchaValid(string response)
-        {
-            try
-            {
-                var secret = ConfigurationManager.AppSettings["ReCAPTCHA_Secret_Key"];
-                using (var client = new HttpClient())
-                {
-                    var values = new Dictionary<string, string>
-                    {
-                        {"secret", secret},
-                        {"response", response},
-                        {"remoteip", Request.UserHostAddress}
-                    };
-
-                    var content = new FormUrlEncodedContent(values);
-                    var verify = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
-                    var captchaResponseJson = await verify.Content.ReadAsStringAsync();
-                    var captchaResult = JsonConvert.DeserializeObject<RecaptchaResponse>(captchaResponseJson);
-                    return captchaResult.success;
-                           //&& captchaResult.action == "Gestion/AccionMitigacion"
-                           //&& captchaResult.score > 0.5;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                return false;
-            }
-        }
-
-
-
     }
 }

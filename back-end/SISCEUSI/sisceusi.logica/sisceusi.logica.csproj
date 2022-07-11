@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseLN.cs" />
+    <Compile Include="IntencionParticiparLN.cs" />
     <Compile Include="LoginLN.cs" />
     <Compile Include="RolLN.cs" />
     <Compile Include="UsuarioLN.cs" />

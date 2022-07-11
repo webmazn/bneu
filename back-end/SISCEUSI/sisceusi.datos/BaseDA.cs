@@ -17,6 +17,7 @@ namespace sisceusi.Datos
             {
                 return new
                 {
+                    Externo = $"{esquema}.PKG_SISCEUSI_EXTERNO.",
                     Login = $"{esquema}.PKG_SISCEUSI_LOGIN.",
                     Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO."
                 };

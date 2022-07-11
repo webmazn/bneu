@@ -21,7 +21,12 @@ var messageStringGeneric = (message) => {
     return `<small class="mb-0">${message}</li></small>`;
 }
 
-
+/*
+ *  Metodo para crear
+ *  un mensaje de error
+ *  con parámetro de entrada una cadena
+ * 
+ * **/
 var messageError = (message) => {
     return `<div class="alert alert-danger d-flex align-items-stretch" role="alert">` +
                     `<div class="alert-wrap mr-3">` +
@@ -38,6 +43,31 @@ var messageError = (message) => {
                     `</div>` +
                     `<div class="alert-wrap">` +
                       `<h6>Error de acceso</h6>` +
+                      `<hr>${message}` +
+                    `</div>` +
+                  `</div>`;
+}
+
+/*
+ *  Metodo para crear
+ *  un mensaje de success
+ *  con parámetro de entrada una cadena
+ * 
+ * **/
+var messageSuccess = (message) => {
+    return `<div class="alert alert-success d-flex align-items-stretch" role="alert">` +
+                    `<div class="alert-wrap mr-3">` +
+                      `<div class="sa">` +
+                        `<div class="sa-success">` +
+                          `<div class="sa-success-tip"></div>` +
+                          `<div class="sa-success-long"></div>` +
+                          `<div class="sa-success-placeholder"></div>` +
+                          `<div class="sa-success-fix"></div>` +
+                        `</div>` +
+                      `</div>` +
+                    `</div>` +
+                    `<div class="alert-wrap">` +
+                      `<h6>Bien hecho</h6>` +
                       `<hr>${message}` +
                     `</div>` +
                   `</div>`;

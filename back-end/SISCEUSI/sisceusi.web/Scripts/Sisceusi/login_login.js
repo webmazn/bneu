@@ -7,8 +7,8 @@ $(document).ready(() => {
 
 var validarCampos = () => {
     let arr = [];
-    if ($("#USUARIO").val().trim() == '') arr.push("Debe ingresar su usuario");
-    else if (!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test($("#USUARIO").val()))) arr.push("Debe ingresar un correo electrónico válido");
+    if (validarEspaciosBlanco($("#USUARIO").val().trim())) arr.push("Debe ingresar su usuario");
+    else if (validarCorreoElectronico($("#USUARIO").val().trim())) arr.push("Debe ingresar un correo electrónico válido");
     if ($("#txt-pswd").val().trim() == '') arr.push("Debe ingresar la contraseña");
 
     if (arr.length > 0) {
@@ -44,7 +44,7 @@ var iniciarSesionConCaptcha = () => {
 
 var validarInicioSesion = (data) => {
     if (data.success == true) {
-        location.href = `${baseUrl}Interno/Inicio`;
+        location.href = `${baseUrl}Interno/Index`;
     } else {
         $('form .form-group:last').after(messageError(messageStringGeneric(data.message)));
         grecaptcha.reset();

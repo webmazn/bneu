@@ -5,7 +5,8 @@ $(document).ready(() => {
 
 var consultarUsuario = () => {
 
-    let urlUsuario = `${baseUrl}Inicio/obtenerUsuario`;
+    //let urlUsuario = `${baseUrl}Inicio/obtenerUsuario`;
+    let urlUsuario = `${baseUrl}Rol/obtenerRol/${1}`;
 
     fetch(urlUsuario)
     .then(r => r.json())

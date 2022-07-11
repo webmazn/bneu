@@ -11,40 +11,25 @@ using System.Threading.Tasks;
 
 namespace sisceusi.logica
 {
-    public class RolLN : BaseLN
+    public class IntencionParticiparLN : BaseLN
     {
-        RolDA datos = new RolDA();
+        IntencionParticiparDA datos = new IntencionParticiparDA();
 
-        public bool grabarRol(RolBE rol)
+        public bool grabarIntencionParticipar(IntencionParticiparBE intencionParticipar)
         {
             bool seGuardo = false;
-
             try
             {
                 cn.Open();
                 using (OracleTransaction ot = cn.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
                 {
-                    seGuardo = datos.GrabarRol(rol, cn);
-
+                    seGuardo = datos.GrabarIntencionParticipar(intencionParticipar, cn);
                     if (seGuardo) ot.Commit();
                     else ot.Rollback();
                 }
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
-
             return seGuardo;
-        }
-
-        public RolBE obtenerRol(RolBE rol)
-        {
-            RolBE item = null;
-            try
-            {
-                cn.Open();
-                item = datos.obtenerRol(rol, cn);
-            }
-            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
-            return item;
         }
     }
 }
