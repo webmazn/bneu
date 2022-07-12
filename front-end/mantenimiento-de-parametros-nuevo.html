@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Mantenimineto de usuarios</title>
+    <title>Balance Nacional de Energía Útil | Mantenimineto de parámetros</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -71,14 +71,14 @@
             <div class="row">
               <div class="col-md-12 col-lg-9">
                 <div class="bg-light p-4">
-                  <div class="h4 text-cyan">Mantenimiento de Usuarios&nbsp;</div>
+                  <div class="h4 text-cyan">Mantenimiento de Parámetros&nbsp;</div>
                   <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
                 </div>
               </div>
               <div class="col-md-12 col-lg-3">
                 <div class="row">
                   <div class="col-12">
-                    <!--span(data-toggle="modal", data-target="#modal-usuario")--><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-usuarios.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Bandeja de usuarios</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                    <!--span(data-toggle="modal", data-target="#modal-usuario")--><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-usuarios.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Bandeja de parámetros</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
                     <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                   </div>
                 </div>
@@ -89,64 +89,37 @@
               <div class="row">
                 <div class="col-4">
                   <div class="form-group">
-                    <label class="font-weight-bold" for="txt-ruc">R.U.C.</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <div class="input-group">
-                      <input class="form-control" type="text" id="txt-ruc" placeholder="Ingrese su RUC" aria-describedby="inputGroup7" required>
-                      <div class="input-group-append">
-                        <!--span.input-group-text-->
-                        <button class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Verificar</button>
-                      </div>
-                    </div>
+                    <label class="font-weight-bold" for="txt-codigo">CÓDIGO</label>
+                    <input class="form-control" type="text" id="txt-codigo" placeholder="Ingrese su codigo" aria-describedby="inputGroup7" required>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="form-group">
-                    <label class="font-weight-bold" for="txt-correo">CORREO ELECTRÓNICO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <input class="form-control" type="text" id="txt-correo" placeholder="Dirección de email" aria-describedby="inputGroup1" required>
+                    <label class="font-weight-bold" for="txt-parametro">NOMBRE PARÁMETRO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                    <input class="form-control" type="text" id="txt-parametro" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="form-group">
-                    <label class="font-weight-bold" for="txt-institucion">NOMBRE DE LA EMPRESA</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <input class="form-control" type="text" id="txt-institucion" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  <div class="form-group">
-                    <label class="font-weight-bold" for="txt-nombre">NOMBRE DEL REPRESENTANTE</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <input class="form-control" type="text" id="txt-nombre" placeholder="Ingrese su nombre" aria-describedby="inputGroup3" required>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="form-group">
-                    <label class="font-weight-bold" for="txt-dni">D.N.I.</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <input class="form-control" type="text" id="txt-dni" placeholder="Ingrese su DNI" aria-describedby="inputGroup7" required>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="form-group">
-                    <label class="font-weight-bold" for="txt-telefono">TELÉFONO DEL CONTACTO</label>
-                    <input class="form-control" type="text" id="txt-telefono" placeholder="Ingrese su teléfono" aria-describedby="inputGroup11" required>
+                    <label class="font-weight-bold" for="cbo-parent">PARENT PARÁMETRO</label>
+                    <select class="form-control" id="cbo-parent">
+                      <option>-Seleccione un parent parámetro-</option>
+                      <option>Parent parámetro 01</option>
+                      <option>Parent parámetro 02</option>
+                      <option>Parent parámetro 03</option>
+                    </select>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-4">
                   <div class="form-group">
-                    <label class="font-weight-bold" for="txt-pswd">CONTRASEÑA</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <input class="form-control" type="password" id="txt-pswd" placeholder="Ingresar contraseña" aria-describedby="inputGroup2" required>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="form-group">
-                    <label class="font-weight-bold" for="cbo-perfil">PERFIL</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                    <select class="form-control" id="cbo-perfil" aria-describedby="inputGroup10" required>
-                      <option>-Seleccione un perfil de usuario-</option>
-                      <option>Administrado</option>
-                      <option>Especialista</option>
-                      <option>Encuestado</option>
+                    <label class="font-weight-bold" for="cbo-tipo-parametro">TIPO DE PARÁMETRO</label>
+                    <select class="form-control" id="cbo-tipo-parametro">
+                      <option>-Seleccione un tipo de parámetro-</option>
+                      <option>Tipo parámetro 01</option>
+                      <option>Tipo parámetro 02</option>
+                      <option>Tipo parámetro 03</option>
                     </select>
                   </div>
                 </div>
@@ -157,10 +130,10 @@
                       <option>-Seleccione un estado-</option>
                       <option>Habilitado</option>
                       <option>Deshabilitado</option>
-                      <option>Por habilitar</option>
                     </select>
                   </div>
                 </div>
+                <div class="col-4"></div>
               </div>
               <div class="dropdown-divider"></div>
               <div class="row">

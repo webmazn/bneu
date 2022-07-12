@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Mantenimineto de empresas</title>
+    <title>Balance Nacional de Energía Útil | Mantenimineto de parámetros</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -71,15 +71,14 @@
             <div class="row">
               <div class="col-md-12 col-lg-9">
                 <div class="bg-light p-4">
-                  <div class="h4 text-cyan">Mantenimiento de Empresas&nbsp;</div>
+                  <div class="h4 text-cyan">Mantenimiento de Parámetros&nbsp;</div>
                   <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
                 </div>
               </div>
               <div class="col-md-12 col-lg-3">
                 <div class="row">
-                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-empresas-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva empresa</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-parametros-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nuevo parámetro</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
                     <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
-                    <button class="btn btn-info w-100 mb-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!">Importar empresas</button>
                   </div>
                 </div>
               </div>
@@ -107,26 +106,14 @@
                                 <div class="row">
                                   <div class="col-sm-12">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-user">NÚMERO DE R.U.C.</label>
-                                      <input class="form-control" type="text" id="ruc" placeholder="Número de RUC">
+                                      <label class="font-weight-bold" for="txt-parent">PARENT PARÁMETRO</label>
+                                      <input class="form-control" type="text" id="parent" placeholder="Código de parent parámetro">
                                     </div>
                                   </div>
                                   <div class="col-sm-12">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-empresa">RAZÓN SOCIAL DE LA EMPRESA</label>
-                                      <input class="form-control" type="text" id="empresa" placeholder="Nombre de empresa">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-12">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-representante">REPRESENTANTE LEGAL DE LA EMPRESA</label>
-                                      <input class="form-control" type="text" id="usuario" placeholder="Nombre del representante">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-12">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="cbo-tipo-usuario">CORREO ELECTRÓNICO DE LA EMPRESA</label>
-                                      <input class="form-control" type="email" id="email" placeholder="Correo electrónico de la empresa">
+                                      <label class="font-weight-bold" for="txt-parametro">PARÁMETRO</label>
+                                      <input class="form-control" type="text" id="parametro" placeholder="Código de parámetro">
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -143,11 +130,23 @@
                                   </div>
                                   <div class="col-sm-12">
                                     <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-tipo-parametro">TIPO DE PARÁMETRO</label>
+                                      <select class="form-control" id="cbo-tipo-usuario">
+                                        <option>-Seleccione un tipo de parámetro-</option>
+                                        <option>Tipo parámetro 01</option>
+                                        <option>Tipo parámetro 02</option>
+                                        <option>Tipo parámetro 03</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-12">
+                                    <div class="form-group">
                                       <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO</label>
                                       <select class="form-control" id="cbo-tipo-usuario">
                                         <option>-Seleccione un estado-</option>
                                         <option>Habilitado</option>
                                         <option>Deshabilitado</option>
+                                        <option>Por habilitar</option>
                                       </select>
                                     </div>
                                   </div>
@@ -180,7 +179,7 @@
           <div class="container-fluid py-4">
             <div class="row">
               <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                <div class="h5">BANDEJA DE EMPRESAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                <div class="h5">BANDEJA DE PARÁMETROS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
               </div>
               <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                 <button class="btn btn-success w-100">Descargar Excel</button>
@@ -197,22 +196,16 @@
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>PARENT PARÁMETROS&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>RUC EMPRESA&nbsp;</span></span><i class="fas fa-sort"></i></div>
-                        </th>
-                        <th scope="col" style="min-width: 120px;">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>RAZÓN SOCIAL&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>REP. LEGAL&nbsp;</span></span><i class="fas fa-sort"></i></div>
-                        </th>
-                        <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>GIRO NEGOCIO&nbsp;</span></span><i class="fas fa-sort"></i></div>
-                        </th>
-                        <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>F. REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOM. PARÁMETRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
@@ -223,12 +216,10 @@
                     <tbody>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">1</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Deshabilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -238,12 +229,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">2</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Deshabilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -253,12 +242,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">3</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Deshabilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -268,12 +255,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">4</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Deshabilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -283,12 +268,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">5</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Deshabilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -298,12 +281,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">6</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -313,12 +294,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">7</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -328,12 +307,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">8</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -343,12 +320,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">9</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -358,12 +333,10 @@
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">10</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Parent parámetro">PAR0001</td>
+                        <td data-encabezado="Código">PAR0002</td>
+                        <td data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td class="text-center" data-encabezado="Nombre parámetro">Nombre parámetro</td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
@@ -374,7 +347,7 @@
                       <tfoot>
                         <tr>
                           <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
-                          <td class="text-right text-xs-left pr-0" colspan="6"><span>Registros por página&nbsp;</span>
+                          <td class="text-right text-xs-left pr-0" colspan="5"><span>Registros por página&nbsp;</span>
                             <select id="catidad-rgistros">
                               <option value="10" selected>10</option>
                               <option value="25">25</option>
