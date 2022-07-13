@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Mantenimineto de usuarios</title>
+    <title>Balance Nacional de Energía Útil | Mantenimineto de campañas</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -70,13 +70,13 @@
             <div class="row">
               <div class="col-md-12 col-lg-9">
                 <div class="bg-light p-4">
-                  <div class="h4 text-cyan">Mantenimiento de Usuarios&nbsp;</div>
+                  <div class="h4 text-cyan">Mantenimiento de Campañas&nbsp;</div>
                   <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
                 </div>
               </div>
               <div class="col-md-12 col-lg-3">
                 <div class="row">
-                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-usuarios-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nuevo usuario</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-campanas-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva campaña</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
                     <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                   </div>
                 </div>
@@ -105,25 +105,20 @@
                                 <div class="row">
                                   <div class="col-sm-12">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-user">NÚMERO DE R.U.C.</label>
+                                      <label class="font-weight-bold" for="txt-denominacion">DENOMINACIÓN DE LA ENCUESTA</label>
+                                      <input class="form-control" type="text" id="ruc" placeholder="">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-12">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C</label>
                                       <input class="form-control" type="text" id="ruc" placeholder="Número de RUC">
                                     </div>
                                   </div>
                                   <div class="col-sm-12">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-user">EMPRESA</label>
+                                      <label class="font-weight-bold" for="txt-empresa">RAZÓN SOCIAL DE LA EMPRESA</label>
                                       <input class="form-control" type="text" id="empresa" placeholder="Nombre de empresa">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-12">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="cbo-tipo-usuario">TIPO DE USUARIO</label>
-                                      <select class="form-control" id="cbo-tipo-usuario">
-                                        <option>-Seleccione un tipo de usuario-</option>
-                                        <option>Encuestado</option>
-                                        <option>Especialista</option>
-                                        <option>Administrado</option>
-                                      </select>
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -140,18 +135,11 @@
                                   </div>
                                   <div class="col-sm-12">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-user">NOMBRE DE USUARIO</label>
-                                      <input class="form-control" type="text" id="usuario" placeholder="Nombre de usuario">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-12">
-                                    <div class="form-group">
                                       <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO</label>
                                       <select class="form-control" id="cbo-tipo-usuario">
                                         <option>-Seleccione un estado-</option>
                                         <option>Habilitado</option>
                                         <option>Deshabilitado</option>
-                                        <option>Por habilitar</option>
                                       </select>
                                     </div>
                                   </div>
@@ -184,7 +172,7 @@
           <div class="container-fluid py-4">
             <div class="row">
               <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                <div class="h5">BANDEJA DE USUARIOS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                <div class="h5">BANDEJA DE CAMPAÑAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
               </div>
               <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                 <button class="btn btn-success w-100">Descargar Excel</button>
@@ -197,23 +185,17 @@
                   <table class="table table-striped table-hover">
                     <thead>
                       <tr class="bg-azul text-white">
-                        <th class="text-center" scope="col" style="width: 50px;">
+                        <th class="text-center" scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
-                        <th scope="col" style="min-width: 300px;">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOMBRE Y APELLIDO&nbsp;</span></span><i class="fas fa-sort"></i></div>
-                        </th>
-                        <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TIPO USUARIO&nbsp;</span></span><i class="fas fa-sort"></i></div>
-                        </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
-                        <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ADMINISTRADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        <th scope="col" style="min-width: 150px;">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DENOMINACIÓN&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
@@ -224,168 +206,138 @@
                     <tbody>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">1</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Piloto</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">2</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">3</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Iniciado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">4</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">5</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Deshabilitado</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Piloto</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">6</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Concluido</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">7</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Especialista</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Concluido</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">8</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Administrador</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Concluido</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">9</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Concluido</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">10</td>
-                        <td class="text-center" data-encabezado="Código">USU0001</td>
-                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
-                        <td data-encabezado="Tipo usuario"><span>Especialista</span>
-                        </td>
-                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
-                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
-                        </td>
-                        <td data-encabezado="Estado"><span>Habilitado</span>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
+                        <td data-encabezado="Estado"><span>Concluido</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                         </td>
                       </tr>
                       <tfoot>
                         <tr>
                           <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
-                          <td class="text-right text-xs-left pr-0" colspan="5"><span>Registros por página&nbsp;</span>
+                          <td class="text-right text-xs-left pr-0" colspan="3"><span>Registros por página&nbsp;</span>
                             <select id="catidad-rgistros">
                               <option value="10" selected>10</option>
                               <option value="25">25</option>
@@ -412,152 +364,6 @@
         </div>
       </div>
     </div>
-    <!--.modal.fade(id="modal-usuario", tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
-    .modal-dialog.modal-md.modal-dialog-centered(role="document")
-      .modal-content
-        .modal-header
-          h5.modal-title(id="exampleModalLabel") Registro/Verificación de Nuevo Usuario <br>
-            small.text-muted Complete los siguientes campos para registrar un nuevo usuario
-            small.text-danger.d-block
-              strong (*)&nbsp;
-              | Campos obligatorios
-          button.close(type="button", data-dismiss="modal", aria-label="Close")
-            span(aria-hidden="true") &times;
-        .modal-body.medidas-modal
-          form
-            .row
-              .col-12
-                .form-group
-                  label(for="txt-ruc") R.U.C.
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup7
-                        i.fas.fa-landmark
-                    input.form-control(type="text", id="txt-ruc", placeholder="Ingrese su RUC", aria-describedby="inputGroup7", required)
-                    .input-group-append
-                      //span.input-group-text
-                      button.btn.btn-azul(type="submit")
-                        i.fas.fa-search.px-1
-                        | Verificar
-                .form-group
-                  label(for="txt-user") Correo electrónico
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup1
-                        i.fas.fa-envelope
-                    input.form-control(type="text", id="txt-user", placeholder="Dirección de email", aria-describedby="inputGroup1", required)
-                .form-group
-                  label(for="txt-institucion") Nombre de la empresa
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup6
-                        i.fas.fa-landmark
-                    input.form-control(type="text", id="txt-institucion", placeholder="Ingrese su institución", aria-describedby="inputGroup6", required)
-                .form-group
-                  label(for="txt-nombre") Nombre del representante
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup3
-                        i.fas.fa-user
-                    input.form-control(type="text", id="txt-nombre", placeholder="Ingrese su nombre", aria-describedby="inputGroup3", required)
-                .form-group
-                  label(for="txt-ruc") D.N.I.
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup7
-                        i.fas.fa-landmark
-                    input.form-control(type="text", id="txt-ruc", placeholder="Ingrese su DNI", aria-describedby="inputGroup7", required)
-                .form-group
-                  label(for="txt-telefono") Teléfono de contacto
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup11
-                        i.fas.fa-phone-alt
-                    input.form-control(type="text", id="txt-telefono", placeholder="Ingrese su teléfono", aria-describedby="inputGroup11", required)
-    
-                .form-group
-                  label(for="txt-pswd") Contraseña
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup2
-                        i.fas.fa-key
-                    input.form-control(type="password", id="txt-pswd", placeholder="Ingresar contraseña", aria-describedby="inputGroup2", required)
-                .form-group
-                  label(for="cbo-perfil") Perfil
-                  span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup10
-                        i.fas.fa-user
-                    select.form-control(id="cbo-perfil", aria-describedby="inputGroup10", required)
-                      option -Seleccione un perfil de usuario-
-                      option.badge-actor-02.font-weight-bold Administrado
-                      option.badge-actor-03.font-weight-bold Especialista
-                      option.badge-actor-04.font-weight-bold Encuestado
-    
-                .form-group
-                  label(for="mlt-gei") Estado
-                    span.text-danger.font-weight-bold &nbsp;(*)&nbsp;
-                  .input-group
-                    .input-group-prepend
-                      span.input-group-text#inputGroup9
-                        i.fas.fa-shield-alt
-                    .form-control(style="height:90px; overflow-y: auto;")
-                      .col-auto.my-1
-                        .custom-control.custom-radio.mr-sm-2
-                          input.custom-control-input(type="radio", name="rad-estado", id="rad-01")
-                          label.custom-control-label.badge.badge-actor-aprobado(for="rad-01")
-                            i.fas.fa-check-circle.mr-1
-                            | Habilitar
-                      .col-auto.my-1
-                        .custom-control.custom-radio.mr-sm-2
-                          input.custom-control-input(type="radio", name="rad-estado", id="rad-02")
-                          label.custom-control-label.badge.badge-actor-desaprobado(for="rad-02")
-                            i.fas.fa-times-circle.mr-1
-                            | Deshabilitar
-    
-            .row
-              .col-sm-12.col-md-12.col-lg-12
-    
-                .alert.alert-danger.d-flex.align-items-stretch(role="alert")
-                  .alert-wrap.mr-3
-                    .sa
-                      .sa-error
-                        .sa-error-x
-                          .sa-error-left
-                          .sa-error-right
-                        .sa-error-placeholder
-                        .sa-error-fix
-                  .alert-wrap
-                    h6 Error de registro
-                    hr
-                    small.mb-0
-                      | Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.
-    
-                .alert.alert-success.d-flex.align-items-stretch(role="alert")
-                  .alert-wrap.mr-3
-                    .sa
-                      .sa-success
-                        .sa-success-tip
-                        .sa-success-long
-                        .sa-success-placeholder
-                        .sa-success-fix
-                  .alert-wrap
-                    h6 Bien hecho
-                    hr
-                    small.mb-0 Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.
-    
-        .modal-footer
-          button(type="button", class="btn btn-secondary", data-dismiss="modal") Cancelar
-          button(type="button", class="btn btn-primary") Guardar
-    
-    -->
     <script></script>
     <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
       <footer class="container">
