@@ -1430,6 +1430,13 @@ $(document).ready(function(){
     });
   }
 
+  $(".open-avanzado").on("click", function(){
+    $(this).parent().parent().parent().hide();
+  });
+  $(".close-basico").on("click", function(){
+    $(".init-search").show();
+  });
+
   $("#agregarPregunta").on("click", function(){
     $('html, body').animate({scrollTop: ($("#contenedorEncuesta").offset().top - $(".menu-nav").height() - 70) },'slow');
     var ctrl = $("#cbo-list-tipo-control option:selected").val();
