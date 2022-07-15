@@ -15,4 +15,4 @@ Fuentes del proyecto en templates **HTML5**, **CSS** y **JS** -› [Front-End] (
 
 ## ÁRBOL DE ARCHIVOS
 
-![](https://www.webdev.pe/py/bneu/arbol_bneu_140722.png)
+![](https://www.webdev.pe/py/bneu/arbol_bneu_150722.png)

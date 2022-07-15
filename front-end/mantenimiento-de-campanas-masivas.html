@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Balance Nacional de Energía Útil | Mantenimiento de campañas masivas</title>
+    <meta name="description" content="Balance Nacional de Energía Útil">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-76x76.png" sizes="76x76">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-114x114.png" sizes="114x114">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-144x144.png" sizes="144x144">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-180x180.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="images/favicon/android-icon-192x192.png" sizes="192x192">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+    <meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
+      <div class="container-fluid bg-nuevo-azul">
+        <div class="container menu-main">
+          <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
+            <ul class="navbar-nav mr-md-auto">
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="https://www.gob.pe/minem" target="_blank"><img src="./images/logo_mem.svg" height="48"></a></li>
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="./images/logo_dgee.svg" height="48"></a></li>
+            </ul>
+            <ul class="navbar-nav ml-md-auto">
+              <li class="nav-item align-self-center"><a class="btn btn-danger btn-md px-4 font-weight-bold" href="./login.html" role="button">CERRAR SESIÓN</a></li>
+            </ul>
+          </header>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container menu-sub">
+          <nav class="navbar navbar-expand-lg p-0 py-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="./index.html"><img src="./images/logo_web.svg" height="33"></a></li>
+                <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-4" href="./index.html">INICIO</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./campanas.html">CAMPAÑAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
+              </ul>
+              <div class="btn-group w-sm-100"><a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>USU0001 - JUAN PEREZ SANCHEZ <br></b></small><small class="text-truncate">20105678910 - NOMBRE EMPRESA</small></a>
+                <div class="dropdown-menu dropdown-menu-right w-sm-100"><span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">Administrado</span><br><span class="badge badge-info">Especialista</span><br><span class="badge badge-info">Encuestado</span></span><a class="dropdown-item" href="./maestro-mantenimiento.html"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="./login.html"><i class="fas fa-sign-out-alt pr-1"></i>Salir del sistema</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="flecha-top d-print-none"><i class="fas fa-angle-double-right fa-2x text-dark btn-slider-bottom"></i></div>
+    <div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_fb.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ig.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_tw.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_yt.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_wp.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ld.svg"></a></div>
+    <div class="container-fluid map-root" id="historia"></div>
+    <div class="container my-4" id="cuerpo">
+      <div class="row">
+        <div class="col-12">
+          <div class="container m-0 px-0 py-4">
+            <div class="row">
+              <div class="col-md-12 col-lg-9">
+                <div class="bg-light p-4">
+                  <div class="h4 text-cyan">Mantenimiento de Campañas Masivas&nbsp;</div>
+                  <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-3">
+                <div class="row">
+                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-campanas-masivas-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva campaña masiva</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                    <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <form>
+                  <div class="form-group">
+                    <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Texto de ayuda"></i></label>
+                    <div class="input-group">
+                      <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
+                      <div class="input-group-append">
+                        <button class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12 text-right">
+                        <div class="collapse" id="busqueda-avanzada">
+                          <div class="card card-body">
+                            <div class="row">
+                              <div class="col-sm-12 text-left">
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-denominacion">DENOMINACIÓN DE LA ENCUESTA</label>
+                                      <input class="form-control" type="text" id="ruc" placeholder="">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C</label>
+                                      <input class="form-control" type="text" id="ruc" placeholder="Número de RUC">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-empresa">RAZÓN SOCIAL EMPRESA</label>
+                                      <input class="form-control" type="text" id="empresa" placeholder="Nombre de empresa">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-fecha-inicio">FECHA REGISTRO DESDE -</label>
+                                      <input class="form-control" type="date" id="txt-fecha-inicio">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-fecha-fin">HASTA</label>
+                                      <input class="form-control" type="date" id="txt-fecha-fin">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-departamento">DEPARTAMENTO</label>
+                                      <select class="form-control" id="cbo-departamento">
+                                        <option>-Seleccione un departamento-</option>
+                                        <option>Departamento 01</option>
+                                        <option>Departamento 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-provincia">PROVINCIA</label>
+                                      <select class="form-control" id="cbo-provincia">
+                                        <option>-Seleccione un provincia-</option>
+                                        <option>Provincia 01</option>
+                                        <option>Provincia 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-distrito">DISTRITO</label>
+                                      <select class="form-control" id="cbo-distrito">
+                                        <option>-Seleccione un distrito-</option>
+                                        <option>Distrito 01</option>
+                                        <option>Distrito 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-zona">ZONA</label>
+                                      <select class="form-control" id="cbo-zona">
+                                        <option>-Seleccione un zona-</option>
+                                        <option>Zona 01</option>
+                                        <option>Zona 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-sub- sector">SUB SECTOR</label>
+                                      <select class="form-control" id="cbo-sub-sector">
+                                        <option>-Seleccione un sub sector-</option>
+                                        <option>Sub sector 01</option>
+                                        <option>Sub sector 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-actividad">ACTIVIDAD</label>
+                                      <select class="form-control" id="cbo-actividad">
+                                        <option>-Seleccione un actividad-</option>
+                                        <option>Actividad 01</option>
+                                        <option>Actividad 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-combustibles">COMBUSTIBLES</label>
+                                      <select class="form-control" id="cbo-combustibles">
+                                        <option>-Seleccione un combustibles-</option>
+                                        <option>Combustibles 01</option>
+                                        <option>Combustibles 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-fuente-energia">FUENTE DE ENERGÍA</label>
+                                      <select class="form-control" id="cbo-fuente-energia">
+                                        <option>-Seleccione un fuente energia-</option>
+                                        <option>Fuente-energia 01</option>
+                                        <option>Fuente-energia 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-tipo-transporte">TIPO DE TRANSPORTE</label>
+                                      <select class="form-control" id="cbo-tipo-transporte">
+                                        <option>-Seleccione un tipo transporte-</option>
+                                        <option>Tipo-transporte 01</option>
+                                        <option>Tipo-transporte 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-datos-informante">DATOS INFORMANTE</label>
+                                      <select class="form-control" id="cbo-datos-informante">
+                                        <option>-Seleccione un datos informante-</option>
+                                        <option>Datos informante 01</option>
+                                        <option>Datos informante 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-campana">CAMPAÑA</label>
+                                      <input class="form-control" type="date" id="txt-campana">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO</label>
+                                      <select class="form-control" id="cbo-tipo-usuario">
+                                        <option>-Seleccione un estado-</option>
+                                        <option>Habilitado</option>
+                                        <option>Deshabilitado</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="titulo-avanzado" data-toggle="collapse" href="#busqueda-avanzada" aria-expanded="false" aria-controls="busqueda-avanzada"><span>Búsqueda avanzada&nbsp;<i class="fas fa-sort"></i></span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--.row
+                  .col-sm-12.col-md-6.col-lg-6
+                    button.btn.btn-success.w-100.mb-2
+                      i.fas.fa-file-download.px-1
+                      | Descargar Excel
+                  .col-sm-12.col-md-6.col-lg-6
+                    button.btn.btn-info.w-100.mb-2(type="submit")
+                      i.fas.fa-search.px-1
+                      | Buscar
+                  -->
+                </form>
+              </div>
+              <div class="col-md-12 col-lg-6"></div>
+            </div>
+          </div>
+          <div class="container-fluid py-4">
+            <div class="row">
+              <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
+                <div class="h5">BANDEJA DE CAMPAÑAS MASIVAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+              </div>
+              <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
+                <button class="btn btn-success w-100">Descargar Excel</button>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-12 px-0">
+                <div class="table-responsive tabla-principal">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr class="bg-azul text-white">
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col" style="min-width: 150px;">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>EMPRESA ENCUESTADA&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col" style="min-width: 150px;">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TIPO ENCUESTA&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CAMPAÑA&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th class="text-center" scope="col">GESTIÓN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">1</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Enviado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">2</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>En proceso</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">3</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">4</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Enviado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">5</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Enviado</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">6</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">7</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">8</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">9</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" data-encabezado="Item" scope="row">10</td>
+                        <td class="text-center" data-encabezado="Código">ENC0002</td>
+                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
+                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Campaña">Nombre de la campaña</td>
+                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
+                        <td data-encabezado="Estado"><span>Sin iniciar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tfoot>
+                        <tr>
+                          <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
+                          <td class="text-right text-xs-left pr-0" colspan="5"><span>Registros por página&nbsp;</span>
+                            <select id="catidad-rgistros">
+                              <option value="10" selected>10</option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                            </select>&nbsp;
+                            1 de 75 páginas&nbsp;
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-double-left"></i></button>
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-left"></i></button>
+                              <input class="ir-pagina" type="number" value="1" min="1">
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-right"></i></button>
+                              <button class="btn btn-success" type="button"><i class="fas fa-angle-double-right"></i></button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script></script>
+    <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
+      <footer class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Contáctenos</div>
+                <ul class="list-unstyled mr-0">
+                  <li class="py-1"><a class="text-white" href="tel: +5114111100">Teléfono: (+511) 411-1100</a></li>
+                  <li class="py-1"><a class="text-white" href="mailto:webmaster@minem.gob.pe?Subject=Contacto%20desde%20la%20web%20de%20MRV%20Plataforma%20del%20Sector%20Energético">webmaster@minem.gob.pe</a></li>
+                  <li class="py-1">Dirección General de Eficiencia Energética</li>
+                  <li class="py-1"><a class="text-white" href="https://www.google.com/maps/d/u/0/viewer?msa=0&amp;hl=en&amp;ie=UTF8&amp;ll=-12.097192999999981%2C-77.00643500000001&amp;spn=0%2C0&amp;t=m&amp;source=embed&amp;mid=1oiTLqK_OscJsqGYEQbVNHyO68Dw&amp;z=17" target="_blank">Av. Las Artes Sur 260. San Borja. Lima. Perú</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Enlaces</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="http://eficienciaenergetica.minem.gob.pe/" target="_blank">Sistema Interactivo de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank">Dirección General de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="https://www.gob.pe/minem" target="_blank">Ministerio de Energía y Minas</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Más información</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="./documentos/Manual_Usuario_MRV.pdf" download>Manual de Usuario</a></li>
+                  <li class="py-1"><a class="text-white" href="./terminos-y-condiciones.html">Términos y Condiciones</a></li>
+                  <li class="py-1"><a class="text-white" href="./mapa-del-ditio.html" target="_blank">Mapa del Sitio</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="dropdown-divider"></div>
+          </div>
+          <div class="col-sm-12 col-md-12 text-right text-white">
+            <div class="row">
+              <div class="col-6 text-left"><img src="./images/logo_web_footer.svg" height="18"></div>
+              <div class="col-6"><small>&copy; Ministerio de Energía y Minas | Todos los derechos reservados</small></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
