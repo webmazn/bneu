@@ -20129,8 +20129,8 @@ $(document).ready(function(){
       switch(ctrl){
         case 'txt': tipo = "CAJA DE TEXTO"; break;
         case 'cbo': tipo = "LISTA DE OPCIONES"; break;
-        case 'chk': tipo = "MÚLTIPLES DE OPCIONES"; break;
-        case 'rad': tipo = "ÚNICA OPCIÓN DE RESPUESTA"; break;
+        case 'chk': tipo = "MÚLTIPLES OPCIONES"; break;
+        case 'rad': tipo = "ÚNICA OPCIÓN"; break;
       }
       span.empty().text("PREGUNTA "+item+" ("+tipo+")");
     });
@@ -20145,7 +20145,7 @@ $(document).ready(function(){
         <div class="form-group">
           <label class="font-weight-bold d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar"></i>
+              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>
               <span class="tituloPregunta" data-tipo="txt"></span>
             </div>
             <i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>
@@ -20165,7 +20165,7 @@ $(document).ready(function(){
         <div class="form-group">
           <label class="font-weight-bold d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar"></i>
+              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>
               <span class="tituloPregunta" data-tipo="cbo"></span>
             </div>
             <i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>
@@ -20209,7 +20209,7 @@ $(document).ready(function(){
         <div class="form-group">
           <label class="font-weight-bold d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar"></i>
+              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>
               <span class="tituloPregunta" data-tipo="chk"></span>
             </div>
             <i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>
@@ -20259,7 +20259,7 @@ $(document).ready(function(){
         <div class="form-group">
           <label class="font-weight-bold d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar"></i>
+              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>
               <span class="tituloPregunta" data-tipo="rad"></span>
             </div>
             <i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>
@@ -20315,8 +20315,10 @@ $(document).ready(function(){
     conteoPreguntas();
   });
 
-  var contenedorEncuesta = document.getElementById('contenedorEncuesta');
-  if(contenedorEncuesta!=""){
+  // var contenedorEncuesta = document.getElementById('contenedorEncuesta');
+  // if(contenedorEncuesta!=""){
+  if($("#contenedorEncuesta").length>0){
+    var contenedorEncuesta = document.getElementById('contenedorEncuesta');
     new Sortable(contenedorEncuesta, {
       animation: 150,
       ghostClass: 'blue-background-class',
@@ -20331,7 +20333,6 @@ $(document).ready(function(){
   eliminarOpcion = function(t){
     event.preventDefault();
     var controlesPregunta = $(t).parent().parent().parent().parent().find(".control-pregunta");
-    console.log(controlesPregunta);
     var contadorPreguntas = controlesPregunta.length;
     if(contadorPreguntas>1){
       $(t).parent().parent().parent().remove();
@@ -20343,8 +20344,22 @@ $(document).ready(function(){
     event.preventDefault();
     var $controlesPregunta = $(t).parent().parent().parent().parent();
     var $controlPregunta = $controlesPregunta.find(".control-pregunta:last").clone().html();
-  $controlesPregunta.append('<div class="form-group control-pregunta">'+$controlPregunta+'</div>');
+    $controlesPregunta.append('<div class="form-group control-pregunta">'+$controlPregunta+'</div>');
     $('[data-toggle="tooltip"]').tooltip();
+  }
+
+  eliminarPregunta = function(t){
+    event.preventDefault();
+    var controlesPregunta = $(t).parent().parent().parent().parent().parent().find(".seccion-pregunta");
+    var contadorPreguntas = controlesPregunta.length;
+    // console.log(contadorPreguntas);
+    if(contadorPreguntas>=1){
+      $(t).parent().parent().parent().parent().remove();
+      if(contadorPreguntas==1){
+        $("#ninguna-pregunta").show();
+      }
+    }
+    $(t).tooltip("hide");
   }
 
 });
