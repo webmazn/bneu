@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BaseDA.cs" />
     <Compile Include="DataBaseHelpers\OracleDynamicParameters.cs" />
+    <Compile Include="EmpresaIndustriaDA.cs" />
     <Compile Include="IntencionParticiparDA.cs" />
     <Compile Include="LoginDA.cs" />
     <Compile Include="RolDA.cs" />

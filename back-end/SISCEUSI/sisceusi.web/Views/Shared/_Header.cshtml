@@ -1,14 +1,28 @@
-﻿<div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
+﻿@using sisceusi.entidad;
+@{
+    UsuarioBE usuario = Session["user"] == null ? null : (UsuarioBE)Session["user"];
+}
+
+<div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
     <div class="container-fluid bg-nuevo-azul">
-        <div class="container menu-main">
+        <div class="container menu-main">            
             <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
                 <ul class="navbar-nav mr-md-auto">
                     <li class="nav-item align-self-center"><a class="nav-link p-1" href="https://www.gob.pe/minem" target="_blank"><img src="@Url.Content("~/images/logo_mem.svg")" height="48"></a></li>
                     <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="@Url.Content("~/images/logo_dgee.svg")" height="48"></a></li>
                 </ul>
-                <ul class="navbar-nav ml-md-auto">
-                    <li class="nav-item align-self-center"><a class="btn btn-celeste btn-md px-4 font-weight-bold" href="@Url.Action("Index", "Login")" role="button">INICIAR SESIÓN</a></li>
-                </ul>
+                @if (usuario == null)
+                {
+                    <ul class="navbar-nav ml-md-auto">
+                        <li class="nav-item align-self-center"><a class="btn btn-celeste btn-md px-4 font-weight-bold" href="@Url.Action("Index", "Login")" role="button">INICIAR SESIÓN</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav ml-md-auto">
+                        <li class="nav-item align-self-center"><a class="btn btn-danger btn-md px-4 font-weight-bold" href="@Url.Action("Salir", "Login")" role="button">CERRAR SESIÓN</a></li>
+                    </ul>
+                }
             </header>
         </div>
     </div>
@@ -24,6 +38,17 @@
                         <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
                         <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
                     </ul>
+                    @if (usuario != null)
+                        {
+                        string code = "USU" + usuario.idUsuario.ToString("D4");
+                        <div class="btn-group w-sm-100">
+                            <a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>@code - @usuario.nombres.ToUpper() <br></b></small><small class="text-truncate">20105678910 - NOMBRE EMPRESA</small></a>
+                            <div class="dropdown-menu dropdown-menu-right w-sm-100">
+                                <span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">@usuario.rol.rol</span><br></span><a class="dropdown-item" href="./mantenimiento-de-tablas.html"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="@Url.Action("Salir", "Login")"><i class="fas fa-sign-out-alt pr-1"></i>Salir del sistema</a>
+                            </div>
+                        </div>
+                    }
                 </div>
             </nav>
         </div>

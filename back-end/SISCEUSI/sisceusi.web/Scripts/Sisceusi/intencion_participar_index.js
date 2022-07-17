@@ -22,7 +22,7 @@ var validarCampos = () => {
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
-        $('form .form-group:last').after(messageError(error));
+        $('form .form-group:last').after(messageError(error), 'registro');
         return false;
     }
     return true;
@@ -63,7 +63,7 @@ var validar = (data) => {
             location.href = `${baseUrl}Inicio/Index`;
         }, 3500);
     } else {
-        $('form .form-group:last').after(messageError(messageStringGeneric(data.message)));
+        $('form .form-group:last').after(messageError(messageStringGeneric(data.message), 'registro'));
         grecaptcha.reset();
     }
 }

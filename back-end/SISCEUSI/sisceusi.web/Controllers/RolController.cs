@@ -39,8 +39,23 @@ namespace sisceusi.web.Controllers
         {
             RolLN logica = new RolLN();
             RolBE rol = logica.obtenerRol(new RolBE(id));
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", rol == null ? false : true);
+            response.Add("object", rol);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
 
-            var jsonResult = Json(new { objeto = rol }, JsonRequestBehavior.AllowGet);
+        [HttpGet]
+        public JsonResult obtenerListaRol()
+        {
+            RolLN logica = new RolLN();
+            List<RolBE> lista = logica.obtenerListaRol();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }

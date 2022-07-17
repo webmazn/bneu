@@ -19,7 +19,10 @@ namespace sisceusi.Datos
                 {
                     Externo = $"{esquema}.PKG_SISCEUSI_EXTERNO.",
                     Login = $"{esquema}.PKG_SISCEUSI_LOGIN.",
-                    Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO."
+                    Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO.",
+                    Rol = $"{esquema}.PKG_SISCEUSI_ROL.",
+                    Usuario = $"{esquema}.PKG_SISCEUSI_USUARIO.",
+                    EmpresaIndustria = $"{esquema}.PKG_SISCEUSI_EMPRESA_IND.",
                 };
             }
         }

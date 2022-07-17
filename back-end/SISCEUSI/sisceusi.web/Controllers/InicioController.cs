@@ -17,12 +17,5 @@ namespace sisceusi.web.Controllers
             return View();
         }
 
-        public JsonResult obtenerUsuario()
-        {
-            UsuarioBE lista = logica.obtenerUsuario(1);
-            var jsonResult = Json(lista, JsonRequestBehavior.AllowGet);
-            jsonResult.MaxJsonLength = int.MaxValue;
-            return jsonResult;
-        }
     }
 }

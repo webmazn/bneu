@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sisceusi.entidad
 {
-    public class UsuarioBE
+    public class UsuarioBE : BaseBE
     {
         public int idUsuario { get; set; }
         public int idEmpresaIndustria { get; set; }
@@ -15,6 +15,7 @@ namespace sisceusi.entidad
         public string correoElectronico { get; set; }
         public string password { get; set; }
         public string dni { get; set; }
+        public string telefono { get; set; }
         public string idEstado { get; set; }
 
         public UsuarioBE() { }
@@ -29,6 +30,7 @@ namespace sisceusi.entidad
          * Entidades Asociadas
          */
 
-        public RolBE rol;
+        public EmpresaIndustriaBE empresaIndustria { get; set; }
+        public RolBE rol { get; set; }
     }
 }

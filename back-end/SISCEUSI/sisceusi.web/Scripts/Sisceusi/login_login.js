@@ -13,7 +13,7 @@ var validarCampos = () => {
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
-        $('form .form-group:last').after(messageError(error));
+        $('form .form-group:last').after(messageError(error), 'acceso');
         return false;
     }
     return true;
@@ -46,7 +46,7 @@ var validarInicioSesion = (data) => {
     if (data.success == true) {
         location.href = `${baseUrl}Interno/Index`;
     } else {
-        $('form .form-group:last').after(messageError(messageStringGeneric(data.message)));
+        $('form .form-group:last').after(messageError(messageStringGeneric(data.message), 'acceso'));
         grecaptcha.reset();
     }
 }

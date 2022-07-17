@@ -64,5 +64,11 @@ namespace sisceusi.web.Controllers
             catch (Exception ex) { Log.Error(ex); }
             return Json(response);
         }
+
+        public ActionResult Salir()
+        {
+            Session["user"] = null;
+            return View("Index");
+        }
     }
 }

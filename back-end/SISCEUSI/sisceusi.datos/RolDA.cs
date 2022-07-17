@@ -19,7 +19,7 @@ namespace sisceusi.datos
             bool seGuardo = false;
             try
             {
-                string sp = $"{Package.Mantenimiento}USP_UPD_ROL";
+                string sp = $"{Package.Rol}USP_UPD_ROL";
                 var p = new OracleDynamicParameters();
                 p.Add("PI_ID_EQUIPO", rol.idRol);
                 p.Add("PI_EQUIPO", rol.rol);
@@ -43,14 +43,33 @@ namespace sisceusi.datos
             RolBE item = null;
             try
             {
-                string sp = $"{Package.Mantenimiento}USP_SEL_GET_ROL";
+                string sp = $"{Package.Rol}USP_SEL_OBJECT";
                 var p = new OracleDynamicParameters();
-                p.Add("pi_idRol", entidad.idRol);
-                p.Add("po_ref", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                p.Add("piIdRol", entidad.idRol);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
                 item = db.Query<RolBE>(sp, p, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
             catch (Exception ex) { Log.Error(ex); }
             return item;
+        }
+
+        public List<RolBE> obtenerListaRol(OracleConnection db)
+        {
+            List<RolBE> lista = new List<RolBE>();
+
+            try
+            {
+                string sp = $"{Package.Rol}USP_SEL_LISTA";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<RolBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return lista;
         }
     }
 }

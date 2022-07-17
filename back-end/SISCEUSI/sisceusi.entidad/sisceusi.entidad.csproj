@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBE.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="EmpresaIndustriaBE.cs" />
     <Compile Include="IntencionParticiparBE.cs" />
     <Compile Include="LoginBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

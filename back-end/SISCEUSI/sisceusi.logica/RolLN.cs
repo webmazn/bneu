@@ -46,5 +46,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;
         }
+
+        public List<RolBE> obtenerListaRol()
+        {
+            List<RolBE> lista = new List<RolBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRol(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }
