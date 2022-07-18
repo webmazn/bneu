@@ -14,6 +14,66 @@ namespace sisceusi.logica
     {
         EmpresaIndustriaDA datos = new EmpresaIndustriaDA();
 
+        public List<EmpresaIndustriaBE> filtroGeneral(EmpresaIndustriaBE empresa)
+        {
+            List<EmpresaIndustriaBE> lista = new List<EmpresaIndustriaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.filtroGeneral(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<EmpresaIndustriaBE> filtroAvanzado(EmpresaIndustriaBE empresa)
+        {
+            List<EmpresaIndustriaBE> lista = new List<EmpresaIndustriaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.filtroAvanzado(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<EmpresaIndustriaBE> exportarGeneral(EmpresaIndustriaBE empresa)
+        {
+            List<EmpresaIndustriaBE> lista = new List<EmpresaIndustriaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.exportarGeneral(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<EmpresaIndustriaBE> exportarAvanzado(EmpresaIndustriaBE empresa)
+        {
+            List<EmpresaIndustriaBE> lista = new List<EmpresaIndustriaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.exportarAvanzado(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public bool grabarEmpresaIndustria(EmpresaIndustriaBE empresa)
+        {
+            bool seGuardo = false;
+            try
+            {
+                cn.Open();
+                seGuardo = datos.grabarEmpresaIndustria(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seGuardo;
+        }
+
         public EmpresaIndustriaBE obtenerEmpresa(EmpresaIndustriaBE empresa)
         {
             EmpresaIndustriaBE item = null;

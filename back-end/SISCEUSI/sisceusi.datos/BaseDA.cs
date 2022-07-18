@@ -21,6 +21,9 @@ namespace sisceusi.Datos
                     Login = $"{esquema}.PKG_SISCEUSI_LOGIN.",
                     Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO.",
                     Rol = $"{esquema}.PKG_SISCEUSI_ROL.",
+                    Giro = $"{esquema}.PKG_SISCEUSI_GIRO.",
+                    GrupoEmpresa = $"{esquema}.PKG_SISCEUSI_GRUPO_EMPRESA.",
+                    Ciuu = $"{esquema}.PKG_SISCEUSI_CIUU.",
                     Usuario = $"{esquema}.PKG_SISCEUSI_USUARIO.",
                     EmpresaIndustria = $"{esquema}.PKG_SISCEUSI_EMPRESA_IND.",
                 };

@@ -169,6 +169,8 @@
     <Content Include="images\portada03.png" />
     <Content Include="packages.config" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\Sisceusi\empresa_index.js" />
+    <Content Include="Scripts\Sisceusi\empresa_nueva_empresa.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
     <Content Include="Scripts\Sisceusi\script_validaciones.js" />
     <Content Include="Scripts\Sisceusi\usuario_index.js" />
@@ -199,7 +201,9 @@
     <Content Include="Views\IntencionParticipar\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\NuevoUsuario.cshtml" />
-    <Content Include="Views\Empresa\Index.cshtml" />
+    <Content Include="Views\EmpresaIndustria\Index.cshtml" />
+    <Content Include="Views\Interno\MaestroMantenimiento.cshtml" />
+    <Content Include="Views\EmpresaIndustria\NuevaEmpresaIndustria.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -222,7 +226,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CiuuController.cs" />
     <Compile Include="Controllers\EmpresaIndustriaController.cs" />
+    <Compile Include="Controllers\GiroController.cs" />
+    <Compile Include="Controllers\GrupoEmpresaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\IntencionParticiparController.cs" />
     <Compile Include="Controllers\InternoController.cs" />
@@ -240,6 +247,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Ciuu\" />
+    <Folder Include="Views\Giro\" />
+    <Folder Include="Views\GrupoEmpresa\" />
     <Folder Include="Views\Rol\" />
   </ItemGroup>
   <ItemGroup>

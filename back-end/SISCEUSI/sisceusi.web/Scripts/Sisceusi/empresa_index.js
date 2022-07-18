@@ -5,11 +5,14 @@
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
     $('#btn-buscar')[0].click();
-    cargarDesplegables()
 });
 
+/* ================================================
+ * INICIO ORDENAR COLUMA - PAGINA
+ * ================================================
+ */
+
 /*
- * Variable para indicar
  * si es filtro general
  * true = general, false = avanzado
  */
@@ -33,6 +36,17 @@ var cambiarPaginaRegistros = () => {
     else $('#btn-buscar-avanzado')[0].click()
 }
 
+
+/* ================================================
+ * FIN ORDENAR COLUMA - PAGINA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO BUSQUEDA GENERAL
+ * ================================================
+ */
+
 var filtroGeneral = (e) => {
     e.preventDefault()
     bFiltroGeneral = true
@@ -44,7 +58,7 @@ var filtroGeneral = (e) => {
     let params = { buscar, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
-    let url = `${baseUrl}Usuario/filtroGeneral?${queryParams}`;
+    let url = `${baseUrl}EmpresaIndustria/filtroGeneral?${queryParams}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let method = 'GET';
@@ -61,24 +75,34 @@ var filtroGeneral = (e) => {
     });
 };
 
+/* ================================================
+ * FIN BUSQUEDA GENERAL
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO BUSQUEDA AVANZADO
+ * ================================================
+ */
+
 var filtroAvanzado = (e) => {
     e.preventDefault()
     bFiltroGeneral = false
     let ruc = $('#ruc').val();
     let empresa = $('#empresa').val();
-    let tipoUsuario = $('#cbo-tipo-usuario').val();
+    let representanteLegal = $('#usuario').val();
+    let correoElectronico = $('#email').val();
     let fechaInicio = $("#txt-fecha-inicio").val();
     let fechaFin = $("#txt-fecha-fin").val();
-    let nombres = $("#usuario").val();
     let estado = $("#cbo-estado").val();
     let registros = $('#number-registers').val();
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { ruc, empresa, tipoUsuario, fechaInicio, fechaFin, nombres, estado, registros, pagina, columna, orden };
+    let params = { ruc, empresa, representanteLegal, correoElectronico, fechaInicio, fechaFin, estado, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
-    let url = `${baseUrl}Usuario/filtroAvanzado?${queryParams}`;
+    let url = `${baseUrl}EmpresaIndustria/filtroAvanzado?${queryParams}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let method = 'GET';
@@ -94,6 +118,16 @@ var filtroAvanzado = (e) => {
         console.log('Error: ' + error.message);
     });
 }
+
+/* ================================================
+ * FIN BUSQUEDA AVANZADO
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO CARGAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
 
 var cargarDatosTabla = (j) => {
     let tabla = $('.tabla-principal').find('table');
@@ -129,6 +163,16 @@ var cargarDatosTabla = (j) => {
     }
 }
 
+/* ================================================
+ * FIN CARGAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO RENDERIZAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
+
 var renderizar = (data, numberCellHeader, pagina, registros) => {
     let doRenderizar = data.length > 0;
     let content = `<tr><th colspan='${numberCellHeader}'>No existe información</th></tr>`;
@@ -136,29 +180,36 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
     if (doRenderizar) {
         content = data.map((x, i) => {
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
-            let colCodigo = `<td class="text-center" data-encabezado="Código">USU${pad(x.idUsuario, 4)}</td>`;
-            let colNombresApellidos = `<td data-encabezado="Nombre y Apellido">${x.nombres}</td>`;
-            let colTipoUsuario = `<td data-encabezado="Tipo usuario"><span>${x.rol.rol}</span></td>`;
+            let colCodigo = `<td class="text-center" data-encabezado="Código">EMP${pad(x.idEmpresaIndustria, 4)}</td>`;
+            let colRuc = `<td data-encabezado="Nombre y Apellido">${x.ruc}</td>`;
+            let colRazonSocial = `<td data-encabezado="Tipo usuario"><span>${x.nombreEmpresa}</span></td>`
+            let colRepresentanteLegal = `<td class="text-center" data-encabezado="Fecha registro">${x.representanteLegal}</td>`;
+            let colGiroNegocio = `<td class="text-center" data-encabezado="Fecha registro">${x.giro.giro}</td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idUsuario}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idUsuario}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idEmpresaIndustria}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idEmpresaIndustria}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colNro}${colCodigo}${colNombresApellidos}${colTipoUsuario}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
+            let row = `<tr>${colNro}${colCodigo}${colRuc}${colRazonSocial}${colRepresentanteLegal}${colGiroNegocio}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
     return content;
 };
 
-var actualizar = (obj) => {
-    let id = $(obj).data('id')
-    location.href = `${baseUrl}Usuario/NuevoUsuario/${id}`
-}
+/* ================================================
+ * FIN RENDERIZAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO EXPORTAR GENERAL | AVANZADO
+ * ================================================
+ */
 
 var exportar = () => {
     if (bFiltroGeneral) exportarGeneral()
-    else exportarAvanzado()    
+    else exportarAvanzado()
 }
 
 var exportarGeneral = () => {
@@ -167,40 +218,42 @@ var exportarGeneral = () => {
     let orden = $("#order").val()
     let params = { buscar, columna, orden }
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
-    let url = `${baseUrl}Usuario/exportarGeneral?${queryParams}`
+    let url = `${baseUrl}EmpresaIndustria/exportarGeneral?${queryParams}`
     location.href = url
 }
 
 var exportarAvanzado = () => {
-    let ruc = $('#ruc').val()
-    let empresa = $('#empresa').val()
-    let tipoUsuario = $('#cbo-tipo-usuario').val()
-    let fechaInicio = $("#txt-fecha-inicio").val()
-    let fechaFin = $("#txt-fecha-fin").val()
-    let nombres = $("#usuario").val()
-    let estado = $("#cbo-estado").val()
-    let columna = $("#column").val()
-    let orden = $("#order").val()
-    let params = { ruc, empresa, tipoUsuario, fechaInicio, fechaFin, nombres, estado, columna, orden }
+    let ruc = $('#ruc').val();
+    let empresa = $('#empresa').val();
+    let representanteLegal = $('#usuario').val();
+    let correoElectronico = $('#email').val();
+    let fechaInicio = $("#txt-fecha-inicio").val();
+    let fechaFin = $("#txt-fecha-fin").val();
+    let estado = $("#cbo-estado").val();
+    let columna = $("#column").val();
+    let orden = $("#order").val();
+    let params = { ruc, empresa, representanteLegal, correoElectronico, fechaInicio, fechaFin, estado, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
-    let url = `${baseUrl}Usuario/exportarAvanzado?${queryParams}`
+    let url = `${baseUrl}EmpresaIndustria/exportarAvanzado?${queryParams}`
     location.href = url;
 }
 
-var cargarDesplegables = () => {
-    let urlRol = `${baseUrl}Rol/obtenerListaRol`;
-    Promise.all([
-        fetch(urlRol)
-    ])
-    .then(r => Promise.all(r.map(v => v.json())))
-    .then((responseAll) => {
-        jRol = responseAll[0]
-        if (jRol.success) cargarRoles(jRol.object)
-    });
+/* ================================================
+ * FIN EXPORTAR GENERAL | AVANZADO
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ACTUALIZAR EMPRESA
+ * ================================================
+ */
+
+var actualizar = (obj) => {
+    let id = $(obj).data('id')
+    location.href = `${baseUrl}EmpresaIndustria/NuevaEmpresaIndustria/${id}`
 }
 
-var cargarRoles = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idRol}">${x.rol}</option>`).join('');
-    options = `<option value="0">-Seleccione un tipo de usuario-</option>${options}`;
-    $('#cbo-tipo-usuario').html(options);
-}
+/* ================================================
+ * FIN ACTUALIZAR EMPRESA
+ * ================================================
+ */

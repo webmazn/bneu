@@ -44,7 +44,7 @@
                         <div class="btn-group w-sm-100">
                             <a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>@code - @usuario.nombres.ToUpper() <br></b></small><small class="text-truncate">20105678910 - NOMBRE EMPRESA</small></a>
                             <div class="dropdown-menu dropdown-menu-right w-sm-100">
-                                <span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">@usuario.rol.rol</span><br></span><a class="dropdown-item" href="./mantenimiento-de-tablas.html"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
+                                <span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">@usuario.rol.rol</span><br></span><a class="dropdown-item" href="@Url.Action("MaestroMantenimiento", "Interno")"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item" href="@Url.Action("Salir", "Login")"><i class="fas fa-sign-out-alt pr-1"></i>Salir del sistema</a>
                             </div>
                         </div>
@@ -55,4 +55,7 @@
     </div>
 </div>
 <div class="flecha-top d-print-none"><i class="fas fa-angle-double-right fa-2x text-dark btn-slider-bottom"></i></div>
-<div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_fb.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ig.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_tw.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_yt.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_wp.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ld.svg")"></a></div>
+@if (usuario == null)
+{
+    <div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_fb.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ig.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_tw.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_yt.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_wp.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ld.svg")"></a></div>
+}

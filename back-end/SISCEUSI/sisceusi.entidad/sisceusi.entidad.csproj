@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBE.cs" />
+    <Compile Include="CiuuBE.cs" />
     <Compile Include="EmpresaIndustriaBE.cs" />
+    <Compile Include="GiroBE.cs" />
+    <Compile Include="GrupoEmpresaBE.cs" />
     <Compile Include="IntencionParticiparBE.cs" />
     <Compile Include="LoginBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

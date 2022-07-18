@@ -15,5 +15,10 @@ namespace sisceusi.web.Controllers
         {
             return View();
         }
+
+        public ActionResult MaestroMantenimiento()
+        {
+            return View();
+        }
     }
 }
