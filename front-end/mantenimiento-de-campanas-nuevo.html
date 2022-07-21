@@ -151,6 +151,20 @@
                       </ul>
                       <div class="tab-content border-left border-bottom border-right p-4" id="myTabContent">
                         <div class="tab-pane fade show active" id="tab01" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <select class="custom-select">
+                                <option value="" selected>-Seleccione un filtro para las empresas-</option>
+                                <option value="porcentaje">Seleccionar empresas por porcentaje [%]</option>
+                                <option value="cantidad">Seleccionar empresas por cantidad [#]</option>
+                              </select>
+                            </div>
+                            <input class="form-control" type="number">
+                            <div class="input-group-append">
+                              <button class="btn btn-azul" type="submit">Aplicar filtro</button>
+                            </div>
+                          </div>
+                          <div class="dropdown-divider"></div>
                           <select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">
                             <option value="empresa_01">NOMBRE DE EMPRESA 01 O NOMBRE COMERCIAL</option>
                             <option value="empresa_02">NOMBRE DE EMPRESA 02 O NOMBRE COMERCIAL</option>
@@ -166,6 +180,20 @@
                           <select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>
                         </div>
                         <div class="tab-pane fade" id="tab02" role="tabpanel" aria-labelledby="profile-tab">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <select class="custom-select">
+                                <option value="" selected>-Seleccione un filtro para las empresas-</option>
+                                <option value="porcentaje">Seleccionar empresas por porcentaje [%]</option>
+                                <option value="cantidad">Seleccionar empresas por cantidad [#]</option>
+                              </select>
+                            </div>
+                            <input class="form-control" type="number">
+                            <div class="input-group-append">
+                              <button class="btn btn-azul" type="submit">Aplicar filtro</button>
+                            </div>
+                          </div>
+                          <div class="dropdown-divider"></div>
                           <select id="source01" data-text="Empresas piloto para seleccionar" data-search="Buscar empresa">
                             <option value="empresa_01">NOMBRE DE EMPRESA PILOTO 01 O NOMBRE COMERCIAL</option>
                             <option value="empresa_02">NOMBRE DE EMPRESA PILOTO 02 O NOMBRE COMERCIAL</option>
@@ -181,19 +209,64 @@
                           <select id="destination01" data-text="Empresas piloto seleccionadas" data-search="Buscar empresa"></select>
                         </div>
                         <div class="tab-pane fade" id="tab03" role="tabpanel" aria-labelledby="contact-tab">
-                          <select id="source02" data-text="Perfiles para seleccionar" data-search="Buscar empresa">
-                            <option value="empresa_01">NOMBRE DE ESPECIALISTA 01</option>
-                            <option value="empresa_02">NOMBRE DE ESPECIALISTA 02</option>
-                            <option value="empresa_03">NOMBRE DE ESPECIALISTA 03</option>
-                            <option value="empresa_04">NOMBRE DE ESPECIALISTA 04</option>
-                            <option value="empresa_05">NOMBRE DE ESPECIALISTA 05</option>
-                            <option value="empresa_06">NOMBRE DE ADMINISTRADOR 06</option>
-                            <option value="empresa_07">NOMBRE DE ADMINISTRADOR 07</option>
-                            <option value="empresa_08">NOMBRE DE ADMINISTRADOR 08</option>
-                            <option value="empresa_09">NOMBRE DE ADMINISTRADOR 09</option>
-                            <option value="empresa_10">NOMBRE DE ADMINISTRADOR 10</option>
-                          </select>
-                          <select id="destination02" data-text="Perfiles seleccionadas" data-search="Buscar empresa"></select>
+                          <div class="col-12">
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="form-group">
+                                  <label class="font-weight-bold" for="cbo-tipo-empresa">Seleccionar empresas</label>
+                                  <select class="form-control" id="cbo-tipo-empresa">
+                                    <option value="">-Seleccione empresas-</option>
+                                    <option value="oficial">EMPRESAS OFICIAL</option>
+                                    <option value="pilotos">EMPRESAS PILOTO</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label class="font-weight-bold" for="cbo-revisor">Asignar revisor</label>
+                                  <select class="form-control" id="cbo-revisor">
+                                    <option value="">-Seleccione revisor-</option>
+                                    <option value="revisor_1">Revisor 01</option>
+                                    <option value="revisor_2">Revisor 02</option>
+                                    <option value="revisor_3">Revisor 03</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                <div class="form-group">
+                                  <label class="font-weight-bold" for="cbo-revisor">Empresas seleccionadas</label>
+                                  <div class="border p-2 empresas-seleccionadas">
+                                    <div class="truncate">EMPRESAS LISTADA 01</div>
+                                    <div class="truncate">EMPRESAS LISTADA 02</div>
+                                    <div class="truncate">EMPRESAS LISTADA 03</div>
+                                    <div class="truncate">EMPRESAS LISTADA 04</div>
+                                    <div class="truncate">EMPRESAS LISTADA 05</div>
+                                    <div class="truncate">EMPRESAS LISTADA 06</div>
+                                    <div class="truncate">EMPRESAS LISTADA 07</div>
+                                    <div class="truncate">EMPRESAS LISTADA 08</div>
+                                    <div class="truncate">EMPRESAS LISTADA 09</div>
+                                    <div class="truncate">EMPRESAS LISTADA 10</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="dropdown-divider"></div>
+                          </div>
+                          <div class="col-12">
+                            <select id="source02" data-text="Perfiles para seleccionar" data-search="Buscar empresa">
+                              <option value="empresa_01">NOMBRE DE ESPECIALISTA 01</option>
+                              <option value="empresa_02">NOMBRE DE ESPECIALISTA 02</option>
+                              <option value="empresa_03">NOMBRE DE ESPECIALISTA 03</option>
+                              <option value="empresa_04">NOMBRE DE ESPECIALISTA 04</option>
+                              <option value="empresa_05">NOMBRE DE ESPECIALISTA 05</option>
+                              <option value="empresa_06">NOMBRE DE ADMINISTRADOR 06</option>
+                              <option value="empresa_07">NOMBRE DE ADMINISTRADOR 07</option>
+                              <option value="empresa_08">NOMBRE DE ADMINISTRADOR 08</option>
+                              <option value="empresa_09">NOMBRE DE ADMINISTRADOR 09</option>
+                              <option value="empresa_10">NOMBRE DE ADMINISTRADOR 10</option>
+                            </select>
+                            <select id="destination02" data-text="Perfiles seleccionadas" data-search="Buscar empresa"></select>
+                          </div>
                         </div>
                       </div>
                     </div>
