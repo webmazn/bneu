@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Encuesta inicio</title>
+    <title>Balance Nacional de Energía Útil | Encuesta formulario</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -80,87 +80,78 @@
                 <div class="row">
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C.</label>
-                      <input class="form-control" type="text" id="txt-ruc" placeholder="Número de RUC">
+                      <label class="font-weight-bold" for="txt-fecha-encuesta">FECHA DE LA ENCUESTA</label>
+                      <input class="form-control" type="date" id="txt-fecha-encuesta">
                     </div>
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-cuestionario">NÚMERO DE CUESTIONARIO</label>
-                      <input class="form-control" type="text" id="txt-cuestionario" placeholder="Número de cuestionario">
+                      <label class="font-weight-bold" for="txt-hora-encuesta">HORA DE LA ENCUESTA</label>
+                      <input class="form-control" type="time" id="txt-hora-encuesta">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-departamento">DIVISIÓN POLÍTICA - DEPARTAMENTO</label>
+                      <select class="form-control" id="cbo-departamento">
+                        <option>-Seleccione un departamento-</option>
+                        <option>Departamento 01</option>
+                        <option>Departamento 02</option>
+                        <option>Departamento 03</option>
+                      </select>
                     </div>
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-suministro">NÚMERO SUMINISTRO GAS</label>
-                      <input class="form-control" type="text" id="txt-suministro" placeholder="Número de suministro de gas">
+                      <label class="font-weight-bold" for="cbo-provincia">DIVISIÓN POLÍTICA - PROVINCIA</label>
+                      <select class="form-control" id="cbo-provincia">
+                        <option>-Seleccione una provincia-</option>
+                        <option>Provincia 01</option>
+                        <option>Provincia 02</option>
+                        <option>Provincia 03</option>
+                      </select>
                     </div>
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="cbo-condicion">CONDICIÓN</label>
-                      <select class="form-control" id="cbo-condicion">
-                        <option>-Seleccione una considición-</option>
+                      <label class="font-weight-bold" for="cbo-distrito">DIVISIÓN POLÍTICA - DISTRITO</label>
+                      <select class="form-control" id="cbo-distrito">
+                        <option>-Seleccione una distrito-</option>
+                        <option>Distrito 01</option>
+                        <option>Distrito 02</option>
+                        <option>Distrito 03</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-zona">ZONA</label>
+                      <select class="form-control" id="cbo-zona">
+                        <option>-Seleccione una zona-</option>
                         <option>Condición 01</option>
                         <option>Condición 02</option>
                         <option>Condición 03</option>
                       </select>
                     </div>
                   </div>
-                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-razon-social">RAZÓN SOCIAL DE LA EMPRESA</label>
-                      <input class="form-control" type="text" id="txt-razon-social">
+                      <label class="font-weight-bold" for="txt-direccion">DIRECCIÓN EXACTA DE LA EMPRESA</label>
+                      <input class="form-control" type="text" id="txt-direccion">
                     </div>
                   </div>
-                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-nombre-comercial">NOMBRE COMERCIAL DE LA EMPRESA O ESTABLECIMIENTO</label>
-                      <input class="form-control" type="text" id="txt-nombre-comercial">
+                      <label class="font-weight-bold" for="txt-servicio-electrico">EMPRESA DE SERVICIO DE ELECTRICIDAD<i class="fas fa-question-circle ayuda-tooltip ml-1" data-toggle="tooltip" data-placement="top" title="Texto de ayuda"></i></label>
+                      <input class="form-control" type="text" id="txt-servicio-electrico">
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="row">
-              <div class="col-12 d-flex">
-                <div class="bg-light w-100 p-4">
-                  <div class="text-center text-azul font-weight-bold p-5">Buenos días / Buenas tardes: NOMBRE DE LA PERSONA LOGUEADA</div>
-                  <div class="row pb-5">
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
-                      <p class="pl-md-5 pl-lg-5 text-justify"><b>F1. &nbsp;</b><span>¿Acepta usted participar en este estudio?</span></p>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
-                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios1" value="si" checked>
-                        <label class="form-check-label" for="exampleRadios1">Si</label>
-                      </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios2" value="no">
-                        <label class="form-check-label" for="exampleRadios2">No</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
-                      <p class="pl-md-5 pl-lg-5 text-justify"><b>F2. &nbsp;</b><span>Trataremos sus respuestas como información confidencial, sin embargo sería de mucha ayuda para nuestro cliente que le facilitemos algunos datos personales de quienes participaron en esta encuesta, para la planificación de los servicios de energía. ¿Está interesado en proveer a nuestro cliente con sus datos?</span></p>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
-                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios3" value="si" checked>
-                        <label class="form-check-label" for="exampleRadios3">Si</label>
-                      </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios4" value="no">
-                        <label class="form-check-label" for="exampleRadios4">No</label>
-                      </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-gas-natural">EMPRESA SERVICIO GAS NATURAL<i class="fas fa-question-circle ayuda-tooltip ml-1 ml-1" data-toggle="tooltip" data-placement="top" title="Texto de ayuda"></i></label>
+                      <input class="form-control" type="text" id="txt-gas-natural">
                     </div>
                   </div>
                 </div>
@@ -173,7 +164,7 @@
               </div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Salir</a></div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-firma.html">Continuar</a></div>
+              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-a.html">Continuar</a></div>
             </div>
           </div>
         </div>
