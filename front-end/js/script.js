@@ -1425,6 +1425,7 @@ $(document).ready(function(){
         case 'cbo': tipo = "LISTA DE OPCIONES"; break;
         case 'chk': tipo = "MÚLTIPLES OPCIONES"; break;
         case 'rad': tipo = "ÚNICA OPCIÓN"; break;
+        case 'tbl': tipo = "TABLA MAESTRA"; break;
       }
       span.empty().text("PREGUNTA "+item+" ("+tipo+")");
     });
@@ -1605,12 +1606,37 @@ $(document).ready(function(){
         </div>
       </div>
     `;
+    var htmlTbl = `
+      <div class="col-12 my-2 pt-3 border bg-light seccion-pregunta">
+        <div class="form-group">
+          <label class="font-weight-bold d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
+              <i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>
+              <span class="tituloPregunta" data-tipo="tbl"></span>
+            </div>
+            <i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>
+          </label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text border-0 bg-white font-weight-bold">SELECCIONAR TABLA</div>
+            </div>
+            <select class="form-control" aria-describedby="inputGroup10">
+              <option>-Seleccione una tabla maestra-</option>
+              <option value="">Tabla maestra 01</option>
+              <option value="">Tabla maestra 02</option>
+            </select>
+            <div class="input-group-append"></div>
+          </div>
+        </div>
+      </div>
+    `;
     $("#ninguna-pregunta").hide();
     switch(ctrl){
       case 'txt': $("#contenedorEncuesta").append(htmlTxt); break;
       case 'cbo': $("#contenedorEncuesta").append(htmlCbo); break;
       case 'chk': $("#contenedorEncuesta").append(htmlChk); break;
       case 'rad': $("#contenedorEncuesta").append(htmlRad); break;
+      case 'tbl': $("#contenedorEncuesta").append(htmlTbl); break;
     }
     $('[data-toggle="tooltip"]').tooltip();
     conteoPreguntas();

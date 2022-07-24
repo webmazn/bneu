@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Mantenimiento de empresas</title>
+    <title>Balance Nacional de Energía Útil | Mantenimiento de plantas</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
@@ -70,15 +70,14 @@
             <div class="row">
               <div class="col-md-12 col-lg-9 d-flex">
                 <div class="bg-light p-4">
-                  <div class="h4 text-cyan">Mantenimiento de Empresas&nbsp;</div>
+                  <div class="h4 text-cyan">Usuarios de la Planta -&nbsp;<b>DIRECCIÓN DE LA PLANTA</b></div>
                   <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
                 </div>
               </div>
               <div class="col-md-12 col-lg-3">
                 <div class="row">
-                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-empresas-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva empresa</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-plantas-usuarios-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nuevo usuario</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
                     <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
-                    <button class="btn btn-info w-100 mb-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!">Importar empresas</button>
                   </div>
                 </div>
               </div>
@@ -107,7 +106,7 @@
                   </div>
                   <div class="form-group">
                     <div class="row">
-                      <div class="col-12 text-right">
+                      <div class="col-12 text">
                         <div class="collapse" id="busqueda-avanzada">
                           <div class="card card-body">
                             <div class="row">
@@ -115,64 +114,53 @@
                                 <div class="row">
                                   <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C.</label>
-                                      <input class="form-control" type="text" id="txt-ruc" placeholder="Número de RUC">
+                                      <label class="font-weight-bold" for="txt-user">NÚMERO DE R.U.C.</label>
+                                      <input class="form-control" type="text" id="ruc" placeholder="Número de RUC">
                                     </div>
                                   </div>
                                   <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-empresa">RAZÓN SOCIAL DE LA EMPRESA</label>
-                                      <input class="form-control" type="text" id="txt-empresa" placeholder="Nombre de empresa">
+                                      <label class="font-weight-bold" for="txt-user">EMPRESA</label>
+                                      <input class="form-control" type="text" id="empresa" placeholder="Nombre de empresa">
                                     </div>
                                   </div>
                                   <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-nombre-comercial">NOMBRE COMERCIAL DE LA EMPRESA</label>
-                                      <input class="form-control" type="text" id="txt-nombre-comercial" placeholder="Nombre de nombre comercial">
-                                    </div>
-                                  </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-representante">REPRESENTANTE LEGAL EMPRESA</label>
-                                      <input class="form-control" type="text" id="txt-representante" placeholder="Nombre del representante">
-                                    </div>
-                                  </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-correo-empresa">CORREO ELECTRÓNICO EMPRESA</label>
-                                      <input class="form-control" type="email" id="txt-correo-empresa" placeholder="Correo electrónico de la empresa">
-                                    </div>
-                                  </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="cbo-giro">GIRO DEL NEGOCIO</label>
-                                      <select class="form-control" id="cbo-giro" aria-describedby="inputGroup10" required>
-                                        <option>-Seleccione un giro del negocio-</option>
-                                        <option>Giro 01</option>
-                                        <option>Giro 02</option>
-                                        <option>Giro 03</option>
+                                      <label class="font-weight-bold" for="cbo-tipo-usuario">TIPO DE USUARIO</label>
+                                      <select class="form-control" id="cbo-tipo-usuario">
+                                        <option>-Seleccione un tipo de usuario-</option>
+                                        <option>Encuestado</option>
+                                        <option>Especialista</option>
+                                        <option>Administrado</option>
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                       <label class="font-weight-bold" for="txt-fecha-inicio">FECHA REGISTRO DESDE</label>
                                       <input class="form-control" type="date" id="txt-fecha-inicio">
                                     </div>
                                   </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                       <label class="font-weight-bold" for="txt-fecha-fin">FECHA REGISTRO HASTA</label>
                                       <input class="form-control" type="date" id="txt-fecha-fin">
                                     </div>
                                   </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="txt-user">NOMBRE DE USUARIO</label>
+                                      <input class="form-control" type="text" id="usuario" placeholder="Nombre de usuario">
+                                    </div>
+                                  </div>
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                       <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO</label>
                                       <select class="form-control" id="cbo-tipo-usuario">
                                         <option>-Seleccione un estado-</option>
                                         <option>Habilitado</option>
                                         <option>Deshabilitado</option>
+                                        <option>Por habilitar</option>
                                       </select>
                                     </div>
                                   </div>
@@ -200,7 +188,7 @@
           <div class="container-fluid py-4">
             <div class="row">
               <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                <div class="h5">BANDEJA DE EMPRESAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                <div class="h5">BANDEJA DE USUARIOS DE LA PLANTA&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
               </div>
               <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                 <button class="btn btn-success w-100">Descargar Excel</button>
@@ -219,20 +207,17 @@
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
-                        <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>RUC EMPRESA&nbsp;</span></span><i class="fas fa-sort"></i></div>
-                        </th>
-                        <th scope="col" style="min-width: 120px;">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>RAZÓN SOCIAL&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        <th scope="col" style="min-width: 300px;">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOMBRE Y APELLIDO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>REP. LEGAL&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TIPO USUARIO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>GIRO NEGOCIO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>F. REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ADMINISTRADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
@@ -243,150 +228,160 @@
                     <tbody>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">1</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
-                        <td data-encabezado="Estado"><span>Deshabilitado</span>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">2</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
-                        <td data-encabezado="Estado"><span>Deshabilitado</span>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">3</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
-                        <td data-encabezado="Estado"><span>Deshabilitado</span>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">4</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
-                        <td data-encabezado="Estado"><span>Deshabilitado</span>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
+                        <td data-encabezado="Estado"><span>Por habilitar</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">5</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
                         <td data-encabezado="Estado"><span>Deshabilitado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">6</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">7</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Especialista</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">8</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Administrador</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">9</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Encuestado</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>Si</span>
+                        </td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center" data-encabezado="Item" scope="row">10</td>
-                        <td class="text-center" data-encabezado="Código">EMP0001</td>
-                        <td data-encabezado="RUC Empresa">20102078910</td>
-                        <td data-encabezado="Razón social">RAZÓN SOCIAL</td>
-                        <td data-encabezado="Rep. Legal">Nombre y apellidos</td>
-                        <td data-encabezado="Giro negocio">Agricultura</td>
-                        <td class="text-center" data-encabezado="Fecha registro">16-10-2022</td>
+                        <td class="text-center" data-encabezado="Código">USU0001</td>
+                        <td data-encabezado="Nombre y Apellido">Nombre y apellido</td>
+                        <td data-encabezado="Tipo usuario"><span>Especialista</span>
+                        </td>
+                        <td class="text-center" data-encabezado="Fecha registro">12-10-2022</td>
+                        <td class="text-center" data-encabezado="Administrado"><span>No</span>
+                        </td>
                         <td data-encabezado="Estado"><span>Habilitado</span>
                         </td>
-                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión"><a class="btn btn-sm btn-warning text-white btn-table" href="./mantenimiento-de-plantas.html" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
@@ -394,7 +389,7 @@
                       <tfoot>
                         <tr>
                           <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
-                          <td class="text-right text-xs-left pr-0" colspan="6"><span>Registros por página&nbsp;</span>
+                          <td class="text-right text-xs-left pr-0" colspan="5"><span>Registros por página&nbsp;</span>
                             <select id="catidad-rgistros">
                               <option value="10" selected>10</option>
                               <option value="25">25</option>
@@ -421,7 +416,6 @@
         </div>
       </div>
     </div>
-    <script></script>
     <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
       <footer class="container">
         <div class="row">
