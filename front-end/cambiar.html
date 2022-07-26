@@ -124,7 +124,72 @@
         </div>
       </div>
     </div>
+    <div class="modal customChatBot fade" id="modalChatBot" tabindex="-1" role="dialog" aria-labelledby="modalChatBotLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Contáctenos</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label class="col-form-label" for="recipient-name">Correo electrónico:</label>
+                <input class="form-control" id="recipient-name" type="email">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" id="message-text">Mensaje:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="alert alert-danger d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-error">
+                          <div class="sa-error-x">
+                            <div class="sa-error-left"></div>
+                            <div class="sa-error-right"></div>
+                          </div>
+                          <div class="sa-error-placeholder"></div>
+                          <div class="sa-error-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Error de envío</h6>
+                      <hr><small class="mb-0">Error al enviar el correo.</small>
+                    </div>
+                  </div>
+                  <div class="alert alert-success d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-success">
+                          <div class="sa-success-tip"></div>
+                          <div class="sa-success-long"></div>
+                          <div class="sa-success-placeholder"></div>
+                          <div class="sa-success-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Bien hecho</h6>
+                      <hr><small class="mb-0">Envío de correo exitoso.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" type="button">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
+      <div class="chat-bot" data-toggle="modal" data-target="#modalChatBot"></div>
       <footer class="container">
         <div class="row">
           <div class="col-12">
