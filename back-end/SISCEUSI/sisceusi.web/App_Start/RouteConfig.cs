@@ -15,8 +15,8 @@ namespace sisceusi.web
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Inicio", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{idTwo}",
+                defaults: new { controller = "Inicio", action = "Index", id = UrlParameter.Optional, idTwo = UrlParameter.Optional }
             );
         }
     }

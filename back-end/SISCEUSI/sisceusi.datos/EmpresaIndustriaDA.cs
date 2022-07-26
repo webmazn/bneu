@@ -188,6 +188,20 @@ namespace sisceusi.datos
             return item;
         }
 
+        public List<EmpresaIndustriaBE> obtenerListaEmpresa(OracleConnection db)
+        {
+            List<EmpresaIndustriaBE> lista = new List<EmpresaIndustriaBE>();
+            try
+            {
+                string sp = $"{Package.EmpresaIndustria}USP_SEL_LISTA";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<EmpresaIndustriaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
         public EmpresaIndustriaBE obtenerEmpresaPorRuc(EmpresaIndustriaBE empresa, OracleConnection db)
         {
             EmpresaIndustriaBE item = null;

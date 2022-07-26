@@ -83,6 +83,18 @@ namespace sisceusi.logica
             return item;
         }
 
+        public List<UsuarioBE> obtenerListaRolEspecifico(UsuarioBE usuario)
+        {
+            List<UsuarioBE> lista = new List<UsuarioBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRolEspecifico(usuario, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public UsuarioBE obtenerUsuarioPorCorreo(UsuarioBE usuario)
         {
             UsuarioBE item = null;

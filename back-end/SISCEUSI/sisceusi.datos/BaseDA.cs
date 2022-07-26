@@ -17,15 +17,19 @@ namespace sisceusi.Datos
             {
                 return new
                 {
-                    Externo = $"{esquema}.PKG_SISCEUSI_EXTERNO.",
-                    Login = $"{esquema}.PKG_SISCEUSI_LOGIN.",
-                    Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO.",
                     Rol = $"{esquema}.PKG_SISCEUSI_ROL.",
+                    Departamento = $"{esquema}.PKG_SISCEUSI_DEPARTAMENTO.",
+                    Provincia = $"{esquema}.PKG_SISCEUSI_PROVINCIA.",
+                    Distrito = $"{esquema}.PKG_SISCEUSI_DISTRITO.",
                     Giro = $"{esquema}.PKG_SISCEUSI_GIRO.",
                     GrupoEmpresa = $"{esquema}.PKG_SISCEUSI_GRUPO_EMPRESA.",
                     Ciuu = $"{esquema}.PKG_SISCEUSI_CIUU.",
+                    Externo = $"{esquema}.PKG_SISCEUSI_EXTERNO.",
+                    Login = $"{esquema}.PKG_SISCEUSI_LOGIN.",
+                    Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO.",                    
                     Usuario = $"{esquema}.PKG_SISCEUSI_USUARIO.",
                     EmpresaIndustria = $"{esquema}.PKG_SISCEUSI_EMPRESA_IND.",
+                    PlantaEmpresa = $"{esquema}.PKG_SISCEUSI_PLANTA_EMPRESA.",
                 };
             }
         }

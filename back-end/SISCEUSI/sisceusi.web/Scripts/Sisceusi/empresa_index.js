@@ -187,9 +187,10 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colGiroNegocio = `<td class="text-center" data-encabezado="Fecha registro">${x.giro.giro}</td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
+            let btnPlanta = `<a class="btn btn-sm btn-warning text-white btn-table" href="${baseUrl}PlantaEmpresa/index/${x.idEmpresaIndustria}" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idEmpresaIndustria}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idEmpresaIndustria}"><i class="fa fa-edit"></i></div>`;
-            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnPlanta}${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colRuc}${colRazonSocial}${colRepresentanteLegal}${colGiroNegocio}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');

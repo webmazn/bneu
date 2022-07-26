@@ -1,6 +1,7 @@
 ﻿using OfficeOpenXml;
 using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.web.Filter;
 using sres.ut;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace sisceusi.web.Controllers
 {
     public class UsuarioController : BaseController
     {
+        [LoginRequiredAttribute]
         // GET: Usuario
         public ActionResult Index()
         {
@@ -90,6 +92,19 @@ namespace sisceusi.web.Controllers
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", usuario == null ? false : true);
             response.Add("object", usuario);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerListaRevisor()
+        {
+            UsuarioLN logica = new UsuarioLN();
+            List<UsuarioBE> lista = logica.obtenerListaRolEspecifico(new UsuarioBE { idRol = 2 });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;

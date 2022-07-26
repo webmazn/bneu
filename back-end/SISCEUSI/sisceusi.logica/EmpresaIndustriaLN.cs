@@ -86,6 +86,18 @@ namespace sisceusi.logica
             return item;
         }
 
+        public List<EmpresaIndustriaBE>  obtenerListaEmpresa()
+        {
+            List<EmpresaIndustriaBE> lista = new List<EmpresaIndustriaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaEmpresa(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public EmpresaIndustriaBE obtenerEmpresaPorRuc(EmpresaIndustriaBE empresa)
         {
             EmpresaIndustriaBE item = null;

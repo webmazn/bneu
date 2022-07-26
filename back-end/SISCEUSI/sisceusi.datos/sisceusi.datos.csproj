@@ -51,11 +51,15 @@
     <Compile Include="BaseDA.cs" />
     <Compile Include="CiuuDA.cs" />
     <Compile Include="DataBaseHelpers\OracleDynamicParameters.cs" />
+    <Compile Include="DepartamentoDA.cs" />
+    <Compile Include="DistritoDA.cs" />
     <Compile Include="EmpresaIndustriaDA.cs" />
     <Compile Include="GiroDA.cs" />
     <Compile Include="GrupoEmpresaDA.cs" />
     <Compile Include="IntencionParticiparDA.cs" />
     <Compile Include="LoginDA.cs" />
+    <Compile Include="PlantaEmpresaDA.cs" />
+    <Compile Include="ProvinciaDA.cs" />
     <Compile Include="RolDA.cs" />
     <Compile Include="UsuarioDA.cs" />
     <Compile Include="DataBaseHelpers\OracleHelper.cs" />

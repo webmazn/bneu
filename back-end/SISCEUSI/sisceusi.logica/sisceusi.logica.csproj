@@ -47,11 +47,15 @@
   <ItemGroup>
     <Compile Include="BaseLN.cs" />
     <Compile Include="CiuuLN.cs" />
+    <Compile Include="DepartamentoLN.cs" />
+    <Compile Include="DistritoLN.cs" />
     <Compile Include="EmpresaIndustriaLN.cs" />
     <Compile Include="GiroLN.cs" />
     <Compile Include="GrupoEmpresaLN.cs" />
     <Compile Include="IntencionParticiparLN.cs" />
     <Compile Include="LoginLN.cs" />
+    <Compile Include="PlantaEmpresaLN.cs" />
+    <Compile Include="ProvinciaLN.cs" />
     <Compile Include="RolLN.cs" />
     <Compile Include="UsuarioLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

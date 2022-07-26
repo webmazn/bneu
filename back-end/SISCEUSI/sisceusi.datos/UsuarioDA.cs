@@ -127,6 +127,21 @@ namespace sisceusi.datos
             return item;
         }
 
+        public List<UsuarioBE> obtenerListaRolEspecifico(UsuarioBE usuario, OracleConnection db)
+        {
+            List<UsuarioBE> lista = new List<UsuarioBE>();
+            try
+            {
+                string sp = $"{Package.Usuario}USP_SEL_LISTA_ROL";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdRol", usuario.idRol);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<UsuarioBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
         public UsuarioBE obtenerUsuarioPorCorreo(UsuarioBE usuario, OracleConnection db)
         {
             UsuarioBE item = null;

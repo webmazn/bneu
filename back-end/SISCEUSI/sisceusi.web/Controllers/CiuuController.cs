@@ -1,5 +1,6 @@
 ﻿using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.web.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
+    [LoginRequiredAttribute]
     public class CiuuController : Controller
     {
         // GET: Ciuu

@@ -169,12 +169,16 @@
     <Content Include="images\portada03.png" />
     <Content Include="packages.config" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\Sisceusi\campana_nueva_campana.js" />
     <Content Include="Scripts\Sisceusi\empresa_index.js" />
     <Content Include="Scripts\Sisceusi\empresa_nueva_empresa.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
+    <Content Include="Scripts\Sisceusi\planta_index.js" />
+    <Content Include="Scripts\Sisceusi\planta_nueva_planta.js" />
     <Content Include="Scripts\Sisceusi\script_validaciones.js" />
     <Content Include="Scripts\Sisceusi\usuario_index.js" />
     <Content Include="Scripts\Sisceusi\usuario_nuevo_usuario.js" />
+    <Content Include="Scripts\Sisceusi\usuario_planta_index.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -204,6 +208,11 @@
     <Content Include="Views\EmpresaIndustria\Index.cshtml" />
     <Content Include="Views\Interno\MaestroMantenimiento.cshtml" />
     <Content Include="Views\EmpresaIndustria\NuevaEmpresaIndustria.cshtml" />
+    <Content Include="Views\Campana\Index.cshtml" />
+    <Content Include="Views\Campana\NuevaCampana.cshtml" />
+    <Content Include="Views\PlantaEmpresa\Index.cshtml" />
+    <Content Include="Views\PlantaEmpresa\NuevaPlanta.cshtml" />
+    <Content Include="Views\UsuarioPlanta\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,7 +235,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CampanaController.cs" />
     <Compile Include="Controllers\CiuuController.cs" />
+    <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\DistritoController.cs" />
     <Compile Include="Controllers\EmpresaIndustriaController.cs" />
     <Compile Include="Controllers\GiroController.cs" />
     <Compile Include="Controllers\GrupoEmpresaController.cs" />
@@ -234,8 +246,11 @@
     <Compile Include="Controllers\IntencionParticiparController.cs" />
     <Compile Include="Controllers\InternoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PlantaEmpresaController.cs" />
+    <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioPlantaController.cs" />
     <Compile Include="Filter\LoginRequiredAttribute.cs" />
     <Compile Include="Filter\NoLoginRequiredAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,8 +263,11 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Ciuu\" />
+    <Folder Include="Views\Departamento\" />
+    <Folder Include="Views\Distrito\" />
     <Folder Include="Views\Giro\" />
     <Folder Include="Views\GrupoEmpresa\" />
+    <Folder Include="Views\Provincia\" />
     <Folder Include="Views\Rol\" />
   </ItemGroup>
   <ItemGroup>

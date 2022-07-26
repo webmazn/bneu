@@ -10,19 +10,19 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
-    public class GrupoEmpresaController : Controller
+    public class DistritoController : Controller
     {
-        // GET: GrupoEmpresa
+        // GET: Distrito
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public JsonResult obtenerListaGrupoEmpresa()
+        public JsonResult obtenerListaDistrito()
         {
-            GrupoEmpresaLN logica = new GrupoEmpresaLN();
-            List<GrupoEmpresaBE> lista = logica.obtenerListaGrupoEmpresa();
+            DistritoLN logica = new DistritoLN();
+            List<DistritoBE> lista = logica.obtenerListaDistrito();
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
             response.Add("object", lista);

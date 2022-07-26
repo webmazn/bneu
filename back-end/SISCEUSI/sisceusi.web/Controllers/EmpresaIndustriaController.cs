@@ -151,6 +151,19 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
+        public JsonResult obtenerListaEmpresaIndustria()
+        {
+            EmpresaIndustriaLN logica = new EmpresaIndustriaLN();
+            List<EmpresaIndustriaBE> lista = logica.obtenerListaEmpresa();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
         public JsonResult verificarRucPorIdEmpresa(int id, string ruc)
         {
             EmpresaIndustriaLN logica = new EmpresaIndustriaLN();

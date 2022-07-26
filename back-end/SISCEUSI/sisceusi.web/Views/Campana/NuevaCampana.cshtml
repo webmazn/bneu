@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewBag.Title = "NuevaCampana";
+}
+
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/campana_nueva_campana.js")"></script>
+}
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container my-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 py-4">
+                <div class="row">
+                    <div class="col-md-12 col-lg-9">
+                        <div class="bg-light p-4">
+                            <div class="h4 text-cyan">Mantenimiento de Campañas&nbsp;</div>
+                            <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--span(data-toggle="modal", data-target="#modal-usuario")--><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-campanas.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Bandeja de campañas</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col-12 mb-4"><strong class="text-cyan">DATOS PRINCIPALES DE LA CAMPAÑA</strong></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="row">
+                                @*<div class="col-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-codigo">CÓDIGO</label>
+                                        <input class="form-control" type="text" id="txt-codigo" placeholder="Ingrese su código" aria-describedby="inputGroup7" required>
+                                    </div>
+                                </div>*@
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-empresa">DENOMINACIÓN</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                        <input class="form-control" type="text" id="txt-empresa" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-inicio">FEC. PILOTO DESDE&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-fecha-inicio">
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-fin">HASTA&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-fecha-fin">
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-inicio">FEC. REAL DESDE&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-fecha-inicio">
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-fin">HASTA&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-fecha-fin">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-empresa">OBSERVACIONES</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                        <input class="form-control" type="text" id="txt-empresa" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="chk-anular">
+                                        <label class="custom-control-label" for="chk-anular">Active para anular</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8" id="listSwapWrap">
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link link-gris active" id="tab01-tab" data-toggle="tab" href="#tab01" role="tab" aria-controls="tab01" aria-selected="true">SELECCIONAR EMPRESAS</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link link-gris" id="tab02-tab" data-toggle="tab" href="#tab02" role="tab" aria-controls="tab02" aria-selected="false">SELECCIONAR EMP. PILOTO</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link link-gris" id="tab03-tab" data-toggle="tab" href="#tab03" role="tab" aria-controls="tab03" aria-selected="false">ASIGNAR USUARIOS</a></li>
+                                    </ul>
+                                    <div class="tab-content border-left border-bottom border-right p-4" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="tab01" role="tabpanel" aria-labelledby="home-tab">
+                                            @*<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">
+                                                <option value="empresa_01">NOMBRE DE EMPRESA 01 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_02">NOMBRE DE EMPRESA 02 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_03">NOMBRE DE EMPRESA 03 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_04">NOMBRE DE EMPRESA 04 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_05">NOMBRE DE EMPRESA 05 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_06">NOMBRE DE EMPRESA 06 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_07">NOMBRE DE EMPRESA 07 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_08">NOMBRE DE EMPRESA 08 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_09">NOMBRE DE EMPRESA 09 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_10">NOMBRE DE EMPRESA 10 O NOMBRE COMERCIAL</option>
+                                            </select>
+                                            <select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>*@
+                                        </div>
+                                        <div class="tab-pane fade" id="tab02" role="tabpanel" aria-labelledby="profile-tab">
+                                            @*<select id="source01" data-text="Empresas piloto para seleccionar" data-search="Buscar empresa">
+                                                <option value="empresa_01">NOMBRE DE EMPRESA PILOTO 01 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_02">NOMBRE DE EMPRESA PILOTO 02 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_03">NOMBRE DE EMPRESA PILOTO 03 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_04">NOMBRE DE EMPRESA PILOTO 04 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_05">NOMBRE DE EMPRESA PILOTO 05 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_06">NOMBRE DE EMPRESA PILOTO 06 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_07">NOMBRE DE EMPRESA PILOTO 07 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_08">NOMBRE DE EMPRESA PILOTO 08 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_09">NOMBRE DE EMPRESA PILOTO 09 O NOMBRE COMERCIAL</option>
+                                                <option value="empresa_10">NOMBRE DE EMPRESA PILOTO 10 O NOMBRE COMERCIAL</option>
+                                            </select>
+                                            <select id="destination01" data-text="Empresas piloto seleccionadas" data-search="Buscar empresa"></select>*@
+                                        </div>
+                                        <div class="tab-pane fade" id="tab03" role="tabpanel" aria-labelledby="contact-tab">
+                                            @*<select id="source02" data-text="Perfiles para seleccionar" data-search="Buscar empresa">
+                                                <option value="empresa_01">NOMBRE DE ESPECIALISTA 01</option>
+                                                <option value="empresa_02">NOMBRE DE ESPECIALISTA 02</option>
+                                                <option value="empresa_03">NOMBRE DE ESPECIALISTA 03</option>
+                                                <option value="empresa_04">NOMBRE DE ESPECIALISTA 04</option>
+                                                <option value="empresa_05">NOMBRE DE ESPECIALISTA 05</option>
+                                                <option value="empresa_06">NOMBRE DE ADMINISTRADOR 06</option>
+                                                <option value="empresa_07">NOMBRE DE ADMINISTRADOR 07</option>
+                                                <option value="empresa_08">NOMBRE DE ADMINISTRADOR 08</option>
+                                                <option value="empresa_09">NOMBRE DE ADMINISTRADOR 09</option>
+                                                <option value="empresa_10">NOMBRE DE ADMINISTRADOR 10</option>
+                                            </select>
+                                            <select id="destination02" data-text="Perfiles seleccionadas" data-search="Buscar empresa"></select>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4"></div>
+                                <div class="col-4">
+                                    <button class="btn btn-azul w-100 my-3" href="#">Crear grupo de empresas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col-12 mb-4"><strong class="text-cyan">CONFIGURACIÓN DE PREGUNTAS Y OPCIONES</strong></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="cbo-list-tipo-control">TIPO DE CONTROL</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                        <select class="form-control" id="cbo-list-tipo-control" aria-describedby="inputGroup10" required>
+                                            <option>-Seleccione un tipo de control-</option>
+                                            <option value="txt">CAJA DE TEXTO</option>
+                                            <option value="cbo">LISTA DE OPCIONES</option>
+                                            <option value="chk">MÚLTIPLES OPCIONES</option>
+                                            <option value="rad">ÚNICA OPCIÓN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-azul w-100 mb-3" id="agregarPregunta">Agregar control, <br> formular preguntas y respuestas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group p-4 border">
+                                        <label class="font-weight-bold">ELABORACIÓN DE ENCUESTA</label>
+                                        <div class="row" id="contenedorEncuesta"><strong class="w-100 p-4 text-center" id="ninguna-pregunta">AÚN NO TIENE NI UNA PREGUNTA FORMULADA.</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            @*<div class="alert alert-danger d-flex align-items-stretch" role="alert">
+                                <div class="alert-wrap mr-3">
+                                    <div class="sa">
+                                        <div class="sa-error">
+                                            <div class="sa-error-x">
+                                                <div class="sa-error-left"></div>
+                                                <div class="sa-error-right"></div>
+                                            </div>
+                                            <div class="sa-error-placeholder"></div>
+                                            <div class="sa-error-fix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert-wrap">
+                                    <h6>Error de registro</h6>
+                                    <hr><small class="mb-0">Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.</small>
+                                </div>
+                            </div>
+                            <div class="alert alert-success d-flex align-items-stretch" role="alert">
+                                <div class="alert-wrap mr-3">
+                                    <div class="sa">
+                                        <div class="sa-success">
+                                            <div class="sa-success-tip"></div>
+                                            <div class="sa-success-long"></div>
+                                            <div class="sa-success-placeholder"></div>
+                                            <div class="sa-success-fix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert-wrap">
+                                    <h6>Bien hecho</h6>
+                                    <hr><small class="mb-0">Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.</small>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+                            <button class="btn btn-info w-100 mb-3" href="#">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
