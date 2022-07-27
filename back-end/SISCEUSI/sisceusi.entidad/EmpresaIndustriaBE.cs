@@ -14,6 +14,7 @@ namespace sisceusi.entidad
         public int idCiuu { get; set; }
         public string ruc { get; set; }
         public string nombreEmpresa { get; set; }
+        public string nombreComercial { get; set; }
         public string direccionFiscal { get; set; }
         public string correoElectronico { get; set; }
         public string representanteLegal { get; set; }

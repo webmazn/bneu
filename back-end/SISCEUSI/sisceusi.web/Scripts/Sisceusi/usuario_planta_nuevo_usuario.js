@@ -1,31 +1,60 @@
 ﻿$(document).ready(() => {
-    $('#btn-verificar').on('click', (e) => verificarRuc())
     $('#btn-grabar').on('click', (e) => grabar())
+    $('#btn-verificar').on('click', (e) => verificarDni())
     cargarDesplegables()
 });
 
-var verificadoRuc = false
-var idEmpresaIndustria = 0
-var idPlantaEmpresa = 0
+/* ================================================
+ * INICIO CARGA DESPLEGABLES
+ * ================================================
+ */
 
-var verificarRuc = () => {
+var cargarDesplegables = () => {
+    let urlRol = `${baseUrl}Rol/obtenerListaRol`;
+    Promise.all([
+        fetch(urlRol)
+    ])
+    .then(r => Promise.all(r.map(v => v.json())))
+    .then((responseAll) => {
+        jRol = responseAll[0]
+        if (jRol.success) cargarRol(jRol.object)
+        cargarDatosIniciales()
+    });
+}
+
+var cargarRol = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idRol}">${x.rol}</option>`).join('');
+    options = `<option value="0">-Seleccione un perfil de usuario-</option>${options}`;
+    $('#cbo-perfil').html(options);
+    $('#cbo-perfil').val(3)
+}
+
+
+/* ================================================
+ * FIN CARGA DESPLEGABLES
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO VERIFICAR DNI
+ * ================================================
+ */
+var verificarDni = () => {
     $('.seccion-mensaje').html('')
-    if (verificarCampoRuc()) {
-        let url = `${baseUrl}EmpresaIndustria/verificarRuc?ruc=${$('#txt-ruc').val().trim()}`;
+    if (verificarCampoDni()) {
+        let url = `${baseUrl}Usuario/verificarDniPide?dni=${$('#txt-dni').val().trim()}`;
 
         fetch(url)
         .then(r => r.json())
         .then(o => {
             if (!o.success) {
-                idEmpresaIndustria = 0
-                $('#txt-institucion').val('')
-                verificadoRuc = false                
-                $('.seccion-mensaje').html(messageError(messageStringGeneric('No se encontró información del Ruc ingresado. Verifique si la empresa fue registrada o regístrela')));
+                $('#txt-nombre').val('')
+                //verificadoDni = false
+                $('.seccion-mensaje').html(messageError(messageStringGeneric('No se encontró información del Dni ingresado. Verifique si es el correcto'), 'verificación'));
             } else {
-                let empresa = o.object
-                idEmpresaIndustria = empresa.idEmpresaIndustria
-                $('#txt-institucion').val(empresa.nombreEmpresa)
-                verificadoRuc = true
+                let usuario = o.object
+                $('#txt-nombre').val(usuario.nombres)
+                //verificadoDni = true
             }
         })
         .catch(error => {
@@ -34,12 +63,12 @@ var verificarRuc = () => {
     }
 }
 
-var verificarCampoRuc = () => {
+var verificarCampoDni = () => {
     let arr = [];
-    if (validarEspaciosBlanco($('#txt-ruc').val().trim())) arr.push("Debe ingresar el Ruc para la validación");
-    else if (validarNumerico($('#txt-ruc').val().trim())) arr.push("El Ruc debe tener caracteres numéricos");
-    else if (validarTamanioRuc($('#txt-ruc').val().trim())) arr.push("El Ruc debe tener 11 caracteres");
-    else if (validarRuc10($('#txt-ruc').val().trim()) && validarRuc20($('#txt-ruc').val().trim())) arr.push("El Ruc debe empezar con 10 o 20");
+    let dni = $("#txt-dni").val().trim()
+    if (validarEspaciosBlanco(dni)) arr.push("Debe ingresar el Dni");
+    else if (validarNumerico(dni)) arr.push("El Dni debe tener caracteres numéricos");
+    else if (validarTamanioDni(dni)) arr.push("El Dni debe tener 8 caracteres");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -49,6 +78,15 @@ var verificarCampoRuc = () => {
     return true;
 }
 
+/* ================================================
+ * FIN VERIFICAR DNI
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO VALIDAR DATOS
+ * ================================================
+ */
 var grabar = () => {
     $('.seccion-mensaje').html('');
     let arr = [];
@@ -61,11 +99,6 @@ var grabar = () => {
     let idRol = $("#cbo-perfil").val()
     let idEstado = $("#cbo-estado").val()
 
-    if (!verificadoRuc) arr.push("No ha verificado el Ruc");
-    if (validarEspaciosBlanco(ruc)) arr.push("Debe ingresar el Ruc para la validación");
-    else if (validarNumerico(ruc)) arr.push("El Ruc debe tener caracteres numéricos");
-    else if (validarTamanioRuc(ruc)) arr.push("El Ruc debe tener 11 caracteres");
-    else if (validarRuc10(ruc) && validarRuc20(ruc)) arr.push("El Ruc debe empezar con 10 o 20");
     if (validarEspaciosBlanco(correoElectronico)) arr.push("Debe ingresar un correo electrónico");
     else if (validarCorreoElectronico(correoElectronico)) arr.push("Debe ingresar un correo electrónico válido");
     if (validarEspaciosBlanco(nombres)) arr.push("Debe ingresar los nombres");
@@ -81,16 +114,24 @@ var grabar = () => {
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
-        $('.seccion-mensaje').html(messageError(error, 'registro'));
+        $('.seccion-mensaje').html(messageError(error), 'registro');
         return;
     }
 
     let idUsuario = $('#frm').data('id')
     idUsuario = idUsuario == null ? -1 : idUsuario
 
-    validarDatosRegistro(idUsuario, correoElectronico, dni) 
+    validarDatosRegistro(idUsuario, correoElectronico, dni)
 }
+/* ================================================
+ * FIN VALIDAR DATOS
+ * ================================================
+ */
 
+/* ================================================
+ * INICIO VALIDAR DATOS CON BD
+ * ================================================
+ */
 var validarDatosRegistro = (id, correo, dni) => {
     let urlVerificarCorreo = `${baseUrl}Usuario/verificarCorreo?id=${id}&correo=${correo}`;
     let urlVerificarDni = `${baseUrl}Usuario/verificarDni?id=${id}&dni=${dni}`;
@@ -113,11 +154,21 @@ var validarDatosRegistro = (id, correo, dni) => {
         }
     });
 }
+/* ================================================
+ * FIN VALIDAR DATOS CON BD
+ * ================================================
+ */
 
+/* ================================================
+ * INICIO GRABAR DATOS
+ * ================================================
+ */
 var grabarDatos = () => {
     let idUsuario = $('#frm').data('id')
     idUsuario = idUsuario == null ? -1 : idUsuario
 
+    let idEmpresaIndustria = $('#identificador-parent').val()
+    let idPlantaEmpresa = $('#identificador').val()
     let correoElectronico = $("#txt-correo").val().trim()
     let nombres = $("#txt-nombre").val().trim()
     let dni = $("#txt-dni").val().trim()
@@ -142,28 +193,17 @@ var grabarDatos = () => {
         console.log('Error:' + error.message);
     })
 }
+/* ================================================
+ * FIN GRABAR DATOS
+ * ================================================
+ */
 
-var cargarDesplegables = () => {
-    let urlRol = `${baseUrl}Rol/obtenerListaRol`;
-    Promise.all([
-        fetch(urlRol)
-    ])
-    .then(r => Promise.all(r.map(v => v.json())))
-    .then((responseAll) => {
-        jRol = responseAll[0]
-        if (jRol.success) cargarRoles(jRol.object)
-        cargarDatosIniciales()
-    });
-}
-
-var cargarRoles = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idRol}">${x.rol}</option>`).join('');
-    options = `<option value="0">-Seleccione un perfil de usuario-</option>${options}`;
-    $('#cbo-perfil').html(options);
-}
-
+/* ================================================
+ * INICIO CONSULTAR DATOS ENTIDAD
+ * ================================================
+ */
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    let id = $('#identificador-user').val()
     if (id > 0) {
         let url = `${baseUrl}Usuario/obtenerUsuario?idUsuario=${id}`;
         fetch(url)
@@ -180,20 +220,26 @@ var cargarDatosIniciales = () => {
         })
     }
 }
+/* ================================================
+ * FIN CONSULTAR DATOS ENTIDAD
+ * ================================================
+ */
 
+/* ================================================
+ * INICIO CARGAR DATOS ENTIDAD
+ * ================================================
+ */
 var cargarDatos = (data) => {
     if (data == null) return
-    $('#frm').data('id', data.idUsuario);
-    verificadoRuc = true
-    idEmpresaIndustria = data.idEmpresaIndustria
-    idPlantaEmpresa = data.idPlantaEmpresa
-    $('#txt-ruc').val(data.empresaIndustria.ruc)
-    $('#txt-institucion').val(data.empresaIndustria.nombreEmpresa)
+    $('#frm').data('id', data.idUsuario)
     $('#txt-correo').val(data.correoElectronico)
     $('#txt-nombre').val(data.nombres)
     $('#txt-dni').val(data.dni)
     $('#txt-pswd').val(data.password)
     $('#txt-telefono').val(data.telefono)
-    $('#cbo-perfil').val(data.idRol)
     $('#cbo-estado').val(data.idEstado)
 }
+/* ================================================
+ * FIN CARGAR DATOS ENTIDAD
+ * ================================================
+ */

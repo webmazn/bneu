@@ -21,6 +21,7 @@ namespace sisceusi.datos
             {
                 string sp = $"{Package.Usuario}USP_SEL_BUSQUEDA_GENERAL";
                 var p = new OracleDynamicParameters();
+                p.Add("piIdPlantaEmpresa", usuario.idPlantaEmpresa);
                 p.Add("piBuscar", usuario.buscar);
                 p.Add("piRegistros", usuario.registros);
                 p.Add("piPagina", usuario.pagina);
@@ -53,6 +54,7 @@ namespace sisceusi.datos
             {
                 string sp = $"{Package.Usuario}USP_SEL_BUSQUEDA_AVANZADO";
                 var p = new OracleDynamicParameters();
+                p.Add("piIdPlantaEmpresa", usuario.idPlantaEmpresa);
                 p.Add("piRuc", usuario.empresaIndustria.ruc);
                 p.Add("piNombreEmpresa", usuario.empresaIndustria.nombreEmpresa);
                 p.Add("piIdRol", usuario.idRol);
@@ -93,6 +95,7 @@ namespace sisceusi.datos
                 var p = new OracleDynamicParameters();
                 p.Add("piIdUsuario", usuario.idUsuario);
                 p.Add("piIdEmpresaIndustria", usuario.idEmpresaIndustria);
+                p.Add("piIdPlantaEmpresa", usuario.idPlantaEmpresa);
                 p.Add("piIdRol", usuario.idRol);
                 p.Add("piDni", usuario.dni);
                 p.Add("piTelefono", usuario.telefono);
@@ -181,6 +184,7 @@ namespace sisceusi.datos
             {
                 string sp = $"{Package.Usuario}USP_SEL_EXPORTAR_GENERAL";
                 var p = new OracleDynamicParameters();
+                p.Add("piIdPlantaEmpresa", usuario.idPlantaEmpresa);
                 p.Add("piBuscar", usuario.buscar);
                 p.Add("piColumna", usuario.columna);
                 p.Add("piOrden", usuario.orden);
@@ -206,6 +210,7 @@ namespace sisceusi.datos
             {
                 string sp = $"{Package.Usuario}USP_SEL_EXPORTAR_AVANZADO";
                 var p = new OracleDynamicParameters();
+                p.Add("piIdPlantaEmpresa", usuario.idPlantaEmpresa);
                 p.Add("piRuc", usuario.empresaIndustria.ruc);
                 p.Add("piNombreEmpresa", usuario.empresaIndustria.nombreEmpresa);
                 p.Add("piIdRol", usuario.idRol);

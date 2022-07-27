@@ -179,6 +179,7 @@
     <Content Include="Scripts\Sisceusi\usuario_index.js" />
     <Content Include="Scripts\Sisceusi\usuario_nuevo_usuario.js" />
     <Content Include="Scripts\Sisceusi\usuario_planta_index.js" />
+    <Content Include="Scripts\Sisceusi\usuario_planta_nuevo_usuario.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -213,6 +214,7 @@
     <Content Include="Views\PlantaEmpresa\Index.cshtml" />
     <Content Include="Views\PlantaEmpresa\NuevaPlanta.cshtml" />
     <Content Include="Views\UsuarioPlanta\Index.cshtml" />
+    <Content Include="Views\UsuarioPlanta\NuevoUsuarioPlanta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

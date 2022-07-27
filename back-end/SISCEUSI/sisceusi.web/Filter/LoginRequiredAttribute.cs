@@ -22,10 +22,10 @@ namespace sisceusi.web.Filter
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                     {
                         controller = "Login",
-                        action = "Login"
+                        action = "Index"
                     }));
-
                 }
+                
             }
             catch (Exception ex)
             {

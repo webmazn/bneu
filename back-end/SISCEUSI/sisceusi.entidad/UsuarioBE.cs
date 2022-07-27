@@ -10,6 +10,7 @@ namespace sisceusi.entidad
     {
         public int idUsuario { get; set; }
         public int idEmpresaIndustria { get; set; }
+        public int idPlantaEmpresa { get; set; }
         public int idRol { get; set; }
         public string nombres { get; set; }
         public string correoElectronico { get; set; }

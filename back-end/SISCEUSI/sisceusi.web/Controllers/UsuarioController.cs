@@ -27,10 +27,11 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
-        public JsonResult filtroGeneral(string buscar, int registros, int pagina, string columna, string orden)
+        public JsonResult filtroGeneral(int idPlantaEmpresa, string buscar, int registros, int pagina, string columna, string orden)
         {
             UsuarioLN logica = new UsuarioLN();
             List<UsuarioBE> lista = logica.filtroGeneral(new UsuarioBE {
+                idPlantaEmpresa = idPlantaEmpresa,
                 buscar = buscar,
                 registros = registros,
                 pagina = pagina,
@@ -46,11 +47,12 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
-        public JsonResult filtroAvanzado(string ruc, string empresa, int tipoUsuario, DateTime? fechaInicio, DateTime? fechaFin, string nombres, string estado, int registros, int pagina, string columna, string orden)
+        public JsonResult filtroAvanzado(int idPlantaEmpresa, string ruc, string empresa, int tipoUsuario, DateTime? fechaInicio, DateTime? fechaFin, string nombres, string estado, int registros, int pagina, string columna, string orden)
         {
             UsuarioLN logica = new UsuarioLN();
             List<UsuarioBE> lista = logica.filtroAvanzado(new UsuarioBE {
                 empresaIndustria = new EmpresaIndustriaBE { ruc = ruc, nombreEmpresa = empresa },
+                idPlantaEmpresa = idPlantaEmpresa,
                 idRol = tipoUsuario,
                 fechaInicio = fechaInicio,
                 fechaFin = fechaFin,
@@ -135,11 +137,23 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
-        public void exportarGeneral(string buscar, string columna, string orden)
+        public JsonResult verificarDniPide(string dni)
+        {
+            UsuarioBE usuario = null;
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", usuario == null ? false : true);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public void exportarGeneral(int idPlantaEmpresa, string buscar, string columna, string orden)
         {
             UsuarioLN logica = new UsuarioLN();
             List<UsuarioBE> lista = logica.exportarGeneral(new UsuarioBE
             {
+                idPlantaEmpresa = idPlantaEmpresa,
                 buscar = buscar,
                 columna = columna,
                 orden = orden
@@ -149,22 +163,25 @@ namespace sisceusi.web.Controllers
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
-                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Usuario", 6);
+                    string tituloExcel = idPlantaEmpresa == 0 ? "Mantenimiento Usuario" : "Mantenimiento Usuario Planta";
+                    string nombreArchivo = idPlantaEmpresa == 0 ? "MANTENIMIENTO_USUARIO_" : "MANTENIMIENTO_USUARIO_PLANTA_";
+                    ExcelWorksheet ws = tituloReporteExcel(package, tituloExcel, 6);
                     cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
-                    exportar(package, "MANTENIMIENTO_USUARIO_");
+                    exportar(package, nombreArchivo);
                 }
             }
             catch (Exception ex) { Log.Error(ex); }
         }
 
         [HttpGet]
-        public void exportarAvanzado(string ruc, string empresa, int tipoUsuario, DateTime? fechaInicio, DateTime? fechaFin, string nombres, string estado, string columna, string orden)
+        public void exportarAvanzado(int idPlantaEmpresa, string ruc, string empresa, int tipoUsuario, DateTime? fechaInicio, DateTime? fechaFin, string nombres, string estado, string columna, string orden)
         {
             UsuarioLN logica = new UsuarioLN();
             List<UsuarioBE> lista = logica.exportarAvanzado(new UsuarioBE
             {
                 empresaIndustria = new EmpresaIndustriaBE { ruc = ruc, nombreEmpresa = empresa },
+                idPlantaEmpresa = idPlantaEmpresa,
                 idRol = tipoUsuario,
                 fechaInicio = fechaInicio,
                 fechaFin = fechaFin,

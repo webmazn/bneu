@@ -33,15 +33,20 @@ var cambiarPaginaRegistros = () => {
     else $('#btn-buscar-avanzado')[0].click()
 }
 
+/* ================================================
+ * INICIO BUSQUEDA GENERAL
+ * ================================================
+ */
 var filtroGeneral = (e) => {
     e.preventDefault()
     bFiltroGeneral = true
+    let idPlantaEmpresa = 0
     let buscar = $('#txt-buscar').val();
     let registros = $('#number-registers').val();
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { buscar, registros, pagina, columna, orden };
+    let params = { idPlantaEmpresa, buscar, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
     let url = `${baseUrl}Usuario/filtroGeneral?${queryParams}`;
@@ -60,10 +65,19 @@ var filtroGeneral = (e) => {
         console.log('Error: ' + error.message);
     });
 };
+/* ================================================
+ * FIN BUSQUEDA GENERAL
+ * ================================================
+ */
 
+/* ================================================
+ * INICIO BUSQUEDA AVANZADO
+ * ================================================
+ */
 var filtroAvanzado = (e) => {
     e.preventDefault()
     bFiltroGeneral = false
+    let idPlantaEmpresa = 0
     let ruc = $('#ruc').val();
     let empresa = $('#empresa').val();
     let tipoUsuario = $('#cbo-tipo-usuario').val();
@@ -75,7 +89,7 @@ var filtroAvanzado = (e) => {
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { ruc, empresa, tipoUsuario, fechaInicio, fechaFin, nombres, estado, registros, pagina, columna, orden };
+    let params = { idPlantaEmpresa, ruc, empresa, tipoUsuario, fechaInicio, fechaFin, nombres, estado, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
     let url = `${baseUrl}Usuario/filtroAvanzado?${queryParams}`;
@@ -94,7 +108,15 @@ var filtroAvanzado = (e) => {
         console.log('Error: ' + error.message);
     });
 }
+/* ================================================
+ * FIN BUSQUEDA AVANZADO
+ * ================================================
+ */
 
+/* ================================================
+ * INICIO CARGAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
 var cargarDatosTabla = (j) => {
     let tabla = $('.tabla-principal').find('table');
     tabla.find('tbody').html('');
@@ -128,7 +150,15 @@ var cargarDatosTabla = (j) => {
         $('.inicio-registros').text('No se encontraron resultados');
     }
 }
+/* ================================================
+ * FIN CARGAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
 
+/* ================================================
+ * INICIO RENDERIZAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
 var renderizar = (data, numberCellHeader, pagina, registros) => {
     let doRenderizar = data.length > 0;
     let content = `<tr><th colspan='${numberCellHeader}'>No existe información</th></tr>`;
@@ -150,28 +180,33 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
     };
     return content;
 };
+/* ================================================
+ * FIN RENDERIZAR DATOS TABLA - BUSQUEDA
+ * ================================================
+ */
 
-var actualizar = (obj) => {
-    let id = $(obj).data('id')
-    location.href = `${baseUrl}Usuario/NuevoUsuario/${id}`
-}
-
+/* ================================================
+ * INICIO EXPORTAR GENERAL | AVANZADO
+ * ================================================
+ */
 var exportar = () => {
     if (bFiltroGeneral) exportarGeneral()
-    else exportarAvanzado()    
+    else exportarAvanzado()
 }
 
 var exportarGeneral = () => {
+    let idPlantaEmpresa = 0
     let buscar = $('#txt-buscar').val()
     let columna = $("#column").val()
     let orden = $("#order").val()
-    let params = { buscar, columna, orden }
+    let params = { idPlantaEmpresa, buscar, columna, orden }
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
     let url = `${baseUrl}Usuario/exportarGeneral?${queryParams}`
     location.href = url
 }
 
 var exportarAvanzado = () => {
+    let idPlantaEmpresa = 0
     let ruc = $('#ruc').val()
     let empresa = $('#empresa').val()
     let tipoUsuario = $('#cbo-tipo-usuario').val()
@@ -181,10 +216,19 @@ var exportarAvanzado = () => {
     let estado = $("#cbo-estado").val()
     let columna = $("#column").val()
     let orden = $("#order").val()
-    let params = { ruc, empresa, tipoUsuario, fechaInicio, fechaFin, nombres, estado, columna, orden }
+    let params = { idPlantaEmpresa, ruc, empresa, tipoUsuario, fechaInicio, fechaFin, nombres, estado, columna, orden }
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
     let url = `${baseUrl}Usuario/exportarAvanzado?${queryParams}`
     location.href = url;
+}
+/* ================================================
+ * FIN EXPORTAR GENERAL | AVANZADO
+ * ================================================
+ */
+
+var actualizar = (obj) => {
+    let id = $(obj).data('id')
+    location.href = `${baseUrl}Usuario/NuevoUsuario/${id}`
 }
 
 var cargarDesplegables = () => {
