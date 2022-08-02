@@ -1411,6 +1411,18 @@ $(document).ready(function(){
     });
   });
 
+  $("#cbo-condicion-electricidad").on("change", function(){
+    $("#cbo-condicion-electricidad option:selected").each(function(){
+      var opt = $(this).val();
+      if(opt=="si"){
+        $("#txt-suministro-electrico").removeAttr("readonly");
+      }else{
+        $("#txt-suministro-electrico").attr("readonly",1);
+        $("#txt-suministro-electrico").focus();
+      }
+    });
+  });
+
   function conteoPreguntas(){
     var arregloComponentes = $("#contenedorEncuesta .seccion-pregunta");
     // console.log(arregloComponentes);
@@ -1430,6 +1442,13 @@ $(document).ready(function(){
       span.empty().text("PREGUNTA "+item+" ("+tipo+")");
     });
   }
+
+  $(".btn-danger.btn-table").on("click", function(){
+    $('#modalConfirmacion').modal('show')
+  });
+  $(".btn-warning.btn-table").on("click", function(){
+    $('#modalCopia').modal('show')
+  });
 
   $(".open-avanzado").on("click", function(){
     $(this).parent().parent().parent().hide();

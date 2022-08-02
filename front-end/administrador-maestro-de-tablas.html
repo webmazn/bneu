@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Balance Nacional de Energía Útil | Administrador de maestros de tablas</title>
+    <meta name="description" content="Balance Nacional de Energía Útil">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-76x76.png" sizes="76x76">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-114x114.png" sizes="114x114">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-144x144.png" sizes="144x144">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-180x180.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="images/favicon/android-icon-192x192.png" sizes="192x192">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+    <meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
+      <div class="container-fluid bg-nuevo-azul">
+        <div class="container menu-main">
+          <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
+            <ul class="navbar-nav mr-md-auto">
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="https://www.gob.pe/minem" target="_blank"><img src="./images/logo_mem.svg" height="48"></a></li>
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="./images/logo_dgee.svg" height="48"></a></li>
+            </ul>
+            <ul class="navbar-nav ml-md-auto">
+              <li class="nav-item align-self-center"><a class="btn btn-danger btn-md px-4 font-weight-bold" href="./login.html" role="button">CERRAR SESIÓN</a></li>
+            </ul>
+          </header>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container menu-sub">
+          <nav class="navbar navbar-expand-lg p-0 py-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="./index.html"><img src="./images/logo_web.svg" height="33"></a></li>
+                <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-4" href="./index.html">INICIO</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./campanas.html">CAMPAÑAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
+              </ul>
+              <div class="btn-group w-sm-100"><a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>USU0001 - JUAN PEREZ SANCHEZ <br></b></small><small class="text-truncate">20105678910 - NOMBRE EMPRESA</small></a>
+                <div class="dropdown-menu dropdown-menu-right w-sm-100"><span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">Administrado</span><br><span class="badge badge-info">Especialista</span><br><span class="badge badge-info">Encuestado</span></span><a class="dropdown-item" href="./maestro-mantenimiento.html"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="./login.html"><i class="fas fa-sign-out-alt pr-1"></i>Salir del sistema</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="flecha-top d-print-none"><i class="fas fa-angle-double-right fa-2x text-dark btn-slider-bottom"></i></div>
+    <div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_fb.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ig.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_tw.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_yt.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_wp.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ld.svg"></a></div>
+    <div class="container-fluid map-root" id="historia"></div>
+    <div class="container my-4" id="cuerpo">
+      <div class="row">
+        <div class="col-12">
+          <div class="container m-0 px-0 py-4">
+            <div class="row">
+              <div class="col-12 d-flex">
+                <div class="bg-light w-100 p-4">
+                  <div class="h4 text-cyan">ADMINISTRADOR DE MAESTROS DE TABLAS</div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider my-4"></div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-titulo-principal">TÍTULO PRINCIPAL</label>
+                      <input class="form-control" type="text" id="txt-titulo-principal" placeholder="Título principal">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-question-mark">QUESTION MARK - ÍCONO DE AYUDA</label>
+                      <input class="form-control" type="text" id="txt-question-mark" placeholder="Question mark descripción">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-pregunta-confirmacion">PREGUNTA DE CONFIRMACIÓN</label>
+                      <input class="form-control" type="text" id="txt-pregunta-confirmacion" placeholder="Pregunta frecuente">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-titulo-principal">ENCABEZADO PRINCIPAL</label>
+                      <input class="form-control" type="text" id="txt-titulo-principal" placeholder="Encabezado principal">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-question-mark">ENCABEZADO PRINC ABREVIADO</label>
+                      <input class="form-control" type="text" id="txt-question-mark" placeholder="Encabezado principal abreviado">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-pregunta-confirmacion">USAR ABREVIADO</label>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios1" value="si" checked>
+                        <label class="form-check-label" for="exampleRadios1">Si</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios2" value="No">
+                        <label class="form-check-label" for="exampleRadios2">No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-info w-100 mb-3" href="#">Agregar</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label class="font-weight-bold">TABLA DE ENCABEZADOS PRINCIPALES</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="table-responsive tabla-principal">
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr class="bg-azul text-white">
+                            <th scope="col">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOMBRE DEL ENC. PRINCIPAL</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ABREVIATURA</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>USAR ABREVIATURA</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td data-encabezado="Nombre del encabezado principal" scope="row"><span class="ml-4">Fuente de energía &nbsp;1</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Fte. energía</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura">Si</td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre del encabezado principal" scope="row"><span class="ml-4">Fuente de energía &nbsp;2</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Fte. energía</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura">Si</td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre del encabezado principal" scope="row"><span class="ml-4">Fuente de energía &nbsp;3</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Fte. energía</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura">Si</td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider my-4"></div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-encabezado-secundario">ENCABEZADO SECUNDARIO</label>
+                      <input class="form-control" type="text" id="txt-encabezado-secundario" placeholder="Encabezado secundario">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-encabezado-secundario-abreviado">ENCABEZADO SEC ABREVIADO</label>
+                      <input class="form-control" type="text" id="txt-encabezado-secundario-abreviado" placeholder="Encabezado secundario abreviado">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-pregunta-confirmacion">USAR ABREVIADO</label>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios3" value="si" checked>
+                        <label class="form-check-label" for="exampleRadios3">Si</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios4" value="No">
+                        <label class="form-check-label" for="exampleRadios4">No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-departamento">ENCABEZADO PRINCIPAL</label>
+                      <select class="form-control" id="cbo-departamento">
+                        <option>-Seleccione un encabezado principal-</option>
+                        <option>Encabezado principal 01</option>
+                        <option>Encabezado principal 02</option>
+                        <option>Encabezado principal 03</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-question-mark-02">QUESTION MARK - ÍCONO DE AYUDA</label>
+                      <input class="form-control" type="text" id="txt-question-mark-02" placeholder="Question mark descripción">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-control-respuesta">CONTROL DE RESPUESTA</label>
+                      <select class="form-control" id="cbo-control-respuesta">
+                        <option>-Seleccione un control de respuesta-</option>
+                        <option>Control de respuesta 01</option>
+                        <option>Control de respuesta 02</option>
+                        <option>Control de respuesta 03</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-tipo-dato">TIPO DE DATO</label>
+                      <select class="form-control" id="cbo-tipo-dato">
+                        <option>-Seleccione un tipo de dato-</option>
+                        <option>Tipo de dato 01</option>
+                        <option>Tipo de dato 02</option>
+                        <option>Tipo de dato 03</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-id-parametro">ID PARÁMETRO</label>
+                      <select class="form-control" id="cbo-id-parametro">
+                        <option>-Seleccione un id parámetro-</option>
+                        <option>ID Parámetro 01</option>
+                        <option>ID Parámetro 02</option>
+                        <option>ID Parámetro 03</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-info w-100 mb-3" href="#">Agregar</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label class="font-weight-bold">TABLA DE ENCABEZADOS SECUNDARIOS</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="table-responsive tabla-principal">
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr class="bg-azul text-white">
+                            <th scope="col" style="min-width: 180px;">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOM. ENC. SECUNDARIO</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ABREVIATURA</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col" style="min-width: 150px;">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>USAR ABREVIATURA</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col" style="min-width: 120px;">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENC. PRINCIPAL</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TEXTO DE AYUDA</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col" style="min-width: 90px;">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TPO. DATO</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col" style="min-width: 120px;">
+                              <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ID PARÁMETRO</span></span></div>
+                            </th>
+                            <th class="text-center" scope="col" style="min-width: 90px;"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td data-encabezado="Nombre de encabezado secundario" scope="row"><span class="ml-4">Calderos &nbsp;1</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Cldros.</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura"><span>Si</span>
+                            </td>
+                            <td class="text-center" data-encabezado="Encabezado principal"><span>Sin grupo</span>
+                            </td>
+                            <td class="text-left" data-encabezado="Texto de ayuda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque quos expedita earum. Repellendus, dignissimos totam eligendi reprehenderit eaque cum, ratione minima nemo officia voluptate magnam repellat veniam ipsa eos.</td>
+                            <td class="text-center" data-encabezado="Tipo de dato"><span>Número</span>
+                            </td>
+                            <td class="text-center" data-encabezado="ID Parámetro">Parámetro &nbsp;2
+                            </td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre de encabezado secundario" scope="row"><span class="ml-4">Calderos &nbsp;2</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Cldros.</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura"><span>Si</span>
+                            </td>
+                            <td class="text-center" data-encabezado="Encabezado principal"><span>Sin grupo</span>
+                            </td>
+                            <td class="text-left" data-encabezado="Texto de ayuda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque quos expedita earum. Repellendus, dignissimos totam eligendi reprehenderit eaque cum, ratione minima nemo officia voluptate magnam repellat veniam ipsa eos.</td>
+                            <td class="text-center" data-encabezado="Tipo de dato"><span>Número</span>
+                            </td>
+                            <td class="text-center" data-encabezado="ID Parámetro">Parámetro &nbsp;3
+                            </td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre de encabezado secundario" scope="row"><span class="ml-4">Calderos &nbsp;3</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Cldros.</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura"><span>No</span>
+                            </td>
+                            <td class="text-center" data-encabezado="Encabezado principal"><span>Fuente Energía</span>
+                            </td>
+                            <td class="text-left" data-encabezado="Texto de ayuda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque quos expedita earum. Repellendus, dignissimos totam eligendi reprehenderit eaque cum, ratione minima nemo officia voluptate magnam repellat veniam ipsa eos.</td>
+                            <td class="text-center" data-encabezado="Tipo de dato"><span>Texto</span>
+                            </td>
+                            <td class="text-center" data-encabezado="ID Parámetro">Parámetro &nbsp;4
+                            </td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre de encabezado secundario" scope="row"><span class="ml-4">Calderos &nbsp;4</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Cldros.</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura"><span>Si</span>
+                            </td>
+                            <td class="text-center" data-encabezado="Encabezado principal"><span>Sin grupo</span>
+                            </td>
+                            <td class="text-left" data-encabezado="Texto de ayuda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque quos expedita earum. Repellendus, dignissimos totam eligendi reprehenderit eaque cum, ratione minima nemo officia voluptate magnam repellat veniam ipsa eos.</td>
+                            <td class="text-center" data-encabezado="Tipo de dato"><span>Decimal</span>
+                            </td>
+                            <td class="text-center" data-encabezado="ID Parámetro">Parámetro &nbsp;5
+                            </td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre de encabezado secundario" scope="row"><span class="ml-4">Calderos &nbsp;5</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Cldros.</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura"><span>Si</span>
+                            </td>
+                            <td class="text-center" data-encabezado="Encabezado principal"><span>Sin grupo</span>
+                            </td>
+                            <td class="text-left" data-encabezado="Texto de ayuda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque quos expedita earum. Repellendus, dignissimos totam eligendi reprehenderit eaque cum, ratione minima nemo officia voluptate magnam repellat veniam ipsa eos.</td>
+                            <td class="text-center" data-encabezado="Tipo de dato"><span>Número</span>
+                            </td>
+                            <td class="text-center" data-encabezado="ID Parámetro">Parámetro &nbsp;6
+                            </td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-encabezado="Nombre de encabezado secundario" scope="row"><span class="ml-4">Calderos &nbsp;6</span></td>
+                            <td class="text-center" data-encabezado="Abreviatura">Cldros.</td>
+                            <td class="text-center" data-encabezado="Usar abreviatura"><span>No</span>
+                            </td>
+                            <td class="text-center" data-encabezado="Encabezado principal"><span>Fuente Energía</span>
+                            </td>
+                            <td class="text-left" data-encabezado="Texto de ayuda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque quos expedita earum. Repellendus, dignissimos totam eligendi reprehenderit eaque cum, ratione minima nemo officia voluptate magnam repellat veniam ipsa eos.</td>
+                            <td class="text-center" data-encabezado="Tipo de dato"><span>Texto</span>
+                            </td>
+                            <td class="text-center" data-encabezado="ID Parámetro">Parámetro &nbsp;7
+                            </td>
+                            <td class="text-center text-xs-right" data-encabezado="Gestión">
+                              <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                              <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script></script>
+    <div class="modal customChatBot fade" id="modalChatBot" tabindex="-1" role="dialog" aria-labelledby="modalChatBotLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Contáctenos</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label class="col-form-label" for="recipient-name">Correo electrónico:</label>
+                <input class="form-control" id="recipient-name" type="email">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" id="message-text">Mensaje:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="alert alert-danger d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-error">
+                          <div class="sa-error-x">
+                            <div class="sa-error-left"></div>
+                            <div class="sa-error-right"></div>
+                          </div>
+                          <div class="sa-error-placeholder"></div>
+                          <div class="sa-error-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Error de envío</h6>
+                      <hr><small class="mb-0">Error al enviar el correo.</small>
+                    </div>
+                  </div>
+                  <div class="alert alert-success d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-success">
+                          <div class="sa-success-tip"></div>
+                          <div class="sa-success-long"></div>
+                          <div class="sa-success-placeholder"></div>
+                          <div class="sa-success-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Bien hecho</h6>
+                      <hr><small class="mb-0">Envío de correo exitoso.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" type="button">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Desea eliminar el registro?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" id="eliminacionRow" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalCopia" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar copia</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <h3>¿Desea copiar la campaña?</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, incidunt repellendus eos praesentium debitis consectetur quidem assumenda aliquam quod numquam veniam excepturi nostrum id rerum asperiores? Obcaecati molestiae animi similique!</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-warning" id="copiaRow" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
+      <div class="chat-bot" data-toggle="modal" data-target="#modalChatBot"></div>
+      <footer class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Contáctenos</div>
+                <ul class="list-unstyled mr-0">
+                  <li class="py-1"><a class="text-white" href="tel: +5114111100">Teléfono: (+511) 411-1100</a></li>
+                  <li class="py-1"><a class="text-white" href="mailto:webmaster@minem.gob.pe?Subject=Contacto%20desde%20la%20web%20de%20MRV%20Plataforma%20del%20Sector%20Energético">webmaster@minem.gob.pe</a></li>
+                  <li class="py-1">Dirección General de Eficiencia Energética</li>
+                  <li class="py-1"><a class="text-white" href="https://www.google.com/maps/d/u/0/viewer?msa=0&amp;hl=en&amp;ie=UTF8&amp;ll=-12.097192999999981%2C-77.00643500000001&amp;spn=0%2C0&amp;t=m&amp;source=embed&amp;mid=1oiTLqK_OscJsqGYEQbVNHyO68Dw&amp;z=17" target="_blank">Av. Las Artes Sur 260. San Borja. Lima. Perú</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Enlaces</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="http://eficienciaenergetica.minem.gob.pe/" target="_blank">Sistema Interactivo de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank">Dirección General de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="https://www.gob.pe/minem" target="_blank">Ministerio de Energía y Minas</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Más información</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="./documentos/Manual_Usuario_MRV.pdf" download>Manual de Usuario</a></li>
+                  <li class="py-1"><a class="text-white" href="./terminos-y-condiciones.html">Términos y Condiciones</a></li>
+                  <li class="py-1"><a class="text-white" href="./mapa-del-ditio.html" target="_blank">Mapa del Sitio</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="dropdown-divider"></div>
+          </div>
+          <div class="col-sm-12 col-md-12 text-right text-white">
+            <div class="row">
+              <div class="col-6 text-left"><img src="./images/logo_web_footer.svg" height="18"></div>
+              <div class="col-6"><small>&copy; Ministerio de Energía y Minas | Todos los derechos reservados</small></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

@@ -390,7 +390,7 @@
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENERGÍA PRODUCIDA (kwh)</span></span></div>
                         </th>
-                        <th class="text-center" scope="col"><a class="btn btn-sm btn-info btn-table" href="./encuesta-seccion-c-formulario.html"><i class="fa fa-plus"></i></a></th>
+                        <th class="text-center" scope="col"><a class="btn btn-sm btn-info btn-table" href="#"><i class="fa fa-plus"></i></a></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -461,7 +461,7 @@
               </div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-verde-petroleo w-100 mb-3" href="javascript:print()">Imprimir</a></div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Salir</a></div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-b.html">Continuar</a></div>
+              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-d.html">Continuar</a></div>
             </div>
           </div>
         </div>
@@ -528,6 +528,41 @@
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
             <button class="btn btn-primary" type="button">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Desea eliminar el registro?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" id="eliminacionRow" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalCopia" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar copia</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <h3>¿Desea copiar la campaña?</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, incidunt repellendus eos praesentium debitis consectetur quidem assumenda aliquam quod numquam veniam excepturi nostrum id rerum asperiores? Obcaecati molestiae animi similique!</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-warning" id="copiaRow" type="button">Aceptar</button>
           </div>
         </div>
       </div>

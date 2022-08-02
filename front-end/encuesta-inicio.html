@@ -80,43 +80,48 @@
                 <div class="row">
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C.</label>
-                      <input class="form-control" type="text" id="txt-ruc" placeholder="Número de RUC">
-                    </div>
-                  </div>
-                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                    <div class="form-group">
                       <label class="font-weight-bold" for="txt-cuestionario">NÚMERO DE CUESTIONARIO</label>
                       <input class="form-control" type="text" id="txt-cuestionario" placeholder="Número de cuestionario">
                     </div>
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-suministro">NÚMERO SUMINISTRO GAS</label>
-                      <input class="form-control" type="text" id="txt-suministro" placeholder="Número de suministro de gas">
+                      <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C.</label>
+                      <input class="form-control" type="text" id="txt-ruc" placeholder="Número de RUC">
                     </div>
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                    <div class="form-group">
-                      <label class="font-weight-bold" for="cbo-condicion">CONDICIÓN</label>
-                      <select class="form-control" id="cbo-condicion">
-                        <option>-Seleccione una considición-</option>
-                        <option>Condición 01</option>
-                        <option>Condición 02</option>
-                        <option>Condición 03</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="form-group">
                       <label class="font-weight-bold" for="txt-razon-social">RAZÓN SOCIAL DE LA EMPRESA</label>
                       <input class="form-control" type="text" id="txt-razon-social">
                     </div>
                   </div>
-                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-nombre-comercial">NOMBRE COMERCIAL DE LA EMPRESA O ESTABLECIMIENTO</label>
+                      <label class="font-weight-bold" for="txt-nombre-comercial">NOMBRE COMERCIAL EMPRESA</label>
                       <input class="form-control" type="text" id="txt-nombre-comercial">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-suministro">NÚMERO SUMINISTRO GAS</label>
+                      <input class="form-control" type="text" id="txt-suministro" placeholder="Número de suministro de gas">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="cbo-condicion-electricidad">GENERA SU PROPIA ELECTRICIDAD</label>
+                      <select class="form-control" id="cbo-condicion-electricidad">
+                        <option>-Seleccione una considición-</option>
+                        <option value="no">No tiene servicio de electricidad</option>
+                        <option value="si">Si genera su propia electricidad</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-suministro-electrico">NÚMERO DE SUMINISTRO ELÉCTRICO</label>
+                      <input class="form-control" type="text" id="txt-suministro-electrico" placeholder="Número de suministros eléctrico" readonly>
                     </div>
                   </div>
                 </div>
@@ -163,6 +168,27 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                      <div class="alert alert-success d-flex align-items-stretch" role="alert">
+                        <div class="alert-wrap mr-3">
+                          <div class="sa">
+                            <div class="sa-success">
+                              <div class="sa-success-tip"></div>
+                              <div class="sa-success-long"></div>
+                              <div class="sa-success-placeholder"></div>
+                              <div class="sa-success-fix"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="alert-wrap">
+                          <h6>Gracias</h6>
+                          <hr><small class="mb-0">Los datos recopilados serán tratados de manera confidencial.</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -173,7 +199,7 @@
               </div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Salir</a></div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-firma.html">Continuar</a></div>
+              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-firma.html">Continuar / Terminar</a></div>
             </div>
           </div>
         </div>
@@ -240,6 +266,41 @@
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
             <button class="btn btn-primary" type="button">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Desea eliminar el registro?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" id="eliminacionRow" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalCopia" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar copia</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <h3>¿Desea copiar la campaña?</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, incidunt repellendus eos praesentium debitis consectetur quidem assumenda aliquam quod numquam veniam excepturi nostrum id rerum asperiores? Obcaecati molestiae animi similique!</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-warning" id="copiaRow" type="button">Aceptar</button>
           </div>
         </div>
       </div>
