@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseLN.cs" />
+    <Compile Include="CampanaLN.cs" />
     <Compile Include="CiuuLN.cs" />
     <Compile Include="DepartamentoLN.cs" />
     <Compile Include="DistritoLN.cs" />

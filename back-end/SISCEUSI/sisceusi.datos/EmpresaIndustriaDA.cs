@@ -153,6 +153,7 @@ namespace sisceusi.datos
                 var p = new OracleDynamicParameters();
                 p.Add("piIdEmpresaIndustria", empresa.idEmpresaIndustria);
                 p.Add("piNombreEmpresa", empresa.nombreEmpresa);
+                p.Add("piNombreComercial", empresa.nombreComercial);
                 p.Add("piRuc", empresa.ruc);
                 p.Add("piIdGiro", empresa.idGiro);
                 p.Add("piIdGrupoEmpresa", empresa.idGrupoEmpresa);
@@ -171,6 +172,23 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return seGrabo;
+        }
+
+        public bool eliminar(EmpresaIndustriaBE empresa, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.EmpresaIndustria}USP_UPD_DESHABILITAR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEmpresa", empresa.idEmpresaIndustria);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
         }
 
         public EmpresaIndustriaBE obtenerEmpresa(EmpresaIndustriaBE empresa, OracleConnection db)

@@ -18,6 +18,7 @@ namespace sisceusi.entidad
         public string telefono { get; set; }
         public string latitud { get; set; }
         public string longitud { get; set; }
+        public string idEstado { get; set; }
 
         public CiuuBE ciuu { get; set; }
         public DepartamentoBE departamento { get; set; }

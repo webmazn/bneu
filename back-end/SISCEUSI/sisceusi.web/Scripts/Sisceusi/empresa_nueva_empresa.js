@@ -61,6 +61,7 @@ var grabar = () => {
     $('.seccion-mensaje').html('');
     let arr = [];
     let nombreEmpresa = $("#txt-empresa").val().trim()
+    let nombreComercial = $("#txt-nombre-comercial").val().trim()
     let ruc = $('#txt-ruc').val().trim()
     let idGiro = $("#cbo-giro").val()
     let idGrupoEmpresa = $("#cbo-grupo-empresarial").val()
@@ -72,6 +73,7 @@ var grabar = () => {
     let idEstado = $("#cbo-estado").val()
 
     if (validarEspaciosBlanco(nombreEmpresa)) arr.push("Debe ingresar la razón social");
+    if (validarEspaciosBlanco(nombreComercial)) arr.push("Debe ingresar el nombre comercial");
     if (validarEspaciosBlanco(ruc)) arr.push("Debe ingresar el Ruc para la validación");
     else if (validarNumerico(ruc)) arr.push("El Ruc debe tener caracteres numéricos");
     else if (validarTamanioRuc(ruc)) arr.push("El Ruc debe tener 11 caracteres");
@@ -141,6 +143,7 @@ var grabarDatos = () => {
     idEmpresaIndustria = idEmpresaIndustria == null ? -1 : idEmpresaIndustria
 
     let nombreEmpresa = $("#txt-empresa").val().trim()
+    let nombreComercial = $("#txt-nombre-comercial").val().trim()
     let ruc = $('#txt-ruc').val().trim()
     let idGiro = $("#cbo-giro").val()
     let idGrupoEmpresa = $("#cbo-grupo-empresarial").val()
@@ -152,7 +155,7 @@ var grabarDatos = () => {
     let idEstado = $("#cbo-estado").val()
 
     let url = `${baseUrl}EmpresaIndustria/grabarEmpresaIndustria`;
-    let data = { idEmpresaIndustria, nombreEmpresa, ruc, idGiro, idGrupoEmpresa, idCiuu, direccionFiscal, correoElectronico, representanteLegal, dni, idEstado, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEmpresaIndustria, nombreEmpresa, nombreComercial, ruc, idGiro, idGrupoEmpresa, idCiuu, direccionFiscal, correoElectronico, representanteLegal, dni, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -211,6 +214,7 @@ var cargarDatos = (data) => {
     if (data == null) return
     $('#frm').data('id', data.idEmpresaIndustria);
     $("#txt-empresa").val(data.nombreEmpresa)
+    $("#txt-nombre-comercial").val(data.nombreComercial)
     $('#txt-ruc').val(data.ruc)
     $("#cbo-giro").val(data.idGiro)
     $("#cbo-grupo-empresarial").val(data.idGrupoEmpresa)

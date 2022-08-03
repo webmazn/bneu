@@ -144,6 +144,18 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
+        public JsonResult eliminar(int idPlantaEmpresa)
+        {
+            PlantaEmpresaLN logica = new PlantaEmpresaLN();
+            bool seElimino = logica.eliminar(new PlantaEmpresaBE { idPlantaEmpresa = idPlantaEmpresa });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
         public JsonResult obtenerPlantaEmpresa(int idPlantaEmpresa)
         {
             PlantaEmpresaLN logica = new PlantaEmpresaLN();

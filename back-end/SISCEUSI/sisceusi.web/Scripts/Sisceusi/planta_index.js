@@ -6,6 +6,7 @@
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
     $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
+    $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     cargarDesplegables();
     $('#btn-buscar')[0].click();
 });
@@ -160,6 +161,14 @@ var cargarDatosTabla = (j) => {
                 actualizar(e.currentTarget);
             });
         });
+        tabla.find('.btn-delete').each(x => {
+            let elementButton = tabla.find('.btn-delete')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                eliminar(e.currentTarget);
+            });
+        });
+        $('[data-toggle="tooltip"]').tooltip();
     } else {
         console.log('No hay resultados');
         $('#viewPagination').hide(); $('#view-page-result').hide();
@@ -191,11 +200,12 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colDepartamento = `<td data-encabezado="Departamento">${x.departamento.departamento}</td>`;
             let colProvincia = `<td data-encabezado="Provincia">${x.provincia.provincia}</td>`;
             let colDistrito = `<td data-encabezado="Distrito">${x.distrito.distrito}</td>`;
+            let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
             let btnUsuarios = `<a class="btn btn-sm btn-warning text-white btn-table" href="${baseUrl}UsuarioPlanta/index/${x.idPlantaEmpresa}" data-toggle="tooltip" data-placement="top" title="Mantenimiento de usuarios"><i class="fa fa-user"></i></a>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idPlantaEmpresa}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idPlantaEmpresa}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnUsuarios}${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colNro}${colDireccion}${colCiuu}${colTelefono}${colUbicacion}${colDepartamento}${colProvincia}${colDistrito}${colOptions}</tr>`;
+            let row = `<tr>${colNro}${colDireccion}${colCiuu}${colTelefono}${colUbicacion}${colDepartamento}${colProvincia}${colDistrito}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -356,5 +366,34 @@ var actualizar = (obj) => {
 
 /* ================================================
  * FIN ACTUALIZAR EMPRESA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR
+ * ================================================
+ */
+var idEliminar = 0
+var eliminar = (obj) => {
+    idEliminar = $(obj).data('id')
+    $('#modalConfirmacion').modal('show')
+}
+
+var deshabilitarRegistro = () => {
+    let url = `${baseUrl}PlantaEmpresa/eliminar?idPlantaEmpresa=${idEliminar}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('#btn-buscar')[0].click();
+            $('#modalConfirmacion').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR
  * ================================================
  */

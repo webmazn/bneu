@@ -70,6 +70,18 @@ namespace sisceusi.logica
             return seGuardo;
         }
 
+        public bool eliminar(UsuarioBE usuario)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminar(usuario, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
         public UsuarioBE obtenerUsuario(UsuarioBE usuario)
         {
             UsuarioBE item = null;

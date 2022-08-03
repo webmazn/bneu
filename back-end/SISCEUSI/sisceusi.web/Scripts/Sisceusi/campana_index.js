@@ -4,7 +4,6 @@
     $('#btn-exportar').on('click', (e) => exportar(e));
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
-    $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     $('#btn-buscar')[0].click();
 });
 
@@ -59,7 +58,7 @@ var filtroGeneral = (e) => {
     let params = { buscar, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
-    let url = `${baseUrl}EmpresaIndustria/filtroGeneral?${queryParams}`;
+    let url = `${baseUrl}Campana/filtroGeneral?${queryParams}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let method = 'GET';
@@ -89,10 +88,9 @@ var filtroGeneral = (e) => {
 var filtroAvanzado = (e) => {
     e.preventDefault()
     bFiltroGeneral = false
+    let denominacion = $('#txt-denominacion').val();
     let ruc = $('#ruc').val();
     let empresa = $('#empresa').val();
-    let representanteLegal = $('#usuario').val();
-    let correoElectronico = $('#email').val();
     let fechaInicio = $("#txt-fecha-inicio").val();
     let fechaFin = $("#txt-fecha-fin").val();
     let estado = $("#cbo-estado").val();
@@ -100,10 +98,10 @@ var filtroAvanzado = (e) => {
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { ruc, empresa, representanteLegal, correoElectronico, fechaInicio, fechaFin, estado, registros, pagina, columna, orden };
+    let params = { denominacion, ruc, empresa, fechaInicio, fechaFin, estado, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
-    let url = `${baseUrl}EmpresaIndustria/filtroAvanzado?${queryParams}`;
+    let url = `${baseUrl}Campana/filtroAvanzado?${queryParams}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let method = 'GET';
@@ -157,14 +155,6 @@ var cargarDatosTabla = (j) => {
                 actualizar(e.currentTarget);
             });
         });
-        tabla.find('.btn-delete').each(x => {
-            let elementButton = tabla.find('.btn-delete')[x];
-            $(elementButton).on('click', (e) => {
-                e.preventDefault();
-                eliminar(e.currentTarget);
-            });
-        });
-        $('[data-toggle="tooltip"]').tooltip();
     } else {
         console.log('No hay resultados');
         $('#viewPagination').hide(); $('#view-page-result').hide();
@@ -189,18 +179,15 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
     if (doRenderizar) {
         content = data.map((x, i) => {
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
-            let colCodigo = `<td class="text-center" data-encabezado="Código">EMP${pad(x.idEmpresaIndustria, 4)}</td>`;
-            let colRuc = `<td data-encabezado="Nombre y Apellido">${x.ruc}</td>`;
-            let colRazonSocial = `<td data-encabezado="Tipo usuario"><span>${x.nombreEmpresa}</span></td>`
-            let colRepresentanteLegal = `<td class="text-center" data-encabezado="Fecha registro">${x.representanteLegal}</td>`;
-            let colGiroNegocio = `<td class="text-center" data-encabezado="Fecha registro">${x.giro.giro}</td>`;
+            let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.idCampana, 4)}</td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
+            let colDenominacion = `<td data-encabezado="Denominación">${x.denominacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnPlanta = `<a class="btn btn-sm btn-warning text-white btn-table" href="${baseUrl}PlantaEmpresa/index/${x.idEmpresaIndustria}" data-toggle="tooltip" data-placement="top" title="Mantenimiento de plantas"><i class="fa fa-industry"></i></a>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idEmpresaIndustria}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idEmpresaIndustria}"><i class="fa fa-edit"></i></div>`;
-            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnPlanta}${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colNro}${colCodigo}${colRuc}${colRazonSocial}${colRepresentanteLegal}${colGiroNegocio}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
+            let btnDocumento = `<div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idCampana}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idCampana}"><i class="fa fa-edit"></i></div>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}${btnDocumento}</td>`;
+            let row = `<tr>${colNro}${colCodigo}${colFechaRegistro}${colDenominacion}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -228,15 +215,14 @@ var exportarGeneral = () => {
     let orden = $("#order").val()
     let params = { buscar, columna, orden }
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
-    let url = `${baseUrl}EmpresaIndustria/exportarGeneral?${queryParams}`
+    let url = `${baseUrl}Campana/exportarGeneral?${queryParams}`
     location.href = url
 }
 
 var exportarAvanzado = () => {
+    let denominacion = $('#txt-denominacion').val();
     let ruc = $('#ruc').val();
     let empresa = $('#empresa').val();
-    let representanteLegal = $('#usuario').val();
-    let correoElectronico = $('#email').val();
     let fechaInicio = $("#txt-fecha-inicio").val();
     let fechaFin = $("#txt-fecha-fin").val();
     let estado = $("#cbo-estado").val();
@@ -244,7 +230,7 @@ var exportarAvanzado = () => {
     let orden = $("#order").val();
     let params = { ruc, empresa, representanteLegal, correoElectronico, fechaInicio, fechaFin, estado, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
-    let url = `${baseUrl}EmpresaIndustria/exportarAvanzado?${queryParams}`
+    let url = `${baseUrl}Campana/exportarAvanzado?${queryParams}`
     location.href = url;
 }
 
@@ -260,39 +246,10 @@ var exportarAvanzado = () => {
 
 var actualizar = (obj) => {
     let id = $(obj).data('id')
-    location.href = `${baseUrl}EmpresaIndustria/NuevaEmpresaIndustria/${id}`
+    location.href = `${baseUrl}Campana/NuevaCampana/${id}`
 }
 
 /* ================================================
  * FIN ACTUALIZAR EMPRESA
- * ================================================
- */
-
-/* ================================================
- * INICIO ELIMINAR
- * ================================================
- */
-var idEliminar = 0
-var eliminar = (obj) => {
-    idEliminar = $(obj).data('id')
-    $('#modalConfirmacion').modal('show')
-}
-
-var deshabilitarRegistro = () => {
-    let url = `${baseUrl}EmpresaIndustria/eliminar?idEmpresaIndustria=${idEliminar}`;
-    fetch(url)
-    .then(r => r.json())
-    .then(j => {
-        if (j.success) {
-            $('#btn-buscar')[0].click();
-            $('#modalConfirmacion').modal('hide')
-        }
-    })
-    .catch(error => {
-        console.log('Error:' + error.message)
-    })
-}
-/* ================================================
- * FIN ELIMINAR
  * ================================================
  */

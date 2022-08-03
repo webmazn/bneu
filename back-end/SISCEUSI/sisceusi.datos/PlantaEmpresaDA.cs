@@ -40,7 +40,7 @@ namespace sisceusi.datos
                     telefono = (string)x.TELEFONO,
                     latitud = (string)x.LATITUD,
                     longitud = (string)x.LONGITUD,
-                    //idEstado = (string)x.IDESTADO,
+                    idEstado = (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -83,7 +83,7 @@ namespace sisceusi.datos
                     telefono = (string)x.TELEFONO,
                     latitud = (string)x.LATITUD,
                     longitud = (string)x.LONGITUD,
-                    //idEstado = (string)x.IDESTADO,
+                    idEstado = (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -119,7 +119,7 @@ namespace sisceusi.datos
                     telefono = (string)x.TELEFONO,
                     latitud = (string)x.LATITUD,
                     longitud = (string)x.LONGITUD,
-                    //idEstado = (string)x.IDESTADO,
+                    idEstado = (string)x.IDESTADO,
                     fila = (int)x.FILA
                 }).ToList();
             }
@@ -156,7 +156,7 @@ namespace sisceusi.datos
                     telefono = (string)x.TELEFONO,
                     latitud = (string)x.LATITUD,
                     longitud = (string)x.LONGITUD,
-                    //idEstado = (string)x.IDESTADO,
+                    idEstado = (string)x.IDESTADO,
                     fila = (int)x.FILA
                 }).ToList();
             }
@@ -181,6 +181,7 @@ namespace sisceusi.datos
                 p.Add("piTelefono", planta.telefono);
                 p.Add("piLatitud", planta.latitud);
                 p.Add("piLongitud", planta.longitud);
+                p.Add("piIdEstado", planta.idEstado);
                 p.Add("piIdUsuarioCreacion", planta.idUsuarioCreacion);
                 p.Add("piIpCreacion", planta.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
@@ -190,6 +191,23 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return seGrabo;
+        }
+
+        public bool eliminar(PlantaEmpresaBE empresa, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.PlantaEmpresa}USP_UPD_DESHABILITAR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdPlantaEmpresa", empresa.idPlantaEmpresa);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
         }
 
         public PlantaEmpresaBE obtenerPlantaEmpresa(PlantaEmpresaBE empresa, OracleConnection db)

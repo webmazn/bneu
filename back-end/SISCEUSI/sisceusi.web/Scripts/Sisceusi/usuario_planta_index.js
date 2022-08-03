@@ -4,6 +4,7 @@
     $('#btn-exportar').on('click', (e) => exportar(e));
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
+    $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     $('#btn-buscar')[0].click();
     cargarDesplegables()
 });
@@ -152,6 +153,14 @@ var cargarDatosTabla = (j) => {
                 actualizar(e.currentTarget);
             });
         });
+        tabla.find('.btn-delete').each(x => {
+            let elementButton = tabla.find('.btn-delete')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                eliminar(e.currentTarget);
+            });
+        });
+        $('[data-toggle="tooltip"]').tooltip();
     } else {
         console.log('No hay resultados');
         $('#viewPagination').hide(); $('#view-page-result').hide();
@@ -270,5 +279,34 @@ var actualizar = (obj) => {
 }
 /* ================================================
  * FIN ACTUALIZAR
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR
+ * ================================================
+ */
+var idEliminar = 0
+var eliminar = (obj) => {
+    idEliminar = $(obj).data('id')
+    $('#modalConfirmacion').modal('show')
+}
+
+var deshabilitarRegistro = () => {
+    let url = `${baseUrl}Usuario/eliminar?idUsuario=${idEliminar}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('#btn-buscar')[0].click();
+            $('#modalConfirmacion').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR
  * ================================================
  */

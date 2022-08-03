@@ -85,6 +85,18 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
+        public JsonResult eliminar(int idUsuario)
+        {
+            UsuarioLN logica = new UsuarioLN();
+            bool seElimino = logica.eliminar(new UsuarioBE { idUsuario = idUsuario });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
         public JsonResult obtenerUsuario(int idUsuario)
         {
             UsuarioLN logica = new UsuarioLN();

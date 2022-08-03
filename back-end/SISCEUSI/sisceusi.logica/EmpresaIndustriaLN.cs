@@ -74,6 +74,18 @@ namespace sisceusi.logica
             return seGuardo;
         }
 
+        public bool eliminar(EmpresaIndustriaBE empresa)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminar(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
         public EmpresaIndustriaBE obtenerEmpresa(EmpresaIndustriaBE empresa)
         {
             EmpresaIndustriaBE item = null;

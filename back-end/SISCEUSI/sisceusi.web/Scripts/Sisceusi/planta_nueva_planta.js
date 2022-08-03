@@ -117,7 +117,7 @@ var grabar = () => {
     let idDepartamento = $("#cbo-departamento").val()
     let idProvincia = $("#cbo-provincia").val()
     let idDistrito = $("#cbo-distrito").val()
-    //let idEstado = $("#cbo-estado").val()
+    let idEstado = $("#cbo-estado").val()
 
     if (idEmpresaIndustria == 0) arr.push("El identificador de la empresa es incorrecto")
     if (validarEspaciosBlanco(direccion)) arr.push("Debe ingresar la dirección");
@@ -128,7 +128,7 @@ var grabar = () => {
     if (validarCombo(idDepartamento)) arr.push("Debe seleccionar un departamento");
     if (validarCombo(idProvincia)) arr.push("Debe seleccionar una provincia");
     if (validarCombo(idDistrito)) arr.push("Debe seleccionar un distrito");
-    //if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -141,7 +141,7 @@ var grabar = () => {
     
 
     let url = `${baseUrl}PlantaEmpresa/grabarPlantaEmpresa`;
-    let data = { idPlantaEmpresa, idEmpresaIndustria, direccion, idCiuu, telefono, latitud, longitud, idDepartamento, idProvincia, idDistrito, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idPlantaEmpresa, idEmpresaIndustria, direccion, idCiuu, telefono, latitud, longitud, idDepartamento, idProvincia, idDistrito, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -209,6 +209,7 @@ var cargarDatos = (data) => {
     $('#txt-telefono').val(data.telefono)
     $("#txt-latitud").val(data.latitud)
     $("#txt-longitud").val(data.longitud)
+    $('#cbo-estado').val(data.idEstado)
 }
 
 /* ================================================

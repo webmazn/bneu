@@ -24,7 +24,7 @@
                     <div class="col-md-12 col-lg-3">
                         <div class="row">
                             <div class="col-12">
-                                <a class="btn btn-azul w-100 mb-3" href="@Url.Action("NuevaPlanta", "PlantaEmpresa", new { id = id })" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva planta</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                                <a class="btn btn-azul w-100 mb-3" href="@Url.Action("NuevaPlanta", "PlantaEmpresa", new { id = id })" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva planta</a><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("Index", "EmpresaIndustria")">Regresar</a>
                                 <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                             </div>
                         </div>
@@ -165,6 +165,9 @@
                                         <th scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DISTRITO&nbsp;</span></span><i class="fas fa-sort column-filter" id="dis_distrito"></i></div>
                                         </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort column-filter" id="pem_idEstado"></i></div>
+                                        </th>
                                         <th class="text-center" scope="col">GESTIÓN</th>
                                     </tr>
                                 </thead>
@@ -173,7 +176,7 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros">1</span><span id="view-page-result">-<span class="fin-registros">1</span> de <span class="total-registros">1</span> registros</span></td>
-                                        <td id="viewPagination" class="text-right text-xs-left pr-0" colspan="5" style="display: none">
+                                        <td id="viewPagination" class="text-right text-xs-left pr-0" colspan="7" style="display: none">
                                             <span>Registros por página&nbsp;</span>
                                             <select id="number-registers">
                                                 <option value="10" selected>10</option>
@@ -196,6 +199,23 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRow" type="button">Aceptar</button>
             </div>
         </div>
     </div>

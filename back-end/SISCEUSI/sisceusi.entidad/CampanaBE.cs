@@ -15,6 +15,44 @@ namespace sisceusi.entidad
         public DateTime fechaInicioEncuesta { get; set; }
         public DateTime fechaFinEncuesta { get; set; }
         public string observaciones { get; set; }
-        public string idEstado { get;set; }
+        public int idGiroPiloto { get; set; }
+        public int idCiuuPiloto { get; set; }
+        public int idGiroOficial { get; set; }
+        public int idCiuuOficial { get; set; }
+        public List<CampanaEmpresaBE> listaCampanaEmpresa { get; set; }
+        public List<CampanaEncuestaBE> listaPregunta { get; set; }
+        public string idEstado { get; set; }
+
+        public string txtFechaInicioPiloto
+        {
+            get
+            {
+                return fechaInicioPiloto.ToString("yyyy-MM-dd");
+            }
+        }
+
+        public string txtFechaFinPiloto
+        {
+            get
+            {
+                return fechaFinPiloto.ToString("yyyy-MM-dd");
+            }
+        }
+
+        public string txtFechaInicioEncuesta
+        {
+            get
+            {
+                return fechaInicioEncuesta.ToString("yyyy-MM-dd");
+            }
+        }
+
+        public string txtFechaFinEncuesta
+        {
+            get
+            {
+                return fechaFinEncuesta.ToString("yyyy-MM-dd");
+            }
+        }
     }
 }

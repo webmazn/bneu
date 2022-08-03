@@ -30,6 +30,7 @@ namespace sisceusi.Datos
                     Usuario = $"{esquema}.PKG_SISCEUSI_USUARIO.",
                     EmpresaIndustria = $"{esquema}.PKG_SISCEUSI_EMPRESA_IND.",
                     PlantaEmpresa = $"{esquema}.PKG_SISCEUSI_PLANTA_EMPRESA.",
+                    Campana = $"{esquema}.PKG_SISCEUSI_CAMPANA.",
                 };
             }
         }

@@ -115,6 +115,23 @@ namespace sisceusi.datos
             return seGrabo;
         }
 
+        public bool eliminar(UsuarioBE usuario, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.Usuario}USP_UPD_DESHABILITAR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdUsuario", usuario.idUsuario);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
+        }
+
         public UsuarioBE obtenerUsuario(UsuarioBE usuario, OracleConnection db)
         {
             UsuarioBE item = null;

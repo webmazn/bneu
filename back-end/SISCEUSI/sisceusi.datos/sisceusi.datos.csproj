@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDA.cs" />
+    <Compile Include="CampanaDA.cs" />
     <Compile Include="CiuuDA.cs" />
     <Compile Include="DataBaseHelpers\OracleDynamicParameters.cs" />
     <Compile Include="DepartamentoDA.cs" />

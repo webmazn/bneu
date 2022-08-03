@@ -3,7 +3,9 @@
     ViewBag.Title = "Index";
 }
 
-
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/campana_index.js")"></script>
+}
 
 <div class="container-fluid map-root" id="historia"></div>
 <div class="container my-4" id="cuerpo">
@@ -37,7 +39,7 @@
                                         <div class="input-group">
                                             <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
                                             <div class="input-group-append">
-                                                <button class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
+                                                <button id="btn-buscar" class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -59,7 +61,7 @@
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="txt-denominacion">DENOMINACIÓN DE LA ENCUESTA</label>
-                                                                    <input class="form-control" type="text" id="ruc" placeholder="">
+                                                                    <input class="form-control" type="text" id="txt-denominacion" placeholder="">
                                                                 </div>
                                                             </div>
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
@@ -89,17 +91,17 @@
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO</label>
-                                                                    <select class="form-control" id="cbo-tipo-usuario">
-                                                                        <option>-Seleccione un estado-</option>
-                                                                        <option>Habilitado</option>
-                                                                        <option>Deshabilitado</option>
+                                                                    <select class="form-control" id="cbo-estado">
+                                                                        <option value="-1">-Seleccione un estado-</option>
+                                                                        <option value="1">Habilitado</option>
+                                                                        <option value="0">Deshabilitado</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-12 text-right">
-                                                                <button class="btn btn-azul text-white"><i class="fas fa-search pr-1"></i>Buscar</button>
+                                                                <button id="btn-buscar-avanzado" class="btn btn-azul text-white"><i class="fas fa-search pr-1"></i>Buscar</button>
                                                             </div>
                                                             <div class="col-sm-12 text-right">
                                                                 <div class="titulo-avanzado close-basico" data-toggle="collapse" href="#busqueda-avanzada" aria-expanded="false" aria-controls="busqueda-avanzada"><span>Búsqueda básica&nbsp;<i class="fas fa-sort"></i></span></div>
@@ -123,7 +125,7 @@
                         <div class="h5">BANDEJA DE CAMPAÑAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
                     </div>
                     <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
-                        <button class="btn btn-success w-100">Descargar Excel</button>
+                        <button id="btn-exportar" class="btn btn-success w-100">Descargar Excel</button>
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
@@ -134,19 +136,19 @@
                                 <thead>
                                     <tr class="bg-azul text-white">
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span></div>
                                         </th>
                                         <th scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort column-filter" id="cam_idCampana"></i></div>
                                         </th>
                                         <th scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort column-filter" id="cam_fechaCreacion"></i></div>
                                         </th>
                                         <th scope="col" style="min-width: 150px;">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DENOMINACIÓN&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DENOMINACIÓN&nbsp;</span></span><i class="fas fa-sort column-filter" id="cam_denominacion"></i></div>
                                         </th>
                                         <th scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort column-filter" id="cam_idEstado"></i></div>
                                         </th>
                                         <th class="text-center" scope="col">GESTIÓN</th>
                                     </tr>
@@ -166,151 +168,25 @@
                                             <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">2</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Sin iniciar</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">3</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Iniciado</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">4</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Sin iniciar</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">5</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Piloto</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">6</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Concluido</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">7</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Concluido</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">8</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Concluido</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">9</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Concluido</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">10</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Denominación">Denominación de la encuesta</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Concluido</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
-                                        <td class="text-right text-xs-left pr-0" colspan="3">
+                                        <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros">1</span><span id="view-page-result">-<span class="fin-registros">1</span> de <span class="total-registros">1</span> registros</span></td>
+                                        <td id="viewPagination" class="text-right text-xs-left pr-0" colspan="5" style="display: none">
                                             <span>Registros por página&nbsp;</span>
-                                            <select id="catidad-rgistros">
+                                            <select id="number-registers">
                                                 <option value="10" selected>10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
                                             </select>&nbsp;
-                                            1 de 75 páginas&nbsp;
+                                            <span class="pagina">1</span> de <span class="total-paginas">75</span> páginas&nbsp;
                                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                                <button class="btn btn-success" type="button"><i class="fas fa-angle-double-left"></i></button>
-                                                <button class="btn btn-success" type="button"><i class="fas fa-angle-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(2)"><i class="fas fa-angle-left"></i></button>
                                                 <input class="ir-pagina" type="number" value="1" min="1">
-                                                <button class="btn btn-success" type="button"><i class="fas fa-angle-right"></i></button>
-                                                <button class="btn btn-success" type="button"><i class="fas fa-angle-double-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(4)"><i class="fas fa-angle-double-right"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -323,4 +199,7 @@
         </div>
     </div>
 </div>
+
+@Html.Hidden("column", "cam_idCampana")
+@Html.Hidden("order", "ASC")
 
