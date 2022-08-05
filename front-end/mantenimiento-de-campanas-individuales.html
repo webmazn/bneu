@@ -160,7 +160,7 @@
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                       <label class="font-weight-bold" for="cbo-zona">ZONA</label>
                                       <select class="form-control" id="cbo-zona">
@@ -170,7 +170,7 @@
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                       <label class="font-weight-bold" for="cbo-sub- sector">SUB SECTOR</label>
                                       <select class="form-control" id="cbo-sub-sector">
@@ -180,13 +180,28 @@
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                       <label class="font-weight-bold" for="cbo-actividad">ACTIVIDAD</label>
                                       <select class="form-control" id="cbo-actividad">
                                         <option>-Seleccione un actividad-</option>
                                         <option>Actividad 01</option>
                                         <option>Actividad 02</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                      <label class="font-weight-bold" for="cbo-actividad">SUPERVISOR</label>
+                                      <select class="selectpicker form-control border rounded">
+                                        <option selected>-Filtre y seleccione un supervisor-</option>
+                                        <option value="Ultrasound Knee Left">Ultrasound Knee Left Sup 02</option>
+                                        <option value="MRI Knee Right">MRI Knee Right Sup 03</option>
+                                        <option value="MRI Knee Left">MRI Knee Left Sup 04</option>
+                                        <option value="MRI Forearm/Elbow Right">MRI Forearm/Elbow Right Sup 04</option>
+                                        <option value="MRI Forearm/Elbow Left">MRI Forearm/Elbow Left Sup 05</option>
+                                        <option value="CT Knee Right">CT Knee Right Sup 06</option>
+                                        <option value="CT Knee Left">CT Knee Left Sup 07</option>
                                       </select>
                                     </div>
                                   </div>
@@ -282,7 +297,7 @@
           <div class="container-fluid py-4">
             <div class="row">
               <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                <div class="h5">BANDEJA DE CAMPAÑAS INDIVIDUALES&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                <div class="h5">BANDEJA DE ENCUESTAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
               </div>
               <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                 <button class="btn btn-success w-100">Descargar Excel</button>
@@ -302,21 +317,24 @@
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col" style="min-width: 150px;">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>EMPRESA ENCUESTADA&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>EMPRESA&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col" style="min-width: 150px;">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TIPO ENCUESTA&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>PLANTA&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>T. ENCUESTA&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CAMPAÑA&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>F. REGISTRO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
-                        <th class="text-center" scope="col">GESTIÓN</th>
+                        <th class="text-center" scope="col" style="min-width: 150px;">GESTIÓN</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -324,12 +342,15 @@
                         <td class="text-center" data-encabezado="Item" scope="row">1</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Enviado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
@@ -338,12 +359,14 @@
                         <td class="text-center" data-encabezado="Item" scope="row">2</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>En proceso</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
                           <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
@@ -353,12 +376,15 @@
                         <td class="text-center" data-encabezado="Item" scope="row">3</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
@@ -367,12 +393,14 @@
                         <td class="text-center" data-encabezado="Item" scope="row">4</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Enviado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
                           <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
@@ -382,12 +410,15 @@
                         <td class="text-center" data-encabezado="Item" scope="row">5</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Enviado</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
@@ -396,12 +427,14 @@
                         <td class="text-center" data-encabezado="Item" scope="row">6</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
                           <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
@@ -411,12 +444,15 @@
                         <td class="text-center" data-encabezado="Item" scope="row">7</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
@@ -425,12 +461,14 @@
                         <td class="text-center" data-encabezado="Item" scope="row">8</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
                           <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
@@ -440,12 +478,15 @@
                         <td class="text-center" data-encabezado="Item" scope="row">9</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
@@ -454,12 +495,15 @@
                         <td class="text-center" data-encabezado="Item" scope="row">10</td>
                         <td class="text-center" data-encabezado="Código">ENC0002</td>
                         <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                        <td data-encabezado="Tipo de encuesta">Tipo de encuesta</td>
+                        <td data-encabezado="Planta">Nombre de planta</td>
+                        <td data-encabezado="Tipo de encuesta">Piloto</td>
                         <td data-encabezado="Campaña">Nombre de la campaña</td>
                         <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
                         <td data-encabezado="Estado"><span>Sin iniciar</span>
                         </td>
                         <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
+                          <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
                           <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
                           <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
                         </td>
