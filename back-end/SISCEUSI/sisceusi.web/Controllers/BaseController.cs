@@ -139,5 +139,11 @@ namespace sisceusi.web.Controllers
             Response.BinaryWrite(dataByte);
             Response.End();
         }
+
+        protected JsonResult json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return new JsonResult() { Data = data, ContentType = contentType, ContentEncoding = contentEncoding, JsonRequestBehavior = behavior, MaxJsonLength = Int32.MaxValue };
+        }
+
     }
 }

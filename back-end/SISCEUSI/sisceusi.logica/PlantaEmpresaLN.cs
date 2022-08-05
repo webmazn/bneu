@@ -1,9 +1,13 @@
-﻿using sisceusi.datos;
+﻿using Oracle.DataAccess.Client;
+using sisceusi.datos;
 using sisceusi.entidad;
 using sisceusi.Logica;
+using sres.ut;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,7 +72,30 @@ namespace sisceusi.logica
             try
             {
                 cn.Open();
-                seGuardo = datos.grabarPlantaEmpresa(planta, cn);
+                using (OracleTransaction ot = cn.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+                {
+                    try
+                    {
+                        planta.nombreArchivoGenerado = planta.archivoNuevo ? Guid.NewGuid().ToString() : planta.nombreArchivoGenerado;
+                        seGuardo = datos.grabarPlantaEmpresa(planta, cn);
+                        if (seGuardo && planta.archivoNuevo)
+                        {
+                            string ruta = ConfigurationManager.AppSettings.Get("rutaArchivo");
+                            string nombre = String.Concat(planta.nombreArchivoGenerado, "_", planta.nombreArchivo);
+                            string pathFile = Path.Combine(ruta, nombre);
+                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            File.WriteAllBytes(pathFile, planta.archivoContenido);
+                        }                        
+                    }
+                    catch (Exception ex)
+                    {
+                        seGuardo = false;
+                        Log.Error(ex);
+                    }
+
+                    if (seGuardo) ot.Commit();
+                    else ot.Rollback();
+                }                    
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return seGuardo;
@@ -93,6 +120,14 @@ namespace sisceusi.logica
             {
                 cn.Open();
                 item = datos.obtenerPlantaEmpresa(planta, cn);
+                if (item != null)
+                {
+                    string ruta = ConfigurationManager.AppSettings.Get("rutaArchivo");
+                    string nombre = String.Concat(item.nombreArchivoGenerado, "_", item.nombreArchivo);
+                    string pathFile = Path.Combine(ruta, nombre);
+                    pathFile = !File.Exists(pathFile) ? null : pathFile;
+                    item.archivoContenido = pathFile == null ? null : File.ReadAllBytes(pathFile);
+                }
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;

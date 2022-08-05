@@ -242,7 +242,9 @@
     <Compile Include="Controllers\CiuuController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\DistritoController.cs" />
+    <Compile Include="Controllers\EmpresaGasController.cs" />
     <Compile Include="Controllers\EmpresaIndustriaController.cs" />
+    <Compile Include="Controllers\EmpresaLuzController.cs" />
     <Compile Include="Controllers\GiroController.cs" />
     <Compile Include="Controllers\GrupoEmpresaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
@@ -254,6 +256,8 @@
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\UsuarioPlantaController.cs" />
+    <Compile Include="Controllers\ZonaController.cs" />
+    <Compile Include="Filter\LargeJsonValueProviderFactory .cs" />
     <Compile Include="Filter\LoginRequiredAttribute.cs" />
     <Compile Include="Filter\NoLoginRequiredAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,10 +272,13 @@
     <Folder Include="Views\Ciuu\" />
     <Folder Include="Views\Departamento\" />
     <Folder Include="Views\Distrito\" />
+    <Folder Include="Views\EmpresaGas\" />
+    <Folder Include="Views\EmpresaLuz\" />
     <Folder Include="Views\Giro\" />
     <Folder Include="Views\GrupoEmpresa\" />
     <Folder Include="Views\Provincia\" />
     <Folder Include="Views\Rol\" />
+    <Folder Include="Views\Zona\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sisceusi.entidad\sisceusi.entidad.csproj">

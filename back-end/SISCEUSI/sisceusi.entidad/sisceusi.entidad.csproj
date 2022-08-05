@@ -47,7 +47,9 @@
     <Compile Include="CiuuBE.cs" />
     <Compile Include="DepartamentoBE.cs" />
     <Compile Include="DistritoBE.cs" />
+    <Compile Include="EmpresaGasBE.cs" />
     <Compile Include="EmpresaIndustriaBE.cs" />
+    <Compile Include="EmpresaLuzBE.cs" />
     <Compile Include="GiroBE.cs" />
     <Compile Include="GrupoEmpresaBE.cs" />
     <Compile Include="IntencionParticiparBE.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="RespuestaEncuestaBE.cs" />
     <Compile Include="RolBE.cs" />
     <Compile Include="UsuarioBE.cs" />
+    <Compile Include="ZonaBE.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

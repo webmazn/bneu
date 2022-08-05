@@ -54,16 +54,26 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label class="font-weight-bold" for="txt-latitud">UBICACIÓN - LATITUD</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                <input class="form-control" type="text" id="txt-latitud" maxlength="20" placeholder="Ingrese su latitud" aria-describedby="inputGroup3" required>
+                                <input class="form-control" type="text" id="txt-latitud" placeholder="Ingrese su latitud" aria-describedby="inputGroup3" required>
                             </div>
                         </div>
-                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label class="font-weight-bold" for="txt-longitud">UBICACIÓN - LONGITUD</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                <input class="form-control" type="text" id="txt-longitud" maxlength="20" placeholder="Ingrese su longitud" aria-describedby="inputGroup3" required>
+                                <input class="form-control" type="text" id="txt-longitud" placeholder="Ingrese su longitud" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-zona">ZONA</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-zona">
+                                    <option value="0">-Seleccione un zona-</option>
+                                    <option value="1">Zona 01</option>
+                                    <option value="2">Zona 02</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -91,6 +101,46 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-empresa-gas">EMPRESA DE GAS</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-empresa-gas">
+                                    <option value="0">-Seleccione una empresa de gas-</option>
+                                    <option value="1">Empresa gas 01</option>
+                                    <option value="2">Empresa gas 02</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-suministro-gas">NRO SUMINISTRO GAS</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-positivo" maxlength="25" type="text" id="txt-suministro-gas" placeholder="Ingrese número suministro de gas" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-empresa-luz">EMPRESA DE LUZ</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-empresa-luz">
+                                    <option value="0">-Seleccione una empresa de luz-</option>
+                                    <option value="1">Empresa luz 01</option>
+                                    <option value="2">Empresa luz 02</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-suministro-luz">NRO SUMINISTRO LUZ</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-positivo" maxlength="25" type="text" id="txt-suministro-luz" placeholder="Ingrese número suministro de luz" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-firo">GIRO DEL NEGOCIO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-giro" aria-describedby="inputGroup10" required></select>
+                            </div>
+                        </div>
                         <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label class="font-weight-bold" for="cbo-estado">ESTADO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
@@ -103,8 +153,21 @@
                         </div>
                         <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         </div>
-                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group text-left">
+                                <label class="font-weight-bold" for="fle-requisito-01">CARGAR SOLICITUD ESCANEADA DE GEN. USUARIO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <div class="input-group">
+                                    <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-01" placeholder="Subir documentos" required>
+                                    <input class="d-none fil-file-control" type="file" id="fle-requisito-01" accept="application/msword, application/pdf">
+                                    <div class="input-group-append">
+                                        <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-01">Seleccionar</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col-6"></div>
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="row">

@@ -12,6 +12,7 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
+    [RoutePrefix("PlantaEmpresa")]
     public class PlantaEmpresaController : BaseController
     {
         // GET: PlantaEmpresa
@@ -130,6 +131,7 @@ namespace sisceusi.web.Controllers
             catch (Exception ex) { Log.Error(ex); }
         }
 
+        [Route("grabarPlanta")]
         [HttpPost]
         public JsonResult grabarPlantaEmpresa(PlantaEmpresaBE planta)
         {

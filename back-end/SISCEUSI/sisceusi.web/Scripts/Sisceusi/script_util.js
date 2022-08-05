@@ -128,7 +128,25 @@ var ordenar = (id) => {
     }
 }
 
+/*
+ *
+ * Indicar cuantos ceros a la
+ * izquierda se deberán mostrar Ejm: 000001
+ *
+ **/
 var pad = (str, max) => {
     str = str.toString()
     return str.length < max ? pad("0" + str, max) : str
 }
+
+/*
+ *
+ * Método números enteros: ruc, dni, etc.
+ * Ejemplo => DNI: 10225896
+ *
+ **/
+$(document).on("keyup", ".integer-positivo", function (e) {
+    $(e.target).val(function (index, value) {
+        return value.replace(/\D/g, "");
+    });
+});
