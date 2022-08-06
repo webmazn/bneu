@@ -116,6 +116,45 @@ namespace sisceusi.datos
             return seGrabo;
         }
 
+        public List<PlantaEmpresaBE> obtenerListaPlantaEmpesa(PlantaEmpresaBE planta, OracleConnection db)
+        {
+            List<PlantaEmpresaBE> lista = new List<PlantaEmpresaBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_LIST_PLANTA_EMPRESA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEmpresaIndustria", planta.idEmpresaIndustria);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<PlantaEmpresaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public bool grabarCampanaPlanta(CampanaPlantaBE campanaPlanta, OracleConnection db)
+        {
+            bool seGrabo = false;
+            try
+            {
+                string sp = $"{Package.Campana}USP_PRC_GUARDAR_CAMPANA_PLANTA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampana", campanaPlanta.idCampana);
+                p.Add("piIdPlantaEmpresa", campanaPlanta.idPlantaEmpresa);
+                p.Add("piParticiparEnPiloto", campanaPlanta.participarEnPiloto);
+                p.Add("piParticiparEnOficial", campanaPlanta.participarEnOficial);
+                p.Add("piIdSupervisorPiloto", campanaPlanta.idSupervisorPiloto);
+                p.Add("piIdSupervisorOficial", campanaPlanta.idSupervisorOficial);
+                p.Add("piIdUsuarioCreacion", campanaPlanta.idUsuarioCreacion);
+                p.Add("piIpCreacion", campanaPlanta.ipCreacion);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seGrabo = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seGrabo;
+        }
+
         public bool actualizarCampanaEncuestaEstado(CampanaBE campana, OracleConnection db)
         {
             bool seGuardo = false;
@@ -216,7 +255,7 @@ namespace sisceusi.datos
             List<CampanaEmpresaBE> lista = new List<CampanaEmpresaBE>();
             try
             {
-                string sp = $"{Package.Campana}USP_SEL_LIST_CAMPANA_EMPRESA";
+                string sp = $"{Package.Campana}USP_SEL_LIST_CAMPANA_EMP";
                 var p = new OracleDynamicParameters();
                 p.Add("piIdCampana", campana.idCampana);
                 p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
@@ -224,7 +263,8 @@ namespace sisceusi.datos
                 {
                     idCampanaEmpresa = (int)x.IDCAMPANAEMPRESA,
                     idCampana = (int)x.IDCAMPANA,
-                    empresaIndustria = new EmpresaIndustriaBE {
+                    empresaIndustria = new EmpresaIndustriaBE
+                    {
                         idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,
                         idGiro = (int)x.IDGIRO,
                         idCiuu = (int)x.IDCIUU,

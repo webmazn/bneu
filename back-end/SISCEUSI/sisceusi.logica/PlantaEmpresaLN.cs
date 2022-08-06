@@ -132,5 +132,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;
         }
+
+        public List<PlantaEmpresaBE> obtenerListaPlantaEmpresa()
+        {
+            List<PlantaEmpresaBE> lista = new List<PlantaEmpresaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaPlantaEmpresa(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

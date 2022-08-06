@@ -46,6 +46,7 @@ var cargarDesplegables = () => {
     let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
     let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
     let urlEmpresa = `${baseUrl}EmpresaIndustria/obtenerListaEmpresaIndustria`;
+    //let urlEmpresa = `${baseUrl}PlantaEmpresa/obtenerListaPlantaEmpresa`;
     let urlRevisor = `${baseUrl}Usuario/obtenerListaRevisor`;    
     Promise.all([
         fetch(urlGiro),
@@ -722,7 +723,7 @@ var cargarDatos = (data) => {
             arrEmpresaSelect00.push(x.empresaIndustria)
             let index = arrEmpresa00.findIndex(y => y.idEmpresaIndustria == x.empresaIndustria.idEmpresaIndustria)
             if (index != -1) {
-                arrEmpresa00.slice(index, 1)
+                arrEmpresa00.splice(index, 1)
             }
         }
     })
@@ -734,7 +735,7 @@ var cargarDatos = (data) => {
             arrEmpresaSelect01.push(x.empresaIndustria)
             let index = arrEmpresa01.findIndex(y => y.idEmpresaIndustria == x.empresaIndustria.idEmpresaIndustria)
             if (index != -1) {
-                arrEmpresa01.slice(index, 1)
+                arrEmpresa01.splice(index, 1)
             }
         }
     })

@@ -170,6 +170,19 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        [HttpGet]
+        public JsonResult obtenerListaPlantaEmpresa()
+        {
+            PlantaEmpresaLN logica = new PlantaEmpresaLN();
+            List<PlantaEmpresaBE> lista = logica.obtenerListaPlantaEmpresa();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
         private List<List<string>> obtenerDatos(List<PlantaEmpresaBE> lista)
         {
             int i = 0;

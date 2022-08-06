@@ -15,11 +15,8 @@ namespace sisceusi.entidad
         public string participarEnOficial { get; set; }
         public int idSupervisorPiloto { get; set; }
         public int idSupervisorOficial { get; set; }
-        public string aceptarLLenarEncuesta { get; set; }
         public string idEstado { get; set; }
 
-        public CampanaBE campana { get; set; }
         public EmpresaIndustriaBE empresaIndustria { get; set; }
-        public UsuarioBE revisor { get; set; }
     }
 }

@@ -51,6 +51,29 @@ namespace sisceusi.logica
                             x.idUsuarioCreacion = campana.idUsuarioCreacion;
                             x.ipCreacion = campana.ipCreacion;
                             seGuardo = datos.grabarCampanaEmpresa(x, cn);
+                            if (seGuardo)
+                            {
+                                List<PlantaEmpresaBE> list = datos.obtenerListaPlantaEmpesa(new PlantaEmpresaBE { idEmpresaIndustria = x.idEmpresaIndustria }, cn);
+                                if (list != null)
+                                {
+                                    foreach (var y in list)
+                                    {
+                                        CampanaPlantaBE campanaPlanta = new CampanaPlantaBE
+                                        {
+                                            idCampana = idCampana,
+                                            idPlantaEmpresa = y.idPlantaEmpresa,
+                                            participarEnPiloto = x.participarEnPiloto,
+                                            participarEnOficial = x.participarEnOficial,
+                                            idSupervisorPiloto = x.idSupervisorPiloto,
+                                            idSupervisorOficial = x.idSupervisorOficial,
+                                            idUsuarioCreacion = campana.idUsuarioCreacion,
+                                            ipCreacion = campana.ipCreacion
+                                        };
+                                        seGuardo = datos.grabarCampanaPlanta(campanaPlanta, cn);
+                                        if (!seGuardo) break;
+                                    }
+                                }
+                            }                            
                             if (!seGuardo) break;
                         }
                     }

@@ -232,5 +232,34 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return item;
         }
+
+        public List<PlantaEmpresaBE> obtenerListaPlantaEmpresa(OracleConnection db)
+        {
+            List<PlantaEmpresaBE> lista = new List<PlantaEmpresaBE>();
+            try
+            {
+                string sp = $"{Package.PlantaEmpresa}USP_SEL_LISTA";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new PlantaEmpresaBE
+                {
+                    idPlantaEmpresa = (int)x.IDPLANTAEMPRESA,
+                    idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,
+                    ciuu = new CiuuBE { ciuu = (string)x.CIUU },
+                    departamento = new DepartamentoBE { departamento = (string)x.DEPARTAMENTO },
+                    provincia = new ProvinciaBE { provincia = (string)x.PROVINCIA },
+                    distrito = new DistritoBE { distrito = (string)x.DISTRITO },
+                    direccion = (string)x.DIRECCION,
+                    empresa = new EmpresaIndustriaBE {
+                        idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,
+                        nombreEmpresa = (string)x.NOMBREEMPRESA,
+                        nombreComercial = (string)x.NOMBRECOMERCIAL
+                    },
+                    idEstado = (string)x.IDESTADO,
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

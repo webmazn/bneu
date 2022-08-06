@@ -30,6 +30,7 @@ namespace sisceusi.entidad
         public byte[] archivoContenido { get; set; }
         public string idEstado { get; set; }
 
+        public EmpresaIndustriaBE empresa { get; set;}
         public GiroBE giro { get; set; }
         public CiuuBE ciuu { get; set; }
         public DepartamentoBE departamento { get; set; }

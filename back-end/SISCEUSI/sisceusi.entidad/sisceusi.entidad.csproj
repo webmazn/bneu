@@ -43,6 +43,7 @@
     <Compile Include="BaseBE.cs" />
     <Compile Include="CampanaBE.cs" />
     <Compile Include="CampanaEmpresaBE.cs" />
+    <Compile Include="CampanaPlantaBE.cs" />
     <Compile Include="CampanaEncuestaBE.cs" />
     <Compile Include="CiuuBE.cs" />
     <Compile Include="DepartamentoBE.cs" />
