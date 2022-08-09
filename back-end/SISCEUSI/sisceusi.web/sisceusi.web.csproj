@@ -173,7 +173,10 @@
     <Content Include="Scripts\Sisceusi\campana_nueva_campana.js" />
     <Content Include="Scripts\Sisceusi\empresa_index.js" />
     <Content Include="Scripts\Sisceusi\empresa_nueva_empresa.js" />
+    <Content Include="Scripts\Sisceusi\encuesta_firma.js" />
+    <Content Include="Scripts\Sisceusi\encuesta_inicio.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
+    <Content Include="Scripts\Sisceusi\interno_index.js" />
     <Content Include="Scripts\Sisceusi\planta_index.js" />
     <Content Include="Scripts\Sisceusi\planta_nueva_planta.js" />
     <Content Include="Scripts\Sisceusi\script_validaciones.js" />
@@ -216,6 +219,9 @@
     <Content Include="Views\PlantaEmpresa\NuevaPlanta.cshtml" />
     <Content Include="Views\UsuarioPlanta\Index.cshtml" />
     <Content Include="Views\UsuarioPlanta\NuevoUsuarioPlanta.cshtml" />
+    <Content Include="Views\Encuesta\Inicio.cshtml" />
+    <Content Include="Views\Encuesta\Firma.cshtml" />
+    <Content Include="Views\Encuesta\Formulario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,6 +251,7 @@
     <Compile Include="Controllers\EmpresaGasController.cs" />
     <Compile Include="Controllers\EmpresaIndustriaController.cs" />
     <Compile Include="Controllers\EmpresaLuzController.cs" />
+    <Compile Include="Controllers\EncuestaController.cs" />
     <Compile Include="Controllers\GiroController.cs" />
     <Compile Include="Controllers\GrupoEmpresaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />

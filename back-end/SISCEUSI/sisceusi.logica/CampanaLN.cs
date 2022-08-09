@@ -47,10 +47,11 @@ namespace sisceusi.logica
                     {
                         foreach (var x in campana.listaCampanaEmpresa)
                         {
+                            int idCampanaEmpresa = 0;
                             x.idCampana = idCampana;
                             x.idUsuarioCreacion = campana.idUsuarioCreacion;
                             x.ipCreacion = campana.ipCreacion;
-                            seGuardo = datos.grabarCampanaEmpresa(x, cn);
+                            seGuardo = datos.grabarCampanaEmpresa(x, out idCampanaEmpresa, cn);
                             if (seGuardo)
                             {
                                 List<PlantaEmpresaBE> list = datos.obtenerListaPlantaEmpesa(new PlantaEmpresaBE { idEmpresaIndustria = x.idEmpresaIndustria }, cn);
@@ -58,18 +59,36 @@ namespace sisceusi.logica
                                 {
                                     foreach (var y in list)
                                     {
-                                        CampanaPlantaBE campanaPlanta = new CampanaPlantaBE
+                                        if (x.participarEnPiloto.Equals("1"))
                                         {
-                                            idCampana = idCampana,
-                                            idPlantaEmpresa = y.idPlantaEmpresa,
-                                            participarEnPiloto = x.participarEnPiloto,
-                                            participarEnOficial = x.participarEnOficial,
-                                            idSupervisorPiloto = x.idSupervisorPiloto,
-                                            idSupervisorOficial = x.idSupervisorOficial,
-                                            idUsuarioCreacion = campana.idUsuarioCreacion,
-                                            ipCreacion = campana.ipCreacion
-                                        };
-                                        seGuardo = datos.grabarCampanaPlanta(campanaPlanta, cn);
+                                            ControlEncuestaBE controlEncuesta = new ControlEncuestaBE
+                                            {
+                                                idCampanaEmpresa = idCampanaEmpresa,
+                                                idPlantaEmpresa = y.idPlantaEmpresa,
+                                                idTipoEncuesta = 1,
+                                                idSupervisor = x.idSupervisorPiloto,
+                                                idEtapa = campana.idEtapaPiloto,
+                                                idUsuarioCreacion = campana.idUsuarioCreacion,
+                                                ipCreacion = campana.ipCreacion
+                                            };
+                                            seGuardo = datos.grabarControlEncuesta(controlEncuesta, cn);
+                                        }
+                                        if (!seGuardo) break;
+
+                                        if (x.participarEnOficial.Equals("1"))
+                                        {
+                                            ControlEncuestaBE controlEncuesta = new ControlEncuestaBE
+                                            {
+                                                idCampanaEmpresa = idCampanaEmpresa,
+                                                idPlantaEmpresa = y.idPlantaEmpresa,
+                                                idTipoEncuesta = 2,
+                                                idSupervisor = x.idSupervisorOficial,
+                                                idEtapa = campana.idEtapaOficial,
+                                                idUsuarioCreacion = campana.idUsuarioCreacion,
+                                                ipCreacion = campana.ipCreacion
+                                            };
+                                            seGuardo = datos.grabarControlEncuesta(controlEncuesta, cn);
+                                        }
                                         if (!seGuardo) break;
                                     }
                                 }

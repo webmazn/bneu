@@ -28,12 +28,14 @@ namespace sisceusi.Datos
                     EmpresaGas = $"{esquema}.PKG_SISCEUSI_EMPRESA_GAS.",
                     EmpresaLuz = $"{esquema}.PKG_SISCEUSI_EMPRESA_LUZ.",
                     Externo = $"{esquema}.PKG_SISCEUSI_EXTERNO.",
+                    Interno = $"{esquema}.PKG_SISCEUSI_INTERNO.",
                     Login = $"{esquema}.PKG_SISCEUSI_LOGIN.",
                     Mantenimiento = $"{esquema}.PKG_SISCEUSI_MANTENIMIENTO.",                    
                     Usuario = $"{esquema}.PKG_SISCEUSI_USUARIO.",
                     EmpresaIndustria = $"{esquema}.PKG_SISCEUSI_EMPRESA_IND.",
                     PlantaEmpresa = $"{esquema}.PKG_SISCEUSI_PLANTA_EMPRESA.",
                     Campana = $"{esquema}.PKG_SISCEUSI_CAMPANA.",
+                    ControlEncuesta = $"{esquema}.PKG_SISCEUSI_CONTROL_ENCUESTA.",
                 };
             }
         }

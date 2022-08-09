@@ -150,6 +150,7 @@ var grabar = () => {
     $('.seccion-mensaje').html('');
     let arr = [];
     let idEmpresaIndustria = $('#identificador-parent').val()
+    let denominacion = $("#txt-denominacion").val().trim()
     let direccion = $("#txt-direccion").val().trim()
     let idGiro = $("#cbo-giro").val()
     let idCiuu = $("#cbo-ciuu").val()
@@ -168,6 +169,7 @@ var grabar = () => {
     let archivoContenido = $('#fle-requisito-01').data('file')
 
     if (idEmpresaIndustria == 0) arr.push("El identificador de la empresa es incorrecto")
+    if (validarEspaciosBlanco(denominacion)) arr.push("Debe ingresar una denominación")
     if (validarEspaciosBlanco(direccion)) arr.push("Debe ingresar la dirección");
     if (validarCombo(idGiro)) arr.push("Debe seleccionar un giro");
     if (validarCombo(idCiuu)) arr.push("Debe seleccionar un CIUU");
@@ -199,7 +201,7 @@ var grabar = () => {
 
     let url = `${baseUrl}PlantaEmpresa/grabarPlanta`;
     let data = {
-        idPlantaEmpresa, idEmpresaIndustria, direccion, idGiro, idCiuu, telefono, latitud, longitud, idDepartamento, idProvincia, idDistrito, nombreArchivo, nombreArchivoGenerado,
+        idPlantaEmpresa, idEmpresaIndustria, denominacion, direccion, idGiro, idCiuu, telefono, latitud, longitud, idDepartamento, idProvincia, idDistrito, nombreArchivo, nombreArchivoGenerado,
         idZona, idEmpresaGas, numeroSuministroGas, idEmpresaLuz, numeroSuministroAlumbrado, archivoNuevo, archivoContenido, idEstado, idUsuarioCreacion: idUsuarioLogin
     };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
@@ -268,6 +270,7 @@ var cargarDatos = (data) => {
     cambiarProvincia()
     $("#cbo-distrito").val(data.idDistrito)
     $("#cbo-zona").val(data.idZona)
+    $("#txt-denominacion").val(data.denominacion)
     $("#txt-direccion").val(data.direccion)
     $('#txt-telefono').val(data.telefono)
     $("#txt-latitud").val(data.latitud)

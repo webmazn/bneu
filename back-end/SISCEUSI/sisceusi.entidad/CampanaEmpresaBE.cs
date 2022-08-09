@@ -17,6 +17,7 @@ namespace sisceusi.entidad
         public int idSupervisorOficial { get; set; }
         public string idEstado { get; set; }
 
+        public CampanaBE campana { get; set; }
         public EmpresaIndustriaBE empresaIndustria { get; set; }
     }
 }

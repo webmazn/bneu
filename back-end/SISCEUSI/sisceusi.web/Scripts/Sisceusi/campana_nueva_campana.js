@@ -516,6 +516,8 @@ var grabar = () => {
     let idCiuuOficial = $('#cbo-ciuu00').val()
     let idGiroPiloto = $('#cbo-giro01').val()
     let idCiuuPiloto = $('#cbo-ciuu01').val()
+    let idEtapaPiloto = 1
+    let idEtapaOficial = 1   
     let idEstado = $('#chk-anular').prop('checked') ? '0' : '1'
 
     if (validarEspaciosBlanco(denominacion)) arr.push("Debe ingresar una denominación")
@@ -645,7 +647,7 @@ var grabar = () => {
     })
 
     let url = `${baseUrl}Campana/grabarCampana`;
-    let data = { idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroOficial, idCiuuOficial, idGiroPiloto, idCiuuPiloto, idEstado, listaCampanaEmpresa: arrCampanaEmpresa, listaPregunta: arrPregunta, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroOficial, idCiuuOficial, idGiroPiloto, idCiuuPiloto, idEtapaPiloto, idEtapaOficial, idEstado, listaCampanaEmpresa: arrCampanaEmpresa, listaPregunta: arrPregunta, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)

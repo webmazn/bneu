@@ -4,7 +4,7 @@ CREATE SEQUENCE SISCEUSI.SQ_GENM_PLANTA_EMPRESA MINVALUE 1 MAXVALUE 999999999999
 CREATE SEQUENCE SISCEUSI.SQ_GENM_USUARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 2 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_CAMPANA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_CAMPANA_EMPRESA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
-CREATE SEQUENCE SISCEUSI.SQ_GEND_CAMPANA_PLANTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GEND_CONTROL_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_CAMPANA_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_RESPUESTA_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
@@ -139,6 +139,32 @@ ipModificacion varchar2(50),
 CONSTRAINT empresa_luz_pk PRIMARY KEY(idEmpresaLuz)
 );
 
+CREATE TABLE SISCEUSI.T_MAE_TIPO_ENCUESTA(
+idTipoEncuesta NUMBER,
+tipoEncuesta VARCHAR2(200),
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT tipo_encuesta_pk PRIMARY KEY(idTipoEncuesta)
+);
+
+CREATE TABLE SISCEUSI.T_MAE_ETAPA(
+idEtapa NUMBER,
+etapa VARCHAR2(200),
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT etapa_pk PRIMARY KEY(idEtapa)
+);
+
 CREATE TABLE SISCEUSI.T_GENM_INTENCION_PARTICIPAR(
 idIntencionParticipar number,
 ruc varchar2(11),
@@ -192,6 +218,7 @@ idDepartamento VARCHAR2(2),
 idProvincia VARCHAR2(5), 
 idDistrito VARCHAR2(8),
 idZona NUMBER,
+denominacion VARCHAR2(200),
 direccion VARCHAR2(150),
 telefono VARCHAR2(20),
 latitud VARCHAR2(25),
@@ -252,6 +279,8 @@ idGiroPiloto NUMBER,
 idCiuuPiloto NUMBER,
 idGiroOficial NUMBER,
 idCiuuOficial NUMBER,
+idEtapaPiloto NUMBER,
+idEtapaOficial NUMBER,
 idEstado varchar2(1) default '1',
 idUsuarioCreacion number,
 fechaCreacion date default sysdate,
@@ -280,18 +309,19 @@ ipModificacion varchar2(50),
 constraint campana_empresa_pk primary key(idCampanaEmpresa)
 );
 
-CREATE TABLE SISCEUSI.T_GEND_CAMPANA_PLANTA(
-idCampanaPlanta NUMBER,
-idCampana NUMBER,
+CREATE TABLE SISCEUSI.T_GEND_CONTROL_ENCUESTA(
+idControlEncuesta NUMBER,
+idCampanaEmpresa NUMBER,
 idPlantaEmpresa NUMBER,
-participarEnPiloto VARCHAR2(1),
-participarEnOficial VARCHAR2(1),
-idSupervisorPiloto NUMBER,
-idSupervisorOficial NUMBER,
-aceptaLLenarEncuesta VARCHAR2(1),
-aceptaTratamientoDatos VARCHAR2(1),
-aceptaFirmarEncuesta VARCHAR2(1),
+idTipoEncuesta NUMBER,
+idSupervisor NUMBER,
+aceptaLLenarEncuesta VARCHAR2(1) DEFAULT '',
+aceptaTratamientoDatos VARCHAR2(1) DEFAULT '',
+aceptaFirmarEncuesta VARCHAR2(1) DEFAULT '',
+idUsuarioResponde NUMBER,
 fechaHoraLlenado DATE,
+idEtapa NUMBER,
+numeroCuestionario NUMBER DEFAULT 0,
 idEstado varchar2(1) default '1',
 idUsuarioCreacion number,
 fechaCreacion date default sysdate,
@@ -299,7 +329,11 @@ ipCreacion varchar2(50),
 idUsuarioModificacion number,
 fechaModificacion date,
 ipModificacion varchar2(50),
-constraint campana_planta_pk primary key(idCampanaPlanta)
+constraint control_encuesta_pk primary key (idControlEncuesta),
+constraint control_enc_camp_emp_fk FOREIGN KEY (idCampanaEmpresa) REFERENCES T_GEND_CAMPANA_EMPRESA (idCampanaEmpresa),
+constraint control_enc_planta_fk FOREIGN KEY (idPlantaEmpresa) REFERENCES T_GENM_PLANTA_EMPRESA (idPlantaEmpresa),
+constraint control_enc_tipo_enc_fk FOREIGN KEY (idTipoEncuesta) REFERENCES T_MAE_TIPO_ENCUESTA (idTipoEncuesta),
+constraint control_enc_etapa_fk FOREIGN KEY (idEtapa) REFERENCES T_MAE_ETAPA (idEtapa)
 );
 
 CREATE TABLE SISCEUSI.T_GENM_CAMPANA_ENCUESTA(
@@ -371,6 +405,14 @@ INSERT INTO SISCEUSI.T_MAE_EMPRESA_LUZ (idEmpresaLuz, empresaLuz, idEstado) VALU
 INSERT INTO SISCEUSI.T_MAE_EMPRESA_LUZ (idEmpresaLuz, empresaLuz, idEstado) VALUES (2, 'Edelnor', '1');
 INSERT INTO SISCEUSI.T_MAE_EMPRESA_LUZ (idEmpresaLuz, empresaLuz, idEstado) VALUES (3, 'Electrocentro', '1');
 
+--T_MAE_EMPRESA_ETAPA
+INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (1, 'Sin iniciar', '1');
+INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (2, 'Iniciado', '1');
+INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (3, 'Finalizado', '1');
+
+--T_MAE_EMPRESA_TIPO_ENCUESTA
+INSERT INTO SISCEUSI.T_MAE_TIPO_ENCUESTA (idTipoEncuesta, tipoEncuesta, idEstado) VALUES (1, 'Piloto', '1');
+INSERT INTO SISCEUSI.T_MAE_TIPO_ENCUESTA (idTipoEncuesta, tipoEncuesta, idEstado) VALUES (2, 'Oficial', '1');
 --
 INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
 VALUES (1, 1, 1, 1, '20999999999', 'Ministerio de Energías y Minas', 'minem@gmail.com', 'Av Javier Prado 2563', 'Jhon Matos Guerra', '78958749', '959365203', '1');
@@ -2479,7 +2521,7 @@ DROP TABLE SISCEUSI.T_GENM_EMPRESA_INDUSTRIA;
 
 DROP TABLE SISCEUSI.T_GEND_RESPUESTA_ENCUESTA;
 DROP TABLE SISCEUSI.T_GENM_CAMPANA_ENCUESTA;
-DROP TABLE SISCEUSI.T_GEND_CAMPANA_PLANTA;
+DROP TABLE SISCEUSI.T_GEND_CONTROL_ENCUESTA;
 DROP TABLE SISCEUSI.T_GEND_CAMPANA_EMPRESA;
 DROP TABLE SISCEUSI.T_GENM_CAMPANA;
 

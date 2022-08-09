@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace sisceusi.entidad
 {
-    public class CampanaPlantaBE : BaseBE
+    public class ControlEncuestaBE : BaseBE
     {
-        public int idCampanaPlanta { get; set; }
-        public int idCampana { get; set; }
+        public int idControlEncuesta { get; set; }
+        public int idCampanaEmpresa { get; set; }
         public int idPlantaEmpresa { get; set; }
-        public string participarEnPiloto { get; set; }
-        public string participarEnOficial { get; set; }
-        public int idSupervisorPiloto { get; set; }
-        public int idSupervisorOficial { get; set; }
+        public int idTipoEncuesta { get; set; }
+        public int idSupervisor { get; set; }
         public string aceptaLLenarEncuesta { get; set; }
         public string aceptaTratamientoDatos { get; set; }
         public string aceptaFirmarEncuesta { get; set; }
+        public int idUsuarioResponde { get; set; }
         public DateTime fechaHoraLlenado { get; set; }
+        public int numeroCuestionario { get; set; }
+        public int idEtapa { get; set; }
         public string idEstado { get; set; }
 
-        public CampanaBE campana { get; set; }
+        public CampanaEmpresaBE campanaEmpresa { get; set; }
         public PlantaEmpresaBE plantaEmpresa { get; set; }
         public UsuarioBE revisor { get; set; }
     }

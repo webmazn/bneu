@@ -63,6 +63,8 @@ namespace sisceusi.datos
                 p.Add("piIdCiuuPiloto", campana.idCiuuPiloto);
                 p.Add("piIdGiroOficial", campana.idGiroOficial);
                 p.Add("piIdCiuuOficial", campana.idCiuuOficial);
+                p.Add("piIdEtapaPiloto", campana.idEtapaPiloto);
+                p.Add("piIdEtapaOficial", campana.idEtapaOficial);
                 p.Add("piIdEstado", campana.idEstado);             
                 p.Add("piIdUsuarioCreacion", campana.idUsuarioCreacion);
                 p.Add("piIpCreacion", campana.ipCreacion);
@@ -92,8 +94,9 @@ namespace sisceusi.datos
             return seGuardo;
         }
 
-        public bool grabarCampanaEmpresa(CampanaEmpresaBE campanaEmpresa, OracleConnection db)
+        public bool grabarCampanaEmpresa(CampanaEmpresaBE campanaEmpresa, out int idCampanaEmpresa, OracleConnection db)
         {
+            idCampanaEmpresa = 0;
             bool seGrabo = false;
             try
             {
@@ -107,8 +110,10 @@ namespace sisceusi.datos
                 p.Add("piIdSupervisorOficial", campanaEmpresa.idSupervisorOficial);
                 p.Add("piIdUsuarioCreacion", campanaEmpresa.idUsuarioCreacion);
                 p.Add("piIpCreacion", campanaEmpresa.ipCreacion);
+                p.Add("poIdCampanaEmpresa", 0, OracleDbType.Int32, ParameterDirection.Output);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
                 db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                idCampanaEmpresa = (int)p.Get<dynamic>("poIdCampanaEmpresa").Value;
                 int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
                 seGrabo = filasAfectadas > 0;
             }
@@ -131,19 +136,18 @@ namespace sisceusi.datos
             return lista;
         }
 
-        public bool grabarCampanaPlanta(CampanaPlantaBE campanaPlanta, OracleConnection db)
+        public bool grabarControlEncuesta(ControlEncuestaBE campanaPlanta, OracleConnection db)
         {
             bool seGrabo = false;
             try
             {
-                string sp = $"{Package.Campana}USP_PRC_GUARDAR_CAMPANA_PLANTA";
+                string sp = $"{Package.Campana}USP_PRC_GUARDAR_CONTROL_ENC";
                 var p = new OracleDynamicParameters();
-                p.Add("piIdCampana", campanaPlanta.idCampana);
+                p.Add("piIdCampanaEmpresa", campanaPlanta.idCampanaEmpresa);
                 p.Add("piIdPlantaEmpresa", campanaPlanta.idPlantaEmpresa);
-                p.Add("piParticiparEnPiloto", campanaPlanta.participarEnPiloto);
-                p.Add("piParticiparEnOficial", campanaPlanta.participarEnOficial);
-                p.Add("piIdSupervisorPiloto", campanaPlanta.idSupervisorPiloto);
-                p.Add("piIdSupervisorOficial", campanaPlanta.idSupervisorOficial);
+                p.Add("piIdTipoEncuesta", campanaPlanta.idTipoEncuesta);
+                p.Add("piIdSupervisor", campanaPlanta.idSupervisor);
+                p.Add("piIdEtapa", campanaPlanta.idEtapa);
                 p.Add("piIdUsuarioCreacion", campanaPlanta.idUsuarioCreacion);
                 p.Add("piIpCreacion", campanaPlanta.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);

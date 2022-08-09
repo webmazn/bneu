@@ -15,6 +15,7 @@ namespace sisceusi.entidad
         public string idDepartamento { get; set; }
         public string idProvincia { get; set; }
         public string idDistrito { get; set; }
+        public string denominacion { get; set; }
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string latitud { get; set; }

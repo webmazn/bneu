@@ -179,6 +179,7 @@ namespace sisceusi.datos
                 p.Add("piIdProvincia", planta.idProvincia);
                 p.Add("piIdDistrito", planta.idDistrito);
                 p.Add("piIdZona", planta.idZona);
+                p.Add("piDenominacion", planta.denominacion);
                 p.Add("piDireccion", planta.direccion);
                 p.Add("piTelefono", planta.telefono);
                 p.Add("piLatitud", planta.latitud);

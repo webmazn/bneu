@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Formulario";
+}
+
+
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container my-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 py-4">
+                <div class="row">
+                    <div class="col-12 d-flex">
+                        <div class="bg-light w-100 p-4">
+                            <div class="h4 text-cyan">Denominación Título Campaña - ENC0001</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-fecha-encuesta">FECHA DE LA ENCUESTA</label>
+                                    <input class="form-control" type="date" id="txt-fecha-encuesta">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-hora-encuesta">HORA DE LA ENCUESTA</label>
+                                    <input class="form-control" type="time" id="txt-hora-encuesta">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="cbo-departamento">DIV. POLÍTICA - DEPARTAMENTO</label>
+                                    <select class="form-control" id="cbo-departamento">
+                                        <option>-Seleccione un departamento-</option>
+                                        <option>Departamento 01</option>
+                                        <option>Departamento 02</option>
+                                        <option>Departamento 03</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="cbo-provincia">DIVISIÓN POLÍTICA - PROVINCIA</label>
+                                    <select class="form-control" id="cbo-provincia">
+                                        <option>-Seleccione una provincia-</option>
+                                        <option>Provincia 01</option>
+                                        <option>Provincia 02</option>
+                                        <option>Provincia 03</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="cbo-distrito">DIVISIÓN POLÍTICA - DISTRITO</label>
+                                    <select class="form-control" id="cbo-distrito">
+                                        <option>-Seleccione una distrito-</option>
+                                        <option>Distrito 01</option>
+                                        <option>Distrito 02</option>
+                                        <option>Distrito 03</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="cbo-zona">ZONA</label>
+                                    <select class="form-control" id="cbo-zona">
+                                        <option>-Seleccione una zona-</option>
+                                        <option>Condición 01</option>
+                                        <option>Condición 02</option>
+                                        <option>Condición 03</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-direccion">DIRECCIÓN EXACTA DE LA EMPRESA</label>
+                                    <input class="form-control" type="text" id="txt-direccion">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-servicio-electrico">EMPRESA DE SERVICIO DE ELECTRICIDAD<i class="fas fa-question-circle ayuda-tooltip ml-1" data-toggle="tooltip" data-placement="top" title="Texto de ayuda"></i></label>
+                                    <input class="form-control" type="text" id="txt-servicio-electrico">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-gas-natural">EMPRESA SERVICIO GAS NATURAL<i class="fas fa-question-circle ayuda-tooltip ml-1 ml-1" data-toggle="tooltip" data-placement="top" title="Texto de ayuda"></i></label>
+                                    <input class="form-control" type="text" id="txt-gas-natural">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider my-4"></div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                        <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Salir</a></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-a.html">Continuar</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
