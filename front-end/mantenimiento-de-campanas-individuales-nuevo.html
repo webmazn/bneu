@@ -89,594 +89,629 @@
                 <div class="col-12 mb-4"><strong class="text-cyan">DATOS PRINCIPALES DE LA CAMPAÑA</strong></div>
               </div>
               <div class="row">
-                <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="col-12">
                   <div class="row">
-                    <div class="col-12">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                       <div class="form-group">
                         <label class="font-weight-bold" for="txt-codigo">CÓDIGO</label>
                         <input class="form-control" type="text" id="txt-codigo" placeholder="Ingrese su código" aria-describedby="inputGroup7" required>
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
                       <div class="form-group">
                         <label class="font-weight-bold" for="txt-empresa">DENOMINACIÓN</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
                         <input class="form-control" type="text" id="txt-empresa" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
                       </div>
                     </div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                      <div class="form-group">
-                        <label class="font-weight-bold" for="txt-fecha-inicio">FEC. PILOTO DESDE&nbsp;</label>
-                        <input class="form-control" type="date" id="txt-fecha-inicio">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                      <label class="font-weight-bold mb-3">ACTIVACIÓN PILOTO</label>
+                      <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="chk-encuesta-piloto">
+                        <label class="custom-control-label" for="chk-encuesta-piloto">ACTIVAR ENCUESTA PILOTO</label>
                       </div>
                     </div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                       <div class="form-group">
-                        <label class="font-weight-bold" for="txt-fecha-fin">HASTA&nbsp;</label>
-                        <input class="form-control" type="date" id="txt-fecha-fin">
+                        <label class="font-weight-bold" for="txt-fecha-inicio">FECHA PILOTO DESDE&nbsp;</label>
+                        <input class="form-control" type="date" id="txt-fecha-piloto-inicio" readonly>
                       </div>
                     </div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                       <div class="form-group">
-                        <label class="font-weight-bold" for="txt-fecha-inicio">FEC. REAL DESDE&nbsp;</label>
-                        <input class="form-control" type="date" id="txt-fecha-inicio">
+                        <label class="font-weight-bold" for="txt-fecha-fin">FECHA PILOTO HASTA&nbsp;</label>
+                        <input class="form-control" type="date" id="txt-fecha-piloto-fin" readonly>
                       </div>
                     </div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                       <div class="form-group">
-                        <label class="font-weight-bold" for="txt-fecha-fin">HASTA&nbsp;</label>
-                        <input class="form-control" type="date" id="txt-fecha-fin">
+                        <label class="font-weight-bold">ESTADO PILOTO</label>
+                        <select class="form-control" id="cbo-estado-piloto" aria-describedby="inputGroup10" required>
+                          <option>-Seleccione un estado-</option>
+                          <option>POR INICIAR</option>
+                          <option>INICIADO</option>
+                          <option>FINALIZADO</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                      <label class="font-weight-bold mb-3">ACTIVACIÓN OFICIAL</label>
+                      <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="chk-encuesta-oficial">
+                        <label class="custom-control-label" for="chk-encuesta-oficial">ACTIVAR ENCUESTA OFICIAL</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                       <div class="form-group">
+                        <label class="font-weight-bold" for="txt-fecha-inicio">FECHA REAL DESDE&nbsp;</label>
+                        <input class="form-control" type="date" id="txt-fecha-oficial-inicio" readonly>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                      <div class="form-group">
+                        <label class="font-weight-bold" for="txt-fecha-fin">FECHA REAL HASTA&nbsp;</label>
+                        <input class="form-control" type="date" id="txt-fecha-oficial-fin" readonly>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                      <div class="form-group">
+                        <label class="font-weight-bold">ESTADO OFICIAL</label>
+                        <select class="form-control" id="cbo-estado+oficial" aria-describedby="inputGroup10" required>
+                          <option>-Seleccione un estado-</option>
+                          <option>POR INICIAR</option>
+                          <option>INICIADO</option>
+                          <option>FINALIZADO</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                      <div class="form-group m-0">
                         <label class="font-weight-bold" for="txt-empresa">OBSERVACIONES</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
                         <input class="form-control" type="text" id="txt-empresa" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                      <label class="font-weight-bold mb-3">ANULACIÓN</label>
                       <div class="custom-control custom-checkbox">
                         <input class="custom-control-input" type="checkbox" id="chk-anular">
-                        <label class="custom-control-label" for="chk-anular">Active para anular</label>
+                        <label class="custom-control-label" for="chk-anular">ACTIVE PARA ANULAR</label>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8" id="listSwapWrap">
-                  <div class="row">
-                    <div class="col-12">
-                      <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation"><a class="nav-link link-gris active" id="tab01-tab" data-toggle="tab" href="#tab01" role="tab" aria-controls="tab01" aria-selected="true">EMPRESAS PILOTO</a></li>
-                      </ul>
-                      <div class="tab-content border-left border-bottom border-right p-4" id="myTabContent" style="height:433px; overflow-y:auto;">
-                        <div class="tab-pane fade show active" id="tab01" role="tabpanel" aria-labelledby="home-tab">
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4 font-weight-bold">Empresas seleccionadas</div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
-                              <div class="w-100 text-center">Piloto</div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
-                              <div class="w-100 text-center">Iniciado</div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
-                              <div class="w-100 text-center">En proceso</div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
-                              <div class="w-100 text-center">Concluido</div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">1NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-2">
-                                <label class="custom-control-label" for="chk-col01-2">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-2">
-                                <label class="custom-control-label" for="chk-col02-2">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-2">
-                                <label class="custom-control-label" for="chk-col03-2">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-2">
-                                <label class="custom-control-label" for="chk-col04-2">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">2NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-3">
-                                <label class="custom-control-label" for="chk-col01-3">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-3">
-                                <label class="custom-control-label" for="chk-col02-3">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-3">
-                                <label class="custom-control-label" for="chk-col03-3">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-3">
-                                <label class="custom-control-label" for="chk-col04-3">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">3NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-4">
-                                <label class="custom-control-label" for="chk-col01-4">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-4">
-                                <label class="custom-control-label" for="chk-col02-4">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-4">
-                                <label class="custom-control-label" for="chk-col03-4">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-4">
-                                <label class="custom-control-label" for="chk-col04-4">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">4NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-5">
-                                <label class="custom-control-label" for="chk-col01-5">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-5">
-                                <label class="custom-control-label" for="chk-col02-5">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-5">
-                                <label class="custom-control-label" for="chk-col03-5">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-5">
-                                <label class="custom-control-label" for="chk-col04-5">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">5NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-6">
-                                <label class="custom-control-label" for="chk-col01-6">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-6">
-                                <label class="custom-control-label" for="chk-col02-6">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-6">
-                                <label class="custom-control-label" for="chk-col03-6">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-6">
-                                <label class="custom-control-label" for="chk-col04-6">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">6NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-7">
-                                <label class="custom-control-label" for="chk-col01-7">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-7">
-                                <label class="custom-control-label" for="chk-col02-7">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-7">
-                                <label class="custom-control-label" for="chk-col03-7">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-7">
-                                <label class="custom-control-label" for="chk-col04-7">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">7NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-8">
-                                <label class="custom-control-label" for="chk-col01-8">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-8">
-                                <label class="custom-control-label" for="chk-col02-8">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-8">
-                                <label class="custom-control-label" for="chk-col03-8">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-8">
-                                <label class="custom-control-label" for="chk-col04-8">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">8NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-9">
-                                <label class="custom-control-label" for="chk-col01-9">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-9">
-                                <label class="custom-control-label" for="chk-col02-9">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-9">
-                                <label class="custom-control-label" for="chk-col03-9">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-9">
-                                <label class="custom-control-label" for="chk-col04-9">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">9NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-10">
-                                <label class="custom-control-label" for="chk-col01-10">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-10">
-                                <label class="custom-control-label" for="chk-col02-10">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-10">
-                                <label class="custom-control-label" for="chk-col03-10">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-10">
-                                <label class="custom-control-label" for="chk-col04-10">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">10NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-11">
-                                <label class="custom-control-label" for="chk-col01-11">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-11">
-                                <label class="custom-control-label" for="chk-col02-11">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-11">
-                                <label class="custom-control-label" for="chk-col03-11">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-11">
-                                <label class="custom-control-label" for="chk-col04-11">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">11NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-12">
-                                <label class="custom-control-label" for="chk-col01-12">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-12">
-                                <label class="custom-control-label" for="chk-col02-12">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-12">
-                                <label class="custom-control-label" for="chk-col03-12">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-12">
-                                <label class="custom-control-label" for="chk-col04-12">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">12NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-13">
-                                <label class="custom-control-label" for="chk-col01-13">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-13">
-                                <label class="custom-control-label" for="chk-col02-13">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-13">
-                                <label class="custom-control-label" for="chk-col03-13">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-13">
-                                <label class="custom-control-label" for="chk-col04-13">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">13NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-14">
-                                <label class="custom-control-label" for="chk-col01-14">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-14">
-                                <label class="custom-control-label" for="chk-col02-14">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-14">
-                                <label class="custom-control-label" for="chk-col03-14">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-14">
-                                <label class="custom-control-label" for="chk-col04-14">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row py-2">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                              <p class="text-truncate m-0">14NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
-                              </p>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col01-15">
-                                <label class="custom-control-label" for="chk-col01-15">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col02-15">
-                                <label class="custom-control-label" for="chk-col02-15">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col03-15">
-                                <label class="custom-control-label" for="chk-col03-15">&nbsp;</label>
-                              </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
-                              <div class="custom-control custom-checkbox d-inline-block pl-3">
-                                <input class="custom-control-input" type="checkbox" id="chk-col04-15">
-                                <label class="custom-control-label" for="chk-col04-15">&nbsp;</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="row">
-                <div class="col-12 mb-4"><strong class="text-cyan">CONFIGURACIÓN DE PREGUNTAS Y OPCIONES</strong></div>
-              </div>
-              <div class="row">
-                <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="form-group">
-                        <label class="font-weight-bold" for="cbo-list-tipo-control">TIPO DE CONTROL</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                        <select class="form-control" id="cbo-list-tipo-control" aria-describedby="inputGroup10" required>
-                          <option>-Seleccione un tipo de control-</option>
-                          <option value="txt">CAJA DE TEXTO</option>
-                          <option value="cbo">LISTA DE OPCIONES</option>
-                          <option value="chk">MÚLTIPLES OPCIONES</option>
-                          <option value="rad">ÚNICA OPCIÓN</option>
-                          <option value="tbl">TABLA MAESTRA</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <button class="btn btn-azul w-100 mb-3" id="agregarPregunta">Agregar control, <br> formular preguntas y respuestas</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="form-group p-4 border">
-                        <label class="font-weight-bold">ELABORACIÓN DE ENCUESTA</label>
-                        <div class="row" id="contenedorEncuesta"><strong class="w-100 p-4 text-center" id="ninguna-pregunta">AÚN NO TIENE NI UNA PREGUNTA FORMULADA.</strong></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="row">
-                <div class="col-6"></div>
-                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                  <div class="alert alert-danger d-flex align-items-stretch" role="alert">
-                    <div class="alert-wrap mr-3">
-                      <div class="sa">
-                        <div class="sa-error">
-                          <div class="sa-error-x">
-                            <div class="sa-error-left"></div>
-                            <div class="sa-error-right"></div>
-                          </div>
-                          <div class="sa-error-placeholder"></div>
-                          <div class="sa-error-fix"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="alert-wrap">
-                      <h6>Error de registro</h6>
-                      <hr><small class="mb-0">Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.</small>
-                    </div>
-                  </div>
-                  <div class="alert alert-success d-flex align-items-stretch" role="alert">
-                    <div class="alert-wrap mr-3">
-                      <div class="sa">
-                        <div class="sa-success">
-                          <div class="sa-success-tip"></div>
-                          <div class="sa-success-long"></div>
-                          <div class="sa-success-placeholder"></div>
-                          <div class="sa-success-fix"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="alert-wrap">
-                      <h6>Bien hecho</h6>
-                      <hr><small class="mb-0">Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
-                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
-                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
-                  <button class="btn btn-info w-100 mb-3" href="#">Guardar</button>
                 </div>
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-light py-3">
+      <div class="row">
+        <div class="col-12" id="listSwapWrap">
+          <div class="row">
+            <div class="col-12">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation"><a class="nav-link link-gris active" id="tab01-tab" data-toggle="tab" href="#tab01" role="tab" aria-controls="tab01" aria-selected="true">EMPRESAS PILOTO</a></li>
+              </ul>
+              <div class="tab-content bg-white border-left border-bottom border-right p-4" id="myTabContent" style="height:433px; overflow-y:auto;">
+                <div class="tab-pane bg-white fade show active" id="tab01" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4 font-weight-bold">Empresas seleccionadas</div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
+                      <div class="w-100 text-center">Piloto</div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
+                      <div class="w-100 text-center">Iniciado</div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
+                      <div class="w-100 text-center">En proceso</div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 font-weight-bold">
+                      <div class="w-100 text-center">Concluido</div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">1NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-2">
+                        <label class="custom-control-label" for="chk-col01-2">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-2">
+                        <label class="custom-control-label" for="chk-col02-2">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-2">
+                        <label class="custom-control-label" for="chk-col03-2">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-2">
+                        <label class="custom-control-label" for="chk-col04-2">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">2NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-3">
+                        <label class="custom-control-label" for="chk-col01-3">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-3">
+                        <label class="custom-control-label" for="chk-col02-3">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-3">
+                        <label class="custom-control-label" for="chk-col03-3">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-3">
+                        <label class="custom-control-label" for="chk-col04-3">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">3NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-4">
+                        <label class="custom-control-label" for="chk-col01-4">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-4">
+                        <label class="custom-control-label" for="chk-col02-4">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-4">
+                        <label class="custom-control-label" for="chk-col03-4">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-4">
+                        <label class="custom-control-label" for="chk-col04-4">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">4NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-5">
+                        <label class="custom-control-label" for="chk-col01-5">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-5">
+                        <label class="custom-control-label" for="chk-col02-5">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-5">
+                        <label class="custom-control-label" for="chk-col03-5">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-5">
+                        <label class="custom-control-label" for="chk-col04-5">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">5NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-6">
+                        <label class="custom-control-label" for="chk-col01-6">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-6">
+                        <label class="custom-control-label" for="chk-col02-6">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-6">
+                        <label class="custom-control-label" for="chk-col03-6">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-6">
+                        <label class="custom-control-label" for="chk-col04-6">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">6NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-7">
+                        <label class="custom-control-label" for="chk-col01-7">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-7">
+                        <label class="custom-control-label" for="chk-col02-7">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-7">
+                        <label class="custom-control-label" for="chk-col03-7">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-7">
+                        <label class="custom-control-label" for="chk-col04-7">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">7NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-8">
+                        <label class="custom-control-label" for="chk-col01-8">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-8">
+                        <label class="custom-control-label" for="chk-col02-8">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-8">
+                        <label class="custom-control-label" for="chk-col03-8">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-8">
+                        <label class="custom-control-label" for="chk-col04-8">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">8NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-9">
+                        <label class="custom-control-label" for="chk-col01-9">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-9">
+                        <label class="custom-control-label" for="chk-col02-9">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-9">
+                        <label class="custom-control-label" for="chk-col03-9">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-9">
+                        <label class="custom-control-label" for="chk-col04-9">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">9NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-10">
+                        <label class="custom-control-label" for="chk-col01-10">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-10">
+                        <label class="custom-control-label" for="chk-col02-10">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-10">
+                        <label class="custom-control-label" for="chk-col03-10">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-10">
+                        <label class="custom-control-label" for="chk-col04-10">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">10NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-11">
+                        <label class="custom-control-label" for="chk-col01-11">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-11">
+                        <label class="custom-control-label" for="chk-col02-11">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-11">
+                        <label class="custom-control-label" for="chk-col03-11">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-11">
+                        <label class="custom-control-label" for="chk-col04-11">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">11NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-12">
+                        <label class="custom-control-label" for="chk-col01-12">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-12">
+                        <label class="custom-control-label" for="chk-col02-12">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-12">
+                        <label class="custom-control-label" for="chk-col03-12">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-12">
+                        <label class="custom-control-label" for="chk-col04-12">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">12NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-13">
+                        <label class="custom-control-label" for="chk-col01-13">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-13">
+                        <label class="custom-control-label" for="chk-col02-13">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-13">
+                        <label class="custom-control-label" for="chk-col03-13">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-13">
+                        <label class="custom-control-label" for="chk-col04-13">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">13NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-14">
+                        <label class="custom-control-label" for="chk-col01-14">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-14">
+                        <label class="custom-control-label" for="chk-col02-14">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-14">
+                        <label class="custom-control-label" for="chk-col03-14">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-14">
+                        <label class="custom-control-label" for="chk-col04-14">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                      <p class="text-truncate m-0">14NOMBRE DE LA EMPRESA O NOMBRE COMERCIAL
+                      </p>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col01-15">
+                        <label class="custom-control-label" for="chk-col01-15">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col02-15">
+                        <label class="custom-control-label" for="chk-col02-15">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col03-15">
+                        <label class="custom-control-label" for="chk-col03-15">&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2 text-center">
+                      <div class="custom-control custom-checkbox d-inline-block pl-3">
+                        <input class="custom-control-input" type="checkbox" id="chk-col04-15">
+                        <label class="custom-control-label" for="chk-col04-15">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container pt-4">
+      <div class="row">
+        <div class="col-12 mb-4"><strong class="text-cyan">CONFIGURACIÓN DE PREGUNTAS Y OPCIONES</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <select class="custom-select form-control" id="cbo-list-tipo-control" aria-describedby="inputGroup10" required>
+              <option>-Seleccione un tipo de control-</option>
+              <option value="txt">CAJA DE TEXTO</option>
+              <option value="cbo">LISTA DE OPCIONES</option>
+              <option value="chk">MÚLTIPLES OPCIONES</option>
+              <option value="rad">ÚNICA OPCIÓN</option>
+              <option value="tbl">TABLA MAESTRA</option>
+            </select>
+            <div class="input-group-append">
+              <button class="btn btn-azul" id="agregarPregunta">Agregar control, preguntas y respuestas</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group p-4 border">
+                <label class="font-weight-bold">ELABORACIÓN DE ENCUESTA</label>
+                <div class="row" id="contenedorEncuesta"><strong class="w-100 p-4 text-center" id="ninguna-pregunta">AÚN NO TIENE NI UNA PREGUNTA FORMULADA.</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+          <div class="alert alert-danger d-flex align-items-stretch" role="alert">
+            <div class="alert-wrap mr-3">
+              <div class="sa">
+                <div class="sa-error">
+                  <div class="sa-error-x">
+                    <div class="sa-error-left"></div>
+                    <div class="sa-error-right"></div>
+                  </div>
+                  <div class="sa-error-placeholder"></div>
+                  <div class="sa-error-fix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="alert-wrap">
+              <h6>Error de registro</h6>
+              <hr><small class="mb-0">Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.</small>
+            </div>
+          </div>
+          <div class="alert alert-success d-flex align-items-stretch" role="alert">
+            <div class="alert-wrap mr-3">
+              <div class="sa">
+                <div class="sa-success">
+                  <div class="sa-success-tip"></div>
+                  <div class="sa-success-long"></div>
+                  <div class="sa-success-placeholder"></div>
+                  <div class="sa-success-fix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="alert-wrap">
+              <h6>Bien hecho</h6>
+              <hr><small class="mb-0">Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+          <button class="btn btn-info w-100 mb-3" href="#">Guardar</button>
         </div>
       </div>
     </div>
