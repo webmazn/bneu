@@ -97,19 +97,19 @@
                       <input class="form-control" type="text" id="txt-question-mark" placeholder="Question mark descripción">
                     </div>
                   </div>
-                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold" for="txt-pregunta-confirmacion-01">PREGUNTA DE INICIAL (CABECERA)</label>
+                      <label class="font-weight-bold" for="txt-pregunta-confirmacion-01">PREGUNTA INICIAL (CABECERA)</label>
                       <input class="form-control" type="text" id="txt-pregunta-confirmacion-01" placeholder="Pregunta inicial">
                     </div>
                   </div>
-                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
                       <label class="font-weight-bold" for="txt-pregunta-confirmacion-02">PREGUNTA DE CIERRE (PIE)</label>
                       <input class="form-control" type="text" id="txt-pregunta-confirmacion-02" placeholder="Pregunta cierre">
                     </div>
                   </div>
-                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
                       <label class="font-weight-bold" for="cbo-estilo-tabla">ESTILO DE TABLA MAESTRA</label>
                       <select class="form-control" id="cbo-estilo-tabla">
@@ -117,6 +117,11 @@
                         <option>Ancho de tabla regular</option>
                         <option>Ancho de tabla full width</option>
                       </select>
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-info w-100 mb-3" href="#">Guardar</a>
                     </div>
                   </div>
                 </div>
@@ -162,7 +167,7 @@
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-info w-100 mb-3" href="#">Agregar</a>
+                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-secondary w-100 mb-3" href="#">Agregar</a>
                     </div>
                   </div>
                 </div>
@@ -228,6 +233,27 @@
                             </td>
                           </tr>
                         </tbody>
+                        <tfoot>
+                          <tr>
+                            <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
+                            <td class="text-right text-xs-left pr-0" colspan="2"><span>Registros por página&nbsp;</span>
+                              <select id="catidad-rgistros">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                              </select>&nbsp;
+                              1 de 75 páginas&nbsp;
+                              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-double-left"></i></button>
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-left"></i></button>
+                                <input class="ir-pagina" type="number" value="1" min="1">
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-right"></i></button>
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-double-right"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tfoot>
                       </table>
                     </div>
                   </div>
@@ -365,7 +391,7 @@
                   </div>
                   <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="form-group">
-                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-info w-100 mb-3" href="#">Agregar</a>
+                      <label class="font-weight-bold">&nbsp;</label><a class="btn btn-secondary w-100 mb-3" href="#">Agregar</a>
                     </div>
                   </div>
                 </div>
@@ -510,6 +536,27 @@
                             </td>
                           </tr>
                         </tbody>
+                        <tfoot>
+                          <tr>
+                            <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span>1-10 de 750 registros</td>
+                            <td class="text-right text-xs-left pr-0" colspan="5"><span>Registros por página&nbsp;</span>
+                              <select id="catidad-rgistros">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                              </select>&nbsp;
+                              1 de 75 páginas&nbsp;
+                              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-double-left"></i></button>
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-left"></i></button>
+                                <input class="ir-pagina" type="number" value="1" min="1">
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-right"></i></button>
+                                <button class="btn btn-success" type="button"><i class="fas fa-angle-double-right"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tfoot>
                       </table>
                     </div>
                   </div>
