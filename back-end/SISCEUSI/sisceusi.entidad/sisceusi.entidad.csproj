@@ -51,6 +51,8 @@
     <Compile Include="EmpresaGasBE.cs" />
     <Compile Include="EmpresaIndustriaBE.cs" />
     <Compile Include="EmpresaLuzBE.cs" />
+    <Compile Include="EncabezadoPrincipalBE.cs" />
+    <Compile Include="EncabezadoSecundarioBE.cs" />
     <Compile Include="EtapaBE.cs" />
     <Compile Include="GiroBE.cs" />
     <Compile Include="GrupoEmpresaBE.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="ProvinciaBE.cs" />
     <Compile Include="RespuestaEncuestaBE.cs" />
     <Compile Include="RolBE.cs" />
+    <Compile Include="TablaMaestraBE.cs" />
     <Compile Include="TipoEncuestaBE.cs" />
     <Compile Include="UsuarioBE.cs" />
     <Compile Include="ZonaBE.cs" />

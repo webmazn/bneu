@@ -37,5 +37,7 @@ namespace sisceusi.entidad
                 return fechaCreacion.ToString("dd/MM/yyyy");
             }
         }
+
+        public UsuarioBE usuarioRegistro { get; set; }
     }
 }

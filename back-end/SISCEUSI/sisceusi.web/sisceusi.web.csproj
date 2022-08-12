@@ -180,6 +180,8 @@
     <Content Include="Scripts\Sisceusi\planta_index.js" />
     <Content Include="Scripts\Sisceusi\planta_nueva_planta.js" />
     <Content Include="Scripts\Sisceusi\script_validaciones.js" />
+    <Content Include="Scripts\Sisceusi\tabla_maestra_index.js" />
+    <Content Include="Scripts\Sisceusi\tabla_maestra_nueva_tabla.js" />
     <Content Include="Scripts\Sisceusi\usuario_index.js" />
     <Content Include="Scripts\Sisceusi\usuario_nuevo_usuario.js" />
     <Content Include="Scripts\Sisceusi\usuario_planta_index.js" />
@@ -222,6 +224,8 @@
     <Content Include="Views\Encuesta\Inicio.cshtml" />
     <Content Include="Views\Encuesta\Firma.cshtml" />
     <Content Include="Views\Encuesta\Formulario.cshtml" />
+    <Content Include="Views\TablaMaestra\Index.cshtml" />
+    <Content Include="Views\TablaMaestra\NuevaTablaMaestra.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -261,6 +265,7 @@
     <Compile Include="Controllers\PlantaEmpresaController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\TablaMaestraController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\UsuarioPlantaController.cs" />
     <Compile Include="Controllers\ZonaController.cs" />

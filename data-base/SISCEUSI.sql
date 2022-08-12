@@ -7,6 +7,9 @@ CREATE SEQUENCE SISCEUSI.SQ_GEND_CAMPANA_EMPRESA MINVALUE 1 MAXVALUE 99999999999
 CREATE SEQUENCE SISCEUSI.SQ_GEND_CONTROL_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_CAMPANA_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_RESPUESTA_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_TABLA_MAESTRA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_PRINCIPAL MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_SECUNDARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE SISCEUSI.T_MAE_ROL(
@@ -371,6 +374,65 @@ constraint resp_enc_pk primary key(idRespuestaEncuesta),
 CONSTRAINT resp_enc_from_camp_enc_fk FOREIGN KEY (idCampanaEncuesta) REFERENCES T_GENM_CAMPANA_ENCUESTA(idCampanaEncuesta)
 );
 
+CREATE TABLE SISCEUSI.T_GENM_TABLA_MAESTRA(
+idTablaMaestra NUMBER,
+tituloPrincipal VARCHAR2(300),
+subtitulo VARCHAR2(200),
+descripcionIconoAyuda VARCHAR2(250),
+preguntaInicial VARCHAR2(200),
+preguntaCierre VARCHAR2(200),
+idEstiloTabla NUMBER,
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint tabla_maestra_pk primary key(idTablaMaestra)
+);
+
+CREATE TABLE SISCEUSI.T_GEND_ENCABEZADO_PRINCIPAL(
+idEncabezadoPrincipal NUMBER,
+idTablaMaestra NUMBER,
+tituloEncabezado VARCHAR2(200),
+abreviacion VARCHAR2(20),
+usarAbreviado VARCHAR2(1),
+descripcionIconoAyuda VARCHAR2(250),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint encabezado_principal_pk primary key(idEncabezadoPrincipal),
+CONSTRAINT encab_princ_from_tab_maest_fk FOREIGN KEY (idTablaMaestra) REFERENCES T_GENM_TABLA_MAESTRA(idTablaMaestra)
+);
+
+CREATE TABLE SISCEUSI.T_GEND_ENCABEZADO_SECUNDARIO(
+idEncabezadoSecundario NUMBER,
+idEncabezadoPrincipal NUMBER,
+tituloEncabezado VARCHAR2(200),
+abreviacion VARCHAR2(20),
+usarAbreviado VARCHAR2(1),
+idOrientacion NUMBER,
+descripcionIconoAyuda VARCHAR2(250),
+idTipoControl NUMBER,
+idTipoDato NUMBER,
+idParametro NUMBER,
+cantidadFilas NUMBER,
+agregarFilas VARCHAR2(1),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint encabezado_secundario_pk primary key(idEncabezadoSecundario),
+CONSTRAINT encab_secun_from_enc_princ_fk FOREIGN KEY (idEncabezadoPrincipal) REFERENCES T_GEND_ENCABEZADO_PRINCIPAL(idEncabezadoPrincipal)
+);
 ------------------------------------------------------------------------------------------------------------------------------
 --T_MAE_GIRO
 INSERT INTO SISCEUSI.T_MAE_GIRO (idGiro, giro, idEstado) VALUES (1, 'Giro 1', '1');
@@ -2524,6 +2586,10 @@ DROP TABLE SISCEUSI.T_GENM_CAMPANA_ENCUESTA;
 DROP TABLE SISCEUSI.T_GEND_CONTROL_ENCUESTA;
 DROP TABLE SISCEUSI.T_GEND_CAMPANA_EMPRESA;
 DROP TABLE SISCEUSI.T_GENM_CAMPANA;
+
+DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_SECUNDARIO;
+DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_PRINCIPAL;
+DROP TABLE SISCEUSI.T_GENM_TABLA_MAESTRA;
 
 ------------------------------------------------------------------------------------------------------------------------------
 SELECT * FROM T_GENM_USUARIO;

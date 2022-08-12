@@ -66,6 +66,7 @@
     <Compile Include="PlantaEmpresaDA.cs" />
     <Compile Include="ProvinciaDA.cs" />
     <Compile Include="RolDA.cs" />
+    <Compile Include="TablaMaestraDA.cs" />
     <Compile Include="UsuarioDA.cs" />
     <Compile Include="DataBaseHelpers\OracleHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

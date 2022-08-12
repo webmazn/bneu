@@ -1,5 +1,4 @@
 ﻿$(document).ready(() => {
-    //$('#btn-verificar').on('click', (e) => verificarRuc())
     $('#btn-grabar').on('click', (e) => grabar())
     $('#cbo-giro00').on('change', (e) => listarEmpresa00())
     $('#cbo-ciuu00').on('change', (e) => listarEmpresa00())
