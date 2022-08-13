@@ -23,5 +23,7 @@ namespace sisceusi.entidad
         public string idEstado { get; set; }
 
         public EncabezadoPrincipalBE encabezadoPrincipal { get; set; }
+        public TipoDatoBE tipoDato { get; set; }
+        public ParametroBE parametro { get; set; }
     }
 }

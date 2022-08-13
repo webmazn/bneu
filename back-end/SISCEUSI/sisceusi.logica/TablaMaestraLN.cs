@@ -74,6 +74,18 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public List<EncabezadoSecundarioBE> mostrarListaEncabezadoSecundario(EncabezadoSecundarioBE entidad)
+        {
+            List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.mostrarListaEncabezadoSecundario(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public bool grabarTablaMaestra(TablaMaestraBE tablaMaestra, out int idTablaMaestra)
         {
             bool seGuardo = false;
@@ -108,6 +120,42 @@ namespace sisceusi.logica
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return seGuardo;
+        }
+
+        public TablaMaestraBE obtenerTablaMaestra(TablaMaestraBE encabezado)
+        {
+            TablaMaestraBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerTablaMaestra(encabezado, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
+        }
+
+        public EncabezadoPrincipalBE obtenerEncabezadoPrincipal(EncabezadoPrincipalBE encabezado)
+        {
+            EncabezadoPrincipalBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerEncabezadoPrincipal(encabezado, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
+        }
+
+        public EncabezadoSecundarioBE obtenerEncabezadoSecundario(EncabezadoSecundarioBE encabezado)
+        {
+            EncabezadoSecundarioBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerEncabezadoSecundario(encabezado, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
         }
     }
 }

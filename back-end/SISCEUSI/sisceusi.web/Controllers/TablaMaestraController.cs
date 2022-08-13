@@ -137,6 +137,24 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        [HttpGet]
+        public JsonResult mostrarListaEncabezadoSecundario(int idTablaMaestra, int registros, int pagina)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            List<EncabezadoSecundarioBE> lista = logica.mostrarListaEncabezadoSecundario(new EncabezadoSecundarioBE
+            {
+                encabezadoPrincipal = new EncabezadoPrincipalBE { idTablaMaestra = idTablaMaestra },
+                registros = registros,
+                pagina = pagina
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
         [HttpPost]
         public JsonResult grabarTablaMaestra(TablaMaestraBE tablaMaestra)
         {
@@ -173,6 +191,45 @@ namespace sisceusi.web.Controllers
             bool seGrabo = logica.grabarEncabezadoSecundario(encabezado);
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", seGrabo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerTablaMaestra(int idTablaMaestra)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            TablaMaestraBE encabezado = logica.obtenerTablaMaestra(new TablaMaestraBE { idTablaMaestra = idTablaMaestra });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", encabezado == null ? false : true);
+            response.Add("object", encabezado);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerEncabezadoPrincipal(int idEncabezadoPrincipal)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            EncabezadoPrincipalBE encabezado = logica.obtenerEncabezadoPrincipal(new EncabezadoPrincipalBE { idEncabezadoPrincipal = idEncabezadoPrincipal });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", encabezado == null ? false : true);
+            response.Add("object", encabezado);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerEncabezadoSecundario(int idEncabezadoSecundario)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            EncabezadoSecundarioBE encabezado = logica.obtenerEncabezadoSecundario(new EncabezadoSecundarioBE { idEncabezadoSecundario = idEncabezadoSecundario });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", encabezado == null ? false : true);
+            response.Add("object", encabezado);
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;

@@ -59,12 +59,14 @@
     <Compile Include="IntencionParticiparBE.cs" />
     <Compile Include="InternoBE.cs" />
     <Compile Include="LoginBE.cs" />
+    <Compile Include="ParametroBE.cs" />
     <Compile Include="PlantaEmpresaBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaBE.cs" />
     <Compile Include="RespuestaEncuestaBE.cs" />
     <Compile Include="RolBE.cs" />
     <Compile Include="TablaMaestraBE.cs" />
+    <Compile Include="TipoDatoBE.cs" />
     <Compile Include="TipoEncuestaBE.cs" />
     <Compile Include="UsuarioBE.cs" />
     <Compile Include="ZonaBE.cs" />

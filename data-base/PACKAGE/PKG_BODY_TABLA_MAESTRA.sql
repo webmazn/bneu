@@ -326,7 +326,7 @@
                                 enp.abreviacion,
                                 enp.usarAbreviado,
                                 enp.descripcionIconoAyuda,
-                                ROW_NUMBER() OVER (ORDER BY enp.idTablaMaestra ASC) AS fila,'
+                                ROW_NUMBER() OVER (ORDER BY enp.idEncabezadoPrincipal ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
                                 || piRegistros || ' AS registros,'
@@ -339,6 +339,71 @@
 
     OPEN poRef FOR vQuerySelect;
   END USP_SEL_BUSQ_GEN_ENC_PRINC;
+  
+  PROCEDURE USP_SEL_BUSQ_GEN_ENC_SECUN(
+    piIdTablaMaestra NUMBER,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vTotalRegistros INTEGER;
+    vTotalPaginas INTEGER;
+    vPaginaActual INTEGER := piPagina;
+    vPaginaInicial INTEGER := 0;
+    vQueryCount VARCHAR2(10000) := '';
+    vQuerySelect VARCHAR2(10000) := '';
+  BEGIN
+    vQueryCount := 'SELECT  COUNT(1)
+                    FROM T_GEND_ENCABEZADO_SECUNDARIO ens                    
+                    INNER JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ens.idEncabezadoPrincipal = enp.idEncabezadoPrincipal and enp.idEstado = ''1''
+                    LEFT JOIN T_MAE_TIPO_DATO tid ON ens.idTipoDato = tid.idTipoDato
+                    LEFT JOIN T_GENM_PARAMETRO par ON ens.idParametro = par.idParametro
+                    WHERE 
+                    ens.idEstado = ''1'' AND enp.idTablaMaestra = '|| piIdTablaMaestra;
+    EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
+
+    vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
+    IF vPaginaActual = 0 THEN
+      vPaginaActual := 1;
+    END IF;
+    IF vPaginaActual > vTotalPaginas THEN
+      vPaginaActual := vTotalPaginas;
+    END IF;
+    
+    vPaginaInicial := vPaginaActual - 1;
+
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  ens.idEncabezadoSecundario,
+                                ens.tituloEncabezado,                                
+                                ens.abreviacion,
+                                ens.usarAbreviado,
+                                enp.tituloEncabezado encabezadoPrincipal,
+                                ens.descripcionIconoAyuda,
+                                case 
+                                    when ens.idTipoDato = 0 then ''''
+                                    else tid.tipoDato
+                                end tipoDato,    
+                                case 
+                                    when ens.idParametro = 0 then ''''
+                                    else par.parametro
+                                end parametro,    
+                                ROW_NUMBER() OVER (ORDER BY ens.idEncabezadoSecundario ASC) AS fila,'
+                                || vTotalPaginas || ' AS totalPaginas,'
+                                || vPaginaActual || ' AS pagina,'
+                                || piRegistros || ' AS registros,'
+                                || vTotalRegistros || ' AS totalRegistros
+                        FROM T_GEND_ENCABEZADO_SECUNDARIO ens
+                        LEFT JOIN T_MAE_TIPO_DATO tid ON ens.idTipoDato = tid.idTipoDato
+                        LEFT JOIN T_GENM_PARAMETRO par ON ens.idParametro = par.idParametro                        
+                        INNER JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ens.idEncabezadoPrincipal = enp.idEncabezadoPrincipal and enp.idEstado = ''1''
+                        WHERE 
+                        ens.idEstado = ''1'' AND enp.idTablaMaestra = '|| piIdTablaMaestra ||'
+                        )
+                    WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_BUSQ_GEN_ENC_SECUN;
 
   PROCEDURE USP_PRC_GUARDAR_TABLA_MAESTRA(
     piIdTablaMaestra NUMBER,
@@ -455,6 +520,39 @@
     END IF;
     poRowAffected := SQL%ROWCOUNT;
   END USP_PRC_GUARDAR_ENC_SECUNDARIO;
+  
+  PROCEDURE USP_SEL_OBJECT(
+    piIdTablaMaestra NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GENM_TABLA_MAESTRA	 
+    WHERE   idTablaMaestra = piIdTablaMaestra;
+  END USP_SEL_OBJECT;
+  
+  PROCEDURE USP_SEL_OBJECT_PRINCIPAL(
+    piIdEncabezadoPrincipal NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GEND_ENCABEZADO_PRINCIPAL	 
+    WHERE   idEncabezadoPrincipal = piIdEncabezadoPrincipal;
+  END USP_SEL_OBJECT_PRINCIPAL;
+  
+  PROCEDURE USP_SEL_OBJECT_SECUNDARIO(
+    piIdEncabezadoSecundario NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GEND_ENCABEZADO_SECUNDARIO	 
+    WHERE   idEncabezadoSecundario = piIdEncabezadoSecundario;
+  END USP_SEL_OBJECT_SECUNDARIO;
 
 END PKG_SISCEUSI_TABLA_MAESTRA;
 

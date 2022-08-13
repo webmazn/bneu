@@ -168,6 +168,32 @@ ipModificacion varchar2(50),
 CONSTRAINT etapa_pk PRIMARY KEY(idEtapa)
 );
 
+CREATE TABLE SISCEUSI.T_MAE_TIPO_DATO(
+idTipoDato NUMBER,
+tipoDato VARCHAR2(200),
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT tipo_dato_pk PRIMARY KEY(idTipoDato)
+);
+
+CREATE TABLE SISCEUSI.T_GENM_PARAMETRO(
+idParametro NUMBER,
+parametro VARCHAR2(200),
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT parametro_pk PRIMARY KEY(idParametro)
+);
+
 CREATE TABLE SISCEUSI.T_GENM_INTENCION_PARTICIPAR(
 idIntencionParticipar number,
 ruc varchar2(11),
@@ -475,6 +501,11 @@ INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (3, 'Finaliza
 --T_MAE_EMPRESA_TIPO_ENCUESTA
 INSERT INTO SISCEUSI.T_MAE_TIPO_ENCUESTA (idTipoEncuesta, tipoEncuesta, idEstado) VALUES (1, 'Piloto', '1');
 INSERT INTO SISCEUSI.T_MAE_TIPO_ENCUESTA (idTipoEncuesta, tipoEncuesta, idEstado) VALUES (2, 'Oficial', '1');
+
+--T_MAE_TIPO_DATO
+INSERT INTO SISCEUSI.T_MAE_TIPO_DATO (idTipoDato, tipoDato, idEstado) VALUES (1, 'Number', '1');
+INSERT INTO SISCEUSI.T_MAE_TIPO_DATO (idTipoDato, tipoDato, idEstado) VALUES (2, 'Float', '1');
+INSERT INTO SISCEUSI.T_MAE_TIPO_DATO (idTipoDato, tipoDato, idEstado) VALUES (3, 'String', '1');
 --
 INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
 VALUES (1, 1, 1, 1, '20999999999', 'Ministerio de Energías y Minas', 'minem@gmail.com', 'Av Javier Prado 2563', 'Jhon Matos Guerra', '78958749', '959365203', '1');

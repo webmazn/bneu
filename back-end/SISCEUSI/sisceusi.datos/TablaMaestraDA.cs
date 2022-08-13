@@ -165,6 +165,38 @@ namespace sisceusi.datos
             return lista;
         }
 
+        public List<EncabezadoSecundarioBE> mostrarListaEncabezadoSecundario(EncabezadoSecundarioBE entidad, OracleConnection db)
+        {
+            List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_SEL_BUSQ_GEN_ENC_SECUN";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdTablaMaestra", entidad.encabezadoPrincipal.idTablaMaestra);
+                p.Add("piRegistros", entidad.registros);
+                p.Add("piPagina", entidad.pagina);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EncabezadoSecundarioBE
+                {
+                    idEncabezadoSecundario = (int)x.IDENCABEZADOSECUNDARIO,
+                    tituloEncabezado = x.TITULOENCABEZADO == null ? "" : (string)x.TITULOENCABEZADO,
+                    abreviacion = x.ABREVIACION == null ? "" : (string)x.ABREVIACION,
+                    usarAbreviado = x.USARABREVIADO == null ? "" : (string)x.USARABREVIADO,
+                    encabezadoPrincipal = new EncabezadoPrincipalBE { tituloEncabezado = x.ENCABEZADOPRINCIPAL == null ? "" : (string)x.ENCABEZADOPRINCIPAL },
+                    descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : (string)x.DESCRIPCIONICONOAYUDA,
+                    tipoDato = new TipoDatoBE { tipoDato = x.TIPODATO == null ? "" :(string)x.TIPODATO },
+                    parametro = new ParametroBE { parametro = x.PARAMETRO == null ? "" : (string)x.PARAMETRO },
+                    fila = (int)x.FILA,
+                    totalPaginas = (int)x.TOTALPAGINAS,
+                    pagina = (int)x.PAGINA,
+                    registros = (int)x.REGISTROS,
+                    totalRegistros = (int)x.TOTALREGISTROS
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
         public bool grabarTablaMaestra(TablaMaestraBE tablaMaestra, out int idTablaMaestra, OracleConnection db)
         {
             idTablaMaestra = -1;
@@ -245,6 +277,51 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return seGrabo;
+        }
+
+        public TablaMaestraBE obtenerTablaMaestra(TablaMaestraBE encabezado, OracleConnection db)
+        {
+            TablaMaestraBE item = null;
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_SEL_OBJECT";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdTablaMaestra", encabezado.idTablaMaestra);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<TablaMaestraBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
+
+        public EncabezadoPrincipalBE obtenerEncabezadoPrincipal(EncabezadoPrincipalBE encabezado, OracleConnection db)
+        {
+            EncabezadoPrincipalBE item = null;
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_SEL_OBJECT_PRINCIPAL";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEncabezadoPrincipal", encabezado.idEncabezadoPrincipal);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<EncabezadoPrincipalBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
+
+        public EncabezadoSecundarioBE obtenerEncabezadoSecundario(EncabezadoSecundarioBE encabezado, OracleConnection db)
+        {
+            EncabezadoSecundarioBE item = null;
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_SEL_OBJECT_SECUNDARIO";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEncabezadoSecundario", encabezado.idEncabezadoSecundario);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<EncabezadoSecundarioBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
         }
     }
 }

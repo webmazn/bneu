@@ -3,12 +3,11 @@
     $('#btn-agregar-principal').on('click', (e) => grabarEncabezadoPrincipal())
     $('#btn-agregar-secundario').on('click', (e) => grabarEncabezadoSecundario())
     
+    $('.ir-pagina-principal').on('change', (e) => cambiarPaginaRegistrosPrincipal());
+    $('#number-registers-principal').on('change', (e) => cambiarPaginaRegistrosPrincipal());
+    $('.ir-pagina-secundario').on('change', (e) => cambiarPaginaRegistrosSecundario());
+    $('#number-registers-secundario').on('change', (e) => cambiarPaginaRegistrosSecundario());
 
-    /*$('#cbo-giro00').on('change', (e) => listarEmpresa00())
-    $('#cbo-ciuu00').on('change', (e) => listarEmpresa00())
-    $('#txt-filtro00').on('blur', (e) => validarValorFiltro00())
-    $('#cbo-filtro00').on('change', (e) => cambiarFiltro00())
-    $('#btn-filtro00').on('click', (e) => aplicarFiltro00())*/
     cargarDatos()
 });
 
@@ -27,7 +26,7 @@ var grabarTablaMaestra = () => {
 
     if (validarEspaciosBlanco(tituloPrincipal)) arr.push("Debe ingresar el título principal o nombre de la tabla maestra");
     if (validarEspaciosBlanco(subtitulo)) arr.push("Debe ingresar el subtítulo descriptivo");
-    if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
+    //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
     if (validarEspaciosBlanco(preguntaInicial)) arr.push("Debe ingresar la pregunta inicial");
     if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
     if (validarCombo(idEstiloTabla)) arr.push("Debe seleccionar el estilo de tabla");
@@ -99,6 +98,8 @@ var grabarEncabezadoPrincipal = () => {
     .then(r => r.json())
     .then(j => {
         if (j.success) {
+            idEncabezadoPrincipal = -1
+            $('#btn-agregar-principal').html('Agregar')
             mostrarEncabezadoPrincipal()
             limpiarEncabezadoPrincipal()
             $('.seccion-mensaje-principal').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo')))
@@ -146,7 +147,7 @@ var grabarEncabezadoSecundario = () => {
     if (validarCombo(idOrientacion)) arr.push("Debe seleccionar una orientación");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
     if (validarCombo(idTipoControl)) arr.push("Debe seleccionar un tipo de control de respuesta");
-    if (idTipoControl == '1') arr.push("Debe seleccionar un tipo de dato");
+    if (idTipoControl == '1') if (idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato");
     if (validarEspaciosBlanco(cantidadFilas)) arr.push("Debe ingresar la cantidad de filas");
     if (cantidadFilas < 0 || cantidadFilas > 100) arr.push("La cantidad de filas debe ser mayor a 0 y menor a 100");
 
@@ -156,7 +157,7 @@ var grabarEncabezadoSecundario = () => {
         return;
     }
 
-    usarAbreviado = $("#exampleRadios1").prop('checked') ? '1' : '0'
+    usarAbreviado = $("#exampleRadios3").prop('checked') ? '1' : '0'
     agregarFilas = $("#exampleRadios5").prop('checked') ? '1' : '0'
 
     let url = `${baseUrl}TablaMaestra/grabarEncabezadoSecundario`;
@@ -167,8 +168,10 @@ var grabarEncabezadoSecundario = () => {
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            mostrarEncabezadoPrincipal()
-            limpiarEncabezadoPrincipal()
+            idEncabezadoSecundario = -1
+            $('#btn-agregar-secundario').html('Agregar')
+            mostrarEncabezadoSecundario()
+            limpiarEncabezadoSecundario()
             $('.seccion-mensaje-secundario').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo')))
             setTimeout(function () {
                 $('.seccion-mensaje-secundario').html('')
@@ -193,13 +196,30 @@ var limpiarEncabezadoPrincipal = () => {
     $("#txt-question-mark-01").val('')
 }
 
+var limpiarEncabezadoSecundario = () => {
+    $("#txt-encabezado-secundario").val('')
+    $("#txt-encabezado-secundario-abreviado").val('')
+    $("#exampleRadios3").prop('checked', true)
+    $("#exampleRadios4").prop('checked', false)
+    $("#txt-question-mark-02").val('')
+    $("#cbo-encabezado-principal").val('0')
+    $("#cbo-orientacion").val('0')
+    $("#cbo-control-respuesta").val('0')
+    $("#cbo-tipo-dato").val('0')
+    $("#cbo-id-parametro").val('0')
+    $("#txt-filas-por-defecto").val('12')
+    $("#exampleRadios5").prop('checked', true)
+    $("#exampleRadios6").prop('checked', false)
+}
 
+/* ================================================
+ * INICIO MOSTRAR ENCABEZADO PRINCIPAL
+ * ================================================
+ */
 
-
-
-
-
-
+var cambiarPaginaRegistrosPrincipal = () => {
+    mostrarEncabezadoPrincipal()
+}
 
 var cambiarPaginaPrincipal = (boton) => {
     var total = 0, page = 0;
@@ -262,14 +282,14 @@ var cargarDatosTablaPrincipal = (j) => {
             let elementButton = tabla.find('.btn-edit-principal')[x];
             $(elementButton).on('click', (e) => {
                 e.preventDefault();
-                actualizar(e.currentTarget);
+                actualizarPrincipal(e.currentTarget);
             });
         });
         tabla.find('.btn-delete-principal').each(x => {
             let elementButton = tabla.find('.btn-delete-principal')[x];
             $(elementButton).on('click', (e) => {
                 e.preventDefault();
-                eliminar(e.currentTarget);
+                eliminarPrincipal(e.currentTarget);
             });
         });
         armarComboEncabezadoPrincipal(j.object)
@@ -308,12 +328,257 @@ var armarComboEncabezadoPrincipal = (data) => {
     $('#cbo-encabezado-principal').html(options);
 }
 
-/**/
+/* ================================================
+ * FIN MOSTRAR ENCABEZADO PRINCIPAL
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO MOSTRAR ENCABEZADO SECUNDARIO
+ * ================================================
+ */
+
+var cambiarPaginaRegistrosSecundario = () => {
+    mostrarEncabezadoSecundario()
+}
+
+var cambiarPaginaSecundario = (boton) => {
+    var total = 0, page = 0;
+    page = Number($(".ir-pagina-secundario").val());
+    total = Number($(".total-paginas-secundario").text());
+
+    if (boton == 1) page = 1;
+    if (boton == 2) if (page > 1) page--;
+    if (boton == 3) if (page < total) page++;
+    if (boton == 4) page = total;
+
+    $(".ir-pagina-secundario").val(page);
+    mostrarEncabezadoSecundario()
+}
+
+var mostrarEncabezadoSecundario = () => {
+    let registros = $('#number-registers-secundario').val()
+    let pagina = $('.ir-pagina-secundario').val()
+    let params = { idTablaMaestra, registros, pagina };
+    let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
+
+    let url = `${baseUrl}TablaMaestra/mostrarListaEncabezadoSecundario?${queryParams}`;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let method = 'GET';
+
+    const request = new Request(url, { method: method, headers: headers });
+    fetch(request)
+        .then(r => {
+            if (r.status == 204) return null;
+            else return r.json();
+        })
+        .then(cargarDatosTablaSecundario)
+    .catch(error => {
+        console.log('Error: ' + error.message);
+    });
+};
+
+var cargarDatosTablaSecundario = (j) => {
+    let tabla = $('#tbl-encabezado-secundario');
+    tabla.find('tbody').html('');
+    $('#viewPagination-secundario').attr('style', 'display: none !important');
+    if (j.success) {
+        let rs = j.object[0];
+        if (rs.totalRegistros == 0) { $('#viewPagination-secundario').hide(); $('#view-page-result-secundario').hide(); }
+        else { $('#view-page-result-secundario').show(); $('#viewPagination-secundario').show(); }
+        $('.inicio-registros-secundario').text(rs.registros == 0 ? 'No se encontraron resultados' : (rs.pagina - 1) * rs.registros + 1);
+        $('.fin-registros-secundario').text(rs.totalRegistros < rs.pagina * rs.registros ? rs.totalRegistros : rs.pagina * rs.registros);
+        $('.total-registros-secundario').text(rs.totalRegistros);
+        $('.pagina-secundario').text(rs.pagina);
+        $('.ir-pagina-secundario').val(rs.pagina);
+        $('.ir-pagina-secundario').attr('max', rs.totalPaginas);
+        $('.total-paginas-secundario').text(rs.totalPaginas);
+
+        let numberCellHeader = tabla.find('thead tr th').length;
+        let content = renderizarSecundario(j.object, numberCellHeader, rs.pagina, rs.registros);
+        tabla.find('tbody').html(content);
+
+        tabla.find('.btn-edit-secundario').each(x => {
+            let elementButton = tabla.find('.btn-edit-secundario')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                actualizarSecundario(e.currentTarget);
+            });
+        });
+        tabla.find('.btn-delete-secundario').each(x => {
+            let elementButton = tabla.find('.btn-delete-secundario')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                eliminarSecundario(e.currentTarget);
+            });
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+        posicinar('#tbl-encabezado-secundario', 120)
+    } else {
+        console.log('No hay resultados');
+        $('#viewPagination-secundario').hide(); $('#view-page-result-secundario').hide();
+        $('.inicio-registros-secundario').text('No se encontraron resultados');
+    }
+}
+
+var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
+    let doRenderizar = data.length > 0;
+    let content = `<tr><th colspan='${numberCellHeader}'>No existe información</th></tr>`;
+
+    if (doRenderizar) {
+        content = data.map((x, i) => {
+            let colTituloEncabezado = `<td data-encabezado="Nombre del encabezado principal" scope="row"><span class="ml-4">${x.tituloEncabezado}</span></td>`;
+            let colAbreviacion = `<td data-encabezado="Abreviatura">${x.abreviacion}</td>`;
+            let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`
+            let colEncabezadoPrincipal = `<td class="text-center" data-encabezado="Encabezado principal">${x.encabezadoPrincipal.tituloEncabezado}</td>`;
+            let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
+            let colTipoDato = `<td class="text-center" data-encabezado="Tipo de dato">${x.tipoDato.tipoDato}</td>`;
+            let colParametro = `<td class="text-center" data-encabezado="ID Parámetro">${x.parametro.parametro}</td>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-edit"></i></div>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
+            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colEncabezadoPrincipal}${colTextoAyuda}${colTipoDato}${colParametro}${colOptions}</tr>`;
+            return row;
+        }).join('');
+    };
+    return content;
+};
+/* ================================================
+ * INICIO MOSTRAR ENCABEZADO SECUNDARIO
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO CONSULTAR DATOS ENTIDAD
+ * ================================================
+ */
 
 var cargarDatos = () => {
     idTablaMaestra = $('#identificador').val()
+    cargarDatosIniciales()
     mostrarEncabezadoPrincipal()
+    mostrarEncabezadoSecundario()
+    setTimeout(function () {
+        posicinar('#cuerpo', 120)
+    }, 2000)    
 }
+
+var cargarDatosIniciales = () => {
+    let id = $('#identificador').val()
+    if (id > 0) {
+        let url = `${baseUrl}TablaMaestra/obtenerTablaMaestra?idTablaMaestra=${id}`;
+        fetch(url)
+        .then(r => r.json())
+        .then(j => {
+            if (j.success) {
+                cargarDatosTablaMaestra(j.object)
+            } else {
+                $('.seccion-mensaje-maestra').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos de la tabla maestra. Por favor, puede volver a recargar la página.'), 'carga de datos'))
+            }
+        })
+        .catch(error => {
+            console.log('Error:' + error.message)
+        })
+    }
+}
+
+var cargarDatosTablaMaestra = (data) => {
+    $("#txt-titulo-principal").val(data.tituloPrincipal)
+    $("#txt-sub-titulo").val(data.subtitulo)
+    $("#txt-question-mark").val(data.descripcionIconoAyuda)
+    $("#txt-pregunta-confirmacion-01").val(data.preguntaInicial)
+    $("#txt-pregunta-confirmacion-02").val(data.preguntaCierre)
+    $("#cbo-estilo-tabla").val(data.idEstiloTabla)
+}
+
+/* ================================================
+ * FIN CONSULTAR DATOS ENTIDAD
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ACTUALIZAR PRINCIPAL
+ * ================================================
+ */
+
+var actualizarPrincipal = (obj) => {
+    let id = $(obj).data('id')
+    let url = `${baseUrl}TablaMaestra/obtenerEncabezadoPrincipal?idEncabezadoPrincipal=${id}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            cargarDatosPrincipal(j.object)
+        } else {
+            $('.seccion-mensaje-principal').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos del encabezado principal. Por favor, puede volver a recargar la página.'), 'carga de datos'))
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+
+var cargarDatosPrincipal = (data) => {
+    $('#btn-agregar-principal').html('Actualizar')
+    idEncabezadoPrincipal = data.idEncabezadoPrincipal
+    $("#txt-titulo-encabezado-principal").val(data.tituloEncabezado)
+    $("#txt-encabezado-principal-abreviado").val(data.abreviacion)
+    $("#exampleRadios1").prop('checked', data.usarAbreviado == '1' ? true : false)
+    $("#exampleRadios2").prop('checked', data.usarAbreviado == '0' ? true : false)
+    $("#txt-question-mark-01").val(data.descripcionIconoAyuda)
+}
+
+/* ================================================
+ * FIN ACTUALIZAR PRINCIPAL
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ACTUALIZAR SECUNDARIO
+ * ================================================
+ */
+
+var actualizarSecundario = (obj) => {
+    let id = $(obj).data('id')
+    let url = `${baseUrl}TablaMaestra/obtenerEncabezadoSecundario?idEncabezadoSecundario=${id}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            cargarDatosSecundario(j.object)
+        } else {
+            $('.seccion-mensaje-secundario').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos del encabezado secundario. Por favor, puede volver a recargar la página.'), 'carga de datos'))
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+
+var cargarDatosSecundario = (data) => {
+    $('#btn-agregar-secundario').html('Actualizar')
+    idEncabezadoSecundario = data.idEncabezadoSecundario
+    $("#txt-encabezado-secundario").val(data.tituloEncabezado)
+    $("#txt-encabezado-secundario-abreviado").val(data.abreviacion)
+    $("#exampleRadios3").prop('checked', data.usarAbreviado == '1' ? true : false)
+    $("#exampleRadios4").prop('checked', data.usarAbreviado == '0' ? true : false)
+    $("#txt-question-mark-02").val(data.descripcionIconoAyuda)
+    $("#cbo-encabezado-principal").val(data.idEncabezadoPrincipal)
+    $("#cbo-orientacion").val(data.idOrientacion)
+    $("#cbo-control-respuesta").val(data.idTipoControl)
+    $("#cbo-tipo-dato").val(data.idTipoDato)
+    $("#cbo-id-parametro").val(data.idParametro)
+    $("#txt-filas-por-defecto").val(data.cantidadFilas)
+    $("#exampleRadios5").prop('checked', data.agregarFilas == '1' ? true : false)
+    $("#exampleRadios6").prop('checked', data.agregarFilas == '0' ? true : false)
+}
+
+/* ================================================
+ * FIN ACTUALIZAR SECUNDARIO
+ * ================================================
+ */
 
 var posicinar = (id, number) => {
     var target_offset = $(id).offset();

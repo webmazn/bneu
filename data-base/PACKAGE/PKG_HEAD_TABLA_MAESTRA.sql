@@ -53,6 +53,13 @@
     piPagina NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_BUSQ_GEN_ENC_SECUN(
+    piIdTablaMaestra NUMBER,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
   PROCEDURE USP_PRC_GUARDAR_TABLA_MAESTRA(
     piIdTablaMaestra NUMBER,
@@ -96,6 +103,21 @@
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_OBJECT(
+    piIdTablaMaestra NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_OBJECT_PRINCIPAL(
+    piIdEncabezadoPrincipal NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_OBJECT_SECUNDARIO(
+    piIdEncabezadoSecundario NUMBER,
+    poRef OUT SYS_REFCURSOR
   );
 
 END PKG_SISCEUSI_TABLA_MAESTRA;
