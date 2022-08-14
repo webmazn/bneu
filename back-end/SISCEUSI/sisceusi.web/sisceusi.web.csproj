@@ -177,6 +177,8 @@
     <Content Include="Scripts\Sisceusi\encuesta_inicio.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
     <Content Include="Scripts\Sisceusi\interno_index.js" />
+    <Content Include="Scripts\Sisceusi\parametro_index.js" />
+    <Content Include="Scripts\Sisceusi\parametro_nuevo_parametro.js" />
     <Content Include="Scripts\Sisceusi\planta_index.js" />
     <Content Include="Scripts\Sisceusi\planta_nueva_planta.js" />
     <Content Include="Scripts\Sisceusi\script_validaciones.js" />
@@ -226,6 +228,8 @@
     <Content Include="Views\Encuesta\Formulario.cshtml" />
     <Content Include="Views\TablaMaestra\Index.cshtml" />
     <Content Include="Views\TablaMaestra\NuevaTablaMaestra.cshtml" />
+    <Content Include="Views\Parametro\Index.cshtml" />
+    <Content Include="Views\Parametro\NuevoParametro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,6 +266,7 @@
     <Compile Include="Controllers\IntencionParticiparController.cs" />
     <Compile Include="Controllers\InternoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\PlantaEmpresaController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />

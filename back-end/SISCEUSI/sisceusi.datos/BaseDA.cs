@@ -37,6 +37,7 @@ namespace sisceusi.Datos
                     Campana = $"{esquema}.PKG_SISCEUSI_CAMPANA.",
                     ControlEncuesta = $"{esquema}.PKG_SISCEUSI_CONTROL_ENCUESTA.",
                     TablaMaestra = $"{esquema}.PKG_SISCEUSI_TABLA_MAESTRA.",
+                    Parametro = $"{esquema}.PKG_SISCEUSI_PARAMETRO.",
                 };
             }
         }

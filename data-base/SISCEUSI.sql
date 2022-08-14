@@ -10,6 +10,7 @@ CREATE SEQUENCE SISCEUSI.SQ_GEND_RESPUESTA_ENCUESTA MINVALUE 1 MAXVALUE 99999999
 CREATE SEQUENCE SISCEUSI.SQ_GENM_TABLA_MAESTRA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_PRINCIPAL MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_SECUNDARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_PARAMETRO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE SISCEUSI.T_MAE_ROL(
@@ -179,19 +180,6 @@ idUsuarioModificacion number,
 fechaModificacion date,
 ipModificacion varchar2(50),
 CONSTRAINT tipo_dato_pk PRIMARY KEY(idTipoDato)
-);
-
-CREATE TABLE SISCEUSI.T_GENM_PARAMETRO(
-idParametro NUMBER,
-parametro VARCHAR2(200),
-idEstado VARCHAR2(1) DEFAULT '1',
-idUsuarioCreacion number,
-fechaCreacion date default sysdate,
-ipCreacion varchar2(50),
-idUsuarioModificacion number,
-fechaModificacion date,
-ipModificacion varchar2(50),
-CONSTRAINT parametro_pk PRIMARY KEY(idParametro)
 );
 
 CREATE TABLE SISCEUSI.T_GENM_INTENCION_PARTICIPAR(
@@ -458,6 +446,21 @@ fechaModificacion date,
 ipModificacion varchar2(50),
 constraint encabezado_secundario_pk primary key(idEncabezadoSecundario),
 CONSTRAINT encab_secun_from_enc_princ_fk FOREIGN KEY (idEncabezadoPrincipal) REFERENCES T_GEND_ENCABEZADO_PRINCIPAL(idEncabezadoPrincipal)
+);
+
+CREATE TABLE SISCEUSI.T_GENM_PARAMETRO(
+idParametro NUMBER,
+parametro VARCHAR2(200),
+idParentParametro NUMBER,
+idTipoParametro NUMBER,
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT parametro_pk PRIMARY KEY(idParametro)
 );
 ------------------------------------------------------------------------------------------------------------------------------
 --T_MAE_GIRO
@@ -2621,6 +2624,8 @@ DROP TABLE SISCEUSI.T_GENM_CAMPANA;
 DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_SECUNDARIO;
 DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_PRINCIPAL;
 DROP TABLE SISCEUSI.T_GENM_TABLA_MAESTRA;
+
+DROP TABLE SISCEUSI.T_GENM_PARAMETRO;
 
 ------------------------------------------------------------------------------------------------------------------------------
 SELECT * FROM T_GENM_USUARIO;
