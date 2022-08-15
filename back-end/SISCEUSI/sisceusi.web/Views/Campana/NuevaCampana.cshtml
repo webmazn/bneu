@@ -46,10 +46,73 @@
                                 <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label class="font-weight-bold" for="txt-empresa">DENOMINACIÓN</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                        <input class="form-control" type="text" id="txt-denominacion" maxlength="200" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
+                                        <input class="form-control" type="text" id="txt-denominacion" maxlength="200" placeholder="Ingrese la denominación" aria-describedby="inputGroup6" required>
                                     </div>
                                 </div>
                                 <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="font-weight-bold mb-3">ACTIVACIÓN PILOTO</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="chk-encuesta-piloto">
+                                        <label class="custom-control-label" for="chk-encuesta-piloto">ACTIVAR ENCUESTA PILOTO</label>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-inicio">FECHA PILOTO DESDE&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-desde-piloto" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-fin">FECHA PILOTO HASTA&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-hasta-piloto" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">ESTADO PILOTO</label>
+                                        <select class="form-control" id="cbo-estado-piloto" aria-describedby="inputGroup10" required>
+                                            <option value="0">-Seleccione un estado-</option>
+                                            <option value="1">POR INICIAR</option>
+                                            <option value="2">INICIADO</option>
+                                            <option value="3">FINALIZADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="font-weight-bold mb-3">ACTIVACIÓN OFICIAL</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="chk-encuesta-oficial">
+                                        <label class="custom-control-label" for="chk-encuesta-oficial">ACTIVAR ENCUESTA OFICIAL</label>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-inicio">FECHA REAL DESDE&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-desde-real" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold" for="txt-fecha-fin">FECHA REAL HASTA&nbsp;</label>
+                                        <input class="form-control" type="date" id="txt-hasta-real" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">ESTADO OFICIAL</label>
+                                        <select class="form-control" id="cbo-estado-oficial" aria-describedby="inputGroup10" required>
+                                            <option value="0">-Seleccione un estado-</option>
+                                            <option value="1">POR INICIAR</option>
+                                            <option value="2">INICIADO</option>
+                                            <option value="3">FINALIZADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+                                @*<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <label class="font-weight-bold" for="txt-fecha-inicio">FECHA PILOTO DESDE&nbsp;</label>
                                         <input class="form-control" type="date" id="txt-desde-piloto">
@@ -72,219 +135,211 @@
                                         <label class="font-weight-bold" for="txt-fecha-fin">FECHA REAL HASTA&nbsp;</label>
                                         <input class="form-control" type="date" id="txt-hasta-real">
                                     </div>
-                                </div>
+                                </div>*@
+
+
                                 <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
                                     <div class="form-group m-0">
                                         <label class="font-weight-bold" for="txt-empresa">OBSERVACIONES</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                        <input class="form-control" type="text" maxlength="1500" id="txt-observaciones" placeholder="Ingrese su institución" aria-describedby="inputGroup6" required>
+                                        <input class="form-control" type="text" maxlength="1500" id="txt-observaciones" placeholder="Ingrese su observación" aria-describedby="inputGroup6" required>
                                     </div>
                                 </div>
                                 <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                     <label class="font-weight-bold">&nbsp;</label>
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input" type="checkbox" id="chk-anular">
-                                        <label class="custom-control-label" for="chk-anular">Active para anular</label>
+                                        <label class="custom-control-label" for="chk-anular">ACTIVE PARA ANULAR</label>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="dropdown-divider my-4"></div>
-                        </div>
-                        <div class="col-12" id="listSwapWrap">
-                            <div class="row">
-                                <div class="col-12">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation"><a class="nav-link link-gris active" id="tab01-tab" data-toggle="tab" href="#tab01" role="tab" aria-controls="tab01" aria-selected="true">SELECCIONAR EMPRESAS</a></li>
-                                        <li class="nav-item" role="presentation"><a class="nav-link link-gris" id="tab02-tab" data-toggle="tab" href="#tab02" role="tab" aria-controls="tab02" aria-selected="false">SELECCIONAR EMP. PILOTO</a></li>
-                                        <li class="nav-item" role="presentation"><a class="nav-link link-gris" id="tab03-tab" data-toggle="tab" href="#tab03" role="tab" aria-controls="tab03" aria-selected="false">ASIGNAR SUPERVISOR</a></li>
-                                    </ul>
-                                    <div class="tab-content border-left border-bottom border-right p-4" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="tab01" role="tabpanel" aria-labelledby="home-tab">
-                                            <div class="row">
-                                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" id="cbo-giro00" aria-describedby="inputGroup10">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" id="cbo-ciuu00" aria-describedby="inputGroup10">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <select id="cbo-filtro00" class="custom-select">
-                                                        <option value="0" selected>-Seleccione un filtro para las empresas-</option>
-                                                        <option value="1">Seleccionar empresas por porcentaje [%]</option>
-                                                        <option value="2">Seleccionar empresas por cantidad [#]</option>
-                                                    </select>
-                                                </div>
-                                                <input id="txt-filtro00" class="form-control" type="number">
-                                                <div class="input-group-append">
-                                                    <button id="btn-filtro00" class="btn btn-azul" type="button">Aplicar filtro</button>
-                                                </div>
-                                            </div>
-                                            <div id="list00" class="dropdown-divider"></div>
-                                            @*<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">
-                                                <option value="empresa_01">NOMBRE DE EMPRESA 01 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_02">NOMBRE DE EMPRESA 02 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_03">NOMBRE DE EMPRESA 03 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_04">NOMBRE DE EMPRESA 04 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_05">NOMBRE DE EMPRESA 05 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_06">NOMBRE DE EMPRESA 06 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_07">NOMBRE DE EMPRESA 07 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_08">NOMBRE DE EMPRESA 08 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_09">NOMBRE DE EMPRESA 09 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_10">NOMBRE DE EMPRESA 10 O NOMBRE COMERCIAL</option>
-                                            </select>
-                                            <select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>*@
-                                        </div>
-                                        <div class="tab-pane fade" id="tab02" role="tabpanel" aria-labelledby="profile-tab">
-                                            <div class="row">
-                                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" id="cbo-giro01" aria-describedby="inputGroup10">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" id="cbo-ciuu01" aria-describedby="inputGroup10">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <select id="cbo-filtro01" class="custom-select">
-                                                        <option value="0" selected>-Seleccione un filtro para las empresas-</option>
-                                                        <option value="1">Seleccionar empresas por porcentaje [%]</option>
-                                                        <option value="2">Seleccionar empresas por cantidad [#]</option>
-                                                    </select>
-                                                </div>
-                                                <input id="txt-filtro01" class="form-control" type="number">
-                                                <div class="input-group-append">
-                                                    <button id="btn-filtro01" class="btn btn-azul" type="button">Aplicar filtro</button>
-                                                </div>
-                                            </div>
-                                            <div id="list01" class="dropdown-divider"></div>
-                                            @*<select id="source01" data-text="Empresas piloto para seleccionar" data-search="Buscar empresa">
-                                                <option value="empresa_01">NOMBRE DE EMPRESA PILOTO 01 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_02">NOMBRE DE EMPRESA PILOTO 02 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_03">NOMBRE DE EMPRESA PILOTO 03 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_04">NOMBRE DE EMPRESA PILOTO 04 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_05">NOMBRE DE EMPRESA PILOTO 05 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_06">NOMBRE DE EMPRESA PILOTO 06 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_07">NOMBRE DE EMPRESA PILOTO 07 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_08">NOMBRE DE EMPRESA PILOTO 08 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_09">NOMBRE DE EMPRESA PILOTO 09 O NOMBRE COMERCIAL</option>
-                                                <option value="empresa_10">NOMBRE DE EMPRESA PILOTO 10 O NOMBRE COMERCIAL</option>
-                                            </select>
-                                            <select id="destination01" data-text="Empresas piloto seleccionadas" data-search="Buscar empresa"></select>*@
-                                        </div>
-                                        <div class="tab-pane fade" id="tab03" role="tabpanel" aria-labelledby="contact-tab">
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="font-weight-bold" for="cbo-tipo-empresa">Tipo de encuesta</label>
-                                                            <select class="form-control" id="cbo-tipo-empresa">
-                                                                <option value="0">-Seleccione empresas-</option>
-                                                                <option value="1">ENCUESTA OFICIAL</option>
-                                                                <option value="2">ENCUESTA PILOTO</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="font-weight-bold" for="cbo-revisor">Supervisor</label>
-                                                            <select class="form-control" id="cbo-revisor">
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="dropdown-divider"></div>
-                                            </div>
-                                            <div id="list02" class="col-12">
-                                                @*<select id="source02" data-text="Empresas disponibles " data-search="Buscar empresa">
-                                                    <option value="empresa_01">NOMBRE DE EMPRESA 01</option>
-                                                    <option value="empresa_02">NOMBRE DE EMPRESA 02</option>
-                                                    <option value="empresa_03">NOMBRE DE EMPRESA 03</option>
-                                                    <option value="empresa_04">NOMBRE DE EMPRESA 04</option>
-                                                    <option value="empresa_05">NOMBRE DE EMPRESA 05</option>
-                                                    <option value="empresa_06">NOMBRE DE EMPRESA 06</option>
-                                                    <option value="empresa_07">NOMBRE DE EMPRESA 07</option>
-                                                    <option value="empresa_08">NOMBRE DE EMPRESA 08</option>
-                                                    <option value="empresa_09">NOMBRE DE EMPRESA 09</option>
-                                                    <option value="empresa_10">NOMBRE DE EMPRESA 10</option>
-                                                </select>
-                                                <select id="destination02" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>*@
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="row">
-                        <div class="col-12 mb-4"><strong class="text-cyan">CONFIGURACIÓN DE PREGUNTAS Y OPCIONES</strong></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label class="font-weight-bold" for="cbo-list-tipo-control">TIPO DE CONTROL</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                        <select class="form-control" id="cbo-list-tipo-control" aria-describedby="inputGroup10" required>
-                                            <option>-Seleccione un tipo de control-</option>
-                                            <option value="txt">CAJA DE TEXTO</option>
-                                            <option value="cbo">LISTA DE OPCIONES</option>
-                                            <option value="chk">MÚLTIPLES OPCIONES</option>
-                                            <option value="rad">ÚNICA OPCIÓN</option>
-                                            <option value="tbl">TABLA MAESTRA</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <button class="btn btn-azul w-100 mb-3" type="button" id="agregarPregunta">Agregar control, <br> formular preguntas y respuestas</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group p-4 border">
-                                        <label class="font-weight-bold">ELABORACIÓN DE ENCUESTA</label>
-                                        <div class="row" id="contenedorEncuesta"><strong class="w-100 p-4 text-center" id="ninguna-pregunta">AÚN NO TIENE NI UNA PREGUNTA FORMULADA.</strong></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="row">
-                        <div class="col-6"></div>
-                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-mensaje">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
-                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
-                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
-                            <button id="btn-grabar" class="btn btn-info w-100 mb-3" type="button" href="javascript:void(0)">Guardar</button>
-                        </div>
+                        </div>                                              
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-light py-3">
+    <div class="row">
+        <div class="col-12" id="listSwapWrap">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation"><a class="nav-link link-gris active" id="tab01-tab" data-toggle="tab" href="#tab01" role="tab" aria-controls="tab01" aria-selected="true">SELECCIONAR EMPRESAS</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link link-gris" id="tab02-tab" data-toggle="tab" href="#tab02" role="tab" aria-controls="tab02" aria-selected="false">SELECCIONAR EMP. PILOTO</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link link-gris" id="tab03-tab" data-toggle="tab" href="#tab03" role="tab" aria-controls="tab03" aria-selected="false">ASIGNAR SUPERVISOR</a></li>
+                    </ul>
+                    <div class="tab-content border-left border-bottom border-right p-4" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tab01" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="cbo-giro00" aria-describedby="inputGroup10"></select>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="cbo-ciuu00" aria-describedby="inputGroup10"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <select id="cbo-filtro00" class="custom-select">
+                                        <option value="0" selected>-Seleccione un filtro para las empresas-</option>
+                                        <option value="1">Seleccionar empresas por porcentaje [%]</option>
+                                        <option value="2">Seleccionar empresas por cantidad [#]</option>
+                                    </select>
+                                </div>
+                                <input id="txt-filtro00" class="form-control" type="number">
+                                <div class="input-group-append">
+                                    <button id="btn-filtro00" class="btn btn-azul" type="button">Aplicar filtro</button>
+                                </div>
+                            </div>
+                            <div id="list00" class="dropdown-divider"></div>
+                            @*<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">
+                                    <option value="empresa_01">NOMBRE DE EMPRESA 01 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_02">NOMBRE DE EMPRESA 02 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_03">NOMBRE DE EMPRESA 03 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_04">NOMBRE DE EMPRESA 04 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_05">NOMBRE DE EMPRESA 05 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_06">NOMBRE DE EMPRESA 06 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_07">NOMBRE DE EMPRESA 07 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_08">NOMBRE DE EMPRESA 08 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_09">NOMBRE DE EMPRESA 09 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_10">NOMBRE DE EMPRESA 10 O NOMBRE COMERCIAL</option>
+                                </select>
+                                <select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>*@
+                        </div>
+                        <div class="tab-pane fade" id="tab02" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="cbo-giro01" aria-describedby="inputGroup10"></select>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="cbo-ciuu01" aria-describedby="inputGroup10"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <select id="cbo-filtro01" class="custom-select">
+                                        <option value="0" selected>-Seleccione un filtro para las empresas-</option>
+                                        <option value="1">Seleccionar empresas por porcentaje [%]</option>
+                                        <option value="2">Seleccionar empresas por cantidad [#]</option>
+                                    </select>
+                                </div>
+                                <input id="txt-filtro01" class="form-control" type="number">
+                                <div class="input-group-append">
+                                    <button id="btn-filtro01" class="btn btn-azul" type="button">Aplicar filtro</button>
+                                </div>
+                            </div>
+                            <div id="list01" class="dropdown-divider"></div>
+                            @*<select id="source01" data-text="Empresas piloto para seleccionar" data-search="Buscar empresa">
+                                    <option value="empresa_01">NOMBRE DE EMPRESA PILOTO 01 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_02">NOMBRE DE EMPRESA PILOTO 02 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_03">NOMBRE DE EMPRESA PILOTO 03 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_04">NOMBRE DE EMPRESA PILOTO 04 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_05">NOMBRE DE EMPRESA PILOTO 05 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_06">NOMBRE DE EMPRESA PILOTO 06 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_07">NOMBRE DE EMPRESA PILOTO 07 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_08">NOMBRE DE EMPRESA PILOTO 08 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_09">NOMBRE DE EMPRESA PILOTO 09 O NOMBRE COMERCIAL</option>
+                                    <option value="empresa_10">NOMBRE DE EMPRESA PILOTO 10 O NOMBRE COMERCIAL</option>
+                                </select>
+                                <select id="destination01" data-text="Empresas piloto seleccionadas" data-search="Buscar empresa"></select>*@
+                        </div>
+                        <div class="tab-pane fade" id="tab03" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="cbo-tipo-empresa">Tipo de encuesta</label>
+                                            <select class="form-control" id="cbo-tipo-empresa">
+                                                <option value="0">-Seleccione empresas-</option>
+                                                <option value="1">ENCUESTA OFICIAL</option>
+                                                <option value="2">ENCUESTA PILOTO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="cbo-revisor">Supervisor</label>
+                                            <select class="form-control" id="cbo-revisor"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="dropdown-divider"></div>
+                            </div>
+                            <div id="list02" class="col-12">
+                                @*<select id="source02" data-text="Empresas disponibles " data-search="Buscar empresa">
+                                        <option value="empresa_01">NOMBRE DE EMPRESA 01</option>
+                                        <option value="empresa_02">NOMBRE DE EMPRESA 02</option>
+                                        <option value="empresa_03">NOMBRE DE EMPRESA 03</option>
+                                        <option value="empresa_04">NOMBRE DE EMPRESA 04</option>
+                                        <option value="empresa_05">NOMBRE DE EMPRESA 05</option>
+                                        <option value="empresa_06">NOMBRE DE EMPRESA 06</option>
+                                        <option value="empresa_07">NOMBRE DE EMPRESA 07</option>
+                                        <option value="empresa_08">NOMBRE DE EMPRESA 08</option>
+                                        <option value="empresa_09">NOMBRE DE EMPRESA 09</option>
+                                        <option value="empresa_10">NOMBRE DE EMPRESA 10</option>
+                                    </select>
+                                    <select id="destination02" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-12 mb-4"><strong class="text-cyan">CONFIGURACIÓN DE PREGUNTAS Y OPCIONES</strong></div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group mb-3">
+                <select class="custom-select form-control" id="cbo-list-tipo-control" aria-describedby="inputGroup10" required>
+                    <option>-Seleccione un tipo de control-</option>
+                    <option value="txt">CAJA DE TEXTO</option>
+                    <option value="cbo">LISTA DE OPCIONES</option>
+                    <option value="chk">MÚLTIPLES OPCIONES</option>
+                    <option value="rad">ÚNICA OPCIÓN</option>
+                    <option value="tbl">TABLA MAESTRA</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-azul" id="agregarPregunta">Agregar control, preguntas y respuestas</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group p-4 border">
+                        <label class="font-weight-bold">ELABORACIÓN DE ENCUESTA</label>
+                        <div class="row" id="contenedorEncuesta"><strong class="w-100 p-4 text-center" id="ninguna-pregunta">AÚN NO TIENE NI UNA PREGUNTA FORMULADA.</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-mensaje">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+            <button id="btn-grabar" class="btn btn-info w-100 mb-3" type="button" href="javascript:void(0)">Guardar</button>
         </div>
     </div>
 </div>

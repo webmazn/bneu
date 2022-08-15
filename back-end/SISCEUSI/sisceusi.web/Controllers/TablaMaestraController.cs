@@ -235,6 +235,55 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        [HttpGet]
+        public JsonResult obtenerListaTablaMaestra()
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            List<TablaMaestraBE> lista = logica.obtenerListaTablaMaestra();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult eliminar(int idTablaMaestra)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            bool seElimino = logica.eliminar(new TablaMaestraBE { idTablaMaestra = idTablaMaestra });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult eliminarPrincipal(int idEncabezadoPrincipal)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            bool seElimino = logica.eliminarPrincipal(new EncabezadoPrincipalBE { idEncabezadoPrincipal = idEncabezadoPrincipal });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult eliminarSecundario(int idEncabezadoSecundario)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            bool seElimino = logica.eliminarSecundario(new EncabezadoSecundarioBE { idEncabezadoSecundario = idEncabezadoSecundario });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
         private List<List<string>> obtenerDatos(List<TablaMaestraBE> lista)
         {
             int i = 0;

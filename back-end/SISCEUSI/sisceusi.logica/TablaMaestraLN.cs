@@ -157,5 +157,53 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;
         }
+
+        public bool eliminar(TablaMaestraBE entidad)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminar(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
+        public bool eliminarPrincipal(EncabezadoPrincipalBE entidad)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminarPrincipal(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
+        public bool eliminarSecundario(EncabezadoSecundarioBE entidad)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminarSecundario(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
+        public List<TablaMaestraBE> obtenerListaTablaMaestra()
+        {
+            List<TablaMaestraBE> lista = new List<TablaMaestraBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaTablaMaestra(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

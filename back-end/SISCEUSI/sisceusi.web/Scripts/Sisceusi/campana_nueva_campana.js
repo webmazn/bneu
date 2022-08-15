@@ -16,6 +16,8 @@
     $('#cbo-revisor').on('change', (e) => mostrarListaRevisor())
 
     $('#agregarPregunta').on('click', (e) => validarAgregarTablaMaestra())
+    $('#chk-encuesta-piloto').on('click', (e) => validarPiloto())
+    $('#chk-encuesta-oficial').on('click', (e) => validarOficial())
     cargarDesplegables()
 });
 
@@ -41,17 +43,20 @@ var arrEmpresaPerfil01 = []
 var arrRevisor00 = []
 var arrRevisor01 = []
 
+var arrTablaMaestra = [] 
+
 var cargarDesplegables = () => {
     let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
     let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
-    let urlEmpresa = `${baseUrl}EmpresaIndustria/obtenerListaEmpresaIndustria`;
-    //let urlEmpresa = `${baseUrl}PlantaEmpresa/obtenerListaPlantaEmpresa`;
-    let urlRevisor = `${baseUrl}Usuario/obtenerListaRevisor`;    
+    let urlEmpresa = `${baseUrl}EmpresaIndustria/obtenerListaEmpresaIndustria`;    
+    let urlRevisor = `${baseUrl}Usuario/obtenerListaRevisor`;
+    let urlTablaMaestra = `${baseUrl}TablaMaestra/obtenerListaTablaMaestra`;
     Promise.all([
         fetch(urlGiro),
         fetch(urlCiuu),
         fetch(urlEmpresa),
-        fetch(urlRevisor)        
+        fetch(urlRevisor),
+        fetch(urlTablaMaestra)
     ])
     .then(r => Promise.all(r.map(v => v.json())))
     .then((responseAll) => {
@@ -59,11 +64,13 @@ var cargarDesplegables = () => {
         jCiuu = responseAll[1]
         jEmpresa = responseAll[2]
         jRevisor = responseAll[3]
+        jTablaMaestra = responseAll[4]
         
         if (jGiro.success) cargarGiro(jGiro.object)
         if (jCiuu.success) cargarCiuu(jCiuu.object)
         if (jEmpresa.success) cargarEmpresa(jEmpresa.object)
-        if (jRevisor.success) cargarRevisor(jRevisor.object) 
+        if (jRevisor.success) cargarRevisor(jRevisor.object)
+        if (jTablaMaestra.success) cargarTablaMaestra(jTablaMaestra.object)
         cargarDatosIniciales()        
     });
 }
@@ -103,6 +110,10 @@ var cargarCiuu = (data) => {
     options = `<option value="0">-Seleccione un CIUU-</option>${options}`;
     $('#cbo-ciuu00').html(options);
     $('#cbo-ciuu01').html(options);
+}
+
+var cargarTablaMaestra = (data) => {
+    arrTablaMaestra = data
 }
 
 var listarEmpresa00 = () => {
@@ -515,11 +526,17 @@ var grabar = () => {
     let idCiuuOficial = $('#cbo-ciuu00').val()
     let idGiroPiloto = $('#cbo-giro01').val()
     let idCiuuPiloto = $('#cbo-ciuu01').val()
-    let idEtapaPiloto = 1
-    let idEtapaOficial = 1   
+    let idEtapaPiloto = $('#cbo-estado-piloto').val()
+    let idEtapaOficial = $('#cbo-estado-oficial').val()
     let idEstado = $('#chk-anular').prop('checked') ? '0' : '1'
 
     if (validarEspaciosBlanco(denominacion)) arr.push("Debe ingresar una denominación")
+    if ($('#chk-encuesta-piloto').prop('checked')) if (validarEspaciosBlanco(fechaInicioPiloto)) arr.push("Debe ingresar la fecha piloto inicio")
+    if ($('#chk-encuesta-piloto').prop('checked')) if (validarEspaciosBlanco(fechaFinPiloto)) arr.push("Debe ingresar la fecha piloto fin")
+    if ($('#chk-encuesta-piloto').prop('checked')) if (validarCombo(idEtapaPiloto)) arr.push("Debe seleccionar estado piloto")
+    if ($('#chk-encuesta-oficial').prop('checked')) if (validarEspaciosBlanco(fechaInicioEncuesta)) arr.push("Debe ingresar la fecha real inicio")
+    if ($('#chk-encuesta-oficial').prop('checked')) if (validarEspaciosBlanco(fechaFinEncuesta)) arr.push("Debe ingresar la fecha real fin")
+    if ($('#chk-encuesta-oficial').prop('checked')) if (validarCombo(idEtapaOficial)) arr.push("Debe seleccionar estado oficial")
     if (validarEspaciosBlanco(observaciones)) arr.push("Debe ingresar una observación")
     if (arrEmpresaSelect00.length == 0 && arrEmpresaSelect01.length == 0) arr.push("No ha seleccionado ninguna empresa para la campaña")
     else if (arrEmpresaPerfil00.length > 0 || arrEmpresaPerfil01.length > 0) arr.push("Hay empresas que no han sido asignados con un supervisor")
@@ -705,6 +722,14 @@ var cargarDatos = (data) => {
     if (data == null) return
     $('#frm').data('id', data.idCampana)
     $('#txt-denominacion').val(data.denominacion)
+    if (!(data.txtFechaInicioPiloto === '0001-01-01') || !(data.txtFechaFinPiloto === '0001-01-01')) {
+        $('#chk-encuesta-piloto').prop('checked', true)
+        validarPiloto()
+    }
+    if (!(data.txtFechaInicioEncuesta === '0001-01-01') || !(data.txtFechaFinEncuesta === '0001-01-01')) {
+        $('#chk-encuesta-oficial').prop('checked', true)
+        validarOficial()
+    }
     $('#txt-desde-piloto').val(data.txtFechaInicioPiloto === '0001-01-01' ? '' : data.txtFechaInicioPiloto)
     $('#txt-hasta-piloto').val(data.txtFechaFinPiloto === '0001-01-01' ? '' : data.txtFechaFinPiloto)
     $('#txt-desde-real').val(data.txtFechaInicioEncuesta === '0001-01-01' ? '' : data.txtFechaInicioEncuesta)
@@ -715,6 +740,8 @@ var cargarDatos = (data) => {
     $('#cbo-ciuu00').val(data.idCiuuOficial)
     $('#cbo-giro01').val(data.idGiroPiloto)    
     $('#cbo-ciuu01').val(data.idCiuuPiloto)
+    $('#cbo-estado-piloto').val(data.idEtapaPiloto)
+    $('#cbo-estado-oficial').val(data.idEtapaOficial)
     listarEmpresa00()
     listarEmpresa01()
 
@@ -1008,13 +1035,32 @@ function conteoPreguntasV2() {
 
 var validarAgregarTablaMaestra = () => {
     let tipoControl = $('#cbo-list-tipo-control').val()
-    if (tipoControl === 'tbl') {
-        
-        //let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idGiro}">${x.giro}</option>`).join('');
-        let options = `<option value="1">Maestro 1</option><option value="2">Maestro 2</option><option value="3">Maestro 3</option>`;
+    if (tipoControl === 'tbl') {        
+        let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">${x.tituloPrincipal}</option>`).join('');
+        //let options = `<option value="1">Maestro 1</option><option value="2">Maestro 2</option><option value="3">Maestro 3</option>`;
         options = `<option value="0">-Seleccione una tabla maestra-</option>${options}`
         var componente = $("#contenedorEncuesta .seccion-pregunta:last")
         componente.find('div div select').html(options)
     }
     
+}
+
+var validarPiloto = () => {
+    let valor = $('#chk-encuesta-piloto').prop('checked')
+    $('#txt-desde-piloto').prop('readonly', !valor)
+    $('#txt-hasta-piloto').prop('readonly', !valor)
+    if (!valor) {
+        $('#txt-desde-piloto').val('')
+        $('#txt-hasta-piloto').val('')        
+    }
+}
+
+var validarOficial = () => {
+    let valor = $('#chk-encuesta-oficial').prop('checked')
+    $('#txt-desde-real').prop('readonly', !valor)
+    $('#txt-hasta-real').prop('readonly', !valor)
+    if (!valor) {
+        $('#txt-desde-real').val('')
+        $('#txt-hasta-real').val('')
+    }
 }

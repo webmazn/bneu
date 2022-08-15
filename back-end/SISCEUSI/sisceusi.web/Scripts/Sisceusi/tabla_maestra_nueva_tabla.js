@@ -8,8 +8,40 @@
     $('.ir-pagina-secundario').on('change', (e) => cambiarPaginaRegistrosSecundario());
     $('#number-registers-secundario').on('change', (e) => cambiarPaginaRegistrosSecundario());
 
+    $('#eliminacionRowPrincipal').on('click', (e) => deshabilitarRegistroPrincipal())
+    $('#eliminacionRowSecundario').on('click', (e) => deshabilitarRegistroSecundario())
     cargarDatos()
+    cargarDesplegables()
 });
+
+/* ================================================
+ * INICIO CARGA DESPLEGABLES
+ * ================================================
+ */
+
+var cargarDesplegables = () => {
+    let urlGiro = `${baseUrl}Parametro/obtenerListaParametro`
+    Promise.all([
+        fetch(urlGiro),
+    ])
+    .then(r => Promise.all(r.map(v => v.json())))
+    .then((responseAll) => {
+        jParametro = responseAll[0]
+        if (jParametro.success) cargarParametro(jParametro.object)
+        cargarDatosIniciales()
+    });
+}
+
+var cargarParametro = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
+    options = `<option value="0">-Seleccione un parámetro-</option>${options}`;
+    $('#cbo-id-parametro').html(options);
+}
+
+/* ================================================
+ * FIN CARGA DESPLEGABLES
+ * ================================================
+ */
 
 var idTablaMaestra = -1
 
@@ -577,6 +609,70 @@ var cargarDatosSecundario = (data) => {
 
 /* ================================================
  * FIN ACTUALIZAR SECUNDARIO
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR PRINCIPAL
+ * ================================================
+ */
+var idEliminarPrincipal = 0
+var eliminarPrincipal = (obj) => {
+    idEliminarPrincipal = $(obj).data('id')
+    $('#modalConfirmacionPrincipal').modal('show')
+}
+
+var deshabilitarRegistroPrincipal = () => {
+    let url = `${baseUrl}TablaMaestra/eliminarPrincipal?idEncabezadoPrincipal=${idEliminarPrincipal}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            idEncabezadoPrincipal = -1
+            $('#btn-agregar-principal').html('Agregar')
+            mostrarEncabezadoPrincipal()
+            limpiarEncabezadoPrincipal()
+            $('#modalConfirmacionPrincipal').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR PRINCIPAL
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR SECUNDARIO
+ * ================================================
+ */
+var idEliminarSecundario = 0
+var eliminarSecundario = (obj) => {
+    idEliminarSecundario = $(obj).data('id')
+    $('#modalConfirmacionSecundario').modal('show')
+}
+
+var deshabilitarRegistroSecundario = () => {
+    let url = `${baseUrl}TablaMaestra/eliminarSecundario?idEncabezadoSecundario=${idEliminarSecundario}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            idEncabezadoSecundario = -1
+            $('#btn-agregar-secundario').html('Agregar')
+            mostrarEncabezadoSecundario()
+            limpiarEncabezadoSecundario()
+            $('#modalConfirmacionSecundario').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR SECUNDARIO
  * ================================================
  */
 

@@ -119,6 +119,25 @@
     piIdEncabezadoSecundario NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_UPD_DESHABILITAR(
+    piIdTablaMaestra NUMBER,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_UPD_DESHABILITAR_PRINC(
+    piIdEncabezadoPrincipal NUMBER,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_UPD_DESHABILITAR_SECUN(
+    piIdEncabezadoSecundario NUMBER,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_LISTA(
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_TABLA_MAESTRA;
 

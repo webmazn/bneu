@@ -323,5 +323,76 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return item;
         }
+
+        public bool eliminar(TablaMaestraBE entidad, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_UPD_DESHABILITAR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdTablaMaestra", entidad.idTablaMaestra);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
+        }
+
+        public bool eliminarPrincipal(EncabezadoPrincipalBE entidad, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_UPD_DESHABILITAR_PRINC";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEncabezadoPrincipal", entidad.idEncabezadoPrincipal);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
+        }
+
+        public bool eliminarSecundario(EncabezadoSecundarioBE entidad, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_UPD_DESHABILITAR_SECUN";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEncabezadoSecundario", entidad.idEncabezadoSecundario);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
+        }
+
+
+        public List<TablaMaestraBE> obtenerListaTablaMaestra(OracleConnection db)
+        {
+            List<TablaMaestraBE> lista = new List<TablaMaestraBE>();
+
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_SEL_LISTA";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<TablaMaestraBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return lista;
+        }
     }
 }

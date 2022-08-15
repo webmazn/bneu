@@ -553,6 +553,49 @@
     FROM T_GEND_ENCABEZADO_SECUNDARIO	 
     WHERE   idEncabezadoSecundario = piIdEncabezadoSecundario;
   END USP_SEL_OBJECT_SECUNDARIO;
+  
+  PROCEDURE USP_UPD_DESHABILITAR(
+    piIdTablaMaestra NUMBER,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GENM_TABLA_MAESTRA SET
+    idEstado = '0'
+    WHERE idTablaMaestra = piIdTablaMaestra;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_DESHABILITAR;
+  
+  PROCEDURE USP_UPD_DESHABILITAR_PRINC(
+    piIdEncabezadoPrincipal NUMBER,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GEND_ENCABEZADO_PRINCIPAL SET
+    idEstado = '0'
+    WHERE idEncabezadoPrincipal = piIdEncabezadoPrincipal;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_DESHABILITAR_PRINC;
+  
+  PROCEDURE USP_UPD_DESHABILITAR_SECUN(
+    piIdEncabezadoSecundario NUMBER,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GEND_ENCABEZADO_SECUNDARIO SET
+    idEstado = '0'
+    WHERE idEncabezadoSecundario = piIdEncabezadoSecundario;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_DESHABILITAR_SECUN;
+  
+  PROCEDURE USP_SEL_LISTA(
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT  *
+    FROM  T_GENM_TABLA_MAESTRA
+    WHERE idEstado = '1'; 
+  END USP_SEL_LISTA;
 
 END PKG_SISCEUSI_TABLA_MAESTRA;
 
