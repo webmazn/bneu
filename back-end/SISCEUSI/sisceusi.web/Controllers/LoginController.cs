@@ -46,7 +46,10 @@ namespace sisceusi.web.Controllers
                     {
                         RolLN logicaRol = new RolLN();
                         RolBE rol = logicaRol.obtenerRol(new RolBE(usuario.idRol));
+                        EmpresaIndustriaLN logicaEmpresa = new EmpresaIndustriaLN();
+                        EmpresaIndustriaBE empresa = logicaEmpresa.obtenerEmpresa(new EmpresaIndustriaBE { idEmpresaIndustria = usuario.idEmpresaIndustria });
                         usuario.rol = rol;
+                        usuario.empresaIndustria = empresa;
                         Session["user"] = usuario;
                         response["success"] = true;
                         response["message"] = "Validación correcta";
