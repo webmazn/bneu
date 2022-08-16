@@ -1,6 +1,7 @@
 ﻿$(document).ready(() => {
     $('#btn-grabar').on('click', (e) => grabar())
     $('#btn-verificar').on('click', (e) => verificarDni())
+    $('#cbo-estado').val('1')
     cargarDesplegables()
 });
 

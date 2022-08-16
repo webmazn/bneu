@@ -3,6 +3,7 @@
     $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
     $('#fle-requisito-01').on('change', (e) => fileChange(e))
+    $('#cbo-estado').val('1')
     cargarDesplegables()
 });
 

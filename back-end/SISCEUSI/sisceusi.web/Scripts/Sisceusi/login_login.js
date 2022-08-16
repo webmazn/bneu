@@ -44,7 +44,7 @@ var iniciarSesionConCaptcha = () => {
 
 var validarInicioSesion = (data) => {
     if (data.success == true) {
-        location.href = `${baseUrl}Inicio/Index`;
+        location.href = `${baseUrl}Interno/Index`;
     } else {
         $('form .form-group:last').after(messageError(messageStringGeneric(data.message), 'acceso'));
         grecaptcha.reset();

@@ -1,6 +1,7 @@
 ﻿$(document).ready(() => {
     $('#btn-verificar').on('click', (e) => verificarRuc())
     $('#btn-grabar').on('click', (e) => grabar())
+    $('#cbo-estado').val('1')
     cargarDesplegables()
 });
 

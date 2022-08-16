@@ -153,6 +153,7 @@ namespace sisceusi.datos
                     tituloEncabezado = (string)x.TITULOENCABEZADO,
                     abreviacion = (string)x.ABREVIACION,
                     usarAbreviado = (string)x.USARABREVIADO,
+                    posicion = x.POSICION == null ? 0 : (int)x.POSICION,
                     descripcionIconoAyuda = (string)x.DESCRIPCIONICONOAYUDA,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
@@ -182,6 +183,7 @@ namespace sisceusi.datos
                     tituloEncabezado = x.TITULOENCABEZADO == null ? "" : (string)x.TITULOENCABEZADO,
                     abreviacion = x.ABREVIACION == null ? "" : (string)x.ABREVIACION,
                     usarAbreviado = x.USARABREVIADO == null ? "" : (string)x.USARABREVIADO,
+                    posicion = x.POSICION == null ? 0 : (int)x.POSICION,
                     encabezadoPrincipal = new EncabezadoPrincipalBE { tituloEncabezado = x.ENCABEZADOPRINCIPAL == null ? "" : (string)x.ENCABEZADOPRINCIPAL },
                     descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : (string)x.DESCRIPCIONICONOAYUDA,
                     tipoDato = new TipoDatoBE { tipoDato = x.TIPODATO == null ? "" :(string)x.TIPODATO },
@@ -212,6 +214,7 @@ namespace sisceusi.datos
                 p.Add("piPreguntaInicial", tablaMaestra.preguntaInicial);
                 p.Add("piPreguntaCierre", tablaMaestra.preguntaCierre);
                 p.Add("piIdEstiloTabla", tablaMaestra.idEstiloTabla);
+                p.Add("piIdEstado", tablaMaestra.idEstado);
                 p.Add("piIdUsuarioCreacion", tablaMaestra.idUsuarioCreacion);
                 p.Add("piIpCreacion", tablaMaestra.ipCreacion);
                 p.Add("poIdTablaMaestra", -1, OracleDbType.Int32, ParameterDirection.Output);
@@ -237,6 +240,7 @@ namespace sisceusi.datos
                 p.Add("piTituloEncabezado", encabezado.tituloEncabezado);
                 p.Add("piAbreviacion", encabezado.abreviacion);
                 p.Add("piUsarAbreviado", encabezado.usarAbreviado);
+                p.Add("piPosicion", encabezado.posicion);
                 p.Add("piDescripcionIconoAyuda", encabezado.descripcionIconoAyuda);
                 p.Add("piIdUsuarioCreacion", encabezado.idUsuarioCreacion);
                 p.Add("piIpCreacion", encabezado.ipCreacion);
@@ -261,6 +265,7 @@ namespace sisceusi.datos
                 p.Add("piTituloEncabezado", encabezado.tituloEncabezado);
                 p.Add("piAbreviacion", encabezado.abreviacion);
                 p.Add("piUsarAbreviado", encabezado.usarAbreviado);
+                p.Add("piPosicion", encabezado.posicion);
                 p.Add("piDescripcionIconoAyuda", encabezado.descripcionIconoAyuda);
                 p.Add("piIdOrientacion", encabezado.idOrientacion);
                 p.Add("piIdTipoControl", encabezado.idTipoControl);

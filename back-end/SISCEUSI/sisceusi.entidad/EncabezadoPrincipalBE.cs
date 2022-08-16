@@ -13,6 +13,7 @@ namespace sisceusi.entidad
         public string tituloEncabezado { get; set; }
         public string abreviacion { get; set; }
         public string usarAbreviado { get; set; }
+        public int posicion { get; set; }
         public string descripcionIconoAyuda { get; set; }
         public string idEstado { get; set; }
 

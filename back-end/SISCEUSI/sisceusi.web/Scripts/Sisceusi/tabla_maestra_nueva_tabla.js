@@ -10,6 +10,11 @@
 
     $('#eliminacionRowPrincipal').on('click', (e) => deshabilitarRegistroPrincipal())
     $('#eliminacionRowSecundario').on('click', (e) => deshabilitarRegistroSecundario())
+
+    $('#btn-cancelar-principal').on('click', (e) => cancelarPrincipal())
+    $('#btn-cancelar-secundario').on('click', (e) => cancelarSecundario())
+
+    $('#cbo-estado-oficial').val('1')
     cargarDatos()
     cargarDesplegables()
 });
@@ -55,6 +60,7 @@ var grabarTablaMaestra = () => {
     let preguntaInicial = $("#txt-pregunta-confirmacion-01").val().trim()
     let preguntaCierre = $("#txt-pregunta-confirmacion-02").val().trim()
     let idEstiloTabla = $("#cbo-estilo-tabla").val()
+    let idEstado = $("#cbo-estado-oficial").val()
 
     if (validarEspaciosBlanco(tituloPrincipal)) arr.push("Debe ingresar el título principal o nombre de la tabla maestra");
     if (validarEspaciosBlanco(subtitulo)) arr.push("Debe ingresar el subtítulo descriptivo");
@@ -62,6 +68,7 @@ var grabarTablaMaestra = () => {
     if (validarEspaciosBlanco(preguntaInicial)) arr.push("Debe ingresar la pregunta inicial");
     if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
     if (validarCombo(idEstiloTabla)) arr.push("Debe seleccionar el estilo de tabla");
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -70,7 +77,7 @@ var grabarTablaMaestra = () => {
     }
 
     let url = `${baseUrl}TablaMaestra/grabarTablaMaestra`;
-    let data = { idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -108,10 +115,13 @@ var grabarEncabezadoPrincipal = () => {
     let tituloEncabezado = $("#txt-titulo-encabezado-principal").val().trim()
     let abreviacion = $("#txt-encabezado-principal-abreviado").val().trim()
     let usarAbreviado = $("#exampleRadios1").prop('checked')
+    let posicion = $("#txt-posicion-principal").val()
     let descripcionIconoAyuda = $("#txt-question-mark-01").val().trim()
 
-    if (validarEspaciosBlanco(tituloEncabezado)) arr.push("Debe ingresar el título del encabezado principal");
+    //if (validarEspaciosBlanco(tituloEncabezado)) arr.push("Debe ingresar el título del encabezado principal");
     if (usarAbreviado) if (validarEspaciosBlanco(abreviacion)) arr.push("Debe ingresar la abreviación del encabezado principal");
+    if (validarEspaciosBlanco(posicion)) arr.push("Debe ingresar la posición");
+    if (posicion < 0 || posicion > 100) arr.push("La posición debe ser mayor a 0 y menor a 100");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
 
     if (arr.length > 0) {
@@ -123,7 +133,7 @@ var grabarEncabezadoPrincipal = () => {
     usarAbreviado = $("#exampleRadios1").prop('checked') ? '1' : '0'
 
     let url = `${baseUrl}TablaMaestra/grabarEncabezadoPrincipal`;
-    let data = { idEncabezadoPrincipal, idTablaMaestra, tituloEncabezado, abreviacion, usarAbreviado, descripcionIconoAyuda, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEncabezadoPrincipal, idTablaMaestra, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -132,6 +142,7 @@ var grabarEncabezadoPrincipal = () => {
         if (j.success) {
             idEncabezadoPrincipal = -1
             $('#btn-agregar-principal').html('Agregar')
+            $('#btn-cancelar-principal').parent().addClass('d-none')
             mostrarEncabezadoPrincipal()
             limpiarEncabezadoPrincipal()
             $('.seccion-mensaje-principal').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo')))
@@ -164,6 +175,7 @@ var grabarEncabezadoSecundario = () => {
     let tituloEncabezado = $("#txt-encabezado-secundario").val().trim()
     let abreviacion = $("#txt-encabezado-secundario-abreviado").val().trim()
     let usarAbreviado = $("#exampleRadios3").prop('checked')
+    let posicion = $("#txt-posicion-secundario").val()
     let idEncabezadoPrincipal = $("#cbo-encabezado-principal").val()
     let idOrientacion = $("#cbo-orientacion").val()
     let descripcionIconoAyuda = $("#txt-question-mark-02").val().trim()
@@ -174,7 +186,9 @@ var grabarEncabezadoSecundario = () => {
     let agregarFilas = $("#exampleRadios5").prop('checked')
 
     //if (validarEspaciosBlanco(tituloEncabezado)) arr.push("Debe ingresar el título del encabezado secundario");
-    if (usarAbreviado) if (validarEspaciosBlanco(abreviacion)) arr.push("Debe ingresar la abreviación del encabezado principal");    
+    if (usarAbreviado) if (validarEspaciosBlanco(abreviacion)) arr.push("Debe ingresar la abreviación del encabezado principal");
+    if (validarEspaciosBlanco(posicion)) arr.push("Debe ingresar la posición");
+    if (posicion < 0 || posicion > 100) arr.push("La posición debe ser mayor a 0 y menor a 100");
     if (validarCombo(idEncabezadoPrincipal)) arr.push("Debe seleccionar un encabezado principal");
     if (validarCombo(idOrientacion)) arr.push("Debe seleccionar una orientación");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
@@ -193,7 +207,7 @@ var grabarEncabezadoSecundario = () => {
     agregarFilas = $("#exampleRadios5").prop('checked') ? '1' : '0'
 
     let url = `${baseUrl}TablaMaestra/grabarEncabezadoSecundario`;
-    let data = { idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, idOrientacion, descripcionIconoAyuda, idTipoControl, idTipoDato, idParametro, cantidadFilas, agregarFilas,  idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, idOrientacion, descripcionIconoAyuda, idTipoControl, idTipoDato, idParametro, cantidadFilas, agregarFilas,  idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -202,6 +216,7 @@ var grabarEncabezadoSecundario = () => {
         if (j.success) {
             idEncabezadoSecundario = -1
             $('#btn-agregar-secundario').html('Agregar')
+            $('#btn-cancelar-secundario').parent().addClass('d-none')
             mostrarEncabezadoSecundario()
             limpiarEncabezadoSecundario()
             $('.seccion-mensaje-secundario').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo')))
@@ -223,6 +238,7 @@ var grabarEncabezadoSecundario = () => {
 var limpiarEncabezadoPrincipal = () => {
     $("#txt-titulo-encabezado-principal").val('')
     $("#txt-encabezado-principal-abreviado").val('')
+    $('#txt-posicion-principal').val('')
     $("#exampleRadios1").prop('checked', true)
     $("#exampleRadios2").prop('checked', false)
     $("#txt-question-mark-01").val('')
@@ -233,6 +249,7 @@ var limpiarEncabezadoSecundario = () => {
     $("#txt-encabezado-secundario-abreviado").val('')
     $("#exampleRadios3").prop('checked', true)
     $("#exampleRadios4").prop('checked', false)
+    $('#txt-posicion-secundario').val('')
     $("#txt-question-mark-02").val('')
     $("#cbo-encabezado-principal").val('0')
     $("#cbo-orientacion").val('0')
@@ -344,10 +361,11 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
             let colAbreviacion = `<td data-encabezado="Abreviatura">${x.abreviacion}</td>`;
             let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`
             let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
+            let colPosicion = `<td data-encabezado="Posición">${x.posicion}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-principal" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-principal" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colOptions}</tr>`;
+            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colPosicion}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -463,15 +481,16 @@ var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
         content = data.map((x, i) => {
             let colTituloEncabezado = `<td data-encabezado="Nombre del encabezado principal" scope="row"><span class="ml-4">${x.tituloEncabezado}</span></td>`;
             let colAbreviacion = `<td data-encabezado="Abreviatura">${x.abreviacion}</td>`;
-            let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`
+            //let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`            
             let colEncabezadoPrincipal = `<td class="text-center" data-encabezado="Encabezado principal">${x.encabezadoPrincipal.tituloEncabezado}</td>`;
             let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
             let colTipoDato = `<td class="text-center" data-encabezado="Tipo de dato">${x.tipoDato.tipoDato}</td>`;
             let colParametro = `<td class="text-center" data-encabezado="ID Parámetro">${x.parametro.parametro}</td>`;
+            let colPosicion = `<td data-encabezado="Posición">${x.posicion}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colEncabezadoPrincipal}${colTextoAyuda}${colTipoDato}${colParametro}${colOptions}</tr>`;
+            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colEncabezadoPrincipal}${colTextoAyuda}${colTipoDato}${colParametro}${colPosicion}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -523,6 +542,7 @@ var cargarDatosTablaMaestra = (data) => {
     $("#txt-pregunta-confirmacion-01").val(data.preguntaInicial)
     $("#txt-pregunta-confirmacion-02").val(data.preguntaCierre)
     $("#cbo-estilo-tabla").val(data.idEstiloTabla)
+    $("#cbo-estado-oficial").val(data.idEstado)
 }
 
 /* ================================================
@@ -554,11 +574,13 @@ var actualizarPrincipal = (obj) => {
 
 var cargarDatosPrincipal = (data) => {
     $('#btn-agregar-principal').html('Actualizar')
+    $('#btn-cancelar-principal').parent().removeClass('d-none')
     idEncabezadoPrincipal = data.idEncabezadoPrincipal
     $("#txt-titulo-encabezado-principal").val(data.tituloEncabezado)
     $("#txt-encabezado-principal-abreviado").val(data.abreviacion)
     $("#exampleRadios1").prop('checked', data.usarAbreviado == '1' ? true : false)
     $("#exampleRadios2").prop('checked', data.usarAbreviado == '0' ? true : false)
+    $("#txt-posicion-principal").val(data.posicion)
     $("#txt-question-mark-01").val(data.descripcionIconoAyuda)
 }
 
@@ -591,11 +613,13 @@ var actualizarSecundario = (obj) => {
 
 var cargarDatosSecundario = (data) => {
     $('#btn-agregar-secundario').html('Actualizar')
+    $('#btn-cancelar-secundario').parent().removeClass('d-none')
     idEncabezadoSecundario = data.idEncabezadoSecundario
     $("#txt-encabezado-secundario").val(data.tituloEncabezado)
     $("#txt-encabezado-secundario-abreviado").val(data.abreviacion)
     $("#exampleRadios3").prop('checked', data.usarAbreviado == '1' ? true : false)
     $("#exampleRadios4").prop('checked', data.usarAbreviado == '0' ? true : false)
+    $("#txt-posicion-secundario").val(data.posicion)
     $("#txt-question-mark-02").val(data.descripcionIconoAyuda)
     $("#cbo-encabezado-principal").val(data.idEncabezadoPrincipal)
     $("#cbo-orientacion").val(data.idOrientacion)
@@ -630,6 +654,7 @@ var deshabilitarRegistroPrincipal = () => {
         if (j.success) {
             idEncabezadoPrincipal = -1
             $('#btn-agregar-principal').html('Agregar')
+            $('#btn-cancelar-principal').parent().removeClass('d-none')
             mostrarEncabezadoPrincipal()
             limpiarEncabezadoPrincipal()
             $('#modalConfirmacionPrincipal').modal('hide')
@@ -662,6 +687,7 @@ var deshabilitarRegistroSecundario = () => {
         if (j.success) {
             idEncabezadoSecundario = -1
             $('#btn-agregar-secundario').html('Agregar')
+            $('#btn-cancelar-secundario').parent().removeClass('d-none')
             mostrarEncabezadoSecundario()
             limpiarEncabezadoSecundario()
             $('#modalConfirmacionSecundario').modal('hide')
@@ -673,6 +699,24 @@ var deshabilitarRegistroSecundario = () => {
 }
 /* ================================================
  * FIN ELIMINAR SECUNDARIO
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO CANCELAR
+ * ================================================
+ */
+var cancelarPrincipal = () => {
+    limpiarEncabezadoPrincipal()
+    $('#btn-cancelar-principal').parent().addClass('d-none')
+}
+
+var cancelarSecundario = () => {
+    limpiarEncabezadoSecundario()
+    $('#btn-cancelar-secundario').parent().addClass('d-none')
+}
+/* ================================================
+ * FIN CANCELAR
  * ================================================
  */
 

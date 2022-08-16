@@ -67,9 +67,23 @@
                             </div>
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-maestra" class="btn btn-info w-100 mb-3" href="javascript:void(0)">Guardar</a>
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-oficial" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
                                 </div>
                             </div>
+                            @*<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-maestra" class="btn btn-info w-100 mb-3" href="javascript:void(0)">Guardar</a>
+                                </div>
+                            </div>*@
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-agregar-maestra" class="btn btn-info w-100 mb-3" href="javascript:void(0)">Guardar</a></div>
                         </div>
                         <div class="row">
                             <div class="col-6"></div>
@@ -83,7 +97,7 @@
                     <div class="col-12 mb-4"><strong class="text-cyan">DATOS PRINCIPALES CABECERA PRINCIPAL</strong></div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-titulo-encabezado-principal">TÍTULO ENCABEZADO PRINCIPAL</label>
                                     <input class="form-control" type="text" maxlength="150" id="txt-titulo-encabezado-principal" placeholder="Encabezado principal">
@@ -110,17 +124,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-posicion-principal">POSICIÓN</label>
+                                    <input class="form-control" type="number" id="txt-posicion-principal">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-question-mark-01">QUESTION MARK - ÍCONO DE AYUDA</label>
                                     <input class="form-control" type="text" maxlength="200" id="txt-question-mark-01" placeholder="Question mark descripción">
                                 </div>
                             </div>
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group d-none">
+                                    <label class="font-weight-bold">&nbsp;</label><a id="btn-cancelar-principal" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Cancelar</a>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-principal" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a>
+                                </div>
+                            </div>
+
+                            @*<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-principal" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Agregar</a>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="row">
                             <div class="col-6"></div>
@@ -151,6 +182,9 @@
                                                 </th>
                                                 <th class="text-center" scope="col">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>QUESTION MARK</span></span></div>
+                                                </th>
+                                                <th class="text-center" scope="col" style="min-width:50px;">
+                                                    <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>POSICIÓN</span></span></div>
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width:150px;">
                                                     <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
@@ -192,7 +226,7 @@
                     <div class="col-12 mb-4"><strong class="text-cyan">DATOS PRINCIPALES CABECERA SECUNDARIA Y DATOS SOPORTADOS</strong></div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-encabezado-secundario">TÍTULO ENCABEZADO SECUNDARIO</label>
                                     <input class="form-control" type="text" maxlength="150" id="txt-encabezado-secundario" placeholder="Encabezado secundario">
@@ -217,6 +251,12 @@
                                         <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios4" value="No">
                                         <label class="form-check-label" for="exampleRadios4">No</label>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-posicion-secundario">POSICIÓN</label>
+                                    <input class="form-control" type="number" id="txt-posicion-secundario">
                                 </div>
                             </div>
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
@@ -258,12 +298,12 @@
                                     <label class="font-weight-bold" for="cbo-control-respuesta">TIPO CONTROL RESPUESTA</label>
                                     <select class="form-control" id="cbo-control-respuesta">
                                         <option value="0">-Seleccione un control de respuesta-</option>
-                                        <option value="1">Text</option>
-                                        <option value="2">Textarea</option>
-                                        <option value="3">Date</option>
-                                        <option value="4">Select</option>
-                                        <option value="5">Check</option>
-                                        <option value="6">Radio</option>
+                                        <option value="1">Texto</option>
+                                        <option value="2">Área de texto</option>
+                                        <option value="3">Fecha</option>
+                                        <option value="4">Selección</option>
+                                        <option value="5">Casilla de verificación</option>
+                                        <option value="6">Botón de radio</option>
                                     </select>
                                 </div>
                             </div>
@@ -272,10 +312,10 @@
                                     <label class="font-weight-bold" for="cbo-tipo-dato">TIPO DE DATO VÁLIDO</label>
                                     <select class="form-control" id="cbo-tipo-dato">
                                         <option value="0">-Seleccione un tipo de dato-</option>
-                                        <option value="1">Number</option>
-                                        <option value="2">Float</option>
-                                        <option value="3">String</option>
-                                        <option value="4">Boolean</option>
+                                        <option value="1">Número entero</option>
+                                        <option value="2">Número decimal</option>
+                                        <option value="3">Caracter</option>
+                                        @*<option value="4">Boolean</option>*@
                                     </select>
                                 </div>
                             </div>
@@ -295,9 +335,9 @@
                                     <input class="form-control" type="number" id="txt-filas-por-defecto" value="12" min="0">
                                 </div>
                             </div>
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <label class="font-weight-bold m-0" for="txt-pregunta-confirmacion">¿EL USUARIO PUEDE AGREGAR FILAS?</label>
+                                    <label class="font-weight-bold m-0" for="txt-pregunta-confirmacion">USUARIO PUEDE AGREGAR FILAS</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
@@ -311,10 +351,21 @@
                                 </div>
                             </div>
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group d-none">
+                                    <label class="font-weight-bold">&nbsp;</label><a id="btn-cancelar-secundario" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Cancelar</a>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-secundario" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a>
+                                </div>
+                            </div>
+
+                            @*<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-secundario" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Agregar</a>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="row">
                             <div class="col-6"></div>
@@ -340,9 +391,9 @@
                                                 <th class="text-center" scope="col">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ABREVIATURA</span></span></div>
                                                 </th>
-                                                <th class="text-center" scope="col" style="min-width: 150px;">
+                                                @*<th class="text-center" scope="col" style="min-width: 150px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>USAR ABREVIATURA</span></span></div>
-                                                </th>
+                                                </th>*@
                                                 <th class="text-center" scope="col" style="min-width: 120px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENC. PRINCIPAL</span></span></div>
                                                 </th>
@@ -354,6 +405,9 @@
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width: 120px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ID PARÁMETRO</span></span></div>
+                                                </th>
+                                                <th class="text-center" scope="col" style="min-width:50px;">
+                                                    <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>POSICIÓN</span></span></div>
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width: 90px;">GESTIÓN</th>
                                             </tr>

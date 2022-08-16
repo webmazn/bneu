@@ -1,5 +1,6 @@
 ﻿$(document).ready(() => {
     $('#btn-grabar').on('click', (e) => grabar())
+    $('#cbo-estado').val('1')
     cargarDesplegables()
 });
 
