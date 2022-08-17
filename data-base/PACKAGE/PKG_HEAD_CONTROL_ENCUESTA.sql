@@ -30,6 +30,19 @@
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
   );
+  
+  PROCEDURE USP_UPD_FORM_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piFechaHoraLlenado DATE,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_PREGUNTA_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_CONTROL_ENCUESTA;
 

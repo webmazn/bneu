@@ -17,12 +17,21 @@
     cen.idControlEncuesta, cen.aceptaLLenarEncuesta, cen.aceptaTratamientoDatos, cen.aceptaFirmarEncuesta,    
     cam.idCampana, cam.denominacion,
     emp.idEmpresaIndustria, emp.nombreEmpresa, emp.nombreComercial, emp.ruc,
-    pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado
+    pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado, cen.fechahorallenado, 
+    dep.departamento, pro.provincia, dis.distrito, zon.zona, pem.direccion, gas.empresagas, luz.empresaluz
     FROM T_GEND_CONTROL_ENCUESTA cen
     INNER JOIN T_GENM_PLANTA_EMPRESA pem ON cen.idPlantaEmpresa = pem.idPlantaEmpresa AND pem.idEstado = '1'
     INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa AND cem.idEstado = '1'
     INNER JOIN T_GENM_CAMPANA cam ON cem.idCampana = cam.idCampana AND cam.idEstado = '1'
     INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON pem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = '1'
+    
+    INNER JOIN T_MAE_DEPARTAMENTO dep ON pem.idDepartamento = dep.idDepartamento
+    INNER JOIN T_MAE_PROVINCIA pro ON pem.idProvincia = pro.idProvincia
+    INNER JOIN T_MAE_DISTRITO dis ON pem.idDistrito = dis.idDistrito
+    INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
+    INNER JOIN T_MAE_EMPRESA_GAS gas ON pem.idEmpresaGas = gas.idEmpresaGas
+    INNER JOIN T_MAE_EMPRESA_LUZ luz ON pem.idEmpresaLuz = luz.idEmpresaLuz 
+    
     WHERE   idControlEncuesta = piIdControlEncuesta;
   END USP_SEL_OBJECT;
   
@@ -77,6 +86,38 @@
     
     poRowAffected := SQL%ROWCOUNT;
   END USP_UPD_FIRMAR_ENCUESTA;
+  
+  PROCEDURE USP_UPD_FORM_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piFechaHoraLlenado DATE,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GEND_CONTROL_ENCUESTA SET
+    fechaHoraLlenado = piFechaHoraLlenado,
+    idUsuarioModificacion = piIdUsuarioCreacion,
+    fechaModificacion = SYSDATE,
+    ipModificacion = piIpCreacion
+    WHERE 
+    idControlEncuesta = piIdControlEncuesta;
+    
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_FORM_ENCUESTA;
+  
+  PROCEDURE USP_SEL_PREGUNTA_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT 
+    *
+    --MIN(numeroOrdenPregunta) numeroOrdenPregunta
+    FROM T_GENM_CAMPANA_ENCUESTA
+    WHERE idCampana = (SELECT idCampana FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta);
+  END USP_SEL_PREGUNTA_ENCUESTA;
 
 END PKG_SISCEUSI_CONTROL_ENCUESTA;
 

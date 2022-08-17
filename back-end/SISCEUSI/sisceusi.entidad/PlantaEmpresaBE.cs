@@ -37,5 +37,8 @@ namespace sisceusi.entidad
         public DepartamentoBE departamento { get; set; }
         public ProvinciaBE provincia { get; set; }
         public DistritoBE distrito { get; set; }
+        public ZonaBE zona { get; set; }
+        public EmpresaGasBE empresaGas { get; set; }
+        public EmpresaLuzBE empresaLuz { get; set; }
     }
 }

@@ -49,5 +49,29 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return seGuardo;
         }
+
+        public bool formularioEncuesta(ControlEncuestaBE controlEncuesta)
+        {
+            bool seGuardo = false;
+            try
+            {
+                cn.Open();
+                seGuardo = datos.formularioEncuesta(controlEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seGuardo;
+        }
+        public List<CampanaEncuestaBE> obtenerListaCampanaEncuesta(ControlEncuestaBE controlEncuesta)
+        {
+            List<CampanaEncuestaBE> lista = new List<CampanaEncuestaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampanaEncuesta(controlEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
     }
 }

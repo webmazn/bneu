@@ -191,7 +191,8 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
         content = data.map((x, i) => {
             let bloque = x.controlEncuesta.aceptaLLenarEncuesta === '' ? 1 :
                 x.controlEncuesta.aceptaLLenarEncuesta === '0' ? 0 : 
-                x.controlEncuesta.aceptaFirmarEncuesta === '' ? 2 : 3
+                x.controlEncuesta.aceptaFirmarEncuesta === '' ? 2 : 
+                x.controlEncuesta.fechaHoraLlenado == null ? 3 : 4
 
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.campana.idCampana, 4)}</td>`;
@@ -227,15 +228,16 @@ var iniciarEncuesta = (obj) => {
     let id = $(obj).data('id')
     let bloque = $(obj).data('bloque')
     if (bloque == 0) {
-
+        //Mostrar mensaje cuando no acepto participar en la encuesta
     } else if (bloque == 1) {
         location.href = `${baseUrl}Encuesta/Inicio/${id}`
     } else if (bloque == 2) {
         location.href = `${baseUrl}Encuesta/Firma/${id}`
     } else if (bloque == 3) {
         location.href = `${baseUrl}Encuesta/Formulario/${id}`
-    }
-    
+    } else if (bloque == 4) {
+        location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${id}`
+    }    
 }
 
 /* ================================================

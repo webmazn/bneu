@@ -17,7 +17,7 @@ namespace sisceusi.entidad
         public string aceptaTratamientoDatos { get; set; }
         public string aceptaFirmarEncuesta { get; set; }
         public int idUsuarioResponde { get; set; }
-        public DateTime fechaHoraLlenado { get; set; }
+        public DateTime? fechaHoraLlenado { get; set; }
         public int numeroCuestionario { get; set; }
         public int idEtapa { get; set; }
         public string idEstado { get; set; }

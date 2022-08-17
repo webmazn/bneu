@@ -1,6 +1,7 @@
 ﻿using OfficeOpenXml;
 using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.web.Filter;
 using sres.ut;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
+    [LoginRequiredAttribute]
     public class TablaMaestraController : BaseController
     {
         // GET: TablaMaestra
