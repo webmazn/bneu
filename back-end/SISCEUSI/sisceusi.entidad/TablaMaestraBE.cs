@@ -16,5 +16,7 @@ namespace sisceusi.entidad
         public string preguntaCierre { get; set; }
         public int idEstiloTabla { get; set; }
         public string idEstado { get; set; }
+
+        public EstiloTablaBE estiloTabla { get; set; }
     }
 }

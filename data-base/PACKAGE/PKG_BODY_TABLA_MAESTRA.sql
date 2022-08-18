@@ -529,6 +529,17 @@
     poRowAffected := SQL%ROWCOUNT;
   END USP_PRC_GUARDAR_ENC_SECUNDARIO;
   
+  PROCEDURE USP_SEL_LIST_PRINCIPAL(
+    piIdTablaMaestra NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS 
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GEND_ENCABEZADO_PRINCIPAL	 
+    WHERE   idTablaMaestra = piIdTablaMaestra AND idEstado = '1';
+  END USP_SEL_LIST_PRINCIPAL;
+  
   PROCEDURE USP_SEL_OBJECT(
     piIdTablaMaestra NUMBER,
     poRef OUT SYS_REFCURSOR

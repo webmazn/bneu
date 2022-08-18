@@ -122,6 +122,18 @@ namespace sisceusi.logica
             return seGuardo;
         }
 
+        public List<EncabezadoPrincipalBE> obtenerListaEncabezadoPrincipal(EncabezadoPrincipalBE encabezado)
+        {
+            List<EncabezadoPrincipalBE> lista = new List<EncabezadoPrincipalBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaEncabezadoPrincipal(encabezado, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public TablaMaestraBE obtenerTablaMaestra(TablaMaestraBE encabezado)
         {
             TablaMaestraBE item = null;

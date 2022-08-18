@@ -141,7 +141,7 @@ namespace sisceusi.datos
             return lista;
         }
 
-        public List<EncabezadoSecundarioBE> obtenerListaCampanaEncuesta(CampanaEncuestaBE campanaEncuesta, OracleConnection db)
+        public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campanaEncuesta, OracleConnection db)
         {
             List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
             try
@@ -150,21 +150,55 @@ namespace sisceusi.datos
                 OracleDynamicParameters p = new OracleDynamicParameters();
                 p.Add("piIdParametroTabla", campanaEncuesta.idParametroTabla);
                 p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
-                //lista = db.Query<EncabezadoSecundarioBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EncabezadoSecundarioBE
                 {
                     idEncabezadoSecundario = (int)x.IDENCABEZADOSECUNDARIO,
                     tituloEncabezado = x.TITULOENCABEZADO == null ? "" : (string)x.TITULOENCABEZADO,
                     abreviacion = x.ABREVIACION == null ? "" : (string)x.ABREVIACION,
                     usarAbreviado = x.USARABREVIADO == null ? "" : (string)x.USARABREVIADO,
-                    posicion = x.POSICION == null ? 0 : (int)x.POSICION,
+                    posicion = x.POSICION == null ? 99 : (int)x.POSICION,
+                    idOrientacion = x.IDORIENTACION == null ? 0 : (int)x.IDORIENTACION,
+                    descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : x.DESCRIPCIONICONOAYUDA,
+                    idTipoControl = x.IDTIPOCONTROL == null ? 0 : (int)x.IDTIPOCONTROL,
+                    idTipoDato = x.IDTIPODATO == null ? 0 : (int)x.IDTIPODATO,
+                    idParametro = x.IDPARAMETRO == null ? 0 : (int)x.IDPARAMETRO,
+                    cantidadFilas = x.CANTIDADFILAS == null ? 0 : (int)x.CANTIDADFILAS,
+                    agregarFilas = x.AGREGARFILAS == null ? "" : (string)x.AGREGARFILAS,
+                    idEncabezadoPrincipal = (int)x.IDENCABEZADOPRINCIPAL,
                     encabezadoPrincipal = new EncabezadoPrincipalBE {
-                        tituloEncabezado = x.ENCABEZADOPRINCIPAL == null ? "" : (string)x.ENCABEZADOPRINCIPAL
-                    },
-                    descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : (string)x.DESCRIPCIONICONOAYUDA,
-                    tipoDato = new TipoDatoBE { tipoDato = x.TIPODATO == null ? "" : (string)x.TIPODATO },
-                    parametro = new ParametroBE { parametro = x.PARAMETRO == null ? "" : (string)x.PARAMETRO }
+                        idEncabezadoPrincipal = (int)x.IDENCABEZADOPRINCIPAL,
+                        tituloEncabezado = x.TITULOENCABEZADOPRINCIPAL == null ? "" : (string)x.TITULOENCABEZADOPRINCIPAL,
+                        abreviacion = x.ABREVIACIONPRINCIPAL == null ? "" : x.ABREVIACIONPRINCIPAL,
+                        usarAbreviado = x.USARABREVIADOPRINCIPAL == null ? "" : (string)x.USARABREVIADOPRINCIPAL,
+                        posicion = x.POSICIONPRINCIPAL == null ? 99 : (int)x.POSICIONPRINCIPAL,
+                        descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDAPRINC == null ? "" : x.DESCRIPCIONICONOAYUDAPRINC,
+                        idTablaMaestra = (int)x.IDTABLAMAESTRA,
+                        tablaMaestra = new TablaMaestraBE {
+                            idTablaMaestra = (int)x.IDTABLAMAESTRA,
+                            tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
+                            subtitulo = x.SUBTITULO == null ? "" : (string)x.SUBTITULO,
+                            descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDAMAES == null ? "" : x.DESCRIPCIONICONOAYUDAMAES,
+                            preguntaInicial = x.PREGUNTAINICIAL == null ? "" : (string)x.PREGUNTAINICIAL,
+                            preguntaCierre = x.PREGUNTACIERRE == null ? "" : (string)x.PREGUNTACIERRE,
+                            idEstiloTabla = x.IDESTILOTABLA == null ? 0 : (int)x.IDESTILOTABLA
+                        }
+                    }
                 }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<ParametroBE> obtenerListaParametro(ParametroBE parametro, OracleConnection db)
+        {
+            List<ParametroBE> lista = new List<ParametroBE>();
+            try
+            {
+                string sp = $"{Package.ControlEncuesta}USP_SEL_PARAMETRO";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdParametro", parametro.idParametro);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<ParametroBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
             }
             catch (Exception ex) { Log.Error(ex); }
             return lista;

@@ -199,6 +199,19 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
+        public JsonResult obtenerListaEncabezadoPrincipal(int idTablaMaestra)
+        {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            List<EncabezadoPrincipalBE> lista = logica.obtenerListaEncabezadoPrincipal(new EncabezadoPrincipalBE { idTablaMaestra = idTablaMaestra });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
         public JsonResult obtenerTablaMaestra(int idTablaMaestra)
         {
             TablaMaestraLN logica = new TablaMaestraLN();

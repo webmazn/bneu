@@ -143,6 +143,7 @@ var grabarEncabezadoPrincipal = () => {
             idEncabezadoPrincipal = -1
             $('#btn-agregar-principal').html('Agregar')
             $('#btn-cancelar-principal').parent().addClass('d-none')
+            armarComboEncabezadoPrincipal()
             mostrarEncabezadoPrincipal()
             limpiarEncabezadoPrincipal()
             $('.seccion-mensaje-principal').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo')))
@@ -341,7 +342,7 @@ var cargarDatosTablaPrincipal = (j) => {
                 eliminarPrincipal(e.currentTarget);
             });
         });
-        armarComboEncabezadoPrincipal(j.object)
+        //armarComboEncabezadoPrincipal(j.object)
         $('[data-toggle="tooltip"]').tooltip();
         posicinar('#tbl-encabezado-principal', 120)
     } else {
@@ -357,25 +358,37 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
 
     if (doRenderizar) {
         content = data.map((x, i) => {
+            let colCodigo = `<td class="text-center" data-encabezado="Código">${x.idEncabezadoPrincipal}</td>`;
             let colTituloEncabezado = `<td data-encabezado="Nombre del encabezado principal" scope="row"><span class="ml-4">${x.tituloEncabezado}</span></td>`;
             let colAbreviacion = `<td data-encabezado="Abreviatura">${x.abreviacion}</td>`;
             let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`
             let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
-            let colPosicion = `<td data-encabezado="Posición">${x.posicion}</td>`;
+            let colPosicion = `<td class="text-center" data-encabezado="Posición">${x.posicion}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-principal" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-principal" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colPosicion}${colOptions}</tr>`;
+            let row = `<tr>${colCodigo}${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colPosicion}${colOptions}</tr>`;
             return row;
         }).join('');
     };
     return content;
 };
 
-var armarComboEncabezadoPrincipal = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idEncabezadoPrincipal}">${x.tituloEncabezado}</option>`).join('');
-    options = `<option value="0">-Seleccione un encabezado principal-</option>${options}`;
-    $('#cbo-encabezado-principal').html(options);
+var armarComboEncabezadoPrincipal = () => {
+    let url = `${baseUrl}TablaMaestra/obtenerListaEncabezadoPrincipal?idTablaMaestra=${idTablaMaestra}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            let data = j.object
+            let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idEncabezadoPrincipal}">${x.idEncabezadoPrincipal}_${x.tituloEncabezado == null ? "" : x.tituloEncabezado}</option>`).join('');
+            options = `<option value="0">-Seleccione un encabezado principal-</option>${options}`;
+            $('#cbo-encabezado-principal').html(options);
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })    
 }
 
 /* ================================================
@@ -486,7 +499,7 @@ var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
             let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
             let colTipoDato = `<td class="text-center" data-encabezado="Tipo de dato">${x.tipoDato.tipoDato}</td>`;
             let colParametro = `<td class="text-center" data-encabezado="ID Parámetro">${x.parametro.parametro}</td>`;
-            let colPosicion = `<td data-encabezado="Posición">${x.posicion}</td>`;
+            let colPosicion = `<td class="text-center" data-encabezado="Posición">${x.posicion}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
@@ -508,6 +521,7 @@ var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
 
 var cargarDatos = () => {
     idTablaMaestra = $('#identificador').val()
+    armarComboEncabezadoPrincipal()
     cargarDatosIniciales()
     mostrarEncabezadoPrincipal()
     mostrarEncabezadoSecundario()

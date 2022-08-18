@@ -26,5 +26,6 @@ namespace sisceusi.entidad
         public EncabezadoPrincipalBE encabezadoPrincipal { get; set; }
         public TipoDatoBE tipoDato { get; set; }
         public ParametroBE parametro { get; set; }
+        public List<ParametroBE> listaParametro { get; set; }
     }
 }

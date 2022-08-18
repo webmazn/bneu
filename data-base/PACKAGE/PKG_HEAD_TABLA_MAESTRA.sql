@@ -108,6 +108,11 @@
     poRowAffected OUT NUMBER
   );
   
+  PROCEDURE USP_SEL_LIST_PRINCIPAL(
+    piIdTablaMaestra NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
   PROCEDURE USP_SEL_OBJECT(
     piIdTablaMaestra NUMBER,
     poRef OUT SYS_REFCURSOR

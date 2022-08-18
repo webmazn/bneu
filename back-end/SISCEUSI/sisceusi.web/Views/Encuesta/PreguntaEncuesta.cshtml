@@ -1,7 +1,410 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "PreguntaEncuesta";
+    CampanaEncuestaBE encuesta = ViewData["preguntaMostrar"] == null ? null : (CampanaEncuestaBE)ViewData["preguntaMostrar"];
+    int a = encuesta.idParametroTabla;
 }
 
-<h2>PreguntaEncuesta</h2>
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/encuesta_preguntaEncuesta.js")"></script>
+}
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container mt-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 pt-4">
+                <div class="row">
+                    <div class="col-12 d-flex">
+                        <div class="bg-light w-100 p-4">
+                            <div class="h4 text-cyan">@*ENC0001 CUESTIONARIO - SECCIÓN "D" - CARACTERÍSTICAS Y CONSUMOS DE LOS PRINCIPALES EQUIPOS DE LA PLANTA*@</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label id="subtitulo-maestra" class="font-weight-bold text-azul">@*D10. FUERZA MOTRIZ – OTROS EQUIPOS ELÉCTRICOS*@</label><span id="text-ayuda-maestra" class="text-info">@*<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title=""></i>*@</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div id="pregunta-inicial-maestra" class="form-group text-right">
+                            @*<label class="font-weight-bold text-azul">¿LA PLANTA TIENE F.M. - OTROS EQUIPOS ELECT.?</label>
+                            <div class="form-check form-check-inline">
+                                <input id="chk-pregunta-inicial" class="form-check-input" type="checkbox">
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive tabla-principal">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        @*<tr class="bg-info">
+                            <th class="text-white border-right" colspan="2"></th>
+                            <th class="text-white border-right" colspan="2">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>POTENCIA DE PLACA&nbsp;</span></span></div>
+                            </th>
+                            <th class="text-white border-right">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FACTOR DE UTILIZACIÓN <br> CAPACIDAD INSTALADA</span></span></div>
+                            </th>
+                            <th class="text-white border-right">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>EFICIENCIA</span></span></div>
+                            </th>
+                            <th class="text-white border-right">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CONSUMO DE <br> ELECTRICIDAD APROXIMADO</span></span></div>
+                            </th>
+                            <th class="text-white border-right" colspan="3">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TIEMPO DE <br> OPERACIÓN</span></span></div>
+                            </th>
+                        </tr>
+                        <tr class="bg-azul text-white">
+                            <th class="text-center" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>MOTOR</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOMBRE EQUIPO</span></span></div>
+                            </th>
+                            <th class="v-top" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>POTENCIA</span></span></div>
+                            </th>
+                            <th class="v-top" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>MEDIDA</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>%</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>%</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>kW.h/año</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>H. DÍAS</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>D. SEM.</span></span></div>
+                            </th>
+                            <th class="border-right" scope="col">
+                                <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>S. AÑO</span></span></div>
+                            </th>
+                        </tr>*@
+                    </thead>
+                    <tbody>
+                        @*<tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                1
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios2" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios2">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios4" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios4">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                2
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta03" id="exampleRadios3" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios3">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta03" id="exampleRadios6" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios6">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                3
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta04" id="exampleRadios4" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios4">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta04" id="exampleRadios8" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios8">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                4
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta05" id="exampleRadios5" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios5">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta05" id="exampleRadios10" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios10">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                5
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta06" id="exampleRadios6" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios6">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta06" id="exampleRadios12" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios12">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                6
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta07" id="exampleRadios7" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios7">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta07" id="exampleRadios14" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios14">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                7
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta08" id="exampleRadios8" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios8">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta08" id="exampleRadios16" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios16">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                8
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta09" id="exampleRadios9" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios9">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta09" id="exampleRadios18" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios18">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                9
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta010" id="exampleRadios10" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios10">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta010" id="exampleRadios20" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios20">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                10
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta011" id="exampleRadios11" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios11">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta011" id="exampleRadios22" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios22">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                11
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta012" id="exampleRadios12" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios12">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta012" id="exampleRadios24" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios24">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-encabezado="Calderos" scope="row">
+                                12
+                            </td>
+                            <td class="text-center" data-encabezado="Nombre del equipo">Nombre del equipo</td>
+                            <td class="v-top text-center" data-encabezado="POTENCIA">2,000</td>
+                            <td class="v-top text-center" data-encabezado="MEDIDA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pregunta013" id="exampleRadios13" value="si" checked>
+                                    <label class="form-check-label ml-1" for="exampleRadios13">KW</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input class="form-check-input" type="radio" name="pregunta013" id="exampleRadios26" value="no">
+                                    <label class="form-check-label ml-1" for="exampleRadios26">HP</label>
+                                </div>
+                            </td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">50</td>
+                            <td class="text-center" data-encabezado="%">30%</td>
+                            <td class="text-center" data-encabezado="Horas días">20</td>
+                            <td class="text-center" data-encabezado="Días semanas">120</td>
+                            <td class="text-center" data-encabezado="Semanas Año">2,000</td>
+                        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="dropdown-divider my-4"></div>
+    <div class="row">
+        <div class="col-12">
+            <div id="pregunta-cierre-maestra" class="form-group text-right m-0">
+                @*<div class="form-check form-check-inline m-0">
+                    <input id="chk-pregunta-cierre" class="form-check-input" type="checkbox" id="check-final">
+                </div>
+                <label class="font-weight-bold text-azul m-0" for="check-final">No tiene equipos en la sección “FUERZA MOTRIZ – OTROS EQUIPOS ELÉCTRICOS”</label>*@
+            </div>
+        </div>
+    </div>
+    <div class="dropdown-divider my-4"></div>
+    <div class="row">
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+            <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+        </div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-verde-petroleo w-100 mb-3" href="javascript:print()">Imprimir</a></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Salir</a></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-d-05.html">Continuar</a></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var preguntaEncuesta = @Html.Raw(Json.Encode(encuesta));
+</script>
 

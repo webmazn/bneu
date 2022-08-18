@@ -150,11 +150,11 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EncabezadoPrincipalBE
                 {
                     idEncabezadoPrincipal = (int)x.IDENCABEZADOPRINCIPAL,
-                    tituloEncabezado = (string)x.TITULOENCABEZADO,
-                    abreviacion = (string)x.ABREVIACION,
-                    usarAbreviado = (string)x.USARABREVIADO,
+                    tituloEncabezado = x.TITULOENCABEZADO == null ? "" : (string)x.TITULOENCABEZADO,
+                    abreviacion = x.ABREVIACION == null ? "" : (string)x.ABREVIACION,
+                    usarAbreviado = x.USARABREVIADO == null ? "" : (string)x.USARABREVIADO,
                     posicion = x.POSICION == null ? 0 : (int)x.POSICION,
-                    descripcionIconoAyuda = (string)x.DESCRIPCIONICONOAYUDA,
+                    descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : (string)x.DESCRIPCIONICONOAYUDA,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -282,6 +282,26 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return seGrabo;
+        }
+
+        public List<EncabezadoPrincipalBE> obtenerListaEncabezadoPrincipal(EncabezadoPrincipalBE encabezado, OracleConnection db)
+        {
+            List<EncabezadoPrincipalBE> lista = new List<EncabezadoPrincipalBE>();
+
+            try
+            {
+                string sp = $"{Package.TablaMaestra}USP_SEL_LIST_PRINCIPAL";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdTablaMaestra", encabezado.idTablaMaestra);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<EncabezadoPrincipalBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return lista;
         }
 
         public TablaMaestraBE obtenerTablaMaestra(TablaMaestraBE encabezado, OracleConnection db)

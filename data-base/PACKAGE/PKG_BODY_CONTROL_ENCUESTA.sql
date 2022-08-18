@@ -118,6 +118,35 @@
     FROM T_GENM_CAMPANA_ENCUESTA
     WHERE idCampana = (SELECT idCampana FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta);
   END USP_SEL_PREGUNTA_ENCUESTA;
+  
+  PROCEDURE USP_SEL_LIST_ENC_SECUNDARIO(
+    piIdParametroTabla NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    ens.idencabezadosecundario, ens.tituloEncabezado, ens.abreviacion, ens.usarAbreviado, ens.posicion, ens.idOrientacion, ens.descripcionIconoAyuda, ens.idTipoControl, ens.idTipoDato, ens.idParametro, ens.cantidadFilas, ens.agregarFilas,
+    enp.idEncabezadoPrincipal, enp.tituloEncabezado tituloEncabezadoPrincipal, enp.abreviacion abreviacionPrincipal, enp.usarAbreviado usarAbreviadoPrincipal, enp.posicion posicionPrincipal, enp.descripcionIconoAyuda descripcionIconoAyudaPrinc,
+    tma.idTablaMaestra, tma.tituloPrincipal, tma.subtitulo, tma.descripcionIconoAyuda descripcionIconoAyudaMaes, tma.preguntaInicial, tma.preguntaCierre, tma.idEstiloTabla
+    FROM    T_GEND_ENCABEZADO_SECUNDARIO ens
+    INNER JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ens.idEncabezadoPrincipal = enp.idEncabezadoPrincipal AND enp.idEstado = '1'
+    INNER JOIN T_GENM_TABLA_MAESTRA tma ON enp.idTablaMaestra = tma.idTablaMaestra AND tma.idEstado = '1'
+    WHERE
+    tma.idTablaMaestra = piIdParametroTabla AND ens.idEstado = '1'
+    ORDER BY enp.posicion, ens.posicion ASC;
+  END USP_SEL_LIST_ENC_SECUNDARIO;
+  
+  PROCEDURE USP_SEL_PARAMETRO(
+    piIdParametro NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT  *
+    FROM  T_GENM_PARAMETRO
+    WHERE idparentparametro = piIdParametro AND idEstado = '1'; 
+  END USP_SEL_PARAMETRO;
 
 END PKG_SISCEUSI_CONTROL_ENCUESTA;
 

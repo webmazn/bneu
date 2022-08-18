@@ -176,6 +176,7 @@
     <Content Include="Scripts\Sisceusi\encuesta_firma.js" />
     <Content Include="Scripts\Sisceusi\encuesta_formulario.js" />
     <Content Include="Scripts\Sisceusi\encuesta_inicio.js" />
+    <Content Include="Scripts\Sisceusi\encuesta_preguntaEncuesta.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
     <Content Include="Scripts\Sisceusi\interno_index.js" />
     <Content Include="Scripts\Sisceusi\parametro_index.js" />

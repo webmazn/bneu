@@ -43,6 +43,16 @@
     piIdControlEncuesta NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_LIST_ENC_SECUNDARIO(
+    piIdParametroTabla NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_PARAMETRO(
+    piIdParametro NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_CONTROL_ENCUESTA;
 

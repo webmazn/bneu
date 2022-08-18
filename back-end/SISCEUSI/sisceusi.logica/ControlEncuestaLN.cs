@@ -73,5 +73,27 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campamaEncuesta)
+        {
+            List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerTablaMaestraEncabezados(campamaEncuesta, cn);
+                if (lista.Count > 0)
+                {
+                    lista.ForEach(x =>
+                    {
+                        if (x.idParametro > 0)
+                        {
+                            x.listaParametro = datos.obtenerListaParametro(new ParametroBE { idParametro = x.idParametro }, cn);
+                        }
+                    });
+                }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
     }
 }

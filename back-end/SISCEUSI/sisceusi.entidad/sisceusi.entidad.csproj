@@ -53,6 +53,7 @@
     <Compile Include="EmpresaLuzBE.cs" />
     <Compile Include="EncabezadoPrincipalBE.cs" />
     <Compile Include="EncabezadoSecundarioBE.cs" />
+    <Compile Include="EstiloTablaBE.cs" />
     <Compile Include="EtapaBE.cs" />
     <Compile Include="GiroBE.cs" />
     <Compile Include="GrupoEmpresaBE.cs" />

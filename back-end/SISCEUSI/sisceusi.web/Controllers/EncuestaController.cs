@@ -97,7 +97,7 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
-        public ActionResult obtenerListaCampanaEncuesta(int id)
+        public ActionResult PreguntaEncuesta(int id)
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
             List<CampanaEncuestaBE> listCampanaEncuesta = ViewData["pregunta"] != null ? (List<CampanaEncuestaBE>)ViewData["pregunta"] : logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
@@ -106,7 +106,7 @@ namespace sisceusi.web.Controllers
             CampanaEncuestaBE campanaEncuesta = listCampanaEncuesta[0];
             if (campanaEncuesta.idParametroTabla > 0)
             {
-                campanaEncuesta.listaEncabezadoSecundario =  
+                campanaEncuesta.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = campanaEncuesta.idParametroTabla });
             }
             ViewData["preguntaMostrar"] = campanaEncuesta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
