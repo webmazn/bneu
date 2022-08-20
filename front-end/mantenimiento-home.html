@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Balance Nacional de Energía Útil | Reporte</title>
+    <meta name="description" content="Balance Nacional de Energía Útil">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-57x57.png" sizes="57x57">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-60x60.png" sizes="60x60">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-76x76.png" sizes="76x76">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-114x114.png" sizes="114x114">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-144x144.png" sizes="144x144">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" type="image/x-icon" href="images/favicon/apple-icon-180x180.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="images/favicon/android-icon-192x192.png" sizes="192x192">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+    <meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
+      <div class="container-fluid bg-nuevo-azul">
+        <div class="container menu-main">
+          <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
+            <ul class="navbar-nav mr-md-auto">
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="https://www.gob.pe/minem" target="_blank"><img src="./images/logo_mem.svg" height="48"></a></li>
+              <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="./images/logo_dgee.svg" height="48"></a></li>
+            </ul>
+            <ul class="navbar-nav ml-md-auto">
+              <li class="nav-item align-self-center"><a class="btn btn-danger btn-md px-4 font-weight-bold" href="./login.html" role="button">CERRAR SESIÓN</a></li>
+            </ul>
+          </header>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container menu-sub">
+          <nav class="navbar navbar-expand-lg p-0 py-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="./index.html"><img src="./images/logo_web.svg" height="33"></a></li>
+                <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-4" href="./index.html">INICIO</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./campanas.html">CAMPAÑAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
+                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
+              </ul>
+              <div class="btn-group w-sm-100"><a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>USU0001 - JUAN PEREZ SANCHEZ <br></b></small><small class="text-truncate">20105678910 - NOMBRE EMPRESA</small></a>
+                <div class="dropdown-menu dropdown-menu-right w-sm-100"><span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">Administrado</span><br><span class="badge badge-info">Especialista</span><br><span class="badge badge-info">Encuestado</span></span><a class="dropdown-item" href="./maestro-mantenimiento.html"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="./cambiar.html"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="./login.html"><i class="fas fa-sign-out-alt pr-1"></i>Salir del sistema</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="flecha-top d-print-none"><i class="fas fa-angle-double-right fa-2x text-dark btn-slider-bottom"></i></div>
+    <div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_fb.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ig.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_tw.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_yt.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_wp.svg"></a><a href="#" target="_blank"><img class="icon_redes" src="./images/icon_ld.svg"></a></div>
+    <div class="container-fluid map-root" id="historia"></div>
+    <div class="container my-4" id="cuerpo">
+      <div class="row">
+        <div class="col-12">
+          <div class="container m-0 px-0 py-4">
+            <div class="row">
+              <div class="col-md-12 col-lg-9 d-flex">
+                <div class="bg-light p-4">
+                  <div class="h4 text-cyan">Estadísticas&nbsp;</div>
+                  <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-3">
+                <div class="row">
+                  <div class="col-12"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                    <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE BANNER SLIDER PRINCIPAL</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-titulo-banner">TÍTULO DEL BANNER</label>
+                      <input class="form-control" type="text" id="txt-titulo-banner" placeholder="Ingrese título">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-descripcion-banner">DESCRIPCIÓN DEL BANNER</label>
+                      <input class="form-control" type="text" id="txt-descripcion-banner" placeholder="Ingrese descripción">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-titulo-boton">TÍTULO DEL BOTÓN</label>
+                      <input class="form-control" type="text" id="txt-titulo-boton" placeholder="Ingrese título">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-enlace-boton">ENLACE DEL BOTÓN</label>
+                      <input class="form-control" type="text" id="txt-enlace-boton" placeholder="Ingrese enlace">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group text-left">
+                      <label class="font-weight-bold" for="fle-requisito-01">IMAGEN DE LA PUBLICACIÓN</label>
+                      <div class="input-group">
+                        <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-01" placeholder="Subir imagen" required>
+                        <input class="d-none fil-file-control" type="file" id="fle-requisito-01" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                        <div class="input-group-append">
+                          <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-01">Seleccionar</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-secondary w-100 mb-3" href="#">Cancelar</a></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-success w-100 mb-3" href="#">Agregar</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive tabla-principal">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr class="bg-azul text-white">
+                        <th scope="col">
+                          <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN PRINCIPAL&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>BOTÓN&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE BOTÓN&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN PRICIPAL&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN DE FONDO&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col" style="min-width:90px;"><a class="btn btn-sm btn-info btn-table" href="#"><i class="fa fa-plus"></i></a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="0"><span>Título del artículo1</span></td>
+                        <td data-encabezado="Descripción principal"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Botón">Ver más</td>
+                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                        <td data-encabezado="Descripción principal"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Enlace botón" style="min-width:180px;">
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">nombre_archivo.jpg</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="1"><span>Título del artículo2</span></td>
+                        <td data-encabezado="Descripción principal"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Botón">Ver más</td>
+                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                        <td data-encabezado="Descripción principal"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Enlace botón" style="min-width:180px;">
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">nombre_archivo.jpg</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="2"><span>Título del artículo3</span></td>
+                        <td data-encabezado="Descripción principal"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Botón">Ver más</td>
+                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                        <td data-encabezado="Descripción principal"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Enlace botón" style="min-width:180px;">
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">nombre_archivo.jpg</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="font-weight-bold" for="txt-descripcion-fija">DESCRIPCIÓN FIJA</label>
+                  <input class="form-control" type="text" id="txt-descripcion-fija" placeholder="Ingrese descripción">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE PUBLICACIONES Y/O ARTÍCULOS</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-titulo-publicacion">TÍTULO DE LA PUBLICACIÓN</label>
+                      <input class="form-control" type="text" id="txt-titulo-publicacion" placeholder="Ingrese título">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-descripcion-publicacion">DESCRIPCIÓN DE LA PUBLICACIÓN</label>
+                      <input class="form-control" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group text-left">
+                      <label class="font-weight-bold" for="fle-requisito-01">IMAGEN DE LA PUBLICACIÓN</label>
+                      <div class="input-group">
+                        <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-01" placeholder="Subir imagen" required>
+                        <input class="d-none fil-file-control" type="file" id="fle-requisito-01" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                        <div class="input-group-append">
+                          <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-01">Seleccionar</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-secondary w-100 mb-3" href="#">Cancelar</a></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-success w-100 mb-3" href="#">Agregar</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive tabla-principal">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr class="bg-azul text-white">
+                        <th scope="col">
+                          <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                        </th>
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col" style="min-width:90px;"><a class="btn btn-sm btn-info btn-table" href="#"><i class="fa fa-plus"></i></a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="0"><span>Título del artículo1</span></td>
+                        <td data-encabezado="Descripción"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Imagen" style="min-width:180px;">
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">nombre_archivo.jpg</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="1"><span>Título del artículo2</span></td>
+                        <td data-encabezado="Descripción"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Imagen" style="min-width:180px;">
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">nombre_archivo.jpg</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="2"><span>Título del artículo3</span></td>
+                        <td data-encabezado="Descripción"><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio culpa excepturi neque numquam inventore, consequuntur eos autem possimus nostrum laboriosam iusto perferendis et, cum nulla ea porro eaque impedit tempore.</span></td>
+                        <td data-encabezado="Imagen" style="min-width:180px;">
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">nombre_archivo.jpg</span>
+                        </td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE ENLACES DE LA COLUMNA LATERAL DERECHA</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-titulo-enlace">TÍTULO DEL ENLACE</label>
+                      <input class="form-control" type="text" id="txt-titulo-enlace" placeholder="Ingrese título">
+                    </div>
+                  </div>
+                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="txt-descripcion-enlace">DESCRIPCIÓN DEL ENLACE</label>
+                      <input class="form-control" type="text" id="txt-descripcion-enlace" placeholder="Ingrese descripción">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-secondary w-100 mb-3" href="#">Cancelar</a></div>
+                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-success w-100 mb-3" href="#">Agregar</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive tabla-principal">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr class="bg-azul text-white">
+                        <th scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col">
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE&nbsp;</span></span></div>
+                        </th>
+                        <th class="text-center" scope="col" style="width:90px;"><a class="btn btn-sm btn-info btn-table" href="#"><i class="fa fa-plus"></i></a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="0"><span class="ml-2">Título del artículo1</span></td>
+                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="1"><span class="ml-2">Título del artículo2</span></td>
+                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-encabezado="Título" scope="row" data="2"><span class="ml-2">Título del artículo3</span></td>
+                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                          <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                          <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="font-weight-bold mt-5">LOGOS PRINCIPALES</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group text-left">
+                  <label class="font-weight-bold" for="fle-requisito-02">ÍCONO PRINCIPAL DE LA WEB</label>
+                  <div class="input-group">
+                    <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-02" placeholder="Subir documentos" required>
+                    <input class="d-none fil-file-control" type="file" id="fle-requisito-02" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                    <div class="input-group-append">
+                      <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-02">Seleccionar</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group text-left">
+                  <label class="font-weight-bold" for="fle-requisito-03">ÍCONO DE LA DGEE</label>
+                  <div class="input-group">
+                    <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-03" placeholder="Subir documentos" required>
+                    <input class="d-none fil-file-control" type="file" id="fle-requisito-03" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                    <div class="input-group-append">
+                      <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-03">Seleccionar</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="font-weight-bold mt-5">ENLACES SOCIALES</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_fb.svg"></div>
+                  <input class="form-control" type="text" placeholder="Ingresar enlace">
+                </div>
+              </div>
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_tw.svg"></div>
+                  <input class="form-control" type="text" placeholder="Ingresar enlace">
+                </div>
+              </div>
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_ig.svg"></div>
+                  <input class="form-control" type="text" placeholder="Ingresar enlace">
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_yt.svg"></div>
+                  <input class="form-control" type="text" placeholder="Ingresar enlace">
+                </div>
+              </div>
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_wp.svg"></div>
+                  <input class="form-control" type="text" placeholder="Ingresar enlace">
+                </div>
+              </div>
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_ld.svg"></div>
+                  <input class="form-control" type="text" placeholder="Ingresar enlace">
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider mt-5"></div>
+            <div class="row">
+              <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"></div>
+              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+                <button class="btn btn-info w-100 mb-3" href="#">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal customChatBot fade" id="modalChatBot" tabindex="-1" role="dialog" aria-labelledby="modalChatBotLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Contáctenos</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label class="col-form-label" for="recipient-name">Correo electrónico:</label>
+                <input class="form-control" id="recipient-name" type="email">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" id="message-text">Mensaje:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="alert alert-danger d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-error">
+                          <div class="sa-error-x">
+                            <div class="sa-error-left"></div>
+                            <div class="sa-error-right"></div>
+                          </div>
+                          <div class="sa-error-placeholder"></div>
+                          <div class="sa-error-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Error de envío</h6>
+                      <hr><small class="mb-0">Error al enviar el correo.</small>
+                    </div>
+                  </div>
+                  <div class="alert alert-success d-flex align-items-stretch" role="alert">
+                    <div class="alert-wrap mr-3">
+                      <div class="sa">
+                        <div class="sa-success">
+                          <div class="sa-success-tip"></div>
+                          <div class="sa-success-long"></div>
+                          <div class="sa-success-placeholder"></div>
+                          <div class="sa-success-fix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="alert-wrap">
+                      <h6>Bien hecho</h6>
+                      <hr><small class="mb-0">Envío de correo exitoso.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" type="button">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Desea eliminar el registro?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" id="eliminacionRow" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalCopia" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmar copia</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <h3>¿Desea copiar la campaña?</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, incidunt repellendus eos praesentium debitis consectetur quidem assumenda aliquam quod numquam veniam excepturi nostrum id rerum asperiores? Obcaecati molestiae animi similique!</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-warning" id="copiaRow" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
+      <div class="chat-bot" data-toggle="modal" data-target="#modalChatBot"></div>
+      <footer class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Contáctenos</div>
+                <ul class="list-unstyled mr-0">
+                  <li class="py-1"><a class="text-white" href="tel: +5114111100">Teléfono: (+511) 411-1100</a></li>
+                  <li class="py-1"><a class="text-white" href="mailto:webmaster@minem.gob.pe?Subject=Contacto%20desde%20la%20web%20de%20MRV%20Plataforma%20del%20Sector%20Energético">webmaster@minem.gob.pe</a></li>
+                  <li class="py-1">Dirección General de Eficiencia Energética</li>
+                  <li class="py-1"><a class="text-white" href="https://www.google.com/maps/d/u/0/viewer?msa=0&amp;hl=en&amp;ie=UTF8&amp;ll=-12.097192999999981%2C-77.00643500000001&amp;spn=0%2C0&amp;t=m&amp;source=embed&amp;mid=1oiTLqK_OscJsqGYEQbVNHyO68Dw&amp;z=17" target="_blank">Av. Las Artes Sur 260. San Borja. Lima. Perú</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Enlaces</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="http://eficienciaenergetica.minem.gob.pe/" target="_blank">Sistema Interactivo de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank">Dirección General de Eficiencia Energética</a></li>
+                  <li class="py-1"><a class="text-white" href="https://www.gob.pe/minem" target="_blank">Ministerio de Energía y Minas</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-12 col-md-4 text-white">
+                <div class="lead font-weight-bold">Más información</div>
+                <ul class="list-unstyled">
+                  <li class="py-1"><a class="text-white" href="./documentos/Manual_Usuario_MRV.pdf" download>Manual de Usuario</a></li>
+                  <li class="py-1"><a class="text-white" href="./terminos-y-condiciones.html">Términos y Condiciones</a></li>
+                  <li class="py-1"><a class="text-white" href="./mapa-del-ditio.html" target="_blank">Mapa del Sitio</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="dropdown-divider"></div>
+          </div>
+          <div class="col-sm-12 col-md-12 text-right text-white">
+            <div class="row">
+              <div class="col-6 text-left"><img src="./images/logo_web_footer.svg" height="18"></div>
+              <div class="col-6"><small>&copy; Ministerio de Energía y Minas | Todos los derechos reservados</small></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
