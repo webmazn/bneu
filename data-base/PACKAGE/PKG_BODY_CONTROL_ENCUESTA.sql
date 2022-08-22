@@ -116,7 +116,9 @@
     *
     --MIN(numeroOrdenPregunta) numeroOrdenPregunta
     FROM T_GENM_CAMPANA_ENCUESTA
-    WHERE idCampana = (SELECT idCampana FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta);
+    WHERE 
+    idCampana = (SELECT idCampana FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta) AND idEstado = '1'
+    ORDER BY numeroOrdenPregunta ASC;
   END USP_SEL_PREGUNTA_ENCUESTA;
   
   PROCEDURE USP_SEL_LIST_ENC_SECUNDARIO(
@@ -126,9 +128,9 @@
   BEGIN
     OPEN poRef FOR
     SELECT
-    ens.idencabezadosecundario, ens.tituloEncabezado, ens.abreviacion, ens.usarAbreviado, ens.posicion, ens.idOrientacion, ens.descripcionIconoAyuda, ens.idTipoControl, ens.idTipoDato, ens.idParametro, ens.cantidadFilas, ens.agregarFilas,
+    ens.idencabezadosecundario, ens.tituloEncabezado, ens.abreviacion, ens.usarAbreviado, ens.posicion, ens.idOrientacion, ens.descripcionIconoAyuda, ens.idTipoControl, ens.idTipoDato, ens.idParametro, 
     enp.idEncabezadoPrincipal, enp.tituloEncabezado tituloEncabezadoPrincipal, enp.abreviacion abreviacionPrincipal, enp.usarAbreviado usarAbreviadoPrincipal, enp.posicion posicionPrincipal, enp.descripcionIconoAyuda descripcionIconoAyudaPrinc,
-    tma.idTablaMaestra, tma.tituloPrincipal, tma.subtitulo, tma.descripcionIconoAyuda descripcionIconoAyudaMaes, tma.preguntaInicial, tma.preguntaCierre, tma.idEstiloTabla
+    tma.idTablaMaestra, tma.tituloPrincipal, tma.subtitulo, tma.descripcionIconoAyuda descripcionIconoAyudaMaes, tma.preguntaInicial, tma.preguntaCierre, tma.idEstiloTabla, tma.cantidadFilas, tma.agregarFilas
     FROM    T_GEND_ENCABEZADO_SECUNDARIO ens
     INNER JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ens.idEncabezadoPrincipal = enp.idEncabezadoPrincipal AND enp.idEstado = '1'
     INNER JOIN T_GENM_TABLA_MAESTRA tma ON enp.idTablaMaestra = tma.idTablaMaestra AND tma.idEstado = '1'

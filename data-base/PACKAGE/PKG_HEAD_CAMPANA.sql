@@ -79,6 +79,7 @@
     piIdCampana NUMBER,    
     piPregunta VARCHAR2,
     piNumeroOrdenPregunta NUMBER,
+    piSeparador VARCHAR2,
     piIdTipoControl NUMBER,
     piIdParametroTabla NUMBER,
     piIdUsuarioCreacion NUMBER,

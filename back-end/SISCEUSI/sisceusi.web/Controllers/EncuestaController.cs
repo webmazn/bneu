@@ -100,15 +100,45 @@ namespace sisceusi.web.Controllers
         public ActionResult PreguntaEncuesta(int id)
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
-            List<CampanaEncuestaBE> listCampanaEncuesta = ViewData["pregunta"] != null ? (List<CampanaEncuestaBE>)ViewData["pregunta"] : logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
-            Session["pregunta"] = listCampanaEncuesta;
+            List<CampanaEncuestaBE> listCampanaEncuesta = logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
+            //Session["pregunta"] = listCampanaEncuesta;
             //realizar validacion para mostrar la pregunta
-            CampanaEncuestaBE campanaEncuesta = listCampanaEncuesta[0];
-            if (campanaEncuesta.idParametroTabla > 0)
+
+            //Ubicarse en la ultima pregunta y recorrer hasta el separador de pagina
+            int ultimaPregunta = 0;
+            bool detener = false;
+            List<CampanaEncuestaBE> listaPregunta = new List<CampanaEncuestaBE>();
+            while (!detener)
             {
-                campanaEncuesta.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = campanaEncuesta.idParametroTabla });
+                CampanaEncuestaBE campanaEncuesta = listCampanaEncuesta.Find(x => x.numeroOrdenPregunta == ultimaPregunta);
+                if (campanaEncuesta != null)
+                {
+                    listaPregunta.Add(campanaEncuesta);
+                    ultimaPregunta++;
+                    if (campanaEncuesta.separador.Equals("1"))
+                    {
+                        detener = true;
+                    }
+                }
+                else
+                {
+                    detener = true;
+                }
             }
-            ViewData["preguntaMostrar"] = campanaEncuesta;
+            //Verificar cada pregunta si presenta una tabla mestra
+            listaPregunta.ForEach(x =>
+            {
+                if (x.idParametroTabla > 0)
+                {
+                    x.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = x.idParametroTabla });
+                }
+            });
+            //CampanaEncuestaBE campanaEncuesta = listCampanaEncuesta[0];
+            //if (campanaEncuesta.idParametroTabla > 0)
+            //{
+            //    campanaEncuesta.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = campanaEncuesta.idParametroTabla });
+            //}
+            ViewData["preguntaMostrar"] = listaPregunta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
         }

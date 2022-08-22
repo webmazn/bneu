@@ -18,9 +18,7 @@ namespace sisceusi.entidad
         public string descripcionIconoAyuda { get; set; }
         public int idTipoControl { get; set; }
         public int idTipoDato { get; set; }
-        public int idParametro { get; set; }
-        public int cantidadFilas { get; set; }
-        public string agregarFilas { get; set; }
+        public int idParametro { get; set; }        
         public string idEstado { get; set; }
 
         public EncabezadoPrincipalBE encabezadoPrincipal { get; set; }

@@ -1,8 +1,7 @@
 ﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "PreguntaEncuesta";
-    CampanaEncuestaBE encuesta = ViewData["preguntaMostrar"] == null ? null : (CampanaEncuestaBE)ViewData["preguntaMostrar"];
-    int a = encuesta.idParametroTabla;
+    List<CampanaEncuestaBE> encuesta = ViewData["preguntaMostrar"] == null ? null : (List<CampanaEncuestaBE>)ViewData["preguntaMostrar"];
 }
 
 @section scripts_footer {
@@ -405,6 +404,6 @@
 </div>
 
 <script type="text/javascript">
-    var preguntaEncuesta = @Html.Raw(Json.Encode(encuesta));
+    var preguntasEncuesta = @Html.Raw(Json.Encode(encuesta));
 </script>
 

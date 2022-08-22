@@ -161,9 +161,7 @@ namespace sisceusi.datos
                     descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : x.DESCRIPCIONICONOAYUDA,
                     idTipoControl = x.IDTIPOCONTROL == null ? 0 : (int)x.IDTIPOCONTROL,
                     idTipoDato = x.IDTIPODATO == null ? 0 : (int)x.IDTIPODATO,
-                    idParametro = x.IDPARAMETRO == null ? 0 : (int)x.IDPARAMETRO,
-                    cantidadFilas = x.CANTIDADFILAS == null ? 0 : (int)x.CANTIDADFILAS,
-                    agregarFilas = x.AGREGARFILAS == null ? "" : (string)x.AGREGARFILAS,
+                    idParametro = x.IDPARAMETRO == null ? 0 : (int)x.IDPARAMETRO,  
                     idEncabezadoPrincipal = (int)x.IDENCABEZADOPRINCIPAL,
                     encabezadoPrincipal = new EncabezadoPrincipalBE {
                         idEncabezadoPrincipal = (int)x.IDENCABEZADOPRINCIPAL,
@@ -180,7 +178,9 @@ namespace sisceusi.datos
                             descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDAMAES == null ? "" : x.DESCRIPCIONICONOAYUDAMAES,
                             preguntaInicial = x.PREGUNTAINICIAL == null ? "" : (string)x.PREGUNTAINICIAL,
                             preguntaCierre = x.PREGUNTACIERRE == null ? "" : (string)x.PREGUNTACIERRE,
-                            idEstiloTabla = x.IDESTILOTABLA == null ? 0 : (int)x.IDESTILOTABLA
+                            idEstiloTabla = x.IDESTILOTABLA == null ? 0 : (int)x.IDESTILOTABLA,
+                            cantidadFilas = x.CANTIDADFILAS == null ? 0 : (int)x.CANTIDADFILAS,
+                            agregarFilas = x.AGREGARFILAS == null ? "" : (string)x.AGREGARFILAS
                         }
                     }
                 }).ToList();

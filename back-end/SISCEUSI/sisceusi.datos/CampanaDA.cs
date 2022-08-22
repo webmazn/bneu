@@ -186,6 +186,7 @@ namespace sisceusi.datos
                 p.Add("piIdCampana", campanaEncuesta.idCampana);
                 p.Add("piPregunta", campanaEncuesta.pregunta);
                 p.Add("piNumeroOrdenPregunta", campanaEncuesta.numeroOrdenPregunta);
+                p.Add("piSeparador", campanaEncuesta.separador); 
                 p.Add("piIdTipoControl", campanaEncuesta.idTipoControl);
                 p.Add("piIdParametroTabla", campanaEncuesta.idParametroTabla);
                 p.Add("piIdUsuarioCreacion", campanaEncuesta.idUsuarioCreacion);

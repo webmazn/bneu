@@ -540,16 +540,19 @@ var grabar = () => {
     if (validarEspaciosBlanco(observaciones)) arr.push("Debe ingresar una observación")
     if (arrEmpresaSelect00.length == 0 && arrEmpresaSelect01.length == 0) arr.push("No ha seleccionado ninguna empresa para la campaña")
     else if (arrEmpresaPerfil00.length > 0 || arrEmpresaPerfil01.length > 0) arr.push("Hay empresas que no han sido asignados con un supervisor")
+    //if ($("#contenedorEncuesta .seccion-pregunta:last").next().length == 0) arr.push("Debe agregar un separador de página a la última pregunta")
 
     let arrPregunta = []
     $('#contenedorEncuesta').find('.seccion-pregunta').each((x, y) => {
+        let separador = $(y).next().length == 0 ? '0' : $(y).next()[0].className.indexOf("seccion-separador") != -1 ? '1' : '0'
         let tipoControl = $(y).find('label .tituloPregunta').data('tipo')
-        let idTipoControl = tipoControl === 'txt' ? 1 : tipoControl === 'cbo' ? 2 : tipoControl === 'chk' ? 3 : tipoControl === 'rad' ? 4 : tipoControl === 'tbl' ? 5 : 0
+        let idTipoControl = tipoControl === 'txt' ? 1 : tipoControl === 'cbo' ? 2 : tipoControl === 'chk' ? 3 : tipoControl === 'rad' ? 4 : tipoControl === 'tbl' ? 5 : tipoControl === 'sep' ? 6 : 0
         if (tipoControl === 'txt') {
             arrPregunta.push({
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
                 listaRespuesta: []
@@ -568,6 +571,7 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
                 listaRespuesta: arrRespuesta
@@ -586,6 +590,7 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
                 listaRespuesta: arrRespuesta
@@ -604,6 +609,7 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
                 listaRespuesta: arrRespuesta
@@ -614,6 +620,7 @@ var grabar = () => {
                 //pregunta: $(y).find('div div input').val(),
                 pregunta: '',
                 numeroOrdenPregunta: x,
+                separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: $(y).find('div div select').val(),
                 listaRespuesta: []
@@ -994,10 +1001,32 @@ var armarPreguntas = (x) => {
         $("#ninguna-pregunta").hide();
         $("#contenedorEncuesta").append(htmlTbl);
         $('[data-toggle="tooltip"]').tooltip();
+        let options = obtenerOpcionesTablaMaestra()
+        $('#contenedorEncuesta').find(`#p-${x.idCampanaEncuesta}`).find('div div select').html(options)
         $('#contenedorEncuesta').find(`#p-${x.idCampanaEncuesta}`).find('div div select').val(x.idParametroTabla)
         conteoPreguntasV2();
     }
 
+    if (x.separador == '1') {
+        let separador = `<div class="col-12 my-2 pt-3 border bg-light seccion-separador">` +
+                            `<div class="form-group">` +
+                                `<label class="font-weight-bold d-flex justify-content-between align-items-center">` +
+                                    `<div class="d-flex justify-content-between align-items-center">` +
+                                        `<i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>` +
+                                        `<span class="tituloPregunta" data-tipo="sep">———————— (SEPARADOR PREGUNTA) ————————</span>` +
+                                    `</div>` +
+                                    `<i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>` +
+                                `</label>` +
+                                `<div class="input-group-text border-0 bg-warning font-weight-bold w-100">SEPARADOR DE PREGUNTAS - BOTÓN CONTINUAR (ÚLTIMO SEPARADOR FINALIZA) </div>` +
+                            `</div>` +
+                        `</div>`
+        $("#contenedorEncuesta").append(separador)
+    }
+}
+
+var obtenerOpcionesTablaMaestra = () => {
+    let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">${x.tituloPrincipal}</option>`).join('');
+    return options = `<option value="0">-Seleccione una tabla maestra-</option>${options}`
 }
 
 function conteoPreguntasV2() {

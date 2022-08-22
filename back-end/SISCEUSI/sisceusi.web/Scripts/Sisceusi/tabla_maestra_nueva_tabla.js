@@ -60,6 +60,8 @@ var grabarTablaMaestra = () => {
     let preguntaInicial = $("#txt-pregunta-confirmacion-01").val().trim()
     let preguntaCierre = $("#txt-pregunta-confirmacion-02").val().trim()
     let idEstiloTabla = $("#cbo-estilo-tabla").val()
+    let cantidadFilas = $("#txt-filas-por-defecto").val()
+    let agregarFilas = $("#exampleRadios5").prop('checked')
     let idEstado = $("#cbo-estado-oficial").val()
 
     if (validarEspaciosBlanco(tituloPrincipal)) arr.push("Debe ingresar el título principal o nombre de la tabla maestra");
@@ -68,6 +70,8 @@ var grabarTablaMaestra = () => {
     if (validarEspaciosBlanco(preguntaInicial)) arr.push("Debe ingresar la pregunta inicial");
     if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
     if (validarCombo(idEstiloTabla)) arr.push("Debe seleccionar el estilo de tabla");
+    if (validarEspaciosBlanco(cantidadFilas)) arr.push("Debe ingresar la cantidad de filas");
+    if (cantidadFilas < 0 || cantidadFilas > 100) arr.push("La cantidad de filas debe ser mayor a 0 y menor a 100");
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
@@ -76,8 +80,10 @@ var grabarTablaMaestra = () => {
         return;
     }
 
+    agregarFilas = $("#exampleRadios5").prop('checked') ? '1' : '0'
+
     let url = `${baseUrl}TablaMaestra/grabarTablaMaestra`;
-    let data = { idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, idEstado, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, cantidadFilas, agregarFilas, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -182,9 +188,7 @@ var grabarEncabezadoSecundario = () => {
     let descripcionIconoAyuda = $("#txt-question-mark-02").val().trim()
     let idTipoControl = $("#cbo-control-respuesta").val()
     let idTipoDato = $("#cbo-tipo-dato").val()
-    let idParametro = $("#cbo-id-parametro").val()
-    let cantidadFilas = $("#txt-filas-por-defecto").val()
-    let agregarFilas = $("#exampleRadios5").prop('checked')
+    let idParametro = $("#cbo-id-parametro").val()    
 
     //if (validarEspaciosBlanco(tituloEncabezado)) arr.push("Debe ingresar el título del encabezado secundario");
     if (usarAbreviado) if (validarEspaciosBlanco(abreviacion)) arr.push("Debe ingresar la abreviación del encabezado principal");
@@ -194,9 +198,7 @@ var grabarEncabezadoSecundario = () => {
     if (validarCombo(idOrientacion)) arr.push("Debe seleccionar una orientación");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
     if (validarCombo(idTipoControl)) arr.push("Debe seleccionar un tipo de control de respuesta");
-    if (idTipoControl == '1') if (idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato");
-    if (validarEspaciosBlanco(cantidadFilas)) arr.push("Debe ingresar la cantidad de filas");
-    if (cantidadFilas < 0 || cantidadFilas > 100) arr.push("La cantidad de filas debe ser mayor a 0 y menor a 100");
+    if (idTipoControl == '1') if (idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato");    
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -204,11 +206,10 @@ var grabarEncabezadoSecundario = () => {
         return;
     }
 
-    usarAbreviado = $("#exampleRadios3").prop('checked') ? '1' : '0'
-    agregarFilas = $("#exampleRadios5").prop('checked') ? '1' : '0'
+    usarAbreviado = $("#exampleRadios3").prop('checked') ? '1' : '0'    
 
     let url = `${baseUrl}TablaMaestra/grabarEncabezadoSecundario`;
-    let data = { idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, idOrientacion, descripcionIconoAyuda, idTipoControl, idTipoDato, idParametro, cantidadFilas, agregarFilas,  idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, idOrientacion, descripcionIconoAyuda, idTipoControl, idTipoDato, idParametro,  idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -257,9 +258,6 @@ var limpiarEncabezadoSecundario = () => {
     $("#cbo-control-respuesta").val('0')
     $("#cbo-tipo-dato").val('0')
     $("#cbo-id-parametro").val('0')
-    $("#txt-filas-por-defecto").val('12')
-    $("#exampleRadios5").prop('checked', true)
-    $("#exampleRadios6").prop('checked', false)
 }
 
 /* ================================================
@@ -556,6 +554,9 @@ var cargarDatosTablaMaestra = (data) => {
     $("#txt-pregunta-confirmacion-01").val(data.preguntaInicial)
     $("#txt-pregunta-confirmacion-02").val(data.preguntaCierre)
     $("#cbo-estilo-tabla").val(data.idEstiloTabla)
+    $("#txt-filas-por-defecto").val(data.cantidadFilas)
+    $("#exampleRadios5").prop('checked', data.agregarFilas == '1' ? true : false)
+    $("#exampleRadios6").prop('checked', data.agregarFilas == '0' ? true : false)
     $("#cbo-estado-oficial").val(data.idEstado)
 }
 
@@ -639,10 +640,7 @@ var cargarDatosSecundario = (data) => {
     $("#cbo-orientacion").val(data.idOrientacion)
     $("#cbo-control-respuesta").val(data.idTipoControl)
     $("#cbo-tipo-dato").val(data.idTipoDato)
-    $("#cbo-id-parametro").val(data.idParametro)
-    $("#txt-filas-por-defecto").val(data.cantidadFilas)
-    $("#exampleRadios5").prop('checked', data.agregarFilas == '1' ? true : false)
-    $("#exampleRadios6").prop('checked', data.agregarFilas == '0' ? true : false)
+    $("#cbo-id-parametro").val(data.idParametro)    
 }
 
 /* ================================================

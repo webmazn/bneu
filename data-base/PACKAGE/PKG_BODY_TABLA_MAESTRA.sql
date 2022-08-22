@@ -415,6 +415,8 @@
     piPreguntaInicial VARCHAR2,
     piPreguntaCierre VARCHAR2,
     piIdEstiloTabla NUMBER,
+    piCantidadFilas NUMBER,
+    piAgregarFilas VARCHAR2,
     piIdEstado NUMBER,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
@@ -425,9 +427,9 @@
     IF piIdTablaMaestra = -1 THEN
       poIdTablaMaestra := SQ_GENM_TABLA_MAESTRA.NEXTVAL();
       INSERT INTO T_GENM_TABLA_MAESTRA
-      (idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, cantidadFilas, agregarFilas, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (poIdTablaMaestra, piTituloPrincipal, piSubtitulo, piDescripcionIconoAyuda, piPreguntaInicial, piPreguntaCierre, piIdEstiloTabla, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (poIdTablaMaestra, piTituloPrincipal, piSubtitulo, piDescripcionIconoAyuda, piPreguntaInicial, piPreguntaCierre, piIdEstiloTabla, piCantidadFilas, piAgregarFilas, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       poIdTablaMaestra := piIdTablaMaestra;
       UPDATE T_GENM_TABLA_MAESTRA SET
@@ -437,6 +439,8 @@
       preguntaInicial = piPreguntaInicial,
       preguntaCierre = piPreguntaCierre,
       idEstiloTabla = piIdEstiloTabla,
+      cantidadFilas = piCantidadFilas,
+      agregarFilas = piAgregarFilas,
       idEstado = piIdEstado,
       idUsuarioModificacion = piIdUsuarioCreacion,
       fechaModificacion = SYSDATE,
@@ -492,9 +496,7 @@
     piIdOrientacion NUMBER,
     piIdTipoControl NUMBER,
     piIdTipoDato NUMBER,
-    piIdParametro NUMBER,
-    piCantidadFilas NUMBER,
-    piAgregarFilas VARCHAR2,
+    piIdParametro NUMBER,    
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -504,9 +506,9 @@
     IF piIdEncabezadoSecundario = -1 THEN
       vId := SQ_GEND_ENCABEZADO_SECUNDARIO.NEXTVAL();
       INSERT INTO T_GEND_ENCABEZADO_SECUNDARIO
-      (idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idOrientacion, idTipoControl, idTipoDato, idParametro, cantidadFilas, agregarFilas, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idOrientacion, idTipoControl, idTipoDato, idParametro, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (vId, piIdEncabezadoPrincipal, piTituloEncabezado, piAbreviacion, piUsarAbreviado, piPosicion, piDescripcionIconoAyuda, piIdOrientacion, piIdTipoControl, piIdTipoDato, piIdParametro, piCantidadFilas, piAgregarFilas, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (vId, piIdEncabezadoPrincipal, piTituloEncabezado, piAbreviacion, piUsarAbreviado, piPosicion, piDescripcionIconoAyuda, piIdOrientacion, piIdTipoControl, piIdTipoDato, piIdParametro, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       UPDATE T_GEND_ENCABEZADO_SECUNDARIO SET
       idEncabezadoPrincipal = piIdEncabezadoPrincipal,
@@ -518,9 +520,7 @@
       idOrientacion = piIdOrientacion,
       idTipoControl = piIdTipoControl,
       idTipoDato = piIdTipoDato,
-      idParametro = piIdParametro,
-      cantidadFilas = piCantidadFilas,
-      agregarFilas = piAgregarFilas,      
+      idParametro = piIdParametro,  
       idUsuarioModificacion = piIdUsuarioCreacion,
       fechaModificacion = SYSDATE,
       ipModificacion = piIpCreacion

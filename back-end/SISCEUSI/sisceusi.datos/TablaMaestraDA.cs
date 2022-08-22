@@ -214,6 +214,8 @@ namespace sisceusi.datos
                 p.Add("piPreguntaInicial", tablaMaestra.preguntaInicial);
                 p.Add("piPreguntaCierre", tablaMaestra.preguntaCierre);
                 p.Add("piIdEstiloTabla", tablaMaestra.idEstiloTabla);
+                p.Add("piCantidadFilas", tablaMaestra.cantidadFilas);
+                p.Add("piAgregarFilas", tablaMaestra.agregarFilas);
                 p.Add("piIdEstado", tablaMaestra.idEstado);
                 p.Add("piIdUsuarioCreacion", tablaMaestra.idUsuarioCreacion);
                 p.Add("piIpCreacion", tablaMaestra.ipCreacion);
@@ -270,9 +272,7 @@ namespace sisceusi.datos
                 p.Add("piIdOrientacion", encabezado.idOrientacion);
                 p.Add("piIdTipoControl", encabezado.idTipoControl);
                 p.Add("piIdTipoDato", encabezado.idTipoDato);
-                p.Add("piIdParametro", encabezado.idParametro);
-                p.Add("piCantidadFilas", encabezado.cantidadFilas);
-                p.Add("piAgregarFilas", encabezado.agregarFilas);
+                p.Add("piIdParametro", encabezado.idParametro);                
                 p.Add("piIdUsuarioCreacion", encabezado.idUsuarioCreacion);
                 p.Add("piIpCreacion", encabezado.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
