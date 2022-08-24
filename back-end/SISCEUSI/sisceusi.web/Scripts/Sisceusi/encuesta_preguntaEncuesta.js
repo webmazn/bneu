@@ -1,14 +1,27 @@
 ﻿$(document).ready(() => {
+    tituloPrincipal(preguntasEncuesta[0].tituloSeccion)
     preguntasEncuesta.forEach(x => {
         armarPregunta(x)
     })    
 });
 
+var tituloPrincipal = (tituloSeccion) => {
+    let titulo = `  <div class="row">` +
+                      `<div class="col-12 d-flex">` +
+                        `<div class="bg-light w-100 p-4">` +
+                          `<div class="h4 text-cyan">${tituloSeccion}</div>` +
+                        `</div>` +
+                      `</div>` +
+                    `</div>` +
+                    `<div class="dropdown-divider my-4"></div>`
+    $('#pregunta-contenido').append(titulo)
+}
+
 var armarPregunta = (preguntaEncuesta) => {
     if (preguntaEncuesta.idTipoControl == 1) {
 
     } else if (preguntaEncuesta.idTipoControl == 2) {
-
+        armarListaOpciones(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 3) {
 
     } else if (preguntaEncuesta.idTipoControl == 4) {
@@ -18,33 +31,48 @@ var armarPregunta = (preguntaEncuesta) => {
     }
 }
 
+var armarListaOpciones = (preguntaEncuesta) => {
+    let opciones = preguntaEncuesta.listaRespuesta == null ? `` : preguntaEncuesta.listaRespuesta.length == 0 ? '' : preguntaEncuesta.listaRespuesta.map(x => `<option value="${x.idRespuestaEncuesta}">${x.respuesta}</option>`).join('');
+    opciones = `<option value="0">-Seleccione una opción-</option>${opciones}`;
+
+    let componente = `<div class="row">` +
+                      `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
+                        `<div class="form-group">` +
+                          `<label class="font-weight-bold" for="cbo-sub-sector">${preguntaEncuesta.pregunta}</label>` +
+                          `<select class="form-control" id="cbo-sub-sector">` +
+                            `${opciones}` +
+                          `</select>` +
+                        `</div>` +
+                      `</div>` +
+                    `</div>`
+    $('#pregunta-contenido').append(componente)
+}
+
 var armarTablaMaestra = (listaSecundario) => {
     if (listaSecundario.length > 0) {
         let tablaMaestra = listaSecundario[0].encabezadoPrincipal.tablaMaestra
-        //Titulo principal
-        $('.text-cyan').html(tablaMaestra.tituloPrincipal)
         //Subtitulo
-        $('#subtitulo-maestra').html(tablaMaestra.subtitulo)
-        if (tablaMaestra.subtitulo) {
-            let textAyudaMaestra = `<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title="${tablaMaestra.descripcionIconoAyuda}"></i>`
-            $('#text-ayuda-maestra').html(textAyudaMaestra)
-        }
+        //$('#subtitulo-maestra').html(tablaMaestra.subtitulo)
+        //if (tablaMaestra.subtitulo) {
+        //    let textAyudaMaestra = `<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title="${tablaMaestra.descripcionIconoAyuda}"></i>`
+        //    $('#text-ayuda-maestra').html(textAyudaMaestra)
+        //}
         //Pregunta inicial
-        if (tablaMaestra.preguntaInicial) {
-            let preguntaInicial = ` <label class="font-weight-bold text-azul" for="chk-pregunta-inicial">${tablaMaestra.preguntaInicial}</label>&nbsp;` +
-                                    `<div class="form-check form-check-inline">` +
-                                        `<input id="chk-pregunta-inicial" class="form-check-input" type="checkbox">` +
-                                    `</div>`
-            $('#pregunta-inicial-maestra').html(preguntaInicial)
-        }
+        //if (tablaMaestra.preguntaInicial) {
+        //    let preguntaInicial = ` <label class="font-weight-bold text-azul" for="chk-pregunta-inicial">${tablaMaestra.preguntaInicial}</label>&nbsp;` +
+        //                            `<div class="form-check form-check-inline">` +
+        //                                `<input id="chk-pregunta-inicial" class="form-check-input" type="checkbox">` +
+        //                            `</div>`
+        //    $('#pregunta-inicial-maestra').html(preguntaInicial)
+        //}
         //Pregunta cierre
-        if (tablaMaestra.preguntaCierre) {
-            let preguntaCierre = `  <div class="form-check form-check-inline m-0">` +
-                                        `<input id="chk-pregunta-cierre" class="form-check-input" type="checkbox">` +
-                                    `</div>` +
-                                    `<label class="font-weight-bold text-azul m-0" for="chk-pregunta-cierre">No tiene equipos en la sección “FUERZA MOTRIZ – OTROS EQUIPOS ELÉCTRICOS”</label>`
-            $('#pregunta-cierre-maestra').html(preguntaCierre)
-        }
+        //if (tablaMaestra.preguntaCierre) {
+        //    let preguntaCierre = `  <div class="form-check form-check-inline m-0">` +
+        //                                `<input id="chk-pregunta-cierre" class="form-check-input" type="checkbox">` +
+        //                            `</div>` +
+        //                            `<label class="font-weight-bold text-azul m-0" for="chk-pregunta-cierre">No tiene equipos en la sección “FUERZA MOTRIZ – OTROS EQUIPOS ELÉCTRICOS”</label>`
+        //    $('#pregunta-cierre-maestra').html(preguntaCierre)
+        //}
         //Obtener encabezados principales
         let listaPrincipal = []
         listaSecundario.forEach(x => {
@@ -68,7 +96,7 @@ var armarTablaMaestra = (listaSecundario) => {
         //Mostrar en html
         headPrincipal = `<tr class="bg-info">${headPrincipal}</tr>`
         headSecundario = `<tr class="bg-azul text-white">${headSecundario}</tr>`
-        $('.tabla-principal').find('table thead').html(`${headPrincipal}${headSecundario}`)
+        //$('.tabla-principal').find('table thead').html(`${headPrincipal}${headSecundario}`)
 
         //Armar body
         let body = ''
@@ -82,7 +110,32 @@ var armarTablaMaestra = (listaSecundario) => {
             })
             body += `<tr>${fila}</tr>`
         }
-        $('.tabla-principal').find('table tbody').html(body)
+        //$('.tabla-principal').find('table tbody').html(body)
+
+        let subtitulo = `   <div class="row">` +
+                                `<div class="col-12">` +
+                                    `<div class="form-group">` +
+                                        `<label class="font-weight-bold">${tablaMaestra.subtitulo}</label>${tablaMaestra.descripcionIconoAyuda != '' ? `&nbsp;<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title="${tablaMaestra.descripcionIconoAyuda}"></i>` : ''}` +
+                                    `</div>` +
+                                `</div>` +
+                            `</div>`
+
+        let componenteTabla = `${subtitulo}` +
+                                `<div class ="row"> ` +
+                                    `<div class="col-12">` +
+                                        `<div class="table-responsive tabla-principal">` +
+                                            `<table class="table table-striped table-hover">` +
+                                                `<thead>` +
+                                                `${headPrincipal}${headSecundario}` +
+                                                `</thead>` +
+                                                `<tbody>` +
+                                                `${body}`+
+                                                `</tbody>` +
+                                            `</table>` +
+                                        `</div>` +
+                                    `</div>` +
+                                `</div>`
+        $('#pregunta-contenido').append(componenteTabla)
 
         $('[data-toggle="tooltip"]').tooltip()
     }

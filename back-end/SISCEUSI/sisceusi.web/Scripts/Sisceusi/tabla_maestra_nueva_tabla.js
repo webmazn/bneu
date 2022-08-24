@@ -54,7 +54,6 @@ var grabarTablaMaestra = () => {
     $('.seccion-mensaje-maestra').html('');
     let arr = [];
 
-    let tituloPrincipal = $("#txt-titulo-principal").val().trim()
     let subtitulo = $("#txt-sub-titulo").val().trim()
     let descripcionIconoAyuda = $("#txt-question-mark").val().trim()
     let preguntaInicial = $("#txt-pregunta-confirmacion-01").val().trim()
@@ -64,11 +63,11 @@ var grabarTablaMaestra = () => {
     let agregarFilas = $("#exampleRadios5").prop('checked')
     let idEstado = $("#cbo-estado-oficial").val()
 
-    if (validarEspaciosBlanco(tituloPrincipal)) arr.push("Debe ingresar el título principal o nombre de la tabla maestra");
+    //if (validarEspaciosBlanco(tituloPrincipal)) arr.push("Debe ingresar el título principal o nombre de la tabla maestra");
     if (validarEspaciosBlanco(subtitulo)) arr.push("Debe ingresar el subtítulo descriptivo");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
-    if (validarEspaciosBlanco(preguntaInicial)) arr.push("Debe ingresar la pregunta inicial");
-    if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
+    //if (validarEspaciosBlanco(preguntaInicial)) arr.push("Debe ingresar la pregunta inicial");
+    //if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
     if (validarCombo(idEstiloTabla)) arr.push("Debe seleccionar el estilo de tabla");
     if (validarEspaciosBlanco(cantidadFilas)) arr.push("Debe ingresar la cantidad de filas");
     if (cantidadFilas < 0 || cantidadFilas > 100) arr.push("La cantidad de filas debe ser mayor a 0 y menor a 100");
@@ -83,7 +82,7 @@ var grabarTablaMaestra = () => {
     agregarFilas = $("#exampleRadios5").prop('checked') ? '1' : '0'
 
     let url = `${baseUrl}TablaMaestra/grabarTablaMaestra`;
-    let data = { idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, cantidadFilas, agregarFilas, idEstado, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idTablaMaestra, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, cantidadFilas, agregarFilas, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -548,7 +547,7 @@ var cargarDatosIniciales = () => {
 }
 
 var cargarDatosTablaMaestra = (data) => {
-    $("#txt-titulo-principal").val(data.tituloPrincipal)
+    //$("#txt-titulo-principal").val(data.tituloPrincipal)
     $("#txt-sub-titulo").val(data.subtitulo)
     $("#txt-question-mark").val(data.descripcionIconoAyuda)
     $("#txt-pregunta-confirmacion-01").val(data.preguntaInicial)

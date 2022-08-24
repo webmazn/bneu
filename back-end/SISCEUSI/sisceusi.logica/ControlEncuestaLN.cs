@@ -73,6 +73,18 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public List<RespuestaEncuestaBE> obtenerListaRespuestaEncuesta(CampanaEncuestaBE campanaEncuesta)
+        {
+            List<RespuestaEncuestaBE> lista = new List<RespuestaEncuestaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRespuestaEncuesta(campanaEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campamaEncuesta)
         {
             List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();

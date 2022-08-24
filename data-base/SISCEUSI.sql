@@ -358,6 +358,8 @@ idCampanaEncuesta NUMBER,
 idCampana NUMBER,
 pregunta VARCHAR2(500),
 numeroOrdenPregunta NUMBER,
+tituloSeccion VARCHAR2(300) default '',
+titulo VARCHAR2(1) default '0',
 separador VARCHAR2(1) default '0',
 idTipoControl NUMBER,
 idParametroTabla NUMBER,
@@ -391,7 +393,6 @@ CONSTRAINT resp_enc_from_camp_enc_fk FOREIGN KEY (idCampanaEncuesta) REFERENCES 
 
 CREATE TABLE SISCEUSI.T_GENM_TABLA_MAESTRA(
 idTablaMaestra NUMBER,
-tituloPrincipal VARCHAR2(300),
 subtitulo VARCHAR2(200),
 descripcionIconoAyuda VARCHAR2(250),
 preguntaInicial VARCHAR2(200),

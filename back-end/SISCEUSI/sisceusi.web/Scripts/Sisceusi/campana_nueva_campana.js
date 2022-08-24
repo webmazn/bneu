@@ -540,11 +540,13 @@ var grabar = () => {
     if (validarEspaciosBlanco(observaciones)) arr.push("Debe ingresar una observación")
     if (arrEmpresaSelect00.length == 0 && arrEmpresaSelect01.length == 0) arr.push("No ha seleccionado ninguna empresa para la campaña")
     else if (arrEmpresaPerfil00.length > 0 || arrEmpresaPerfil01.length > 0) arr.push("Hay empresas que no han sido asignados con un supervisor")
-    //if ($("#contenedorEncuesta .seccion-pregunta:last").next().length == 0) arr.push("Debe agregar un separador de página a la última pregunta")
+    if ($("#contenedorEncuesta .seccion-pregunta:last").next().length == 0) arr.push("Debe agregar un separador de página a la última pregunta")
 
     let arrPregunta = []
     $('#contenedorEncuesta').find('.seccion-pregunta').each((x, y) => {
+        let titulo = $(y).prev().length == 0 ? '0' : $(y).prev()[0].className.indexOf("seccion-titulo") != -1 ? '1' : '0'
         let separador = $(y).next().length == 0 ? '0' : $(y).next()[0].className.indexOf("seccion-separador") != -1 ? '1' : '0'
+        let tituloSeccion = titulo == '0' ? '' : $(y).prev().find('div div input').val()
         let tipoControl = $(y).find('label .tituloPregunta').data('tipo')
         let idTipoControl = tipoControl === 'txt' ? 1 : tipoControl === 'cbo' ? 2 : tipoControl === 'chk' ? 3 : tipoControl === 'rad' ? 4 : tipoControl === 'tbl' ? 5 : tipoControl === 'sep' ? 6 : 0
         if (tipoControl === 'txt') {
@@ -552,6 +554,8 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                tituloSeccion: tituloSeccion,
+                titulo: titulo,
                 separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
@@ -571,6 +575,8 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                tituloSeccion: tituloSeccion,
+                titulo: titulo,
                 separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
@@ -590,6 +596,8 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                tituloSeccion: tituloSeccion,
+                titulo: titulo,
                 separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
@@ -609,6 +617,8 @@ var grabar = () => {
                 idCampanaEncuesta: $(y)[0].id == "" ? -1 : $(y)[0].id.split('-')[1],
                 pregunta: $(y).find('div div input').val(),
                 numeroOrdenPregunta: x,
+                tituloSeccion: tituloSeccion,
+                titulo: titulo,
                 separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: 0,
@@ -620,6 +630,8 @@ var grabar = () => {
                 //pregunta: $(y).find('div div input').val(),
                 pregunta: '',
                 numeroOrdenPregunta: x,
+                tituloSeccion: tituloSeccion,
+                titulo: titulo,
                 separador: separador,
                 idTipoControl: idTipoControl,
                 idParametroTabla: $(y).find('div div select').val(),
@@ -821,6 +833,28 @@ var armarPreguntas = (x) => {
     $('html, body').animate({
         scrollTop: ($("#contenedorEncuesta").offset().top - $(".menu-nav").height() - 70)
     }, 'slow');
+
+    if (x.titulo == '1') {
+        let titulo = `<div class="col-12 my-2 pt-3 border bg-light seccion-titulo">` +
+                            `<div class="form-group">` +
+                                `<label class="font-weight-bold d-flex justify-content-between align-items-center">` +
+                                    `<div class="d-flex justify-content-between align-items-center">` +
+                                        `<i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>` +
+                                        `<span class="tituloPregunta" data-tipo="lbl">———————— (TÍTULO DE LA SECCIÓN) ————————</span>` +
+                                    `</div>` +
+                                    `<i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>` +
+                                `</label>` +
+                                `<div class="input-group">` +
+                                    `<div class="input-group-prepend">` +
+                                        `<div class="input-group-text border-0 bg-info text-white font-weight-bold">TÍTULO DE LA SECCIÓN</div>` +
+                                    `</div>` +
+                                    `<input class="form-control" type="text" placeholder="Ingrese la descripción de su pregunta" aria-describedby="inputGroup1" value="${x.tituloSeccion}" required="">` +
+                                    `<div class="input-group-append"></div>` +
+                                `</div>` +
+                            `</div>` +
+                        `</div>`
+        $("#contenedorEncuesta").append(titulo)
+    }
 
     if (x.idTipoControl == 1) {
         var htmlTxt =
@@ -1025,7 +1059,7 @@ var armarPreguntas = (x) => {
 }
 
 var obtenerOpcionesTablaMaestra = () => {
-    let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">${x.tituloPrincipal}</option>`).join('');
+    let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">${x.subtitulo}</option>`).join('');
     return options = `<option value="0">-Seleccione una tabla maestra-</option>${options}`
 }
 

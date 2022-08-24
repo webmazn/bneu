@@ -128,6 +128,7 @@ namespace sisceusi.web.Controllers
             //Verificar cada pregunta si presenta una tabla mestra
             listaPregunta.ForEach(x =>
             {
+                x.listaRespuesta = logica.obtenerListaRespuestaEncuesta(x);
                 if (x.idParametroTabla > 0)
                 {
                     x.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = x.idParametroTabla });

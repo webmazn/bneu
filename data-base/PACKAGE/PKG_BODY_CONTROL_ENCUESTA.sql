@@ -121,6 +121,19 @@
     ORDER BY numeroOrdenPregunta ASC;
   END USP_SEL_PREGUNTA_ENCUESTA;
   
+  PROCEDURE USP_SEL_RESPUESTA_ENCUESTA(
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    *
+    FROM T_GEND_RESPUESTA_ENCUESTA
+    WHERE idEstado = '1' AND idCampanaEncuesta = piIdCampanaEncuesta
+    ORDER BY numeroOrdenRespuesta ASC; 
+  END USP_SEL_RESPUESTA_ENCUESTA;
+  
   PROCEDURE USP_SEL_LIST_ENC_SECUNDARIO(
     piIdParametroTabla NUMBER,
     poRef OUT SYS_REFCURSOR
@@ -130,7 +143,7 @@
     SELECT
     ens.idencabezadosecundario, ens.tituloEncabezado, ens.abreviacion, ens.usarAbreviado, ens.posicion, ens.idOrientacion, ens.descripcionIconoAyuda, ens.idTipoControl, ens.idTipoDato, ens.idParametro, 
     enp.idEncabezadoPrincipal, enp.tituloEncabezado tituloEncabezadoPrincipal, enp.abreviacion abreviacionPrincipal, enp.usarAbreviado usarAbreviadoPrincipal, enp.posicion posicionPrincipal, enp.descripcionIconoAyuda descripcionIconoAyudaPrinc,
-    tma.idTablaMaestra, tma.tituloPrincipal, tma.subtitulo, tma.descripcionIconoAyuda descripcionIconoAyudaMaes, tma.preguntaInicial, tma.preguntaCierre, tma.idEstiloTabla, tma.cantidadFilas, tma.agregarFilas
+    tma.idTablaMaestra, tma.subtitulo, tma.descripcionIconoAyuda descripcionIconoAyudaMaes, tma.preguntaInicial, tma.preguntaCierre, tma.idEstiloTabla, tma.cantidadFilas, tma.agregarFilas
     FROM    T_GEND_ENCABEZADO_SECUNDARIO ens
     INNER JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ens.idEncabezadoPrincipal = enp.idEncabezadoPrincipal AND enp.idEstado = '1'
     INNER JOIN T_GENM_TABLA_MAESTRA tma ON enp.idTablaMaestra = tma.idTablaMaestra AND tma.idEstado = '1'

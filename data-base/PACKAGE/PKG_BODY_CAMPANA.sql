@@ -239,6 +239,8 @@
     piIdCampana NUMBER,    
     piPregunta VARCHAR2,
     piNumeroOrdenPregunta NUMBER,
+    piTituloSeccion VARCHAR2,
+    piTitulo VARCHAR2,
     piSeparador VARCHAR2,
     piIdTipoControl NUMBER,
     piIdParametroTabla NUMBER,
@@ -251,14 +253,16 @@
     IF piIdCampanaEncuesta = -1 THEN
         poIdCampanaEncuesta := SQ_GENM_CAMPANA_ENCUESTA.NEXTVAL();
         INSERT INTO T_GENM_CAMPANA_ENCUESTA
-        (idCampanaEncuesta, idCampana, pregunta, numeroOrdenPregunta, separador, idTipoControl, idParametroTabla, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+        (idCampanaEncuesta, idCampana, pregunta, numeroOrdenPregunta, tituloSeccion, titulo, separador, idTipoControl, idParametroTabla, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
         VALUES
-        (poIdCampanaEncuesta, piIdCampana, piPregunta, piNumeroOrdenPregunta, piSeparador, piIdTipoControl, piIdParametroTabla, '1', piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+        (poIdCampanaEncuesta, piIdCampana, piPregunta, piNumeroOrdenPregunta, piTituloSeccion, piTitulo, piSeparador, piIdTipoControl, piIdParametroTabla, '1', piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
         poIdCampanaEncuesta := piIdCampanaEncuesta;
         UPDATE T_GENM_CAMPANA_ENCUESTA SET
         pregunta = piPregunta,
         numeroOrdenPregunta = piNumeroOrdenPregunta,
+        tituloSeccion = piTituloSeccion,
+        titulo = piTitulo,
         separador = piSeparador,
         idTipoControl = piIdTipoControl,
         idParametroTabla = piIdParametroTabla,

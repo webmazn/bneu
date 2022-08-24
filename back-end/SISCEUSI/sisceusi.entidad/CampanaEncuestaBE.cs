@@ -12,6 +12,8 @@ namespace sisceusi.entidad
         public int idCampana { get; set; }
         public string pregunta { get; set; }
         public int numeroOrdenPregunta { get; set; }
+        public string tituloSeccion { get; set; }
+        public string titulo { get; set; }
         public string separador { get; set; }
         public int idTipoControl { get; set; }
         public int idParametroTabla { get; set; }

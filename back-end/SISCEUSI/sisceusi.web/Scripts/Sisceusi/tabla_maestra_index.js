@@ -90,7 +90,7 @@ var filtroGeneral = (e) => {
 var filtroAvanzado = (e) => {
     e.preventDefault()
     bFiltroGeneral = false
-    let tituloPrincipal = $('#txt-titulo-pricipal').val();
+    let subtitulo = $('#txt-titulo-pricipal').val();
     let fechaInicio = $('#txt-fecha-inicio').val();
     let fechaFin = $('#txt-fecha-fin').val();
     let usuario = $('#usuario').val();
@@ -99,7 +99,7 @@ var filtroAvanzado = (e) => {
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { tituloPrincipal, fechaInicio, fechaFin, usuario, estado, registros, pagina, columna, orden };
+    let params = { subtitulo, fechaInicio, fechaFin, usuario, estado, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
     let url = `${baseUrl}TablaMaestra/filtroAvanzado?${queryParams}`;
@@ -189,7 +189,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
         content = data.map((x, i) => {
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">TMA${pad(x.idTablaMaestra, 4)}</td>`;
-            let colTituloPrincipal = `<td data-encabezado="Título principal">${x.tituloPrincipal}</td>`;
+            //let colTituloPrincipal = `<td data-encabezado="Título principal">${x.tituloPrincipal}</td>`;
             let colSubtitulo = `<td data-encabezado="Sub título">${x.subtitulo}</td>`
             let colUsuario = `<td class="text-center" data-encabezado="Usuario registro">${x.usuarioRegistro.nombres}</td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
@@ -197,7 +197,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idTablaMaestra}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idTablaMaestra}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colNro}${colCodigo}${colTituloPrincipal}${colSubtitulo}${colUsuario}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
+            let row = `<tr>${colNro}${colCodigo}${colSubtitulo}${colUsuario}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -230,7 +230,7 @@ var exportarGeneral = () => {
 }
 
 var exportarAvanzado = () => {
-    let tituloPrincipal = $('#txt-titulo-pricipal').val();
+    let subtitulo = $('#txt-titulo-pricipal').val();
     let fechaInicio = $('#txt-fecha-inicio').val();
     let fechaFin = $('#txt-fecha-fin').val();
     let usuario = $('#usuario').val();
@@ -239,7 +239,7 @@ var exportarAvanzado = () => {
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { tituloPrincipal, fechaInicio, fechaFin, usuario, estado, registros, pagina, columna, orden };
+    let params = { subtitulo, fechaInicio, fechaFin, usuario, estado, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
     let url = `${baseUrl}TablaMaestra/exportarAvanzado?${queryParams}`
     location.href = url;

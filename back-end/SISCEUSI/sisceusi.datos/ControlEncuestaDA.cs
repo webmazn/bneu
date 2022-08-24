@@ -141,6 +141,21 @@ namespace sisceusi.datos
             return lista;
         }
 
+        public List<RespuestaEncuestaBE> obtenerListaRespuestaEncuesta(CampanaEncuestaBE campanaEncuesta, OracleConnection db)
+        {
+            List<RespuestaEncuestaBE> lista = new List<RespuestaEncuestaBE>();
+            try
+            {
+                string sp = $"{Package.ControlEncuesta}USP_SEL_RESPUESTA_ENCUESTA";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdCampanaEncuesta", campanaEncuesta.idCampanaEncuesta);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<RespuestaEncuestaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
         public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campanaEncuesta, OracleConnection db)
         {
             List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
@@ -173,7 +188,7 @@ namespace sisceusi.datos
                         idTablaMaestra = (int)x.IDTABLAMAESTRA,
                         tablaMaestra = new TablaMaestraBE {
                             idTablaMaestra = (int)x.IDTABLAMAESTRA,
-                            tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
+                            //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
                             subtitulo = x.SUBTITULO == null ? "" : (string)x.SUBTITULO,
                             descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDAMAES == null ? "" : x.DESCRIPCIONICONOAYUDAMAES,
                             preguntaInicial = x.PREGUNTAINICIAL == null ? "" : (string)x.PREGUNTAINICIAL,

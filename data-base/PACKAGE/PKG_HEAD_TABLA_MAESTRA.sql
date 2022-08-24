@@ -17,7 +17,7 @@
   );
   
   PROCEDURE USP_SEL_BUSQUEDA_AVANZADO(
-    piTituloPrincipal VARCHAR2,
+    piSubtitulo VARCHAR2,
     piFechaInicio DATE,
     piFechaFin DATE,
     piNombres VARCHAR2,
@@ -37,7 +37,7 @@
   );
   
   PROCEDURE USP_SEL_EXPORTAR_AVANZADO(
-    piTituloPrincipal VARCHAR2,
+    piSubtitulo VARCHAR2,
     piFechaInicio DATE,
     piFechaFin DATE,
     piNombres VARCHAR2,
@@ -63,7 +63,6 @@
 
   PROCEDURE USP_PRC_GUARDAR_TABLA_MAESTRA(
     piIdTablaMaestra NUMBER,
-    piTituloPrincipal VARCHAR2,
     piSubtitulo VARCHAR2,
     piDescripcionIconoAyuda VARCHAR2,
     piPreguntaInicial VARCHAR2,

@@ -47,12 +47,12 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
-        public JsonResult filtroAvanzado(string tituloPrincipal, DateTime? fechaInicio, DateTime? fechaFin, string usuario, string estado, int registros, int pagina, string columna, string orden)
+        public JsonResult filtroAvanzado(string subtitulo, DateTime? fechaInicio, DateTime? fechaFin, string usuario, string estado, int registros, int pagina, string columna, string orden)
         {
             TablaMaestraLN logica = new TablaMaestraLN();
             List<TablaMaestraBE> lista = logica.filtroAvanzado(new TablaMaestraBE
             {
-                tituloPrincipal = tituloPrincipal,
+                subtitulo = subtitulo,
                 fechaInicio = fechaInicio,
                 fechaFin = fechaFin,
                 usuarioRegistro = new UsuarioBE { nombres = usuario },
@@ -85,8 +85,8 @@ namespace sisceusi.web.Controllers
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
-                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento tabla maestra", 7);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "TÍTULO PRINCIPAL", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
+                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento tabla maestra", 6);
+                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_TABLA_MAESTRA_");
                 }
@@ -94,12 +94,12 @@ namespace sisceusi.web.Controllers
             catch (Exception ex) { Log.Error(ex); }
         }
 
-        public void exportarAvanzado(string tituloPrincipal, DateTime? fechaInicio, DateTime? fechaFin, string usuario, string estado, string columna, string orden)
+        public void exportarAvanzado(string subtitulo, DateTime? fechaInicio, DateTime? fechaFin, string usuario, string estado, string columna, string orden)
         {
             TablaMaestraLN logica = new TablaMaestraLN();
             List<TablaMaestraBE> lista = logica.exportarAvanzado(new TablaMaestraBE
             {
-                tituloPrincipal = tituloPrincipal,
+                subtitulo = subtitulo,
                 fechaInicio = fechaInicio,
                 fechaFin = fechaFin,
                 usuarioRegistro = new UsuarioBE { nombres = usuario },
@@ -112,8 +112,8 @@ namespace sisceusi.web.Controllers
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
-                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento tabla maestra", 7);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "TÍTULO PRINCIPAL", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
+                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento tabla maestra", 6);
+                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_TABLA_MAESTRA_");
                 }
@@ -308,7 +308,6 @@ namespace sisceusi.web.Controllers
                 listas.Add(new List<string> {
                     (i + 1).ToString(),
                     String.Concat("TMA", c.idTablaMaestra.ToString("D4")),
-                    c.tituloPrincipal,
                     c.subtitulo,
                     c.usuarioRegistro.nombres,
                     c.txtFechaCreacion,

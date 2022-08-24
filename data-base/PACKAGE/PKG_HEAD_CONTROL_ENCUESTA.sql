@@ -44,6 +44,11 @@
     poRef OUT SYS_REFCURSOR
   );
   
+  PROCEDURE USP_SEL_RESPUESTA_ENCUESTA(
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
   PROCEDURE USP_SEL_LIST_ENC_SECUNDARIO(
     piIdParametroTabla NUMBER,
     poRef OUT SYS_REFCURSOR

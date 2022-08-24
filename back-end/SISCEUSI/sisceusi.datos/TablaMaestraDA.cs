@@ -30,7 +30,7 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new TablaMaestraBE
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
-                    tituloPrincipal = (string)x.TITULOPRINCIPAL,
+                    //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
                     subtitulo = (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
@@ -53,7 +53,7 @@ namespace sisceusi.datos
             {
                 string sp = $"{Package.TablaMaestra}USP_SEL_BUSQUEDA_AVANZADO";
                 var p = new OracleDynamicParameters();
-                p.Add("piTituloPrincipal", empresa.tituloPrincipal);
+                //p.Add("piTituloPrincipal", empresa.tituloPrincipal);
                 p.Add("piFechaInicio", empresa.fechaInicio);
                 p.Add("piFechaFin", empresa.fechaFin);
                 p.Add("piNombres", empresa.usuarioRegistro.nombres);
@@ -66,7 +66,7 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new TablaMaestraBE
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
-                    tituloPrincipal = (string)x.TITULOPRINCIPAL,
+                    //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
                     subtitulo = (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
@@ -96,7 +96,7 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new TablaMaestraBE
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
-                    tituloPrincipal = (string)x.TITULOPRINCIPAL,
+                    //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
                     subtitulo = (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
@@ -114,7 +114,7 @@ namespace sisceusi.datos
             {
                 string sp = $"{Package.TablaMaestra}USP_SEL_EXPORTAR_AVANZADO";
                 var p = new OracleDynamicParameters();
-                p.Add("piTituloPrincipal", empresa.tituloPrincipal);
+                //p.Add("piTituloPrincipal", empresa.tituloPrincipal);
                 p.Add("piFechaInicio", empresa.fechaInicio);
                 p.Add("piFechaFin", empresa.fechaFin);
                 p.Add("piNombres", empresa.usuarioRegistro.nombres);
@@ -125,7 +125,7 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new TablaMaestraBE
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
-                    tituloPrincipal = (string)x.TITULOPRINCIPAL,
+                    //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
                     subtitulo = (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
@@ -208,7 +208,7 @@ namespace sisceusi.datos
                 string sp = $"{Package.TablaMaestra}USP_PRC_GUARDAR_TABLA_MAESTRA";
                 var p = new OracleDynamicParameters();
                 p.Add("piIdTablaMaestra", tablaMaestra.idTablaMaestra);
-                p.Add("piTituloPrincipal", tablaMaestra.tituloPrincipal);
+                //p.Add("piTituloPrincipal", tablaMaestra.tituloPrincipal);
                 p.Add("piSubtitulo", tablaMaestra.subtitulo);
                 p.Add("piDescripcionIconoAyuda", tablaMaestra.descripcionIconoAyuda);
                 p.Add("piPreguntaInicial", tablaMaestra.preguntaInicial);

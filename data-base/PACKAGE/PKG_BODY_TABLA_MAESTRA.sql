@@ -29,7 +29,7 @@
                     inner join T_GENM_USUARIO usu on tma.idUsuarioCreacion = usu.idUsuario
                     WHERE 
                     (
-                    LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
+                    --LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(tma.subtitulo,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(usu.nombres,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' 
                     )';
@@ -51,7 +51,7 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  tma.idTablaMaestra,
-                                tma.tituloPrincipal,
+                                --tma.tituloPrincipal,
                                 tma.subtitulo,
                                 usu.nombres,
                                 tma.fechaCreacion,
@@ -65,7 +65,7 @@
                         INNER JOIN T_GENM_USUARIO usu on tma.idUsuarioCreacion = usu.idUsuario
                         WHERE 
                         (
-                        LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
+                        --LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(tma.subtitulo,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(usu.nombres,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' 
                         )
@@ -76,7 +76,7 @@
   END USP_SEL_BUSQUEDA_GENERAL;
   
   PROCEDURE USP_SEL_BUSQUEDA_AVANZADO(
-    piTituloPrincipal VARCHAR2,
+    piSubtitulo VARCHAR2,
     piFechaInicio DATE,
     piFechaFin DATE,
     piNombres VARCHAR2,
@@ -102,8 +102,8 @@
                     WHERE (
                     '||
                     case
-                        when piTituloPrincipal is null then ''
-                        else ' LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piTituloPrincipal ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' AND '
+                        when piSubtitulo is null then ''
+                        else ' LOWER(TRANSLATE(tma.subtitulo,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piSubtitulo ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' AND '
                     end    
                     ||' 
                     '||
@@ -145,7 +145,7 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  tma.idTablaMaestra,
-                                tma.tituloPrincipal,
+                                --tma.tituloPrincipal,
                                 tma.subtitulo,
                                 usu.nombres,
                                 tma.fechaCreacion,
@@ -160,8 +160,8 @@
                         WHERE (
                         '||
                         case
-                            when piTituloPrincipal is null then ''
-                            else ' LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piTituloPrincipal ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' AND '
+                            when piSubtitulo is null then ''
+                            else ' LOWER(TRANSLATE(tma.subtitulo,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piSubtitulo ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' AND '
                         end    
                         ||' 
                         '||
@@ -209,7 +209,7 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  tma.idTablaMaestra,
-                                tma.tituloPrincipal,
+                                --tma.tituloPrincipal,
                                 tma.subtitulo,
                                 usu.nombres,
                                 tma.fechaCreacion,
@@ -219,7 +219,7 @@
                         INNER JOIN T_GENM_USUARIO usu on tma.idUsuarioCreacion = usu.idUsuario
                         WHERE 
                         (
-                        LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
+                        --LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(tma.subtitulo,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(usu.nombres,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' 
                         )
@@ -229,7 +229,7 @@
   END USP_SEL_EXPORTAR_GENERAL;
   
   PROCEDURE USP_SEL_EXPORTAR_AVANZADO(
-    piTituloPrincipal VARCHAR2,
+    piSubtitulo VARCHAR2,
     piFechaInicio DATE,
     piFechaFin DATE,
     piNombres VARCHAR2,
@@ -249,7 +249,7 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  tma.idTablaMaestra,
-                                tma.tituloPrincipal,
+                                --tma.tituloPrincipal,
                                 tma.subtitulo,
                                 usu.nombres,
                                 tma.fechaCreacion,
@@ -260,8 +260,8 @@
                         WHERE (
                         '||
                         case
-                            when piTituloPrincipal is null then ''
-                            else ' LOWER(TRANSLATE(tma.tituloPrincipal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piTituloPrincipal ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' AND '
+                            when piSubtitulo is null then ''
+                            else ' LOWER(TRANSLATE(tma.subtitulo,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piSubtitulo ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' AND '
                         end    
                         ||' 
                         '||
@@ -409,7 +409,6 @@
 
   PROCEDURE USP_PRC_GUARDAR_TABLA_MAESTRA(
     piIdTablaMaestra NUMBER,
-    piTituloPrincipal VARCHAR2,
     piSubtitulo VARCHAR2,
     piDescripcionIconoAyuda VARCHAR2,
     piPreguntaInicial VARCHAR2,
@@ -427,13 +426,12 @@
     IF piIdTablaMaestra = -1 THEN
       poIdTablaMaestra := SQ_GENM_TABLA_MAESTRA.NEXTVAL();
       INSERT INTO T_GENM_TABLA_MAESTRA
-      (idTablaMaestra, tituloPrincipal, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, cantidadFilas, agregarFilas, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idTablaMaestra, subtitulo, descripcionIconoAyuda, preguntaInicial, preguntaCierre, idEstiloTabla, cantidadFilas, agregarFilas, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (poIdTablaMaestra, piTituloPrincipal, piSubtitulo, piDescripcionIconoAyuda, piPreguntaInicial, piPreguntaCierre, piIdEstiloTabla, piCantidadFilas, piAgregarFilas, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (poIdTablaMaestra, piSubtitulo, piDescripcionIconoAyuda, piPreguntaInicial, piPreguntaCierre, piIdEstiloTabla, piCantidadFilas, piAgregarFilas, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       poIdTablaMaestra := piIdTablaMaestra;
       UPDATE T_GENM_TABLA_MAESTRA SET
-      tituloPrincipal = piTituloPrincipal,
       subtitulo = piSubtitulo,
       descripcionIconoAyuda = piDescripcionIconoAyuda,
       preguntaInicial = piPreguntaInicial,
