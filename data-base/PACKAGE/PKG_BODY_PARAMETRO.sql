@@ -363,7 +363,7 @@
     OPEN poRef FOR
     SELECT  *
     FROM  T_GENM_PARAMETRO
-    WHERE idEstado = '1'; 
+    WHERE idEstado = '1' AND idTipoParametro = 1; 
   END USP_SEL_LISTA;
 
 END PKG_SISCEUSI_PARAMETRO;
