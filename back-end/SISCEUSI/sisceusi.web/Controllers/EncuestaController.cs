@@ -100,6 +100,10 @@ namespace sisceusi.web.Controllers
         public ActionResult PreguntaEncuesta(int id)
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
+            ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] != null ? (ControlEncuestaBE)ViewData["controlEncuesta"] : logica.obtenerControlEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
+            Session["controlEncuesta"] = controlEncuesta;
+            ViewData["controlEncuesta"] = controlEncuesta;
+
             List<CampanaEncuestaBE> listCampanaEncuesta = logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
             //Session["pregunta"] = listCampanaEncuesta;
             //realizar validacion para mostrar la pregunta
