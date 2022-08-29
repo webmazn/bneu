@@ -54,6 +54,7 @@
     <Compile Include="EmpresaGasLN.cs" />
     <Compile Include="EmpresaIndustriaLN.cs" />
     <Compile Include="EmpresaLuzLN.cs" />
+    <Compile Include="EncuestaLN.cs" />
     <Compile Include="GiroLN.cs" />
     <Compile Include="GrupoEmpresaLN.cs" />
     <Compile Include="IntencionParticiparLN.cs" />

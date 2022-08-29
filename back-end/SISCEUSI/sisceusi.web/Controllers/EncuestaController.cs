@@ -109,7 +109,8 @@ namespace sisceusi.web.Controllers
             //realizar validacion para mostrar la pregunta
 
             //Ubicarse en la ultima pregunta y recorrer hasta el separador de pagina
-            int ultimaPregunta = 0;
+            EncuestaLN logicaEncuesta = new EncuestaLN();
+            int ultimaPregunta = logicaEncuesta.obtenerUltimaPregunta(new ControlEncuestaBE { idControlEncuesta = id });
             bool detener = false;
             List<CampanaEncuestaBE> listaPregunta = new List<CampanaEncuestaBE>();
             while (!detener)
@@ -146,6 +147,19 @@ namespace sisceusi.web.Controllers
             ViewData["preguntaMostrar"] = listaPregunta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult grabarEncuesta(EncuestaBE encuesta)
+        {
+            EncuestaLN logica = new EncuestaLN();
+            encuesta.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seGuardo = logica.grabarEncuesta(encuesta);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seGuardo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
     }
 }

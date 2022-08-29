@@ -45,8 +45,8 @@ var armarListaOpciones = (preguntaEncuesta) => {
                         `<div class="row">` +
                           `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
                             `<div class="form-group">` +
-                              `<label class="font-weight-bold" for="cbo-sub-sector">${preguntaEncuesta.pregunta}</label>` +
-                              `<select class="form-control" id="cbo-sub-sector">` +
+                              `<label class="font-weight-bold" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}">${preguntaEncuesta.pregunta}</label>` +
+                              `<select id="pregunta-${preguntaEncuesta.idCampanaEncuesta}" class="form-control">` +
                                 `${opciones}` +
                               `</select>` +
                             `</div>` +
@@ -61,8 +61,8 @@ var armarOpcionUnica = (preguntaEncuesta) => {
         `<div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">` +
            `<div class="form-group">` +
              `<div class="form-check">` +
-               `<input class="form-check-input" type="radio" name="pregunta-${preguntaEncuesta.idCampanaEncuesta}" id="rad-${x.idRespuestaEncuesta}">` +
-               `<label class="form-check-label" for="rad-${x.idRespuestaEncuesta}">${x.respuesta}</label>` +
+               `<input class="form-check-input" type="radio" name="pregunta-${preguntaEncuesta.idCampanaEncuesta}" id="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${idRespuestaEncuesta}">` +
+               `<label class="form-check-label" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${idRespuestaEncuesta}">${x.respuesta}</label>` +
              `</div>` +
            `</div>` +
          `</div>`).join('');
@@ -208,22 +208,22 @@ var armarControlCampo = (secundario, i, border) => {
         let tipoFormatoCampo = secundario.idTipoDato == 1 || secundario.idTipoDato == 2 ? 'number' : 'text'
         let alineacion = secundario.idTipoDato == 1 || secundario.idTipoDato == 2 ? 'text-right' : ''
         return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<input class="form-control form-control-sm w-100 ${alineacion}" type="${tipoFormatoCampo}">` +
+                    `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100 ${alineacion}" type="${tipoFormatoCampo}">` +
                   `</td>`
     } else if (secundario.idTipoControl == 3) {
         return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<textarea class="form-control form-control-sm w-100" id="pregunta-${secundario.idEncabezadoSecundario}" rows="2"></textarea>` +
+                    `<textarea id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100" rows="2"></textarea>` +
                 `</td>`
     } else if (secundario.idTipoControl == 4) {
-        return `<td class="text-center" data-encabezado="% Calor">` +
-                    `<input class="form-control form-control-sm w-100" id="pregunta-${secundario.idEncabezadoSecundario}" type="date">` +
+        return `<td class="text-center" data-encabezado="${secundario.tituloEncabezado}">` +
+                    `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100" type="date">` +
                 `</td>`
     } else if (secundario.idTipoControl == 5) {
         let opciones = secundario.listaParametro == null ? `` : secundario.listaParametro.length == 0 ? '' : secundario.listaParametro.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
         opciones = `<option value="0">-Seleccione una opción-</option>${opciones}`;
 
         return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<select class="form-control form-control-sm w-100" id="cbo-columna-${secundario.idEncabezadoSecundario}">` +
+                    `<select id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100">` +
                         `${opciones}` +
                     `</select>` +
                 `</td>`
@@ -231,12 +231,12 @@ var armarControlCampo = (secundario, i, border) => {
         if (secundario.idOrientacion == '1') {
             return `    <td class="text-center ${border}" data-encabezado="Seleccionar">` +
                             `<div class="form-check form-check-inline"></div>` +
-                            `<input class="form-check-input" type="checkbox">` +
+                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-check-input" type="checkbox">` +
                         `</td>`
         } else {
             return `   <td class="v-top text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
                           `<div class="form-check form-check-inline">` +
-                            `<input class="form-check-input" type="checkbox">` +
+                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-check-input" type="checkbox">` +
                           `</div>` +
                         `</td>`
         }
@@ -246,14 +246,14 @@ var armarControlCampo = (secundario, i, border) => {
         if (secundario.idParametro > 0) {
             opciones = secundario.listaParametro == null ? '' : secundario.listaParametro.length == 0 ? '' : secundario.listaParametro.map((x, y) => {
                 return `<div class="form-check form-check-inline">` +
-                          `<input class="form-check-input" type="radio" name="pregunta-${i}" id="opcion-${x.idParametro}">` +
-                          `<label class="form-check-label ml-1" for="opcion-${x.idParametro}">${x.parametro}</label>` +
+                          `<input class="form-check-input" type="radio" name="enc-${i}" id="param-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">` +
+                          `<label class="form-check-label ml-1" for="param-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">${x.parametro}</label>` +
                         `</div>&nbsp;`
             }).join('')
         } else {
             opciones = `<div class="form-check form-check-inline">` +
-                          `<input class="form-check-input" type="radio" name="pregunta" id="opcion-${i}">` +
-                          `<label class="form-check-label ml-1" for="opcion-${i}">opcion</label>` +
+                          `<input class="form-check-input" type="radio" name="pregunta-${secundario.idEncabezadoSecundario}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}">` +
+                          `<label class="form-check-label ml-1" for="encabezado-${i}-${secundario.idEncabezadoSecundario}">opcion</label>` +
                         `</div>`
         }
         
@@ -270,11 +270,80 @@ var armarPieEncuesta = () => {
                     `</div>` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="${baseUrl}Interno/Index">Salir</a></div>` +
-                    `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}">Continuar</a></div>` +
+                    `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="javascript:void()" onclick="grabarEncuesta()">Continuar</a></div>` +
+                  `</div>` +
+                  `<div class="row">` +
+                    `<div class ="col-6"></div>` +
+                        `<div class ="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-mensaje"></div>` +
                   `</div>` +
                ` </div>`
 
     $('#pie').prev().after(pie)
 
     $('[data-toggle="tooltip"]').tooltip()
+}
+
+var grabarEncuesta = () => {
+    let arrRespuestaEncPlanta = []
+    let arrRespuestaEncTabla = []
+
+    $(`[id*="pregunta-"]`).each((index, x) => {
+        let valor = $(`#${x.id}`).val()
+        let arr = x.id.split('-')
+        if (arr.length == 2) {
+            arrRespuestaEncPlanta.push({
+                idControlEncuesta: idControlEncuesta,
+                idCampanaEncuesta: x[1],
+                idRespuestaEncuesta: 0,
+                respuesta: valor
+            })
+        } else if (arr.length == 3) {
+            arrRespuestaEncPlanta.push({
+                idControlEncuesta: idControlEncuesta,
+                idCampanaEncuesta: x[1],
+                idRespuestaEncuesta: x[2],
+                respuesta: valor
+            })
+        }
+    })
+
+    $(`[id*="encabezado-"]`).each((index, x) => {
+        let valor = $(`#${x.id}`).val()
+        let arr = x.id.split('-')
+        if (arr.length == 3) {
+            arrRespuestaEncTabla.push({
+                idControlEncuesta: idControlEncuesta,
+                filaTabla: x[1],
+                idEncabezadoSecundario: x[2],
+                idParametro: 0,
+                respuesta: valor
+            })
+        } else if (arr.length == 4) {
+            arrRespuestaEncTabla.push({
+                idControlEncuesta: idControlEncuesta,
+                filaTabla: x[1],
+                idEncabezadoSecundario: x[2],
+                idParametro: x[3],
+                respuesta: valor
+            })
+        }
+    })
+
+    let url = `${baseUrl}Encuesta/grabarEncuesta`;
+    let data = { listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idUsuarioCreacion: idUsuarioLogin };
+    let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
+
+    fetch(url, init)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}`
+        } else {
+            $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados'), 'registro'))
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message);
+    })
+
 }

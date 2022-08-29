@@ -7,9 +7,11 @@ CREATE SEQUENCE SISCEUSI.SQ_GEND_CAMPANA_EMPRESA MINVALUE 1 MAXVALUE 99999999999
 CREATE SEQUENCE SISCEUSI.SQ_GEND_CONTROL_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 6 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_CAMPANA_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 27 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_RESPUESTA_ENCUESTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 21 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GEND_RESP_ENCUESTA_PLANTA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_TABLA_MAESTRA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 21 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_PRINCIPAL MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 87 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_SECUNDARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 223 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GEND_RESP_ENCUESTA_TABLA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_PARAMETRO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 92 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -391,6 +393,24 @@ constraint resp_enc_pk primary key(idRespuestaEncuesta),
 CONSTRAINT resp_enc_from_camp_enc_fk FOREIGN KEY (idCampanaEncuesta) REFERENCES T_GENM_CAMPANA_ENCUESTA(idCampanaEncuesta)
 );
 
+CREATE TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_PLANTA(
+idRespuestaEncuestaPlanta NUMBER,
+idControlEncuesta NUMBER,
+idCampanaEncuesta NUMBER,
+idRespuestaEncuesta NUMBER,
+respuesta VARCHAR2(1000),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint resp_enc_planta_pk primary key (idRespuestaEncuestaPlanta),
+constraint resp_enc_planta_ce_fk FOREIGN KEY (idControlEncuesta) REFERENCES T_GEND_CONTROL_ENCUESTA (idControlEncuesta),
+constraint resp_enc_planta_camp_enc_fk FOREIGN KEY (idCampanaEncuesta) REFERENCES T_GENM_CAMPANA_ENCUESTA (idCampanaEncuesta)
+);
+
 CREATE TABLE SISCEUSI.T_GENM_TABLA_MAESTRA(
 idTablaMaestra NUMBER,
 subtitulo VARCHAR2(200),
@@ -452,6 +472,25 @@ constraint encabezado_secundario_pk primary key(idEncabezadoSecundario),
 CONSTRAINT encab_secun_from_enc_princ_fk FOREIGN KEY (idEncabezadoPrincipal) REFERENCES T_GEND_ENCABEZADO_PRINCIPAL(idEncabezadoPrincipal)
 );
 
+CREATE TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_TABLA(
+idRespuestaEncuestaTabla NUMBER,
+idControlEncuesta NUMBER,
+idEncabezadoSecundario NUMBER,
+idParametro NUMBER,
+filaTabla NUMBER,
+respuesta VARCHAR2(1000),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint resp_enc_tabla_pk primary key (idRespuestaEncuestaTabla),
+constraint resp_enc_tabla_ce_fk FOREIGN KEY (idControlEncuesta) REFERENCES T_GEND_CONTROL_ENCUESTA (idControlEncuesta),
+constraint resp_enc_tabla_es_fk FOREIGN KEY (idEncabezadoSecundario) REFERENCES T_GEND_ENCABEZADO_SECUNDARIO (idEncabezadoSecundario)
+);
+
 CREATE TABLE SISCEUSI.T_GENM_PARAMETRO(
 idParametro NUMBER,
 parametro VARCHAR2(200),
@@ -466,6 +505,27 @@ fechaModificacion date,
 ipModificacion varchar2(50),
 CONSTRAINT parametro_pk PRIMARY KEY(idParametro)
 );
+
+/*CREATE TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_PARAM(
+idRespuestaEncuestaParametro NUMBER,
+idControlEncuesta NUMBER,
+idEncabezadoSecundario NUMBER,
+idParametro NUMBER,
+filaTabla NUMBER,
+respuesta VARCHAR2(1000),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint resp_enc_param_pk primary key (idRespuestaEncuestaParametro),
+constraint resp_enc_param_ce_fk FOREIGN KEY (idControlEncuesta) REFERENCES T_GEND_CONTROL_ENCUESTA (idControlEncuesta),
+constraint resp_enc_param_es_fk FOREIGN KEY (idEncabezadoSecundario) REFERENCES T_GEND_ENCABEZADO_SECUNDARIO (idEncabezadoSecundario),
+constraint resp_enc_param_param_fk FOREIGN KEY (idParametro) REFERENCES T_GENM_PARAMETRO (idParametro)
+);*/
+--DROP TABLE T_GEND_RESP_ENCUESTA_PARAM;
 ------------------------------------------------------------------------------------------------------------------------------
 --T_MAE_GIRO
 INSERT INTO SISCEUSI.T_MAE_GIRO (idGiro, giro, idEstado) VALUES (1, 'Giro 1', '1');
@@ -3205,12 +3265,15 @@ DROP TABLE SISCEUSI.T_GENM_PLANTA_EMPRESA;
 DROP TABLE SISCEUSI.T_GEND_CAMPANA_EMPRESA;
 DROP TABLE SISCEUSI.T_GENM_EMPRESA_INDUSTRIA;
 
+DROP TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_PLANTA;
 DROP TABLE SISCEUSI.T_GEND_RESPUESTA_ENCUESTA;
 DROP TABLE SISCEUSI.T_GENM_CAMPANA_ENCUESTA;
 DROP TABLE SISCEUSI.T_GEND_CONTROL_ENCUESTA;
 DROP TABLE SISCEUSI.T_GEND_CAMPANA_EMPRESA;
 DROP TABLE SISCEUSI.T_GENM_CAMPANA;
 
+DROP TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_TABLA;
+DROP TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_TABLA;
 DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_SECUNDARIO;
 DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_PRINCIPAL;
 DROP TABLE SISCEUSI.T_GENM_TABLA_MAESTRA;

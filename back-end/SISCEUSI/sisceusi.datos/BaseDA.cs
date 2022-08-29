@@ -38,6 +38,7 @@ namespace sisceusi.Datos
                     ControlEncuesta = $"{esquema}.PKG_SISCEUSI_CONTROL_ENCUESTA.",
                     TablaMaestra = $"{esquema}.PKG_SISCEUSI_TABLA_MAESTRA.",
                     Parametro = $"{esquema}.PKG_SISCEUSI_PARAMETRO.",
+                    Encuesta = $"{esquema}.PKG_SISCEUSI_ENCUESTA.",
                 };
             }
         }

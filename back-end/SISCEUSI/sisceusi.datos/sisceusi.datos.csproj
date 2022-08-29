@@ -58,6 +58,7 @@
     <Compile Include="EmpresaIndustriaDA.cs" />
     <Compile Include="EmpresaLuzDA.cs" />
     <Compile Include="ControlEncuestaDA.cs" />
+    <Compile Include="EncuestaDA.cs" />
     <Compile Include="GiroDA.cs" />
     <Compile Include="GrupoEmpresaDA.cs" />
     <Compile Include="IntencionParticiparDA.cs" />
