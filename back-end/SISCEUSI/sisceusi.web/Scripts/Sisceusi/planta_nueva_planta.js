@@ -210,10 +210,15 @@ var grabar = () => {
     fetch(url, init)
     .then(r => r.json())
     .then(j => {
-        if (j.success) { $('#btn-grabar').hide() }
-        j.success ?
-        $('.seccion-mensaje').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.'))) :
-        $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.'), 'registro'))
+        if (j.success) {
+            $('#btn-grabar').hide()
+            $('.seccion-mensaje').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.')))
+            setTimeout(function () {
+                location.href = `${baseUrl}PlantaEmpresa/Index/${$(`#identificador-parent`).val()}`
+            }, 3500)
+        } else {
+            $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.'), 'registro'))
+        }        
     })
     .catch(error => {
         console.log('Error:' + error.message);
