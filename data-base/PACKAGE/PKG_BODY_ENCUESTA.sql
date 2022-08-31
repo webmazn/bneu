@@ -17,6 +17,7 @@
     poRowAffected OUT NUMBER
   ) AS
     vId NUMBER;
+    vIdUsuario NUMBER;
   BEGIN
     IF piIdRespuestaEncuesta > 0 THEN
         SELECT
@@ -38,19 +39,50 @@
       (vId, piIdControlEncuesta, piIdCampanaEncuesta, piIdRespuestaEncuesta, piRespuesta, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       IF piIdRespuestaEncuesta > 0 THEN
-        UPDATE T_GEND_RESP_ENCUESTA_PLANTA SET
-          respuesta = piRespuesta,
-          idUsuarioModificacion = piIdUsuarioCreacion,
-          fechaModificacion = SYSDATE,
-          ipModificacion = piIpCreacion
-          WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta AND idRespuestaEncuesta = piIdRespuestaEncuesta;
+        SELECT
+            (SELECT idUsuarioCreacion FROM T_GEND_RESP_ENCUESTA_PLANTA WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta AND idRespuestaEncuesta = piIdRespuestaEncuesta)
+        INTO vIdUsuario
+        FROM DUAL;
+        
+        IF vIdUsuario = 0 THEN
+            UPDATE T_GEND_RESP_ENCUESTA_PLANTA SET
+            respuesta = piRespuesta,
+            idUsuarioCreacion = piIdUsuarioCreacion,
+            fechaCreacion = SYSDATE,
+            ipCreacion = piIpCreacion
+            WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta AND idRespuestaEncuesta = piIdRespuestaEncuesta;
+        ELSE
+            UPDATE T_GEND_RESP_ENCUESTA_PLANTA SET
+            respuesta = piRespuesta,
+            idUsuarioModificacion = piIdUsuarioCreacion,
+            fechaModificacion = SYSDATE,
+            ipModificacion = piIpCreacion
+            WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta AND idRespuestaEncuesta = piIdRespuestaEncuesta;
+        END IF;      
+        
       ELSE
-        UPDATE T_GEND_RESP_ENCUESTA_PLANTA SET
-          respuesta = piRespuesta,
-          idUsuarioModificacion = piIdUsuarioCreacion,
-          fechaModificacion = SYSDATE,
-          ipModificacion = piIpCreacion
-          WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta;
+        SELECT
+            (SELECT idUsuarioCreacion FROM T_GEND_RESP_ENCUESTA_PLANTA WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta)
+        INTO vIdUsuario
+        FROM DUAL;
+        
+        IF vIdUsuario = 0 THEN
+            UPDATE T_GEND_RESP_ENCUESTA_PLANTA SET
+            respuesta = piRespuesta,
+            idUsuarioCreacion = piIdUsuarioCreacion,
+            fechaCreacion = SYSDATE,
+            ipCreacion = piIpCreacion
+            WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta;
+        ELSE
+            UPDATE T_GEND_RESP_ENCUESTA_PLANTA SET
+            respuesta = piRespuesta,
+            idUsuarioModificacion = piIdUsuarioCreacion,
+            fechaModificacion = SYSDATE,
+            ipModificacion = piIpCreacion
+            WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta;
+        END IF;
+        
+        
       END IF;
       
     END IF;
@@ -68,6 +100,7 @@
     poRowAffected OUT NUMBER
   ) AS
     vId NUMBER;
+    vIdUsuario NUMBER;
   BEGIN
     IF piIdParametro > 0 THEN
         SELECT
@@ -89,19 +122,49 @@
       (vId, piIdControlEncuesta, piFilaTabla, piIdEncabezadoSecundario, piIdParametro, piRespuesta, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       IF piIdParametro > 0 THEN
-        UPDATE T_GEND_RESP_ENCUESTA_TABLA SET
-          respuesta = piRespuesta,
-          idUsuarioModificacion = piIdUsuarioCreacion,
-          fechaModificacion = SYSDATE,
-          ipModificacion = piIpCreacion
-          WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario AND idParametro = piIdParametro;
+        SELECT
+            (SELECT idUsuarioCreacion FROM T_GEND_RESP_ENCUESTA_TABLA WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario AND idParametro = piIdParametro)
+        INTO vIdUsuario
+        FROM DUAL;
+        
+        IF vIdUsuario = 0 THEN
+              UPDATE T_GEND_RESP_ENCUESTA_TABLA SET
+              respuesta = piRespuesta,
+              idUsuarioCreacion = piIdUsuarioCreacion,
+              fechaCreacion = SYSDATE,
+              ipCreacion = piIpCreacion
+              WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario AND idParametro = piIdParametro;
+        ELSE
+              UPDATE T_GEND_RESP_ENCUESTA_TABLA SET
+              respuesta = piRespuesta,
+              idUsuarioModificacion = piIdUsuarioCreacion,
+              fechaModificacion = SYSDATE,
+              ipModificacion = piIpCreacion
+              WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario AND idParametro = piIdParametro;
+        END IF;      
+        
       ELSE
-        UPDATE T_GEND_RESP_ENCUESTA_TABLA SET
-          respuesta = piRespuesta,
-          idUsuarioModificacion = piIdUsuarioCreacion,
-          fechaModificacion = SYSDATE,
-          ipModificacion = piIpCreacion
-          WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario;
+        SELECT
+            (SELECT idUsuarioCreacion FROM T_GEND_RESP_ENCUESTA_TABLA WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario)
+        INTO vIdUsuario
+        FROM DUAL;
+        
+        IF vIdUsuario = 0 THEN
+            UPDATE T_GEND_RESP_ENCUESTA_TABLA SET
+            respuesta = piRespuesta,
+            idUsuarioCreacion = piIdUsuarioCreacion,
+            fechaCreacion = SYSDATE,
+            ipCreacion = piIpCreacion
+            WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario;
+        ELSE
+            UPDATE T_GEND_RESP_ENCUESTA_TABLA SET
+            respuesta = piRespuesta,
+            idUsuarioModificacion = piIdUsuarioCreacion,
+            fechaModificacion = SYSDATE,
+            ipModificacion = piIpCreacion
+            WHERE idControlEncuesta = piIdControlEncuesta AND filaTabla = piFilaTabla AND idEncabezadoSecundario = piIdEncabezadoSecundario;
+        END IF;
+        
       END IF;
       
     END IF;
@@ -136,6 +199,32 @@
     INNER JOIN T_GENM_CAMPANA_ENCUESTA cem ON tma.idTablaMaestra = cem.idParametroTabla AND cem.idEstado = '1'
     WHERE   idControlEncuesta = piIdControlEncuesta AND ret.idEstado = '1';
   END USP_SEL_PREGUNTA_TABLA;
+  
+  PROCEDURE USP_SEL_LIST_RESP_ENC_PLANTA(
+    piIdControlEncuesta NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    *
+    FROM    T_GEND_RESP_ENCUESTA_PLANTA
+    WHERE   idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta AND idEstado = '1';
+  END USP_SEL_LIST_RESP_ENC_PLANTA;
+  
+  PROCEDURE USP_SEL_LIST_RESP_ENC_TABLA(
+    piIdControlEncuesta NUMBER,
+    piIdEncabezadoSecundario NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    *
+    FROM    T_GEND_RESP_ENCUESTA_TABLA
+    WHERE   idControlEncuesta = piIdControlEncuesta AND idEncabezadoSecundario = piIdEncabezadoSecundario AND idEstado = '1';
+  END USP_SEL_LIST_RESP_ENC_TABLA;
 
 END PKG_SISCEUSI_ENCUESTA;
 

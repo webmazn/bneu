@@ -10,6 +10,7 @@ namespace sisceusi.entidad
     {
         //Auditoria
         public int idUsuarioCreacion { get; set; }
+        public int idUsuarioModificacion { get; set; }
         public DateTime fechaCreacion { get; set; }
         public string ipCreacion { get; set; }
         //Seguridad

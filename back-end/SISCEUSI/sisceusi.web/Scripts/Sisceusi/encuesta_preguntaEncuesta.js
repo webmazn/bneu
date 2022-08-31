@@ -4,6 +4,7 @@
         armarPregunta(x)
     })
     armarPieEncuesta()
+    asignarRespuesta()
 });
 
 var tituloPrincipal = (tituloSeccion) => {
@@ -45,8 +46,8 @@ var armarListaOpciones = (preguntaEncuesta) => {
                         `<div class="row">` +
                           `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
                             `<div class="form-group">` +
-                              `<label class="font-weight-bold" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}">${preguntaEncuesta.pregunta}</label>` +
-                              `<select id="pregunta-${preguntaEncuesta.idCampanaEncuesta}" class="form-control">` +
+                              `<label class="font-weight-bold text-azul" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}">${preguntaEncuesta.pregunta}</label>` +
+                              `<select id="pregunta-${preguntaEncuesta.idCampanaEncuesta}" data-usuario="0" class="form-control valor-ingresado">` +
                                 `${opciones}` +
                               `</select>` +
                             `</div>` +
@@ -61,8 +62,8 @@ var armarOpcionUnica = (preguntaEncuesta) => {
         `<div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">` +
            `<div class="form-group">` +
              `<div class="form-check">` +
-               `<input class="form-check-input" type="radio" name="pregunta-${preguntaEncuesta.idCampanaEncuesta}" id="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${idRespuestaEncuesta}">` +
-               `<label class="form-check-label" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${idRespuestaEncuesta}">${x.respuesta}</label>` +
+               `<input class="form-check-input valor-ingresado" type="radio" name="pregunta-${preguntaEncuesta.idCampanaEncuesta}" data-usuario="0" id="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${x.idRespuestaEncuesta}">` +
+               `<label class="form-check-label" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${x.idRespuestaEncuesta}">${x.respuesta}</label>` +
              `</div>` +
            `</div>` +
          `</div>`).join('');
@@ -72,7 +73,7 @@ var armarOpcionUnica = (preguntaEncuesta) => {
                         `<div class="row">` +
                           `<div class="col-12">` +
                             `<div class="form-group">` +
-                              `<label class="font-weight-bold">${preguntaEncuesta.pregunta}</label>` +
+                              `<label class="font-weight-bold text-azul">${preguntaEncuesta.pregunta}</label>` +
                             `</div>` +
                           `</div>` +
                         `</div>${opciones}` +
@@ -83,28 +84,7 @@ var armarOpcionUnica = (preguntaEncuesta) => {
 var armarTablaMaestra = (listaSecundario) => {
     if (listaSecundario.length > 0) {
         let tablaMaestra = listaSecundario[0].encabezadoPrincipal.tablaMaestra
-        //Subtitulo
-        //$('#subtitulo-maestra').html(tablaMaestra.subtitulo)
-        //if (tablaMaestra.subtitulo) {
-        //    let textAyudaMaestra = `<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title="${tablaMaestra.descripcionIconoAyuda}"></i>`
-        //    $('#text-ayuda-maestra').html(textAyudaMaestra)
-        //}
-        //Pregunta inicial
-        //if (tablaMaestra.preguntaInicial) {
-        //    let preguntaInicial = ` <label class="font-weight-bold text-azul" for="chk-pregunta-inicial">${tablaMaestra.preguntaInicial}</label>&nbsp;` +
-        //                            `<div class="form-check form-check-inline">` +
-        //                                `<input id="chk-pregunta-inicial" class="form-check-input" type="checkbox">` +
-        //                            `</div>`
-        //    $('#pregunta-inicial-maestra').html(preguntaInicial)
-        //}
-        //Pregunta cierre
-        //if (tablaMaestra.preguntaCierre) {
-        //    let preguntaCierre = `  <div class="form-check form-check-inline m-0">` +
-        //                                `<input id="chk-pregunta-cierre" class="form-check-input" type="checkbox">` +
-        //                            `</div>` +
-        //                            `<label class="font-weight-bold text-azul m-0" for="chk-pregunta-cierre">No tiene equipos en la sección “FUERZA MOTRIZ – OTROS EQUIPOS ELÉCTRICOS”</label>`
-        //    $('#pregunta-cierre-maestra').html(preguntaCierre)
-        //}
+
         //Obtener encabezados principales
         let listaPrincipal = []
         listaSecundario.forEach(x => {
@@ -139,7 +119,6 @@ var armarTablaMaestra = (listaSecundario) => {
         //Mostrar en html
         headPrincipal = listaPrincipal.length == 1 && (listaPrincipal[0].encabezadoPrincipal.tituloEncabezado == null || listaPrincipal[0].encabezadoPrincipal.tituloEncabezado == '') ? '' : `<tr class="bg-info">${headPrincipal}</tr>`
         headSecundario = `<tr class="bg-azul text-white">${headSecundario}</tr>`
-        //$('.tabla-principal').find('table thead').html(`${headPrincipal}${headSecundario}`)
 
         //Armar body
         let body = ''
@@ -157,15 +136,41 @@ var armarTablaMaestra = (listaSecundario) => {
             })
             body += `<tr>${fila}</tr>`
         }
-        //$('.tabla-principal').find('table tbody').html(body)
+
+        let idEncabezado = listaSecundario[0].idEncabezadoSecundario
+        let preguntaInicial = tablaMaestra.preguntaInicial == '' ? '' :
+                            `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
+                                `<div class="form-group text-right">` +
+                                  `<label for="encabezado-${100}-${idEncabezado}" class="font-weight-bold text-azul">${tablaMaestra.preguntaInicial}&nbsp;</label>` +
+                                  `<div class="form-check form-check-inline">` +
+                                    `<input id="encabezado-${100}-${idEncabezado}" data-usuario="0" class="form-check-input valor-ingresado" type="checkbox">` +
+                                  `</div>` +
+                                `</div>` +
+                              `</div>`
+
+        let preguntaFin = tablaMaestra.preguntaCierre == '' ? '' :
+                        `<div class="container p-0">` +
+                            `<div class="dropdown-divider my-4"></div>` +
+                            `<div class="row">` +
+                              `<div class="col-12">` +
+                                `<div class="form-group text-right m-0">` +
+                                  `<div class="form-check form-check-inline m-0">` +
+                                    `<input class="form-check-input valor-ingresado" data-usuario="0" type="checkbox" id="encabezado-${101}-${idEncabezado}">` +
+                                  `</div>` +
+                                  `<label class="font-weight-bold text-azul m-0" for="encabezado-${101}-${idEncabezado}">${tablaMaestra.preguntaCierre}&nbsp;</label>` +
+                                `</div>` +
+                              `</div>` +
+                            `</div>` +
+                          `</div>`
 
         let subtitulo = `<div class="container p-0">` +
                             `<div class="row">` +
-                                `<div class="col-12">` +
+                                `<div class="${tablaMaestra.preguntaInicio == '' ? 'col-12' : 'col-xm-12 col-sm-12 col-md-6 col-lg-6'}">` +
                                     `<div class="form-group">` +
-                                        `<label class="font-weight-bold">${tablaMaestra.subtitulo}</label>${tablaMaestra.descripcionIconoAyuda != '' ? `&nbsp;<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title="${tablaMaestra.descripcionIconoAyuda}"></i>` : ''}` +
+                                        `<label class="font-weight-bold text-azul">${tablaMaestra.subtitulo}</label>${tablaMaestra.descripcionIconoAyuda != '' ? `&nbsp;<i class="fas fa-question-circle pl-1" data-toggle="tooltip" data-placement="top" title="${tablaMaestra.descripcionIconoAyuda}"></i>` : ''}` +
                                     `</div>` +
                                 `</div>` +
+                                `${preguntaInicial}` +
                             `</div>` +
                         `</div>`
 
@@ -187,6 +192,7 @@ var armarTablaMaestra = (listaSecundario) => {
                                             `</div>` +
                                         `</div>` +
                                     `</div>` +
+                                    `${preguntaFin}` +
                                 `</div>`
         $('#pie').prev().after(componenteTabla)
 
@@ -208,22 +214,22 @@ var armarControlCampo = (secundario, i, border) => {
         let tipoFormatoCampo = secundario.idTipoDato == 1 || secundario.idTipoDato == 2 ? 'number' : 'text'
         let alineacion = secundario.idTipoDato == 1 || secundario.idTipoDato == 2 ? 'text-right' : ''
         return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100 ${alineacion}" type="${tipoFormatoCampo}">` +
+                    `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-usuario="0" class="form-control form-control-sm w-100 ${alineacion} valor-ingresado" type="${tipoFormatoCampo}">` +
                   `</td>`
     } else if (secundario.idTipoControl == 3) {
         return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<textarea id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100" rows="2"></textarea>` +
+                    `<textarea id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-usuario="0" class="form-control form-control-sm w-100 valor-ingresado" rows="2"></textarea>` +
                 `</td>`
     } else if (secundario.idTipoControl == 4) {
         return `<td class="text-center" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100" type="date">` +
+                    `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-usuario="0" class="form-control form-control-sm w-100 valor-ingresado" type="date">` +
                 `</td>`
     } else if (secundario.idTipoControl == 5) {
         let opciones = secundario.listaParametro == null ? `` : secundario.listaParametro.length == 0 ? '' : secundario.listaParametro.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
         opciones = `<option value="0">-Seleccione una opción-</option>${opciones}`;
 
         return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
-                    `<select id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-control form-control-sm w-100">` +
+                    `<select id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-usuario="0" class="form-control form-control-sm w-100 valor-ingresado">` +
                         `${opciones}` +
                     `</select>` +
                 `</td>`
@@ -231,12 +237,12 @@ var armarControlCampo = (secundario, i, border) => {
         if (secundario.idOrientacion == '1') {
             return `    <td class="text-center ${border}" data-encabezado="Seleccionar">` +
                             `<div class="form-check form-check-inline"></div>` +
-                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-check-input" type="checkbox">` +
+                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-usuario="0" class="form-check-input valor-ingresado" type="checkbox">` +
                         `</td>`
         } else {
             return `   <td class="v-top text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
                           `<div class="form-check form-check-inline">` +
-                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" class="form-check-input" type="checkbox">` +
+                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-usuario="0" class="form-check-input valor-ingresado" type="checkbox">` +
                           `</div>` +
                         `</td>`
         }
@@ -246,13 +252,13 @@ var armarControlCampo = (secundario, i, border) => {
         if (secundario.idParametro > 0) {
             opciones = secundario.listaParametro == null ? '' : secundario.listaParametro.length == 0 ? '' : secundario.listaParametro.map((x, y) => {
                 return `<div class="form-check form-check-inline">` +
-                          `<input class="form-check-input" type="radio" name="enc-${i}" id="param-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">` +
-                          `<label class="form-check-label ml-1" for="param-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">${x.parametro}</label>` +
+                          `<input class="form-check-input valor-ingresado" data-usuario="0" type="radio" name="enc-${i}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">` +
+                          `<label class="form-check-label ml-1" for="encabezado-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">${x.parametro}</label>` +
                         `</div>&nbsp;`
             }).join('')
         } else {
             opciones = `<div class="form-check form-check-inline">` +
-                          `<input class="form-check-input" type="radio" name="pregunta-${secundario.idEncabezadoSecundario}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}">` +
+                          `<input class="form-check-input valor-ingresado" data-usuario="0" type="radio" name="rad-${secundario.idEncabezadoSecundario}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}">` +
                           `<label class="form-check-label ml-1" for="encabezado-${i}-${secundario.idEncabezadoSecundario}">opcion</label>` +
                         `</div>`
         }
@@ -262,14 +268,16 @@ var armarControlCampo = (secundario, i, border) => {
 }
 
 var armarPieEncuesta = () => {
+    let btnAtras = preguntaInicio == 0 ? '' : `<a class="btn btn-azul w-100 mb-3" href="${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}/${anteriorPregunta}">Atrás</a>`
     let pie = `<div class="dropdown-divider my-4"></div>` +
                 `<div class="container">` +
                   `<div class="row">` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">` +
                       `<button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>` +
                     `</div>` +
-                    `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>` +
+                    
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="${baseUrl}Interno/Index">Salir</a></div>` +
+                    `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">${btnAtras}</div>` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="javascript:void()" onclick="grabarEncuesta()">Continuar</a></div>` +
                   `</div>` +
                   `<div class="row">` +
@@ -283,61 +291,140 @@ var armarPieEncuesta = () => {
     $('[data-toggle="tooltip"]').tooltip()
 }
 
+var asignarRespuesta = () => {
+    preguntasEncuesta.forEach(x => {
+        if (x.idTipoControl != 5) {
+            x.listaRespuestaEncuestaPlanta.length == 0 ? '' : x.listaRespuestaEncuestaPlanta.map((m, n) => {                
+                if (m.idRespuestaEncuesta == 0) {          
+                    let type = $(`#pregunta-${m.idCampanaEncuesta}`)[0].attributes.type == undefined ? 'sin-type' : $(`#pregunta-${m.idCampanaEncuesta}`)[0].attributes.type.value
+                    if (type == 'checkbox' || type == 'radio') {
+                        $(`#pregunta-${m.idCampanaEncuesta}`).prop('checked', m.respuesta == '1' ? true : false)
+                    } else {
+                        $(`#pregunta-${m.idCampanaEncuesta}`).val(m.respuesta)
+                    }
+                    let idUsuario = m.idUsuarioModificacion == null || m.idUsuarioModificacion == 0 ? m.idUsuarioCreacion : m.idUsuarioModificacion
+                    //let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' : idRolLogin == 2 ? 'bg-orange' : 'bg-green'
+                    let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' :
+                                    idRolLogin == 2 ? 'bg-green' :
+                                    idRolLogin == 3 ? idSupervisor == idUsuario ? 'bg-orange' : 'bg-green' : ''
+                    $(`#pregunta-${m.idCampanaEncuesta}`).addClass(clase)
+                    $(`#pregunta-${m.idCampanaEncuesta}`).data('usuario', idUsuario)
+                } else {
+                    let type = $(`#pregunta-${m.idCampanaEncuesta}-${m.idRespuestaEncuesta}`)[0].attributes.type == undefined ? 'sin-type' : $(`#pregunta-${m.idCampanaEncuesta}-${m.idRespuestaEncuesta}`)[0].attributes.type.value
+                    if (type == 'checkbox' || type == 'radio') {
+                        $(`#pregunta-${m.idCampanaEncuesta}-${m.idRespuestaEncuesta}`).prop('checked', m.respuesta == '1' ? true : false)
+                    } else {
+                        $(`#pregunta-${m.idCampanaEncuesta}-${m.idRespuestaEncuesta}`).val(m.respuesta)
+                    }
+                    let idUsuario = m.idUsuarioModificacion == null || m.idUsuarioModificacion == 0 ? m.idUsuarioCreacion : m.idUsuarioModificacion
+                    //let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' : idRolLogin == 2 ? 'bg-orange' : 'bg-green'
+                    let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' :
+                                    idRolLogin == 2 ? 'bg-green' :
+                                    idRolLogin == 3 ? idSupervisor == idUsuario ? 'bg-orange' : 'bg-green' : ''
+                    $(`#pregunta-${m.idCampanaEncuesta}-${m.idRespuestaEncuesta}`).addClass(clase)
+                    $(`#pregunta-${m.idCampanaEncuesta}-${m.idRespuestaEncuesta}`).data('usuario', idUsuario)
+                }
+            })
+        } else {
+            x.listaEncabezadoSecundario.length == 0 ? '' : x.listaEncabezadoSecundario.map((m, n) => {
+                m.listaRespuestaEncuestaTabla.length == 0 ? '' : m.listaRespuestaEncuestaTabla.map((a, b) => {                    
+                    if (a.idParametro == 0) {
+                        let type = $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`)[0].attributes.type == undefined ? 'sin-type' : $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`)[0].attributes.type.value
+                        if (type == 'checkbox' || type == 'radio') {
+                            $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).prop('checked', a.respuesta == '1' ? true : false)
+                        } else {
+                            $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).val(a.respuesta)
+                        }
+                        let idUsuario = a.idUsuarioModificacion == null || a.idUsuarioModificacion == 0 ? a.idUsuarioCreacion : a.idUsuarioModificacion
+                        //let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' : idRolLogin == 2 ? 'bg-orange' : 'bg-green'
+                        let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' :
+                                    idRolLogin == 2 ? 'bg-green' :
+                                    idRolLogin == 3 ? idSupervisor == idUsuario ? 'bg-orange' : 'bg-green' : ''
+                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).addClass(clase)
+                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).data('usuario', idUsuario)
+                    } else {
+                        let type = $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`)[0].attributes.type == undefined ? 'sin-type' : $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`)[0].attributes.type.value
+                        if (type == 'checkbox' || type == 'radio') {
+                            $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).prop('checked', a.respuesta == '1' ? true : false)
+                        } else {
+                            $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).val(a.respuesta)
+                        }
+                        let idUsuario = a.idUsuarioModificacion == null || a.idUsuarioModificacion == 0 ? a.idUsuarioCreacion : a.idUsuarioModificacion
+                        let clase = idUsuario == 0 ? '' : idUsuario == idUsuarioLogin ? '' : 
+                                    idRolLogin == 2 ?  'bg-green' :
+                                    idRolLogin == 3 ? idSupervisor == idUsuario ? 'bg-orange' : 'bg-green' : ''
+                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).addClass(clase)
+                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).data('usuario', idUsuario)
+                    }
+                })
+            })
+        }
+    })
+}
+
 var grabarEncuesta = () => {
     let arrRespuestaEncPlanta = []
     let arrRespuestaEncTabla = []
 
-    $(`[id*="pregunta-"]`).each((index, x) => {
-        let valor = $(`#${x.id}`).val()
+    $(`[id*="pregunta-"]`).each((index, x) => {        
+        let type = $(`#${x.id}`)[0].attributes.type == undefined ? 'sin-type' : $(`#${x.id}`)[0].attributes.type.value
+        let valor = type == 'checkbox' || type == 'radio' ? $(`#${x.id}`).prop('checked') ? '1' : '0' : $(`#${x.id}`).val()
+        let usuario = $(`#${x.id}`).data('usuario')
         let arr = x.id.split('-')
         if (arr.length == 2) {
             arrRespuestaEncPlanta.push({
                 idControlEncuesta: idControlEncuesta,
-                idCampanaEncuesta: x[1],
+                idCampanaEncuesta: arr[1],
                 idRespuestaEncuesta: 0,
+                idUsuarioCreacion: usuario,
                 respuesta: valor
             })
         } else if (arr.length == 3) {
             arrRespuestaEncPlanta.push({
                 idControlEncuesta: idControlEncuesta,
-                idCampanaEncuesta: x[1],
-                idRespuestaEncuesta: x[2],
+                idCampanaEncuesta: arr[1],
+                idRespuestaEncuesta: arr[2],
+                idUsuarioCreacion: usuario,
                 respuesta: valor
             })
         }
     })
 
     $(`[id*="encabezado-"]`).each((index, x) => {
-        let valor = $(`#${x.id}`).val()
+        let type = $(`#${x.id}`)[0].attributes.type == undefined ? 'sin-type' : $(`#${x.id}`)[0].attributes.type.value
+        let valor = type == 'checkbox' || type == 'radio' ? $(`#${x.id}`).prop('checked') ? '1' : '0' : $(`#${x.id}`).val()
+        let usuario = $(`#${x.id}`).data('usuario')
         let arr = x.id.split('-')
         if (arr.length == 3) {
             arrRespuestaEncTabla.push({
                 idControlEncuesta: idControlEncuesta,
-                filaTabla: x[1],
-                idEncabezadoSecundario: x[2],
+                filaTabla: arr[1],
+                idEncabezadoSecundario: arr[2],
                 idParametro: 0,
+                idUsuarioCreacion: usuario,
                 respuesta: valor
             })
         } else if (arr.length == 4) {
             arrRespuestaEncTabla.push({
                 idControlEncuesta: idControlEncuesta,
-                filaTabla: x[1],
-                idEncabezadoSecundario: x[2],
-                idParametro: x[3],
+                filaTabla: arr[1],
+                idEncabezadoSecundario: arr[2],
+                idParametro: arr[3],
+                idUsuarioCreacion: usuario,
                 respuesta: valor
             })
         }
     })
 
     let url = `${baseUrl}Encuesta/grabarEncuesta`;
-    let data = { listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idUsuarioCreacion: idUsuarioLogin };
+    let data = { listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idUsuarioCreacion: idUsuarioLogin }
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}`
+            location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}/${preguntaUltimo}`
         } else {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados'), 'registro'))
         }
@@ -347,3 +434,52 @@ var grabarEncuesta = () => {
     })
 
 }
+
+$(document).on('change', '.valor-ingresado', (e) => {
+    let component = $(e.target)
+    let type = component[0].attributes.type == undefined ? 'sin-type' : component[0].attributes.type.value
+    if (type == 'radio') {
+        let name = component[0].name
+        $(`[name=${name}]`).each((x, y) => {
+            $(y).data('usuario', idUsuarioLogin)
+        })
+    } else {
+        if (type == 'checkbox') {
+            if (component.prop('checked')) {
+                $(e.target).data('usuario', idUsuarioLogin)
+            } else {
+                if (component.data('usuario') == 0) {
+                    $(e.target).data('usuario', 0)
+                } else {
+                    $(e.target).data('usuario', idUsuarioLogin)
+                }
+                //$(e.target).data('usuario', 0)
+            }
+        } else if (type == 'sin-type' && component[0].localName == 'select') {
+            if (component.val() == '0') {
+                if (component.data('usuario') == 0) {
+                    $(e.target).data('usuario', 0)
+                } else {
+                    $(e.target).data('usuario', idUsuarioLogin)
+                }
+                //$(e.target).data('usuario', 0)
+            } else {
+                $(e.target).data('usuario', idUsuarioLogin)
+            }            
+        }        
+    }    
+})
+
+$(document).on('blur', '.valor-ingresado', (e) => {
+    let component = $(e.target)
+    if (component.val().trim() === '') {
+        if (component.data('usuario') == 0) {
+            $(e.target).data('usuario', 0)
+        } else {
+            $(e.target).data('usuario', idUsuarioLogin)
+        }
+        //$(e.target).data('usuario', 0)
+    } else {
+        $(e.target).data('usuario', idUsuarioLogin)
+    }    
+})

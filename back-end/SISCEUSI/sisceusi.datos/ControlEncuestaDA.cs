@@ -30,6 +30,7 @@ namespace sisceusi.datos
                     aceptaTratamientoDatos = x.ACEPTATRATAMIENTODATOS == null ? "" : (string)x.ACEPTATRATAMIENTODATOS,
                     aceptaFirmarEncuesta = x.ACEPTAFIRMARENCUESTA == null ? "" : (string)x.ACEPTAFIRMARENCUESTA,
                     fechaHoraLlenado = x.FECHAHORALLENADO == null ? x.FECHAHORALLENADO : (DateTime)x.FECHAHORALLENADO,
+                    idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
                     plantaEmpresa = new PlantaEmpresaBE {
                         idPlantaEmpresa = (int)x.IDPLANTAEMPRESA,
                         denominacion = (string)x.PLANTA,

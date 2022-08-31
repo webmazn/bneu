@@ -85,13 +85,13 @@ namespace sisceusi.logica
             return lista;
         }
 
-        public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campamaEncuesta)
+        public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campanaEncuesta)
         {
             List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
             try
             {
                 cn.Open();
-                lista = datos.obtenerTablaMaestraEncabezados(campamaEncuesta, cn);
+                lista = datos.obtenerTablaMaestraEncabezados(campanaEncuesta, cn);
                 if (lista.Count > 0)
                 {
                     lista.ForEach(x =>
@@ -100,6 +100,8 @@ namespace sisceusi.logica
                         {
                             x.listaParametro = datos.obtenerListaParametro(new ParametroBE { idParametro = x.idParametro }, cn);
                         }
+                        EncuestaDA datosEncuesta = new EncuestaDA();
+                        x.listaRespuestaEncuestaTabla = datosEncuesta.obtenerListaRespuestaEncuestaTabla(campanaEncuesta.idControlEncuesta, x.idEncabezadoSecundario, cn);
                     });
                 }
             }

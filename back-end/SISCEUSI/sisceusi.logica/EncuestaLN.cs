@@ -24,25 +24,35 @@ namespace sisceusi.logica
                 cn.Open();
                 using (OracleTransaction ot = cn.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
                 {
-                    foreach (var item in encuesta.listaRespuestaEncuestaPlanta)
+                    if (encuesta.listaRespuestaEncuestaPlanta != null)
                     {
-                        item.ipCreacion = encuesta.ipCreacion;
-                        item.idUsuarioCreacion = encuesta.idUsuarioCreacion;
-                        seGuardo = datos.grabarRespuestaEncuestaPlanta(item, cn);
-                        if (!seGuardo) break;
+                        foreach (var item in encuesta.listaRespuestaEncuestaPlanta)
+                        {
+                            item.ipCreacion = encuesta.ipCreacion;
+                            //item.idUsuarioCreacion = encuesta.idUsuarioCreacion;
+                            seGuardo = datos.grabarRespuestaEncuestaPlanta(item, cn);
+                            if (!seGuardo) break;
+                        }
+                    }
+                    else
+                    {
+                        seGuardo = true;
                     }
 
                     if (seGuardo)
                     {
-                        foreach (var item in encuesta.listaRespuestaEncuestaTabla)
+                        if (encuesta.listaRespuestaEncuestaTabla != null)
                         {
-                            item.ipCreacion = encuesta.ipCreacion;
-                            item.idUsuarioCreacion = encuesta.idUsuarioCreacion;
-                            seGuardo = datos.grabarRespuestaEncuestaTabla(item, cn);
-                            if (!seGuardo) break;
+                            foreach (var item in encuesta.listaRespuestaEncuestaTabla)
+                            {
+                                item.ipCreacion = encuesta.ipCreacion;
+                                //item.idUsuarioCreacion = encuesta.idUsuarioCreacion;
+                                seGuardo = datos.grabarRespuestaEncuestaTabla(item, cn);
+                                if (!seGuardo) break;
+                            }
                         }
                     }
-                    
+
                     if (seGuardo) ot.Commit();
                     else ot.Rollback();
                 }
@@ -52,6 +62,30 @@ namespace sisceusi.logica
             return seGuardo;
         }
 
+        public List<RespuestaEncuestaPlantaBE> obtenerListaRespuestaPlanta(int idControlEncuesta, int idCampanaEncuesta)
+        {
+            List<RespuestaEncuestaPlantaBE> lista = new List<RespuestaEncuestaPlantaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRespuestaEncuestaPlanta(idControlEncuesta, idCampanaEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<RespuestaEncuestaTablaBE> obtenerListaRespuestaTabla(int idControlEncuesta, int idCEncabezadoSecundario)
+        {
+            List<RespuestaEncuestaTablaBE> lista = new List<RespuestaEncuestaTablaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRespuestaEncuestaTabla(idControlEncuesta, idCEncabezadoSecundario, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public int obtenerUltimaPregunta(ControlEncuestaBE control)
         {
             int pregunta = 0;
@@ -59,7 +93,7 @@ namespace sisceusi.logica
             {
                 cn.Open();
                 int preguntaPlanta = datos.obtenerPreguntaPlanta(control, cn);
-                int preguntaTabla = datos.obtenerPreguntaPlanta(control, cn);
+                int preguntaTabla = datos.obtenerPreguntaTabla(control, cn);
                 if (preguntaPlanta > 0 || preguntaTabla > 0)
                 {
                     pregunta = preguntaPlanta > preguntaTabla ? preguntaPlanta : preguntaTabla;

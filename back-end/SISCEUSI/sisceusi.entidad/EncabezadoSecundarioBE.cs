@@ -25,5 +25,6 @@ namespace sisceusi.entidad
         public TipoDatoBE tipoDato { get; set; }
         public ParametroBE parametro { get; set; }
         public List<ParametroBE> listaParametro { get; set; }
+        public List<RespuestaEncuestaTablaBE> listaRespuestaEncuestaTabla { get; set; }
     }
 }

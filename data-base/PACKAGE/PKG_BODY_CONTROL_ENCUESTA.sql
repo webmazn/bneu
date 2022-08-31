@@ -14,7 +14,7 @@
   BEGIN
     OPEN poRef FOR
     SELECT 
-    cen.idControlEncuesta, cen.aceptaLLenarEncuesta, cen.aceptaTratamientoDatos, cen.aceptaFirmarEncuesta,    
+    cen.idControlEncuesta, cen.aceptaLLenarEncuesta, cen.aceptaTratamientoDatos, cen.aceptaFirmarEncuesta, cen.idSupervisor,
     cam.idCampana, cam.denominacion,
     emp.idEmpresaIndustria, emp.nombreEmpresa, emp.nombreComercial, emp.ruc,
     pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado, cen.fechahorallenado, 

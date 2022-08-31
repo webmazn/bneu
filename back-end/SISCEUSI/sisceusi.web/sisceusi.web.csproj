@@ -233,6 +233,7 @@
     <Content Include="Views\Parametro\Index.cshtml" />
     <Content Include="Views\Parametro\NuevoParametro.cshtml" />
     <Content Include="Views\Encuesta\PreguntaEncuesta.cshtml" />
+    <Content Include="Views\Encuesta\FinalizarEncuesta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

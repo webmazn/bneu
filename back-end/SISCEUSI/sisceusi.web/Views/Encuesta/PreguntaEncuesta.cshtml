@@ -3,6 +3,9 @@
     ViewBag.Title = "PreguntaEncuesta";
     ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] == null ? new ControlEncuestaBE() : (ControlEncuestaBE)ViewData["controlEncuesta"];
     List<CampanaEncuestaBE> encuesta = ViewData["preguntaMostrar"] == null ? null : (List<CampanaEncuestaBE>)ViewData["preguntaMostrar"];
+    int preguntaInicio = ViewData["preguntaInicio"] == null ? 0 : (int)ViewData["preguntaInicio"];
+    int preguntaUltimo = ViewData["preguntaUltimo"] == null ? 0 : (int)ViewData["preguntaUltimo"];
+    int anteriorPregunta = ViewData["preguntaAnterior"] == null ? 0 : (int)ViewData["preguntaAnterior"];
 }
 
 @section scripts_footer {
@@ -17,4 +20,8 @@
     var preguntasEncuesta = @Html.Raw(Json.Encode(encuesta));
     var numeroEncuesta = '@controlEncuesta.campanaEmpresa.idCampana'
     var idControlEncuesta = @controlEncuesta.idControlEncuesta
+    var anteriorPregunta = @anteriorPregunta
+    var preguntaInicio = @preguntaInicio
+    var preguntaUltimo = @preguntaUltimo
+    var idSupervisor = @controlEncuesta.idSupervisor
 </script>

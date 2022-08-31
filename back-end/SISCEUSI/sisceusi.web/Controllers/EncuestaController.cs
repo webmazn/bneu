@@ -97,7 +97,7 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
-        public ActionResult PreguntaEncuesta(int id)
+        public ActionResult PreguntaEncuesta(int id, int? idTwo)
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
             ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] != null ? (ControlEncuestaBE)ViewData["controlEncuesta"] : logica.obtenerControlEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
@@ -105,13 +105,22 @@ namespace sisceusi.web.Controllers
             ViewData["controlEncuesta"] = controlEncuesta;
 
             List<CampanaEncuestaBE> listCampanaEncuesta = logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
-            //Session["pregunta"] = listCampanaEncuesta;
-            //realizar validacion para mostrar la pregunta
 
             //Ubicarse en la ultima pregunta y recorrer hasta el separador de pagina
+            int ultimaPregunta = 0;
+            int anteriorPregunta = 0;
             EncuestaLN logicaEncuesta = new EncuestaLN();
-            int ultimaPregunta = logicaEncuesta.obtenerUltimaPregunta(new ControlEncuestaBE { idControlEncuesta = id });
-            bool detener = false;
+            if (idTwo == null)
+            {
+                ultimaPregunta = logicaEncuesta.obtenerUltimaPregunta(new ControlEncuestaBE { idControlEncuesta = id });                
+            } else
+            {
+                ultimaPregunta = idTwo.Value;
+            }
+            anteriorPregunta = ultimaPregunta == 0 ? 0 : obtenerAnteriorPregunta(listCampanaEncuesta, ultimaPregunta);
+            int preguntaActual = ultimaPregunta;
+
+            bool detener = false, finalizarEncuesta = false;
             List<CampanaEncuestaBE> listaPregunta = new List<CampanaEncuestaBE>();
             while (!detener)
             {
@@ -127,24 +136,36 @@ namespace sisceusi.web.Controllers
                 }
                 else
                 {
+                    finalizarEncuesta = true;
                     detener = true;
                 }
             }
+
+            //Verificamos si respondió la ultima pregunta de la encuesta
+            if (finalizarEncuesta)
+            {
+                int numeroUltimaPregunta = listCampanaEncuesta.Max(x => x.numeroOrdenPregunta);
+                if (ultimaPregunta > numeroUltimaPregunta)
+                {
+                    return View("FinalizarEncuesta");
+                }
+            }
+
             //Verificar cada pregunta si presenta una tabla mestra
             listaPregunta.ForEach(x =>
             {
                 x.listaRespuesta = logica.obtenerListaRespuestaEncuesta(x);
+                x.listaRespuestaEncuestaPlanta = logicaEncuesta.obtenerListaRespuestaPlanta(id, x.idCampanaEncuesta);
                 if (x.idParametroTabla > 0)
                 {
-                    x.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = x.idParametroTabla });
+                    x.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idControlEncuesta = id, idParametroTabla = x.idParametroTabla });
                 }
             });
-            //CampanaEncuestaBE campanaEncuesta = listCampanaEncuesta[0];
-            //if (campanaEncuesta.idParametroTabla > 0)
-            //{
-            //    campanaEncuesta.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = campanaEncuesta.idParametroTabla });
-            //}
+
             ViewData["preguntaMostrar"] = listaPregunta;
+            ViewData["preguntaInicio"] = preguntaActual;
+            ViewData["preguntaUltimo"] = ultimaPregunta;
+            ViewData["preguntaAnterior"] = anteriorPregunta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
         }
@@ -161,5 +182,39 @@ namespace sisceusi.web.Controllers
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }
+
+        private int obtenerAnteriorPregunta(List<CampanaEncuestaBE> lista, int ultimaPregunta)
+        {
+            bool detener = false;            
+            while (!detener)
+            {
+                ultimaPregunta--;
+                CampanaEncuestaBE campanaEncuesta = lista.Find(x => x.numeroOrdenPregunta == ultimaPregunta);
+                if (campanaEncuesta != null)
+                {
+                    if (campanaEncuesta.titulo.Equals("1"))
+                    {
+                        detener = true;
+                    }
+                }
+                else
+                {
+                    ultimaPregunta = 0;
+                    detener = true;
+                }
+            }
+            return ultimaPregunta;
+        }
+
+        public ActionResult FinalizarEncuesta(int id)
+        {
+            ControlEncuestaLN logica = new ControlEncuestaLN();
+            ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] != null ? (ControlEncuestaBE)ViewData["controlEncuesta"] : logica.obtenerControlEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
+            Session["controlEncuesta"] = controlEncuesta;
+            ViewData["controlEncuesta"] = controlEncuesta;
+            ViewData["usuario"] = ObtenerUsuarioLogin();
+            return View();
+        }
+
     }
 }

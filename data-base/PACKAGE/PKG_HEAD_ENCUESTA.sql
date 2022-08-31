@@ -37,6 +37,18 @@
     piIdControlEncuesta NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_LIST_RESP_ENC_PLANTA(
+    piIdControlEncuesta NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_LIST_RESP_ENC_TABLA(
+    piIdControlEncuesta NUMBER,
+    piIdEncabezadoSecundario NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_ENCUESTA;
 
