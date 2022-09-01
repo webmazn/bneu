@@ -16,12 +16,46 @@ namespace sisceusi.web.Controllers
         // GET: Empresa
         public ActionResult Index()
         {
+            EmpresaIndustriaLN logica = new EmpresaIndustriaLN();
+            List<EmpresaIndustriaBE> lista = logica.filtroGeneral(new EmpresaIndustriaBE
+            {
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "idEmpresaIndustria",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            ViewData["listaEmpresa"] = response;
             return View();
         }
 
         public ActionResult NuevaEmpresaIndustria(int? id)
         {
+            //Lista Giro
+            GiroLN logicaGiro = new GiroLN();
+            List<GiroBE> listaGiro = logicaGiro.obtenerListaGiro();
+            //Lista GrupoEmpresa
+            GrupoEmpresaLN logicaGrupo = new GrupoEmpresaLN();
+            List<GrupoEmpresaBE> listaGrupo = logicaGrupo.obtenerListaGrupoEmpresa();
+            //Lista Ciuu
+            CiuuLN logicaCiuu = new CiuuLN();
+            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
+            //Objeto Campaña
+            EmpresaIndustriaBE empresa = null;
+            if (id != null)
+            {
+                EmpresaIndustriaLN logica = new EmpresaIndustriaLN();
+                empresa = logica.obtenerEmpresa(new EmpresaIndustriaBE { idEmpresaIndustria = id.Value });
+            }
+
             ViewData["idEmpresaIndustria"] = id;
+            ViewData["empresa"] = empresa;
+            ViewData["listaGiro"] = listaGiro;
+            ViewData["listaGrupo"] = listaGrupo;
+            ViewData["listaCiuu"] = listaCiuu;            
             return View();
         }
 

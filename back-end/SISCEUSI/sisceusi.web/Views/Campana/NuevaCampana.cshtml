@@ -1,7 +1,13 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaCampana";
     int id = ViewData["idCampana"] == null ? 0 : (int)ViewData["idCampana"];
+    CampanaBE campana = ViewData["campana"] == null ? null : (CampanaBE)ViewData["campana"];
+    List<GiroBE> listaGiro = ViewData["listaGiro"] == null ? new List<GiroBE>() : (List<GiroBE>)ViewData["listaGiro"];
+    List<CiuuBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<CiuuBE>() : (List<CiuuBE>)ViewData["listaCiuu"];
+    List<EmpresaIndustriaBE> listaEmpresa = ViewData["listaEmpresa"] == null ? new List<EmpresaIndustriaBE>() : (List<EmpresaIndustriaBE>)ViewData["listaEmpresa"];
+    List<UsuarioBE> listaRevisor = ViewData["listaRevisor"] == null ? new List<UsuarioBE>() : (List<UsuarioBE>)ViewData["listaRevisor"];
+    List<TablaMaestraBE> listaTablaMaestra = ViewData["listaTablaMaestra"] == null ? new List<TablaMaestraBE>() : (List<TablaMaestraBE>)ViewData["listaTablaMaestra"];
 }
 
 @section scripts_footer {
@@ -346,6 +352,14 @@
     </div>
 </div>
 <input type="hidden" id="identificador" value="@id" />
+<script type="text/javascript">
+    var campana = @Html.Raw(Json.Encode(campana));
+    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
+    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
+    var listaEmpresa = @Html.Raw(Json.Encode(listaEmpresa));
+    var listaRevisor = @Html.Raw(Json.Encode(listaRevisor));
+    var listaTablaMaestra = @Html.Raw(Json.Encode(listaTablaMaestra));
+</script>
 
 
 

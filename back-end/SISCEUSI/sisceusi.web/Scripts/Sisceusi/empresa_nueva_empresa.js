@@ -10,7 +10,7 @@
  */
 
 var cargarDesplegables = () => {
-    let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
+    /*let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
     let urlGrupoEmpresa = `${baseUrl}GrupoEmpresa/obtenerListaGrupoEmpresa`;
     let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
     Promise.all([
@@ -27,7 +27,11 @@ var cargarDesplegables = () => {
         if (jGrupoEmpresa.success) cargarGrupoEmpresa(jGrupoEmpresa.object)
         if (jCiuu.success) cargarCiuu(jCiuu.object)
         cargarDatosIniciales()
-    });
+    });*/
+    cargarGiro(listaGiro)
+    cargarGrupoEmpresa(listaGrupo)
+    cargarCiuu(listaCiuu)
+    cargarDatosIniciales()
 }
 
 var cargarGiro = (data) => {
@@ -189,7 +193,7 @@ var grabarDatos = () => {
  */
 
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    /*let id = $('#identificador').val()
     if (id > 0) {
         let url = `${baseUrl}EmpresaIndustria/obtenerEmpresaIndustria?idEmpresaIndustria=${id}`;
         fetch(url)
@@ -204,7 +208,8 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatos(empresa)
 }
 
 /* ================================================

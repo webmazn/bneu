@@ -16,7 +16,7 @@ var arrProvincia = []
 var arrDistrito = []
 
 var cargarDesplegables = () => {
-    let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
+    /*let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
     let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
     let urlDepartamento = `${baseUrl}Departamento/obtenerListaDepartamento`;
     let urlProvincia = `${baseUrl}Provincia/obtenerListaProvincia`;
@@ -53,7 +53,17 @@ var cargarDesplegables = () => {
         if (jEmpresaGas.success) cargarEmpresaGas(jEmpresaGas.object)
         if (jEmpresaLuz.success) cargarEmpresaLuz(jEmpresaLuz.object)
         cargarDatosIniciales()
-    });
+    });*/
+
+    cargarGiro(listaGiro)
+    cargarCiuu(listaCiuu)
+    cargarDepartamento(listaDepartamento)
+    cargarProvincia(listaProvincia)
+    cargarDistrito(listaDistrito)
+    cargarZona(listaZona)
+    cargarEmpresaGas(listaEmpresaGas)
+    cargarEmpresaLuz(listaEmpresaLuz)
+    cargarDatosIniciales()
 }
 
 var cargarCiuu = (data) => {
@@ -236,7 +246,7 @@ var grabar = () => {
  */
 
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    /*let id = $('#identificador').val()
     if (id > 0) {
         let url = `${baseUrl}PlantaEmpresa/obtenerPlantaEmpresa?idPlantaEmpresa=${id}`;
         fetch(url)
@@ -251,7 +261,8 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatos(planta)
 }
 
 /* ================================================

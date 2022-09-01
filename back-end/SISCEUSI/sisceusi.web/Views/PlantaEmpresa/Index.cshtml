@@ -1,6 +1,7 @@
 ﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
+    Dictionary<string, object> lista = ViewData["listaPlanta"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaPlanta"];
     EmpresaIndustriaBE empresa = ViewData["empresa"] == null ? new EmpresaIndustriaBE() : (EmpresaIndustriaBE)ViewData["empresa"];
     int id = empresa.idEmpresaIndustria;
 }
@@ -224,4 +225,8 @@
 
 @Html.Hidden("column", "pem_idPlantaEmpresa")
 @Html.Hidden("order", "ASC")
+
+<script type="text/javascript">
+    var listaPlanta = @Html.Raw(Json.Encode(lista));
+</script>
 

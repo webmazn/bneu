@@ -8,7 +8,8 @@
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
     $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     cargarDesplegables();
-    $('#btn-buscar')[0].click();
+    //$('#btn-buscar')[0].click();
+    cargarDatosTabla(listaPlanta)
 });
 
 /* ================================================

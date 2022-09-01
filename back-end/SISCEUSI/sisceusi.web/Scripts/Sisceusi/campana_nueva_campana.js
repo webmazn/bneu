@@ -46,7 +46,7 @@ var arrRevisor01 = []
 var arrTablaMaestra = [] 
 
 var cargarDesplegables = () => {
-    let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
+    /*let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
     let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
     let urlEmpresa = `${baseUrl}EmpresaIndustria/obtenerListaEmpresaIndustria`;    
     let urlRevisor = `${baseUrl}Usuario/obtenerListaRevisor`;
@@ -72,7 +72,14 @@ var cargarDesplegables = () => {
         if (jRevisor.success) cargarRevisor(jRevisor.object)
         if (jTablaMaestra.success) cargarTablaMaestra(jTablaMaestra.object)
         cargarDatosIniciales()        
-    });
+    });*/
+
+    cargarGiro(listaGiro)
+    cargarCiuu(listaCiuu)
+    cargarEmpresa(listaEmpresa)
+    cargarRevisor(listaRevisor)
+    cargarTablaMaestra(listaTablaMaestra)
+    cargarDatosIniciales()
 }
 
 var cargarEmpresa = (data) => {
@@ -714,7 +721,7 @@ var grabar = () => {
  */
 
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    /*let id = $('#identificador').val()
     if (id > 0) {
         let url = `${baseUrl}Campana/obtenerCampana?idCampana=${id}`;
         fetch(url)
@@ -729,7 +736,8 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatos(campana)
 }
 
 /* ================================================
@@ -831,13 +839,11 @@ var cargarDatos = (data) => {
     data.listaPregunta.map(x => {
         armarPreguntas(x)
     })
-    
+    conteoPreguntasV2()
+    posicinar('#btn-grabar', 0)
 }
 
 var armarPreguntas = (x) => {
-    $('html, body').animate({
-        scrollTop: ($("#contenedorEncuesta").offset().top - $(".menu-nav").height() - 70)
-    }, 'slow');
 
     if (x.titulo == '1') {
         let titulo = `<div class="col-12 my-2 pt-3 border bg-light seccion-titulo">` +
@@ -884,7 +890,6 @@ var armarPreguntas = (x) => {
         $("#ninguna-pregunta").hide();
         $("#contenedorEncuesta").append(htmlTxt);
         $('[data-toggle="tooltip"]').tooltip();
-        conteoPreguntasV2();
     } else if (x.idTipoControl == 2) {
         var htmlCbo =
           `<div class="col-12 my-2 pt-3 border bg-light seccion-pregunta" id="p-${x.idCampanaEncuesta}">` +
@@ -926,7 +931,6 @@ var armarPreguntas = (x) => {
         $("#ninguna-pregunta").hide();
         $("#contenedorEncuesta").append(htmlCbo);
         $('[data-toggle="tooltip"]').tooltip();
-        conteoPreguntasV2()
     } else if (x.idTipoControl == 3) {
         var htmlChk =
           `<div class="col-12 my-2 pt-3 border bg-light seccion-pregunta" id="p-${x.idCampanaEncuesta}">` +
@@ -969,7 +973,6 @@ var armarPreguntas = (x) => {
         $("#ninguna-pregunta").hide();
         $("#contenedorEncuesta").append(htmlChk);
         $('[data-toggle="tooltip"]').tooltip();
-        conteoPreguntasV2();
     } else if (x.idTipoControl == 4) {
         var htmlRad =
           `<div class="col-12 my-2 pt-3 border bg-light seccion-pregunta" id="p-${x.idCampanaEncuesta}">` +
@@ -1012,7 +1015,6 @@ var armarPreguntas = (x) => {
         $("#ninguna-pregunta").hide();
         $("#contenedorEncuesta").append(htmlRad);
         $('[data-toggle="tooltip"]').tooltip();
-        conteoPreguntasV2();
     } else if (x.idTipoControl == 5) {
         var htmlTbl =
       `<div class="col-12 my-2 pt-3 border bg-light seccion-pregunta" id="p-${x.idCampanaEncuesta}">` +
@@ -1043,7 +1045,6 @@ var armarPreguntas = (x) => {
         let options = obtenerOpcionesTablaMaestra()
         $('#contenedorEncuesta').find(`#p-${x.idCampanaEncuesta}`).find('div div select').html(options)
         $('#contenedorEncuesta').find(`#p-${x.idCampanaEncuesta}`).find('div div select').val(x.idParametroTabla)
-        conteoPreguntasV2();
     }
 
     if (x.separador == '1') {
@@ -1064,7 +1065,7 @@ var armarPreguntas = (x) => {
 }
 
 var obtenerOpcionesTablaMaestra = () => {
-    let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">${x.subtitulo}</option>`).join('');
+    let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">TAM${pad(x.idTablaMaestra, 4)} ${x.subtitulo == null ? '' : `| ${x.subtitulo}`}</option>`).join('');
     return options = `<option value="0">-Seleccione una tabla maestra-</option>${options}`
 }
 
@@ -1104,8 +1105,7 @@ function conteoPreguntasV2() {
 var validarAgregarTablaMaestra = () => {
     let tipoControl = $('#cbo-list-tipo-control').val()
     if (tipoControl === 'tbl') {        
-        let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">${x.tituloPrincipal}</option>`).join('');
-        //let options = `<option value="1">Maestro 1</option><option value="2">Maestro 2</option><option value="3">Maestro 3</option>`;
+        let options = arrTablaMaestra.length == 0 ? '' : arrTablaMaestra.map(x => `<option value="${x.idTablaMaestra}">TAM${pad(x.idTablaMaestra, 4)}${x.subtitulo == null ? '' : `| ${x.subtitulo}`}</option>`).join('');
         options = `<option value="0">-Seleccione una tabla maestra-</option>${options}`
         var componente = $("#contenedorEncuesta .seccion-pregunta:last")
         componente.find('div div select').html(options)
@@ -1131,4 +1131,10 @@ var validarOficial = () => {
         $('#txt-desde-real').val('')
         $('#txt-hasta-real').val('')
     }
+}
+
+var posicinar = (id, number) => {
+    var target_offset = $(id).offset();
+    var target_top = target_offset.top - number;
+    $('html,body').animate({ scrollTop: target_top }, { duration: "slow" });
 }

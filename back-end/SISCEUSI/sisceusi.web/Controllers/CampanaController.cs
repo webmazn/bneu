@@ -15,12 +15,54 @@ namespace sisceusi.web.Controllers
         // GET: Campana
         public ActionResult Index()
         {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaBE> lista = logica.filtroGeneral(new CampanaBE
+            {
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "cam_idCampana",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            ViewData["listaCampana"] = response;
             return View();
         }
 
         public ActionResult NuevaCampana(int? id)
         {
+            //Lista Giro
+            GiroLN logicaGiro = new GiroLN();
+            List<GiroBE> listaGiro = logicaGiro.obtenerListaGiro();
+            //Lista Ciuu
+            CiuuLN logicaCiuu = new CiuuLN();
+            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
+            //Lista Empresa
+            EmpresaIndustriaLN logicaEmpresa = new EmpresaIndustriaLN();
+            List<EmpresaIndustriaBE> listaEmpresa = logicaEmpresa.obtenerListaEmpresa();
+            //Lista Revisor
+            UsuarioLN logicaRevisor = new UsuarioLN();
+            List<UsuarioBE> listaRevisor = logicaRevisor.obtenerListaRolEspecifico(new UsuarioBE { idRol = 2 });
+            //Lista TablaMaestra
+            TablaMaestraLN logicaTablaMaestra = new TablaMaestraLN();
+            List<TablaMaestraBE> listaTablaMaestra = logicaTablaMaestra.obtenerListaTablaMaestra();
+            //Objeto Campaña
+            CampanaBE campana = null;
+            if (id != null)
+            {
+                CampanaLN logica = new CampanaLN();
+                campana = logica.obtenerCampana(new CampanaBE { idCampana = id.Value });
+            }
+
             ViewData["idCampana"] = id;
+            ViewData["campana"] = campana;
+            ViewData["listaGiro"] = listaGiro;
+            ViewData["listaCiuu"] = listaCiuu;
+            ViewData["listaEmpresa"] = listaEmpresa;
+            ViewData["listaRevisor"] = listaRevisor;
+            ViewData["listaTablaMaestra"] = listaTablaMaestra;
             return View();
         }
 

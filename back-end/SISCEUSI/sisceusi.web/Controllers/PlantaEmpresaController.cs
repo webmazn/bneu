@@ -18,15 +18,71 @@ namespace sisceusi.web.Controllers
         // GET: PlantaEmpresa
         public ActionResult Index(int id)
         {
+            PlantaEmpresaLN logicaPlanta = new PlantaEmpresaLN();
+            List<PlantaEmpresaBE> lista = logicaPlanta.filtroGeneral(new PlantaEmpresaBE
+            {
+                idEmpresaIndustria = id,
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "pem_idPlantaEmpresa",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            
             EmpresaIndustriaLN logica = new EmpresaIndustriaLN();
             ViewData["empresa"] = logica.obtenerEmpresa(new EmpresaIndustriaBE() { idEmpresaIndustria = id });
+            ViewData["listaPlanta"] = response;
             return View();
         }
 
         public ActionResult NuevaPlanta(int? id, int? idTwo)
         {
+            //Lista Giro
+            GiroLN logicaGiro = new GiroLN();
+            List<GiroBE> listaGiro = logicaGiro.obtenerListaGiro();
+            //Lista Ciuu
+            CiuuLN logicaCiuu = new CiuuLN();
+            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
+            //Lista Departamento
+            DepartamentoLN logicaDepartamento = new DepartamentoLN();
+            List<DepartamentoBE> listaDepartamento = logicaDepartamento.obtenerListaDepartamento();
+            //Lista Provincia
+            ProvinciaLN logicaProvincia = new ProvinciaLN();
+            List<ProvinciaBE> listaProvincia = logicaProvincia.obtenerListaProvincia();
+            //Lista Distrito
+            DistritoLN logicaDistrito = new DistritoLN();
+            List<DistritoBE> listaDistrito = logicaDistrito.obtenerListaDistrito();
+            //Lista Zona
+            ZonaLN logicaZona = new ZonaLN();
+            List<ZonaBE> listaZona = logicaZona.obtenerListaZona();
+            //Lista Empresa Gas
+            EmpresaGasLN logicaEmpresaGas = new EmpresaGasLN();
+            List<EmpresaGasBE> listaEmpresaGas = logicaEmpresaGas.obtenerListaEmpresaGas();
+            //Lista Empresa Luz
+            EmpresaLuzLN logicaEmpresaLuz = new EmpresaLuzLN();
+            List<EmpresaLuzBE> listaEmpresaLuz = logicaEmpresaLuz.obtenerListaEmpresaLuz();
+            //Objeto Campaña
+            PlantaEmpresaBE planta = null;
+            if (idTwo != null)
+            {
+                PlantaEmpresaLN logica = new PlantaEmpresaLN();
+                planta = logica.obtenerPlantaEmpresa(new PlantaEmpresaBE { idPlantaEmpresa = idTwo.Value });                
+            }
+
             ViewData["idEmpresaIndustria"] = id;
             ViewData["idPlantaEmpresa"] = idTwo;
+            ViewData["planta"] = planta;
+            ViewData["listaGiro"] = listaGiro;
+            ViewData["listaCiuu"] = listaCiuu;
+            ViewData["listaDepartamento"] = listaDepartamento;
+            ViewData["listaProvincia"] = listaProvincia;
+            ViewData["listaDistrito"] = listaDistrito;
+            ViewData["listaZona"] = listaZona;
+            ViewData["listaEmpresaGas"] = listaEmpresaGas;
+            ViewData["listaEmpresaLuz"] = listaEmpresaLuz;
             return View();
         }
 

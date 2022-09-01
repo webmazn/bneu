@@ -1,8 +1,18 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaPlanta";
     int id = ViewData["idPlantaEmpresa"] == null ? 0 : (int)ViewData["idPlantaEmpresa"];
     int idEmpresaIndustria = ViewData["idEmpresaIndustria"] == null ? 0 : (int)ViewData["idEmpresaIndustria"];
+    PlantaEmpresaBE planta = ViewData["planta"] == null ? null : (PlantaEmpresaBE)ViewData["planta"];
+    List<GiroBE> listaGiro = ViewData["listaGiro"] == null ? new List<GiroBE>() : (List<GiroBE>)ViewData["listaGiro"];
+    List<CiuuBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<CiuuBE>() : (List<CiuuBE>)ViewData["listaCiuu"];
+    List<DepartamentoBE> listaDepartamento = ViewData["listaDepartamento"] == null ? new List<DepartamentoBE>() : (List<DepartamentoBE>)ViewData["listaDepartamento"];
+    List<ProvinciaBE> listaProvincia = ViewData["listaProvincia"] == null ? new List<ProvinciaBE>() : (List<ProvinciaBE>)ViewData["listaProvincia"];
+    List<DistritoBE> listaDistrito = ViewData["listaDistrito"] == null ? new List<DistritoBE>() : (List<DistritoBE>)ViewData["listaDistrito"];
+    List<ZonaBE> listaZona = ViewData["listaZona"] == null ? new List<ZonaBE>() : (List<ZonaBE>)ViewData["listaZona"];
+    List<EmpresaGasBE> listaEmpresaGas = ViewData["listaEmpresaGas"] == null ? new List<EmpresaGasBE>() : (List<EmpresaGasBE>)ViewData["listaEmpresaGas"];
+    List<EmpresaLuzBE> listaEmpresaLuz = ViewData["listaEmpresaLuz"] == null ? new List<EmpresaLuzBE>() : (List<EmpresaLuzBE>)ViewData["listaEmpresaLuz"];
+    if (planta != null) { planta.archivoContenido = new byte[100]; }
 }
 
 @section scripts_footer {
@@ -197,4 +207,15 @@
 </div>
 <input type="hidden" id="identificador" value="@id" />
 <input type="hidden" id="identificador-parent" value="@idEmpresaIndustria" />
+<script type="text/javascript">
+    var planta = @Html.Raw(Json.Encode(planta));
+    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
+    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
+    var listaDepartamento = @Html.Raw(Json.Encode(listaDepartamento));
+    var listaProvincia = @Html.Raw(Json.Encode(listaProvincia));
+    var listaDistrito = @Html.Raw(Json.Encode(listaDistrito));
+    var listaZona = @Html.Raw(Json.Encode(listaZona));
+    var listaEmpresaGas = @Html.Raw(Json.Encode(listaEmpresaGas));
+    var listaEmpresaLuz = @Html.Raw(Json.Encode(listaEmpresaLuz));
+</script>
 

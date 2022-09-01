@@ -1,7 +1,11 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaEmpresaIndustria";
     int id = ViewData["idEmpresaIndustria"] == null ? 0 : (int)ViewData["idEmpresaIndustria"];
+    EmpresaIndustriaBE empresa = ViewData["empresa"] == null ? null : (EmpresaIndustriaBE)ViewData["empresa"];
+    List<GiroBE> listaGiro = ViewData["listaGiro"] == null ? new List<GiroBE>() : (List<GiroBE>)ViewData["listaGiro"];
+    List<GrupoEmpresaBE> listaGrupo = ViewData["listaGrupo"] == null ? new List<GrupoEmpresaBE>() : (List<GrupoEmpresaBE>)ViewData["listaGrupo"];
+    List<CiuuBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<CiuuBE>() : (List<CiuuBE>)ViewData["listaCiuu"];
 }
 
 @section scripts_footer {
@@ -129,4 +133,10 @@
     </div>
 </div>
 <input type="hidden" id="identificador" value="@id" />
+<script type="text/javascript">
+    var empresa = @Html.Raw(Json.Encode(empresa));
+    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
+    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
+    var listaGrupo = @Html.Raw(Json.Encode(listaGrupo));
+</script>
 

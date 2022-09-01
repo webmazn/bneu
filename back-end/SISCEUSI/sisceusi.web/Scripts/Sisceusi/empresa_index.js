@@ -5,7 +5,8 @@
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
     $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
-    $('#btn-buscar')[0].click();
+    //$('#btn-buscar')[0].click();
+    cargarDatosTabla(listaEmpresa)
 });
 
 /* ================================================
