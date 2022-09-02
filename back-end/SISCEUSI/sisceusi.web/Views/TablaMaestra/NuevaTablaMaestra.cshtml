@@ -1,7 +1,12 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaTablaMaestra";
     int id = ViewData["idTablaMaestra"] == null ? -1 : (int)ViewData["idTablaMaestra"];
+    TablaMaestraBE tablaMaestra = ViewData["tablaMaestra"] == null ? null : (TablaMaestraBE)ViewData["tablaMaestra"];
+    Dictionary<string, object> responsePrincipal = ViewData["tablaEncabezadoPrincipal"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["tablaEncabezadoPrincipal"];
+    Dictionary<string, object> responseSecundario = ViewData["tablaEncabezadoSecundario"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["tablaEncabezadoSecundario"];
+    List<EncabezadoPrincipalBE> listaEncabezadoPrincipal = ViewData["listaEncabezadoPrincipal"] == null ? new List<EncabezadoPrincipalBE>() : (List<EncabezadoPrincipalBE>)ViewData["listaEncabezadoPrincipal"];
+    List<ParametroBE> listaParametro = ViewData["listaParametro"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaParametro"];
 }
 
 @section scripts_footer {
@@ -498,4 +503,12 @@
     </div>
 </div>
 <input type="hidden" id="identificador" value="@id" />
+
+<script type="text/javascript">
+    var tablaMaestra = @Html.Raw(Json.Encode(tablaMaestra));
+    var responsePrincipal = @Html.Raw(Json.Encode(responsePrincipal));
+    var responseSecundario = @Html.Raw(Json.Encode(responseSecundario));
+    var listaEncabezadoPrincipal = @Html.Raw(Json.Encode(listaEncabezadoPrincipal));
+    var listaParametro = @Html.Raw(Json.Encode(listaParametro));
+</script>
 

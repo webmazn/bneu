@@ -28,6 +28,18 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public List<CampanaBE> filtroAvanzado(CampanaBE campana)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.filtroAvanzado(campana, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public bool grabarCampana(CampanaBE campana)
         {
             bool seGuardo = false;

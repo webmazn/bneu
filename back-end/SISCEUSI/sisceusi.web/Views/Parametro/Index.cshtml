@@ -1,6 +1,7 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
+    Dictionary<string, object> listaParametro = ViewData["listaParametro"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaParametro"];
 }
 
 @section scripts_footer {
@@ -213,4 +214,8 @@
 
 @Html.Hidden("column", "par_idParametro")
 @Html.Hidden("order", "ASC")
+
+<script type="text/javascript">
+    var listaParametro = @Html.Raw(Json.Encode(listaParametro));
+</script>
 

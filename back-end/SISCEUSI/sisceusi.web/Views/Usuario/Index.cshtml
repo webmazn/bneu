@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Dictionary<string, object> listaUsuario = ViewData["listaUsuario"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaUsuario"];
 }
 
 @section scripts_footer {
@@ -201,3 +202,7 @@
 
 @Html.Hidden("column", "idUsuario")
 @Html.Hidden("order", "ASC")
+
+<script type="text/javascript">
+    var listaUsuario = @Html.Raw(Json.Encode(listaUsuario));
+</script>

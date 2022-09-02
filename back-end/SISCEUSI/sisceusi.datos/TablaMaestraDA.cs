@@ -31,7 +31,7 @@ namespace sisceusi.datos
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
                     //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
-                    subtitulo = (string)x.SUBTITULO,
+                    subtitulo = x.SUBTITULO == null ? "" : (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO,
@@ -54,6 +54,7 @@ namespace sisceusi.datos
                 string sp = $"{Package.TablaMaestra}USP_SEL_BUSQUEDA_AVANZADO";
                 var p = new OracleDynamicParameters();
                 //p.Add("piTituloPrincipal", empresa.tituloPrincipal);
+                p.Add("piSubtitulo", empresa.subtitulo);
                 p.Add("piFechaInicio", empresa.fechaInicio);
                 p.Add("piFechaFin", empresa.fechaFin);
                 p.Add("piNombres", empresa.usuarioRegistro.nombres);
@@ -67,7 +68,7 @@ namespace sisceusi.datos
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
                     //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
-                    subtitulo = (string)x.SUBTITULO,
+                    subtitulo = x.SUBTITULO == null ? "" : (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO,
@@ -115,6 +116,7 @@ namespace sisceusi.datos
                 string sp = $"{Package.TablaMaestra}USP_SEL_EXPORTAR_AVANZADO";
                 var p = new OracleDynamicParameters();
                 //p.Add("piTituloPrincipal", empresa.tituloPrincipal);
+                p.Add("piSubtitulo", empresa.subtitulo);
                 p.Add("piFechaInicio", empresa.fechaInicio);
                 p.Add("piFechaFin", empresa.fechaFin);
                 p.Add("piNombres", empresa.usuarioRegistro.nombres);
@@ -126,7 +128,7 @@ namespace sisceusi.datos
                 {
                     idTablaMaestra = (int)x.IDTABLAMAESTRA,
                     //tituloPrincipal = x.TITULOPRINCIPAL == null ? "" : (string)x.TITULOPRINCIPAL,
-                    subtitulo = (string)x.SUBTITULO,
+                    subtitulo = x.SUBTITULO == null ? "" : (string)x.SUBTITULO,
                     usuarioRegistro = new UsuarioBE { nombres = (string)x.NOMBRES },
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO

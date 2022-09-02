@@ -11,7 +11,7 @@
  */
 
 var cargarDesplegables = () => {
-    let urlRol = `${baseUrl}Rol/obtenerListaRol`;
+    /*let urlRol = `${baseUrl}Rol/obtenerListaRol`;
     Promise.all([
         fetch(urlRol)
     ])
@@ -20,7 +20,9 @@ var cargarDesplegables = () => {
         jRol = responseAll[0]
         if (jRol.success) cargarRol(jRol.object)
         cargarDatosIniciales()
-    });
+    });*/
+    cargarRol(listaRol)
+    cargarDatosIniciales()
 }
 
 var cargarRol = (data) => {
@@ -209,7 +211,7 @@ var grabarDatos = () => {
  * ================================================
  */
 var cargarDatosIniciales = () => {
-    let id = $('#identificador-user').val()
+    /*let id = $('#identificador-user').val()
     if (id > 0) {
         let url = `${baseUrl}Usuario/obtenerUsuario?idUsuario=${id}`;
         fetch(url)
@@ -224,7 +226,8 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatos(usuario)
 }
 /* ================================================
  * FIN CONSULTAR DATOS ENTIDAD

@@ -4,8 +4,9 @@
     $('#btn-exportar').on('click', (e) => exportar(e));
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
-    $('#btn-buscar')[0].click();
+    //$('#btn-buscar')[0].click();
     cargarDesplegables()
+    cargarDatosTabla(listaUsuario)
 });
 
 /*

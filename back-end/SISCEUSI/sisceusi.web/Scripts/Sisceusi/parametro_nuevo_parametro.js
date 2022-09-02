@@ -10,7 +10,7 @@
  */
 
 var cargarDesplegables = () => {
-    let urlGiro = `${baseUrl}Parametro/obtenerListaParametro`
+    /*let urlGiro = `${baseUrl}Parametro/obtenerListaParametro`
     Promise.all([
         fetch(urlGiro),
     ])
@@ -19,7 +19,9 @@ var cargarDesplegables = () => {
         jParametro = responseAll[0]
         if (jParametro.success) cargarParametro(jParametro.object)
         cargarDatosIniciales()
-    });
+    });*/
+    cargarParametro(listaParametro)
+    cargarDatosIniciales()
 }
 
 var cargarParametro = (data) => {
@@ -90,7 +92,7 @@ var grabar = () => {
  */
 
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    /*let id = $('#identificador').val()
     if (id > 0) {
         let url = `${baseUrl}Parametro/obtenerParametro?idParametro=${id}`;
         fetch(url)
@@ -105,7 +107,8 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatos(parametro)
 }
 
 /* ================================================

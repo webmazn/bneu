@@ -65,6 +65,136 @@
     OPEN poRef FOR vQuerySelect;
     
   END USP_SEL_BUSQUEDA_GENERAL;
+  
+  PROCEDURE USP_SEL_BUSQUEDA_AVANZADO(
+    piDenominacion VARCHAR2,
+    piRuc VARCHAR2,
+    piNombreEmpresa VARCHAR2,
+    piFechaInicio DATE,
+    piFechaFin DATE,
+    piIdEstado VARCHAR2,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vTotalRegistros INTEGER;
+    vTotalPaginas INTEGER;
+    vPaginaActual INTEGER := piPagina;
+    vPaginaInicial INTEGER := 0;
+    vQueryCount VARCHAR2(10000) := '';
+    vQuerySelect VARCHAR2(10000) := '';
+    vExtension VARCHAR(10);
+    vColumna VARCHAR2(50);
+  BEGIN
+    vQueryCount := 'SELECT   COUNT(DISTINCT cam.idCampana)
+                    FROM T_GENM_CAMPANA cam
+                    INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
+                    INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
+                    WHERE (
+                    '||
+                    case
+                        when piDenominacion is null then ''
+                        else ' LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piDenominacion ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                    end    
+                    ||'
+                    '||
+                    case
+                        when piRuc is null then ''
+                        else ' emp.ruc = '''|| piRuc ||''' AND '
+                    end    
+                    ||'        
+                    '||
+                    case
+                        when piNombreEmpresa is null then ''
+                        else ' LOWER(TRANSLATE(emp.nombreEmpresa,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piNombreEmpresa ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                    end    
+                    ||'
+                    '||
+                    case
+                        when piFechaInicio is null and piFechaFin is null then ''
+                        when piFechaInicio is null then ' TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''') AND '
+                        when piFechaFin is null then ' TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') || ''') AND '
+                        else ' (TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') ||''') AND TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''')) AND '  
+                    end
+                    ||'                
+                    '||
+                    case
+                        when piIdEstado = '-1' then ''
+                        else ' cam.idEstado = '''|| piIdEstado ||''' AND '
+                    end
+                    ||'
+                    1 = 1)';
+    EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
+
+    vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
+    IF vPaginaActual = 0 THEN
+      vPaginaActual := 1;
+    END IF;
+    IF vPaginaActual > vTotalPaginas THEN
+      vPaginaActual := vTotalPaginas;
+    END IF;
+
+    vPaginaInicial := vPaginaActual - 1;
+    vExtension := SUBSTR(piColumna,1,3);
+    vColumna := SUBSTR(piColumna,5,LENGTH(piColumna)-4);
+    vColumna := vExtension || '.' || vColumna;
+
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  cam.idCampana,
+                                cam.denominacion,
+                                cam.fechaCreacion,
+                                cam.idEstado,
+                                ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
+                                || vTotalPaginas || ' AS totalPaginas,'
+                                || vPaginaActual || ' AS pagina,'
+                                || piRegistros || ' AS registros,'
+                                || vTotalRegistros || ' AS totalRegistros
+                        FROM T_GENM_CAMPANA cam
+                        INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
+                        INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
+                        WHERE (
+                        '||
+                        case
+                            when piDenominacion is null then ''
+                            else ' LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piDenominacion ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                        end    
+                        ||'
+                        '||
+                        case
+                            when piRuc is null then ''
+                            else ' emp.ruc = '''|| piRuc ||''' AND '
+                        end    
+                        ||'        
+                        '||
+                        case
+                            when piNombreEmpresa is null then ''
+                            else ' LOWER(TRANSLATE(emp.nombreEmpresa,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piNombreEmpresa ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                        end    
+                        ||'
+                        '||
+                        case
+                            when piFechaInicio is null and piFechaFin is null then ''
+                            when piFechaInicio is null then ' TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''') AND '
+                            when piFechaFin is null then ' TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') || ''') AND '
+                            else ' (TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') ||''') AND TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''')) AND '  
+                        end
+                        ||'                
+                        '||
+                        case
+                            when piIdEstado = '-1' then ''
+                            else ' cam.idEstado = '''|| piIdEstado ||''' AND '
+                        end
+                        ||'
+                        1 = 1)
+                        GROUP BY cam.idCampana, cam.denominacion, cam.fechaCreacion, cam.idEstado
+                    )    
+                    WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_BUSQUEDA_AVANZADO;
 
   PROCEDURE USP_PRC_GUARDAR_CAMPANA(
     piIdCampana NUMBER,

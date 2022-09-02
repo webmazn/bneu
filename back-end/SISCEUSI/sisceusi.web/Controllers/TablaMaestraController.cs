@@ -17,12 +17,65 @@ namespace sisceusi.web.Controllers
         // GET: TablaMaestra
         public ActionResult Index()
         {
+            TablaMaestraLN logica = new TablaMaestraLN();
+            List<TablaMaestraBE> lista = logica.filtroGeneral(new TablaMaestraBE
+            {
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "tma_idTablaMaestra",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            ViewData["listaTablaMaestra"] = response;
             return View();
         }
 
         public ActionResult NuevaTablaMaestra(int? id)
         {
+            //Lista Parametro
+            ParametroLN logicaParametro = new ParametroLN();
+            List<ParametroBE> listaParametro = logicaParametro.obtenerListaParametro();
+
+            //Lista TablaMaestra
+            TablaMaestraBE tablaMaestra = null;
+            Dictionary<string, object> responsePrincipal = new Dictionary<string, object>();
+            Dictionary<string, object> responseSecundario = new Dictionary<string, object>();
+            List<EncabezadoPrincipalBE> lista = null;
+            if (id != null)
+            {
+                TablaMaestraLN logica = new TablaMaestraLN();
+                tablaMaestra = logica.obtenerTablaMaestra(new TablaMaestraBE { idTablaMaestra = id.Value });
+                //Lista Encabezado Principal Tabla
+                List<EncabezadoPrincipalBE> listaEncabezadoPrincipal = logica.mostrarListaEncabezadoPrincipal(new EncabezadoPrincipalBE
+                {
+                    idTablaMaestra = id.Value,
+                    registros = 10,
+                    pagina = 1
+                });                
+                responsePrincipal.Add("success", listaEncabezadoPrincipal == null ? false : listaEncabezadoPrincipal.Count == 0 ? false : true);
+                responsePrincipal.Add("object", listaEncabezadoPrincipal);
+                //Lista Encabezado Secundario
+                List<EncabezadoSecundarioBE> listaSecundario = logica.mostrarListaEncabezadoSecundario(new EncabezadoSecundarioBE
+                {
+                    encabezadoPrincipal = new EncabezadoPrincipalBE { idTablaMaestra = id.Value },
+                    registros = 10,
+                    pagina = 1
+                });                
+                responseSecundario.Add("success", listaSecundario == null ? false : listaSecundario.Count == 0 ? false : true);
+                responseSecundario.Add("object", listaSecundario);
+                //Obtener Lista Encabezado Principal
+                lista = logica.obtenerListaEncabezadoPrincipal(new EncabezadoPrincipalBE { idTablaMaestra = id.Value });
+            }
+            
             ViewData["idTablaMaestra"] = id;
+            ViewData["tablaMaestra"] = tablaMaestra;
+            ViewData["tablaEncabezadoPrincipal"] = responsePrincipal;
+            ViewData["tablaEncabezadoSecundario"] = responseSecundario;
+            ViewData["listaEncabezadoPrincipal"] = lista;
+            ViewData["listaParametro"] = listaParametro; 
             return View();
         }
 

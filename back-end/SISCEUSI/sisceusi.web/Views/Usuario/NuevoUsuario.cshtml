@@ -1,7 +1,9 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevoUsuario";
     int id = ViewData["idUsuario"] == null ? 0 : (int)ViewData["idUsuario"];
+    UsuarioBE usuario = ViewData["usuario"] == null ? null : (UsuarioBE)ViewData["usuario"];
+    List<RolBE> listaRol = ViewData["listaRol"] == null ? new List<RolBE>() : (List<RolBE>)ViewData["listaRol"];
 }
 
 @section scripts_footer {
@@ -120,3 +122,7 @@
     </div>
 </div>
 <input type="hidden" id="identificador" value="@id" />
+<script type="text/javascript">
+    var usuario = @Html.Raw(Json.Encode(usuario));
+    var listaRol = @Html.Raw(Json.Encode(listaRol));
+</script>

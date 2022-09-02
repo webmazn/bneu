@@ -17,12 +17,40 @@ namespace sisceusi.web.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
+            UsuarioLN logicaUsuario = new UsuarioLN();
+            List<UsuarioBE> listaUsuario = logicaUsuario.filtroGeneral(new UsuarioBE
+            {
+                idPlantaEmpresa = 0,
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "idUsuario",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", listaUsuario == null ? false : listaUsuario.Count == 0 ? false : true);
+            response.Add("object", listaUsuario);
+            ViewData["listaUsuario"] = response;
             return View();
         }
 
         public ActionResult NuevoUsuario(int? id)
         {
+            //Lista Rol
+            RolLN logicaRol = new RolLN();
+            List<RolBE> listaRol = logicaRol.obtenerListaRol();
+            //Obtener Usuario
+            UsuarioBE usuario = null;
+            if (id != null)
+            {
+                UsuarioLN logicaUsuario = new UsuarioLN();
+                usuario = logicaUsuario.obtenerUsuario(new UsuarioBE { idUsuario = id.Value });
+                EmpresaIndustriaLN logicaEmpresa = new EmpresaIndustriaLN();
+                usuario.empresaIndustria = logicaEmpresa.obtenerEmpresa(new EmpresaIndustriaBE { idEmpresaIndustria = usuario.idEmpresaIndustria });
+            }
             ViewData["idUsuario"] = id;
+            ViewData["usuario"] = usuario;
+            ViewData["listaRol"] = listaRol;
             return View();
         }
 

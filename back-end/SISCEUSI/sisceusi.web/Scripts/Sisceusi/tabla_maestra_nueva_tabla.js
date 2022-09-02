@@ -25,7 +25,7 @@
  */
 
 var cargarDesplegables = () => {
-    let urlGiro = `${baseUrl}Parametro/obtenerListaParametro`
+    /*let urlGiro = `${baseUrl}Parametro/obtenerListaParametro`
     Promise.all([
         fetch(urlGiro),
     ])
@@ -33,8 +33,8 @@ var cargarDesplegables = () => {
     .then((responseAll) => {
         jParametro = responseAll[0]
         if (jParametro.success) cargarParametro(jParametro.object)
-        cargarDatosIniciales()
-    });
+    });*/
+    cargarParametro(listaParametro)
 }
 
 var cargarParametro = (data) => {
@@ -305,7 +305,7 @@ var mostrarEncabezadoPrincipal = () => {
     });
 };
 
-var cargarDatosTablaPrincipal = (j) => {
+var cargarDatosTablaPrincipal = (j, inicio) => {
     let tabla = $('#tbl-encabezado-principal');
     tabla.find('tbody').html('');
     $('#viewPagination-principal').attr('style', 'display: none !important');
@@ -341,7 +341,7 @@ var cargarDatosTablaPrincipal = (j) => {
         });
         //armarComboEncabezadoPrincipal(j.object)
         $('[data-toggle="tooltip"]').tooltip();
-        posicinar('#tbl-encabezado-principal', 120)
+        if (inicio == null) posicinar('#tbl-encabezado-principal', 120)
     } else {
         console.log('No hay resultados');
         $('#viewPagination-principal').hide(); $('#view-page-result-principal').hide();
@@ -377,15 +377,18 @@ var armarComboEncabezadoPrincipal = () => {
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            let data = j.object
-            let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idEncabezadoPrincipal}">${x.idEncabezadoPrincipal}_${x.tituloEncabezado == null ? "" : x.tituloEncabezado}</option>`).join('');
-            options = `<option value="0">-Seleccione un encabezado principal-</option>${options}`;
-            $('#cbo-encabezado-principal').html(options);
+            armarComboPrincipal(j.object)
         }
     })
     .catch(error => {
         console.log('Error:' + error.message)
     })    
+}
+
+var armarComboPrincipal = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idEncabezadoPrincipal}">${x.idEncabezadoPrincipal}_${x.tituloEncabezado == null ? "" : x.tituloEncabezado}</option>`).join('');
+    options = `<option value="0">-Seleccione un encabezado principal-</option>${options}`;
+    $('#cbo-encabezado-principal').html(options);
 }
 
 /* ================================================
@@ -439,7 +442,7 @@ var mostrarEncabezadoSecundario = () => {
     });
 };
 
-var cargarDatosTablaSecundario = (j) => {
+var cargarDatosTablaSecundario = (j, inicio) => {
     let tabla = $('#tbl-encabezado-secundario');
     tabla.find('tbody').html('');
     $('#viewPagination-secundario').attr('style', 'display: none !important');
@@ -475,7 +478,7 @@ var cargarDatosTablaSecundario = (j) => {
         });
 
         $('[data-toggle="tooltip"]').tooltip();
-        posicinar('#tbl-encabezado-secundario', 120)
+        if (inicio == null) posicinar('#tbl-encabezado-secundario', 120)
     } else {
         console.log('No hay resultados');
         $('#viewPagination-secundario').hide(); $('#view-page-result-secundario').hide();
@@ -518,17 +521,15 @@ var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
 
 var cargarDatos = () => {
     idTablaMaestra = $('#identificador').val()
-    armarComboEncabezadoPrincipal()
+    armarComboPrincipal(listaEncabezadoPrincipal)
     cargarDatosIniciales()
-    mostrarEncabezadoPrincipal()
-    mostrarEncabezadoSecundario()
-    setTimeout(function () {
-        posicinar('#cuerpo', 120)
-    }, 2000)    
+    cargarDatosTablaPrincipal(responsePrincipal, 1)
+    cargarDatosTablaSecundario(responseSecundario, 1)
+    posicinar('#cuerpo', 120)
 }
 
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    /*let id = $('#identificador').val()
     if (id > 0) {
         let url = `${baseUrl}TablaMaestra/obtenerTablaMaestra?idTablaMaestra=${id}`;
         fetch(url)
@@ -543,10 +544,12 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatosTablaMaestra(tablaMaestra)
 }
 
 var cargarDatosTablaMaestra = (data) => {
+    if (data == null) return
     //$("#txt-titulo-principal").val(data.tituloPrincipal)
     $("#txt-sub-titulo").val(data.subtitulo)
     $("#txt-question-mark").val(data.descripcionIconoAyuda)

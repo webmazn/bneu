@@ -86,6 +86,39 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        [HttpGet]
+        public JsonResult filtroAvanzado(string denominacion, string ruc, string empresa, DateTime? fechaInicio, DateTime? fechaFin, string estado, int registros, int pagina, string columna, string orden)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaEmpresaBE> listaCampanaEmpresa = new List<CampanaEmpresaBE>();
+            listaCampanaEmpresa.Add(new CampanaEmpresaBE
+            {
+                empresaIndustria = new EmpresaIndustriaBE
+                {
+                    ruc = ruc,
+                    nombreEmpresa = empresa
+                }                
+            });
+            List<CampanaBE> lista = logica.filtroAvanzado(new CampanaBE
+            {
+                denominacion = denominacion,
+                listaCampanaEmpresa = listaCampanaEmpresa,
+                fechaInicio = fechaInicio,
+                fechaFin = fechaFin,
+                idEstado = estado,
+                registros = registros,
+                pagina = pagina,
+                columna = columna,
+                orden = orden
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
         [HttpPost]
         public JsonResult grabarCampana(CampanaBE campana)
         {

@@ -15,11 +15,36 @@ namespace sisceusi.web.Controllers
         // GET: Parametro
         public ActionResult Index()
         {
+            ParametroLN logica = new ParametroLN();
+            List<ParametroBE> lista = logica.filtroGeneral(new ParametroBE
+            {
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "par_idParametro",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            ViewData["listaParametro"] = response;
             return View();
         }
         public ActionResult NuevoParametro(int? id)
         {
+            //Lista PArametro
+            ParametroLN logica = new ParametroLN();
+            List<ParametroBE> listaParametro = logica.obtenerListaParametro();
+            //Obtener parametro
+            ParametroBE parametro = null;
+            if (id != null)
+            {
+                ParametroLN logicaParametro = new ParametroLN();
+                parametro = logicaParametro.obtenerParametro(new ParametroBE { idParametro = id.Value });
+            }
             ViewData["idParametro"] = id;
+            ViewData["parametro"] = parametro;
+            ViewData["listaParametro"] = listaParametro;
             return View();
         }
 

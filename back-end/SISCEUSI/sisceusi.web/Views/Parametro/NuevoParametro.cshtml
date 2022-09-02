@@ -1,7 +1,9 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevoParametro";
     int id = ViewData["idParametro"] == null ? 0 : (int)ViewData["idParametro"];
+    ParametroBE parametro = ViewData["parametro"] == null ? null : (ParametroBE)ViewData["parametro"];
+    List<ParametroBE> listaParametro = ViewData["listaParametro"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaParametro"];
 }
 
 @section scripts_footer {
@@ -95,4 +97,9 @@
     </div>
 </div>
 <input type="hidden" id="identificador" value="@id" />
+
+<script type="text/javascript">
+    var parametro = @Html.Raw(Json.Encode(parametro));
+    var listaParametro = @Html.Raw(Json.Encode(listaParametro));
+</script>
 

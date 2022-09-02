@@ -1,9 +1,11 @@
 ﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevoUsuarioPlanta";
-    EmpresaIndustriaBE empresa = ViewData["empresa"] == null ? new EmpresaIndustriaBE() : (EmpresaIndustriaBE)ViewData["empresa"];
     int idUsuario = ViewData["idUsuario"] == null ? 0 : (int)ViewData["idUsuario"];
     int id = ViewData["idPlantaEmpresa"] == null ? 0 : (int)ViewData["idPlantaEmpresa"];
+    EmpresaIndustriaBE empresa = ViewData["empresa"] == null ? new EmpresaIndustriaBE() : (EmpresaIndustriaBE)ViewData["empresa"];
+    UsuarioBE usuario = ViewData["usuario"] == null ? null : (UsuarioBE)ViewData["usuario"];
+    List<RolBE> listaRol = ViewData["listaRol"] == null ? new List<RolBE>() : (List<RolBE>)ViewData["listaRol"];
     int idEmpresa = empresa.idEmpresaIndustria;
 }
 
@@ -61,7 +63,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold" for="txt-dni">DNI (P.I.D.E) CON CÓD. DE VERIFICACIÓN</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" id="txt-dni" maxlength="8" placeholder="Ingrese su RUC" aria-describedby="inputGroup7" required>
+                                    <input class="form-control" type="text" id="txt-dni" maxlength="8" placeholder="Ingrese su DNI" aria-describedby="inputGroup7" required>
                                     <div class="input-group-append">
                                         <!--span.input-group-text-->
                                         <button id="btn-verificar" class="btn btn-info" type="button"><i class="fas fa-search px-1"></i>Consultar</button>
@@ -128,4 +130,8 @@
 <input type="hidden" id="identificador" value="@id" />
 <input type="hidden" id="identificador-parent" value="@idEmpresa" />
 <input type="hidden" id="identificador-user" value="@idUsuario" />
+<script type="text/javascript">
+    var usuario = @Html.Raw(Json.Encode(usuario));
+    var listaRol = @Html.Raw(Json.Encode(listaRol));
+</script>
 

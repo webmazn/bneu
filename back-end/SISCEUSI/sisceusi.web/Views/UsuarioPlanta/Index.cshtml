@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     PlantaEmpresaBE planta = ViewData["planta"] == null ? new PlantaEmpresaBE() : (PlantaEmpresaBE)ViewData["planta"];
+    Dictionary<string, object> listaUsuarioPlanta = ViewData["listaUsuarioPlanta"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaUsuarioPlanta"];
     int id = planta.idPlantaEmpresa;
 }
 
@@ -220,4 +221,8 @@
 <input type="hidden" id="identificador" value="@id" />
 @Html.Hidden("column", "idUsuario")
 @Html.Hidden("order", "ASC")
+
+<script type="text/javascript">
+    var listaUsuarioPlanta = @Html.Raw(Json.Encode(listaUsuarioPlanta));
+</script>
 

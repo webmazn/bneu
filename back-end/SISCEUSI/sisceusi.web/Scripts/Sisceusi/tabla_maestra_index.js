@@ -6,7 +6,8 @@
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
     $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     //cargarDesplegables();
-    $('#btn-buscar')[0].click();
+    //$('#btn-buscar')[0].click();
+    cargarDatosTabla(listaTablaMaestra)
 });
 
 /* ================================================

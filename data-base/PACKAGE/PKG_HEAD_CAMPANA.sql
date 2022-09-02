@@ -15,6 +15,20 @@
     piOrden VARCHAR2,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_BUSQUEDA_AVANZADO(
+    piDenominacion VARCHAR2,
+    piRuc VARCHAR2,
+    piNombreEmpresa VARCHAR2,
+    piFechaInicio DATE,
+    piFechaFin DATE,
+    piIdEstado VARCHAR2,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
 
   PROCEDURE USP_PRC_GUARDAR_CAMPANA(
     piIdCampana NUMBER,

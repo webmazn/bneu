@@ -150,7 +150,7 @@ var grabarDatos = () => {
 }
 
 var cargarDesplegables = () => {
-    let urlRol = `${baseUrl}Rol/obtenerListaRol`;
+    /*let urlRol = `${baseUrl}Rol/obtenerListaRol`;
     Promise.all([
         fetch(urlRol)
     ])
@@ -159,7 +159,9 @@ var cargarDesplegables = () => {
         jRol = responseAll[0]
         if (jRol.success) cargarRoles(jRol.object)
         cargarDatosIniciales()
-    });
+    });*/
+    cargarRoles(listaRol)
+    cargarDatosIniciales()
 }
 
 var cargarRoles = (data) => {
@@ -169,7 +171,7 @@ var cargarRoles = (data) => {
 }
 
 var cargarDatosIniciales = () => {
-    let id = $('#identificador').val()
+    /*let id = $('#identificador').val()
     if (id > 0) {
         let url = `${baseUrl}Usuario/obtenerUsuario?idUsuario=${id}`;
         fetch(url)
@@ -184,7 +186,8 @@ var cargarDatosIniciales = () => {
         .catch(error => {
             console.log('Error:' + error.message)
         })
-    }
+    }*/
+    cargarDatos(usuario)
 }
 
 var cargarDatos = (data) => {
