@@ -46,7 +46,9 @@
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="./index.html"><img src="./images/logo_web.svg" height="33"></a></li>
                 <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-4" href="./index.html">INICIO</a></li>
-                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./campanas.html">CAMPAÑAS</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle font-weight-bold px-4" href="#" role="button" data-toggle="dropdown" aria-expanded="true">SUB SECTOR</a>
+                  <div class="dropdown-menu"><a class="dropdown-item" href="./campanas-inicio.html">Industria Minería</a><a class="dropdown-item" href="./campanas-inicio.html">Industria Pesquera</a><a class="dropdown-item" href="./campanas-inicio.html">Manufactura</a><a class="dropdown-item" href="./campanas-inicio.html">Industria</a></div>
+                </li>
                 <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
                 <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
               </ul>
@@ -175,8 +177,29 @@
               </div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-verde-petroleo w-100 mb-3" href="javascript:print()">Imprimir</a></div>
               <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Salir</a></div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-control-02.html">Continuar</a></div>
+              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="./encuesta-seccion-control-02.html">Continuar</a><span data-toggle="modal" data-target="#guardar-encuesta"><a class="btn btn-azul w-100 mb-3" href="#">Enviar encuesta</a></span></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="guardar-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body medidas-modal">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                  <div class="swal2-icon-content"><i class="fas fa-info"></i></div>
+                </div>
+                <h3 class="text-center">Gracias por completar su encuesta</h3>
+                <p class="text-center">Los datos ingresados serán enviados para su revisión, los resultados lo podrá generar desde su bandeja de encuestas, en el informe general detallado.</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button class="btn btn-info" type="button">Si, grabar</button>
+            <button class="btn btn-dark" type="button" data-dismiss="modal">Cancelar</button>
           </div>
         </div>
       </div>
