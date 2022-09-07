@@ -29,6 +29,25 @@
     piOrden VARCHAR2,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_EXPORTAR_GENERAL(
+    piBuscar VARCHAR2,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_EXPORTAR_AVANZADO(
+    piDenominacion VARCHAR2,
+    piRuc VARCHAR2,
+    piNombreEmpresa VARCHAR2,
+    piFechaInicio DATE,
+    piFechaFin DATE,
+    piIdEstado VARCHAR2,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
 
   PROCEDURE USP_PRC_GUARDAR_CAMPANA(
     piIdCampana NUMBER,

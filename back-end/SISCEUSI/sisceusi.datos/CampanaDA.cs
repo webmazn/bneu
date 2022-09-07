@@ -79,6 +79,57 @@ namespace sisceusi.datos
             return lista;
         }
 
+        public List<CampanaBE> exportarGeneral(CampanaBE empresa, OracleConnection db)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_EXPORTAR_GENERAL";
+                var p = new OracleDynamicParameters();
+                p.Add("piBuscar", empresa.buscar);
+                p.Add("piColumna", empresa.columna);
+                p.Add("piOrden", empresa.orden);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new CampanaBE
+                {
+                    idCampana = (int)x.IDCAMPANA,
+                    denominacion = (string)x.DENOMINACION,
+                    fechaCreacion = (DateTime)x.FECHACREACION,
+                    idEstado = (string)x.IDESTADO
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<CampanaBE> exportarAvanzado(CampanaBE empresa, OracleConnection db)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_EXPORTAR_AVANZADO";
+                var p = new OracleDynamicParameters();
+                p.Add("piDenominacion", empresa.denominacion);
+                p.Add("piRuc", empresa.listaCampanaEmpresa[0].empresaIndustria.ruc);
+                p.Add("piNombreEmpresa", empresa.listaCampanaEmpresa[0].empresaIndustria.nombreEmpresa);
+                p.Add("piFechaInicio", empresa.fechaInicio);
+                p.Add("piFechaFin", empresa.fechaFin);
+                p.Add("piIdEstado", empresa.idEstado);
+                p.Add("piColumna", empresa.columna);
+                p.Add("piOrden", empresa.orden);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new CampanaBE
+                {
+                    idCampana = (int)x.IDCAMPANA,
+                    denominacion = (string)x.DENOMINACION,
+                    fechaCreacion = (DateTime)x.FECHACREACION,
+                    idEstado = (string)x.IDESTADO,
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
         public bool grabarCampana(CampanaBE campana,out int idCampana, OracleConnection db)
         {
             idCampana = 0;

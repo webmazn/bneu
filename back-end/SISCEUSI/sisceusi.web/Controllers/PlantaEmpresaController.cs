@@ -149,8 +149,8 @@ namespace sisceusi.web.Controllers
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
-                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO" });
+                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 9);
+                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PLANTA_EMPRESA_");
                 }
@@ -178,8 +178,8 @@ namespace sisceusi.web.Controllers
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
-                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO" });
+                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 9);
+                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PLANTA_EMPRESA_");
                 }
@@ -253,7 +253,8 @@ namespace sisceusi.web.Controllers
                     String.Concat(c.latitud, ", ",c.longitud),
                     c.departamento.departamento,
                     c.provincia.provincia,
-                    c.distrito.distrito });
+                    c.distrito.distrito,
+                    c.idEstado == "1" ? "Habilitado" : "Deshabilitado"});
                 i++;
             });
             return listas;

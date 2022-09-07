@@ -1,6 +1,8 @@
-﻿using sisceusi.entidad;
+﻿using OfficeOpenXml;
+using sisceusi.entidad;
 using sisceusi.logica;
 using sisceusi.web.Filter;
+using sres.ut;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
-    public class CampanaController : Controller
+    public class CampanaController : BaseController
     {
         // GET: Campana
         public ActionResult Index()
@@ -119,6 +121,67 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        [HttpGet]
+        public void exportarGeneral(string buscar, string columna, string orden)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaBE> lista = logica.exportarGeneral(new CampanaBE
+            {
+                buscar = buscar,
+                columna = columna,
+                orden = orden
+            });
+
+            try
+            {
+                using (ExcelPackage package = new ExcelPackage())
+                {
+                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Campaña", 4);
+                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
+                    cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
+                    exportar(package, "MANTENIMIENTO_EMPRESA_");
+                }
+            }
+            catch (Exception ex) { Log.Error(ex); }
+        }
+
+        [HttpGet]
+        public void exportarAvanzado(string denominacion, string ruc, string empresa, DateTime? fechaInicio, DateTime? fechaFin, string estado, string columna, string orden)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaEmpresaBE> listaCampanaEmpresa = new List<CampanaEmpresaBE>();
+            listaCampanaEmpresa.Add(new CampanaEmpresaBE
+            {
+                empresaIndustria = new EmpresaIndustriaBE
+                {
+                    ruc = ruc,
+                    nombreEmpresa = empresa
+                }
+            });
+            List<CampanaBE> lista = logica.exportarAvanzado(new CampanaBE
+            {
+                denominacion = denominacion,
+                listaCampanaEmpresa = listaCampanaEmpresa,
+                fechaInicio = fechaInicio,
+                fechaFin = fechaFin,
+                idEstado = estado,
+                columna = columna,
+                orden = orden
+            });
+
+            try
+            {
+                using (ExcelPackage package = new ExcelPackage())
+                {
+                    ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Campaña", 4);
+                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
+                    cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
+                    exportar(package, "MANTENIMIENTO_EMPRESA_");
+                }
+            }
+            catch (Exception ex) { Log.Error(ex); }
+        }
+
         [HttpPost]
         public JsonResult grabarCampana(CampanaBE campana)
         {
@@ -143,6 +206,23 @@ namespace sisceusi.web.Controllers
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
+        }
+
+        private List<List<string>> obtenerDatos(List<CampanaBE> lista)
+        {
+            int i = 0;
+            List<List<string>> listas = new List<List<string>>();
+            lista.ForEach(c =>
+            {
+                listas.Add(new List<string> {
+                    (i + 1).ToString(),
+                    String.Concat("ENC", c.idCampana.ToString("D4")),
+                    c.denominacion,
+                    c.txtFechaCreacion,
+                    c.idEstado == "1" ? "Habilitado" : "Deshabilitado" });
+                i++;
+            });
+            return listas;
         }
     }
 }

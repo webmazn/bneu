@@ -150,3 +150,15 @@ $(document).on("keyup", ".integer-positivo", function (e) {
         return value.replace(/\D/g, "");
     });
 });
+
+/*
+ *
+ * Método números enteros: ruc, dni, etc.
+ * Ejemplo => DNI: 10225896
+ *
+ **/
+$(document).on("keyup", ".integer-latitud-longitud", function (e) {
+    $(e.target).val(function (index, value) {
+        return value.replace(/[A-Za-z]/g, "");
+    });
+});

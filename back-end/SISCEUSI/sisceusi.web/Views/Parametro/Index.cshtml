@@ -38,7 +38,7 @@
                                     <div class="col-md-12 col-lg-6">
                                         <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Texto de ayuda"></i></label>
                                         <div class="input-group">
-                                            <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
+                                            <input maxlength="80" class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
                                             <div class="input-group-append">
                                                 <button id="btn-buscar" class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
                                             </div>
@@ -62,13 +62,13 @@
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="txt-parent">PARENT PARÁMETRO</label>
-                                                                    <input class="form-control" type="text" id="parent" placeholder="Nombre parent parámetro">
+                                                                    <input maxlength="80" class="form-control" type="text" id="parent" placeholder="Nombre parent parámetro">
                                                                 </div>
                                                             </div>
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="txt-parametro">PARÁMETRO</label>
-                                                                    <input class="form-control" type="text" id="parametro" placeholder="Nombre parámetro">
+                                                                    <input maxlength="80" class="form-control" type="text" id="parametro" placeholder="Nombre parámetro">
                                                                 </div>
                                                             </div>
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
@@ -76,8 +76,8 @@
                                                                     <label class="font-weight-bold" for="cbo-tipo-parametro">TIPO DE PARÁMETRO</label>
                                                                     <select class="form-control" id="cbo-tipo-parametro">
                                                                         <option value="0">-Seleccione un tipo de parámetro-</option>
-                                                                        <option value="1">Tipo parámetro 01</option>
-                                                                        <option value="2">Tipo parámetro 02</option>
+                                                                        <option value="1">Principal</option>
+                                                                        <option value="2">Detalle</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

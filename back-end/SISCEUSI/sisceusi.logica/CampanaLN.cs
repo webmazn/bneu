@@ -40,6 +40,30 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public List<CampanaBE> exportarGeneral(CampanaBE empresa)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.exportarGeneral(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<CampanaBE> exportarAvanzado(CampanaBE empresa)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.exportarAvanzado(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
         public bool grabarCampana(CampanaBE campana)
         {
             bool seGuardo = false;

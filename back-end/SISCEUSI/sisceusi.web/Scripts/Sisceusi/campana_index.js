@@ -188,7 +188,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idCampana}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idCampana}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}${btnDocumento}</td>`;
-            let row = `<tr>${colNro}${colCodigo}${colFechaRegistro}${colDenominacion}${colEstado}${colOptions}</tr>`;
+            let row = `<tr>${colNro}${colCodigo}${colDenominacion}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -229,7 +229,7 @@ var exportarAvanzado = () => {
     let estado = $("#cbo-estado").val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { ruc, empresa, representanteLegal, correoElectronico, fechaInicio, fechaFin, estado, columna, orden };
+    let params = { denominacion, ruc, empresa, fechaInicio, fechaFin, estado, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
     let url = `${baseUrl}Campana/exportarAvanzado?${queryParams}`
     location.href = url;
