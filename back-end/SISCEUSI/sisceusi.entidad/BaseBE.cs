@@ -13,6 +13,7 @@ namespace sisceusi.entidad
         public int idUsuarioModificacion { get; set; }
         public DateTime fechaCreacion { get; set; }
         public string ipCreacion { get; set; }
+        public int idRolLogin { get; set; }
         //Seguridad
         public string token { get; set; }
         //Busqueda

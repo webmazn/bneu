@@ -17,6 +17,7 @@ namespace sisceusi.entidad
         public ControlEncuestaBE controlEncuesta { get; set; }
         public TipoEncuestaBE tipoEncuesta { get; set; }
         public EtapaBE etapa { get; set; }
+        public FaseBE fase { get; set; }
         public string txtFechaHoraLlenado { get; set; }
     }
 }

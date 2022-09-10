@@ -109,5 +109,17 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public bool GuardarRevisionEncuesta(ControlEncuestaBE controlEncuesta)
+        {
+            bool seGuardo = false;
+            try
+            {
+                cn.Open();
+                seGuardo = datos.GuardarRevisionEncuesta(controlEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seGuardo;
+        }
+
     }
 }

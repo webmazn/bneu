@@ -56,6 +56,7 @@
     <Compile Include="EncuestaBE.cs" />
     <Compile Include="EstiloTablaBE.cs" />
     <Compile Include="EtapaBE.cs" />
+    <Compile Include="FaseBE.cs" />
     <Compile Include="GiroBE.cs" />
     <Compile Include="GrupoEmpresaBE.cs" />
     <Compile Include="IntencionParticiparBE.cs" />

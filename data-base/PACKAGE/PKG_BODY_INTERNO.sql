@@ -43,6 +43,7 @@
                     INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON pem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
                     INNER JOIN T_MAE_TIPO_ENCUESTA ten ON cen.idTipoEncuesta = ten.idTipoEncuesta AND ten.idEstado = ''1''
                     INNER JOIN T_MAE_ETAPA eta ON cen.idEtapa = eta.idEtapa
+                    INNER JOIN T_MAE_FASE fas ON cen.idFase = fas.idFase
                     WHERE
                     '||
                     CASE
@@ -89,6 +90,8 @@
                                 cen.aceptallenarencuesta,
                                 cen.aceptatratamientodatos,
                                 cen.aceptafirmarencuesta,
+                                cen.idFase,
+                                fas.fase,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
@@ -109,6 +112,7 @@
                         INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON pem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
                         INNER JOIN T_MAE_TIPO_ENCUESTA ten ON cen.idTipoEncuesta = ten.idTipoEncuesta AND ten.idEstado = ''1''
                         INNER JOIN T_MAE_ETAPA eta ON cen.idEtapa = eta.idEtapa
+                        INNER JOIN T_MAE_FASE fas ON cen.idFase = fas.idFase
                         WHERE
                         '||
                         CASE

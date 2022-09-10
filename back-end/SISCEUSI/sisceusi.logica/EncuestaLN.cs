@@ -53,6 +53,11 @@ namespace sisceusi.logica
                         }
                     }
 
+                    if (seGuardo && encuesta.idRolLogin == 3 && encuesta.esUltimaPregunta)
+                    {
+                        seGuardo = datos.grabarFaseEncuesta(new ControlEncuestaBE { idControlEncuesta = encuesta.idControlEncuesta, idFase = encuesta.idFase, idUsuarioCreacion = encuesta.idUsuarioCreacion, ipCreacion = encuesta.ipCreacion }, cn);
+                    }
+
                     if (seGuardo) ot.Commit();
                     else ot.Rollback();
                 }

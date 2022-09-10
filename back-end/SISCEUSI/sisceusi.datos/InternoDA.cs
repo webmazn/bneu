@@ -36,13 +36,14 @@ namespace sisceusi.datos
                     planta = new PlantaEmpresaBE { denominacion = (string)x.PLANTA },
                     tipoEncuesta = new TipoEncuestaBE { tipoEncuesta = (string)x.TIPOENCUESTA },
                     txtFechaHoraLlenado = x.FECHAHORALLENADO == null ? "" : ((DateTime)x.FECHAHORALLENADO).ToString("dd/MM/yyyy"),
-                    etapa = new EtapaBE { etapa = (string)x.ETAPA },
+                    etapa = new EtapaBE { etapa = (string)x.ETAPA },                    
                     controlEncuesta = new ControlEncuestaBE {
                         idControlEncuesta = (int)x.IDCONTROLENCUESTA,
                         aceptaLLenarEncuesta = x.ACEPTALLENARENCUESTA == null ? "" :(string)x.ACEPTALLENARENCUESTA,
                         aceptaTratamientoDatos = x.ACEPTATRATAMIENTODATOS == null ? "" : (string)x.ACEPTATRATAMIENTODATOS,
                         aceptaFirmarEncuesta = x.ACEPTAFIRMARENCUESTA == null ? "" :(string)x.ACEPTAFIRMARENCUESTA,
                         fechaHoraLlenado = x.FECHAHORALLENADO == null ? x.FECHAHORALLENADO : (DateTime)x.FECHAHORALLENADO,
+                        fase = new FaseBE { fase = x.FASE == null ? "": (string)x.FASE, idFase = x.IDFASE == null ? 0 : (int)x.IDFASE }
                     },
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,

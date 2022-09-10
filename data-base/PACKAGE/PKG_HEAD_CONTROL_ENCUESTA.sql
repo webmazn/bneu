@@ -58,6 +58,18 @@
     piIdParametro NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_UPD_REVISAR_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piIdFase NUMBER,
+    piFechaRevision DATE,
+    piIdMetodoVerificacion NUMBER,
+    piIdValidezEntrevista NUMBER,
+    piResultadoValidezEntrevista VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  );
 
 END PKG_SISCEUSI_CONTROL_ENCUESTA;
 

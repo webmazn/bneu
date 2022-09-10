@@ -1,4 +1,5 @@
 ﻿$(document).ready(() => {
+    $('#btn-grabar').on('click', (e) => grabarEncuesta())    
     tituloPrincipal(preguntasEncuesta[0].tituloSeccion)
     preguntasEncuesta.forEach(x => {
         armarPregunta(x)
@@ -278,7 +279,7 @@ var armarPieEncuesta = () => {
                     
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="${baseUrl}Interno/Index">Salir</a></div>` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">${btnAtras}</div>` +
-                    `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" href="javascript:void()" onclick="grabarEncuesta()">Continuar</a></div>` +
+                    `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">${esUltimaPregunta && idRolLogin == 3 ? `<span data-toggle="modal" data-target="#guardar-encuesta"><a class="btn btn-azul w-100 mb-3" href="javascript:void()">Enviar encuesta</a></span>` : `<a class="btn btn-azul w-100 mb-3" href="javascript:void()" onclick="grabarEncuesta()">Continuar</a>`}</div>` +
                   `</div>` +
                   `<div class="row">` +
                     `<div class ="col-6"></div>` +
@@ -416,8 +417,10 @@ var grabarEncuesta = () => {
         }
     })
 
+    let idFase = esUltimaPregunta && idRolLogin == 3 ? idFaseActual < 2 ? 2 : 4 : 0
+
     let url = `${baseUrl}Encuesta/grabarEncuesta`;
-    let data = { listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idUsuarioCreacion: idUsuarioLogin }
+    let data = { idControlEncuesta, listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idFase, esUltimaPregunta, idUsuarioCreacion: idUsuarioLogin, idRolLogin }
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)

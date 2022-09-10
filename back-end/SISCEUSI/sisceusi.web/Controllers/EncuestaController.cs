@@ -110,17 +110,30 @@ namespace sisceusi.web.Controllers
             int ultimaPregunta = 0;
             int anteriorPregunta = 0;
             EncuestaLN logicaEncuesta = new EncuestaLN();
-            if (idTwo == null)
+
+            if (ObtenerUsuarioLogin().idRol == 2)
             {
-                ultimaPregunta = logicaEncuesta.obtenerUltimaPregunta(new ControlEncuestaBE { idControlEncuesta = id });                
-            } else
-            {
-                ultimaPregunta = idTwo.Value;
+                ultimaPregunta = idTwo == null ? 0 : idTwo.Value;
             }
+            else
+            {
+                if (controlEncuesta.idFase == 3)
+                {
+                    ultimaPregunta = idTwo == null ? 0 : idTwo.Value;
+                } else if (idTwo == null)
+                {
+                    ultimaPregunta = logicaEncuesta.obtenerUltimaPregunta(new ControlEncuestaBE { idControlEncuesta = id });
+                }
+                else
+                {
+                    ultimaPregunta = idTwo.Value;
+                }
+            }
+            
             anteriorPregunta = ultimaPregunta == 0 ? 0 : obtenerAnteriorPregunta(listCampanaEncuesta, ultimaPregunta);
             int preguntaActual = ultimaPregunta;
 
-            bool detener = false, finalizarEncuesta = false;
+            bool detener = false, finalizarEncuesta = false, esUltimaPregunta = false;
             List<CampanaEncuestaBE> listaPregunta = new List<CampanaEncuestaBE>();
             while (!detener)
             {
@@ -147,8 +160,13 @@ namespace sisceusi.web.Controllers
                 int numeroUltimaPregunta = listCampanaEncuesta.Max(x => x.numeroOrdenPregunta);
                 if (ultimaPregunta > numeroUltimaPregunta)
                 {
-                    return View("FinalizarEncuesta");
-                }
+                    return View("RevisarEncuesta");
+                } 
+            }
+            else
+            {
+                int numeroUltimaPregunta = listCampanaEncuesta.Max(x => x.numeroOrdenPregunta);
+                esUltimaPregunta = numeroUltimaPregunta == (ultimaPregunta - 1);
             }
 
             //Verificar cada pregunta si presenta una tabla mestra
@@ -166,6 +184,7 @@ namespace sisceusi.web.Controllers
             ViewData["preguntaInicio"] = preguntaActual;
             ViewData["preguntaUltimo"] = ultimaPregunta;
             ViewData["preguntaAnterior"] = anteriorPregunta;
+            ViewData["esUltimaPregunta"] = esUltimaPregunta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
         }
@@ -206,7 +225,7 @@ namespace sisceusi.web.Controllers
             return ultimaPregunta;
         }
 
-        public ActionResult FinalizarEncuesta(int id)
+        public ActionResult RevisarEncuesta(int id)
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
             ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] != null ? (ControlEncuestaBE)ViewData["controlEncuesta"] : logica.obtenerControlEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
@@ -214,6 +233,19 @@ namespace sisceusi.web.Controllers
             ViewData["controlEncuesta"] = controlEncuesta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult GuardarRevisionEncuesta(ControlEncuestaBE controlEncuesta)
+        {
+            ControlEncuestaLN logica = new ControlEncuestaLN();
+            controlEncuesta.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seGuardo = logica.GuardarRevisionEncuesta(controlEncuesta);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seGuardo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
     }

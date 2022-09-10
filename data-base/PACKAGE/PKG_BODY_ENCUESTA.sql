@@ -225,6 +225,23 @@
     FROM    T_GEND_RESP_ENCUESTA_TABLA
     WHERE   idControlEncuesta = piIdControlEncuesta AND idEncabezadoSecundario = piIdEncabezadoSecundario AND idEstado = '1';
   END USP_SEL_LIST_RESP_ENC_TABLA;
+  
+  PROCEDURE USP_UPD_FASE_CONTROL_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piIdFase NUMBER,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GEND_CONTROL_ENCUESTA SET
+    idFase = piIdFase,
+    idUsuarioModificacion = piIdUsuarioCreacion,
+    fechaModificacion = SYSDATE,
+    ipModificacion = piIpCreacion
+    WHERE idControlEncuesta = piIdControlEncuesta;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_FASE_CONTROL_ENCUESTA;
 
 END PKG_SISCEUSI_ENCUESTA;
 

@@ -6,6 +6,7 @@
     int preguntaInicio = ViewData["preguntaInicio"] == null ? 0 : (int)ViewData["preguntaInicio"];
     int preguntaUltimo = ViewData["preguntaUltimo"] == null ? 0 : (int)ViewData["preguntaUltimo"];
     int anteriorPregunta = ViewData["preguntaAnterior"] == null ? 0 : (int)ViewData["preguntaAnterior"];
+    bool esUltimaPregunta = ViewData["esUltimaPregunta"] == null ? false : (bool)ViewData["esUltimaPregunta"];
 }
 
 @section scripts_footer {
@@ -16,6 +17,28 @@
 <div class="container my-4" id="cuerpo"></div>
 <div class="dropdown-divider my-4"></div>
 
+<div class="modal fade" id="guardar-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body medidas-modal">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                            <div class="swal2-icon-content"><i class="fas fa-info"></i></div>
+                        </div>
+                        <h3 class="text-center">Gracias por completar su encuesta</h3>
+                        <p class="text-center">Los datos ingresados serán enviados para su revisión, los resultados lo podrá generar desde su bandeja de encuestas, en el informe general detallado.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button id="btn-grabar" class="btn btn-info" type="button">Si, grabar</button>
+                <button class="btn btn-dark" type="button" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     var preguntasEncuesta = @Html.Raw(Json.Encode(encuesta));
     var numeroEncuesta = '@controlEncuesta.campanaEmpresa.idCampana'
@@ -24,4 +47,6 @@
     var preguntaInicio = @preguntaInicio
     var preguntaUltimo = @preguntaUltimo
     var idSupervisor = @controlEncuesta.idSupervisor
+    var esUltimaPregunta = @Html.Raw(Json.Encode(esUltimaPregunta))
+    var idFaseActual = '@controlEncuesta.idFase'
 </script>

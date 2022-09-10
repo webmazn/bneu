@@ -171,6 +171,19 @@ ipModificacion varchar2(50),
 CONSTRAINT etapa_pk PRIMARY KEY(idEtapa)
 );
 
+CREATE TABLE SISCEUSI.T_MAE_FASE(
+idFase NUMBER,
+fase VARCHAR2(200),
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT fase_pk PRIMARY KEY(idFase)
+);
+
 CREATE TABLE SISCEUSI.T_MAE_TIPO_DATO(
 idTipoDato NUMBER,
 tipoDato VARCHAR2(200),
@@ -339,7 +352,12 @@ aceptaTratamientoDatos VARCHAR2(1) DEFAULT '',
 aceptaFirmarEncuesta VARCHAR2(1) DEFAULT '',
 idUsuarioResponde NUMBER,
 fechaHoraLlenado DATE,
+fechaRevision DATE,
 idEtapa NUMBER,
+idFase NUMBER DEFAULT 0,
+idMetodoVerificacion NUMBER DEFAULT 0,
+idValidezEntrevista NUMBER DEFAULT 0,
+resultadoValidezEntrevista VARCHAR2(200),
 numeroCuestionario NUMBER DEFAULT 0,
 idEstado varchar2(1) default '1',
 idUsuarioCreacion number,
@@ -560,10 +578,18 @@ INSERT INTO SISCEUSI.T_MAE_EMPRESA_LUZ (idEmpresaLuz, empresaLuz, idEstado) VALU
 INSERT INTO SISCEUSI.T_MAE_EMPRESA_LUZ (idEmpresaLuz, empresaLuz, idEstado) VALUES (2, 'Edelnor', '1');
 INSERT INTO SISCEUSI.T_MAE_EMPRESA_LUZ (idEmpresaLuz, empresaLuz, idEstado) VALUES (3, 'Electrocentro', '1');
 
---T_MAE_EMPRESA_ETAPA
+--T_MAE__ETAPA
 INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (1, 'Sin iniciar', '1');
 INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (2, 'Iniciado', '1');
 INSERT INTO SISCEUSI.T_MAE_ETAPA (idEtapa, etapa, idEstado) VALUES (3, 'Finalizado', '1');
+
+--T_MAE_FASE
+INSERT INTO SISCEUSI.T_MAE_FASE (idFase, fase, idEstado) VALUES (0, 'En espera', '1');
+INSERT INTO SISCEUSI.T_MAE_FASE (idFase, fase, idEstado) VALUES (1, 'En progreso', '1');
+INSERT INTO SISCEUSI.T_MAE_FASE (idFase, fase, idEstado) VALUES (2, 'Enviado', '1');
+INSERT INTO SISCEUSI.T_MAE_FASE (idFase, fase, idEstado) VALUES (3, 'Observado', '1');
+INSERT INTO SISCEUSI.T_MAE_FASE (idFase, fase, idEstado) VALUES (4, 'Subsanación enviada', '1');
+INSERT INTO SISCEUSI.T_MAE_FASE (idFase, fase, idEstado) VALUES (5, 'Revisado', '1');
 
 --T_MAE_EMPRESA_TIPO_ENCUESTA
 INSERT INTO SISCEUSI.T_MAE_TIPO_ENCUESTA (idTipoEncuesta, tipoEncuesta, idEstado) VALUES (1, 'Piloto', '1');

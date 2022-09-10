@@ -30,7 +30,12 @@ namespace sisceusi.datos
                     aceptaTratamientoDatos = x.ACEPTATRATAMIENTODATOS == null ? "" : (string)x.ACEPTATRATAMIENTODATOS,
                     aceptaFirmarEncuesta = x.ACEPTAFIRMARENCUESTA == null ? "" : (string)x.ACEPTAFIRMARENCUESTA,
                     fechaHoraLlenado = x.FECHAHORALLENADO == null ? x.FECHAHORALLENADO : (DateTime)x.FECHAHORALLENADO,
+                    revisor = new UsuarioBE {
+                        idUsuario = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
+                        nombres = x.NOMBREREVISOR == null ? "" : (string)x.NOMBREREVISOR
+                    },
                     idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
+                    idFase = x.IDFASE == null ? 0 : (int)x.IDFASE,
                     plantaEmpresa = new PlantaEmpresaBE {
                         idPlantaEmpresa = (int)x.IDPLANTAEMPRESA,
                         denominacion = (string)x.PLANTA,
@@ -218,6 +223,30 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return lista;
+        }
+
+        public bool GuardarRevisionEncuesta(ControlEncuestaBE controlEncuesta, OracleConnection db)
+        {
+            bool seGrabo = false;
+            try
+            {
+                string sp = $"{Package.ControlEncuesta}USP_UPD_REVISAR_ENCUESTA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdControlEncuesta", controlEncuesta.idControlEncuesta);
+                p.Add("piIdFase", controlEncuesta.idFase);
+                p.Add("piFechaRevision", controlEncuesta.fechaRevision);
+                p.Add("piIdMetodoVerificacion", controlEncuesta.idMetodoVerificacion);
+                p.Add("piIdValidezEntrevista", controlEncuesta.idValidezEntrevista);
+                p.Add("piResultadoValidezEntrevista", controlEncuesta.resultadoValidezEntrevista);
+                p.Add("piIdUsuarioCreacion", controlEncuesta.idUsuarioCreacion);
+                p.Add("piIpCreacion", controlEncuesta.ipCreacion);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seGrabo = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seGrabo;
         }
     }
 }

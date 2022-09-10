@@ -176,6 +176,7 @@
     <Content Include="Scripts\Sisceusi\encuesta_formulario.js" />
     <Content Include="Scripts\Sisceusi\encuesta_inicio.js" />
     <Content Include="Scripts\Sisceusi\encuesta_preguntaEncuesta.js" />
+    <Content Include="Scripts\Sisceusi\encuesta_revisar.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
     <Content Include="Scripts\Sisceusi\interno_index.js" />
     <Content Include="Scripts\Sisceusi\parametro_index.js" />
@@ -233,7 +234,7 @@
     <Content Include="Views\Parametro\Index.cshtml" />
     <Content Include="Views\Parametro\NuevoParametro.cshtml" />
     <Content Include="Views\Encuesta\PreguntaEncuesta.cshtml" />
-    <Content Include="Views\Encuesta\FinalizarEncuesta.cshtml" />
+    <Content Include="Views\Encuesta\RevisarEncuesta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

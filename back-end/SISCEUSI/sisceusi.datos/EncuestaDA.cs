@@ -122,5 +122,25 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return lista;
         }
+
+        public bool grabarFaseEncuesta(ControlEncuestaBE controlEncuesta, OracleConnection db)
+        {
+            bool seGrabo = false;
+            try
+            {
+                string sp = $"{Package.Encuesta}USP_UPD_FASE_CONTROL_ENCUESTA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdControlEncuesta", controlEncuesta.idControlEncuesta);
+                p.Add("piIdFase", controlEncuesta.idFase);
+                p.Add("piIdUsuarioCreacion", controlEncuesta.idUsuarioCreacion);
+                p.Add("piIpCreacion", controlEncuesta.ipCreacion);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seGrabo = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seGrabo;
+        }
     }
 }

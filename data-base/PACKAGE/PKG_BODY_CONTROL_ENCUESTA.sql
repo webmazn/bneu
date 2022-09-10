@@ -14,10 +14,11 @@
   BEGIN
     OPEN poRef FOR
     SELECT 
-    cen.idControlEncuesta, cen.aceptaLLenarEncuesta, cen.aceptaTratamientoDatos, cen.aceptaFirmarEncuesta, cen.idSupervisor,
+    cen.idControlEncuesta, cen.aceptaLLenarEncuesta, cen.aceptaTratamientoDatos, cen.aceptaFirmarEncuesta, cen.idSupervisor, cen.idFase,
     cam.idCampana, cam.denominacion,
     emp.idEmpresaIndustria, emp.nombreEmpresa, emp.nombreComercial, emp.ruc,
-    pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado, cen.fechahorallenado, 
+    pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado, cen.fechahorallenado,
+    usu.nombres nombreRevisor,
     dep.departamento, pro.provincia, dis.distrito, zon.zona, pem.direccion, gas.empresagas, luz.empresaluz
     FROM T_GEND_CONTROL_ENCUESTA cen
     INNER JOIN T_GENM_PLANTA_EMPRESA pem ON cen.idPlantaEmpresa = pem.idPlantaEmpresa AND pem.idEstado = '1'
@@ -31,6 +32,7 @@
     INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
     INNER JOIN T_MAE_EMPRESA_GAS gas ON pem.idEmpresaGas = gas.idEmpresaGas
     INNER JOIN T_MAE_EMPRESA_LUZ luz ON pem.idEmpresaLuz = luz.idEmpresaLuz 
+    INNER JOIN T_GENM_USUARIO usu ON cen.idSupervisor = usu.idUsuario
     
     WHERE   idControlEncuesta = piIdControlEncuesta;
   END USP_SEL_OBJECT;
@@ -162,6 +164,33 @@
     FROM  T_GENM_PARAMETRO
     WHERE idparentparametro = piIdParametro AND idEstado = '1'; 
   END USP_SEL_PARAMETRO;
+  
+  PROCEDURE USP_UPD_REVISAR_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piIdFase NUMBER,
+    piFechaRevision DATE,
+    piIdMetodoVerificacion NUMBER,
+    piIdValidezEntrevista NUMBER,
+    piResultadoValidezEntrevista VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS 
+  BEGIN
+    UPDATE T_GEND_CONTROL_ENCUESTA SET
+    idFase = piIdFase,
+    fechaRevision = piFechaRevision,
+    idMetodoVerificacion = piIdMetodoVerificacion,
+    idValidezEntrevista = piIdValidezEntrevista,
+    resultadoValidezEntrevista = piResultadoValidezEntrevista,
+    idUsuarioModificacion = piIdUsuarioCreacion,
+    fechaModificacion = SYSDATE,
+    ipModificacion = piIpCreacion
+    WHERE 
+    idControlEncuesta = piIdControlEncuesta;
+    
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_REVISAR_ENCUESTA;
 
 END PKG_SISCEUSI_CONTROL_ENCUESTA;
 

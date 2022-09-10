@@ -18,12 +18,18 @@ namespace sisceusi.entidad
         public string aceptaFirmarEncuesta { get; set; }
         public int idUsuarioResponde { get; set; }
         public DateTime? fechaHoraLlenado { get; set; }
+        public DateTime? fechaRevision { get; set; }
         public int numeroCuestionario { get; set; }
         public int idEtapa { get; set; }
+        public int idFase { get; set; }
+        public int idMetodoVerificacion { get; set; }
+        public int idValidezEntrevista { get; set; }
+        public string resultadoValidezEntrevista { get; set; }
         public string idEstado { get; set; }
 
         public CampanaEmpresaBE campanaEmpresa { get; set; }
         public PlantaEmpresaBE plantaEmpresa { get; set; }
         public UsuarioBE revisor { get; set; }
+        public FaseBE fase { get; set; }
     }
 }
