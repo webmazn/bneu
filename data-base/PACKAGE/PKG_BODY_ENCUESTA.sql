@@ -242,6 +242,50 @@
     WHERE idControlEncuesta = piIdControlEncuesta;
     poRowAffected := SQL%ROWCOUNT;
   END USP_UPD_FASE_CONTROL_ENCUESTA;
+  
+  PROCEDURE USP_PRC_ENCUESTA_COMENTARIO(
+    piIdControlEncuesta NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    piComentario VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS
+    vId NUMBER;
+  BEGIN
+    SELECT
+        (SELECT idEncuestaComentario FROM T_GEND_ENCUESTA_COMENTARIO WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta)
+    INTO vId
+    FROM DUAL;
+    
+    IF vId IS NULL THEN
+          vId := SQ_GEND_ENCUESTA_COMENTARIO.NEXTVAL();
+          INSERT INTO T_GEND_ENCUESTA_COMENTARIO
+          (idEncuestaComentario, idControlEncuesta, idCampanaEncuesta, comentario, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          VALUES 
+          (vId, piIdControlEncuesta, piIdCampanaEncuesta, piComentario, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+    ELSE
+          UPDATE T_GEND_ENCUESTA_COMENTARIO SET
+          comentario = piComentario,
+          idUsuarioModificacion = piIdUsuarioCreacion,
+          fechaModificacion = SYSDATE,
+          ipModificacion = piIpCreacion
+          WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta;
+    END IF;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_PRC_ENCUESTA_COMENTARIO;
+  
+  PROCEDURE USP_SEL_ENCUESTA_COMENTARIO(
+    piIdControlEncuesta NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT  *
+    FROM  T_GEND_ENCUESTA_COMENTARIO
+    WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta;
+  END USP_SEL_ENCUESTA_COMENTARIO;
 
 END PKG_SISCEUSI_ENCUESTA;
 

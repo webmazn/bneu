@@ -142,5 +142,42 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return seGrabo;
         }
+
+        public bool grabarEncuestaComentario(EncuestaComentarioBE encuestaComentario, OracleConnection db)
+        {
+            bool seGrabo = false;
+            try
+            {
+                string sp = $"{Package.Encuesta}USP_PRC_ENCUESTA_COMENTARIO";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdControlEncuesta", encuestaComentario.idControlEncuesta);
+                p.Add("piIdCampanaEncuesta", encuestaComentario.idCampanaEncuesta);
+                p.Add("piComentario", encuestaComentario.comentario);
+                p.Add("piIdUsuarioCreacion", encuestaComentario.idUsuarioCreacion);
+                p.Add("piIpCreacion", encuestaComentario.ipCreacion);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seGrabo = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seGrabo;
+        }
+
+        public EncuestaComentarioBE obtenerEncuestaComentario(EncuestaComentarioBE entidad, OracleConnection db)
+        {
+            EncuestaComentarioBE item = null;
+            try
+            {
+                string sp = $"{Package.Encuesta}USP_SEL_ENCUESTA_COMENTARIO";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdControlEncuesta", entidad.idControlEncuesta);
+                p.Add("piIdCampanaEncuesta", entidad.idCampanaEncuesta);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.Query<EncuestaComentarioBE>(sp, p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
     }
 }

@@ -169,9 +169,11 @@ namespace sisceusi.web.Controllers
                 esUltimaPregunta = numeroUltimaPregunta == (ultimaPregunta - 1);
             }
 
+
             //Verificar cada pregunta si presenta una tabla mestra
             listaPregunta.ForEach(x =>
             {
+                x.encuestaComentario = x.idCampanaEncuesta == listaPregunta[0].idCampanaEncuesta ? logicaEncuesta.obtenerEncuestaComentario(new EncuestaComentarioBE { idControlEncuesta = controlEncuesta.idControlEncuesta, idCampanaEncuesta = x.idCampanaEncuesta }) : null;
                 x.listaRespuesta = logica.obtenerListaRespuestaEncuesta(x);
                 x.listaRespuestaEncuestaPlanta = logicaEncuesta.obtenerListaRespuestaPlanta(id, x.idCampanaEncuesta);
                 if (x.idParametroTabla > 0)
@@ -187,20 +189,7 @@ namespace sisceusi.web.Controllers
             ViewData["esUltimaPregunta"] = esUltimaPregunta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
-        }
-
-        [HttpPost]
-        public JsonResult grabarEncuesta(EncuestaBE encuesta)
-        {
-            EncuestaLN logica = new EncuestaLN();
-            encuesta.ipCreacion = Request.UserHostAddress.ToString().Trim();
-            bool seGuardo = logica.grabarEncuesta(encuesta);
-            Dictionary<string, object> response = new Dictionary<string, object>();
-            response.Add("success", seGuardo);
-            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
-            jsonResult.MaxJsonLength = int.MaxValue;
-            return jsonResult;
-        }
+        }       
 
         private int obtenerAnteriorPregunta(List<CampanaEncuestaBE> lista, int ultimaPregunta)
         {
@@ -225,6 +214,19 @@ namespace sisceusi.web.Controllers
             return ultimaPregunta;
         }
 
+        [HttpPost]
+        public JsonResult grabarEncuesta(EncuestaBE encuesta)
+        {
+            EncuestaLN logica = new EncuestaLN();
+            encuesta.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seGuardo = logica.grabarEncuesta(encuesta);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seGuardo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
         public ActionResult RevisarEncuesta(int id)
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
@@ -233,6 +235,19 @@ namespace sisceusi.web.Controllers
             ViewData["controlEncuesta"] = controlEncuesta;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult GuardarObservacionEncuesta(ControlEncuestaBE controlEncuesta)
+        {
+            ControlEncuestaLN logica = new ControlEncuestaLN();
+            controlEncuesta.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seGuardo = logica.GuardarRevisionEncuesta(controlEncuesta);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seGuardo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
         [HttpPost]

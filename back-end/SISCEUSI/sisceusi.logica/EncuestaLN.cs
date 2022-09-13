@@ -57,6 +57,13 @@ namespace sisceusi.logica
                     {
                         seGuardo = datos.grabarFaseEncuesta(new ControlEncuestaBE { idControlEncuesta = encuesta.idControlEncuesta, idFase = encuesta.idFase, idUsuarioCreacion = encuesta.idUsuarioCreacion, ipCreacion = encuesta.ipCreacion }, cn);
                     }
+                    else if (seGuardo && encuesta.idRolLogin == 2)
+                    {
+                        EncuestaComentarioBE encuestaComentario = encuesta.encuestaComentario;
+                        encuestaComentario.ipCreacion = encuesta.ipCreacion;
+                        encuestaComentario.idUsuarioCreacion = encuesta.idUsuarioCreacion;
+                        seGuardo = datos.grabarEncuestaComentario(encuestaComentario, cn);
+                    }
 
                     if (seGuardo) ot.Commit();
                     else ot.Rollback();
@@ -107,6 +114,18 @@ namespace sisceusi.logica
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return pregunta;
+        }
+
+        public EncuestaComentarioBE obtenerEncuestaComentario(EncuestaComentarioBE encuestaComentario)
+        {
+            EncuestaComentarioBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerEncuestaComentario(encuestaComentario, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
         }
     }
 }

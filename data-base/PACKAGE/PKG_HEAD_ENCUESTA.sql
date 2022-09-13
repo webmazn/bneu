@@ -57,6 +57,21 @@
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
   );
+  
+  PROCEDURE USP_PRC_ENCUESTA_COMENTARIO(
+    piIdControlEncuesta NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    piComentario VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_ENCUESTA_COMENTARIO(
+    piIdControlEncuesta NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_ENCUESTA;
 

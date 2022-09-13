@@ -270,7 +270,40 @@ var armarControlCampo = (secundario, i, border) => {
 
 var armarPieEncuesta = () => {
     let btnAtras = preguntaInicio == 0 ? '' : `<a class="btn btn-azul w-100 mb-3" href="${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}/${anteriorPregunta}">Atrás</a>`
-    let pie = `<div class="dropdown-divider my-4"></div>` +
+
+    let comentario = ''
+    if (idRolLogin == 2) {
+        comentario = `<div class="dropdown-divider my-4"></div>` +
+                      `<div class="container">` +
+                        `<div class="container p-0">` +
+                            `<div class="row">` +
+                                `<div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">` +
+                                    `<div class="form-group">` +
+                                        `<label class="font-weight-bold text-azul">Comentarios de revisor:</label>` +
+                                    `</div>` +
+                                    `<div class="input-group">` +
+                                        `<textarea id="txt-comentario" class="form-control" rows="2"></textarea>` +
+                                    `</div>` +
+                                `</div>` +
+                            `</div>` +
+                        `</div>` +
+                    `</div>`
+    } else if (idRolLogin == 3) {
+        comentario = `<div class="dropdown-divider my-4"></div>` +
+                      `<div id="seccion-comentario" class="container">` +
+                        `<div class="container p-0">` +
+                            `<div class="row">` +
+                                `<div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">` +
+                                    `<label class="text-danger"></label>` +
+                                `</div>` +
+                            `</div>` +
+                        `</div>` +
+                    `</div>`
+    }
+    
+
+    let pie = `${comentario}` +
+                `<div class="dropdown-divider my-4"></div>` +
                 `<div class="container">` +
                   `<div class="row">` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">` +
@@ -361,6 +394,20 @@ var asignarRespuesta = () => {
             })
         }
     })
+
+    //Comentarios
+    let comentario = preguntasEncuesta[0].encuestaComentario == null || preguntasEncuesta[0].encuestaComentario == undefined ? "" : preguntasEncuesta[0].encuestaComentario.comentario == null ? "" : preguntasEncuesta[0].encuestaComentario.comentario
+    if (idRolLogin == 2) {        
+        $('#txt-comentario').val(comentario)
+    } else {
+        if (comentario == "") {
+            $('#seccion-comentario').prev().remove()
+            $('#seccion-comentario').remove()
+        } else {
+            $('#seccion-comentario').find('div div div label').html(`<small><strong>Observación: ${comentario}</strong></small>`)
+        }        
+    }
+    
 }
 
 var grabarEncuesta = () => {
@@ -417,17 +464,27 @@ var grabarEncuesta = () => {
         }
     })
 
+    let comentario = $('#txt-comentario').val() == undefined ? '' : $('#txt-comentario').val()
     let idFase = esUltimaPregunta && idRolLogin == 3 ? idFaseActual < 2 ? 2 : 4 : 0
 
+    let encuestaComentario = {
+        idControlEncuesta: idControlEncuesta,
+        idCampanaEncuesta: preguntasEncuesta[0].idCampanaEncuesta,
+        comentario: comentario
+    }
+
     let url = `${baseUrl}Encuesta/grabarEncuesta`;
-    let data = { idControlEncuesta, listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idFase, esUltimaPregunta, idUsuarioCreacion: idUsuarioLogin, idRolLogin }
+    let data = { idControlEncuesta, listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idFase, esUltimaPregunta, encuestaComentario, idUsuarioCreacion: idUsuarioLogin, idRolLogin }
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}/${preguntaUltimo}`
+            if (esUltimaPregunta && idRolLogin == 3)
+                location.href = `${baseUrl}Interno/Index`
+            else
+                location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}/${preguntaUltimo}`
         } else {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados'), 'registro'))
         }

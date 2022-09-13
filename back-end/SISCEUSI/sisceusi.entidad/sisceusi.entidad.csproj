@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BannerBE.cs" />
     <Compile Include="BaseBE.cs" />
     <Compile Include="CampanaBE.cs" />
     <Compile Include="CampanaEmpresaBE.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="EncabezadoPrincipalBE.cs" />
     <Compile Include="EncabezadoSecundarioBE.cs" />
     <Compile Include="EncuestaBE.cs" />
+    <Compile Include="EncuestaComentarioBE.cs" />
     <Compile Include="EstiloTablaBE.cs" />
     <Compile Include="EtapaBE.cs" />
     <Compile Include="FaseBE.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="PlantaEmpresaBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaBE.cs" />
+    <Compile Include="PublicacionBE.cs" />
     <Compile Include="RespuestaEncuestaBE.cs" />
     <Compile Include="RespuestaEncuestaParametroBE.cs" />
     <Compile Include="RespuestaEncuestaPlantaBE.cs" />

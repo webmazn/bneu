@@ -60,6 +60,7 @@
     <Compile Include="IntencionParticiparLN.cs" />
     <Compile Include="InternoLN.cs" />
     <Compile Include="LoginLN.cs" />
+    <Compile Include="PaginaHomeLN.cs" />
     <Compile Include="ParametroLN.cs" />
     <Compile Include="PlantaEmpresaLN.cs" />
     <Compile Include="ProvinciaLN.cs" />

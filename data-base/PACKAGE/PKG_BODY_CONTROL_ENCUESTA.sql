@@ -165,6 +165,26 @@
     WHERE idparentparametro = piIdParametro AND idEstado = '1'; 
   END USP_SEL_PARAMETRO;
   
+  PROCEDURE USP_UPD_OBSERVACION_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piIdFase NUMBER,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GEND_CONTROL_ENCUESTA SET
+    idFase = piIdFase,
+    fechaObservacion = SYSDATE,
+    idUsuarioModificacion = piIdUsuarioCreacion,
+    fechaModificacion = SYSDATE,
+    ipModificacion = piIpCreacion
+    WHERE 
+    idControlEncuesta = piIdControlEncuesta;
+    
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_OBSERVACION_ENCUESTA;
+  
   PROCEDURE USP_UPD_REVISAR_ENCUESTA(
     piIdControlEncuesta NUMBER,
     piIdFase NUMBER,

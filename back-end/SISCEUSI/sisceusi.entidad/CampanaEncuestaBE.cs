@@ -21,6 +21,7 @@ namespace sisceusi.entidad
         public string idEstado { get; set; }
 
         public int idControlEncuesta { get; set; }
+        public EncuestaComentarioBE encuestaComentario { get; set; }
         public List<EncabezadoSecundarioBE> listaEncabezadoSecundario { get; set; }
         public List<RespuestaEncuestaPlantaBE> listaRespuestaEncuestaPlanta { get; set; }
     }

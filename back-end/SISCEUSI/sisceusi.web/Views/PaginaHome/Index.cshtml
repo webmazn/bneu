@@ -1,0 +1,465 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Dictionary<string, object> listaBanner = ViewData["listaBanner"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaBanner"];
+    Dictionary<string, object> listaPublicacion = ViewData["listaPublicacion"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaPublicacion"];
+}
+
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/pagina_home_index.js")"></script>
+}
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container my-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 py-4">
+                <div class="row">
+                    <div class="col-md-12 col-lg-9 d-flex">
+                        <div class="bg-light p-4">
+                            <div class="h4 text-cyan">Mantenimiento del home&nbsp;</div>
+                            <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE BANNER SLIDER PRINCIPAL</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-banner">TÍTULO DEL BANNER</label>
+                                    <input class="form-control" type="text" id="txt-titulo-banner" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-banner">DESCRIPCIÓN DEL BANNER</label>
+                                    <input class="form-control" type="text" id="txt-descripcion-banner" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-fija">DESCRIPCIÓN FIJA</label>
+                                    <input class="form-control" type="text" id="txt-descripcion-fija" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-boton">TÍTULO DEL BOTÓN</label>
+                                    <input class="form-control" type="text" id="txt-titulo-boton" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-enlace-boton">ENLACE DEL BOTÓN</label>
+                                    <input class="form-control" type="text" id="txt-enlace-boton" placeholder="Ingrese enlace">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group text-left">
+                                    <label class="font-weight-bold" for="fle-slider-01">IMAGEN DE LA PUBLICACIÓN</label>
+                                    <div class="input-group">
+                                        <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-slider-01" placeholder="Subir imagen" required>
+                                        <input class="d-none fil-file-control" type="file" id="fle-slider-01" accept="image/*">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text cursor-pointer badge-info" for="fle-slider-01">Seleccionar</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-banner">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-cancelar-banner" class="btn btn-secondary w-100 mb-3 d-none" href="javascript:void(0)">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar-banner" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive tabla-principal">
+                            <table id="tbl-banner" class="table table-striped table-hover">
+                                <thead>
+                                    <tr class="bg-azul text-white">
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN PRINCIPAL&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN FIJA&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>BOTÓN&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE BOTÓN&nbsp;</span></span></div>
+                                        </th>                                        
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN DE FONDO&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col" style="min-width:150px;">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                   
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros-banner">1</span><span id="view-page-result-banner">-<span class="fin-registros-banner">1</span> de <span class="total-registros-banner">1</span> registros</span></td>
+                                        <td id="viewPagination-banner" class="text-right text-xs-left pr-0" colspan="5" style="display: none">
+                                            <span>Registros por página&nbsp;</span>
+                                            <select id="number-registers-banner">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina-banner">1</span> de <span class="total-paginas-banner">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina-banner" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE PUBLICACIONES Y/O ARTÍCULOS</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-publicacion">TÍTULO DE LA PUBLICACIÓN</label>
+                                    <input class="form-control" type="text" id="txt-titulo-publicacion" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-publicacion">DESCRIPCIÓN DE LA PUBLICACIÓN</label>
+                                    <input class="form-control" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group text-left">
+                                    <label class="font-weight-bold" for="fle-publicacion-01">IMAGEN DE LA PUBLICACIÓN</label>
+                                    <div class="input-group">
+                                        <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-publicacion-01" placeholder="Subir imagen" required>
+                                        <input class="d-none fil-file-control" type="file" id="fle-publicacion-01" accept="image/*">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text cursor-pointer badge-info" for="fle-publicacion-01">Seleccionar</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-publicacion">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-cancelar-publicacion" class="btn btn-secondary w-100 mb-3 d-none" href="javascript:void(0)">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar-publicacion" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive tabla-principal">
+                            <table id="tbl-publicacion" class="table table-striped table-hover">
+                                <thead>
+                                    <tr class="bg-azul text-white">
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col" style="min-width:150px;">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="2"><span>Resultado:&nbsp;</span><span class="inicio-registros-publicacion">1</span><span id="view-page-result-publicacion">-<span class="fin-registros-publicacion">1</span> de <span class="total-registros-publicacion">1</span> registros</span></td>
+                                        <td id="viewPagination-publicacion" class="text-right text-xs-left pr-0" colspan="3" style="display: none">
+                                            <span>Registros por página&nbsp;</span>
+                                            <select id="number-registers-publicacion">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina-publicacion">1</span> de <span class="total-paginas-publicacion">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina-publicacion" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE ENLACES DE LA COLUMNA LATERAL DERECHA</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-enlace">TÍTULO DEL ENLACE</label>
+                                    <input class="form-control" type="text" id="txt-titulo-enlace" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-enlace">DESCRIPCIÓN DEL ENLACE</label>
+                                    <input class="form-control" type="text" id="txt-descripcion-enlace" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-secondary w-100 mb-3" href="#">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-success w-100 mb-3" href="#">Agregar</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive tabla-principal">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr class="bg-azul text-white">
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col" style="width:90px;"><a class="btn btn-sm btn-info btn-table" href="#"><i class="fa fa-plus"></i></a></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-encabezado="Título" scope="row" data="0"><span class="ml-2">Título del artículo1</span></td>
+                                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-encabezado="Título" scope="row" data="1"><span class="ml-2">Título del artículo2</span></td>
+                                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-encabezado="Título" scope="row" data="2"><span class="ml-2">Título del artículo3</span></td>
+                                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
+                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
+                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
+                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">LOGOS PRINCIPALES</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group text-left">
+                            <label class="font-weight-bold" for="fle-requisito-02">ÍCONO PRINCIPAL DE LA WEB</label>
+                            <div class="input-group">
+                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-02" placeholder="Subir documentos" required>
+                                <input class="d-none fil-file-control" type="file" id="fle-requisito-02" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                                <div class="input-group-append">
+                                    <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-02">Seleccionar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group text-left">
+                            <label class="font-weight-bold" for="fle-requisito-03">ÍCONO DE LA DGEE</label>
+                            <div class="input-group">
+                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-03" placeholder="Subir documentos" required>
+                                <input class="d-none fil-file-control" type="file" id="fle-requisito-03" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                                <div class="input-group-append">
+                                    <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-03">Seleccionar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ENLACES SOCIALES</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_fb.svg"></div>
+                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_tw.svg"></div>
+                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_ig.svg"></div>
+                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_yt.svg"></div>
+                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_wp.svg"></div>
+                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_ld.svg"></div>
+                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider mt-5"></div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+                        <button class="btn btn-info w-100 mb-3" href="#">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalConfirmacionBanner" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRowBanner" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalConfirmacionPublicacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabelP">Confirmar eliminación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRowPublicacion" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var listaBanner = @Html.Raw(Json.Encode(listaBanner));
+    var listaPublicacion = @Html.Raw(Json.Encode(listaPublicacion));
+</script>
+

@@ -59,6 +59,14 @@
     poRef OUT SYS_REFCURSOR
   );
   
+  PROCEDURE USP_UPD_OBSERVACION_ENCUESTA(
+    piIdControlEncuesta NUMBER,
+    piIdFase NUMBER,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  );
+  
   PROCEDURE USP_UPD_REVISAR_ENCUESTA(
     piIdControlEncuesta NUMBER,
     piIdFase NUMBER,

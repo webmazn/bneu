@@ -11,6 +11,7 @@ namespace sisceusi.entidad
         public int idControlEncuesta { get; set; }
         public int idFase { get; set; } 
         public bool esUltimaPregunta { get; set; }
+        public EncuestaComentarioBE encuestaComentario { get; set; }
         public List<RespuestaEncuestaPlantaBE> listaRespuestaEncuestaPlanta { get; set; }
         public List<RespuestaEncuestaTablaBE> listaRespuestaEncuestaTabla { get; set; }
     }

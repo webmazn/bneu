@@ -81,19 +81,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="dropdown-divider my-4"></div>
-                <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-mensaje">
-                    </div>
-                </div>
+                <div class="dropdown-divider my-4"></div>                
                 <div class="row">
                     <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                         <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                     </div>
-                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
                     <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("Index", "Interno")">Salir</a></div>
-                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar" class="btn btn-azul w-100 mb-3" href="javascript:void(0)">Grabar</a></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><span data-toggle="modal" data-target="#observar-encuesta"><a class="btn btn-info w-100 mb-3" href="javascript:void(0)">Observar</a></span></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><span data-toggle="modal" data-target="#grabar-encuesta"><a class="btn btn-azul w-100 mb-3" href="javascript:void(0)">Finalizar</a></span></div>
                 </div>
             </div>
         </div>
@@ -101,4 +96,55 @@
 </div>
 <input type="hidden" id="identificador" value="@controlEncuesta.idControlEncuesta" />
 <input type="hidden" id="fecha-revision" value="@fechaActual" />
+
+<div class="modal fade" id="observar-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body medidas-modal">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                            <div class="swal2-icon-content"><i class="fas fa-bell"></i></div>
+                        </div>
+                        <h3 class="text-center">¡Encuesta con observaciones!</h3>
+                        <p class="text-center">Los datos ingresados serán almacenados para subsanarlos y las obervaciones serán entregadas a los usuarios responsables.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 seccion-mensaje-observado">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button id="btn-observar" class="btn btn-info" type="button">Si, confirmar</button>
+                <button class="btn btn-dark" type="button" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="grabar-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body medidas-modal">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                            <div class="swal2-icon-content"><i class="fas fa-info"></i></div>
+                        </div>
+                        <h3 class="text-center">Gracias por revisar la encuesta</h3>
+                        <p class="text-center">Los datos ingresados serán almacenados, los resultados lo podrá generar desde la bandeja de encuestas.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 seccion-mensaje-revision">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button id="btn-grabar" class="btn btn-azul" type="button">Si, grabar</button>
+                <button class="btn btn-dark" type="button" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 

@@ -13,6 +13,9 @@ CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_PRINCIPAL MINVALUE 1 MAXVALUE 999999
 CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCABEZADO_SECUNDARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 223 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GEND_RESP_ENCUESTA_TABLA MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_PARAMETRO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 92 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCUESTA_COMENTARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_BANNER MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_PUBLICACION MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE SISCEUSI.T_MAE_ROL(
@@ -352,6 +355,7 @@ aceptaTratamientoDatos VARCHAR2(1) DEFAULT '',
 aceptaFirmarEncuesta VARCHAR2(1) DEFAULT '',
 idUsuarioResponde NUMBER,
 fechaHoraLlenado DATE,
+fechaObservacion DATE,
 fechaRevision DATE,
 idEtapa NUMBER,
 idFase NUMBER DEFAULT 0,
@@ -524,13 +528,11 @@ ipModificacion varchar2(50),
 CONSTRAINT parametro_pk PRIMARY KEY(idParametro)
 );
 
-/*CREATE TABLE SISCEUSI.T_GEND_RESP_ENCUESTA_PARAM(
-idRespuestaEncuestaParametro NUMBER,
+CREATE TABLE SISCEUSI.T_GEND_ENCUESTA_COMENTARIO(
+idEncuestaComentario NUMBER,
 idControlEncuesta NUMBER,
-idEncabezadoSecundario NUMBER,
-idParametro NUMBER,
-filaTabla NUMBER,
-respuesta VARCHAR2(1000),
+idCampanaEncuesta NUMBER,
+comentario VARCHAR2(4000),
 idEstado varchar2(1) default '1',
 idUsuarioCreacion number,
 fechaCreacion date default sysdate,
@@ -538,12 +540,43 @@ ipCreacion varchar2(50),
 idUsuarioModificacion number,
 fechaModificacion date,
 ipModificacion varchar2(50),
-constraint resp_enc_param_pk primary key (idRespuestaEncuestaParametro),
-constraint resp_enc_param_ce_fk FOREIGN KEY (idControlEncuesta) REFERENCES T_GEND_CONTROL_ENCUESTA (idControlEncuesta),
-constraint resp_enc_param_es_fk FOREIGN KEY (idEncabezadoSecundario) REFERENCES T_GEND_ENCABEZADO_SECUNDARIO (idEncabezadoSecundario),
-constraint resp_enc_param_param_fk FOREIGN KEY (idParametro) REFERENCES T_GENM_PARAMETRO (idParametro)
-);*/
---DROP TABLE T_GEND_RESP_ENCUESTA_PARAM;
+constraint encuesta_coment_pk primary key (idEncuestaComentario)
+);
+
+CREATE TABLE SISCEUSI.T_GENM_BANNER(
+idBanner NUMBER,
+tituloBanner VARCHAR2(400),
+descripcionBanner VARCHAR2(4000),
+descripcionFija VARCHAR2(4000),
+tituloBoton VARCHAR2(400),
+enlaceBoton VARCHAR2(4000),
+nombreArchivoBanner VARCHAR2(400),
+nombreArchivoGeneradoBanner VARCHAR2(400),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint banner_coment_pk primary key (idBanner)
+);
+
+CREATE TABLE SISCEUSI.T_GENM_PUBLICACION(
+idPublicacion NUMBER,
+tituloPublicacion VARCHAR2(400),
+descripcionPublicacion VARCHAR2(4000),
+nombreArchivoPublicacion VARCHAR2(400),
+nombreArchivoGeneradoPubli VARCHAR2(400),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint publicacion_pk primary key (idPublicacion)
+);
 ------------------------------------------------------------------------------------------------------------------------------
 --T_MAE_GIRO
 INSERT INTO SISCEUSI.T_MAE_GIRO (idGiro, giro, idEstado) VALUES (1, 'Giro 1', '1');
