@@ -183,5 +183,128 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return seElimino;
         }
+
+        public bool grabarEnlace(EnlaceBE entidad, OracleConnection db)
+        {
+            bool seGrabo = false;
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_PRC_ENLACE";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEnlace", entidad.idEnlace);
+                p.Add("piTituloEnlace", entidad.tituloEnlace);
+                p.Add("piDescripcionEnlace", entidad.descripcionEnlace);
+                p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
+                p.Add("piIpCreacion", entidad.ipCreacion);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seGrabo = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seGrabo;
+        }
+
+        public List<EnlaceBE> mostrarListaEnlace(EnlaceBE entidad, OracleConnection db)
+        {
+            List<EnlaceBE> lista = new List<EnlaceBE>();
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_SEL_LIST_ENLACE";
+                var p = new OracleDynamicParameters();
+                p.Add("piRegistros", entidad.registros);
+                p.Add("piPagina", entidad.pagina);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EnlaceBE
+                {
+                    idEnlace = (int)x.IDENLACE,
+                    tituloEnlace = x.TITULOENLACE == null ? "" : (string)x.TITULOENLACE,
+                    descripcionEnlace = x.DESCRIPCIONENLACE == null ? "" : (string)x.DESCRIPCIONENLACE,
+                    fila = (int)x.FILA,
+                    totalPaginas = (int)x.TOTALPAGINAS,
+                    pagina = (int)x.PAGINA,
+                    registros = (int)x.REGISTROS,
+                    totalRegistros = (int)x.TOTALREGISTROS
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public EnlaceBE obtenerEnlace(EnlaceBE entidad, OracleConnection db)
+        {
+            EnlaceBE item = null;
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_SEL_ENLACE";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEnlace", entidad.idEnlace);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<EnlaceBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
+
+        public bool eliminarEnlace(EnlaceBE entidad, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_UPD_DESHABILITAR_ENLACE";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdEnlace", entidad.idEnlace);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
+        }
+
+        public bool grabarLogoRedSocial(LogoRedSocialBE entidad, OracleConnection db)
+        {
+            bool seGrabo = false;
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_PRC_LOGO_RED_SOCIAL";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdLogoRedSocial", entidad.idLogoRedSocial);
+                p.Add("piNombreArchivoLogoWeb", entidad.nombreArchivoLogoWeb);
+                p.Add("piNombreArchivoGeneradoLogoWeb", entidad.nombreArchivoGeneradoLogoWeb);
+                p.Add("piNombreArchivoLogoDgee", entidad.nombreArchivoLogoDgee);
+                p.Add("piNombreArchivoGeneradoLogoD", entidad.nombreArchivoGeneradoLogoDgee);
+                p.Add("piEnlaceFacebook", entidad.enlaceFacebook);
+                p.Add("piEnlaceTwiter", entidad.enlaceTwiter);
+                p.Add("piEnlaceInstangram", entidad.enlaceInstangram);
+                p.Add("piEnlaceYoutube", entidad.enlaceYoutube);
+                p.Add("piEnlaceWhatsApp", entidad.enlaceWhatsApp);
+                p.Add("piEnlaceLinkedin", entidad.enlaceLinkedin);
+                p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
+                p.Add("piIpCreacion", entidad.ipCreacion);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seGrabo = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seGrabo;
+        }
+
+        public LogoRedSocialBE obtenerLogoRedSocial(LogoRedSocialBE entidad, OracleConnection db)
+        {
+            LogoRedSocialBE item = null;
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_SEL_LOGO_RED_SOCIAL";
+                var p = new OracleDynamicParameters();
+                //p.Add("piIdLogoRedSocial", entidad.idLogoRedSocial);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<LogoRedSocialBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
     }
 }

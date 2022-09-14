@@ -3,17 +3,25 @@
     $('#fle-slider-01').on('change', (e) => fileChangeBanner(e))
     $('#btn-grabar-publicacion').on('click', (e) => grabarPublicacion())
     $('#fle-publicacion-01').on('change', (e) => fileChangePublicacion(e))
+    $('#btn-grabar-enlace').on('click', (e) => grabarEnlace())
+    $('#fle-web-01').on('change', (e) => fileChangeLogoWeb(e))
+    $('#fle-dgee-01').on('change', (e) => fileChangeLogoDgee(e))
+    $('#btn-grabar-logo').on('click', (e) => grabarLogoRedSocial())
 
     $('.ir-pagina-banner').on('change', (e) => cambiarPaginaRegistrosBanner());
     $('#number-registers-banner').on('change', (e) => cambiarPaginaRegistrosBanner());
     $('.ir-pagina-publicacion').on('change', (e) => cambiarPaginaRegistrosPublicacion());
     $('#number-registers-publicacion').on('change', (e) => cambiarPaginaRegistrosPublicacion());
+    $('.ir-pagina-enlace').on('change', (e) => cambiarPaginaRegistrosEnlace());
+    $('#number-registers-enlace').on('change', (e) => cambiarPaginaRegistrosEnlace());
 
     $('#eliminacionRowBanner').on('click', (e) => deshabilitarRegistroBanner())
     $('#eliminacionRowPublicacion').on('click', (e) => deshabilitarRegistroPublicacion())
+    $('#eliminacionRowEnlace').on('click', (e) => deshabilitarRegistroEnlace())
 
     $('#btn-cancelar-banner').on('click', (e) => cancelarBanner())
     $('#btn-cancelar-publicacion').on('click', (e) => cancelarPublicacion())
+    $('#btn-cancelar-enlace').on('click', (e) => cancelarEnlace())
 
     cargarDatos()
 });
@@ -642,7 +650,7 @@ var deshabilitarRegistroPublicacion = () => {
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            idBanner = -1
+            idPublicacion = -1
             $('#btn-grabar-publicacion').html('Agregar')
             $('#btn-cancelar-publicacion').parent().removeClass('d-none')
             mostrarListaPublicacion()
@@ -679,9 +687,474 @@ var cancelarPublicacion = () => {
  * ================================================
  */
 
+/* ================================================
+ * INICIO ENLACE
+ * ================================================
+ */
+
+var idEnlace = -1
+var grabarEnlace = () => {
+    $('.seccion-enlace').html('');
+    let arr = [];
+
+    let tituloEnlace = $("#txt-titulo-enlace").val().trim()
+    let descripcionEnlace = $("#txt-descripcion-enlace").val().trim()
+
+    if (validarEspaciosBlanco(tituloEnlace)) arr.push("Debe ingresar el título del enlace");
+    if (validarEspaciosBlanco(descripcionEnlace)) arr.push("Debe ingresar la descripción del enlace");
+
+    if (arr.length > 0) {
+        let error = messageArrayGeneric(arr);
+        $('.seccion-enlace').html(messageError(error, 'registro'));
+        return;
+    }
+
+    let url = `${baseUrl}PaginaHome/grabarEnlace`;
+    let data = {
+        idEnlace, tituloEnlace, descripcionEnlace, idUsuarioCreacion: idUsuarioLogin
+    };
+    let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
+
+    fetch(url, init)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            idEnlace = -1
+            limpiarEnlace()
+            mostrarListaEnlace()
+            $('#btn-grabar-enlace').html('Agregar')
+            $('#btn-cancelar-enlace').addClass('d-none')
+            $('.seccion-enlace').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente')))
+            setTimeout(function () {
+                $('.seccion-enlace').html('')
+            }, 5000);
+        } else {
+            $('.seccion-enlace').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.'), 'registro'))
+            setTimeout(function () {
+                $('.seccion-enlace').html('')
+            }, 5000);
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message);
+    })
+}
+
+var limpiarEnlace = () => {
+    $("#txt-titulo-enlace").val('')
+    $("#txt-descripcion-enlace").val('')
+}
+
+/* ================================================
+ * INICIO PAGINACION ENLACE
+ * ================================================
+ */
+
+var cambiarPaginaRegistrosEnlace = () => {
+    mostrarListaEnlace()
+}
+
+var cambiarPaginaEnlace = (boton) => {
+    var total = 0, page = 0;
+    page = Number($(".ir-pagina-enlace").val());
+    total = Number($(".total-paginas-enlace").text());
+
+    if (boton == 1) page = 1;
+    if (boton == 2) if (page > 1) page--;
+    if (boton == 3) if (page < total) page++;
+    if (boton == 4) page = total;
+
+    $(".ir-pagina-enlace").val(page);
+    mostrarListaEnlace()
+}
+
+var mostrarListaEnlace = () => {
+    let registros = $('#number-registers-enlace').val()
+    let pagina = $('.ir-pagina-enlace').val()
+    let params = { registros, pagina };
+    let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
+
+    let url = `${baseUrl}PaginaHome/mostrarListaEnlace?${queryParams}`;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let method = 'GET';
+
+    const request = new Request(url, { method: method, headers: headers });
+    fetch(request)
+        .then(r => {
+            if (r.status == 204) return null;
+            else return r.json();
+        })
+        .then(cargarDatosTablaEnlace)
+    .catch(error => {
+        console.log('Error: ' + error.message);
+    });
+};
+
+var cargarDatosTablaEnlace = (j, inicio) => {
+    let tabla = $('#tbl-enlace');
+    tabla.find('tbody').html('');
+    $('#viewPagination-enlace').attr('style', 'display: none !important');
+    if (j.success) {
+        let rs = j.object[0];
+        if (rs.totalRegistros == 0) { $('#viewPagination-enlace').hide(); $('#view-page-result-enlace').hide(); }
+        else { $('#view-page-result-enlace').show(); $('#viewPagination-enlace').show(); }
+        $('.inicio-registros-enlace').text(rs.registros == 0 ? 'No se encontraron resultados' : (rs.pagina - 1) * rs.registros + 1);
+        $('.fin-registros-enlace').text(rs.totalRegistros < rs.pagina * rs.registros ? rs.totalRegistros : rs.pagina * rs.registros);
+        $('.total-registros-enlace').text(rs.totalRegistros);
+        $('.pagina-enlace').text(rs.pagina);
+        $('.ir-pagina-enlace').val(rs.pagina);
+        $('.ir-pagina-enlace').attr('max', rs.totalPaginas);
+        $('.total-paginas-enlace').text(rs.totalPaginas);
+
+        let numberCellHeader = tabla.find('thead tr th').length;
+        let content = renderizarEnlace(j.object, numberCellHeader, rs.pagina, rs.registros);
+        tabla.find('tbody').html(content);
+
+        tabla.find('.btn-edit-enlace').each(x => {
+            let elementButton = tabla.find('.btn-edit-enlace')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                actualizarEnlace(e.currentTarget);
+            });
+        });
+
+        tabla.find('.btn-delete-enlace').each(x => {
+            let elementButton = tabla.find('.btn-delete-enlace')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                eliminarEnlace(e.currentTarget);
+            });
+        });
+        //armarComboEncabezadoPrincipal(j.object)
+        $('[data-toggle="tooltip"]').tooltip();
+        if (inicio == null) posicinar('#tbl-enlace', 120)
+    } else {
+        console.log('No hay resultados');
+        $('#viewPagination-publicacion').hide(); $('#view-page-result-publicacion').hide();
+        $('.inicio-registros-publicacion').text('No se encontraron resultados');
+    }
+}
+
+var renderizarEnlace = (data, numberCellHeader, pagina, registros) => {
+    let doRenderizar = data.length > 0;
+    let content = `<tr><th colspan='${numberCellHeader}'>No existe información</th></tr>`;
+
+    if (doRenderizar) {
+        content = data.map((x, i) => {
+            let colCodigo = `<td class="text-center" data-encabezado="Código">ENL${pad(x.idEnlace, 4)}</td>`;
+            let colTituloEnlace = `<td data-encabezado="Título enlace" scope="row"><span>${x.tituloEnlace}</span></td>`;
+            let colDescripcionEnlace = `<td data-encabezado="Descripción enlace">${x.descripcionEnlace}</td>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-publicacion" data-id="${x.idEnlace}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-publicacion" data-id="${x.idEnlace}"><i class="fa fa-edit"></i></div>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
+            let row = `<tr>${colCodigo}${colTituloEnlace}${colDescripcionEnlace}${colOptions}</tr>`;
+            return row;
+        }).join('');
+    };
+    return content;
+};
+
+/* ================================================
+ * FIN PAGINACION ENLACE
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ACTUALIZAR ENLACE
+ * ================================================
+ */
+
+var actualizarEnlace = (obj) => {
+    let id = $(obj).data('id')
+    let url = `${baseUrl}PaginaHome/obtenerEnlace?idEnlace=${id}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            cargarDatosPublicacion(j.object)
+        } else {
+            $('.seccion-enlace').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos de la publicación. Por favor, puede volver a recargar la página.'), 'carga de datos'))
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+
+var cargarDatosEnlace = (data) => {
+    $('#btn-grabar-enlace').html('Actualizar')
+    $('#btn-cancelar-enlace').removeClass('d-none')
+    idEnlace = data.idEnlace
+    $("#txt-titulo-enlace").val(data.tituloEnlace)
+    $("#txt-descripcion-enlace").val(data.descripcionEnlace)
+}
+
+/* ================================================
+ * FIN ACTUALIZAR PUBLICACION
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR PUBLICACION
+ * ================================================
+ */
+var idEliminarEnlace = 0
+var eliminarEnlace = (obj) => {
+    idEliminarEnlace = $(obj).data('id')
+    $('#modalConfirmacionEnlace').modal('show')
+}
+
+var deshabilitarRegistroEnlace = () => {
+    let url = `${baseUrl}PaginaHome/eliminarEnlace?idEnlace=${idEliminarEnlace}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            idEnlace = -1
+            $('#btn-grabar-enlace').html('Agregar')
+            $('#btn-cancelar-enlace').parent().removeClass('d-none')
+            mostrarListaEnlace()
+            limpiarEnlace()
+            $('#modalConfirmacionEnlace').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR PUBLICACION
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO CANCELAR
+ * ================================================
+ */
+var cancelarEnlace = () => {
+    limpiarEnlace()
+    $('#btn-grabar-enlace').html('Agregar')
+    $('#btn-cancelar-enlace').addClass('d-none')
+}
+
+/* ================================================
+ * FIN CANCELAR
+ * ================================================
+ */
+
+/* ================================================
+ * FIN ENLACE
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO LOGO RED SOCIAL
+ * ================================================
+ */
+
+var idLogoRedSocial = -1
+var grabarLogoRedSocial = () => {
+    $('.seccion-logo').html('');
+    let arr = [];
+
+    let archivoContenidoLogoWeb = $('#fle-web-01').data('file')
+    let archivoContenidoLogoDgee = $('#fle-dgee-01').data('file')
+    let enlaceFacebook = $("#txt-facebook").val().trim()
+    let enlaceTwiter = $("#txt-twiter").val().trim()
+    let enlaceInstangram = $("#txt-instangram").val().trim()
+    let enlaceYoutube = $("#txt-youtube").val().trim()
+    let enlaceWhatsApp = $("#txt-whatsapp").val().trim()
+    let enlaceLinkedin = $("#txt-linkedin").val().trim()
+    
+    if (archivoContenidoLogoWeb == undefined) arr.push('Debe cargar la imagen principal de la web')
+    if (archivoContenidoLogoDgee == undefined) arr.push('Debe cargar la imagen de la DGEE')
+    if (validarEspaciosBlanco(enlaceFacebook)) arr.push("Debe ingresar el enlace para Facebook");
+    if (validarEspaciosBlanco(enlaceTwiter)) arr.push("Debe ingresar el enlace para Twiter");
+    if (validarEspaciosBlanco(enlaceInstangram)) arr.push("Debe ingresar el enlace para Instangram");
+    if (validarEspaciosBlanco(enlaceYoutube)) arr.push("Debe ingresar el enlace para Youtube");
+    if (validarEspaciosBlanco(enlaceWhatsApp)) arr.push("Debe ingresar el enlace para WhatsApp");
+    if (validarEspaciosBlanco(enlaceLinkedin)) arr.push("Debe ingresar el enlace para Linkedin");
+
+    if (arr.length > 0) {
+        let error = messageArrayGeneric(arr);
+        $('.seccion-logo').html(messageError(error, 'registro'));
+        return;
+    }
+
+    let archivoNuevoLogoWeb = $('#fle-web-01').data('new')
+    let archivoNuevoLogoDgee = $('#fle-dgee-01').data('new')
+
+    let url = `${baseUrl}PaginaHome/grabarLogoRedSocial`;
+    let data = {
+        idLogoRedSocial,
+        nombreArchivoLogoWeb, nombreArchivoGeneradoLogoWeb, archivoNuevoLogoWeb, archivoContenidoLogoWeb,
+        nombreArchivoLogoDgee, nombreArchivoGeneradoLogoDgee, archivoNuevoLogoDgee, archivoContenidoLogoDgee,
+        enlaceFacebook, enlaceTwiter, enlaceInstangram, enlaceYoutube, enlaceWhatsApp, enlaceLinkedin, idUsuarioCreacion: idUsuarioLogin
+        };
+    let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
+
+    fetch(url, init)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            let entidad = j.object
+            idLogoRedSocial = entidad.idLogoRedSocial
+            cargarDatosLogoRedSocial(entidad)
+            $('.seccion-logo').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente')))
+            setTimeout(function () {
+                $('.seccion-logo').html('')
+            }, 5000);
+        } else {
+            $('.seccion-logo').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.'), 'registro'))
+            setTimeout(function () {
+                $('.seccion-logo').html('')
+            }, 5000);
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message);
+    })
+}
+
+var nombreArchivoLogoWeb
+var fileChangeLogoWeb = (e) => {
+    $('.seccion-logo').html('');
+    let elFile = $(e.currentTarget);
+    var fileContent = e.currentTarget.files[0];
+
+    if (!fileContent) {
+        elFile.val('')
+        elFile.removeData('file')
+        elFile.removeData('new')
+        return
+    }
+
+    switch (fileContent.name.substring(fileContent.name.lastIndexOf('.') + 1).toLowerCase()) {
+        case 'png': case 'jpg': case 'jpeg': case 'bmp': break;
+        default:
+            elFile.val('')
+            elFile.removeData('file')
+            elFile.removeData('new')
+            $('#txt-web-01').val('')
+            $('.seccion-logo').html(messageError(messageStringGeneric('El archivo tiene una extensión no permitida'), 'carga de archivo'))
+            return
+    }
+
+    if (fileContent.size > 4194304) {
+        elFile.val('')
+        elFile.removeData('file')
+        elFile.removeData('new')
+        $('#txt-web-01').val('')
+        $('.seccion-logo').html(messageError(messageStringGeneric('El archivo debe tener un peso máximo de 4MB'), 'carga de archivo'))
+        return
+    }
+
+    if (e.currentTarget.files.length == 0) {
+        $(e.currentTarget).removeData('file')
+        $(e.currentTarget).removeData('new')
+        return
+    }
+
+    let reader = new FileReader();
+    reader.onload = function (e) {
+        let base64 = e.currentTarget.result.split(',')[1];
+        nombreArchivoLogoWeb = fileContent.name;
+        $('#txt-web-01').val(fileContent.name)
+        elFile.data('file', base64);
+        elFile.data('new', true);
+    }
+    reader.readAsDataURL(e.currentTarget.files[0]);
+}
+
+var nombreArchivoLogoDgee
+var fileChangeLogoDgee = (e) => {
+    $('.seccion-logo').html('');
+    let elFile = $(e.currentTarget);
+    var fileContent = e.currentTarget.files[0];
+
+    if (!fileContent) {
+        elFile.val('')
+        elFile.removeData('file')
+        elFile.removeData('new')
+        return
+    }
+
+    switch (fileContent.name.substring(fileContent.name.lastIndexOf('.') + 1).toLowerCase()) {
+        case 'png': case 'jpg': case 'jpeg': case 'bmp': break;
+        default:
+            elFile.val('')
+            elFile.removeData('file')
+            elFile.removeData('new')
+            $('#txt-dgee-01').val('')
+            $('.seccion-logo').html(messageError(messageStringGeneric('El archivo tiene una extensión no permitida'), 'carga de archivo'))
+            return
+    }
+
+    if (fileContent.size > 4194304) {
+        elFile.val('')
+        elFile.removeData('file')
+        elFile.removeData('new')
+        $('#txt-dgee-01').val('')
+        $('.seccion-logo').html(messageError(messageStringGeneric('El archivo debe tener un peso máximo de 4MB'), 'carga de archivo'))
+        return
+    }
+
+    if (e.currentTarget.files.length == 0) {
+        $(e.currentTarget).removeData('file')
+        $(e.currentTarget).removeData('new')
+        return
+    }
+
+    let reader = new FileReader();
+    reader.onload = function (e) {
+        let base64 = e.currentTarget.result.split(',')[1];
+        nombreArchivoLogoDgee = fileContent.name;
+        $('#txt-dgee-01').val(fileContent.name)
+        elFile.data('file', base64);
+        elFile.data('new', true);
+    }
+    reader.readAsDataURL(e.currentTarget.files[0]);
+}
+
+var nombreArchivoGeneradoLogoWeb = ''
+var nombreArchivoGeneradoLogoDgee = ''
+var cargarDatosLogoRedSocial = (data) => {
+    if (data == null) return
+    idLogoRedSocial = data.idLogoRedSocial
+
+    $("#txt-facebook").val(data.enlaceFacebook)
+    $("#txt-twiter").val(data.enlaceTwiter)
+    $("#txt-instangram").val(data.enlaceInstangram)
+    $("#txt-youtube").val(data.enlaceYoutube)
+    $("#txt-whatsapp").val(data.enlaceWhatsApp)
+    $("#txt-linkedin").val(data.enlaceLinkedin)
+
+    $('#fle-web-01').val('')
+    nombreArchivoLogoWeb = data.nombreArchivoLogoWeb
+    nombreArchivoGeneradoLogoWeb = data.nombreArchivoGeneradoLogoWeb
+    $('#fle-web-01').data('file', data.archivoContenidoLogoWeb)
+    $('#fle-web-01').data('new', false)
+    $('#txt-web-01').val(data.nombreArchivoLogoWeb)
+
+    $('#fle-dgee-01').val('')
+    nombreArchivoLogoDgee = data.nombreArchivoLogoDgee
+    nombreArchivoGeneradoLogoDgee = data.nombreArchivoGeneradoLogoDgee
+    $('#fle-dgee-01').data('file', data.archivoContenidoLogoDgee)
+    $('#fle-dgee-01').data('new', false)
+    $('#txt-dgee-01').val(data.nombreArchivoLogoDgee)
+}
+
+/* ================================================
+ * FIN LOGO RED SOCIAL
+ * ================================================
+ */
+
 var cargarDatos = () => {
     cargarDatosTablaBanner(listaBanner, 1)
     cargarDatosTablaPublicacion(listaPublicacion, 1)
+    cargarDatosTablaEnlace(listaEnlace, 1)
+    cargarDatosLogoRedSocial(logoRedSocial)
 }
 
 var posicinar = (id, number) => {

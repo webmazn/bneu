@@ -63,6 +63,53 @@
     piIdPublicacion NUMBER,
     poRowAffected OUT NUMBER
   );
+  
+  PROCEDURE USP_PRC_ENLACE(
+    piIdEnlace NUMBER,
+    piTituloEnlace VARCHAR2,
+    piDescripcionEnlace VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_LIST_ENLACE(
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_ENLACE(
+    piIdEnlace NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_UPD_DESHABILITAR_ENLACE(
+    piIdEnlace NUMBER,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_PRC_LOGO_RED_SOCIAL(
+    piIdLogoRedSocial NUMBER,
+    piNombreArchivoLogoWeb VARCHAR2,
+    piNombreArchivoGeneradoLogoWeb VARCHAR2,
+    piNombreArchivoLogoDgee VARCHAR2,
+    piNombreArchivoGeneradoLogoD VARCHAR2,
+    piEnlaceFacebook VARCHAR2,
+    piEnlaceTwiter VARCHAR2,
+    piEnlaceInstangram VARCHAR2,
+    piEnlaceYoutube VARCHAR2,
+    piEnlaceWhatsApp VARCHAR2,
+    piEnlaceLinkedin VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_LOGO_RED_SOCIAL(
+    --piIdLogoRedSocial NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_PAGINA_HOME;
 

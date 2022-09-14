@@ -1,5 +1,6 @@
 ﻿using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.web.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
+    [LoginRequiredAttribute]
     public class PaginaHomeController : Controller
     {
         // GET: PaginaHome
@@ -32,8 +34,21 @@ namespace sisceusi.web.Controllers
             listaPublicacion.Add("success", publicaciones == null ? false : publicaciones.Count == 0 ? false : true);
             listaPublicacion.Add("object", publicaciones);
 
+            List<EnlaceBE> enlaces = logica.mostrarListaEnlace(new EnlaceBE
+            {
+                registros = 10,
+                pagina = 1
+            });
+            Dictionary<string, object> listaEnlace = new Dictionary<string, object>();
+            listaEnlace.Add("success", enlaces == null ? false : enlaces.Count == 0 ? false : true);
+            listaEnlace.Add("object", enlaces);
+
+            LogoRedSocialBE logo = logica.obtenerLogoRedSocial(new LogoRedSocialBE());
+
             ViewData["listaBanner"] = listaBanner;
             ViewData["listaPublicacion"] = listaPublicacion;
+            ViewData["listaEnlace"] = listaEnlace;
+            ViewData["logoRedSocial"] = logo;
             return View();
         }
 
@@ -142,6 +157,90 @@ namespace sisceusi.web.Controllers
             bool seElimino = logica.eliminarPublicacion(new PublicacionBE { idPublicacion = idPublicacion });
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult grabarEnlace(EnlaceBE entidad)
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            entidad.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seGrabo = logica.grabarEnlace(entidad);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seGrabo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult mostrarListaEnlace(int registros, int pagina)
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            List<EnlaceBE> lista = logica.mostrarListaEnlace(new EnlaceBE
+            {
+                registros = registros,
+                pagina = pagina
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerEnlace(int idEnlace)
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            EnlaceBE entidad = logica.obtenerEnlace(new EnlaceBE { idEnlace = idEnlace });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", entidad == null ? false : true);
+            response.Add("object", entidad);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult eliminarEnlace(int idEnlace)
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            bool seElimino = logica.eliminarEnlace(new EnlaceBE { idEnlace = idEnlace });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult grabarLogoRedSocial(LogoRedSocialBE entidad)
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            entidad.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seGrabo = logica.grabarLogoRedSocial(entidad);
+            LogoRedSocialBE logo = null;
+            if (seGrabo) logo = logica.obtenerLogoRedSocial(new LogoRedSocialBE());
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seGrabo);
+            response.Add("object", logo);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerLogoRedSocial(int idLogoRedSocial)
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            LogoRedSocialBE entidad = logica.obtenerLogoRedSocial(new LogoRedSocialBE());
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", entidad == null ? false : true);
+            response.Add("object", entidad);
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;

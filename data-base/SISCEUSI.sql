@@ -16,6 +16,8 @@ CREATE SEQUENCE SISCEUSI.SQ_GENM_PARAMETRO MINVALUE 1 MAXVALUE 99999999999999999
 CREATE SEQUENCE SISCEUSI.SQ_GEND_ENCUESTA_COMENTARIO MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_BANNER MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_PUBLICACION MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_ENLACE MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_LOGO_RED_SOCIAL MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE SISCEUSI.T_MAE_ROL(
@@ -576,6 +578,42 @@ idUsuarioModificacion number,
 fechaModificacion date,
 ipModificacion varchar2(50),
 constraint publicacion_pk primary key (idPublicacion)
+);
+
+CREATE TABLE SISCEUSI.T_GENM_ENLACE(
+idEnlace NUMBER,
+tituloEnlace VARCHAR2(400),
+descripcionEnlace VARCHAR2(4000),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint enlace_pk primary key (idEnlace)
+);
+
+CREATE TABLE SISCEUSI.T_GENM_LOGO_RED_SOCIAL(
+idLogoRedSocial NUMBER,
+nombreArchivoLogoWeb VARCHAR2(400),
+nombreArchivoGeneradoLogoWeb VARCHAR2(400),
+nombreArchivoLogoDgee VARCHAR2(400),
+nombreArchivoGeneradoLogoDgee VARCHAR2(400),
+enlaceFacebook VARCHAR2(4000),
+enlaceTwiter VARCHAR2(4000),
+enlaceInstangram VARCHAR2(4000),
+enlaceYoutube VARCHAR2(4000),
+enlaceWhatsApp VARCHAR2(4000),
+enlaceLinkedin VARCHAR2(4000),
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint logo_red_social_pk primary key (idLogoRedSocial)
 );
 ------------------------------------------------------------------------------------------------------------------------------
 --T_MAE_GIRO

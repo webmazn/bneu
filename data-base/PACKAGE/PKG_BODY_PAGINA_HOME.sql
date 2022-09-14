@@ -219,6 +219,158 @@
     WHERE idPublicacion = piIdPublicacion;
     poRowAffected := SQL%ROWCOUNT;
   END USP_UPD_DESHABILITAR_PUBLI;
+  
+  PROCEDURE USP_PRC_ENLACE(
+    piIdEnlace NUMBER,
+    piTituloEnlace VARCHAR2,
+    piDescripcionEnlace VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS
+    vId NUMBER;
+  BEGIN
+    IF piIdEnlace = -1 THEN
+          vId := SQ_GENM_ENLACE.NEXTVAL();
+          INSERT INTO T_GENM_ENLACE
+          (idEnlace, tituloEnlace, descripcionEnlace, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          VALUES 
+          (vId, piTituloEnlace, piDescripcionEnlace, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+    ELSE
+          UPDATE T_GENM_ENLACE SET
+          tituloEnlace = piTituloEnlace,
+          descripcionEnlace = piDescripcionEnlace,
+          idUsuarioModificacion = piIdUsuarioCreacion,
+          fechaModificacion = SYSDATE,
+          ipModificacion = piIpCreacion
+          WHERE idEnlace = piIdEnlace;
+    END IF;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_PRC_ENLACE;
+  
+  PROCEDURE USP_SEL_LIST_ENLACE(
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vTotalRegistros INTEGER;
+    vTotalPaginas INTEGER;
+    vPaginaActual INTEGER := piPagina;
+    vPaginaInicial INTEGER := 0;
+    vQueryCount VARCHAR2(10000) := '';
+    vQuerySelect VARCHAR2(10000) := '';
+  BEGIN
+    vQueryCount := 'SELECT  COUNT(1)
+                    FROM T_GENM_ENLACE enl
+                    WHERE 
+                    enl.idEstado = ''1'' ';
+    EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
+
+    vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
+    IF vPaginaActual = 0 THEN
+      vPaginaActual := 1;
+    END IF;
+    IF vPaginaActual > vTotalPaginas THEN
+      vPaginaActual := vTotalPaginas;
+    END IF;
+
+    vPaginaInicial := vPaginaActual - 1;
+
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  enl.idEnlace,
+                                enl.tituloEnlace,
+                                enl.descripcionEnlace,
+                                ROW_NUMBER() OVER (ORDER BY enl.idEnlace ASC) AS fila,'
+                                || vTotalPaginas || ' AS totalPaginas,'
+                                || vPaginaActual || ' AS pagina,'
+                                || piRegistros || ' AS registros,'
+                                || vTotalRegistros || ' AS totalRegistros
+                        FROM T_GENM_ENLACE enl
+                        WHERE 
+                        enl.idEstado = ''1''
+                        )
+                    WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_LIST_ENLACE;
+  
+  PROCEDURE USP_SEL_ENLACE(
+    piIdEnlace NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GENM_ENLACE
+    WHERE   idEnlace = piIdEnlace;
+  END USP_SEL_ENLACE;
+  
+  PROCEDURE USP_UPD_DESHABILITAR_ENLACE(
+    piIdEnlace NUMBER,
+    poRowAffected OUT NUMBER
+  ) AS
+  BEGIN
+    UPDATE T_GENM_ENLACE SET
+    idEstado = '0'
+    WHERE idEnlace = piIdEnlace;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_DESHABILITAR_ENLACE;
+  
+  PROCEDURE USP_PRC_LOGO_RED_SOCIAL(
+    piIdLogoRedSocial NUMBER,
+    piNombreArchivoLogoWeb VARCHAR2,
+    piNombreArchivoGeneradoLogoWeb VARCHAR2,
+    piNombreArchivoLogoDgee VARCHAR2,
+    piNombreArchivoGeneradoLogoD VARCHAR2,
+    piEnlaceFacebook VARCHAR2,
+    piEnlaceTwiter VARCHAR2,
+    piEnlaceInstangram VARCHAR2,
+    piEnlaceYoutube VARCHAR2,
+    piEnlaceWhatsApp VARCHAR2,
+    piEnlaceLinkedin VARCHAR2,
+    piIdUsuarioCreacion NUMBER,
+    piIpCreacion VARCHAR2,
+    poRowAffected OUT NUMBER
+  ) AS
+    vId NUMBER;
+  BEGIN
+    IF piIdLogoRedSocial = -1 THEN
+          vId := SQ_GENM_LOGO_RED_SOCIAL.NEXTVAL();
+          INSERT INTO T_GENM_LOGO_RED_SOCIAL
+          (idLogoRedSocial, nombreArchivoLogoWeb, nombreArchivoGeneradoLogoWeb, nombreArchivoLogoDgee, nombreArchivoGeneradoLogoDgee, enlaceFacebook, enlaceTwiter, enlaceInstangram, enlaceYoutube, enlaceWhatsApp, enlaceLinkedin, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          VALUES 
+          (vId, piNombreArchivoLogoWeb, piNombreArchivoGeneradoLogoWeb, piNombreArchivoLogoDgee, piNombreArchivoGeneradoLogoD, piEnlaceFacebook, piEnlaceTwiter, piEnlaceInstangram, piEnlaceYoutube, piEnlaceWhatsApp, piEnlaceLinkedin, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+    ELSE
+          UPDATE T_GENM_LOGO_RED_SOCIAL SET
+          nombreArchivoLogoWeb = piNombreArchivoLogoWeb,
+          nombreArchivoGeneradoLogoWeb = piNombreArchivoGeneradoLogoWeb,
+          nombreArchivoLogoDgee = piNombreArchivoLogoDgee,
+          nombreArchivoGeneradoLogoDgee = piNombreArchivoGeneradoLogoD,
+          enlaceFacebook = piEnlaceFacebook,
+          enlaceTwiter = piEnlaceTwiter,
+          enlaceInstangram = piEnlaceInstangram,
+          enlaceYoutube = piEnlaceYoutube,
+          enlaceWhatsApp = piEnlaceWhatsApp,
+          enlaceLinkedin = piEnlaceLinkedin,
+          idUsuarioModificacion = piIdUsuarioCreacion,
+          fechaModificacion = SYSDATE,
+          ipModificacion = piIpCreacion
+          WHERE idLogoRedSocial = piIdLogoRedSocial;
+    END IF;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_PRC_LOGO_RED_SOCIAL;
+  
+  PROCEDURE USP_SEL_LOGO_RED_SOCIAL(
+    --piIdLogoRedSocial NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GENM_LOGO_RED_SOCIAL;
+    --WHERE   idLogoRedSocial = piIdLogoRedSocial;
+  END USP_SEL_LOGO_RED_SOCIAL;
 
 END PKG_SISCEUSI_PAGINA_HOME;
 

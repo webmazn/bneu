@@ -176,5 +176,125 @@ namespace sisceusi.logica
             return seElimino;
         }
 
+        public bool grabarEnlace(EnlaceBE entidad)
+        {
+            bool seGuardo = false;
+            try
+            {
+                cn.Open();
+                seGuardo = datos.grabarEnlace(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seGuardo;
+        }
+
+        public List<EnlaceBE> mostrarListaEnlace(EnlaceBE entidad)
+        {
+            List<EnlaceBE> lista = new List<EnlaceBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.mostrarListaEnlace(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public EnlaceBE obtenerEnlace(EnlaceBE entidad)
+        {
+            EnlaceBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerEnlace(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
+        }
+
+        public bool eliminarEnlace(EnlaceBE entidad)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminarEnlace(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
+        public bool grabarLogoRedSocial(LogoRedSocialBE entidad)
+        {
+            bool seGuardo = false;
+            try
+            {
+                cn.Open();
+                using (OracleTransaction ot = cn.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+                {
+                    try
+                    {
+                        entidad.nombreArchivoGeneradoLogoWeb = entidad.archivoNuevoLogoWeb ? Guid.NewGuid().ToString() : entidad.nombreArchivoGeneradoLogoWeb;
+                        entidad.nombreArchivoGeneradoLogoDgee = entidad.archivoNuevoLogoDgee ? Guid.NewGuid().ToString() : entidad.nombreArchivoGeneradoLogoDgee;
+                        seGuardo = datos.grabarLogoRedSocial(entidad, cn);
+                        if (seGuardo && entidad.archivoNuevoLogoWeb)
+                        {
+                            string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
+                            string nombre = String.Concat(entidad.nombreArchivoGeneradoLogoWeb, "_", entidad.nombreArchivoLogoWeb);
+                            string pathFile = Path.Combine(ruta, nombre);
+                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            File.WriteAllBytes(pathFile, entidad.archivoContenidoLogoWeb);
+                        }
+                        if (seGuardo && entidad.archivoNuevoLogoDgee)
+                        {
+                            string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
+                            string nombre = String.Concat(entidad.nombreArchivoGeneradoLogoDgee, "_", entidad.nombreArchivoLogoDgee);
+                            string pathFile = Path.Combine(ruta, nombre);
+                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            File.WriteAllBytes(pathFile, entidad.archivoContenidoLogoDgee);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        seGuardo = false;
+                        Log.Error(ex);
+                    }
+
+                    if (seGuardo) ot.Commit();
+                    else ot.Rollback();
+                }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seGuardo;
+        }
+
+        public LogoRedSocialBE obtenerLogoRedSocial(LogoRedSocialBE entidad)
+        {
+            LogoRedSocialBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerLogoRedSocial(entidad, cn);
+                if (item != null)
+                {
+                    string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
+                    string nombre = String.Concat(item.nombreArchivoGeneradoLogoWeb, "_", item.nombreArchivoLogoWeb);
+                    string pathFile = Path.Combine(ruta, nombre);
+                    pathFile = !File.Exists(pathFile) ? null : pathFile;
+                    item.archivoContenidoLogoWeb = pathFile == null ? null : File.ReadAllBytes(pathFile);
+                }
+                if (item != null)
+                {
+                    string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
+                    string nombre = String.Concat(item.nombreArchivoGeneradoLogoDgee, "_", item.nombreArchivoLogoDgee);
+                    string pathFile = Path.Combine(ruta, nombre);
+                    pathFile = !File.Exists(pathFile) ? null : pathFile;
+                    item.archivoContenidoLogoDgee = pathFile == null ? null : File.ReadAllBytes(pathFile);
+                }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
+        }
+
     }
 }

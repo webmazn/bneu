@@ -1,8 +1,14 @@
-﻿
+﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
     Dictionary<string, object> listaBanner = ViewData["listaBanner"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaBanner"];
     Dictionary<string, object> listaPublicacion = ViewData["listaPublicacion"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaPublicacion"];
+    Dictionary<string, object> listaEnlace = ViewData["listaEnlace"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaEnlace"];
+    LogoRedSocialBE logoRedSocial = ViewData["logoRedSocial"] == null ? null : (LogoRedSocialBE)ViewData["logoRedSocial"];
+    if (logoRedSocial != null) {
+        logoRedSocial.archivoContenidoLogoWeb = new byte[100];
+        logoRedSocial.archivoContenidoLogoDgee = new byte[100];
+    }
 }
 
 @section scripts_footer {
@@ -24,7 +30,7 @@
                     <div class="col-md-12 col-lg-3">
                         <div class="row">
                             <div class="col-12">
-                                <a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                                <a class="btn btn-plomo w-100 mb-3" href="@Url.Action("MaestroMantenimiento", "Interno")">Regresar</a>
                                 <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                             </div>
                         </div>
@@ -280,54 +286,62 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-publicacion">
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
-                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-secondary w-100 mb-3" href="#">Cancelar</a></div>
-                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-success w-100 mb-3" href="#">Agregar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-cancelar-enlace" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar-enlace" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive tabla-principal">
-                            <table class="table table-striped table-hover">
+                            <table id="tbl-enlace" class="table table-striped table-hover">
                                 <thead>
                                     <tr class="bg-azul text-white">
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span></div>
+                                        </th>
                                         <th scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
                                         </th>
                                         <th class="text-center" scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE&nbsp;</span></span></div>
                                         </th>
-                                        <th class="text-center" scope="col" style="width:90px;"><a class="btn btn-sm btn-info btn-table" href="#"><i class="fa fa-plus"></i></a></th>
+                                        <th class="text-center" scope="col" style="min-width:150px;">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td data-encabezado="Título" scope="row" data="0"><span class="ml-2">Título del artículo1</span></td>
-                                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="Título" scope="row" data="1"><span class="ml-2">Título del artículo2</span></td>
-                                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="Título" scope="row" data="2"><span class="ml-2">Título del artículo3</span></td>
-                                        <td data-encabezado="Enlace botón">http://www.vinculo.com</td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                        </td>
-                                    </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="2"><span>Resultado:&nbsp;</span><span class="inicio-registros-enlace">1</span><span id="view-page-result-enlace">-<span class="fin-registros-enlace">1</span> de <span class="total-registros-enlace">1</span> registros</span></td>
+                                        <td id="viewPagination-enlace" class="text-right text-xs-left pr-0" colspan="3" style="display: none">
+                                            <span>Registros por página&nbsp;</span>
+                                            <select id="number-registers-enlace">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina-enlace">1</span> de <span class="total-paginas-enlace">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina-enlace" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -342,24 +356,24 @@
                 <div class="row">
                     <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group text-left">
-                            <label class="font-weight-bold" for="fle-requisito-02">ÍCONO PRINCIPAL DE LA WEB</label>
+                            <label class="font-weight-bold" for="fle-web-01">ÍCONO PRINCIPAL DE LA WEB</label>
                             <div class="input-group">
-                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-02" placeholder="Subir documentos" required>
-                                <input class="d-none fil-file-control" type="file" id="fle-requisito-02" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-web-01" placeholder="Subir documentos" required>
+                                <input class="d-none fil-file-control" type="file" id="fle-web-01" accept="image/*">
                                 <div class="input-group-append">
-                                    <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-02">Seleccionar</label>
+                                    <label class="input-group-text cursor-pointer badge-info" for="fle-web-01">Seleccionar</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group text-left">
-                            <label class="font-weight-bold" for="fle-requisito-03">ÍCONO DE LA DGEE</label>
+                            <label class="font-weight-bold" for="fle-dgee-01">ÍCONO DE LA DGEE</label>
                             <div class="input-group">
-                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-03" placeholder="Subir documentos" required>
-                                <input class="d-none fil-file-control" type="file" id="fle-requisito-03" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-dgee-01" placeholder="Subir documentos" required>
+                                <input class="d-none fil-file-control" type="file" id="fle-dgee-01" accept="image/*">
                                 <div class="input-group-append">
-                                    <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-03">Seleccionar</label>
+                                    <label class="input-group-text cursor-pointer badge-info" for="fle-dgee-01">Seleccionar</label>
                                 </div>
                             </div>
                         </div>
@@ -375,49 +389,54 @@
                 <div class="row mb-4">
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_fb.svg"></div>
-                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_fb.svg")"></div>
+                            <input id="txt-facebook" class="form-control" type="text" placeholder="Ingresar enlace">
                         </div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_tw.svg"></div>
-                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_tw.svg")"></div>
+                            <input id="txt-twiter" class="form-control" type="text" placeholder="Ingresar enlace">
                         </div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_ig.svg"></div>
-                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_ig.svg")"></div>
+                            <input id="txt-instangram" class="form-control" type="text" placeholder="Ingresar enlace">
                         </div>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_yt.svg"></div>
-                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_yt.svg")"></div>
+                            <input id="txt-youtube" class="form-control" type="text" placeholder="Ingresar enlace">
                         </div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_wp.svg"></div>
-                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_wp.svg")"></div>
+                            <input id="txt-whatsapp" class="form-control" type="text" placeholder="Ingresar enlace">
                         </div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-append"><img class="icon_redes mr-3" src="./images/icon_ld.svg"></div>
-                            <input class="form-control" type="text" placeholder="Ingresar enlace">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_ld.svg")"></div>
+                            <input id="txt-linkedin" class="form-control" type="text" placeholder="Ingresar enlace">
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-logo">
                     </div>
                 </div>
                 <div class="dropdown-divider mt-5"></div>
                 <div class="row">
                     <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"></div>
-                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("MaestroMantenimiento", "Interno")">Regresar</a></div>
                     <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
-                        <button class="btn btn-info w-100 mb-3" href="#">Guardar</button>
+                        <button id="btn-grabar-logo" class="btn btn-info w-100 mb-3" href="javascript:void(0)">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -458,8 +477,27 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalConfirmacionEnlace" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabelP">Confirmar eliminación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRowEnlace" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     var listaBanner = @Html.Raw(Json.Encode(listaBanner));
     var listaPublicacion = @Html.Raw(Json.Encode(listaPublicacion));
+    var listaEnlace = @Html.Raw(Json.Encode(listaEnlace));
+    var logoRedSocial = @Html.Raw(Json.Encode(logoRedSocial));
 </script>
 
