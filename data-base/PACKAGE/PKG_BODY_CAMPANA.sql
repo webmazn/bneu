@@ -309,6 +309,7 @@
     piIdCiuuOficial NUMBER,
     piIdEtapaPiloto NUMBER,
     piIdEtapaOficial NUMBER,
+    piIdSubSector NUMBER,
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
@@ -319,9 +320,9 @@
     IF piIdCampana = -1 THEN
       poIdCampana := SQ_GENM_CAMPANA.NEXTVAL();
       INSERT INTO T_GENM_CAMPANA
-      (idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroPiloto, idCiuuPiloto, idGiroOficial, idCiuuOficial, idEtapaPiloto, idEtapaOficial, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroPiloto, idCiuuPiloto, idGiroOficial, idCiuuOficial, idEtapaPiloto, idEtapaOficial, idSubSector, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (poIdCampana, piDenominacion, piFechaInicioPiloto, piFechaFinPiloto, piFechaInicioEncuesta, piFechaFinEncuesta, piObservaciones, piIdGiroPiloto, piIdCiuuPiloto, piIdGiroOficial, piIdCiuuOficial, piIdEtapaPiloto, piIdEtapaOficial, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (poIdCampana, piDenominacion, piFechaInicioPiloto, piFechaFinPiloto, piFechaInicioEncuesta, piFechaFinEncuesta, piObservaciones, piIdGiroPiloto, piIdCiuuPiloto, piIdGiroOficial, piIdCiuuOficial, piIdEtapaPiloto, piIdEtapaOficial, piIdSubSector, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       poIdCampana := piIdCampana;
       UPDATE T_GENM_CAMPANA c SET
@@ -337,6 +338,7 @@
       c.idCiuuOficial = piIdCiuuOficial,
       c.idEtapaPiloto = piIdEtapaPiloto,
       c.idEtapaOficial = piIdEtapaOficial,
+      c.idSubSector = piIdSubSector,
       c.idEstado = piIdEstado,
       c.idUsuarioModificacion = piIdUsuarioCreacion,
       c.fechaModificacion = SYSDATE,

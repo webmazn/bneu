@@ -535,6 +535,7 @@ var grabar = () => {
     let idCiuuPiloto = $('#cbo-ciuu01').val()
     let idEtapaPiloto = $('#cbo-estado-piloto').val()
     let idEtapaOficial = $('#cbo-estado-oficial').val()
+    let idSubSector = $('#cbo-sub-sector').val()
     let idEstado = $('#chk-anular').prop('checked') ? '0' : '1'
 
     if (validarEspaciosBlanco(denominacion)) arr.push("Debe ingresar una denominación")
@@ -544,6 +545,7 @@ var grabar = () => {
     if ($('#chk-encuesta-oficial').prop('checked')) if (validarEspaciosBlanco(fechaInicioEncuesta)) arr.push("Debe ingresar la fecha real inicio")
     if ($('#chk-encuesta-oficial').prop('checked')) if (validarEspaciosBlanco(fechaFinEncuesta)) arr.push("Debe ingresar la fecha real fin")
     if ($('#chk-encuesta-oficial').prop('checked')) if (validarCombo(idEtapaOficial)) arr.push("Debe seleccionar estado oficial")
+    if (validarCombo(idSubSector)) arr.push("Debe seleccionar un subsector");
     if (validarEspaciosBlanco(observaciones)) arr.push("Debe ingresar una observación")
     if (arrEmpresaSelect00.length == 0 && arrEmpresaSelect01.length == 0) arr.push("No ha seleccionado ninguna empresa para la campaña")
     else if (arrEmpresaPerfil00.length > 0 || arrEmpresaPerfil01.length > 0) arr.push("Hay empresas que no han sido asignados con un supervisor")
@@ -689,7 +691,7 @@ var grabar = () => {
     })
 
     let url = `${baseUrl}Campana/grabarCampana`;
-    let data = { idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroOficial, idCiuuOficial, idGiroPiloto, idCiuuPiloto, idEtapaPiloto, idEtapaOficial, idEstado, listaCampanaEmpresa: arrCampanaEmpresa, listaPregunta: arrPregunta, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroOficial, idCiuuOficial, idGiroPiloto, idCiuuPiloto, idEtapaPiloto, idEtapaOficial, idSubSector, idEstado, listaCampanaEmpresa: arrCampanaEmpresa, listaPregunta: arrPregunta, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -774,6 +776,7 @@ var cargarDatos = (data) => {
     $('#cbo-ciuu01').val(data.idCiuuPiloto)
     $('#cbo-estado-piloto').val(data.idEtapaPiloto)
     $('#cbo-estado-oficial').val(data.idEtapaOficial)
+    $('#cbo-sub-sector').val(data.idSubSector)
     listarEmpresa00()
     listarEmpresa01()
 

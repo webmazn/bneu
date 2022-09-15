@@ -34,8 +34,9 @@ namespace sisceusi.logica
                         {
                             string ruta = ConfigurationManager.AppSettings.Get("rutaImagenBanner");
                             string nombre = String.Concat(entidad.nombreArchivoGeneradoBanner, "_", entidad.nombreArchivoBanner);
-                            string pathFile = Path.Combine(ruta, nombre);
-                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                            string pathFile = Path.Combine(pathDirectory, nombre);
+                            if (!Directory.Exists(pathDirectory)) Directory.CreateDirectory(pathDirectory);
                             File.WriteAllBytes(pathFile, entidad.archivoContenidoBanner);
                         }
                     }
@@ -76,7 +77,8 @@ namespace sisceusi.logica
                 {
                     string ruta = ConfigurationManager.AppSettings.Get("rutaImagenBanner");
                     string nombre = String.Concat(item.nombreArchivoGeneradoBanner, "_", item.nombreArchivoBanner);
-                    string pathFile = Path.Combine(ruta, nombre);
+                    string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                    string pathFile = Path.Combine(pathDirectory, nombre);
                     pathFile = !File.Exists(pathFile) ? null : pathFile;
                     item.archivoContenidoBanner = pathFile == null ? null : File.ReadAllBytes(pathFile);
                 }
@@ -113,8 +115,10 @@ namespace sisceusi.logica
                         {
                             string ruta = ConfigurationManager.AppSettings.Get("rutaImagenPublicacion");
                             string nombre = String.Concat(entidad.nombreArchivoGeneradoPubli, "_", entidad.nombreArchivoPublicacion);
-                            string pathFile = Path.Combine(ruta, nombre);
-                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            //string pathFile = Path.Combine(ruta, nombre);
+                            string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                            string pathFile = Path.Combine(pathDirectory, nombre);
+                            if (!Directory.Exists(pathDirectory)) Directory.CreateDirectory(pathDirectory);
                             File.WriteAllBytes(pathFile, entidad.archivoContenidoPublicacion);
                         }
                     }
@@ -155,7 +159,9 @@ namespace sisceusi.logica
                 {
                     string ruta = ConfigurationManager.AppSettings.Get("rutaImagenPublicacion");
                     string nombre = String.Concat(item.nombreArchivoGeneradoPubli, "_", item.nombreArchivoPublicacion);
-                    string pathFile = Path.Combine(ruta, nombre);
+                    //string pathFile = Path.Combine(ruta, nombre);
+                    string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                    string pathFile = Path.Combine(pathDirectory, nombre);
                     pathFile = !File.Exists(pathFile) ? null : pathFile;
                     item.archivoContenidoPublicacion = pathFile == null ? null : File.ReadAllBytes(pathFile);
                 }
@@ -294,6 +300,42 @@ namespace sisceusi.logica
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;
+        }
+
+        public List<BannerBE> mostrarListaBannerAll()
+        {
+            List<BannerBE> lista = new List<BannerBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.mostrarListaBannerAll(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<PublicacionBE> mostrarListaPublicacionAll()
+        {
+            List<PublicacionBE> lista = new List<PublicacionBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.mostrarListaPublicacionAll(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<EnlaceBE> mostrarListaEnlaceAll()
+        {
+            List<EnlaceBE> lista = new List<EnlaceBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.mostrarListaEnlaceAll(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
         }
 
     }

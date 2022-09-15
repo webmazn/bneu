@@ -14,6 +14,15 @@ namespace sisceusi.web.Controllers
         // GET: Inicio
         public ActionResult Index()
         {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            List<BannerBE> banners = logica.mostrarListaBannerAll();
+            List<PublicacionBE> publicaciones = logica.mostrarListaPublicacionAll();
+            List<EnlaceBE> enlaces = logica.mostrarListaEnlaceAll();
+            LogoRedSocialBE logo = logica.obtenerLogoRedSocial(new LogoRedSocialBE());
+            ViewData["listaBanner"] = banners;
+            ViewData["listaPublicacion"] = publicaciones;
+            ViewData["listaEnlace"] = enlaces;
+            ViewData["logo"] = logo;
             return View();
         }
 

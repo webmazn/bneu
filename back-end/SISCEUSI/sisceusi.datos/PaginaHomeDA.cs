@@ -306,5 +306,72 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return item;
         }
+
+        public List<BannerBE> mostrarListaBannerAll(OracleConnection db)
+        {
+            List<BannerBE> lista = new List<BannerBE>();
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_SEL_LIST_ALL_BANNER";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new BannerBE
+                {
+                    idBanner = (int)x.IDBANNER,
+                    tituloBanner = x.TITULOBANNER == null ? "" : (string)x.TITULOBANNER,
+                    descripcionBanner = x.DESCRIPCIONBANNER == null ? "" : (string)x.DESCRIPCIONBANNER,
+                    descripcionFija = x.DESCRIPCIONFIJA == null ? "" : (string)x.DESCRIPCIONFIJA,
+                    tituloBoton = x.TITULOBOTON == null ? "" : (string)x.TITULOBOTON,
+                    enlaceBoton = x.ENLACEBOTON == null ? "" : (string)x.ENLACEBOTON,
+                    nombreArchivoBanner = x.NOMBREARCHIVOBANNER == null ? "" : (string)x.NOMBREARCHIVOBANNER,
+                    nombreArchivoGeneradoBanner = x.NOMBREARCHIVOGENERADOBANNER == null ? "" : (string)x.NOMBREARCHIVOGENERADOBANNER,
+                    fila = (int)x.FILA
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<PublicacionBE> mostrarListaPublicacionAll(OracleConnection db)
+        {
+            List<PublicacionBE> lista = new List<PublicacionBE>();
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_SEL_LIST_ALL_PUBLICACION";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new PublicacionBE
+                {
+                    idPublicacion = (int)x.IDPUBLICACION,
+                    tituloPublicacion = x.TITULOPUBLICACION == null ? "" : (string)x.TITULOPUBLICACION,
+                    descripcionPublicacion = x.DESCRIPCIONPUBLICACION == null ? "" : (string)x.DESCRIPCIONPUBLICACION,
+                    nombreArchivoPublicacion = x.NOMBREARCHIVOPUBLICACION == null ? "" : (string)x.NOMBREARCHIVOPUBLICACION,
+                    nombreArchivoGeneradoPubli = x.NOMBREARCHIVOGENERADOPUBLI == null ? "" : (string)x.NOMBREARCHIVOGENERADOPUBLI,
+                    fila = (int)x.FILA
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<EnlaceBE> mostrarListaEnlaceAll(OracleConnection db)
+        {
+            List<EnlaceBE> lista = new List<EnlaceBE>();
+            try
+            {
+                string sp = $"{Package.PaginaHome}USP_SEL_LIST_ALL_ENLACE";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EnlaceBE
+                {
+                    idEnlace = (int)x.IDENLACE,
+                    tituloEnlace = x.TITULOENLACE == null ? "" : (string)x.TITULOENLACE,
+                    descripcionEnlace = x.DESCRIPCIONENLACE == null ? "" : (string)x.DESCRIPCIONENLACE,
+                    fila = (int)x.FILA,
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

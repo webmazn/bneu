@@ -1,6 +1,11 @@
-﻿
+﻿@using sisceusi.entidad
+@using System.Configuration;
 @{
     ViewBag.Title = "Index";
+    List<BannerBE> listaBanner = ViewData["listaBanner"] == null ? new List<BannerBE>() : (List<BannerBE>)ViewData["listaBanner"];
+    List<PublicacionBE> listaPublicacion = ViewData["listaPublicacion"] == null ? new List<PublicacionBE>() : (List<PublicacionBE>)ViewData["listaPublicacion"];
+    List<EnlaceBE> listaEnlace = ViewData["listaEnlace"] == null ? new List<EnlaceBE>() : (List<EnlaceBE>)ViewData["listaEnlace"];
+    LogoRedSocialBE logo = ViewData["logo"] == null ? null : (LogoRedSocialBE)ViewData["logo"];
 }
 
 @section scripts_footer {
@@ -11,12 +16,27 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 order-1 order-sm-1 order-md-1 order-lg-2 banner-lado-derecho">
             <div class="banners">
-                <div class="banner-1 banner-mostrado" data-titulo="01 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="01 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común."></div>
-                <div class="banner-2" data-titulo="02 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="02 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común."></div>
-                <div class="banner-3" data-titulo="03 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="03 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común."></div>
-                <div class="banner-4" data-titulo="04 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="04 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común."></div>
-                <div class="banner-5" data-titulo="05 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="05 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común."></div>
-                <div class="banner-6" data-titulo="06 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="06 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común."></div>
+                @if (listaBanner == null || listaBanner.Count == 0)
+                {
+                    <div class="banner-1 banner-mostrado" data-titulo="01 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="01 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                    <div class="banner-2" data-titulo="02 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="02 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                    <div class="banner-3" data-titulo="03 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="03 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                    <div class="banner-4" data-titulo="04 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="04 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                    <div class="banner-5" data-titulo="05 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="05 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                    <div class="banner-6" data-titulo="06 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="06 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                }
+                else
+                {
+                    for (int i = 0; i < listaBanner.Count; i++)
+                    {
+                        string ruta = ConfigurationManager.AppSettings.Get("rutaImagenBanner");
+                        string nombre = String.Concat(listaBanner[i].nombreArchivoGeneradoBanner, "_", listaBanner[i].nombreArchivoBanner);
+                        string pathFile = $"~/{ruta}/{nombre}";
+                        string style = i == 0 ? "banner-mostrado" : "";
+                        int cont = i + 1;
+                        <div class="banner-@cont @style" data-titulo="@listaBanner[i].tituloBanner" data-color="" data-descripcion="@listaBanner[i].descripcionBanner" data-imagen="@Url.Content(pathFile)"></div>
+                    }
+                }
             </div>
             <div class="container position-absolute">
                 <div class="row">
@@ -27,7 +47,15 @@
                                     <div class="bd-callout">
                                         <blockquote class="blockquote">
                                             <p class="mb-0 text-white font-weight-bold"></p>
-                                            <footer class="blockquote-footer typer text-white"></footer><a class="btn btn-amarillo btn-md px-4 mt-4" href="#" role="button">Ir a la encuesta</a>
+                                            <footer class="blockquote-footer typer text-white"></footer>
+                                            @if (listaBanner == null || listaBanner.Count == 0)
+                                            {
+                                                <a class="btn btn-amarillo btn-md px-4 mt-4" href="javascript:void(0)" role="button">Ir a la encuesta</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-amarillo btn-md px-4 mt-4" href="@listaBanner[0].enlaceBoton" role="button">@listaBanner[0].tituloBoton</a>
+                                            }
                                         </blockquote>
                                     </div>
                                 </div>
@@ -51,7 +79,14 @@
             </div>
             <div class="container-fluid banner-mensaje d-flex justify-content-center align-items-center">
                 <div class="container">
-                    <p class="text-white text-truncate p-0 m-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et quisquam harum quis explicabo tenetur enim, suscipit accusantium quidem repudiandae vero temporibus possimus corrupti autem, molestias hic voluptas mollitia fugit! Quaerat?</p>
+                    @if (listaBanner == null || listaBanner.Count == 0)
+                    {
+                        <p class="text-white text-truncate p-0 m-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et quisquam harum quis explicabo tenetur enim, suscipit accusantium quidem repudiandae vero temporibus possimus corrupti autem, molestias hic voluptas mollitia fugit! Quaerat?</p>
+                    }
+                    else
+                    {
+                        <p class="text-white text-truncate p-0 m-0">@listaBanner[0].descripcionFija</p>
+                    }
                 </div>
             </div>
         </div>
@@ -61,30 +96,46 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
-                    <img class="img-fluid w-100" src="@Url.Content("~/images/portada01.png")">
-                    <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
-                    <img class="img-fluid w-100" src="@Url.Content("~/images/portada02.png")">
-                    <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
-                    <img class="img-fluid w-100" src="@Url.Content("~/images/portada03.png")">
-                    <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
-                    <img class="img-fluid w-100" src="@Url.Content("~/images/portada01.png")">
-                    <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
-                    <img class="img-fluid w-100" src="@Url.Content("~/images/portada02.png")">
-                    <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
-                    <img class="img-fluid w-100" src="@Url.Content("~/images/portada03.png")">
-                    <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
-                </div>
+                @if (listaPublicacion == null || listaPublicacion.Count == 0)
+                {
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        <img class="img-fluid w-100" src="@Url.Content("~/images/portada01.png")">
+                        <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        <img class="img-fluid w-100" src="@Url.Content("~/images/portada02.png")">
+                        <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        <img class="img-fluid w-100" src="@Url.Content("~/images/portada03.png")">
+                        <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        <img class="img-fluid w-100" src="@Url.Content("~/images/portada01.png")">
+                        <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        <img class="img-fluid w-100" src="@Url.Content("~/images/portada02.png")">
+                        <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        <img class="img-fluid w-100" src="@Url.Content("~/images/portada03.png")">
+                        <p class="font-weight-bold my-4">Título del artículo 2022</p><span class="d-block text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima itaque quas ipsa excepturi ducimus debitis nostrum nesciunt voluptate, nemo error quia cupiditate, vero cum illo autem magni quo ut necessitatibus.</span>
+                    </div>
+                }
+                else
+                {
+                    for (int i = 0; i < listaPublicacion.Count; i++)
+                    {
+                        string ruta = ConfigurationManager.AppSettings.Get("rutaImagenPublicacion");
+                        string nombre = String.Concat(listaPublicacion[i].nombreArchivoGeneradoPubli, "_", listaPublicacion[i].nombreArchivoPublicacion);
+                        string pathFile = $"~/{ruta}/{nombre}";
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                            <img class="img-fluid w-100" src="@Url.Content(pathFile)">
+                            <p class="font-weight-bold my-4">@listaPublicacion[i].tituloPublicacion</p><span class="d-block text-justify">@listaPublicacion[i].descripcionPublicacion</span>
+                        </div>
+                    }
+                }
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
@@ -92,23 +143,39 @@
                 <div class="col-12 bg-gris my-5">
                     <p class="mb-0 font-weight-bold my-2">LINKS DE INTERÉS</p>
                     <ul class="list-unstyled">
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;1</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;2</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;3</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;4</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;5</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;6</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;7</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;8</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;9</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;10</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;11</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;12</a></li>
-                        <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;13</a></li>
+                        @if (listaEnlace == null || listaEnlace.Count == 0)
+                        {
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;1</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;2</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;3</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;4</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;5</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;6</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;7</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;8</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;9</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;10</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;11</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;12</a></li>
+                            <li class="my-3"><a class="letras-azul-claro-02" href="#">Nombre del archivo vinculado / linkeado a su origen &nbsp;13</a></li>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < listaEnlace.Count; i++)
+                            {
+                                <li class="my-3"><a class="letras-azul-claro-02" href="@listaEnlace[i].descripcionEnlace">@listaEnlace[i].tituloEnlace</a></li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var listaBanner = @Html.Raw(Json.Encode(listaBanner));
+    var listaPublicacion = @Html.Raw(Json.Encode(listaPublicacion));
+    var listaEnlace = @Html.Raw(Json.Encode(listaEnlace));
+    var logo = @Html.Raw(Json.Encode(logo));
+</script>
 

@@ -151,6 +151,7 @@ namespace sisceusi.datos
                 p.Add("piIdCiuuOficial", campana.idCiuuOficial);
                 p.Add("piIdEtapaPiloto", campana.idEtapaPiloto);
                 p.Add("piIdEtapaOficial", campana.idEtapaOficial);
+                p.Add("piIdSubSector", campana.idSubSector);
                 p.Add("piIdEstado", campana.idEstado);             
                 p.Add("piIdUsuarioCreacion", campana.idUsuarioCreacion);
                 p.Add("piIpCreacion", campana.ipCreacion);

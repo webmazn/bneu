@@ -63,6 +63,7 @@
     piIdCiuuOficial NUMBER,
     piIdEtapaPiloto NUMBER,
     piIdEtapaOficial NUMBER,
+    piIdSubSector NUMBER,
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,

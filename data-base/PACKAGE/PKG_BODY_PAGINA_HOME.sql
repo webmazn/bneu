@@ -371,6 +371,70 @@
     FROM T_GENM_LOGO_RED_SOCIAL;
     --WHERE   idLogoRedSocial = piIdLogoRedSocial;
   END USP_SEL_LOGO_RED_SOCIAL;
+  
+  PROCEDURE USP_SEL_LIST_ALL_BANNER(
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vQuerySelect VARCHAR2(10000) := '';
+  BEGIN
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  ban.idBanner,
+                                ban.tituloBanner,
+                                ban.descripcionBanner,
+                                ban.descripcionFija,
+                                ban.tituloBoton,
+                                ban.enlaceBoton,
+                                ban.nombreArchivoBanner,
+                                ban.nombreArchivoGeneradoBanner,
+                                ROW_NUMBER() OVER (ORDER BY ban.idBanner ASC) AS fila
+                        FROM T_GENM_BANNER ban
+                        WHERE 
+                        ban.idEstado = ''1''
+                        )';
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_LIST_ALL_BANNER;
+  
+  PROCEDURE USP_SEL_LIST_ALL_PUBLICACION(
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vQuerySelect VARCHAR2(10000) := '';
+  BEGIN
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  pub.idPublicacion,
+                                pub.tituloPublicacion,
+                                pub.descripcionPublicacion,
+                                pub.nombreArchivoPublicacion,
+                                pub.nombreArchivoGeneradoPubli,
+                                ROW_NUMBER() OVER (ORDER BY pub.idPublicacion ASC) AS fila
+                        FROM T_GENM_PUBLICACION pub
+                        WHERE 
+                        pub.idEstado = ''1''
+                        )';
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_LIST_ALL_PUBLICACION;
+  
+  PROCEDURE USP_SEL_LIST_ALL_ENLACE(
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vQuerySelect VARCHAR2(10000) := '';
+  BEGIN
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  enl.idEnlace,
+                                enl.tituloEnlace,
+                                enl.descripcionEnlace,
+                                ROW_NUMBER() OVER (ORDER BY enl.idEnlace ASC) AS fila
+                        FROM T_GENM_ENLACE enl
+                        WHERE 
+                        enl.idEstado = ''1''
+                        )';
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_LIST_ALL_ENLACE;
 
 END PKG_SISCEUSI_PAGINA_HOME;
 

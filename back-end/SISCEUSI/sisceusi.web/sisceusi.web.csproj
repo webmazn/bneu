@@ -297,6 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Banner\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Ciuu\" />
     <Folder Include="Views\Departamento\" />

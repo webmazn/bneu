@@ -245,5 +245,44 @@ namespace sisceusi.web.Controllers
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }
+
+        [HttpGet]
+        public JsonResult mostrarListaBannerAll()
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            List<BannerBE> lista = logica.mostrarListaBannerAll();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult mostrarListaPublicacionAll()
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            List<PublicacionBE> lista = logica.mostrarListaPublicacionAll();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+        [HttpGet]
+        public JsonResult mostrarListaEnlaceAll()
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            List<EnlaceBE> lista = logica.mostrarListaEnlaceAll();
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
     }
 }
