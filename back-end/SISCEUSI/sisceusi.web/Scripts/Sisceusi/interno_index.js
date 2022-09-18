@@ -5,8 +5,119 @@
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
     $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
+    $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
+    $('#cbo-provincia').on('change', (e) => cambiarProvincia())
     $('#btn-buscar')[0].click();
+    cargarDesplegables()
 });
+
+/* ================================================
+ * INICIO CARGA DESPLEGABLES
+ * ================================================
+ */
+
+var arrProvincia = []
+var arrDistrito = []
+
+var cargarDesplegables = () => {
+    cargarRevisor(listaRevisor)
+    cargarCiuu(listaCiuu)
+    cargarDepartamento(listaDepartamento)
+    cargarProvincia(listaProvincia)
+    cargarDistrito(listaDistrito)
+    cargarZona(listaZona)
+}
+
+var cargarRevisor = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idUsuario}">${x.nombres}</option>`).join('');
+    options = `<option value="0" selected>-Filtre y seleccione un supervisor-</option>${options}`;
+    let content = `<label class="font-weight-bold" for="cbo-revisor">SUPERVISOR</label>` +
+                    `<select class="selectpicker form-control border rounded">` +
+                    `${options}` +
+                    `</select>` 
+    $('.list-revisor').html(content);
+
+    if ($(".selectpicker").length > 0) {
+        const e = document.querySelector(".selectpicker");
+        document.querySelector(".selectpicker"), new Choices(e, {
+            placeholder: !1,
+            itemSelectText: "",
+            allowHTML: !1
+        });
+        let t = e.getAttribute("class");
+        window.onload = function () {
+            e.parentElement.setAttribute("class", t)
+        }
+    }
+}
+
+var cargarCiuu = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idCiuu}">${x.ciuu}</option>`).join('');
+    options = `<option value="0">-Seleccione una actividad-</option>${options}`;
+    $('#cbo-ciuu').html(options);
+}
+
+var cargarDepartamento = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idDepartamento}">${x.departamento}</option>`).join('');
+    options = `<option value="0">-Seleccione un departamento-</option>${options}`;
+    $('#cbo-departamento').html(options);
+}
+
+var cargarProvincia = (data) => {
+    arrProvincia = data
+    options = `<option value="0">-Seleccione una provincia-</option>`
+    $('#cbo-provincia').html(options)
+}
+
+var cargarDistrito = (data) => {
+    arrDistrito = data
+    options = `<option value="0">-Seleccione un distrito-</option>`;
+    $('#cbo-distrito').html(options);
+}
+
+var cargarZona = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idZona}">${x.zona}</option>`).join('');
+    options = `<option value="0">-Seleccione una zona-</option>${options}`;
+    $('#cbo-zona').html(options);
+}
+
+
+/* ================================================
+ * FIN CARGA DESPLEGABLES
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO EVENTOS CHANGE
+ * ================================================
+ */
+var cambiarDepartamento = () => {
+    let departamento = $('#cbo-departamento').val()
+    $('#cbo-distrito').html(`<option value="0">-Seleccione un distrito-</option>`);
+    if (validarCombo(departamento)) {
+        $('#cbo-provincia').html(`<option value="0">-Seleccione una provincia-</option>`)
+    } else {
+        const data = arrProvincia.filter(x => x.idProvincia.substr(0, 2) === departamento)
+        let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idProvincia}">${x.provincia}</option>`).join('');
+        options = `<option value="0">-Seleccione una provincia-</option>${options}`;
+        $('#cbo-provincia').html(options);
+    }
+}
+var cambiarProvincia = () => {
+    let provincia = $('#cbo-provincia').val()
+    if (validarCombo(provincia)) {
+        $('#cbo-distrito').html(`<option value="0">-Seleccione un distrito-</option>`);
+    } else {
+        const data = arrDistrito.filter(x => x.idDistrito.substr(0, 4) === provincia)
+        let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idDistrito}">${x.distrito}</option>`).join('');
+        options = `<option value="0">-Seleccione un distrito-</option>${options}`;
+        $('#cbo-distrito').html(options);
+    }
+}
+/* ================================================
+ * FIN VENTOS CHANGE
+ * ================================================
+ */
 
 /* ================================================
  * INICIO ORDENAR COLUMA - PAGINA
@@ -86,14 +197,22 @@ var filtroGeneral = (e) => {
  * INICIO BUSQUEDA AVANZADO
  * ================================================
  */
-/*
+
 var filtroAvanzado = (e) => {
     e.preventDefault()
     bFiltroGeneral = false
+    let idUsuario = idUsuarioLogin
+    let denominacion = $('#txt-denominacion').val().trim()
     let ruc = $('#ruc').val();
-    let empresa = $('#empresa').val();
-    let representanteLegal = $('#usuario').val();
-    let correoElectronico = $('#email').val();
+    let empresa = $('#empresa').val();    
+    let idDepartamento = $('#cbo-departamento').val();
+    let idProvincia = $("#cbo-provincia").val();
+    let idDistrito = $("#cbo-distrito").val();
+    let idZona = $("#cbo-zona").val();
+    let idSubSector = $("#cbo-sub-sector").val();
+    let idCiuu = $('#cbo-ciuu').val();
+    let idRevisor = $('select.selectpicker').val()
+    let idTipoEncuesta = $('#cbo-tipo-encuesta').val();
     let fechaInicio = $("#txt-fecha-inicio").val();
     let fechaFin = $("#txt-fecha-fin").val();
     let estado = $("#cbo-estado").val();
@@ -101,10 +220,10 @@ var filtroAvanzado = (e) => {
     let pagina = $('.ir-pagina').val();
     let columna = $("#column").val();
     let orden = $("#order").val();
-    let params = { ruc, empresa, representanteLegal, correoElectronico, fechaInicio, fechaFin, estado, registros, pagina, columna, orden };
+    let params = { idUsuario, denominacion, ruc, empresa, idDepartamento, idProvincia, idDistrito, idZona, idSubSector, idCiuu, idRevisor, idTipoEncuesta, fechaInicio, fechaFin, estado, registros, pagina, columna, orden };
     let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&');
 
-    let url = `${baseUrl}EmpresaIndustria/filtroAvanzado?${queryParams}`;
+    let url = `${baseUrl}Interno/filtroAvanzado?${queryParams}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let method = 'GET';
@@ -120,7 +239,7 @@ var filtroAvanzado = (e) => {
         console.log('Error: ' + error.message);
     });
 }
-*/
+
 /* ================================================
  * FIN BUSQUEDA AVANZADO
  * ================================================

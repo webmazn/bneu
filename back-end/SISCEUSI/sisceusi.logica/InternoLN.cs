@@ -25,5 +25,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public List<InternoBE> filtroAvanzado(InternoBE interno)
+        {
+            List<InternoBE> lista = new List<InternoBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.filtroAvanzado(interno, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }
