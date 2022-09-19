@@ -154,6 +154,31 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public bool verificarPaswwor(UsuarioBE usuario)
+        {
+            bool esValido = false;
+            try
+            {
+                cn.Open();
+                UsuarioBE usu = datos.obtenerUsuario(usuario, cn);
+                if (usu != null)
+                {
+                    esValido = Seguridad.CompararHashSal(usuario.password, usu.password);
+                    if (esValido)
+                    {
+                        usu.password = string.IsNullOrEmpty(usuario.passwordNuevo) ? null : Seguridad.hashSal(usuario.passwordNuevo);
+                        usu.editarPassword = true;
+                        esValido = datos.grabarUsuario(usu, cn);
+                    }
+                }
+                
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+
+            return esValido;
+        }
     }
 
 }

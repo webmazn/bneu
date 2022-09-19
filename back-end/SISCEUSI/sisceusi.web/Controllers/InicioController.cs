@@ -26,5 +26,10 @@ namespace sisceusi.web.Controllers
             return View();
         }
 
+        public ActionResult contacto()
+        {
+            return View();
+        }
+
     }
 }

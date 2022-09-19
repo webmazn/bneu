@@ -31,6 +31,7 @@ namespace sisceusi.entidad
         public string orden { get; set; }
         //Validacion Contraseña
         public bool editarPassword { get; set; }
+        public string passwordNuevo { get; set; }
         //Fecha String
         public string txtFechaCreacion
         {

@@ -7,6 +7,7 @@
     List<ZonaBE> listaZona = ViewData["listaZona"] == null ? new List<ZonaBE>() : (List<ZonaBE>)ViewData["listaZona"];
     List<UsuarioBE> listaRevisor = ViewData["listaRevisor"] == null ? new List<UsuarioBE>() : (List<UsuarioBE>)ViewData["listaRevisor"];
     List<CiuuBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<CiuuBE>() : (List<CiuuBE>)ViewData["listaCiuu"];
+    UsuarioBE usuario = ViewData["usuario"] == null ? null : (UsuarioBE)ViewData["usuario"];
 }
 
 @section scripts_footer {
@@ -73,13 +74,27 @@
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C</label>
-                                                                    <input class="form-control integer-positivo" maxlength="11" type="text" id="ruc" placeholder="Número de RUC">
+                                                                    @if (usuario != null && usuario.idRol == 3)
+                                                                    {
+                                                                        <input class="form-control integer-positivo" maxlength="11" type="text" id="ruc" value="@usuario.empresaIndustria.ruc" placeholder="Número de RUC" readonly>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input class="form-control integer-positivo" maxlength="11" type="text" id="ruc" placeholder="Número de RUC">
+                                                                    }                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="txt-empresa">RAZÓN SOCIAL EMPRESA</label>
-                                                                    <input class="form-control" maxlength="150" type="text" id="empresa" placeholder="Nombre de empresa">
+                                                                    @if (usuario != null && usuario.idRol == 3)
+                                                                    {
+                                                                        <input class="form-control" maxlength="150" type="text" id="empresa" value="@usuario.empresaIndustria.nombreEmpresa" placeholder="Nombre de empresa" readonly>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input class="form-control" maxlength="150" type="text" id="empresa" placeholder="Nombre de empresa">
+                                                                    }                                                                      
                                                                 </div>
                                                             </div>
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
@@ -147,7 +162,7 @@
                                                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                                                 <div class="form-group list-revisor">
                                                                     <label class="font-weight-bold" for="cbo-revisor">SUPERVISOR</label>
-                                                                    <select class="selectpicker form-control border rounded">
+                                                                    <select class="selectpicker form-control border rounded" >
                                                                         <option selected>-Filtre y seleccione un supervisor-</option>
                                                                         <option value="Ultrasound Knee Left">Ultrasound Knee Left Sup 02</option>
                                                                         <option value="MRI Knee Right">MRI Knee Right Sup 03</option>
@@ -292,6 +307,9 @@
                                         </th>
                                         <th scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort column-filter" id="eta_etapa"></i></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FASE ENC.&nbsp;</span></span><i class="fas fa-sort column-filter" id="fas_fase"></i></div>
                                         </th>
                                         <th class="text-center" scope="col" style="min-width: 150px;">GESTIÓN</th>
                                     </tr>

@@ -1,9 +1,11 @@
 ﻿using sisceusi.entidad;
 using sisceusi.logica;
 using sisceusi.web.Filter;
+using sres.ut;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -40,6 +42,7 @@ namespace sisceusi.web.Controllers
             ViewData["listaZona"] = listaZona;
             ViewData["listaCiuu"] = listaCiuu;
             ViewData["listaRevisor"] = listaRevisor;
+            ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
         }
 
@@ -113,9 +116,47 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        public ActionResult CambiarClave()
+        {
+            return View();
+        }
+
         public ActionResult MaestroMantenimiento()
         {
             return View();
         }
+
+        public async Task<ActionResult> actualizarClave(UsuarioBE usuario)
+        {
+            Dictionary<string, object> response = new Dictionary<string, object> {["success"] = false,["message"] = "" };
+            try
+            {
+                if (string.IsNullOrEmpty(usuario.token))
+                {
+                    response["success"] = false;
+                    response["message"] = "Por favor, debe verificar el captcha";
+                    return Json(response);
+                }
+
+                var isCaptchaValid = await IsCaptchaValid(usuario.token);
+                if (isCaptchaValid)
+                {
+                    UsuarioLN logica = new UsuarioLN();
+                    usuario.idUsuario = ObtenerUsuarioLogin().idUsuario;
+                    bool seActualizo = logica.verificarPaswwor(usuario);
+                    response["success"] = seActualizo;
+                    response["message"] = seActualizo ? "Se actualizó su contraseña exitosamente. Lo estamos redirigiendo" : "Ocurrió un problema al actualizar la contraseña";
+                    return Json(response);
+                }
+                else
+                {
+                    response["success"] = false;
+                    response["message"] = "Ocurrió un problema en la validación del captcha";
+                }
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return Json(response);
+        }
+
     }
 }

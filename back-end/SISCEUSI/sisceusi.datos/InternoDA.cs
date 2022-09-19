@@ -91,7 +91,7 @@ namespace sisceusi.datos
                     planta = new PlantaEmpresaBE { denominacion = (string)x.PLANTA },
                     tipoEncuesta = new TipoEncuestaBE { tipoEncuesta = (string)x.TIPOENCUESTA },
                     txtFechaHoraLlenado = x.FECHAHORALLENADO == null ? "" : ((DateTime)x.FECHAHORALLENADO).ToString("dd/MM/yyyy"),
-                    etapa = new EtapaBE { etapa = (string)x.ETAPA },
+                    etapa = new EtapaBE { etapa = (string)x.ETAPA, idEtapa = x.IDETAPA == null ? 0 : (int)x.IDETAPA },
                     controlEncuesta = new ControlEncuestaBE
                     {
                         idControlEncuesta = (int)x.IDCONTROLENCUESTA,

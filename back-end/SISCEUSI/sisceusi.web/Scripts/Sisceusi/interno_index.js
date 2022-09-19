@@ -202,16 +202,16 @@ var filtroAvanzado = (e) => {
     e.preventDefault()
     bFiltroGeneral = false
     let idUsuario = idUsuarioLogin
-    let denominacion = $('#txt-denominacion').val().trim()
-    let ruc = $('#ruc').val();
-    let empresa = $('#empresa').val();    
+    let denominacion = $('#txt-denominacion').val().trim() 
+    let ruc = idRolLogin == 3 ? '' : $('#ruc').val();
+    let empresa = idRolLogin == 3 ? '' : $('#empresa').val();
     let idDepartamento = $('#cbo-departamento').val();
     let idProvincia = $("#cbo-provincia").val();
     let idDistrito = $("#cbo-distrito").val();
     let idZona = $("#cbo-zona").val();
     let idSubSector = $("#cbo-sub-sector").val();
     let idCiuu = $('#cbo-ciuu').val();
-    let idRevisor = $('select.selectpicker').val()
+    let idRevisor = idRolLogin == 2 ? 0 : $('select.selectpicker').val()
     let idTipoEncuesta = $('#cbo-tipo-encuesta').val();
     let fechaInicio = $("#txt-fecha-inicio").val();
     let fechaFin = $("#txt-fecha-fin").val();
@@ -320,8 +320,9 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
                 4
 
             let fase = x.controlEncuesta.fase.idFase
-            let verEncuesta = idRolLogin == 3 && (fase < 2 || fase == 3) ? true :
-                              idRolLogin == 2 && (fase == 2 || fase == 4) ? true : false
+            let verEncuesta = x.etapa.idEtapa == 0 || x.etapa.idEtapa == 1 || x.etapa.idEtapa == 3 ? false :
+                                idRolLogin == 3 && (fase < 2 || fase == 3) ? true :
+                                idRolLogin == 2 && (fase == 2 || fase == 4) ? true : false
 
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.campana.idCampana, 4)}</td>`;
@@ -331,12 +332,13 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colCampana = `<td class="text-center" data-encabezado="Fecha registro">${x.campana.denominacion}</td>`;
             let colFecha = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaHoraLlenado}</td>`;
             let colEtapa = `<td data-encabezado="Estado"><span>${x.etapa.etapa}</span></td>`;
+            let colFase = `<td data-encabezado="Fase Enc."><span>${x.controlEncuesta.fase.fase}</span></td>`;
             let btnDescargar = `<div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>`
             let btnObservar = `<div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${0}"><i class="fa fa-trash"></i></div>`;
             let btnEncuesta = `<div class="btn btn-sm btn-info btn-table btn-encuesta" data-id="${x.controlEncuesta.idControlEncuesta}" data-bloque="${bloque}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnDescargar}${btnObservar}${btnEliminar}${ verEncuesta ? btnEncuesta : ''}</td>`;
-            let row = `<tr>${colNro}${colCodigo}${colEmpresa}${colPlanta}${colTipoEncuesta}${colCampana}${colFecha}${colEtapa}${colOptions}</tr>`;
+            let row = `<tr>${colNro}${colCodigo}${colEmpresa}${colPlanta}${colTipoEncuesta}${colCampana}${colFecha}${colEtapa}${colFase}${colOptions}</tr>`;
             return row;
         }).join('');
     };
