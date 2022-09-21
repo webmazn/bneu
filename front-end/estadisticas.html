@@ -49,7 +49,10 @@
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle font-weight-bold px-4" href="#" role="button" data-toggle="dropdown" aria-expanded="true">SUB SECTOR</a>
                   <div class="dropdown-menu"><a class="dropdown-item" href="./campanas-inicio.html">Industria Minería</a><a class="dropdown-item" href="./campanas-inicio.html">Industria Pesquera</a><a class="dropdown-item" href="./campanas-inicio.html">Manufactura</a><a class="dropdown-item" href="./campanas-inicio.html">Industria</a></div>
                 </li>
-                <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>
+                <!-- li.nav-item
+                a.nav-link.font-weight-bold.px-4(href="./estadisticas.html")
+                  | ESTADÍSTICAS
+                -->
                 <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./contacto.html">CONTACTO</a></li>
               </ul>
             </div>
@@ -65,92 +68,26 @@
         <div class="col-12">
           <div class="container m-0 px-0 py-4">
             <div class="row">
-              <div class="col-12 d-flex">
+              <div class="col-md-12 col-lg-9 d-flex">
                 <div class="bg-light p-4">
-                  <div class="h4 text-cyan">ESTADÍSTICAS&nbsp;</div>
+                  <div class="h4 text-cyan">ESTADÍSTICAS DEL SUB SECTOR MANUFACTURA&nbsp;</div>
                   <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-3">
+                <div class="row">
+                  <div class="col-12"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                    <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="dropdown-divider"></div>
-            <div class="row">
-              <div class="col-12">
-                <form>
-                  <div class="form-group init-search">
-                    <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                        <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Texto de ayuda"></i></label>
-                        <div class="input-group">
-                          <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
-                          <div class="input-group-append">
-                            <button class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
-                          </div>
-                          <div class="input-group-append">
-                            <div class="btn-group">
-                              <button class="btn btn-success dropdown-toggle sb-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descargar</button>
-                              <div class="dropdown-menu"><a class="dropdown-item" href="#">Formato Excel</a><a class="dropdown-item" href="#">Formato PDF</a></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12 col-lg-6 text-right">
-                        <div class="titulo-avanzado open-avanzado" data-toggle="collapse" href="#busqueda-avanzada" aria-expanded="false" aria-controls="busqueda-avanzada"><span>Búsqueda avanzada&nbsp;<i class="fas fa-sort"></i></span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-12 text">
-                        <div class="collapse" id="busqueda-avanzada">
-                          <div class="card card-body">
-                            <div class="row">
-                              <div class="col-sm-12 text-left">
-                                <div class="row">
-                                  <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-titulo-pricipal">DENOMINACIÓN DE LA CAMPAÑA</label>
-                                      <input class="form-control" type="text" id="txt-titulo-pricipal" placeholder="Denominación de la campaña">
-                                    </div>
-                                  </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-fecha-inicio">FECHA VERIFICACIÓN DESDE</label>
-                                      <input class="form-control" type="date" id="txt-fecha-inicio">
-                                    </div>
-                                  </div>
-                                  <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                      <label class="font-weight-bold" for="txt-fecha-fin">FECHA VERIFICACIÓN HASTA</label>
-                                      <input class="form-control" type="date" id="txt-fecha-fin">
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-sm-12 text-right">
-                                    <div class="btn-group">
-                                      <button class="btn btn-azul" type="submit"><i class="fas fa-search px-1"></i>Buscar</button>
-                                      <div class="btn-group">
-                                        <button class="btn btn-success dropdown-toggle sb-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descargar</button>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="#">Formato Excel</a><a class="dropdown-item" href="#">Formato PDF</a></div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-12 text-right">
-                                    <div class="titulo-avanzado close-basico" data-toggle="collapse" href="#busqueda-avanzada" aria-expanded="false" aria-controls="busqueda-avanzada"><span>Búsqueda básica&nbsp;<i class="fas fa-sort"></i></span></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <!-- .row
+            .col-12
+              include ./includes/busqueda-reporte
+            
+            -->
             <div class="dropdown-divider mb-4"></div>
             <div class="row">
               <div class="col-12"><strong class="text-cyan">RESUMEN DE RESULTADOS</strong>
@@ -158,19 +95,17 @@
               </div>
             </div>
             <div class="row mb-4">
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                <div class="form-group">
-                  <label class="font-weight-bold" for="cbo-sector">SUB SECTOR</label>
-                  <select class="form-control" id="cbo-sector">
-                    <option>-Seleccione un sub sector-</option>
-                    <option>Industria Minería</option>
-                    <option>Industria Pesquera</option>
-                    <option>Manufactura</option>
-                    <option>Industria</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+              <!--.col-xm-12.col-sm-12.col-md-3.col-lg-3
+              .form-group
+                label.font-weight-bold(for="cbo-sector") SUB SECTOR
+                select.form-control(id="cbo-sector")
+                    option -Seleccione un sub sector-
+                    option Industria Minería
+                    option Industria Pesquera
+                    option Manufactura
+                    option Industria
+              -->
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                   <label class="font-weight-bold" for="cbo-departamento">DEPARTAMENTO</label>
                   <select class="form-control" id="cbo-departamento">
@@ -180,7 +115,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                   <label class="font-weight-bold" for="cbo-provincia">PROVINCIA</label>
                   <select class="form-control" id="cbo-provincia">
@@ -190,7 +125,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+              <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                   <label class="font-weight-bold" for="cbo-distrito">DISTRITO</label>
                   <select class="form-control" id="cbo-distrito">
