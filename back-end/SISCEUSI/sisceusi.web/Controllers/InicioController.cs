@@ -193,5 +193,27 @@ namespace sisceusi.web.Controllers
             return Json(response);
         }
 
+        public JsonResult enviarContactoBot(ContactoBE contacto)
+        {
+            string correoAdmin = ConfigurationManager.AppSettings["correoAdmin"];
+            string fieldServer = "[SERVER]", fieldCorreo = "[CORREO]", fieldMensaje = "[MENSAJE]";
+            string[] fields = new string[] { fieldServer, fieldCorreo, fieldMensaje };
+            string[] fieldsRequire = new string[] { fieldServer, fieldCorreo, fieldMensaje };
+            string mensaje = $"<span style='font-family: sans-serif;'>{contacto.asunto}</span>";
+            Dictionary<string, string> dataBody = new Dictionary<string, string> {[fieldServer] = ConfigurationManager.AppSettings["Server"],[fieldCorreo] = contacto.correo,[fieldMensaje] = mensaje };
+            string subject = $"CONTACTO: se han contactado a través del bot";
+            MailAddressCollection mailTo = new MailAddressCollection();
+            mailTo.Add(new MailAddress(correoAdmin, contacto.correo));
+
+            Mailing mailing = new Mailing();
+            Task.Factory.StartNew(() => mailing.SendMail(Mailing.Templates.ContactoBot, dataBody, fields, fieldsRequire, subject, mailTo));
+
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", true);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
     }
 }

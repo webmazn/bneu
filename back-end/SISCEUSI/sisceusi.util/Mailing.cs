@@ -21,6 +21,8 @@ namespace sisceusi.util
         {
             [Description("contacto.html")]
             Contacto,
+            [Description("contactoBot.html")]
+            ContactoBot,
             [Description("recuperarClave.html")]
             RecuperarClave,
         }
