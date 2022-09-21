@@ -69,7 +69,7 @@ namespace sisceusi.logica
             bool seGuardo = false;
             try
             {
-                cn.Open();
+                if (cn.State != ConnectionState.Open) { cn.Open(); }                
                 using (OracleTransaction ot = cn.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
                 {
                     int idCampana = 0;
@@ -198,6 +198,72 @@ namespace sisceusi.logica
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;
+        }
+
+        public bool copiarCampana(CopiarCampanaBE campana)
+        {
+            CampanaBE item = null;
+            bool seCopio = false;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerCampana(new CampanaBE { idCampana = campana.idCampana }, cn);
+                if (item != null)
+                {
+                    item.idUsuarioCreacion = campana.idUsuarioCreacion;
+                    item.ipCreacion = campana.ipCreacion;
+                    if (campana.copiarEmpresa)
+                    {
+                        item.listaCampanaEmpresa = datos.obtenerCampanaEmpresa(new CampanaEmpresaBE { idCampana = item.idCampana }, cn);
+                        //if (!campana.copiarSupervisor)
+                        //{
+                        //    item.listaCampanaEmpresa.ForEach(x =>
+                        //    {
+                        //        x.idSupervisorOficial = 0;
+                        //        x.idSupervisorPiloto = 0;
+                        //        x.participarEnPiloto = "0";
+                        //        x.participarEnOficial = "0";
+                        //    });
+                        //}
+                    }
+                    else
+                    {
+                        item.listaCampanaEmpresa = new List<CampanaEmpresaBE>();
+                    }
+                    
+                    if (campana.copiarPregunta)
+                    {
+                        item.listaPregunta = datos.obtenerCampanaEncuesta(new CampanaEncuestaBE { idCampana = item.idCampana }, cn);
+                        if (item.listaPregunta != null)
+                        {
+                            foreach (var x in item.listaPregunta)
+                            {
+                                x.listaRespuesta = datos.obtenerRespuestaEncuesta(new RespuestaEncuestaBE { idCampanaEncuesta = x.idCampanaEncuesta }, cn);
+                                x.idCampanaEncuesta = -1;
+                                x.listaRespuesta.ForEach(w =>
+                                {
+                                    w.idRespuestaEncuesta = -1;
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        item.listaPregunta = new List<CampanaEncuestaBE>();
+                    }
+                    item.idCampana = -1;
+                    item.denominacion = campana.nombreCampana;
+                    item.fechaInicioPiloto = campana.fechaInicial;
+                    item.fechaFinPiloto = campana.fechaFinalizacion;
+                    item.idEtapaPiloto = 1;
+                    item.fechaInicioEncuesta = campana.fechaInicial;
+                    item.fechaFinEncuesta = campana.fechaFinalizacion;
+                    item.idEtapaOficial = 1;
+                    seCopio = grabarCampana(item);
+                }                
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seCopio;
         }
     }
 }

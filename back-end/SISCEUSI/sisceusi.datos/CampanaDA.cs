@@ -357,6 +357,7 @@ namespace sisceusi.datos
                 {
                     idCampanaEmpresa = (int)x.IDCAMPANAEMPRESA,
                     idCampana = (int)x.IDCAMPANA,
+                    idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,
                     empresaIndustria = new EmpresaIndustriaBE
                     {
                         idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,

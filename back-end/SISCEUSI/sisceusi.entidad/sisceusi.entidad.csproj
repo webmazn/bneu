@@ -44,9 +44,11 @@
     <Compile Include="BaseBE.cs" />
     <Compile Include="CampanaBE.cs" />
     <Compile Include="CampanaEmpresaBE.cs" />
+    <Compile Include="ContactoBE.cs" />
     <Compile Include="ControlEncuestaBE.cs" />
     <Compile Include="CampanaEncuestaBE.cs" />
     <Compile Include="CiuuBE.cs" />
+    <Compile Include="CopiarCampanaBE.cs" />
     <Compile Include="DepartamentoBE.cs" />
     <Compile Include="DistritoBE.cs" />
     <Compile Include="EmpresaGasBE.cs" />

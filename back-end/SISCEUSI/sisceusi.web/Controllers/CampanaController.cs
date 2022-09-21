@@ -224,5 +224,18 @@ namespace sisceusi.web.Controllers
             });
             return listas;
         }
+
+        [HttpPost]
+        public JsonResult copiarCampana(CopiarCampanaBE entidad)
+        {
+            CampanaLN logica = new CampanaLN();
+            entidad.ipCreacion = Request.UserHostAddress.ToString().Trim();
+            bool seCopio = logica.copiarCampana(entidad);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seCopio);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
     }
 }

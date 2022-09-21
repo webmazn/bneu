@@ -65,6 +65,10 @@
     </script>
 }
 
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/inicio_contacto.js")"></script>
+}
+
 <div class="container-fluid map-root" id="historia"></div>
 <div class="container my-4" id="cuerpo">
     <div class="row">
@@ -126,30 +130,34 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-nobres">NOMBRES Y APELLIDOS</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                    <input class="form-control" type="text" id="txt-nobres" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required>
+                                    <input class="form-control" maxlength="60" type="text" id="txt-nombres" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-nobres">CORREO ELECTRÓNICO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                    <input class="form-control" type="text" id="txt-nobres" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required>
+                                    <input class="form-control" maxlength="70" type="text" id="txt-correo" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-nobres">TELÉFONO / CELULAR</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                    <input class="form-control" type="text" id="txt-nobres" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required>
+                                    <input class="form-control" maxlength="20" type="text" id="txt-telefono" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-nobres">ASUNTO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
-                                    <textarea class="form-control" id="txt-nobres" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required rows="5"></textarea>
+                                    <textarea class="form-control" maxlength="800" id="txt-asunto" placeholder="Ingrese su nombre y apellido" aria-describedby="inputGroup7" required rows="5"></textarea>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <small class="text-danger d-block mb-3"><strong>(*)&nbsp; Campos obligatorios</strong></small>
-                                <button class="btn btn-info w-100 mb-3" href="#">Enviar</button>
+                            </div>
+                            <div class="col-12 seccion-mensaje"></div>
+                            <div class="col-12">
+                                @*<small class="text-danger d-block mb-3"><strong>(*)&nbsp; Campos obligatorios</strong></small>*@
+                                <button id="btn-enviar" class="btn btn-info w-100 mb-3" href="javascript:void(0)">Enviar</button>
                             </div>
                         </div>
                     </div>

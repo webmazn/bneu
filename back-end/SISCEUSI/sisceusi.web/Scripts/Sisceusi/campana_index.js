@@ -4,6 +4,7 @@
     $('#btn-exportar').on('click', (e) => exportar(e));
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
+    $('#copiaRow').on('click', (e) => copiarCampana());
     //$('#btn-buscar')[0].click();
     cargarDatosTabla(listaCampana)
 });
@@ -156,6 +157,16 @@ var cargarDatosTabla = (j) => {
                 actualizar(e.currentTarget);
             });
         });
+
+        tabla.find('.btn-copy').each(x => {
+            let elementButton = tabla.find('.btn-copy')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                copiar(e.currentTarget);
+            });
+        });
+        
+
     } else {
         console.log('No hay resultados');
         $('#viewPagination').hide(); $('#view-page-result').hide();
@@ -184,7 +195,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colDenominacion = `<td data-encabezado="Denominación">${x.denominacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnDocumento = `<div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-copy"></i></div>`;
+            let btnDocumento = `<div class="btn btn-sm btn-warning btn-table text-white btn-copy" data-id="${x.idCampana}"><i class="fa fa-copy"></i></div>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idCampana}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idCampana}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}${btnDocumento}</td>`;
@@ -252,5 +263,88 @@ var actualizar = (obj) => {
 
 /* ================================================
  * FIN ACTUALIZAR EMPRESA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO COPIAR CAMPAÑA
+ * ================================================
+ */
+$(document).on("click", ".btn-warning.btn-table", (function () {
+    $('.seccion-mensaje').html('')
+    $("#modalCopia").modal("show")
+    limpiarCopiar()
+}))
+
+var limpiarCopiar = () => {
+    $('#conf01').prop('checked', true)
+    $('#conf02').prop('checked', true)
+    $('#conf03').prop('checked', true)
+    $('#txt-nuevo-nombre').val('')
+    $('#txt-fecha-inicial').val('')
+    $('#txt-fecha-finalizacion').val('')
+}
+
+/*$('#conf01').on('change', () => {
+    if ($('#conf01').prop('checked')) {
+        $('#conf04').prop('disabled', false)
+    } else {
+        $('#conf04').prop('disabled', true)
+        $('#conf04').prop('checked', false)
+    }
+})*/
+
+let idCopiar
+var copiar = (obj) => {
+    idCopiar = $(obj).data('id')
+}
+
+var copiarCampana = () => {
+    $('.seccion-mensaje').html('')
+    let arr = []
+    let copiarEmpresa = $('#conf01').prop('checked')
+    let copiarPregunta = $('#conf02').prop('checked')
+    let copiarIndicador = $('#conf03').prop('checked')
+    //let copiarSupervisor = $('#conf04').prop('checked')
+    let nombreCampana = $('#txt-nuevo-nombre').val().trim()
+    let fechaInicial = $('#txt-fecha-inicial').val()
+    let fechaFinalizacion = $('#txt-fecha-finalizacion').val()
+
+    if (validarEspaciosBlanco(nombreCampana)) arr.push("Debe ingresar el nombre de la campaña")
+    if (validarEspaciosBlanco(fechaInicial)) arr.push("Debe ingresar la fecha de inicio")
+    if (validarEspaciosBlanco(fechaFinalizacion)) arr.push("Debe ingresar la fecha de finalización")
+
+    if (arr.length > 0) {
+        let error = messageArrayGeneric(arr);
+        $('.seccion-mensaje').html(messageError(error, 'registro'));
+        return;
+    }
+
+    $('#copiaRow').hide()
+    let url = `${baseUrl}Campana/copiarCampana`;
+    let data = { idCampana: idCopiar, nombreCampana, fechaInicial, fechaFinalizacion, copiarEmpresa, copiarPregunta, copiarIndicador, idUsuarioCreacion: idUsuarioLogin }
+    let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
+
+    fetch(url, init)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('.seccion-mensaje').html(messageSuccess(messageStringGeneric("Se realizó la copia de la campaña exitosamente.")))
+            if (bFiltroGeneral) $('#btn-buscar')[0].click()
+            else $('#btn-buscar-avanzado')[0].click()
+        } else {
+            $('#copiaRow').show()
+            $('.seccion-mensaje').html(messageError(messageStringGeneric("Ocurrió un problema al copiar la campaña."), 'copiar campaña'))
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message);
+    })
+}
+
+
+
+/* ================================================
+ * FIN COPIAR CAMPAÑA
  * ================================================
  */
