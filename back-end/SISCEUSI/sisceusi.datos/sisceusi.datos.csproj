@@ -68,6 +68,7 @@
     <Compile Include="ParametroDA.cs" />
     <Compile Include="PlantaEmpresaDA.cs" />
     <Compile Include="ProvinciaDA.cs" />
+    <Compile Include="ReporteDA.cs" />
     <Compile Include="RolDA.cs" />
     <Compile Include="TablaMaestraDA.cs" />
     <Compile Include="UsuarioDA.cs" />

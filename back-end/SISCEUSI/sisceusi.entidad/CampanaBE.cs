@@ -24,6 +24,8 @@ namespace sisceusi.entidad
         public int idSubSector { get; set; }
         public List<CampanaEmpresaBE> listaCampanaEmpresa { get; set; }
         public List<CampanaEncuestaBE> listaPregunta { get; set; }
+        public SubSectorBE subSector { get; set; }
+        public EtapaBE etapa { get; set; }
         public string idEstado { get; set; }
 
         public string txtFechaInicioPiloto

@@ -64,6 +64,7 @@
     <Compile Include="ParametroLN.cs" />
     <Compile Include="PlantaEmpresaLN.cs" />
     <Compile Include="ProvinciaLN.cs" />
+    <Compile Include="ReporteLN.cs" />
     <Compile Include="RolLN.cs" />
     <Compile Include="TablaMaestraLN.cs" />
     <Compile Include="UsuarioLN.cs" />

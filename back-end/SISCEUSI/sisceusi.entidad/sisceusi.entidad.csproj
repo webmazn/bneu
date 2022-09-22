@@ -78,6 +78,7 @@
     <Compile Include="RespuestaEncuestaPlantaBE.cs" />
     <Compile Include="RespuestaEncuestaTablaBE.cs" />
     <Compile Include="RolBE.cs" />
+    <Compile Include="SubSectorBE.cs" />
     <Compile Include="TablaMaestraBE.cs" />
     <Compile Include="TipoDatoBE.cs" />
     <Compile Include="TipoEncuestaBE.cs" />

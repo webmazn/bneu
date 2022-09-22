@@ -594,6 +594,193 @@
     WHERE idCampanaEncuesta = piIdCampanaEncuesta AND idEstado = '1'
     ORDER BY numeroOrdenRespuesta ASC;
   END USP_SEL_LIST_RESPUESTA_ENC;
+  
+  PROCEDURE USP_SEL_BUSQ_GENERAL_SUBSECTOR(
+    piIdSubSector NUMBER,
+    piBuscar VARCHAR2,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vTotalRegistros INTEGER;
+    vTotalPaginas INTEGER;
+    vPaginaActual INTEGER := piPagina;
+    vPaginaInicial INTEGER := 0;
+    vQueryCount VARCHAR2(10000) := '';
+    vQuerySelect VARCHAR2(10000) := '';
+    vExtension VARCHAR(10);
+    vColumna VARCHAR2(50);
+  BEGIN
+    vQueryCount := 'SELECT  COUNT(1)
+                    FROM T_GENM_CAMPANA cam
+                    INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                    INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
+                    WHERE (
+                    LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
+                    ) AND cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector;
+    EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
+
+    vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
+    IF vPaginaActual = 0 THEN
+      vPaginaActual := 1;
+    END IF;
+    IF vPaginaActual > vTotalPaginas THEN
+      vPaginaActual := vTotalPaginas;
+    END IF;
+    
+    vPaginaInicial := vPaginaActual - 1;
+    vExtension := SUBSTR(piColumna,1,3);
+    vColumna := SUBSTR(piColumna,5,LENGTH(piColumna)-4);
+    vColumna := vExtension || '.' || vColumna;
+
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  cam.idCampana,
+                                cam.denominacion,
+                                sub.subsector,
+                                cam.fechaCreacion,
+                                eta.etapa,
+                                ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
+                                || vTotalPaginas || ' AS totalPaginas,'
+                                || vPaginaActual || ' AS pagina,'
+                                || piRegistros || ' AS registros,'
+                                || vTotalRegistros || ' AS totalRegistros
+                        FROM T_GENM_CAMPANA cam
+                        INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                        INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
+                        WHERE (
+                        LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
+                        ) AND cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || '
+                        )
+                    WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_BUSQ_GENERAL_SUBSECTOR;
+  
+  PROCEDURE USP_SEL_BUSQ_AVANZ_SUBSECTOR(
+    piIdSubSector NUMBER,
+    piDenominacion VARCHAR2,
+    piRuc VARCHAR2,
+    piNombreEmpresa VARCHAR2,
+    piFechaInicio DATE,
+    piFechaFin DATE,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+    vTotalRegistros INTEGER;
+    vTotalPaginas INTEGER;
+    vPaginaActual INTEGER := piPagina;
+    vPaginaInicial INTEGER := 0;
+    vQueryCount VARCHAR2(10000) := '';
+    vQuerySelect VARCHAR2(10000) := '';
+    vExtension VARCHAR(10);
+    vColumna VARCHAR2(50);
+  BEGIN
+    vQueryCount := 'SELECT   COUNT(DISTINCT cam.idCampana)
+                    FROM T_GENM_CAMPANA cam
+                    INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
+                    INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
+                    INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                    INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
+                    WHERE cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || ' AND (
+                    '||
+                    case
+                        when piDenominacion is null then ''
+                        else ' LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piDenominacion ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                    end    
+                    ||'
+                    '||
+                    case
+                        when piRuc is null then ''
+                        else ' emp.ruc = '''|| piRuc ||''' AND '
+                    end    
+                    ||'        
+                    '||
+                    case
+                        when piNombreEmpresa is null then ''
+                        else ' LOWER(TRANSLATE(emp.nombreEmpresa,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piNombreEmpresa ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                    end    
+                    ||'
+                    '||
+                    case
+                        when piFechaInicio is null and piFechaFin is null then ''
+                        when piFechaInicio is null then ' TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''') AND '
+                        when piFechaFin is null then ' TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') || ''') AND '
+                        else ' (TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') ||''') AND TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''')) AND '  
+                    end
+                    ||'
+                    1 = 1)';
+    EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
+
+    vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
+    IF vPaginaActual = 0 THEN
+      vPaginaActual := 1;
+    END IF;
+    IF vPaginaActual > vTotalPaginas THEN
+      vPaginaActual := vTotalPaginas;
+    END IF;
+
+    vPaginaInicial := vPaginaActual - 1;
+    vExtension := SUBSTR(piColumna,1,3);
+    vColumna := SUBSTR(piColumna,5,LENGTH(piColumna)-4);
+    vColumna := vExtension || '.' || vColumna;
+
+    vQuerySelect :=  'SELECT * FROM
+                        (
+                        SELECT  cam.idCampana,
+                                cam.denominacion,
+                                sub.subsector,
+                                cam.fechaCreacion,
+                                eta.etapa,
+                                ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
+                                || vTotalPaginas || ' AS totalPaginas,'
+                                || vPaginaActual || ' AS pagina,'
+                                || piRegistros || ' AS registros,'
+                                || vTotalRegistros || ' AS totalRegistros
+                        FROM T_GENM_CAMPANA cam
+                        INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
+                        INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
+                        INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                        INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
+                        WHERE cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || ' AND (
+                        '||
+                        case
+                            when piDenominacion is null then ''
+                            else ' LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piDenominacion ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                        end    
+                        ||'
+                        '||
+                        case
+                            when piRuc is null then ''
+                            else ' emp.ruc = '''|| piRuc ||''' AND '
+                        end    
+                        ||'        
+                        '||
+                        case
+                            when piNombreEmpresa is null then ''
+                            else ' LOWER(TRANSLATE(emp.nombreEmpresa,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piNombreEmpresa ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' AND '
+                        end    
+                        ||'
+                        '||
+                        case
+                            when piFechaInicio is null and piFechaFin is null then ''
+                            when piFechaInicio is null then ' TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''') AND '
+                            when piFechaFin is null then ' TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') || ''') AND '
+                            else ' (TO_DATE(cam.fechaCreacion) >= TO_DATE('''|| TO_CHAR(piFechaInicio,'dd/MM/yy') ||''') AND TO_DATE(cam.fechaCreacion) <= TO_DATE('''|| TO_CHAR(piFechaFin,'dd/MM/yy') || ''')) AND '  
+                        end
+                        ||'   
+                        1 = 1)
+                        GROUP BY cam.idCampana, cam.denominacion, sub.subsector, cam.fechaCreacion, eta.etapa
+                    )    
+                    WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
+
+    OPEN poRef FOR vQuerySelect;
+  END USP_SEL_BUSQ_AVANZ_SUBSECTOR;
 
 END PKG_SISCEUSI_CAMPANA;
 

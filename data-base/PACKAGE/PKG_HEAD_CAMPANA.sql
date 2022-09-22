@@ -158,6 +158,30 @@
     piIdCampanaEncuesta NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_BUSQ_GENERAL_SUBSECTOR(
+    piIdSubSector NUMBER,
+    piBuscar VARCHAR2,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_BUSQ_AVANZ_SUBSECTOR(
+    piIdSubSector NUMBER,
+    piDenominacion VARCHAR2,
+    piRuc VARCHAR2,
+    piNombreEmpresa VARCHAR2,
+    piFechaInicio DATE,
+    piFechaFin DATE,
+    piRegistros NUMBER,
+    piPagina NUMBER,
+    piColumna VARCHAR2,
+    piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_CAMPANA;
 

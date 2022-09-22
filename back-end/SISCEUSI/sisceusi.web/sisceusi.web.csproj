@@ -185,7 +185,9 @@
     <Content Include="Scripts\Sisceusi\inicio_contacto.js" />
     <Content Include="Scripts\Sisceusi\inicio_contacto_bot.js" />
     <Content Include="Scripts\Sisceusi\inicio_contrasena_nuevo.js" />
+    <Content Include="Scripts\Sisceusi\inicio_estadistica.js" />
     <Content Include="Scripts\Sisceusi\inicio_recuperar_clave.js" />
+    <Content Include="Scripts\Sisceusi\inicio_reporte.js" />
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
     <Content Include="Scripts\Sisceusi\interno_cambiar_clave.js" />
     <Content Include="Scripts\Sisceusi\interno_index.js" />
@@ -251,6 +253,8 @@
     <Content Include="Views\Inicio\contacto.cshtml" />
     <Content Include="Views\Inicio\recuperarClave.cshtml" />
     <Content Include="Views\Inicio\ContrasenaNuevo.cshtml" />
+    <Content Include="Views\Inicio\Reporte.cshtml" />
+    <Content Include="Views\Inicio\Estadistica.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

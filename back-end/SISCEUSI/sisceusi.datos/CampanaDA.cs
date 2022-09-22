@@ -404,5 +404,75 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return lista;
         }
+
+        public List<CampanaBE> filtroGeneralCampanaSubSector(CampanaBE entidad, OracleConnection db)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_BUSQ_GENERAL_SUBSECTOR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdSubSector", entidad.idSubSector);
+                p.Add("piBuscar", entidad.buscar);
+                p.Add("piRegistros", entidad.registros);
+                p.Add("piPagina", entidad.pagina);
+                p.Add("piColumna", entidad.columna);
+                p.Add("piOrden", entidad.orden);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new CampanaBE
+                {
+                    idCampana = (int)x.IDCAMPANA,
+                    denominacion = (string)x.DENOMINACION,
+                    fechaCreacion = (DateTime)x.FECHACREACION,
+                    subSector = new SubSectorBE { subSector = x.SUBSECTOR == null ? "" : (string)x.SUBSECTOR },
+                    etapa = new EtapaBE { etapa = x.ETAPA == null ? "" : (string)x.ETAPA },
+                    idEstado = (string)x.IDESTADO,
+                    fila = (int)x.FILA,
+                    totalPaginas = (int)x.TOTALPAGINAS,
+                    pagina = (int)x.PAGINA,
+                    registros = (int)x.REGISTROS,
+                    totalRegistros = (int)x.TOTALREGISTROS
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<CampanaBE> filtroAvanzadoCampanaSubSector(CampanaBE empresa, OracleConnection db)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_BUSQ_AVANZ_SUBSECTOR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdSubSector", empresa.idSubSector);
+                p.Add("piDenominacion", empresa.denominacion);
+                p.Add("piRuc", empresa.listaCampanaEmpresa[0].empresaIndustria.ruc);
+                p.Add("piNombreEmpresa", empresa.listaCampanaEmpresa[0].empresaIndustria.nombreEmpresa);
+                p.Add("piFechaInicio", empresa.fechaInicio);
+                p.Add("piFechaFin", empresa.fechaFin);
+                p.Add("piRegistros", empresa.registros);
+                p.Add("piPagina", empresa.pagina);
+                p.Add("piColumna", empresa.columna);
+                p.Add("piOrden", empresa.orden);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new CampanaBE
+                {
+                    idCampana = (int)x.IDCAMPANA,
+                    denominacion = (string)x.DENOMINACION,
+                    fechaCreacion = (DateTime)x.FECHACREACION,
+                    subSector = new SubSectorBE { subSector = x.SUBSECTOR == null ? "" : (string)x.SUBSECTOR },
+                    etapa = new EtapaBE { etapa = x.ETAPA == null ? "" : (string)x.ETAPA },
+                    idEstado = (string)x.IDESTADO,
+                    fila = (int)x.FILA,
+                    totalPaginas = (int)x.TOTALPAGINAS,
+                    pagina = (int)x.PAGINA,
+                    registros = (int)x.REGISTROS,
+                    totalRegistros = (int)x.TOTALREGISTROS
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

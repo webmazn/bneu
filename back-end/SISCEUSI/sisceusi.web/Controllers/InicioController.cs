@@ -215,5 +215,89 @@ namespace sisceusi.web.Controllers
             return jsonResult;
         }
 
+        public ActionResult Reporte(int id)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaBE> lista = logica.filtroGeneralCampanaSubSector(new CampanaBE
+            {
+                idSubSector = id,
+                buscar = "",
+                registros = 10,
+                pagina = 1,
+                columna = "cam_idCampana",
+                orden = "ASC"
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            ViewData["listaCampana"] = response;
+            ViewData["idSubSector"] = id;
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult filtroGeneralCampanaSubSector(int idSubSector, string buscar, int registros, int pagina, string columna, string orden)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaBE> lista = logica.filtroGeneralCampanaSubSector(new CampanaBE
+            {
+                idSubSector = idSubSector,
+                buscar = buscar,
+                registros = registros,
+                pagina = pagina,
+                columna = columna,
+                orden = orden
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult filtroAvanzadoCampanaSubSector(int idSubSector, string denominacion, string ruc, string empresa, DateTime? fechaInicio, DateTime? fechaFin, int registros, int pagina, string columna, string orden)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaEmpresaBE> listaCampanaEmpresa = new List<CampanaEmpresaBE>();
+            listaCampanaEmpresa.Add(new CampanaEmpresaBE
+            {
+                empresaIndustria = new EmpresaIndustriaBE
+                {
+                    ruc = ruc,
+                    nombreEmpresa = empresa
+                }
+            });
+            List<CampanaBE> lista = logica.filtroAvanzadoCampanaSubSector(new CampanaBE
+            {
+                idSubSector = idSubSector,
+                denominacion = denominacion,
+                listaCampanaEmpresa = listaCampanaEmpresa,
+                fechaInicio = fechaInicio,
+                fechaFin = fechaFin,
+                registros = registros,
+                pagina = pagina,
+                columna = columna,
+                orden = orden
+            });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        public ActionResult Estadistica(int id, int idTwo)
+        {
+            ReporteLN logica = new ReporteLN();
+            List<ControlEncuestaBE> listaControlEncuesta = logica.obtenerListaControlEncuesta(new CampanaBE { idCampana = id });
+            ViewData["listaControlEncuesta"] = listaControlEncuesta;
+            ViewData["idCampana"] = id;
+            ViewData["idSubSector"] = idTwo;
+            return View();
+        }
+
     }
 }

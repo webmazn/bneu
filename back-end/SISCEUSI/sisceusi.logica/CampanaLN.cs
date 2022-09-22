@@ -265,5 +265,29 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return seCopio;
         }
+
+        public List<CampanaBE> filtroGeneralCampanaSubSector(CampanaBE campana)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.filtroGeneralCampanaSubSector(campana, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<CampanaBE> filtroAvanzadoCampanaSubSector(CampanaBE campana)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.filtroAvanzadoCampanaSubSector(campana, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }
