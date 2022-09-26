@@ -2,6 +2,7 @@
 var arrProvincia = []
 var arrDistrito = []
 var arrListaPlanta = []
+var arrListaIndicador = []
 $(document).ready(() => {
     $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
@@ -12,6 +13,7 @@ $(document).ready(() => {
 
 var cargarDatos = () => {
     arrListaPlanta = listaControlEncuesta
+    arrListaIndicador = listaIndicador
     arrDepartamento = listaControlEncuesta.map(x => x.plantaEmpresa.departamento)
     arrDepartamento = [
     ...new Map(arrDepartamento.map((item) =>[item["idDepartamento"], item])).values(),
@@ -25,6 +27,7 @@ var cargarDatos = () => {
     ...new Map(arrDistrito.map((item) =>[item["idDistrito"], item])).values(),
     ]
     cargarDepartamento(arrDepartamento)
+    cargarIndicadores()
 }
 
 var cargarDepartamento = (data) => {
@@ -75,6 +78,40 @@ var cambiarDistrito = () => {
     }
     google.charts.setOnLoadCallback(drawMap)
 }
+
+var cargarIndicadores = () => {
+    let options = arrListaIndicador.length == 0 ? '' : arrListaIndicador.map(x => {
+        return `<tr>` +
+                    `<td data-encabezado="INDICADORES" scope="row">` +
+                        `<i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i>${x.nombreIndicador}` +
+                    `</td>` +
+                    `<td class ="text-center" data-encabezado="Seleccionar">` +
+                        `<div class ="form-check form-check-inline">` +
+                            `<input class="form-check-input" id="ind-${x.idIndicador}" type="radio" name="radio-tabla">` +
+                        `</div>` +
+                    `</td>` +
+                `</tr>`
+    }).join('');
+    $('#tbl-indicador').find('tbody').html(options);
+}
+
+$(document).on('click', '[name="radio-tabla"]', (e) => {
+    let id = $(e.currentTarget)[0].id.split('-')[1]
+    let indicador = arrListaIndicador.find(x => x.idIndicador == id)
+    if (indicador.idMetodoCalculo == 1) { //suma
+        if (indicador.idTipoControl == 5) {
+            //let total = indicador.indicadorTablaMaestra.sum(x => x.valor)
+            initialValue = 0
+            let total = indicador.indicadorTablaMaestra.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+            alert(total)
+        }
+        
+    } else if (indicador.idMetodoCalculo == 2) { //conteo
+
+    } else if (indicador.idMetodoCalculo == 3) { //acumulado
+
+    }
+})
 
 var drawMap = () => {
 

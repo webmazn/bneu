@@ -24,5 +24,6 @@ namespace sisceusi.entidad
         public EncuestaComentarioBE encuestaComentario { get; set; }
         public List<EncabezadoSecundarioBE> listaEncabezadoSecundario { get; set; }
         public List<RespuestaEncuestaPlantaBE> listaRespuestaEncuestaPlanta { get; set; }
+        public TablaMaestraBE tablaMaestra { get; set; }
     }
 }

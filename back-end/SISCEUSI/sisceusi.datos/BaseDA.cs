@@ -41,6 +41,7 @@ namespace sisceusi.Datos
                     Encuesta = $"{esquema}.PKG_SISCEUSI_ENCUESTA.",
                     PaginaHome = $"{esquema}.PKG_SISCEUSI_PAGINA_HOME.",
                     Reporte = $"{esquema}.PKG_SISCEUSI_REPORTE.",
+                    Indicador = $"{esquema}.PKG_SISCEUSI_INDICADOR.",
                 };
             }
         }

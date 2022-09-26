@@ -18,6 +18,7 @@ CREATE SEQUENCE SISCEUSI.SQ_GENM_BANNER MINVALUE 1 MAXVALUE 99999999999999999999
 CREATE SEQUENCE SISCEUSI.SQ_GENM_PUBLICACION MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_ENLACE MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SISCEUSI.SQ_GENM_LOGO_RED_SOCIAL MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE SISCEUSI.SQ_GENM_INDICADOR MINVALUE 1 MAXVALUE 9999999999999999999999999999 START WITH 1 INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE SISCEUSI.T_MAE_ROL(
@@ -213,6 +214,19 @@ idUsuarioModificacion number,
 fechaModificacion date,
 ipModificacion varchar2(50),
 CONSTRAINT sub_sector_pk PRIMARY KEY(idSubSector)
+);
+
+CREATE TABLE SISCEUSI.T_MAE_METODO_CALCULO(
+idMetodoCalculo NUMBER,
+metodoCalculo VARCHAR2(200),
+idEstado VARCHAR2(1) DEFAULT '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+CONSTRAINT metodo_calculo_pk PRIMARY KEY(idMetodoCalculo)
 );
 
 CREATE TABLE SISCEUSI.T_GENM_INTENCION_PARTICIPAR(
@@ -629,6 +643,25 @@ fechaModificacion date,
 ipModificacion varchar2(50),
 constraint logo_red_social_pk primary key (idLogoRedSocial)
 );
+
+CREATE TABLE SISCEUSI.T_GENM_INDICADOR(
+idIndicador NUMBER,
+nombreIndicador VARCHAR2(200),
+idCampana NUMBER,
+idCampanaEncuesta NUMBER,
+idEncabezadoPrincipal NUMBER,
+idEncabezadoSecundario NUMBER,
+idMetodoCalculo NUMBER,
+idTipoControl NUMBER,
+idEstado varchar2(1) default '1',
+idUsuarioCreacion number,
+fechaCreacion date default sysdate,
+ipCreacion varchar2(50),
+idUsuarioModificacion number,
+fechaModificacion date,
+ipModificacion varchar2(50),
+constraint indicador_pk primary key (idIndicador)
+);
 ------------------------------------------------------------------------------------------------------------------------------
 --T_MAE_GIRO
 INSERT INTO SISCEUSI.T_MAE_GIRO (idGiro, giro, idEstado) VALUES (1, 'Giro 1', '1');
@@ -690,7 +723,12 @@ INSERT INTO SISCEUSI.T_MAE_SUBSECTOR (idSubSector, subSector, idEstado) VALUES (
 INSERT INTO SISCEUSI.T_MAE_SUBSECTOR (idSubSector, subSector, idEstado) VALUES (2, 'Industria Pesquera', '1');
 INSERT INTO SISCEUSI.T_MAE_SUBSECTOR (idSubSector, subSector, idEstado) VALUES (3, 'Manufactura', '1');
 INSERT INTO SISCEUSI.T_MAE_SUBSECTOR (idSubSector, subSector, idEstado) VALUES (4, 'Industria', '1');
---
+
+--T_MAE_METODO_CALCULO
+INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (1, 'Suma', '1');
+INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (2, 'Conteo', '1');
+INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (3, 'Acumulado', '1');
+
 INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
 VALUES (1, 1, 1, 1, '20999999999', 'Ministerio de Energías y Minas', 'minem@gmail.com', 'Av Javier Prado 2563', 'Jhon Matos Guerra', '78958749', '959365203', '1');
 INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
@@ -3398,6 +3436,7 @@ DROP TABLE SISCEUSI.T_GEND_ENCABEZADO_PRINCIPAL;
 DROP TABLE SISCEUSI.T_GENM_TABLA_MAESTRA;
 
 DROP TABLE SISCEUSI.T_GENM_PARAMETRO;
+DROP TABLE SISCEUSI.T_GENM_INDICADOR;
 
 ------------------------------------------------------------------------------------------------------------------------------
 SELECT * FROM T_GENM_USUARIO;

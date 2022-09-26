@@ -64,10 +64,13 @@
     <Compile Include="FaseBE.cs" />
     <Compile Include="GiroBE.cs" />
     <Compile Include="GrupoEmpresaBE.cs" />
+    <Compile Include="IndicadorBE.cs" />
+    <Compile Include="IndicadorEncabezadoSecundarioBE.cs" />
     <Compile Include="IntencionParticiparBE.cs" />
     <Compile Include="InternoBE.cs" />
     <Compile Include="LoginBE.cs" />
     <Compile Include="LogoRedSocialBE.cs" />
+    <Compile Include="MetodoCalculoBE.cs" />
     <Compile Include="ParametroBE.cs" />
     <Compile Include="PlantaEmpresaBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

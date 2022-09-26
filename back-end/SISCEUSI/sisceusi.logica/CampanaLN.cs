@@ -289,5 +289,28 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public List<CampanaEncuestaBE> obtenerListaPreguntas(CampanaBE campana)
+        {
+            List<CampanaEncuestaBE> lista = new List<CampanaEncuestaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerCampanaEncuesta(new CampanaEncuestaBE { idCampana = campana.idCampana }, cn);
+                if (lista != null)
+                {
+                    lista.ForEach(x =>
+                    {
+                        if (x.idParametroTabla > 0)
+                        {
+                            ControlEncuestaDA datosControl = new ControlEncuestaDA();
+                            x.listaEncabezadoSecundario = datosControl.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = x.idParametroTabla }, cn);
+                        }                        
+                    });
+                }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

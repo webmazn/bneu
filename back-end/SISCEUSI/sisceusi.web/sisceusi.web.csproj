@@ -182,6 +182,8 @@
     <Content Include="Scripts\Sisceusi\encuesta_inicio.js" />
     <Content Include="Scripts\Sisceusi\encuesta_preguntaEncuesta.js" />
     <Content Include="Scripts\Sisceusi\encuesta_revisar.js" />
+    <Content Include="Scripts\Sisceusi\indicador_index.js" />
+    <Content Include="Scripts\Sisceusi\indicador_nuevo_indicador.js" />
     <Content Include="Scripts\Sisceusi\inicio_contacto.js" />
     <Content Include="Scripts\Sisceusi\inicio_contacto_bot.js" />
     <Content Include="Scripts\Sisceusi\inicio_contrasena_nuevo.js" />
@@ -255,6 +257,8 @@
     <Content Include="Views\Inicio\ContrasenaNuevo.cshtml" />
     <Content Include="Views\Inicio\Reporte.cshtml" />
     <Content Include="Views\Inicio\Estadistica.cshtml" />
+    <Content Include="Views\Indicador\Index.cshtml" />
+    <Content Include="Views\Indicador\NuevoIndicador.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -289,6 +293,7 @@
     <Compile Include="Controllers\EncuestaController.cs" />
     <Compile Include="Controllers\GiroController.cs" />
     <Compile Include="Controllers\GrupoEmpresaController.cs" />
+    <Compile Include="Controllers\IndicadorController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\IntencionParticiparController.cs" />
     <Compile Include="Controllers\InternoController.cs" />

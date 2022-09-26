@@ -57,6 +57,7 @@
     <Compile Include="EncuestaLN.cs" />
     <Compile Include="GiroLN.cs" />
     <Compile Include="GrupoEmpresaLN.cs" />
+    <Compile Include="IndicadorLN.cs" />
     <Compile Include="IntencionParticiparLN.cs" />
     <Compile Include="InternoLN.cs" />
     <Compile Include="LoginLN.cs" />

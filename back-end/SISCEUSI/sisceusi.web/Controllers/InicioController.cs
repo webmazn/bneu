@@ -292,8 +292,11 @@ namespace sisceusi.web.Controllers
         public ActionResult Estadistica(int id, int idTwo)
         {
             ReporteLN logica = new ReporteLN();
+            IndicadorLN logicaIndicador = new IndicadorLN();
             List<ControlEncuestaBE> listaControlEncuesta = logica.obtenerListaControlEncuesta(new CampanaBE { idCampana = id });
+            List<IndicadorBE> listaIndicador = logicaIndicador.obtenerListaIndicador(new IndicadorBE { idCampana = id });
             ViewData["listaControlEncuesta"] = listaControlEncuesta;
+            ViewData["listaIndicador"] = listaIndicador;
             ViewData["idCampana"] = id;
             ViewData["idSubSector"] = idTwo;
             return View();

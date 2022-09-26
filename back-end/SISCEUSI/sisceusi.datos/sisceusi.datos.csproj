@@ -61,6 +61,7 @@
     <Compile Include="EncuestaDA.cs" />
     <Compile Include="GiroDA.cs" />
     <Compile Include="GrupoEmpresaDA.cs" />
+    <Compile Include="IndicadorDA.cs" />
     <Compile Include="IntencionParticiparDA.cs" />
     <Compile Include="InternoDA.cs" />
     <Compile Include="LoginDA.cs" />
