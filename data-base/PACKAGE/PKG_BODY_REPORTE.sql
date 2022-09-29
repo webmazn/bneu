@@ -14,8 +14,9 @@
   BEGIN
     OPEN poRef FOR
     SELECT 
-    cen.idControlEncuesta,
-    pem.idPlantaEmpresa, pem.denominacion planta, pem.latitud, pem.longitud,
+    cen.idControlEncuesta, nvl(cen.numeroCuestionario, 0) numeroCuestionario,
+    pem.idPlantaEmpresa, pem.denominacion planta, pem.latitud, pem.longitud, pem.direccion,
+    emp.nombreEmpresa,
     dep.idDepartamento, dep.departamento, 
     pro.idProvincia, pro.provincia, 
     dis.idDistrito, dis.distrito, zon.zona
@@ -30,7 +31,8 @@
     INNER JOIN T_MAE_DISTRITO dis ON pem.idDistrito = dis.idDistrito
     INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
     
-    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND cen.idEstado = '1';
+    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 1 AND cen.idEstado = '1'
+    ORDER BY cen.idControlEncuesta, cen.numeroCuestionario ASC;
   END USP_SEL_LIST_CONTROL_ENC;
 
 END PKG_SISCEUSI_REPORTE;

@@ -38,16 +38,16 @@ namespace sisceusi.datos
                             idTablaMaestra = x.IDTABLAMAESTRA == null ? 0 : (int)x.IDTABLAMAESTRA,
                             subtitulo = x.SUBTITULO == null ? "" : (string)x.SUBTITULO
                         }
-                    },                    
-                    encabezadoSecundario = new EncabezadoSecundarioBE
+                    },
+                    encSecundarioAgrupacion = new EncabezadoSecundarioBE
                     {
-                        idEncabezadoSecundario = x.IDENCABEZADOSECUNDARIO == null ? 0 : (int)x.IDENCABEZADOSECUNDARIO,
-                        tituloEncabezado = x.TITULOENCABEZADO == null ? "" : (string)x.TITULOENCABEZADO,
-                        encabezadoPrincipal = new EncabezadoPrincipalBE
-                        {
-                            idEncabezadoPrincipal = x.IDENCABEZADOPRINCIPAL == null ? 0 : (int)x.IDENCABEZADOPRINCIPAL,
-                            tituloEncabezado = x.TITULOENCABEZADOPRINCIPAL == null ? "" : (string)x.TITULOENCABEZADOPRINCIPAL,
-                        }
+                        idEncabezadoSecundario = x.IDAGRUPACION == null ? 0 : (int)x.IDAGRUPACION,
+                        tituloEncabezado = x.TITULOAGRUPACION == null ? "" : (string)x.TITULOAGRUPACION,
+                    },
+                    encSecundarioCalculo = new EncabezadoSecundarioBE
+                    {
+                        idEncabezadoSecundario = x.IDCALCULO == null ? 0 : (int)x.IDCALCULO,
+                        tituloEncabezado = x.TITULOCALCULO == null ? "" : (string)x.TITULOCALCULO,
                     },
                     metodoCalculo = new MetodoCalculoBE
                     {
@@ -77,8 +77,8 @@ namespace sisceusi.datos
                 p.Add("piNombreIndicador", entidad.nombreIndicador);
                 p.Add("piIdCampana", entidad.idCampana);
                 p.Add("piIdCampanaEncuesta", entidad.idCampanaEncuesta);
-                p.Add("piIdEncabezadoPrincipal", entidad.idEncabezadoPrincipal);
-                p.Add("piIdEncabezadoSecundario", entidad.idEncabezadoSecundario);
+                p.Add("piIdEncSecundarioAgrupacion", entidad.idEncSecundarioAgrupacion);
+                p.Add("piIdEncSecundarioCalculo", entidad.idEncSecundarioCalculo);
                 p.Add("piIdMetodoCalculo", entidad.idMetodoCalculo);
                 p.Add("piIdTipoControl", entidad.idTipoControl);
                 //p.Add("piIdEstado", entidad.idEstado);
@@ -140,16 +140,15 @@ namespace sisceusi.datos
             return lista;
         }
 
-        public List<IndicadorEncabezadoSecundarioBE> obtenerListaIndicadorEncabezadoSecundario(IndicadorBE entidad, OracleConnection db)
+        public List<IndicadorEncabezadoSecundarioBE> obtenerListaIndicadorEncSecAgrupacion(IndicadorBE entidad, OracleConnection db)
         {
             List<IndicadorEncabezadoSecundarioBE> lista = new List<IndicadorEncabezadoSecundarioBE>();
             try
             {
-                decimal number = 0;
                 string sp = $"{Package.Indicador}USP_SEL_INDICADOR_ENC_SECUN";
                 var p = new OracleDynamicParameters();
                 p.Add("piIdCampana", entidad.idCampana);
-                p.Add("piIdEncabezadoSecundario", entidad.idEncabezadoSecundario);
+                p.Add("piIdEncabezadoSecundario", entidad.idEncSecundarioAgrupacion);
                 p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new IndicadorEncabezadoSecundarioBE
                 {
@@ -161,7 +160,50 @@ namespace sisceusi.datos
                     controlEncuesta = new ControlEncuestaBE
                     {
                         idControlEncuesta = x.IDCONTROLENCUESTA == null ? 0 : (int)x.IDCONTROLENCUESTA,
+                        plantaEmpresa = new PlantaEmpresaBE
+                        {
+                            idDepartamento = x.IDDEPARTAMENTO == null ? "0" : (string)x.IDDEPARTAMENTO,
+                            idProvincia = x.IDPROVINCIA == null ? "0" : (string)x.IDPROVINCIA,
+                            idDistrito = x.IDDISTRITO == null ? "0" : (string)x.IDDISTRITO
+                        }
                     },
+                    filaTabla = x.FILATABLA == null ? 0 : (int)x.FILATABLA,
+                    etiqueta = x.IDPARAMETRO == 0 ? x.RESPUESTA == null ? "" : x.RESPUESTA : x.PARAMETRO == null ? "" : (string)x.PARAMETRO
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<IndicadorEncabezadoSecundarioBE> obtenerListaIndicadorEncSecCalculo(IndicadorBE entidad, OracleConnection db)
+        {
+            List<IndicadorEncabezadoSecundarioBE> lista = new List<IndicadorEncabezadoSecundarioBE>();
+            try
+            {
+                decimal number = 0;
+                string sp = $"{Package.Indicador}USP_SEL_INDICADOR_ENC_SECUN";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampana", entidad.idCampana);
+                p.Add("piIdEncabezadoSecundario", entidad.idEncSecundarioCalculo);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new IndicadorEncabezadoSecundarioBE
+                {
+                    campanaEmpresa = new CampanaEmpresaBE
+                    {
+                        idCampana = x.IDCAMPANA == null ? 0 : (int)x.IDCAMPANA,
+                        idEmpresaIndustria = x.IDEMPRESAINDUSTRIA == null ? 0 : (int)x.IDEMPRESAINDUSTRIA,
+                    },
+                    controlEncuesta = new ControlEncuestaBE
+                    {
+                        idControlEncuesta = x.IDCONTROLENCUESTA == null ? 0 : (int)x.IDCONTROLENCUESTA,
+                        plantaEmpresa = new PlantaEmpresaBE
+                        {
+                            idDepartamento = x.IDDEPARTAMENTO == null ? "0" : (string)x.IDDEPARTAMENTO,
+                            idProvincia = x.IDPROVINCIA == null ? "0" : (string)x.IDPROVINCIA,
+                            idDistrito = x.IDDISTRITO == null ? "0" : (string)x.IDDISTRITO
+                        }
+                    },
+                    filaTabla = x.FILATABLA == null ? 0 : (int)x.FILATABLA,
                     valor = x.RESPUESTA == null ? 0 : x.RESPUESTA == "" ? 0 : Decimal.TryParse(x.RESPUESTA, out number) ? number : 0
                 }).ToList();
             }

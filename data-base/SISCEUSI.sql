@@ -649,8 +649,8 @@ idIndicador NUMBER,
 nombreIndicador VARCHAR2(200),
 idCampana NUMBER,
 idCampanaEncuesta NUMBER,
-idEncabezadoPrincipal NUMBER,
-idEncabezadoSecundario NUMBER,
+idEncSecundarioAgrupacion NUMBER,
+idEncSecundarioCalculo NUMBER,
 idMetodoCalculo NUMBER,
 idTipoControl NUMBER,
 idEstado varchar2(1) default '1',
@@ -727,7 +727,9 @@ INSERT INTO SISCEUSI.T_MAE_SUBSECTOR (idSubSector, subSector, idEstado) VALUES (
 --T_MAE_METODO_CALCULO
 INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (1, 'Suma', '1');
 INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (2, 'Conteo', '1');
-INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (3, 'Acumulado', '1');
+INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (3, 'Máximo', '1');
+INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (4, 'Mínimo', '1');
+INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (5, 'Promedio', '1');
 
 INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
 VALUES (1, 1, 1, 1, '20999999999', 'Ministerio de Energías y Minas', 'minem@gmail.com', 'Av Javier Prado 2563', 'Jhon Matos Guerra', '78958749', '959365203', '1');

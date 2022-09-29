@@ -7,6 +7,8 @@ $(document).ready(() => {
     $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
     $('#cbo-distrito').on('change', (e) => cambiarDistrito())
+    $('.ir-pagina').on('change', (e) => cargarTablaPlanta());
+    $('#number-registers').on('change', (e) => cargarTablaPlanta());
     cargarDatos()
     google.charts.setOnLoadCallback(drawMap)
 });
@@ -28,6 +30,7 @@ var cargarDatos = () => {
     ]
     cargarDepartamento(arrDepartamento)
     cargarIndicadores()
+    cargarTablaPlanta()
 }
 
 var cargarDepartamento = (data) => {
@@ -39,8 +42,11 @@ var cargarDepartamento = (data) => {
 var departamento
 var cambiarDepartamento = () => {
     departamento = $('#cbo-departamento').val()
+    provincia = "0"
+    distrito = "0"
     $('#cbo-distrito').html(`<option value="0">-Seleccione un distrito-</option>`);
     if (validarCombo(departamento)) {
+        departamento = "0"        
         $('#cbo-provincia').html(`<option value="0">-Seleccione una provincia-</option>`)
         arrListaPlanta = listaControlEncuesta
     } else {
@@ -51,12 +57,17 @@ var cambiarDepartamento = () => {
         arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
     }
     google.charts.setOnLoadCallback(drawMap)
+    armarIndicador(indicador)
+    cargarTablaPlanta()
+    //google.charts.setOnLoadCallback(drawPieChart);
 }
 
 var provincia
 var cambiarProvincia = () => {
+    distrito = "0"
     provincia = $('#cbo-provincia').val()
     if (validarCombo(provincia)) {
+        provincia = "0"        
         $('#cbo-distrito').html(`<option value="0">-Seleccione un distrito-</option>`);
         arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
     } else {
@@ -67,16 +78,22 @@ var cambiarProvincia = () => {
         arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
     }
     google.charts.setOnLoadCallback(drawMap)
+    armarIndicador(indicador)
+    cargarTablaPlanta()
 }
 
+var distrito
 var cambiarDistrito = () => {
-    let distrito = $('#cbo-distrito').val()
-    if (validarCombo(provincia)) {
+    distrito = $('#cbo-distrito').val()
+    if (validarCombo(distrito)) {
+        distrito = "0"
         arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
     } else {
         arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia && x.plantaEmpresa.distrito.idDistrito === distrito)
     }
     google.charts.setOnLoadCallback(drawMap)
+    armarIndicador(indicador)
+    cargarTablaPlanta()
 }
 
 var cargarIndicadores = () => {
@@ -93,25 +110,257 @@ var cargarIndicadores = () => {
                 `</tr>`
     }).join('');
     $('#tbl-indicador').find('tbody').html(options);
+    if (arrListaIndicador.length < 10) $('#seccion-indicadores').attr('style', 'height: 500px;')
 }
 
+var indicador = null
 $(document).on('click', '[name="radio-tabla"]', (e) => {
     let id = $(e.currentTarget)[0].id.split('-')[1]
-    let indicador = arrListaIndicador.find(x => x.idIndicador == id)
+    indicador = arrListaIndicador.find(x => x.idIndicador == id)
+    armarIndicador(indicador)
+})
+
+var armarIndicador = (indicador) => {
+    if (indicador == null) return
+
+    //let arrIndicadorAgrupacion = indicador.indicadorAgrupacion
+    //let arrIndicadorCalculo = indicador.indicadorCalculo
+    //if (distrito && distrito != '0') {
+    //    arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+    //    arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+    //} else if (provincia && provincia != '0') {
+    //    arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+    //    arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+    //} else if (departamento && departamento != '0') {
+    //    arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+    //    arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+    //}
+
     if (indicador.idMetodoCalculo == 1) { //suma
         if (indicador.idTipoControl == 5) {
             //let total = indicador.indicadorTablaMaestra.sum(x => x.valor)
-            initialValue = 0
-            let total = indicador.indicadorTablaMaestra.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
-            alert(total)
-        }
-        
-    } else if (indicador.idMetodoCalculo == 2) { //conteo
+            //initialValue = 0
+            //let total = indicador.indicadorCalculo.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
 
-    } else if (indicador.idMetodoCalculo == 3) { //acumulado
+            let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
+            let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
+
+            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+                return {
+                    "etiqueta": x.etiqueta,
+                    "filaTabla": x.filaTabla
+                }
+            })
+
+            initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let totalEtiqueta = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                let arr = [e.etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            })
+            //console.log(arrReporte)
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+            //alert(total)
+        } else {
+
+        }
+    } else if (indicador.idMetodoCalculo == 2) { //conteo
+        if (indicador.idTipoControl == 5) {
+            let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
+            let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
+
+            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+                return {
+                    "etiqueta": x.etiqueta,
+                    "filaTabla": x.filaTabla
+                }
+            })
+
+            initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let totalEtiqueta = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).length
+                let arr = [e.etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            })
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+        } else {
+
+        }
+    } else if (indicador.idMetodoCalculo == 3) { //Maximo
+        if (indicador.idTipoControl == 5) {
+            let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
+            let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
+
+            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+                return {
+                    "etiqueta": x.etiqueta,
+                    "filaTabla": x.filaTabla
+                }
+            })
+
+            initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let totalEtiqueta = Math.max(arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).map(x => x.valor))
+                let arr = [e.etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            })
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+        } else {
+
+        }
+    } else if (indicador.idMetodoCalculo == 4) { //Minimo
+        if (indicador.idTipoControl == 5) {
+            let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
+            let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
+
+            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+                return {
+                    "etiqueta": x.etiqueta,
+                    "filaTabla": x.filaTabla
+                }
+            })
+
+            initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let totalEtiqueta = Math.min(arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).map(x => x.valor))
+                let arr = [e.etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            })
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+        } else {
+
+        }
+    } else if (indicador.idMetodoCalculo == 5) { //Promedio
 
     }
-})
+}
+
+var validarAgrupacion = (arrIndicadorAgrupacion) => {
+    if (distrito && distrito != '0') {
+        arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+    } else if (provincia && provincia != '0') {
+        arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+    } else if (departamento && departamento != '0') {
+        arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+    }
+    return arrIndicadorAgrupacion
+}
+
+var validarCalculo = (arrIndicadorCalculo) => {
+    if (distrito && distrito != '0') {
+        arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+    } else if (provincia && provincia != '0') {
+        arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+    } else if (departamento && departamento != '0') {
+        arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+    }
+    return arrIndicadorCalculo
+}
+
+var cambiarPagina = (boton) => {
+    var total = 0, page = 0;
+    page = Number($(".ir-pagina").val());
+    total = Number($(".total-paginas").text());
+
+    if (boton == 1) page = 1;
+    if (boton == 2) if (page > 1) page--;
+    if (boton == 3) if (page < total) page++;
+    if (boton == 4) page = total;
+
+    $(".ir-pagina").val(page);
+    cargarTablaPlanta()
+}
+
+var cargarTablaPlanta = () => {
+    let registroMostrar = $('#number-registers').val()
+    let paginaActual = $(".ir-pagina").val()    
+
+    let totalReg = arrListaPlanta.length
+    let totalPag = Math.ceil(totalReg / registroMostrar)
+
+    if (paginaActual <= 0) paginaActual = 1
+    if (paginaActual > totalPag) paginaActual = totalPag
+
+    let arrPlantaFiltro = []
+    for (let i = (paginaActual - 1) * registroMostrar; i < (paginaActual * registroMostrar) ; i++) {
+        if (arrListaPlanta[i] != undefined) arrPlantaFiltro.push(arrListaPlanta[i])        
+        //listing_table.innerHTML += obj[i].number + "<br>";
+    }
+
+    let rs = {
+        registros: registroMostrar,
+        pagina: paginaActual,
+        totalRegistros: totalReg,
+        totalPaginas: totalPag
+    }
+    cargarDatosTabla(rs, arrPlantaFiltro)
+}
+
+var cargarDatosTabla = (rs, arrPlantaFiltro) => {
+    let tabla = $('#tbl-planta');
+    tabla.find('tbody').html('');
+    $('#viewPagination').attr('style', 'display: none !important');
+    if (arrPlantaFiltro.length > 0) {
+        if (rs.totalRegistros == 0) { $('#viewPagination').hide(); $('#view-page-result').hide(); }
+        else { $('#view-page-result').show(); $('#viewPagination').show(); }
+        $('.inicio-registros').text(rs.registros == 0 ? 'No se encontraron resultados' : (rs.pagina - 1) * rs.registros + 1);
+        $('.fin-registros').text(rs.totalRegistros < rs.pagina * rs.registros ? rs.totalRegistros : rs.pagina * rs.registros);
+        $('.total-registros').text(rs.totalRegistros);
+        $('.pagina').text(rs.pagina);
+        $('.ir-pagina').val(rs.pagina);
+        $('.ir-pagina').attr('max', rs.totalPaginas);
+        $('.total-paginas').text(rs.totalPaginas);
+
+        let numberCellHeader = tabla.find('thead tr th').length;
+        let content = renderizar(arrPlantaFiltro, numberCellHeader, rs.pagina, rs.registros);
+        tabla.find('tbody').html(content);
+
+        tabla.find('.btn-descarga').each(x => {
+            let elementButton = tabla.find('.btn-descarga')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                descargar(e.currentTarget);
+            });
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+    } else {
+        console.log('No hay resultados');
+        $('#viewPagination').hide(); $('#view-page-result').hide();
+        $('.inicio-registros').text('No se encontraron resultados');
+    }
+}
+
+var renderizar = (data, numberCellHeader, pagina, registros) => {
+    let doRenderizar = data.length > 0;
+    let content = `<tr><th colspan='${numberCellHeader}'>No existe información</th></tr>`;
+
+    if (doRenderizar) {
+        content = data.map((x, i) => {
+            let colCodigo = `<td class="text-center" data-encabezado="Código">CUE${pad(x.numeroCuestionario, 4)}</td>`;
+            let colEmpresa = `<td data-encabezado="Empresa">${x.plantaEmpresa.empresa.nombreEmpresa}</td>`;
+            let colPlanta = `<td data-encabezado="Planta"><span>${x.plantaEmpresa.denominacion}</span></td>`
+            let colDepartamento = `<td data-encabezado="Departamento">${x.plantaEmpresa.departamento.departamento}</td>`;
+            let colProvincia = `<td data-encabezado="Departamento">${x.plantaEmpresa.provincia.provincia}</td>`;
+            let colDistrito = `<td data-encabezado="Departamento">${x.plantaEmpresa.distrito.distrito}</td>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-descarga" data-id="${x.idControlEncuesta}"><i class="fa fa-edit"></i></div>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEditar}</td>`;
+            let row = `<tr>${colCodigo}${colEmpresa}${colPlanta}${colDepartamento}${colProvincia}${colDistrito}${colOptions}</tr>`;
+            return row;
+        }).join('');
+    };
+    return content;
+};
 
 var drawMap = () => {
 
@@ -171,3 +420,25 @@ var drawMap = () => {
     var map = new google.visualization.Map(document.getElementById('chart_div'));
     map.draw(data, options);
 };
+
+var drawPieChart = (arr) => {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Nombre');
+    data.addColumn('number', 'Valor');
+    //data.addRows([
+    //  ['Valor 01', 3],
+    //  ['Valor 02', 1],
+    //  ['Valor 03', 2],
+    //  ['Valor 04', 1]
+    //]);
+    data.addRows(arr)
+    var options = {
+        // title:'TOTAL ENERGÍA COMPRADA',
+        backgroundColor: '#f8f9fa',
+        legend: { position: 'bottom' },
+        // 'width':400,
+        // 'height':300
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+    chart.draw(data, options);
+}

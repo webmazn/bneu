@@ -22,8 +22,8 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_INDICADOR ind
-                    LEFT JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ind.idEncabezadoPrincipal = enp.idEncabezadoPrincipal AND enp.idEstado = ''1''
-                    LEFT JOIN T_GEND_ENCABEZADO_SECUNDARIO ens ON ind.idEncabezadoSecundario = ens.idEncabezadoSecundario AND ens.idEstado = ''1''
+                    LEFT JOIN T_GEND_ENCABEZADO_SECUNDARIO esa ON ind.idEncSecundarioAgrupacion = esa.idEncabezadoSecundario AND esa.idEstado = ''1''
+                    LEFT JOIN T_GEND_ENCABEZADO_SECUNDARIO esc ON ind.idEncSecundarioCalculo = esc.idEncabezadoSecundario AND esc.idEstado = ''1''
                     INNER JOIN T_MAE_METODO_CALCULO met ON ind.idMetodoCalculo = met.idMetodoCalculo
                     INNER JOIN T_GENM_CAMPANA_ENCUESTA cae ON ind.idCampanaEncuesta = cae.idCampanaEncuesta AND cae.idEstado = ''1''
                     LEFT JOIN T_GENM_TABLA_MAESTRA tma ON cae.idParametroTabla = tma.idTablaMaestra AND tma.idEstado = ''1''
@@ -47,10 +47,10 @@
                                 ind.nombreIndicador,
                                 ind.idCampanaEncuesta,
                                 cae.pregunta,
-                                ens.idEncabezadoSecundario,
-                                ens.tituloEncabezado,
-                                enp.idEncabezadoPrincipal,
-                                enp.tituloEncabezado tituloEncabezadoPrincipal,
+                                esa.idEncabezadoSecundario idAgrupacion,
+                                esa.tituloEncabezado tituloAgrupacion,
+                                esc.idEncabezadoSecundario idCalculo,
+                                esc.tituloEncabezado tituloCalculo,
                                 met.idMetodoCalculo,
                                 met.metodoCalculo,
                                 tma.idTablaMaestra,
@@ -61,8 +61,8 @@
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_INDICADOR ind
-                        LEFT JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ind.idEncabezadoPrincipal = enp.idEncabezadoPrincipal AND enp.idEstado = ''1''
-                        LEFT JOIN T_GEND_ENCABEZADO_SECUNDARIO ens ON ind.idEncabezadoSecundario = ens.idEncabezadoSecundario AND ens.idEstado = ''1''
+                        LEFT JOIN T_GEND_ENCABEZADO_SECUNDARIO esa ON ind.idEncSecundarioAgrupacion = esa.idEncabezadoSecundario AND esa.idEstado = ''1''
+                        LEFT JOIN T_GEND_ENCABEZADO_SECUNDARIO esc ON ind.idEncSecundarioCalculo = esc.idEncabezadoSecundario AND esc.idEstado = ''1''
                         INNER JOIN T_MAE_METODO_CALCULO met ON ind.idMetodoCalculo = met.idMetodoCalculo
                         INNER JOIN T_GENM_CAMPANA_ENCUESTA cae ON ind.idCampanaEncuesta = cae.idCampanaEncuesta AND cae.idEstado = ''1''
                         LEFT JOIN T_GENM_TABLA_MAESTRA tma ON cae.idParametroTabla = tma.idTablaMaestra AND tma.idEstado = ''1''
@@ -79,8 +79,8 @@
     piNombreIndicador VARCHAR2,
     piIdCampana NUMBER,
     piIdCampanaEncuesta NUMBER,
-    piIdEncabezadoPrincipal NUMBER,
-    piIdEncabezadoSecundario NUMBER,
+    piIdEncSecundarioAgrupacion NUMBER,
+    piIdEncSecundarioCalculo NUMBER,
     piIdMetodoCalculo NUMBER,
     piIdTipoControl NUMBER,
     --piIdEstado NUMBER,
@@ -93,16 +93,16 @@
     IF piIdIndicador = -1 THEN
       vId := SQ_GENM_INDICADOR.NEXTVAL();
       INSERT INTO T_GENM_INDICADOR
-      (idIndicador, nombreIndicador, idCampana, idCampanaEncuesta, idEncabezadoPrincipal, idEncabezadoSecundario, idMetodoCalculo, idTipoControl, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idIndicador, nombreIndicador, idCampana, idCampanaEncuesta, idEncSecundarioAgrupacion, idEncSecundarioCalculo, idMetodoCalculo, idTipoControl, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (vId, piNombreIndicador, piIdCampana, piIdCampanaEncuesta, piIdEncabezadoPrincipal, piIdEncabezadoSecundario, piIdMetodoCalculo, piIdTipoControl, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (vId, piNombreIndicador, piIdCampana, piIdCampanaEncuesta, piIdEncSecundarioAgrupacion, piIdEncSecundarioCalculo, piIdMetodoCalculo, piIdTipoControl, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       UPDATE T_GENM_INDICADOR SET
       nombreIndicador = piNombreIndicador,
       idCampana = piIdCampana,
       idCampanaEncuesta = piIdCampanaEncuesta,
-      idEncabezadoPrincipal = piIdEncabezadoPrincipal,
-      idEncabezadoSecundario = piIdEncabezadoSecundario,
+      idEncSecundarioAgrupacion = piIdEncSecundarioAgrupacion,
+      idEncSecundarioCalculo = piIdEncSecundarioCalculo,
       idMetodoCalculo = piIdMetodoCalculo,
       idTipoControl = piIdTipoControl,
       --idEstado = piIdEstado,
@@ -159,10 +159,18 @@
     cem.idEmpresaIndustria,
     cen.idControlEncuesta,
     cen.idPlantaEmpresa,
+    pem.iddepartamento,
+    pem.idprovincia,
+    pem.iddistrito,
+    ret.idParametro,
+    par.parametro,
+    ret.filaTabla,
     nvl(ret.respuesta, '0') respuesta
     FROM T_GEND_RESP_ENCUESTA_TABLA ret
     INNER JOIN T_GEND_CONTROL_ENCUESTA cen ON ret.idControlEncuesta = cen.idControlEncuesta AND cen.idEstado = '1'
     INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa AND cem.idEstado = '1'
+    INNER JOIN T_GENM_PLANTA_EMPRESA pem ON cen.idplantaempresa = pem.idplantaempresa
+    LEFT JOIN T_GENM_PARAMETRO par ON ret.idParametro = par.idParametro AND par.idEstado = '1'
     WHERE
     ret.idEncabezadoSecundario = piIdEncabezadoSecundario AND cem.idCampana = piIdCampana AND cen.idTipoEncuesta = 1; --cAMBIAR A TIPOENCUESTA 2
   END USP_SEL_INDICADOR_ENC_SECUN;

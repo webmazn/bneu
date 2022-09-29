@@ -4,7 +4,7 @@ var arrEncabezadoSecundario = []
 $(document).ready(() => {
     $('#cbo-estado').val('1')
     $('#cbo-pregunta').on('change', (e) => cambiarPregunta())
-    $('#cbo-columna-principal').on('change', (e) => cambiarEncabezadoPrincipal())
+    //$('#cbo-columna-principal').on('change', (e) => cambiarEncabezadoPrincipal())
     $('#btn-grabar').on('click', (e) => grabar())
     $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     $('#btn-cancelar').on('click', (e) => cancelar())
@@ -26,51 +26,54 @@ var cargarPreguntas = () => {
 var idTipoControl = 0
 var cambiarPregunta = () => {
     $('#cbo-columna-principal').val(0)
-    $('#cbo-columna-secundaria').val(0)    
-    $('#cbo-columna-secundaria').prop('disabled', true)
-    let pregunta = $('#cbo-pregunta').val()    
+    $('#cbo-columna-secundaria').val(0)
+    let pregunta = $('#cbo-pregunta').val()
+    $('#cbo-columna-secundaria').prop('disabled', pregunta == 0)
+    $('#cbo-columna-principal').prop('disabled', pregunta == 0)
     if (pregunta == 0) {
-        idTipoControl = 0
-        $('#cbo-columna-principal').prop('disabled', true)        
+        idTipoControl = 0        
     } else {
         let campanaEncuesta = arrListaPregunta.find(x => x.idCampanaEncuesta == pregunta)
         idTipoControl = campanaEncuesta.idTipoControl
         $('#cbo-columna-principal').prop('disabled', !(campanaEncuesta.idParametroTabla > 0))
         if (campanaEncuesta.idParametroTabla > 0) {
-            arrEncabezadoPrincipal = campanaEncuesta.listaEncabezadoSecundario.map(x => x.encabezadoPrincipal)
+            /*arrEncabezadoPrincipal = campanaEncuesta.listaEncabezadoSecundario.map(x => x.encabezadoPrincipal)
             arrEncabezadoPrincipal = [
                 ...new Map(arrEncabezadoPrincipal.map((item) =>[item["idEncabezadoPrincipal"], item])).values(),
             ]
-            cargarEncabezadoPrincipal()
+            cargarEncabezadoPrincipal()*/
+            arrEncabezadoSecundario = campanaEncuesta.listaEncabezadoSecundario
+            cargarColumas()
         }        
     }
 }
 
-var cargarEncabezadoPrincipal = () => {
-    let options = arrEncabezadoPrincipal.length == 0 ? '' : arrEncabezadoPrincipal.map(x => `<option value="${x.idEncabezadoPrincipal}">${x.tituloEncabezado == '' ? `ENCPRI${pad(x.idEncabezadoPrincipal, 4)}` : x.tituloEncabezado}</option>`).join('');
-    options = `<option value="0">-Seleccione una columna principal-</option>${options}`;
+//var cargarEncabezadoPrincipal = () => {
+//    let options = arrEncabezadoPrincipal.length == 0 ? '' : arrEncabezadoPrincipal.map(x => `<option value="${x.idEncabezadoPrincipal}">${x.tituloEncabezado == '' ? `ENCPRI${pad(x.idEncabezadoPrincipal, 4)}` : x.tituloEncabezado}</option>`).join('');
+//    options = `<option value="0">-Seleccione una columna principal-</option>${options}`;
+//    $('#cbo-columna-principal').html(options);
+//}
+
+//var cambiarEncabezadoPrincipal = () => {
+//    let pregunta = $('#cbo-pregunta').val()    
+//    let principal = $('#cbo-columna-principal').val()
+//    if (principal == 0) {
+//        $('#cbo-columna-secundaria').prop('disabled', true)
+//        $('#cbo-columna-secundaria').val(0)
+//    } else {
+//        let campanaEncuesta = arrListaPregunta.find(x => x.idCampanaEncuesta == pregunta)
+//        $('#cbo-columna-secundaria').prop('disabled', !(campanaEncuesta.idParametroTabla > 0))
+//        if (campanaEncuesta.idParametroTabla > 0) {
+//            arrEncabezadoSecundario = campanaEncuesta.listaEncabezadoSecundario.filter(x => x.encabezadoPrincipal.idEncabezadoPrincipal == principal)
+//            cargarEncabezadoSecundario()
+//        }
+//    }
+//}
+
+var cargarColumas = () => {
+    let options = arrEncabezadoSecundario.length == 0 ? '' : arrEncabezadoSecundario.map(x => `<option value="${x.idEncabezadoSecundario}">${x.encabezadoPrincipal.tituloEncabezado == "" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : x.encabezadoPrincipal.tituloEncabezado} - ${x.tituloEncabezado}</option>`).join('');
+    options = `<option value="0">-Seleccione una columna-</option>${options}`;
     $('#cbo-columna-principal').html(options);
-}
-
-var cambiarEncabezadoPrincipal = () => {
-    let pregunta = $('#cbo-pregunta').val()    
-    let principal = $('#cbo-columna-principal').val()
-    if (principal == 0) {
-        $('#cbo-columna-secundaria').prop('disabled', true)
-        $('#cbo-columna-secundaria').val(0)
-    } else {
-        let campanaEncuesta = arrListaPregunta.find(x => x.idCampanaEncuesta == pregunta)
-        $('#cbo-columna-secundaria').prop('disabled', !(campanaEncuesta.idParametroTabla > 0))
-        if (campanaEncuesta.idParametroTabla > 0) {
-            arrEncabezadoSecundario = campanaEncuesta.listaEncabezadoSecundario.filter(x => x.encabezadoPrincipal.idEncabezadoPrincipal == principal)
-            cargarEncabezadoSecundario()
-        }
-    }
-}
-
-var cargarEncabezadoSecundario = () => {
-    let options = arrEncabezadoSecundario.length == 0 ? '' : arrEncabezadoSecundario.map(x => `<option value="${x.idEncabezadoSecundario}">${x.tituloEncabezado}</option>`).join('');
-    options = `<option value="0">-Seleccione una columna secundaria-</option>${options}`;
     $('#cbo-columna-secundaria').html(options);
 }
 
@@ -81,16 +84,16 @@ var grabar = () => {
 
     let nombreIndicador = $('#txt-indicador').val().trim()
     let idCampanaEncuesta = $('#cbo-pregunta').val()
-    let idEncabezadoPrincipal = $('#cbo-columna-principal').val()
-    let idEncabezadoSecundario = $('#cbo-columna-secundaria').val()
+    let idEncSecundarioAgrupacion = $('#cbo-columna-principal').val()
+    let idEncSecundarioCalculo = $('#cbo-columna-secundaria').val()
     let idMetodoCalculo = $('#cbo-metodo-calculo').val()
     //let idEstado = $('#cbo-estado').val()
 
     if (validarEspaciosBlanco(nombreIndicador)) arr.push("Debe ingresar el nombre del indicador");
     if (validarCombo(idCampanaEncuesta)) arr.push("Debe seleccionar una pregunta");
     if (idTipoControl == 5) {
-        if (validarCombo(idEncabezadoPrincipal)) arr.push("Debe seleccionar una columna principal");
-        if (validarCombo(idEncabezadoSecundario)) arr.push("Debe seleccionar una columna secundaria");
+        if (validarCombo(idEncSecundarioAgrupacion)) arr.push("Debe seleccionar una columna agrupación");
+        if (validarCombo(idEncSecundarioCalculo)) arr.push("Debe seleccionar una columna cálculo");
     }    
     if (validarCombo(idMetodoCalculo)) arr.push("Debe seleccionar un método de cálculo");
     //if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
@@ -102,7 +105,7 @@ var grabar = () => {
     }
 
     let url = `${baseUrl}Indicador/grabar`;
-    let data = { idIndicador, nombreIndicador, idCampana, idCampanaEncuesta, idEncabezadoPrincipal, idEncabezadoSecundario, idTipoControl, idMetodoCalculo, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idIndicador, nombreIndicador, idCampana, idCampanaEncuesta, idEncSecundarioAgrupacion, idEncSecundarioCalculo, idTipoControl, idMetodoCalculo, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     $('#btn-grabar').hide()
@@ -238,8 +241,8 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
             let colCodigo = `<td class="text-center" data-encabezado="Código">${x.idIndicador}</td>`;
             let colNombreIndicador = `<td data-encabezado="Nombre indicador" scope="row"><span class="ml-4">${x.nombreIndicador}</span></td>`;
             let colPregunta = `<td data-encabezado="Pregunta">${x.campanaEncuesta.tablaMaestra.idTablaMaestra > 0 ? x.campanaEncuesta.tablaMaestra == "" ? `TMA${pad(x.campanaEncuesta.tablaMaestra.idTablaMaestra, 4)}` : x.campanaEncuesta.tablaMaestra.subtitulo : x.campanaEncuesta.pregunta}</td>`;
-            let colColumnaPrincipal = `<td class="text-center" data-encabezado="Columna Principal">${x.encabezadoSecundario.encabezadoPrincipal.idEncabezadoPrincipal > 0 ? x.encabezadoSecundario.encabezadoPrincipal.tituloEncabezado == "" ? `ENCPRI${pad(x.encabezadoSecundario.encabezadoPrincipal.idEncabezadoPrincipal, 4)}` : x.encabezadoSecundario.encabezadoPrincipal.tituloEncabezado : ""}</td>`
-            let colColumnaSecundario = `<td data-encabezado="Columna Secundaria">${x.encabezadoSecundario.tituloEncabezado}</td>`;
+            let colColumnaPrincipal = `<td class="text-center" data-encabezado="Columna Agrupación">${x.encSecundarioAgrupacion.tituloEncabezado}</td>`
+            let colColumnaSecundario = `<td class="text-center" data-encabezado="Columna Cálculo">${x.encSecundarioCalculo.tituloEncabezado}</td>`;
             let colMetodoCalculo = `<td class="text-center" data-encabezado="Método calculado">${x.metodoCalculo.metodoCalculo}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-principal" data-id="${x.idIndicador}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-principal" data-id="${x.idIndicador}"><i class="fa fa-edit"></i></div>`;
@@ -285,9 +288,8 @@ var cargarDatosIndicador = (data) => {
     $('#txt-indicador').val(data.nombreIndicador)
     $('#cbo-pregunta').val(data.idCampanaEncuesta)
     cambiarPregunta()
-    $('#cbo-columna-principal').val(data.idEncabezadoPrincipal)
-    cambiarEncabezadoPrincipal()
-    $('#cbo-columna-secundaria').val(data.idEncabezadoSecundario)
+    $('#cbo-columna-principal').val(data.idEncSecundarioAgrupacion)
+    $('#cbo-columna-secundaria').val(data.idEncSecundarioCalculo)
     $('#cbo-metodo-calculo').val(data.idMetodoCalculo)
     idTipoControl = data.idTipoControl
     //$('#cbo-estado').val(data.idEstado)

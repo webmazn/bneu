@@ -210,7 +210,7 @@ var armarControlCampo = (secundario, i, border) => {
         } else if (secundario.idTipoDato == 4) {
             valor = i + 1
         }
-        return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}" scope="row">${valor}</td>`
+        return `<td class="text-center ${border}" data-encabezado="${secundario.tituloEncabezado}" scope="row"><span id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-component="span">${valor}</span></td>`
     } else if (secundario.idTipoControl == 2) {
         let tipoFormatoCampo = secundario.idTipoDato == 1 || secundario.idTipoDato == 2 ? 'number' : 'text'
         let alineacion = secundario.idTipoDato == 1 || secundario.idTipoDato == 2 ? 'text-right' : ''
@@ -440,8 +440,9 @@ var grabarEncuesta = () => {
 
     $(`[id*="encabezado-"]`).each((index, x) => {
         let type = $(`#${x.id}`)[0].attributes.type == undefined ? 'sin-type' : $(`#${x.id}`)[0].attributes.type.value
-        let valor = type == 'checkbox' || type == 'radio' ? $(`#${x.id}`).prop('checked') ? '1' : '0' : $(`#${x.id}`).val()
-        let usuario = $(`#${x.id}`).data('usuario')
+        let label = type == 'sin-type' ? $(`#${x.id}`).data('component') == 'span' ? $(`#${x.id}`).html() : "" : ""
+        let valor = type == 'checkbox' || type == 'radio' ? $(`#${x.id}`).prop('checked') ? '1' : '0' : label == "" ? $(`#${x.id}`).val() : label
+        let usuario = label == "" ? $(`#${x.id}`).data('usuario') : 0
         let arr = x.id.split('-')
         if (arr.length == 3) {
             arrRespuestaEncTabla.push({

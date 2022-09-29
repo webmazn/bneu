@@ -73,7 +73,8 @@ namespace sisceusi.logica
                 {
                     if (x.idTipoControl == 5)
                     {
-                        x.indicadorTablaMaestra = datos.obtenerListaIndicadorEncabezadoSecundario(new IndicadorBE { idCampana = entidad.idCampana, idEncabezadoSecundario = x.idEncabezadoSecundario }, cn);
+                        x.indicadorAgrupacion = datos.obtenerListaIndicadorEncSecAgrupacion(new IndicadorBE { idCampana = entidad.idCampana, idEncSecundarioAgrupacion = x.idEncSecundarioAgrupacion }, cn);
+                        x.indicadorCalculo = datos.obtenerListaIndicadorEncSecCalculo(new IndicadorBE { idCampana = entidad.idCampana, idEncSecundarioCalculo = x.idEncSecundarioCalculo }, cn);
                     }
                     else
                     {

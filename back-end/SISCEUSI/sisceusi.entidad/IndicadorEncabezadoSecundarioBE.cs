@@ -10,6 +10,9 @@ namespace sisceusi.entidad
     {
         public CampanaEmpresaBE campanaEmpresa { get; set; }
         public ControlEncuestaBE controlEncuesta { get; set; }
+        public ParametroBE parametro { get; set; }
+        public int filaTabla { get; set; }
+        public string etiqueta { get; set; }
         public decimal valor { get; set; }
     }
 }

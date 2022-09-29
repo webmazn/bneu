@@ -11,27 +11,27 @@
     <script>
           google.charts.load('current', {'packages':['corechart']});
 
-          google.charts.setOnLoadCallback(drawPieChart);
-          function drawPieChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Nombre');
-            data.addColumn('number', 'Valor');
-            data.addRows([
-              ['Valor 01', 3],
-              ['Valor 02', 1],
-              ['Valor 03', 2],
-              ['Valor 04', 1]
-            ]);
-            var options = {
-              // title:'TOTAL ENERGÍA COMPRADA',
-              backgroundColor: '#f8f9fa',
-              legend: {position: 'bottom'},
-              // 'width':400,
-              // 'height':300
-              };
-            var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
-            chart.draw(data, options);
-          }
+          //google.charts.setOnLoadCallback(drawPieChart);
+          //function drawPieChart() {
+          //  var data = new google.visualization.DataTable();
+          //  data.addColumn('string', 'Nombre');
+          //  data.addColumn('number', 'Valor');
+          //  data.addRows([
+          //    ['Valor 01', 3],
+          //    ['Valor 02', 1],
+          //    ['Valor 03', 2],
+          //    ['Valor 04', 1]
+          //  ]);
+          //  var options = {
+          //    // title:'TOTAL ENERGÍA COMPRADA',
+          //    backgroundColor: '#f8f9fa',
+          //    legend: {position: 'bottom'},
+          //    // 'width':400,
+          //    // 'height':300
+          //    };
+          //  var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+          //  chart.draw(data, options);
+          //}
 
           google.charts.load('current', {
           'packages': ['map'],
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div id="seccion-indicadores" class="row mb-4">
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="table-responsive tabla-principal">
                             <table id="tbl-indicador" class="table table-striped table-hover">
@@ -207,225 +207,74 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-responsive tabla-principal">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr class="bg-azul text-white">
-                                        <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>OTROS INDICADORES</span></span></div>
-                                        </th>
-                                        <th scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>SELEC.</span></span></div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td data-encabezado="INDICADORES" scope="row">
-                                            <i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i>Características y consume de los principales equipos de planta &nbsp;1
-                                        </td>
-                                        <td class="text-center" data-encabezado="Seleccionar">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radio-tabla">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="INDICADORES" scope="row">
-                                            <i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i>Características y consume de los principales equipos de planta &nbsp;2
-                                        </td>
-                                        <td class="text-center" data-encabezado="Seleccionar">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radio-tabla">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="INDICADORES" scope="row">
-                                            <i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i>Características y consume de los principales equipos de planta &nbsp;3
-                                        </td>
-                                        <td class="text-center" data-encabezado="Seleccionar">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radio-tabla">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="INDICADORES" scope="row">
-                                            <i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i>Características y consume de los principales equipos de planta &nbsp;4
-                                        </td>
-                                        <td class="text-center" data-encabezado="Seleccionar">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radio-tabla">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="INDICADORES" scope="row">
-                                            <i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i>Características y consume de los principales equipos de planta &nbsp;5
-                                        </td>
-                                        <td class="text-center" data-encabezado="Seleccionar">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radio-tabla">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <strong class="title-chart">TOTAL ENERGÍA COMPRADA</strong>
+                        <strong id="titulo-grafico" class="title-chart"></strong>
                         <div class="logros chart" id="pie-chart"></div>
                     </div>
                     <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <strong class="title-chart">TOTAL ENERGÍA COMPRADA</strong>
+                        <strong class="title-chart"></strong>
                         <div class="map-chart" id="chart_div"></div>
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="table-responsive tabla-principal">
-                            <table class="table table-striped table-hover">
+                            <table id="tbl-planta" class="table table-striped table-hover">
                                 <thead>
                                     <tr class="bg-azul text-white">
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENCUESTA</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>N° CUESTIONARIO</span></span></div>
                                         </th>
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>USUARIO</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>EMPRESA</span></span></div>
                                         </th>
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DEP</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>PLANTA</span></span></div>
                                         </th>
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>PROV</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DEPARTAMENTO</span></span></div>
                                         </th>
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DIST</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>PROVINCIA</span></span></div>
                                         </th>
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FECHA</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DISTRITO</span></span></div>
                                         </th>
+                                        <th class="text-center" scope="col">GESTIÓN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0001
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0002
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0002
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0003
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0003
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0004
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0004
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0005
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0005
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0006
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0006
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0007
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0007
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0008
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0008
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU0009
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-encabezado="ENCUESTA" scope="row">
-                                            ENC0009
-                                        </td>
-                                        <td data-encabezado="USUARIO" scope="row">
-                                            USU00010
-                                        </td>
-                                        <td data-encabezado="DEPARTAMENTO" scope="row">LIMA</td>
-                                        <td data-encabezado="PROVINCIA" scope="row">LIMA</td>
-                                        <td data-encabezado="DISTRITO" scope="row">SURCO</td>
-                                        <td data-encabezado="FECHA" scope="row">21-08-2022</td>
-                                    </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros">1</span><span id="view-page-result">-<span class="fin-registros">1</span> de <span class="total-registros">1</span> registros</span></td>
+                                        <td id="viewPagination" class="text-right text-xs-left pr-0" colspan="5" style="display: none">
+                                            <span>Registros por página&nbsp;</span>
+                                            <select id="number-registers">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina">1</span> de <span class="total-paginas">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPagina(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot> 
                             </table>
                         </div>
                     </div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                    @*<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
                         <strong class="title-chart">SEGMENTO POR PREGUNTA</strong>
                         <div class="logros chart" id="donut-chart"></div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
