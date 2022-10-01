@@ -14,7 +14,7 @@
   BEGIN
     OPEN poRef FOR
     SELECT 
-    cen.idControlEncuesta, nvl(cen.numeroCuestionario, 0) numeroCuestionario,
+    cen.idControlEncuesta, nvl(cen.numeroCuestionario, 0) numeroCuestionario, cen.idSupervisor,
     pem.idPlantaEmpresa, pem.denominacion planta, pem.latitud, pem.longitud, pem.direccion,
     emp.nombreEmpresa,
     dep.idDepartamento, dep.departamento, 

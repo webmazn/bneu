@@ -86,5 +86,19 @@ namespace sisceusi.logica
             return lista;
         }
 
+        public int obtenerIdPlantaxUsuario(UsuarioBE entidad)
+        {
+            PlantaEmpresaBE item = null;
+            int id = 0;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerIdPlantaxUsuario(entidad, cn);
+                if (item != null) id = item.idPlantaEmpresa;
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return id;
+        }
+
     }
 }

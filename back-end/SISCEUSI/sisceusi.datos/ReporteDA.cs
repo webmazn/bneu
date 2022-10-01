@@ -27,6 +27,7 @@ namespace sisceusi.datos
                 {
                     idControlEncuesta = (int)x.IDCONTROLENCUESTA,
                     numeroCuestionario = x.NUMEROCUESTIONARIO == null ? 0 : (int)x.NUMEROCUESTIONARIO,
+                    idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
                     plantaEmpresa = new PlantaEmpresaBE
                     {
                         idPlantaEmpresa = (int)x.IDPLANTAEMPRESA,

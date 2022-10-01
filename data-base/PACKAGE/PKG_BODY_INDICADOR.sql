@@ -158,6 +158,7 @@
     cem.idCampana,
     cem.idEmpresaIndustria,
     cen.idControlEncuesta,
+    cen.idSupervisor,
     cen.idPlantaEmpresa,
     pem.iddepartamento,
     pem.idprovincia,
@@ -172,7 +173,7 @@
     INNER JOIN T_GENM_PLANTA_EMPRESA pem ON cen.idplantaempresa = pem.idplantaempresa
     LEFT JOIN T_GENM_PARAMETRO par ON ret.idParametro = par.idParametro AND par.idEstado = '1'
     WHERE
-    ret.idEncabezadoSecundario = piIdEncabezadoSecundario AND cem.idCampana = piIdCampana AND cen.idTipoEncuesta = 1; --cAMBIAR A TIPOENCUESTA 2
+    ret.idEncabezadoSecundario = piIdEncabezadoSecundario AND cem.idCampana = piIdCampana AND cen.idTipoEncuesta = 2; --cAMBIAR A TIPOENCUESTA 2
   END USP_SEL_INDICADOR_ENC_SECUN;
 
 END PKG_SISCEUSI_INDICADOR;

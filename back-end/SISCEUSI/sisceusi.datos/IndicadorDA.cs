@@ -160,8 +160,10 @@ namespace sisceusi.datos
                     controlEncuesta = new ControlEncuestaBE
                     {
                         idControlEncuesta = x.IDCONTROLENCUESTA == null ? 0 : (int)x.IDCONTROLENCUESTA,
+                        idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
                         plantaEmpresa = new PlantaEmpresaBE
                         {
+                            idPlantaEmpresa = x.IDPLANTAEMPRESA == null ? 0 : (int)x.IDPLANTAEMPRESA,
                             idDepartamento = x.IDDEPARTAMENTO == null ? "0" : (string)x.IDDEPARTAMENTO,
                             idProvincia = x.IDPROVINCIA == null ? "0" : (string)x.IDPROVINCIA,
                             idDistrito = x.IDDISTRITO == null ? "0" : (string)x.IDDISTRITO
@@ -196,8 +198,10 @@ namespace sisceusi.datos
                     controlEncuesta = new ControlEncuestaBE
                     {
                         idControlEncuesta = x.IDCONTROLENCUESTA == null ? 0 : (int)x.IDCONTROLENCUESTA,
+                        idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
                         plantaEmpresa = new PlantaEmpresaBE
                         {
+                            idPlantaEmpresa = x.IDPLANTAEMPRESA == null ? 0 : (int)x.IDPLANTAEMPRESA,
                             idDepartamento = x.IDDEPARTAMENTO == null ? "0" : (string)x.IDDEPARTAMENTO,
                             idProvincia = x.IDPROVINCIA == null ? "0" : (string)x.IDPROVINCIA,
                             idDistrito = x.IDDISTRITO == null ? "0" : (string)x.IDDISTRITO
@@ -209,6 +213,21 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return lista;
+        }
+
+        public PlantaEmpresaBE obtenerIdPlantaxUsuario(UsuarioBE entidad, OracleConnection db)
+        {
+            PlantaEmpresaBE item = null;
+            try
+            {
+                string sp = $"{Package.Indicador}USP_SEL_PLANTA_X_USUARIO";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdUsuario", entidad.idUsuario);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<PlantaEmpresaBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
         }
 
     }

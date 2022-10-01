@@ -3,6 +3,7 @@ var arrProvincia = []
 var arrDistrito = []
 var arrListaPlanta = []
 var arrListaIndicador = []
+var arrPlantaFiltrado = []
 $(document).ready(() => {
     $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
@@ -14,23 +15,57 @@ $(document).ready(() => {
 });
 
 var cargarDatos = () => {
-    arrListaPlanta = listaControlEncuesta
+    if (idRolLogin == null) $('#tbl-planta').html('')
+    //filtrar indicador
     arrListaIndicador = listaIndicador
-    arrDepartamento = listaControlEncuesta.map(x => x.plantaEmpresa.departamento)
-    arrDepartamento = [
-    ...new Map(arrDepartamento.map((item) =>[item["idDepartamento"], item])).values(),
-    ]
-    arrProvincia = listaControlEncuesta.map(x => x.plantaEmpresa.provincia)
-    arrProvincia = [
-    ...new Map(arrProvincia.map((item) =>[item["idProvincia"], item])).values(),
-    ]
-    arrDistrito = listaControlEncuesta.map(x => x.plantaEmpresa.distrito)
-    arrDistrito = [
-    ...new Map(arrDistrito.map((item) =>[item["idDistrito"], item])).values(),
-    ]
+    if (idRolLogin == 3) {
+        arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.idPlantaEmpresa == idPlanta)
+        arrDepartamento = arrListaPlanta.map(x => x.plantaEmpresa.departamento)
+        arrDepartamento = [
+        ...new Map(arrDepartamento.map((item) =>[item["idDepartamento"], item])).values(),
+        ]
+        arrProvincia = arrListaPlanta.map(x => x.plantaEmpresa.provincia)
+        arrProvincia = [
+        ...new Map(arrProvincia.map((item) =>[item["idProvincia"], item])).values(),
+        ]
+        arrDistrito = arrListaPlanta.map(x => x.plantaEmpresa.distrito)
+        arrDistrito = [
+        ...new Map(arrDistrito.map((item) =>[item["idDistrito"], item])).values(),
+        ]
+    } else if (idRolLogin == 2) {
+        arrListaPlanta = listaControlEncuesta.filter(x => x.idSupervisor == idUsuarioLogin)
+        arrDepartamento = arrListaPlanta.map(x => x.plantaEmpresa.departamento)
+        arrDepartamento = [
+        ...new Map(arrDepartamento.map((item) =>[item["idDepartamento"], item])).values(),
+        ]
+        arrProvincia = arrListaPlanta.map(x => x.plantaEmpresa.provincia)
+        arrProvincia = [
+        ...new Map(arrProvincia.map((item) =>[item["idProvincia"], item])).values(),
+        ]
+        arrDistrito = arrListaPlanta.map(x => x.plantaEmpresa.distrito)
+        arrDistrito = [
+        ...new Map(arrDistrito.map((item) =>[item["idDistrito"], item])).values(),
+        ]
+    } else {
+        arrListaPlanta = listaControlEncuesta
+        arrDepartamento = listaControlEncuesta.map(x => x.plantaEmpresa.departamento)
+        arrDepartamento = [
+        ...new Map(arrDepartamento.map((item) =>[item["idDepartamento"], item])).values(),
+        ]
+        arrProvincia = listaControlEncuesta.map(x => x.plantaEmpresa.provincia)
+        arrProvincia = [
+        ...new Map(arrProvincia.map((item) =>[item["idProvincia"], item])).values(),
+        ]
+        arrDistrito = listaControlEncuesta.map(x => x.plantaEmpresa.distrito)
+        arrDistrito = [
+        ...new Map(arrDistrito.map((item) =>[item["idDistrito"], item])).values(),
+        ]
+    }
+
     cargarDepartamento(arrDepartamento)
     cargarIndicadores()
     cargarTablaPlanta()
+    cambiarDepartamento()
 }
 
 var cargarDepartamento = (data) => {
@@ -48,13 +83,15 @@ var cambiarDepartamento = () => {
     if (validarCombo(departamento)) {
         departamento = "0"        
         $('#cbo-provincia').html(`<option value="0">-Seleccione una provincia-</option>`)
-        arrListaPlanta = listaControlEncuesta
+        //arrListaPlanta = listaControlEncuesta
+        arrPlantaFiltrado = arrListaPlanta
     } else {
         const data = arrProvincia.filter(x => x.idProvincia.substr(0, 2) === departamento)
         let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idProvincia}">${x.provincia}</option>`).join('');
         options = `<option value="0">-Seleccione una provincia-</option>${options}`;
         $('#cbo-provincia').html(options);
-        arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
+        //arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
+        arrPlantaFiltrado = arrListaPlanta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
     }
     google.charts.setOnLoadCallback(drawMap)
     armarIndicador(indicador)
@@ -69,13 +106,15 @@ var cambiarProvincia = () => {
     if (validarCombo(provincia)) {
         provincia = "0"        
         $('#cbo-distrito').html(`<option value="0">-Seleccione un distrito-</option>`);
-        arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
+        //arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
+        arrPlantaFiltrado = arrListaPlanta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento)
     } else {
         const data = arrDistrito.filter(x => x.idDistrito.substr(0, 4) === provincia)
         let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idDistrito}">${x.distrito}</option>`).join('');
         options = `<option value="0">-Seleccione un distrito-</option>${options}`;
         $('#cbo-distrito').html(options);
-        arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
+        //arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
+        arrPlantaFiltrado = arrListaPlanta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
     }
     google.charts.setOnLoadCallback(drawMap)
     armarIndicador(indicador)
@@ -87,9 +126,11 @@ var cambiarDistrito = () => {
     distrito = $('#cbo-distrito').val()
     if (validarCombo(distrito)) {
         distrito = "0"
-        arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
+        //arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
+        arrPlantaFiltrado = arrListaPlanta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia)
     } else {
-        arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia && x.plantaEmpresa.distrito.idDistrito === distrito)
+        //arrListaPlanta = listaControlEncuesta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia && x.plantaEmpresa.distrito.idDistrito === distrito)
+        arrPlantaFiltrado = arrListaPlanta.filter(x => x.plantaEmpresa.departamento.idDepartamento === departamento && x.plantaEmpresa.provincia.idProvincia === provincia && x.plantaEmpresa.distrito.idDistrito === distrito)
     }
     google.charts.setOnLoadCallback(drawMap)
     armarIndicador(indicador)
@@ -242,28 +283,92 @@ var armarIndicador = (indicador) => {
 
         }
     } else if (indicador.idMetodoCalculo == 5) { //Promedio
+        if (indicador.idTipoControl == 5) {
+            let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
+            let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
 
+            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+                return {
+                    "etiqueta": x.etiqueta,
+                    "filaTabla": x.filaTabla
+                }
+            })
+
+            initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let cantidad = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).length
+                let suma = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                let promedio = cantidad <= 0 ? 0 : suma/cantidad
+                let arr = [e.etiqueta, promedio]
+                arrReporte.push(arr)
+            })
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+        } else {
+
+        }
     }
 }
 
 var validarAgrupacion = (arrIndicadorAgrupacion) => {
     if (distrito && distrito != '0') {
-        arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        if (idRolLogin == 3) {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        } else if (idRolLogin == 2) {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        } else {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        }        
     } else if (provincia && provincia != '0') {
-        arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        if (idRolLogin == 3) {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        } else if (idRolLogin == 2) {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        } else {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        }        
     } else if (departamento && departamento != '0') {
-        arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        if (idRolLogin == 3) {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        } else if (idRolLogin == 2) {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        } else {
+            arrIndicadorAgrupacion = arrIndicadorAgrupacion.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        }
     }
     return arrIndicadorAgrupacion
 }
 
 var validarCalculo = (arrIndicadorCalculo) => {
     if (distrito && distrito != '0') {
-        arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        if (idRolLogin == 3) {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        } else if (idRolLogin == 2) {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        } else {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        }
+        //arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
     } else if (provincia && provincia != '0') {
-        arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        if (idRolLogin == 3) {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        } else if (idRolLogin == 2) {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        } else {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        }
+        //arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
     } else if (departamento && departamento != '0') {
-        arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        if (idRolLogin == 3) {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        } else if (idRolLogin == 2) {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        } else {
+            arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        }
+        //arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
     }
     return arrIndicadorCalculo
 }
@@ -286,7 +391,7 @@ var cargarTablaPlanta = () => {
     let registroMostrar = $('#number-registers').val()
     let paginaActual = $(".ir-pagina").val()    
 
-    let totalReg = arrListaPlanta.length
+    let totalReg = arrPlantaFiltrado.length
     let totalPag = Math.ceil(totalReg / registroMostrar)
 
     if (paginaActual <= 0) paginaActual = 1
@@ -294,7 +399,7 @@ var cargarTablaPlanta = () => {
 
     let arrPlantaFiltro = []
     for (let i = (paginaActual - 1) * registroMostrar; i < (paginaActual * registroMostrar) ; i++) {
-        if (arrListaPlanta[i] != undefined) arrPlantaFiltro.push(arrListaPlanta[i])        
+        if (arrPlantaFiltrado[i] != undefined) arrPlantaFiltro.push(arrPlantaFiltrado[i])
         //listing_table.innerHTML += obj[i].number + "<br>";
     }
 
@@ -366,11 +471,11 @@ var drawMap = () => {
 
     let arrMapa = []
     arrMapa.push(['Latitud', 'Longitud', 'Nombre', 'Marker'])
-    arrListaPlanta.forEach(x => {
+    arrPlantaFiltrado.forEach(x => {
         let arr = []
         arr.push(parseInt(x.plantaEmpresa.latitud))
         arr.push(parseInt(x.plantaEmpresa.longitud))
-        arr.push(x.plantaEmpresa.denominacion)
+        arr.push(idRolLogin == null ? "" : x.plantaEmpresa.denominacion)
         arr.push('blue')
         arrMapa.push(arr)
     })

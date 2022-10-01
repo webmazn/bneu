@@ -295,10 +295,12 @@ namespace sisceusi.web.Controllers
             IndicadorLN logicaIndicador = new IndicadorLN();
             List<ControlEncuestaBE> listaControlEncuesta = logica.obtenerListaControlEncuesta(new CampanaBE { idCampana = id });
             List<IndicadorBE> listaIndicador = logicaIndicador.obtenerListaIndicador(new IndicadorBE { idCampana = id });
+            int idPlantaEmrpesa = ObtenerUsuarioLogin() == null ? 0 : ObtenerUsuarioLogin().idRol == 3 ? logicaIndicador.obtenerIdPlantaxUsuario(ObtenerUsuarioLogin()) : 0;
             ViewData["listaControlEncuesta"] = listaControlEncuesta;
             ViewData["listaIndicador"] = listaIndicador;
             ViewData["idCampana"] = id;
             ViewData["idSubSector"] = idTwo;
+            ViewData["idPlanta"] = idTwo;
             return View();
         }
 

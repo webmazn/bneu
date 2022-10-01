@@ -4,6 +4,7 @@
     List<ControlEncuestaBE> listaControlEncuesta = ViewData["listaControlEncuesta"] == null ? new List<ControlEncuestaBE>() : (List<ControlEncuestaBE>)ViewData["listaControlEncuesta"];
     List<IndicadorBE> listaIndicador = ViewData["listaIndicador"] == null ? new List<IndicadorBE>() : (List<IndicadorBE>)ViewData["listaIndicador"];
     int idSubSector = ViewData["idSubSector"] == null ? 0 : (int)ViewData["idSubSector"];
+    int idPlanta = ViewData["idPlanta"] == null ? 0 : (int)ViewData["idPlanta"];
 }
 
 @section scripts_header{
@@ -283,5 +284,6 @@
 <script type="text/javascript">
     var listaControlEncuesta = @Html.Raw(Json.Encode(listaControlEncuesta));
     var listaIndicador = @Html.Raw(Json.Encode(listaIndicador));
+    var idPlanta = @idPlanta;
 </script>
 
