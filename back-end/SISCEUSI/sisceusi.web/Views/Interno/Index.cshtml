@@ -12,6 +12,7 @@
 
 @section scripts_footer {
     <script src="@Url.Content("~/Scripts/Sisceusi/interno_index.js")"></script>
+    <script src="@Url.Content("~/Scripts/Sisceusi/encuesta_generar_ficha.js")"></script>
 }
 
 <div class="container-fluid map-root" id="historia"></div>
@@ -364,6 +365,8 @@
         </div>
     </div>
 </div>
+
+<div class="container my-4" id="preguntas-encuesta"></div>
 
 @Html.Hidden("column", "cen_idControlEncuesta")
 @Html.Hidden("order", "ASC")

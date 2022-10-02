@@ -284,6 +284,13 @@ var cargarDatosTabla = (j) => {
                 eliminar(e.currentTarget);
             });
         });
+        tabla.find('.btn-download').each(x => {
+            let elementButton = tabla.find('.btn-download')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                descargar(e.currentTarget);
+            });
+        });
         $('[data-toggle="tooltip"]').tooltip();
     } else {
         console.log('No hay resultados');
@@ -333,7 +340,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colFecha = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaHoraLlenado}</td>`;
             let colEtapa = `<td data-encabezado="Estado"><span>${x.etapa.etapa}</span></td>`;
             let colFase = `<td data-encabezado="Fase Enc."><span>${x.controlEncuesta.fase.fase}</span></td>`;
-            let btnDescargar = `<div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>`
+            let btnDescargar = `<div class="btn btn-sm btn-warning btn-table text-white btn-download" data-id="${x.controlEncuesta.idControlEncuesta}"><i class="fa fa-download"></i></div>`
             let btnObservar = `<div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${0}"><i class="fa fa-trash"></i></div>`;
             let btnEncuesta = `<div class="btn btn-sm btn-info btn-table btn-encuesta" data-id="${x.controlEncuesta.idControlEncuesta}" data-bloque="${bloque}"><i class="fa fa-edit"></i></div>`;
@@ -373,5 +380,21 @@ var iniciarEncuesta = (obj) => {
 
 /* ================================================
  * FIN INICIAR ENCUESTA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO DESCARGAR
+ * ================================================
+ */
+
+var idDescargar
+var descargar = (obj) => {
+    let id = $(obj).data('id')
+    consultarEncuesta(id)
+}
+
+/* ================================================
+ * FIN DESCARGAR
  * ================================================
  */

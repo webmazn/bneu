@@ -173,12 +173,15 @@
     <Content Include="Mailing\contactoBot.html" />
     <Content Include="Mailing\recuperarClave.html" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\html2canvas.min.js" />
+    <Content Include="Scripts\jspdf.umd.min.js" />
     <Content Include="Scripts\Sisceusi\campana_index.js" />
     <Content Include="Scripts\Sisceusi\campana_nueva_campana.js" />
     <Content Include="Scripts\Sisceusi\empresa_index.js" />
     <Content Include="Scripts\Sisceusi\empresa_nueva_empresa.js" />
     <Content Include="Scripts\Sisceusi\encuesta_firma.js" />
     <Content Include="Scripts\Sisceusi\encuesta_formulario.js" />
+    <Content Include="Scripts\Sisceusi\encuesta_generar_ficha.js" />
     <Content Include="Scripts\Sisceusi\encuesta_inicio.js" />
     <Content Include="Scripts\Sisceusi\encuesta_preguntaEncuesta.js" />
     <Content Include="Scripts\Sisceusi\encuesta_revisar.js" />

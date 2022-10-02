@@ -119,7 +119,10 @@
     --MIN(numeroOrdenPregunta) numeroOrdenPregunta
     FROM T_GENM_CAMPANA_ENCUESTA
     WHERE 
-    idCampana = (SELECT idCampana FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta) AND idEstado = '1'
+    idCampana = (SELECT cem.idCampana FROM T_GEND_CONTROL_ENCUESTA cen
+                INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa AND cem.idEstado = '1'
+                WHERE idControlEncuesta = piIdControlEncuesta) 
+    AND idEstado = '1'
     ORDER BY numeroOrdenPregunta ASC;
   END USP_SEL_PREGUNTA_ENCUESTA;
   
