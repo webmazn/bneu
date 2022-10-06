@@ -338,7 +338,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
                                 idRolLogin == 3 && (fase < 2 || fase == 3) ? true :
                                 idRolLogin == 2 && (fase == 2 || fase == 4) ? true : false
 
-            let verFicha = x.tipoEncuesta.idTipoEncuesta == 1 && x.etapa.idEtapa == 3 //Tipo encuesta debe ser 2 = oficial
+            let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && x.etapa.idEtapa == 3 //Tipo encuesta debe ser 2 = oficial
 
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.campana.idCampana, 4)}</td>`;

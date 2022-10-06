@@ -447,6 +447,7 @@
         idPlantaEmpresa = piIdPlantaEmpresa,
         idTipoEncuesta = piIdTipoEncuesta,
         idSupervisor = piIdSupervisor,
+        idEtapa = piIdEtapa,
         idEstado = '1',
         idUsuarioModificacion = piIdUsuarioCreacion,
         fechaModificacion = SYSDATE,

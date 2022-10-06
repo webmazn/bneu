@@ -31,7 +31,7 @@
     INNER JOIN T_MAE_DISTRITO dis ON pem.idDistrito = dis.idDistrito
     INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
     
-    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 1 AND cen.idEstado = '1'
+    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND cen.idEstado = '1'
     ORDER BY cen.idControlEncuesta, cen.numeroCuestionario ASC;
   END USP_SEL_LIST_CONTROL_ENC;
 
