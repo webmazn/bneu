@@ -44,7 +44,7 @@
                     @if (usuario != null)
                         {
                         string code = "USU" + usuario.idUsuario.ToString("D4");
-                        <div class="btn-group w-sm-100">
+                        <div class="btn-group w-sm-100 hide-section">
                             <a class="btn btn-info boton-acceso dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"><small><b>@code - @usuario.nombres.ToUpper() <br></b></small><small class="text-truncate">@usuario.empresaIndustria.ruc - @usuario.empresaIndustria.nombreEmpresa</small></a>
                             <div class="dropdown-menu dropdown-menu-right w-sm-100">
                                 <span class="dropdown-item font-weight-bold">Rol: &nbsp;<span class="badge badge-info">@usuario.rol.rol</span><br></span><a class="dropdown-item" href="@Url.Action("MaestroMantenimiento", "Interno")"><i class="fas fa-cogs pr-1"></i>Mantenimiento de tablas</a><a class="dropdown-item" href="@Url.Action("CambiarClave","Interno")"><i class="fas fa-key pr-1"></i>Cambiar contraseña</a>

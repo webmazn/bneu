@@ -1,0 +1,8 @@
+﻿
+.d-none-print {  
+    page-break-before: always;  
+}
+
+.hide-section {
+    display: none;
+}

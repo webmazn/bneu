@@ -12,7 +12,6 @@
 
 @section scripts_footer {
     <script src="@Url.Content("~/Scripts/Sisceusi/interno_index.js")"></script>
-    <script src="@Url.Content("~/Scripts/Sisceusi/encuesta_generar_ficha.js")"></script>
 }
 
 <div class="container-fluid map-root" id="historia"></div>
@@ -281,7 +280,7 @@
                 <div class="dropdown-divider"></div>
                 <div class="row">
                     <div class="col-12 px-0">
-                        <div class="table-responsive tabla-principal">
+                        <div id="tabla-print" class="table-responsive tabla-principal">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr class="bg-azul text-white">
@@ -366,7 +365,9 @@
     </div>
 </div>
 
-<div class="container my-4" id="preguntas-encuesta"></div>
+@*<div id="preguntas-encuesta">
+    <a href="javascript:print()">Imprimir</a>
+</div>*@
 
 @Html.Hidden("column", "cen_idControlEncuesta")
 @Html.Hidden("order", "ASC")

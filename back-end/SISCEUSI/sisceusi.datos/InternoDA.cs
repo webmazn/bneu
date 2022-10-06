@@ -34,7 +34,7 @@ namespace sisceusi.datos
                     campana = new CampanaBE { idCampana = (int)x.IDCAMPANA, denominacion = (string)x.DENOMINACION },
                     empresa = new EmpresaIndustriaBE { nombreEmpresa = (string)x.NOMBREEMPRESA },
                     planta = new PlantaEmpresaBE { denominacion = (string)x.PLANTA },
-                    tipoEncuesta = new TipoEncuestaBE { tipoEncuesta = (string)x.TIPOENCUESTA },
+                    tipoEncuesta = new TipoEncuestaBE { idTipoEncuesta = x.IDTIPOENCUESTA == null ? 0 : (int)x.IDTIPOENCUESTA, tipoEncuesta = (string)x.TIPOENCUESTA },
                     txtFechaHoraLlenado = x.FECHAHORALLENADO == null ? "" : ((DateTime)x.FECHAHORALLENADO).ToString("dd/MM/yyyy"),
                     etapa = new EtapaBE { etapa = (string)x.ETAPA, idEtapa = x.IDETAPA == null ? 0 : (int)x.IDETAPA },                    
                     controlEncuesta = new ControlEncuestaBE {

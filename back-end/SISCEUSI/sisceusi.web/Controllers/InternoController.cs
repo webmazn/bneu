@@ -158,6 +158,27 @@ namespace sisceusi.web.Controllers
             return Json(response);
         }
 
+        public ActionResult EncuestaFicha(int id)
+        {
+            ControlEncuestaLN logica = new ControlEncuestaLN();
+            ControlEncuestaBE controlEncuesta = logica.obtenerControlEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
+            List<CampanaEncuestaBE> listCampanaEncuesta = logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
+
+            EncuestaLN logicaEncuesta = new EncuestaLN();
+            listCampanaEncuesta.ForEach(x =>
+            {
+                x.listaRespuesta = logica.obtenerListaRespuestaEncuesta(x);
+                x.listaRespuestaEncuestaPlanta = logicaEncuesta.obtenerListaRespuestaPlanta(id, x.idCampanaEncuesta);
+                if (x.idParametroTabla > 0)
+                {
+                    x.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idControlEncuesta = id, idParametroTabla = x.idParametroTabla });
+                }
+            });
+            ViewData["controlEncuesta"] = controlEncuesta;
+            ViewData["listCampanaEncuesta"] = listCampanaEncuesta;
+            return View();
+        }
+
         [HttpGet]
         public JsonResult obtenerPreguntasEncuesta(int id)
         {            

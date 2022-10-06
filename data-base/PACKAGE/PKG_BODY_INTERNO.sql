@@ -81,7 +81,8 @@
                         (
                         SELECT  cam.idCampana, 
                                 emp.nombreEmpresa, 
-                                pem.denominacion planta, 
+                                pem.denominacion planta,
+                                ten.idTipoEncuesta,
                                 ten.tipoEncuesta, 
                                 cam.denominacion, 
                                 cen.fechaHoraLlenado, 
@@ -303,7 +304,8 @@
                         (
                         SELECT  cam.idCampana, 
                                 emp.nombreEmpresa, 
-                                pem.denominacion planta, 
+                                pem.denominacion planta,
+                                ten.idTipoEncuesta,
                                 ten.tipoEncuesta, 
                                 cam.denominacion, 
                                 cen.fechaHoraLlenado,

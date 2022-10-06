@@ -9,9 +9,7 @@
     bool esUltimaPregunta = ViewData["esUltimaPregunta"] == null ? false : (bool)ViewData["esUltimaPregunta"];
 }
 
-@section scripts_footer {
-    <script src="@Url.Content("~/Scripts/jspdf.umd.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/html2canvas.min.js")"></script>
+@section scripts_footer {    
     <script src="@Url.Content("~/Scripts/Sisceusi/encuesta_preguntaEncuesta.js")"></script>
 }
 

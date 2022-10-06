@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\print.css" />
     <Content Include="Content\style.css" />
     <Content Include="fonts\fa-brands-400.svg" />
     <Content Include="fonts\fa-regular-400.svg" />
@@ -173,8 +174,6 @@
     <Content Include="Mailing\contactoBot.html" />
     <Content Include="Mailing\recuperarClave.html" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\html2canvas.min.js" />
-    <Content Include="Scripts\jspdf.umd.min.js" />
     <Content Include="Scripts\Sisceusi\campana_index.js" />
     <Content Include="Scripts\Sisceusi\campana_nueva_campana.js" />
     <Content Include="Scripts\Sisceusi\empresa_index.js" />
@@ -262,6 +261,7 @@
     <Content Include="Views\Inicio\Estadistica.cshtml" />
     <Content Include="Views\Indicador\Index.cshtml" />
     <Content Include="Views\Indicador\NuevoIndicador.cshtml" />
+    <Content Include="Views\Interno\EncuestaFicha.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

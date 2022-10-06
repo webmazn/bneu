@@ -431,11 +431,11 @@ var cargarDatosTabla = (rs, arrPlantaFiltro) => {
         let content = renderizar(arrPlantaFiltro, numberCellHeader, rs.pagina, rs.registros);
         tabla.find('tbody').html(content);
 
-        tabla.find('.btn-descarga').each(x => {
-            let elementButton = tabla.find('.btn-descarga')[x];
+        tabla.find('.btn-observar').each(x => {
+            let elementButton = tabla.find('.btn-observar')[x];
             $(elementButton).on('click', (e) => {
                 e.preventDefault();
-                descargar(e.currentTarget);
+                observar(e.currentTarget);
             });
         });
         $('[data-toggle="tooltip"]').tooltip();
@@ -458,7 +458,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colDepartamento = `<td data-encabezado="Departamento">${x.plantaEmpresa.departamento.departamento}</td>`;
             let colProvincia = `<td data-encabezado="Departamento">${x.plantaEmpresa.provincia.provincia}</td>`;
             let colDistrito = `<td data-encabezado="Departamento">${x.plantaEmpresa.distrito.distrito}</td>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-descarga" data-id="${x.idControlEncuesta}"><i class="fa fa-edit"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-success btn-table btn-observar" data-id="${x.idControlEncuesta}"><i class="fa fa-eye"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEditar}</td>`;
             let row = `<tr>${colCodigo}${colEmpresa}${colPlanta}${colDepartamento}${colProvincia}${colDistrito}${colOptions}</tr>`;
             return row;
@@ -547,3 +547,19 @@ var drawPieChart = (arr) => {
     var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
     chart.draw(data, options);
 }
+
+/* ================================================
+ * INICIO OBSERVAR
+ * ================================================
+ */
+
+var idObservar
+var observar = (obj) => {
+    let id = $(obj).data('id')
+    location.href = `${baseUrl}Interno/EncuestaFicha/${id}`
+}
+
+/* ================================================
+ * FIN OBSERVAR
+ * ================================================
+ */

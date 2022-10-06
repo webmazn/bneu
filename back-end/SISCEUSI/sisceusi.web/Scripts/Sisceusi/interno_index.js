@@ -291,6 +291,13 @@ var cargarDatosTabla = (j) => {
                 descargar(e.currentTarget);
             });
         });
+        tabla.find('.btn-observar').each(x => {
+            let elementButton = tabla.find('.btn-observar')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                observar(e.currentTarget);
+            });
+        });
         $('[data-toggle="tooltip"]').tooltip();
     } else {
         console.log('No hay resultados');
@@ -331,6 +338,8 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
                                 idRolLogin == 3 && (fase < 2 || fase == 3) ? true :
                                 idRolLogin == 2 && (fase == 2 || fase == 4) ? true : false
 
+            let verFicha = x.tipoEncuesta.idTipoEncuesta == 1 && x.etapa.idEtapa == 3 //Tipo encuesta debe ser 2 = oficial
+
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.campana.idCampana, 4)}</td>`;
             let colEmpresa = `<td data-encabezado="Nombre y Apellido">${x.empresa.nombreEmpresa}</td>`;
@@ -340,11 +349,11 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colFecha = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaHoraLlenado}</td>`;
             let colEtapa = `<td data-encabezado="Estado"><span>${x.etapa.etapa}</span></td>`;
             let colFase = `<td data-encabezado="Fase Enc."><span>${x.controlEncuesta.fase.fase}</span></td>`;
-            let btnDescargar = `<div class="btn btn-sm btn-warning btn-table text-white btn-download" data-id="${x.controlEncuesta.idControlEncuesta}"><i class="fa fa-download"></i></div>`
-            let btnObservar = `<div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${0}"><i class="fa fa-trash"></i></div>`;
+            //let btnDescargar = `<div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>`
+            let btnObservar = `<div class="btn btn-sm btn-success btn-table btn-observar" data-id="${x.controlEncuesta.idControlEncuesta}"><i class="fa fa-eye"></i></div>`;
+            //let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${0}"><i class="fa fa-trash"></i></div>`;
             let btnEncuesta = `<div class="btn btn-sm btn-info btn-table btn-encuesta" data-id="${x.controlEncuesta.idControlEncuesta}" data-bloque="${bloque}"><i class="fa fa-edit"></i></div>`;
-            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnDescargar}${btnObservar}${btnEliminar}${ verEncuesta ? btnEncuesta : ''}</td>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${verFicha ? btnObservar : ''}${ verEncuesta ? btnEncuesta : ''}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colEmpresa}${colPlanta}${colTipoEncuesta}${colCampana}${colFecha}${colEtapa}${colFase}${colOptions}</tr>`;
             return row;
         }).join('');
@@ -396,5 +405,21 @@ var descargar = (obj) => {
 
 /* ================================================
  * FIN DESCARGAR
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO OBSERVAR
+ * ================================================
+ */
+
+var idObservar
+var observar = (obj) => {
+    let id = $(obj).data('id')
+    location.href = `${baseUrl}Interno/EncuestaFicha/${id}`
+}
+
+/* ================================================
+ * FIN OBSERVAR
  * ================================================
  */
