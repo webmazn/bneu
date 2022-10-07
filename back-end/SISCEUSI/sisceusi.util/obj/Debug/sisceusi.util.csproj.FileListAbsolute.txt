@@ -1,0 +1,10 @@
+C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.util\bin\Debug\sisceusi.util.dll
+C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.util\bin\Debug\sisceusi.util.pdb
+C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.util\obj\Debug\sisceusi.util.csprojResolveAssemblyReference.cache
+C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.util\obj\Debug\sisceusi.util.dll
+C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.util\obj\Debug\sisceusi.util.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.util\bin\Debug\sisceusi.util.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.util\bin\Debug\sisceusi.util.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.util\obj\Debug\sisceusi.util.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.util\obj\Debug\sisceusi.util.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.util\obj\Debug\sisceusi.util.csprojResolveAssemblyReference.cache
