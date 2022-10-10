@@ -70,14 +70,14 @@
           <div class="container m-0 px-0 py-4">
             <div class="row">
               <div class="col-md-12 col-lg-9 d-flex">
-                <div class="bg-light p-4">
+                <div class="bg-light p-4 w-100">
                   <div class="h4 text-cyan">Mantenimiento de Campañas&nbsp;</div>
-                  <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                  <!-- p.m-0.text-muted Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!-->
                 </div>
               </div>
               <div class="col-md-12 col-lg-3">
                 <div class="row">
-                  <div class="col-12"><a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-campanas-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva campaña</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
+                  <div class="col-12"><a class="btn btn-azul w-100 mb-1" href="./mantenimiento-de-campanas-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nueva campaña</a><a class="btn btn-plomo w-100 mb-1" href="javascript:history.back()">Regresar</a>
                     <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                   </div>
                 </div>
@@ -177,7 +177,7 @@
           <div class="container-fluid py-4">
             <div class="row">
               <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                <div class="h5">BANDEJA DE CAMPAÑAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                <div class="h5">BANDEJA DE ENCUESTAS POR CAMPAÑA&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Esta lista contiene los registros de las encuestas que corresponden al filtro seleccionado arriba. Puede ordenarlas y/o gestionarlas, según su perfil."></i></div>
               </div>
               <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                 <button class="btn btn-success w-100">Descargar Excel</button>
@@ -191,7 +191,7 @@
                     <thead>
                       <tr class="bg-azul text-white">
                         <th class="text-center" scope="col">
-                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span><i class="fas fa-sort"></i></div>
+                          <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>N°&nbsp;</span></span><i class="fas fa-sort"></i></div>
                         </th>
                         <th scope="col">
                           <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort"></i></div>
@@ -435,14 +435,22 @@
       </div>
     </div>
     <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalChatBotLabel">Confirmar eliminación</h5>
+            <h5 class="modal-title" id="modalChatBotLabel">Confirmación</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            <p>¿Desea eliminar el registro?</p>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                  <div class="swal2-icon-content"><i class="fas fa-ban"></i></div>
+                </div>
+                <h3 class="text-center">¿Deshabilitar el registro?</h3>
+                <p class="text-center">Por favor confirme está acción para deshabilitar el registro seleccionado a continuación.</p>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
