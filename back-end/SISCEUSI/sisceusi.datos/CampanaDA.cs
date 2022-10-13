@@ -474,5 +474,83 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return lista;
         }
+
+        public bool eliminar(CampanaBE entidad, OracleConnection db)
+        {
+            bool seElimino = false;
+            try
+            {
+                string sp = $"{Package.Campana}USP_UPD_DESHABILITAR";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampana", entidad.idCampana);
+                p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
+                db.Execute(sp, p, commandType: CommandType.StoredProcedure);
+                int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;
+                seElimino = filasAfectadas > 0;
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return seElimino;
+        }
+
+        public List<CampanaCorreoBE> obtenerListaCampanaCorreo(int idCampana, int idTipoEncuesta, OracleConnection db)
+        {
+            List<CampanaCorreoBE> lista = new List<CampanaCorreoBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_LIST_CORREO_CAMPANA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampana", idCampana);
+                p.Add("piIdTipoEncuesta", idTipoEncuesta);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new CampanaCorreoBE
+                {
+                    nombres = x.NOMBRES == null ? "" : (string)x.NOMBRES,
+                    correoElectronico = x.CORREOELECTRONICO == null ? "" : (string)x.CORREOELECTRONICO,
+                    rol = x.ROL == null ? "" : (string)x.ROL,
+                    nombreEmpresa = x.NOMBREEMPRESA == null ? "" : (string)x.NOMBREEMPRESA,
+                    nombreComercial = x.NOMBRECOMERCIAL == null ? "" : (string)x.NOMBRECOMERCIAL,
+                    revisor = x.REVISOR == null ? "" : (string)x.REVISOR,
+                    correoRevisor = x.CORREOREVISOR == null ? "" : (string)x.CORREOREVISOR,
+                    admin = x.ADMIN == null ? "" : (string)x.ADMIN,
+                    correoAdmin = x.CORREOADMIN == null ? "" : (string)x.CORREOADMIN,
+                    denominacion = x.DENOMINACION == null ? "" : (string)x.DENOMINACION,
+                    fechaFinPiloto = (DateTime)x.FECHAFINPILOTO,
+                    fechaFinOficial = (DateTime)x.FECHAFINENCUESTA,
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<CampanaCorreoBE> obtenerListaCampanaEncuestaCorreo(int idControlEncuesta, OracleConnection db)
+        {
+            List<CampanaCorreoBE> lista = new List<CampanaCorreoBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_CORREO_CAMPANA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdControlEncuesta", idControlEncuesta);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new CampanaCorreoBE
+                {
+                    nombres = x.NOMBRES == null ? "" : (string)x.NOMBRES,
+                    correoElectronico = x.CORREOELECTRONICO == null ? "" : (string)x.CORREOELECTRONICO,
+                    rol = x.ROL == null ? "" : (string)x.ROL,
+                    nombreEmpresa = x.NOMBREEMPRESA == null ? "" : (string)x.NOMBREEMPRESA,
+                    nombreComercial = x.NOMBRECOMERCIAL == null ? "" : (string)x.NOMBRECOMERCIAL,
+                    revisor = x.REVISOR == null ? "" : (string)x.REVISOR,
+                    correoRevisor = x.CORREOREVISOR == null ? "" : (string)x.CORREOREVISOR,
+                    admin = x.ADMIN == null ? "" : (string)x.ADMIN,
+                    correoAdmin = x.CORREOADMIN == null ? "" : (string)x.CORREOADMIN,
+                    denominacion = x.DENOMINACION == null ? "" : (string)x.DENOMINACION,
+                    fechaFinPiloto = (DateTime)x.FECHAFINPILOTO,
+                    fechaFinOficial = (DateTime)x.FECHAFINENCUESTA,
+                    idTipoEncuesta = x.IDTIPOENCUESTA == null ? 0 : (int)x.IDTIPOENCUESTA,
+                    idFase = x.IDFASE == null ? 0 : (int)x.IDFASE
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

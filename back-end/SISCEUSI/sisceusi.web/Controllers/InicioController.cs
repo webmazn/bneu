@@ -31,8 +31,11 @@ namespace sisceusi.web.Controllers
             return View();
         }
 
-        public ActionResult contacto()
+        public ActionResult Contacto()
         {
+            UsuarioLN logica = new UsuarioLN();
+            List<UsuarioBE> listaRevisorVisualizar = logica.obtenerListaRevisorVisualizar();
+            ViewData["listaRevisorVisualizar"] = listaRevisorVisualizar;
             return View();
         }
 

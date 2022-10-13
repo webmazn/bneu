@@ -262,5 +262,25 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return lista;
         }
+
+        public PlantaEmpresaBE verificarDatosPlanta(PlantaEmpresaBE entidad, OracleConnection db)
+        {
+            PlantaEmpresaBE item = null;
+            try
+            {
+                string sp = $"{Package.PlantaEmpresa}USP_SEL_VERIFICADOR_DATOS";
+                var p = new OracleDynamicParameters();
+                p.Add("piDenominacion", entidad.denominacion);
+                p.Add("piDireccion", entidad.direccion);
+                p.Add("piLatitud", entidad.latitud);
+                p.Add("piLongitud", entidad.longitud);
+                p.Add("piNumeroSuministroGas", entidad.numeroSuministroGas);
+                p.Add("piNumeroSuministroAlumbrado", entidad.numeroSuministroAlumbrado);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.QueryFirstOrDefault<PlantaEmpresaBE>(sp, p, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
     }
 }

@@ -18,12 +18,12 @@
             <div class="banners">
                 @if (listaBanner == null || listaBanner.Count == 0)
                 {
-                    <div class="banner-1 banner-mostrado" data-titulo="01 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="01 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
-                    <div class="banner-2" data-titulo="02 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="02 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
-                    <div class="banner-3" data-titulo="03 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="03 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
-                    <div class="banner-4" data-titulo="04 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="04 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
-                    <div class="banner-5" data-titulo="05 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="05 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
-                    <div class="banner-6" data-titulo="06 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="06 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")"></div>
+                    <div class="banner-1 banner-mostrado" data-titulo="01 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="01 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")" data-titulo-boton="Ver más" data-link-boton="http://google.com"></div>
+                    <div class="banner-2" data-titulo="02 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="02 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")" data-titulo-boton="Ver más 01" data-link-boton="http://google.com"></div>
+                    <div class="banner-3" data-titulo="03 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="03 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")" data-titulo-boton="Ver más 02" data-link-boton="http://peru.com"></div>
+                    <div class="banner-4" data-titulo="04 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="04 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")" data-titulo-boton="Ver más 03" data-link-boton="http://google.com"></div>
+                    <div class="banner-5" data-titulo="05 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="05 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")" data-titulo-boton="Ver más 04" data-link-boton="http://peru.com"></div>
+                    <div class="banner-6" data-titulo="06 ENERGÍA ÚTIL ENCUESTA 2022" data-color="" data-descripcion="06 Estudio que brinda los resultados de los flujos físicos de los diferentes energéticos utilizados en el país, mediante los cuales, la energía, se produce, intercambia con el exterior, transforma, consume, etc.; todo calculado en una unidad energética común." data-imagen="@Url.Content("~/images/banner.png")" data-titulo-boton="Ver más 05" data-link-boton="http://google.com"></div>
                 }
                 else
                 {
@@ -34,7 +34,7 @@
                         string pathFile = $"~/{ruta}/{nombre}";
                         string style = i == 0 ? "banner-mostrado" : "";
                         int cont = i + 1;
-                        <div class="banner-@cont @style" data-titulo="@listaBanner[i].tituloBanner" data-color="" data-descripcion="@listaBanner[i].descripcionBanner" data-imagen="@Url.Content(pathFile)"></div>
+                        <div class="banner-@cont @style" data-titulo="@listaBanner[i].tituloBanner" data-color="" data-descripcion="@listaBanner[i].descripcionBanner" data-imagen="@Url.Content(pathFile)" data-titulo-boton="@listaBanner[i].tituloBoton" data-link-boton="@listaBanner[i].enlaceBoton"></div>
                     }
                 }
             </div>
@@ -47,15 +47,7 @@
                                     <div class="bd-callout">
                                         <blockquote class="blockquote">
                                             <p class="mb-0 text-white font-weight-bold"></p>
-                                            <footer class="blockquote-footer typer text-white"></footer>
-                                            @if (listaBanner == null || listaBanner.Count == 0)
-                                            {
-                                                <a class="btn btn-amarillo btn-md px-4 mt-4" href="javascript:void(0)" role="button">Ir a la encuesta</a>
-                                            }
-                                            else
-                                            {
-                                                <a class="btn btn-amarillo btn-md px-4 mt-4" href="@listaBanner[0].enlaceBoton" role="button">@listaBanner[0].tituloBoton</a>
-                                            }
+                                            <footer class="blockquote-footer typer text-white"></footer><a class="btn btn-amarillo btn-md px-4 mt-4" target="_blank" href="#" role="button">Ir a la encuesta</a>
                                         </blockquote>
                                     </div>
                                 </div>
@@ -163,7 +155,7 @@
                         {
                             for (int i = 0; i < listaEnlace.Count; i++)
                             {
-                                <li class="my-3"><a class="letras-azul-claro-02" href="@listaEnlace[i].descripcionEnlace">@listaEnlace[i].tituloEnlace</a></li>
+                                <li class="my-3"><a class="letras-azul-claro-02" target="_blank" href="@listaEnlace[i].descripcionEnlace">@listaEnlace[i].tituloEnlace</a></li>
                             }
                         }
                     </ul>

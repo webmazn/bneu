@@ -27,11 +27,11 @@ var tituloPrincipal = (tituloSeccion) => {
 
 var armarPregunta = (preguntaEncuesta) => {
     if (preguntaEncuesta.idTipoControl == 1) {
-
+        armarCajaTexto(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 2) {
         armarListaOpciones(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 3) {
-
+        
     } else if (preguntaEncuesta.idTipoControl == 4) {
         armarOpcionUnica(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 5) {
@@ -51,6 +51,23 @@ var armarListaOpciones = (preguntaEncuesta) => {
                               `<select id="pregunta-${preguntaEncuesta.idCampanaEncuesta}" data-usuario="0" class="form-control valor-ingresado">` +
                                 `${opciones}` +
                               `</select>` +
+                            `</div>` +
+                          `</div>` +
+                        `</div>` +
+                    `</div>`
+    $('#pie').prev().after(componente)
+}
+
+var armarCajaTexto = (preguntaEncuesta) => {
+    let opciones = preguntaEncuesta.listaRespuesta == null ? `` : preguntaEncuesta.listaRespuesta.length == 0 ? '' : preguntaEncuesta.listaRespuesta.map(x => `<option value="${x.idRespuestaEncuesta}">${x.respuesta}</option>`).join('');
+    opciones = `<option value="0">-Seleccione una opción-</option>${opciones}`;
+
+    let componente = `<div class="container">` +
+                        `<div class="row">` +
+                          `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
+                            `<div class="form-group">` +
+                              `<label class="font-weight-bold text-azul" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}">${preguntaEncuesta.pregunta}</label>` +
+                              `<input id="pregunta-${preguntaEncuesta.idCampanaEncuesta}" data-usuario="0" class="form-control form-control-sm w-100 valor-ingresado" type="text">` +
                             `</div>` +
                           `</div>` +
                         `</div>` +
@@ -478,6 +495,7 @@ var grabarEncuesta = () => {
     let data = { idControlEncuesta, listaRespuestaEncuestaPlanta: arrRespuestaEncPlanta, listaRespuestaEncuestaTabla: arrRespuestaEncTabla, idFase, esUltimaPregunta, encuestaComentario, idUsuarioCreacion: idUsuarioLogin, idRolLogin }
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
+    $('#btn-grabar').addClass('d-none')
     fetch(url, init)
     .then(r => r.json())
     .then(j => {
@@ -487,6 +505,7 @@ var grabarEncuesta = () => {
             else
                 location.href = `${baseUrl}Encuesta/PreguntaEncuesta/${idControlEncuesta}/${preguntaUltimo}`
         } else {
+            $('#btn-grabar').removeClass('d-none')
             $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados'), 'registro'))
         }
     })

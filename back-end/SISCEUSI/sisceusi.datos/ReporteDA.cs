@@ -49,5 +49,35 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return lista;
         }
+
+        public List<CampanaEncuestaBE> obtenerListaCampanaEncuesta(CampanaBE entidad, OracleConnection db)
+        {
+            List<CampanaEncuestaBE> lista = new List<CampanaEncuestaBE>();
+            try
+            {
+                string sp = $"{Package.ControlEncuesta}USP_SEL_PREGUNTA_ENCUESTA";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdCampana", entidad.idCampana);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<CampanaEncuestaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<RespuestaEncuestaPlantaBE> obtenerListaRespuestaEncuestaPlanta(int idCampanaEncuesta, OracleConnection db)
+        {
+            List<RespuestaEncuestaPlantaBE> lista = new List<RespuestaEncuestaPlantaBE>();
+            try
+            {
+                string sp = $"{Package.Encuesta}USP_SEL_LIST_RESP_ENC_PLANTA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampanaEncuesta", idCampanaEncuesta);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<RespuestaEncuestaPlantaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

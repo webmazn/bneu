@@ -36,6 +36,7 @@ var cambiarPregunta = () => {
         let campanaEncuesta = arrListaPregunta.find(x => x.idCampanaEncuesta == pregunta)
         idTipoControl = campanaEncuesta.idTipoControl
         $('#cbo-columna-principal').prop('disabled', !(campanaEncuesta.idParametroTabla > 0))
+        $('#cbo-columna-secundaria').prop('disabled', !(campanaEncuesta.idParametroTabla > 0))
         if (campanaEncuesta.idParametroTabla > 0) {
             /*arrEncabezadoPrincipal = campanaEncuesta.listaEncabezadoSecundario.map(x => x.encabezadoPrincipal)
             arrEncabezadoPrincipal = [

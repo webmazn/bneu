@@ -46,38 +46,11 @@ var arrRevisor01 = []
 var arrTablaMaestra = [] 
 
 var cargarDesplegables = () => {
-    /*let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
-    let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
-    let urlEmpresa = `${baseUrl}EmpresaIndustria/obtenerListaEmpresaIndustria`;    
-    let urlRevisor = `${baseUrl}Usuario/obtenerListaRevisor`;
-    let urlTablaMaestra = `${baseUrl}TablaMaestra/obtenerListaTablaMaestra`;
-    Promise.all([
-        fetch(urlGiro),
-        fetch(urlCiuu),
-        fetch(urlEmpresa),
-        fetch(urlRevisor),
-        fetch(urlTablaMaestra)
-    ])
-    .then(r => Promise.all(r.map(v => v.json())))
-    .then((responseAll) => {
-        jGiro = responseAll[0]
-        jCiuu = responseAll[1]
-        jEmpresa = responseAll[2]
-        jRevisor = responseAll[3]
-        jTablaMaestra = responseAll[4]
-        
-        if (jGiro.success) cargarGiro(jGiro.object)
-        if (jCiuu.success) cargarCiuu(jCiuu.object)
-        if (jEmpresa.success) cargarEmpresa(jEmpresa.object)
-        if (jRevisor.success) cargarRevisor(jRevisor.object)
-        if (jTablaMaestra.success) cargarTablaMaestra(jTablaMaestra.object)
-        cargarDatosIniciales()        
-    });*/
-
     cargarGiro(listaGiro)
     cargarCiuu(listaCiuu)
     cargarEmpresa(listaEmpresa)
     cargarRevisor(listaRevisor)
+    cargarSubSector(listaSubSector)
     cargarTablaMaestra(listaTablaMaestra)
     cargarDatosIniciales()
 }
@@ -106,17 +79,23 @@ var cargarRevisor = (data) => {
 }
 
 var cargarGiro = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idGiro}">${x.giro}</option>`).join('');
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
     options = `<option value="0">-Seleccione un giro del negocio-</option>${options}`;
     $('#cbo-giro00').html(options);
     $('#cbo-giro01').html(options);
 }
 
 var cargarCiuu = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idCiuu}">${x.ciuu}</option>`).join('');
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
     options = `<option value="0">-Seleccione un CIUU-</option>${options}`;
     $('#cbo-ciuu00').html(options);
     $('#cbo-ciuu01').html(options);
+}
+
+var cargarSubSector = (data) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
+    options = `<option value="0">-Seleccione un subsector-</option>${options}`;
+    $('#cbo-sub-sector').html(options);
 }
 
 var cargarTablaMaestra = (data) => {
@@ -546,10 +525,13 @@ var grabar = () => {
     if ($('#chk-encuesta-oficial').prop('checked')) if (validarEspaciosBlanco(fechaFinEncuesta)) arr.push("Debe ingresar la fecha real fin")
     if ($('#chk-encuesta-oficial').prop('checked')) if (validarCombo(idEtapaOficial)) arr.push("Debe seleccionar estado oficial")
     if (validarCombo(idSubSector)) arr.push("Debe seleccionar un subsector");
-    if (validarEspaciosBlanco(observaciones)) arr.push("Debe ingresar una observación")
+    //if (validarEspaciosBlanco(observaciones)) arr.push("Debe ingresar una observación")
     if (arrEmpresaSelect00.length == 0 && arrEmpresaSelect01.length == 0) arr.push("No ha seleccionado ninguna empresa para la campaña")
     else if (arrEmpresaPerfil00.length > 0 || arrEmpresaPerfil01.length > 0) arr.push("Hay empresas que no han sido asignados con un supervisor")
-    if ($("#contenedorEncuesta .seccion-pregunta:last").next().length == 0) arr.push("Debe agregar un separador de página a la última pregunta")
+    if ($("#contenedorEncuesta .seccion-pregunta:first").prev()[0].className.indexOf("seccion-titulo") == -1) arr.push("Debe agregar un título de sección antes de la primera pregunta")
+    if ($("#contenedorEncuesta .seccion-pregunta:last").next().length == 0) arr.push("Debe agregar un separador de sección a la última pregunta")
+    if ($("#contenedorEncuesta .seccion-titulo").length != $("#contenedorEncuesta .seccion-separador").length) arr.push("No coincide el número de secciones de títulos con el número de secciones de separadores")
+
 
     let arrPregunta = []
     $('#contenedorEncuesta').find('.seccion-pregunta').each((x, y) => {
@@ -723,23 +705,8 @@ var grabar = () => {
  */
 
 var cargarDatosIniciales = () => {
-    /*let id = $('#identificador').val()
-    if (id > 0) {
-        let url = `${baseUrl}Campana/obtenerCampana?idCampana=${id}`;
-        fetch(url)
-        .then(r => r.json())
-        .then(j => {
-            if (j.success) {
-                cargarDatos(j.object)
-            } else {
-                $('.seccion-mensaje').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos de la planta. Por favor, puede volver a recargar la página.'), 'carga de datos'))
-            }
-        })
-        .catch(error => {
-            console.log('Error:' + error.message)
-        })
-    }*/
     cargarDatos(campana)
+    configuracionInicial(campana)
 }
 
 /* ================================================
@@ -751,6 +718,14 @@ var cargarDatosIniciales = () => {
  * INICIO CARGAR DATOS ENTIDAD
  * ================================================
  */
+
+var configuracionInicial = (data) => {
+    if (data != null) return;
+    $('#chk-encuesta-oficial').prop('checked', true)
+    validarOficial()
+    $('#txt-desde-real').val(formatoFecha(new Date()))
+    $('#cbo-estado-oficial').val(1)
+}
 
 var cargarDatos = (data) => {
     if (data == null) return
@@ -1120,9 +1095,18 @@ var validarPiloto = () => {
     let valor = $('#chk-encuesta-piloto').prop('checked')
     $('#txt-desde-piloto').prop('readonly', !valor)
     $('#txt-hasta-piloto').prop('readonly', !valor)
+    $('#cbo-estado-piloto').prop('disabled', !valor)
     if (!valor) {
         $('#txt-desde-piloto').val('')
-        $('#txt-hasta-piloto').val('')        
+        $('#txt-hasta-piloto').val('')
+        if (campana == null) {
+            $('#cbo-estado-piloto').val(0)
+        }      
+    } else {
+        $('#txt-desde-piloto').val(formatoFecha(new Date()))
+        if (campana == null) {
+            $('#cbo-estado-piloto').val(1)
+        }
     }
 }
 
@@ -1130,9 +1114,18 @@ var validarOficial = () => {
     let valor = $('#chk-encuesta-oficial').prop('checked')
     $('#txt-desde-real').prop('readonly', !valor)
     $('#txt-hasta-real').prop('readonly', !valor)
+    $('#cbo-estado-oficial').prop('disabled', !valor)
     if (!valor) {
         $('#txt-desde-real').val('')
         $('#txt-hasta-real').val('')
+        if (campana == null) {
+            $('#cbo-estado-oficial').val(0)
+        }     
+    } else {
+        $('#txt-desde-real').val(formatoFecha(new Date()))
+        if (campana == null) {
+            $('#cbo-estado-oficial').val(1)
+        }
     }
 }
 
@@ -1140,4 +1133,13 @@ var posicinar = (id, number) => {
     var target_offset = $(id).offset();
     var target_top = target_offset.top - number;
     $('html,body').animate({ scrollTop: target_top }, { duration: "slow" });
+}
+
+var formatoFecha = (fecha) => {
+    const map = {
+        dd: fecha.getDate(),
+        mm: fecha.getMonth() + 1,
+        yyyy: fecha.getFullYear()
+    }
+    return `${map['yyyy']}-${map['mm']}-${map['dd']}`
 }

@@ -117,7 +117,7 @@ var grabar = () => {
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
-        $('.seccion-mensaje').html(messageError(error), 'registro');
+        $('.seccion-mensaje').html(messageError(error, 'registro'));
         return;
     }
 

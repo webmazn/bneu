@@ -2,6 +2,8 @@
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using sisceusi.entidad;
+using sisceusi.logica;
+using sisceusi.web.Filter;
 using sisceusi.web.Models;
 using sres.ut;
 using System;
@@ -16,6 +18,7 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
+    [LogoRedSocialAttribute]
     public class BaseController : Controller
     {
         protected UsuarioBE ObtenerUsuarioLogin()
@@ -24,6 +27,13 @@ namespace sisceusi.web.Controllers
             UsuarioBE usuario = Session[keySession] == null ? null : (UsuarioBE)Session[keySession];
             return usuario;
         }
+
+        /*protected LogoRedSocialBE ObtenerLogoRedSocial()
+        {
+            PaginaHomeLN logica = new PaginaHomeLN();
+            LogoRedSocialBE logoRedSocial = logica.obtenerLogoRedSocial(new LogoRedSocialBE());
+            return logoRedSocial;
+        }*/
 
         protected async Task<bool> IsCaptchaValid(string response)
         {

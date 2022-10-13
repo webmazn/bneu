@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 p-4 bg-light rounded-right">
-                <div class="h4">Registro de intensión <br><small class="text-muted">de participar en una campaña</small></div>
+                <div class="h4">Registro de intención <br><small class="text-muted">de participar en una campaña</small></div>
                 <form class="pt-4" id="frmLogin" action="@Url.Action("Index", "Inicio")" autocomplete="off">
                     <div class="form-group">
                         <label for="txt-user">R.U.C.</label>
@@ -78,6 +78,9 @@
                     </div>
                     <div class="form-group">
                         <div class="g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["ReCAPTCHA_Site_Key"]"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 seccion-mensaje"></div>
                     </div>
                     <button class="btn-lg btn-azul w-100" type="submit">Registrar</button>
                 </form>

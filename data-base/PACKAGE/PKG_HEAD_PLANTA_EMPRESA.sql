@@ -92,6 +92,16 @@
   PROCEDURE USP_SEL_LISTA(
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_VERIFICADOR_DATOS(
+    piDenominacion VARCHAR2,
+    piDireccion VARCHAR2,   
+    piLatitud VARCHAR2,
+    piLongitud VARCHAR2,
+    piNumeroSuministroGas VARCHAR2,
+    piNumeroSuministroAlumbrado VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_PLANTA_EMPRESA;
 

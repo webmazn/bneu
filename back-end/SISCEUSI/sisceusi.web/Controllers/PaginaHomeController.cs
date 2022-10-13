@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
-    public class PaginaHomeController : Controller
+    public class PaginaHomeController : BaseController
     {
         // GET: PaginaHome
         public ActionResult Index()

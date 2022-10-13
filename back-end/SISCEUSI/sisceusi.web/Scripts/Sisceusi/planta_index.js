@@ -202,9 +202,9 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colProvincia = `<td data-encabezado="Provincia">${x.provincia.provincia}</td>`;
             let colDistrito = `<td data-encabezado="Distrito">${x.distrito.distrito}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnUsuarios = `<a class="btn btn-sm btn-warning text-white btn-table" href="${baseUrl}UsuarioPlanta/index/${x.idPlantaEmpresa}" data-toggle="tooltip" data-placement="top" title="Mantenimiento de usuarios"><i class="fa fa-user"></i></a>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idPlantaEmpresa}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idPlantaEmpresa}"><i class="fa fa-edit"></i></div>`;
+            let btnUsuarios = `<a class="btn btn-sm btn-warning text-white btn-table mx-1" href="${baseUrl}UsuarioPlanta/index/${x.idPlantaEmpresa}" data-toggle="tooltip" data-placement="top" title="Mantenimiento de usuarios"><i class="fa fa-user"></i></a>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete mx-1" data-id="${x.idPlantaEmpresa}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit mx-1" data-id="${x.idPlantaEmpresa}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnUsuarios}${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colNro}${colDireccion}${colCiuu}${colTelefono}${colUbicacion}${colDepartamento}${colProvincia}${colDistrito}${colEstado}${colOptions}</tr>`;
             return row;
@@ -269,33 +269,16 @@ var arrProvincia = []
 var arrDistrito = []
 
 var cargarDesplegables = () => {
-    let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
-    let urlDepartamento = `${baseUrl}Departamento/obtenerListaDepartamento`;
-    let urlProvincia = `${baseUrl}Provincia/obtenerListaProvincia`;
-    let urlDistrito = `${baseUrl}Distrito/obtenerListaDistrito`;
-    Promise.all([
-        fetch(urlCiuu),
-        fetch(urlDepartamento),
-        fetch(urlProvincia),
-        fetch(urlDistrito)
-    ])
-    .then(r => Promise.all(r.map(v => v.json())))
-    .then((responseAll) => {
-        jCiuu = responseAll[0]
-        jDepartamento = responseAll[1]
-        jProvincia = responseAll[2]
-        jDistrito = responseAll[3]
-        if (jCiuu.success) cargarCiuu(jCiuu.object)
-        if (jDepartamento.success) cargarDepartamento(jDepartamento.object)
-        if (jProvincia.success) cargarProvincia(jProvincia.object)
-        if (jDistrito.success) cargarDistrito(jDistrito.object)
-    });
+    cargarParametros(listaCiuu, '#cbo-ciuu', 'Seleccione un CIUU')
+    cargarDepartamento(listaDepartamento)
+    cargarProvincia(listaProvincia)
+    cargarDistrito(listaDistrito)
 }
 
-var cargarCiuu = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idCiuu}">${x.ciuu}</option>`).join('');
-    options = `<option value="0">-Seleccione un CIUU-</option>${options}`;
-    $('#cbo-ciuu').html(options);
+var cargarParametros = (data, idHtml, textoOpcion) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
+    options = `<option value="0">-${textoOpcion}-</option>${options}`;
+    $(idHtml).html(options);
 }
 
 var cargarDepartamento = (data) => {

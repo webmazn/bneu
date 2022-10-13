@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
-    public class UsuarioPlantaController : Controller
+    public class UsuarioPlantaController : BaseController
     {
         // GET: UsuarioPlanta
         public ActionResult Index(int id)

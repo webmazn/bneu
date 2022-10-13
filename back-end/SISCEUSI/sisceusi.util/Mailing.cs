@@ -25,6 +25,18 @@ namespace sisceusi.util
             ContactoBot,
             [Description("recuperarClave.html")]
             RecuperarClave,
+            [Description("registroUsuario.html")]
+            RegistroUsuario,
+            [Description("inicioCampana.html")]
+            InicioCampana,
+            [Description("culminacionSubsanacionCampana.html")]
+            CulminacionSubsanacionCampana,
+            [Description("revisionEncuesta.html")]
+            RevisionEncuesta,
+            [Description("finalizacionCampana.html")]
+            FinalizacionCampana,
+            [Description("intencionParticipar.html")]
+            IntencionParticipar,
         }
 
         static string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);

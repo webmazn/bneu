@@ -3,7 +3,7 @@
     $('#cbo-departamento').on('change', (e) => cambiarDepartamento())
     $('#cbo-provincia').on('change', (e) => cambiarProvincia())
     $('#fle-requisito-01').on('change', (e) => fileChange(e))
-    $('#cbo-estado').val('1')
+    $('#cbo-estado').val('1')    
     cargarDesplegables()
 });
 
@@ -16,66 +16,25 @@ var arrProvincia = []
 var arrDistrito = []
 
 var cargarDesplegables = () => {
-    /*let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
-    let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
-    let urlDepartamento = `${baseUrl}Departamento/obtenerListaDepartamento`;
-    let urlProvincia = `${baseUrl}Provincia/obtenerListaProvincia`;
-    let urlDistrito = `${baseUrl}Distrito/obtenerListaDistrito`;
-    let urlZona = `${baseUrl}Zona/obtenerListaZona`
-    let urlEmpresaGas = `${baseUrl}EmpresaGas/obtenerListaEmpresaGas`
-    let urlEmpresaLuz = `${baseUrl}EmpresaLuz/obtenerListaEmpresaLuz`
-    Promise.all([
-        fetch(urlGiro),
-        fetch(urlCiuu),
-        fetch(urlDepartamento),
-        fetch(urlProvincia),
-        fetch(urlDistrito),
-        fetch(urlZona),
-        fetch(urlEmpresaGas),
-        fetch(urlEmpresaLuz)
-    ])
-    .then(r => Promise.all(r.map(v => v.json())))
-    .then((responseAll) => {
-        jGiro = responseAll[0]
-        jCiuu = responseAll[1]
-        jDepartamento = responseAll[2]
-        jProvincia = responseAll[3]
-        jDistrito = responseAll[4]
-        jZona = responseAll[5]
-        jEmpresaGas = responseAll[6]
-        jEmpresaLuz = responseAll[7]
-        if (jGiro.success) cargarGiro(jGiro.object)
-        if (jCiuu.success) cargarCiuu(jCiuu.object)
-        if (jDepartamento.success) cargarDepartamento(jDepartamento.object)
-        if (jProvincia.success) cargarProvincia(jProvincia.object)
-        if (jDistrito.success) cargarDistrito(jDistrito.object)
-        if (jZona.success) cargarZona(jZona.object)
-        if (jEmpresaGas.success) cargarEmpresaGas(jEmpresaGas.object)
-        if (jEmpresaLuz.success) cargarEmpresaLuz(jEmpresaLuz.object)
-        cargarDatosIniciales()
-    });*/
-
-    cargarGiro(listaGiro)
-    cargarCiuu(listaCiuu)
+    cargarParametros(listaGiro, '#cbo-giro', 'Seleccione un giro del negocio')
+    cargarParametros(listaCiuu, '#cbo-ciuu', 'Seleccione un CIUU')
+    cargarParametros(listaEmpresaGas, '#cbo-empresa-gas', 'Seleccione una empresa de gas')
+    cargarParametros(listaEmpresaLuz, '#cbo-empresa-luz', 'Seleccione una empresa de luz')
+    cargarParametros(listaZona, '#cbo-zona', 'Seleccione una zona')
     cargarDepartamento(listaDepartamento)
     cargarProvincia(listaProvincia)
     cargarDistrito(listaDistrito)
-    cargarZona(listaZona)
-    cargarEmpresaGas(listaEmpresaGas)
-    cargarEmpresaLuz(listaEmpresaLuz)
+    
     cargarDatosIniciales()
+    //$('#txt-telefono').val(empresa.telefono)
+    $("#cbo-giro").val(empresa.idGiro)
+    $("#cbo-ciuu").val(empresa.idCiuu)
 }
 
-var cargarCiuu = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idCiuu}">${x.ciuu}</option>`).join('');
-    options = `<option value="0">-Seleccione un CIUU-</option>${options}`;
-    $('#cbo-ciuu').html(options);
-}
-
-var cargarGiro = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idGiro}">${x.giro}</option>`).join('');
-    options = `<option value="0">-Seleccione un giro del negocio-</option>${options}`;
-    $('#cbo-giro').html(options);
+var cargarParametros = (data, idHtml, textoOpcion) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
+    options = `<option value="0">-${textoOpcion}-</option>${options}`;
+    $(idHtml).html(options);
 }
 
 var cargarDepartamento = (data) => {
@@ -95,25 +54,6 @@ var cargarDistrito = (data) => {
     options = `<option value="0">-Seleccione un distrito-</option>`;
     $('#cbo-distrito').html(options);
 }
-
-var cargarZona = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idZona}">${x.zona}</option>`).join('');
-    options = `<option value="0">-Seleccione una zona-</option>${options}`;
-    $('#cbo-zona').html(options);
-}
-
-var cargarEmpresaGas = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaGas}">${x.empresaGas}</option>`).join('');
-    options = `<option value="0">-Seleccione una empresa de gas-</option>${options}`;
-    $('#cbo-empresa-gas').html(options);
-}
-
-var cargarEmpresaLuz = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaLuz}">${x.empresaLuz}</option>`).join('');
-    options = `<option value="0">-Seleccione una empresa de luz-</option>${options}`;
-    $('#cbo-empresa-luz').html(options);
-}
-
 
 /* ================================================
  * FIN CARGA DESPLEGABLES
@@ -153,7 +93,7 @@ var cambiarProvincia = () => {
  */
 
 /* ================================================
- * INICIO VALIDAR Y GRABAR DATOS
+ * INICIO VALIDAR
  * ================================================
  */
 
@@ -207,6 +147,71 @@ var grabar = () => {
     let idPlantaEmpresa = $('#frm').data('id')
     idPlantaEmpresa = idPlantaEmpresa == null ? -1 : idPlantaEmpresa
 
+    validarDatosRegistro(idPlantaEmpresa, denominacion, direccion, latitud, longitud, numeroSuministroGas, numeroSuministroAlumbrado)
+}
+
+/* ================================================
+ * FIN VALIDAR
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO VALIDAR DATOS CON BD
+ * ================================================
+ */
+
+var validarDatosRegistro = (idPlantaEmpresa, denominacion, direccion, latitud, longitud, numeroSuministroGas, numeroSuministroAlumbrado) => {
+    let url = `${baseUrl}PlantaEmpresa/verificarDatosPlanta`;
+    let data = { idPlantaEmpresa, denominacion, direccion, latitud, longitud, numeroSuministroGas, numeroSuministroAlumbrado };
+    let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
+
+    fetch(url, init)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('.seccion-mensaje').html(messageError(messageStringGeneric('La denominación, dirección, latitud, longitud, número de suministro de gas o número de suministro de luz ya han sido registrados en otra planta. Por favor verifique estos datos.'), 'registro'))
+        } else {
+            grabarDatos()
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message);
+    })
+}
+
+/* ================================================
+ * FIN VALIDAR DATOS CON BD
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO GRABAR DATOS
+ * ================================================
+ */
+
+var grabarDatos = () => {
+    let idEmpresaIndustria = $('#identificador-parent').val()
+    let denominacion = $("#txt-denominacion").val().trim()
+    let direccion = $("#txt-direccion").val().trim()
+    let idGiro = $("#cbo-giro").val()
+    let idCiuu = $("#cbo-ciuu").val()
+    let telefono = $('#txt-telefono').val().trim()
+    let latitud = $('#txt-latitud').val().trim()
+    let longitud = $('#txt-longitud').val().trim()
+    let idZona = $("#cbo-zona").val()
+    let idDepartamento = $("#cbo-departamento").val()
+    let idProvincia = $("#cbo-provincia").val()
+    let idDistrito = $("#cbo-distrito").val()
+    let idEmpresaGas = $('#cbo-empresa-gas').val()
+    let numeroSuministroGas = $('#txt-suministro-gas').val().trim()
+    let idEmpresaLuz = $('#cbo-empresa-luz').val()
+    let numeroSuministroAlumbrado = $('#txt-suministro-luz').val()
+    let idEstado = $("#cbo-estado").val()
+    let archivoContenido = $('#fle-requisito-01').data('file')
+
+    let idPlantaEmpresa = $('#frm').data('id')
+    idPlantaEmpresa = idPlantaEmpresa == null ? -1 : idPlantaEmpresa
+
     let archivoNuevo = $('#fle-requisito-01').data('new');
     archivoContenido = archivoNuevo ? archivoContenido : null
 
@@ -228,7 +233,7 @@ var grabar = () => {
             }, 3500)
         } else {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('Verifique que los datos sean correctamente ingresados, complete todos los campos obligatorios e intente otra vez.'), 'registro'))
-        }        
+        }
     })
     .catch(error => {
         console.log('Error:' + error.message);
@@ -236,7 +241,7 @@ var grabar = () => {
 }
 
 /* ================================================
- * FIN VALIDAR Y GRABAR DATOS
+ * FIN GRABAR DATOS
  * ================================================
  */
 
@@ -246,22 +251,6 @@ var grabar = () => {
  */
 
 var cargarDatosIniciales = () => {
-    /*let id = $('#identificador').val()
-    if (id > 0) {
-        let url = `${baseUrl}PlantaEmpresa/obtenerPlantaEmpresa?idPlantaEmpresa=${id}`;
-        fetch(url)
-        .then(r => r.json())
-        .then(j => {
-            if (j.success) {
-                cargarDatos(j.object)
-            } else {
-                $('.seccion-mensaje').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos de la planta. Por favor, puede volver a recargar la página.'), 'carga de datos'))
-            }
-        })
-        .catch(error => {
-            console.log('Error:' + error.message)
-        })
-    }*/
     cargarDatos(planta)
 }
 

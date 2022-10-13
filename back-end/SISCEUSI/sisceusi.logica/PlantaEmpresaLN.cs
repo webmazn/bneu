@@ -144,5 +144,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public PlantaEmpresaBE verificarDatosPlanta(PlantaEmpresaBE empresa)
+        {
+            PlantaEmpresaBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.verificarDatosPlanta(empresa, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
+        }
     }
 }

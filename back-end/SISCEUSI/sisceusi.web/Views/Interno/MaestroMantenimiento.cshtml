@@ -10,16 +10,17 @@
             <div class="container m-0 px-0 py-4">
                 <div class="row">
                     <div class="col-md-12 col-lg-9 d-flex">
-                        <div class="bg-light p-4">
-                            <div class="h4 text-cyan">Maestros de mantenimiento&nbsp;</div>
-                            <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                        <div class="bg-light py-4 pl-0 w-100">
+                            <div class="h3 text-cyan">Maestros de mantenimiento&nbsp;</div>
+                            @*<p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>*@
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-3">
                         <div class="row">
                             <div class="col-12">
-                                <a class="btn btn-azul w-100 mb-3" href="@Url.Action("Index", "Inicio")" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Ir al inicio</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
-                                <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                                <a class="btn btn-azul w-100 mb-1" href="@Url.Action("Index", "Inicio")" data-toggle="tooltip" data-placement="top" title="Ir a la página principal">Ir al inicio</a>
+                                <a class="btn btn-plomo w-100 mb-1" href="javascript:history.back()">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-1 text-white" data-toggle="tooltip" data-placement="left" title="En este formulario puede seleccionar una opción de la parte inferior, que le permitirá gestionar las tablas que utiliza el sistema, por ejemplo, si desea agregar o modificar los datos de un usuario, seleccione “Mantenimiento de Usuarios” y, si desea generar una nueva campaña haga clic en el botón derecho de “Mantenimiento de Campañas”."><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                             </div>
                         </div>
                     </div>
@@ -29,7 +30,7 @@
             <div class="container-fluid py-4">
                 <div class="row">
                     <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                        <div class="h5">BANDEJA DE MANTENIMIENTOS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                        <div class="h5">BANDEJA DE MANTENIMIENTOS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los mantenimientos"></i></div>
                     </div>
                     <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0"></div>
                 </div>
@@ -80,19 +81,19 @@
                                         <td class="text-center" data-encabezado="Nuevo registro"><a class="btn btn-sm btn-info btn-table" href="./mantenimiento-de-campanas-piloto-nuevo.html"><i class="fa fa-plus-square"></i></a></td>
                                     </tr>*@
                                     <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">4</td>
+                                        <td class="text-center" data-encabezado="Item" scope="row">2</td>
                                         <td data-encabezado="Descripción del mantenimiento">MANTENIMIENTO DE CAMPAÑAS</td>
                                         <td class="text-center" data-encabezado="Bandeja del listado"><a class="btn btn-sm btn-azul btn-table text-white" href="@Url.Action("Index", "Campana")"><i class="fa fa-table"></i></a></td>
                                         <td class="text-center" data-encabezado="Nuevo registro"><a class="btn btn-sm btn-info btn-table" href="@Url.Action("NuevaCampana", "Campana")"><i class="fa fa-plus-square"></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">5</td>
+                                        <td class="text-center" data-encabezado="Item" scope="row">3</td>
                                         <td data-encabezado="Descripción del mantenimiento">MANTENIMIENTO DE EMPRESAS</td>
                                         <td class="text-center" data-encabezado="Bandeja del listado"><a class="btn btn-sm btn-azul btn-table text-white" href="@Url.Action("Index", "EmpresaIndustria")"><i class="fa fa-table"></i></a></td>
                                         <td class="text-center" data-encabezado="Nuevo registro"><a class="btn btn-sm btn-info btn-table" href="@Url.Action("NuevaEmpresaIndustria", "EmpresaIndustria")"><i class="fa fa-plus-square"></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">6</td>
+                                        <td class="text-center" data-encabezado="Item" scope="row">4</td>
                                         <td data-encabezado="Descripción del mantenimiento">MANTENIMIENTO DE PARÁMETROS</td>
                                         <td class="text-center" data-encabezado="Bandeja del listado"><a class="btn btn-sm btn-azul btn-table text-white" href="@Url.Action("Index", "Parametro")"><i class="fa fa-table"></i></a></td>
                                         <td class="text-center" data-encabezado="Nuevo registro"><a class="btn btn-sm btn-info btn-table" href="@Url.Action("NuevoParametro", "Parametro")"><i class="fa fa-plus-square"></i></a></td>
@@ -104,19 +105,19 @@
                                         <td class="text-center" data-encabezado="Nuevo registro"><a class="btn btn-sm btn-info btn-table" href="./mantenimiento-de-perfiles-nuevo.html"><i class="fa fa-plus-square"></i></a></td>
                                     </tr>*@
                                     <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">8</td>
+                                        <td class="text-center" data-encabezado="Item" scope="row">5</td>
                                         <td data-encabezado="Descripción del mantenimiento">MANTENIMIENTO DE USUARIOS</td>
                                         <td class="text-center" data-encabezado="Bandeja del listado"><a class="btn btn-sm btn-azul btn-table text-white" href="@Url.Action("Index", "Usuario")"><i class="fa fa-table"></i></a></td>
                                         <td class="text-center" data-encabezado="Nuevo registro"><a class="btn btn-sm btn-info btn-table" href="@Url.Action("NuevoUsuario", "Usuario")"><i class="fa fa-plus-square"></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">12</td>
+                                        <td class="text-center" data-encabezado="Item" scope="row">6</td>
                                         <td data-encabezado="Descripción del mantenimiento">MANTENIMIENTO DEL HOME</td>
                                         <td class="text-center" data-encabezado="Bandeja del listado"><a class="btn btn-sm btn-azul btn-table text-white" href="@Url.Action("Index", "PaginaHome")"><i class="fa fa-table"></i></a></td>
                                         <td class="text-center" data-encabezado="Nuevo registro">-</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">13</td>
+                                        <td class="text-center" data-encabezado="Item" scope="row">7</td>
                                         <td data-encabezado="Descripción del mantenimiento">MANTENIMIENTO DE INDICADORES</td>
                                         <td class="text-center" data-encabezado="Bandeja del listado"><a class="btn btn-sm btn-azul btn-table text-white" href="@Url.Action("Index", "Indicador")"><i class="fa fa-table"></i></a></td>
                                         <td class="text-center" data-encabezado="Nuevo registro">-</td>

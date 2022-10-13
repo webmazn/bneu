@@ -1,11 +1,15 @@
 ﻿using OfficeOpenXml;
 using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.util;
 using sisceusi.web.Filter;
 using sres.ut;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -102,9 +106,11 @@ namespace sisceusi.web.Controllers
         [HttpPost]
         public JsonResult GrabarUsuario(UsuarioBE usuario)
         {
+            string contrasena = usuario.password;
             UsuarioLN logica = new UsuarioLN();
             usuario.ipCreacion = Request.UserHostAddress.ToString().Trim();
             bool seGrabo = logica.grabarUsuario(usuario);
+            if (seGrabo) enviarCorreo(usuario.correoElectronico, contrasena);
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", seGrabo);
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
@@ -206,7 +212,7 @@ namespace sisceusi.web.Controllers
                     string tituloExcel = idPlantaEmpresa == 0 ? "Mantenimiento Usuario" : "Mantenimiento Usuario Planta";
                     string nombreArchivo = idPlantaEmpresa == 0 ? "MANTENIMIENTO_USUARIO_" : "MANTENIMIENTO_USUARIO_PLANTA_";
                     ExcelWorksheet ws = tituloReporteExcel(package, tituloExcel, 6);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, nombreArchivo);
                 }
@@ -236,7 +242,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Usuario", 6);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_USUARIO_");
                 }
@@ -259,6 +265,28 @@ namespace sisceusi.web.Controllers
                 i++;
             });
             return listas;
+        }
+
+        private void enviarCorreo(string correoElectronico, string contrasena)
+        {
+            UsuarioLN logicaUsuario = new UsuarioLN();
+            UsuarioBE user = logicaUsuario.obtenerEmpresaUsuario(new UsuarioBE { correoElectronico = correoElectronico, idUsuario = 0 });
+            string fieldServer = "[SERVER]", fieldNombres = "[NOMBRES]", fieldEmpresa = "[EMPRESA]", fieldCorreo = "[CORREO]", fieldContrasena = "[CONTRASENA]", fieldRol = "[ROL]";
+            string[] fields = new string[] { fieldServer, fieldNombres, fieldEmpresa, fieldCorreo, fieldContrasena, fieldRol };
+            string[] fieldsRequire = new string[] { fieldServer, fieldNombres, fieldEmpresa, fieldCorreo, fieldContrasena, fieldRol };
+            Dictionary<string, string> dataBody = new Dictionary<string, string> {
+                [fieldServer] = ConfigurationManager.AppSettings["Server"],
+                [fieldNombres] = user == null ? "" : user.nombres,
+                [fieldEmpresa] = user == null ? "" : user.empresaIndustria.nombreEmpresa,
+                [fieldCorreo] = user == null ? "" : user.correoElectronico,
+                [fieldContrasena] = contrasena,
+                [fieldRol] = user == null ? "" : user.rol.rol };
+            string subject = "Registro de Usuario en el Sistema de Balance Energético Del MINEM";
+            MailAddressCollection mailTo = new MailAddressCollection();
+            mailTo.Add(new MailAddress(correoElectronico, user == null ? "" : user.nombres));
+
+            Mailing mailing = new Mailing();
+            Task.Factory.StartNew(() => mailing.SendMail(Mailing.Templates.RegistroUsuario, dataBody, fields, fieldsRequire, subject, mailTo));
         }
     }
 }

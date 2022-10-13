@@ -31,7 +31,7 @@ var validarCampos = () => {
 var send = (e) => {
     e.preventDefault();
 
-    if ($('form .form-group:last').next().hasClass('alert')) $('form .form-group:last').next().remove();
+    $('.seccion-mensaje').html('');
     if (validarCampos()) {
         registrarConCaptcha();
     }
@@ -50,6 +50,7 @@ var registrarConCaptcha = () => {
     let url = `${baseUrl}IntencionParticipar/registrar`;
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
+    $('button[type="submit"]').hide()
     fetch(url, init)
     .then(r => r.json())
     .then(validar)
@@ -57,13 +58,13 @@ var registrarConCaptcha = () => {
 
 var validar = (data) => {
     if (data.success == true) {
-        $('form .form-group:last').after(messageSuccess(messageStringGeneric(data.message)));
-        $('button[type="submit"]').hide()
+        $('.seccion-mensaje').html(messageSuccess(messageStringGeneric(data.message)))
         setTimeout(function () {
             location.href = `${baseUrl}Inicio/Index`;
         }, 3500);
     } else {
-        $('form .form-group:last').after(messageError(messageStringGeneric(data.message), 'registro'));
+        $('button[type="submit"]').show()
+        $('.seccion-mensaje').html(messageError(messageStringGeneric(data.message), 'registro'))
         grecaptcha.reset();
     }
 }

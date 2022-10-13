@@ -43,6 +43,7 @@
     <Compile Include="BannerBE.cs" />
     <Compile Include="BaseBE.cs" />
     <Compile Include="CampanaBE.cs" />
+    <Compile Include="CampanaCorreoBE.cs" />
     <Compile Include="CampanaEmpresaBE.cs" />
     <Compile Include="ContactoBE.cs" />
     <Compile Include="ControlEncuestaBE.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="GiroBE.cs" />
     <Compile Include="GrupoEmpresaBE.cs" />
     <Compile Include="IndicadorBE.cs" />
+    <Compile Include="IndicadorCampanaEncuestaBE.cs" />
     <Compile Include="IndicadorEncabezadoSecundarioBE.cs" />
     <Compile Include="IntencionParticiparBE.cs" />
     <Compile Include="InternoBE.cs" />

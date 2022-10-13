@@ -247,16 +247,20 @@ namespace sisceusi.logica
                         {
                             string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
                             string nombre = String.Concat(entidad.nombreArchivoGeneradoLogoWeb, "_", entidad.nombreArchivoLogoWeb);
-                            string pathFile = Path.Combine(ruta, nombre);
-                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            //string pathFile = Path.Combine(ruta, nombre);
+                            string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                            string pathFile = Path.Combine(pathDirectory, nombre);
+                            if (!Directory.Exists(pathDirectory)) Directory.CreateDirectory(pathDirectory);
                             File.WriteAllBytes(pathFile, entidad.archivoContenidoLogoWeb);
                         }
                         if (seGuardo && entidad.archivoNuevoLogoDgee)
                         {
                             string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
                             string nombre = String.Concat(entidad.nombreArchivoGeneradoLogoDgee, "_", entidad.nombreArchivoLogoDgee);
-                            string pathFile = Path.Combine(ruta, nombre);
-                            if (!Directory.Exists(ruta)) Directory.CreateDirectory(ruta);
+                            //string pathFile = Path.Combine(ruta, nombre);
+                            string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                            string pathFile = Path.Combine(pathDirectory, nombre);
+                            if (!Directory.Exists(pathDirectory)) Directory.CreateDirectory(pathDirectory);
                             File.WriteAllBytes(pathFile, entidad.archivoContenidoLogoDgee);
                         }
                     }
@@ -285,17 +289,23 @@ namespace sisceusi.logica
                 {
                     string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
                     string nombre = String.Concat(item.nombreArchivoGeneradoLogoWeb, "_", item.nombreArchivoLogoWeb);
-                    string pathFile = Path.Combine(ruta, nombre);
+                    //string pathFile = Path.Combine(ruta, nombre);
+                    string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                    string pathFile = Path.Combine(pathDirectory, nombre);
                     pathFile = !File.Exists(pathFile) ? null : pathFile;
                     item.archivoContenidoLogoWeb = pathFile == null ? null : File.ReadAllBytes(pathFile);
+                    item.rutaManager = ruta;
                 }
                 if (item != null)
                 {
                     string ruta = ConfigurationManager.AppSettings.Get("rutaImagenLogo");
                     string nombre = String.Concat(item.nombreArchivoGeneradoLogoDgee, "_", item.nombreArchivoLogoDgee);
-                    string pathFile = Path.Combine(ruta, nombre);
+                    //string pathFile = Path.Combine(ruta, nombre);
+                    string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                    string pathFile = Path.Combine(pathDirectory, nombre);
                     pathFile = !File.Exists(pathFile) ? null : pathFile;
                     item.archivoContenidoLogoDgee = pathFile == null ? null : File.ReadAllBytes(pathFile);
+                    item.rutaManager = ruta;
                 }
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }

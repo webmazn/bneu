@@ -179,135 +179,436 @@ var armarIndicador = (indicador) => {
 
     if (indicador.idMetodoCalculo == 1) { //suma
         if (indicador.idTipoControl == 5) {
-            //let total = indicador.indicadorTablaMaestra.sum(x => x.valor)
-            //initialValue = 0
-            //let total = indicador.indicadorCalculo.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
 
             let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
             let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
 
-            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            let arrEtiqueta = arrIndicadorAgrupacion.filter(x => x.etiqueta !== "").map(x => {
                 return {
                     "etiqueta": x.etiqueta,
-                    "filaTabla": x.filaTabla
+                    "filaTabla": x.filaTabla,
+                    "controlEncuesta": x.controlEncuesta.idControlEncuesta
                 }
             })
 
+            let arrIntegrado = []
+            arrEtiqueta.forEach(e => {
+                let arr = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla && x.controlEncuesta.idControlEncuesta == e.controlEncuesta).map(x => {
+                    return {
+                        'etiqueta': e.etiqueta,
+                        'valor': x.valor,
+                    }
+                })
+                arr.forEach(x => {
+                    arrIntegrado.push(x)
+                })
+            })
+
             initialValue = 0
+            let arrReporte = []
+            arrIntegrado.forEach(x => {
+                let index = arrReporte.findIndex(e => e[0] === x.etiqueta)
+                if (index == -1) {
+                    let suma = arrIntegrado.filter(e => e.etiqueta == x.etiqueta).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                    let arr = [x.etiqueta, suma]
+                    arrReporte.push(arr)
+                }
+            })
+
+            /*initialValue = 0
             let arrReporte = []
             arrEtiqueta.forEach(e => {
                 let totalEtiqueta = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
                 let arr = [e.etiqueta, totalEtiqueta]
                 arrReporte.push(arr)
-            })
-            //console.log(arrReporte)
+            })*/
+
             $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
             google.charts.setOnLoadCallback(drawPieChart(arrReporte))
-            //alert(total)
-        } else {
 
+        } else {
+            let arrIndicadorCampanaEncuesta = validarCampanaEncuesta(indicador.indicadorCampanaEncuesta)
+
+            let arrEtiqueta = []
+            if (indicador.idTipoControl == 1) {
+                arrEtiqueta.push({ "etiqueta": "" })
+            } else {
+                arrEtiqueta = arrIndicadorCampanaEncuesta.map(x => {
+                    return {
+                        "etiqueta": x.etiqueta
+                    }
+                })
+                arrEtiqueta = [
+                    ...new Map(arrEtiqueta.map((item) =>[item["etiqueta"], item])).values(),
+                ]
+            }            
+
+            initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let totalEtiqueta = 0
+                if (indicador.idTipoControl == 1)
+                    totalEtiqueta = arrIndicadorCampanaEncuesta.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                else
+                    totalEtiqueta = arrIndicadorCampanaEncuesta.filter(x => x.etiqueta == e.etiqueta).length
+                let arr = [e.etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            })
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
         }
     } else if (indicador.idMetodoCalculo == 2) { //conteo
         if (indicador.idTipoControl == 5) {
             let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
             let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
 
-            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            let arrEtiqueta = arrIndicadorAgrupacion.filter(x => x.etiqueta !== "").map(x => {
                 return {
                     "etiqueta": x.etiqueta,
-                    "filaTabla": x.filaTabla
+                    "filaTabla": x.filaTabla,
+                    "controlEncuesta": x.controlEncuesta.idControlEncuesta
                 }
             })
+
+            let arrIntegrado = []
+            arrEtiqueta.forEach(e => {
+                let arr = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla && x.controlEncuesta.idControlEncuesta == e.controlEncuesta).map(x => {
+                    return {
+                        'etiqueta': e.etiqueta,
+                        'valor': x.valor,
+                    }
+                })
+                arr.forEach(x => {
+                    arrIntegrado.push(x)
+                })
+            })
+
+            let arrReporte = []
+            arrIntegrado.forEach(x => {
+                let index = arrReporte.findIndex(e => e[0] === x.etiqueta)
+                if (index == -1) {
+                    let contar = arrIntegrado.filter(e => e.etiqueta == x.etiqueta).length
+                    let arr = [x.etiqueta, contar]
+                    arrReporte.push(arr)
+                }
+            })
+
+            /*initialValue = 0
+            let arrReporte = []
+            arrEtiqueta.forEach(e => {
+                let totalEtiqueta = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).length
+                let arr = [e.etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            })*/
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+        } else {
+            let arrIndicadorCampanaEncuesta = validarCampanaEncuesta(indicador.indicadorCampanaEncuesta)
+
+            let arrEtiqueta = []
+            if (indicador.idTipoControl == 1) {
+                arrEtiqueta.push({ "etiqueta": "" })
+            } else {
+                arrEtiqueta = arrIndicadorCampanaEncuesta.map(x => {
+                    return {
+                        "etiqueta": x.etiqueta
+                    }
+                })
+                arrEtiqueta = [
+                    ...new Map(arrEtiqueta.map((item) =>[item["etiqueta"], item])).values(),
+                ]
+            }
 
             initialValue = 0
             let arrReporte = []
             arrEtiqueta.forEach(e => {
-                let totalEtiqueta = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).length
+                let totalEtiqueta = 0
+                if (indicador.idTipoControl == 1)
+                    totalEtiqueta = arrIndicadorCampanaEncuesta.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                else
+                    totalEtiqueta = arrIndicadorCampanaEncuesta.filter(x => x.etiqueta == e.etiqueta).length
                 let arr = [e.etiqueta, totalEtiqueta]
                 arrReporte.push(arr)
             })
 
             $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
             google.charts.setOnLoadCallback(drawPieChart(arrReporte))
-        } else {
-
         }
     } else if (indicador.idMetodoCalculo == 3) { //Maximo
         if (indicador.idTipoControl == 5) {
             let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
             let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
 
-            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            let arrEtiqueta = arrIndicadorAgrupacion.filter(x => x.etiqueta !== "").map(x => {
                 return {
                     "etiqueta": x.etiqueta,
-                    "filaTabla": x.filaTabla
+                    "filaTabla": x.filaTabla,
+                    "controlEncuesta": x.controlEncuesta.idControlEncuesta
                 }
             })
 
-            initialValue = 0
-            let arrReporte = []
+            let arrIntegrado = []
             arrEtiqueta.forEach(e => {
-                let totalEtiqueta = Math.max(arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).map(x => x.valor))
-                let arr = [e.etiqueta, totalEtiqueta]
-                arrReporte.push(arr)
+                let arr = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla && x.controlEncuesta.idControlEncuesta == e.controlEncuesta).map(x => {
+                    return {
+                        'etiqueta': e.etiqueta,
+                        'valor': x.valor
+                    }
+                })
+                arr.forEach(x => {
+                    arrIntegrado.push(x)
+                })
+            })
+
+            let arrReporte = []
+            arrIntegrado.forEach(x => {
+                let index = arrReporte.findIndex(e => e[0] === x.etiqueta)
+                if (index == -1) {
+                    maxValor = Math.max(...arrIntegrado.filter(e => e.etiqueta == x.etiqueta).map(x => x.valor))
+                    let arr = [x.etiqueta, maxValor]
+                    arrReporte.push(arr)
+                }
             })
 
             $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
             google.charts.setOnLoadCallback(drawPieChart(arrReporte))
         } else {
+            let arrIndicadorCampanaEncuesta = validarCampanaEncuesta(indicador.indicadorCampanaEncuesta)
 
+            let arrEtiqueta = []
+            if (indicador.idTipoControl == 1) {
+                arrEtiqueta.push({ "etiqueta": "" })
+            } else {
+                arrEtiqueta = arrIndicadorCampanaEncuesta.map(x => {
+                    return {
+                        "etiqueta": x.etiqueta
+                    }
+                })
+                arrEtiqueta = [
+                    ...new Map(arrEtiqueta.map((item) =>[item["etiqueta"], item])).values(),
+                ]
+            }
+
+            initialValue = 0
+            let arrReporte = []
+            let totalEtiqueta = 0
+            if (indicador.idTipoControl == 1) {
+                totalEtiqueta = Math.max(...arrIndicadorCampanaEncuesta.map(x => x.valor))
+                let arr = [arrEtiqueta[0].etiqueta, totalEtiqueta]
+                arrReporte.push(arr)
+            } else {
+                let arrConteo = []
+                let cont = 1
+                arrEtiqueta.forEach(e => {
+                    let totalEtiqueta = arrIndicadorCampanaEncuesta.filter(x => x.etiqueta == e.etiqueta).length
+                    arrConteo.push({
+                        'etiqueta': e.etiqueta,
+                        'total': totalEtiqueta
+                    })
+                })
+                let maxValor = Math.max(...arrConteo.map(x => x.total))
+                let obj = arrConteo.filter(x => x.total == maxValor)
+                obj.forEach(e => {
+                    let arr = [e.etiqueta, e.total]
+                    arrReporte.push(arr)
+                })                
+            }            
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
         }
     } else if (indicador.idMetodoCalculo == 4) { //Minimo
         if (indicador.idTipoControl == 5) {
             let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
             let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
 
-            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            //let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            //    return {
+            //        "etiqueta": x.etiqueta,
+            //        "filaTabla": x.filaTabla
+            //    }
+            //})
+
+            //initialValue = 0
+            //let arrReporte = []
+            //arrEtiqueta.forEach(e => {
+            //    let totalEtiqueta = Math.min(arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).map(x => x.valor))
+            //    let arr = [e.etiqueta, totalEtiqueta]
+            //    arrReporte.push(arr)
+            //})
+
+            let arrEtiqueta = arrIndicadorAgrupacion.filter(x => x.etiqueta !== "").map(x => {
                 return {
                     "etiqueta": x.etiqueta,
-                    "filaTabla": x.filaTabla
+                    "filaTabla": x.filaTabla,
+                    "controlEncuesta": x.controlEncuesta.idControlEncuesta
                 }
             })
 
-            initialValue = 0
-            let arrReporte = []
+            let arrIntegrado = []
             arrEtiqueta.forEach(e => {
-                let totalEtiqueta = Math.min(arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).map(x => x.valor))
-                let arr = [e.etiqueta, totalEtiqueta]
-                arrReporte.push(arr)
+                let arr = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla && x.controlEncuesta.idControlEncuesta == e.controlEncuesta).map(x => {
+                    return {
+                        'etiqueta': e.etiqueta,
+                        'valor': x.valor
+                    }
+                })
+                arr.forEach(x => {
+                    arrIntegrado.push(x)
+                })
+            })
+
+            let arrReporte = []
+            arrIntegrado.forEach(x => {
+                let index = arrReporte.findIndex(e => e[0] === x.etiqueta)
+                if (index == -1) {
+                    minValor = Math.min(...arrIntegrado.filter(e => e.etiqueta == x.etiqueta).map(x => x.valor))
+                    let arr = [x.etiqueta, minValor]
+                    arrReporte.push(arr)
+                }
             })
 
             $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
             google.charts.setOnLoadCallback(drawPieChart(arrReporte))
         } else {
+            let arrIndicadorCampanaEncuesta = validarCampanaEncuesta(indicador.indicadorCampanaEncuesta)
 
+            let arrEtiqueta = []
+            if (indicador.idTipoControl == 1) {
+                arrEtiqueta.push({ "etiqueta": "" })
+            } else {
+                arrEtiqueta = arrIndicadorCampanaEncuesta.map(x => {
+                    return {
+                        "etiqueta": x.etiqueta
+                    }
+                })
+                arrEtiqueta = [
+                    ...new Map(arrEtiqueta.map((item) =>[item["etiqueta"], item])).values(),
+                ]
+            }
+
+            initialValue = 0
+            let arrReporte = []
+            let totalEtiqueta = 0
+            if (indicador.idTipoControl == 1) {
+                valMin = Math.min(...arrIndicadorCampanaEncuesta.map(x => x.valor))
+                let arr = [arrEtiqueta[0].etiqueta, valMin]
+                arrReporte.push(arr)
+            } else {
+                let arrConteo = []
+                let cont = 1
+                arrEtiqueta.forEach(e => {
+                    let totalEtiqueta = arrIndicadorCampanaEncuesta.filter(x => x.etiqueta == e.etiqueta).length
+                    arrConteo.push({
+                        'etiqueta': e.etiqueta,
+                        'total': totalEtiqueta
+                    })
+                })
+                let minValor = Math.min(...arrConteo.map(x => x.total))
+                let obj = arrConteo.filter(x => x.total == minValor)
+                obj.forEach(e => {
+                    let arr = [e.etiqueta, e.total]
+                    arrReporte.push(arr)
+                })
+            }
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
         }
     } else if (indicador.idMetodoCalculo == 5) { //Promedio
         if (indicador.idTipoControl == 5) {
             let arrIndicadorAgrupacion = validarAgrupacion(indicador.indicadorAgrupacion)
             let arrIndicadorCalculo = validarCalculo(indicador.indicadorCalculo)
 
-            let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            //let arrEtiqueta = arrIndicadorAgrupacion.map(x => {
+            //    return {
+            //        "etiqueta": x.etiqueta,
+            //        "filaTabla": x.filaTabla
+            //    }
+            //})
+
+            //initialValue = 0
+            //let arrReporte = []
+            //arrEtiqueta.forEach(e => {
+            //    let cantidad = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).length
+            //    let suma = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+            //    let promedio = cantidad <= 0 ? 0 : suma/cantidad
+            //    let arr = [e.etiqueta, promedio]
+            //    arrReporte.push(arr)
+            //})
+
+            let arrEtiqueta = arrIndicadorAgrupacion.filter(x => x.etiqueta !== "").map(x => {
                 return {
                     "etiqueta": x.etiqueta,
-                    "filaTabla": x.filaTabla
+                    "filaTabla": x.filaTabla,
+                    "controlEncuesta": x.controlEncuesta.idControlEncuesta
                 }
+            })
+
+            let arrIntegrado = []
+            arrEtiqueta.forEach(e => {
+                let arr = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla && x.controlEncuesta.idControlEncuesta == e.controlEncuesta).map(x => {
+                    return {
+                        'etiqueta': e.etiqueta,
+                        'valor': x.valor
+                    }
+                })
+                arr.forEach(x => {
+                    arrIntegrado.push(x)
+                })
             })
 
             initialValue = 0
             let arrReporte = []
+            arrIntegrado.forEach(x => {
+                let index = arrReporte.findIndex(e => e[0] === x.etiqueta)
+                if (index == -1) {
+                    let cantidad = arrIntegrado.filter(e => e.etiqueta == x.etiqueta).length
+                    let suma = arrIntegrado.filter(e => e.etiqueta == x.etiqueta).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                    let promedio = cantidad <= 0 ? 0 : suma/cantidad
+                    let arr = [x.etiqueta, promedio]
+                    arrReporte.push(arr)
+                }
+            })
+
+            $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
+            google.charts.setOnLoadCallback(drawPieChart(arrReporte))
+        } else {
+            let arrIndicadorCampanaEncuesta = validarCampanaEncuesta(indicador.indicadorCampanaEncuesta)
+
+            let arrEtiqueta = []
+            if (indicador.idTipoControl == 1) {
+                arrEtiqueta.push({ "etiqueta": "" })
+            } else {
+                arrEtiqueta = arrIndicadorCampanaEncuesta.map(x => {
+                    return {
+                        "etiqueta": x.etiqueta
+                    }
+                })
+                arrEtiqueta = [
+                    ...new Map(arrEtiqueta.map((item) =>[item["etiqueta"], item])).values(),
+                ]
+            }
+
+            let initialValue = 0
+            let promedio = 0
+            let arrReporte = []
             arrEtiqueta.forEach(e => {
-                let cantidad = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).length
-                let suma = arrIndicadorCalculo.filter(x => x.filaTabla == e.filaTabla).reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
-                let promedio = cantidad <= 0 ? 0 : suma/cantidad
+                let totalEtiqueta = 0
+                if (indicador.idTipoControl == 1) {
+                    conteo = arrIndicadorCampanaEncuesta.length
+                    suma = arrIndicadorCampanaEncuesta.reduce((previousValue, currentValue) => previousValue + currentValue.valor, initialValue)
+                    promedio = conteo <= 0 ? 0 : suma / conteo
+                } else
+                    promedio = arrIndicadorCampanaEncuesta.filter(x => x.etiqueta == e.etiqueta).length
                 let arr = [e.etiqueta, promedio]
                 arrReporte.push(arr)
             })
 
             $('#titulo-grafico').html(indicador.nombreIndicador.toUpperCase())
             google.charts.setOnLoadCallback(drawPieChart(arrReporte))
-        } else {
-
         }
     }
 }
@@ -371,6 +672,35 @@ var validarCalculo = (arrIndicadorCalculo) => {
         //arrIndicadorCalculo = arrIndicadorCalculo.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
     }
     return arrIndicadorCalculo
+}
+
+var validarCampanaEncuesta = (arrIndicadorCampanaEncuesta) => {
+    if (distrito && distrito != '0') {
+        if (idRolLogin == 3) {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        } else if (idRolLogin == 2) {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        } else {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia && x.controlEncuesta.plantaEmpresa.idDistrito == distrito)
+        }
+    } else if (provincia && provincia != '0') {
+        if (idRolLogin == 3) {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        } else if (idRolLogin == 2) {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        } else {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento && x.controlEncuesta.plantaEmpresa.idProvincia == provincia)
+        }
+    } else if (departamento && departamento != '0') {
+        if (idRolLogin == 3) {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.plantaEmpresa.idPlantaEmpresa == idPlanta && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        } else if (idRolLogin == 2) {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.idSupervisor == idUsuarioLogin && x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        } else {
+            arrIndicadorCampanaEncuesta = arrIndicadorCampanaEncuesta.filter(x => x.controlEncuesta.plantaEmpresa.idDepartamento == departamento)
+        }
+    }
+    return arrIndicadorCampanaEncuesta
 }
 
 var cambiarPagina = (boton) => {
@@ -555,11 +885,21 @@ var drawPieChart = (arr) => {
 
 var idObservar
 var observar = (obj) => {
+    posicinar('#cuerpo', 120)
     let id = $(obj).data('id')
     location.href = `${baseUrl}Interno/EncuestaFicha/${id}`
+    $('#cbo-departamento').val('0')
+    cambiarDepartamento()
+    cargarIndicadores()    
 }
 
 /* ================================================
  * FIN OBSERVAR
  * ================================================
  */
+
+var posicinar = (id, number) => {
+    var target_offset = $(id).offset();
+    var target_top = target_offset.top - number;
+    $('html,body').animate({ scrollTop: target_top }, { duration: "slow" });
+}

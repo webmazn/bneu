@@ -10,7 +10,7 @@ $(document).ready(() => {
 
 var armarPregunta = (preguntaEncuesta) => {
     if (preguntaEncuesta.idTipoControl == 1) {
-
+        armarCajaTexto(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 2) {
         armarListaOpciones(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 3) {
@@ -19,6 +19,26 @@ var armarPregunta = (preguntaEncuesta) => {
         armarOpcionUnica(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 5) {
         armarTablaMaestra(preguntaEncuesta)
+    }
+}
+
+var armarCajaTexto = (preguntaEncuesta) => {
+    let respuesta = preguntaEncuesta.listaRespuestaEncuestaPlanta[0].respuesta
+
+    let componente = `<div class="container">` +
+                        `<div class="row">` +
+                          `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
+                            `<div class="form-group">` +
+                              `<label class="font-weight-bold text-azul" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}">${preguntaEncuesta.pregunta}</label></br>` +
+                              `<span>${respuesta}</span>` +
+                            `</div>` +
+                          `</div>` +
+                        `</div>` +
+                    `</div>`
+    $('#pie').prev().after(componente)
+
+    if (preguntaEncuesta.separador == '1') {
+        $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
     }
 }
 
@@ -50,7 +70,7 @@ var armarListaOpciones = (preguntaEncuesta) => {
     //$('#preguntas-encuesta').append(componente)
 
     if (preguntaEncuesta.separador == '1') {
-        $('#pie').prev().after('<div class="dropdown-divider my-4"></div>')
+        $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
     }
 }
 
@@ -59,8 +79,8 @@ var armarOpcionUnica = (preguntaEncuesta) => {
         `<div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">` +
            `<div class="form-group">` +
              `<div class="form-check">` +
-               `<input class="form-check-input valor-ingresado" type="radio" name="pregunta-${preguntaEncuesta.idCampanaEncuesta}" data-usuario="0" id="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${x.idRespuestaEncuesta}">` +
-               `<label class="form-check-label" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${x.idRespuestaEncuesta}">${x.respuesta}</label>` +
+               `<input class="form-check-input valor-ingresado" type="radio" name="pregunta-${preguntaEncuesta.idCampanaEncuesta}" data-usuario="0" id="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${x.idRespuestaEncuesta}" disabled>` +
+               `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-check-label" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}-${x.idRespuestaEncuesta}">${x.respuesta}</label>` +
              `</div>` +
            `</div>` +
          `</div>`).join('');
@@ -97,7 +117,7 @@ var armarOpcionUnica = (preguntaEncuesta) => {
     })
 
     if (preguntaEncuesta.separador == '1') {
-        $('#pie').prev().after('<div class="dropdown-divider my-4"></div>')
+        $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
     }
 }
 

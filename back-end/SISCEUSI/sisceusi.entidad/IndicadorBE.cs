@@ -25,5 +25,6 @@ namespace sisceusi.entidad
         public MetodoCalculoBE metodoCalculo { get; set; }
         public List<IndicadorEncabezadoSecundarioBE> indicadorAgrupacion { get; set; }
         public List<IndicadorEncabezadoSecundarioBE> indicadorCalculo { get; set; }
+        public List<IndicadorCampanaEncuestaBE> indicadorCampanaEncuesta { get; set; }
     }
 }

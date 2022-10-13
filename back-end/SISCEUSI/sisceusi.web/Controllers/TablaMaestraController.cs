@@ -139,7 +139,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento tabla maestra", 6);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_TABLA_MAESTRA_");
                 }
@@ -166,7 +166,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento tabla maestra", 6);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "SUB TÍTULO", "USUARIO REGISTRO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_TABLA_MAESTRA_");
                 }

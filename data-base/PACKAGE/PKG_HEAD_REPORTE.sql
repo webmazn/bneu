@@ -11,6 +11,22 @@
     piIdCampana NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_PREGUNTA_ENCUESTA(
+    piIdCampana NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_LIST_RESP_ENC_PLANTA(
+    piIdCampanaEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_LIST_RESP_ENC_TABLA(
+    piIdCampana NUMBER,
+    piIdEncabezadoSecundario NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_REPORTE;
 

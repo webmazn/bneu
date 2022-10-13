@@ -251,6 +251,7 @@ namespace sisceusi.logica
                     {
                         item.listaPregunta = new List<CampanaEncuestaBE>();
                     }
+
                     item.idCampana = -1;
                     item.denominacion = campana.nombreCampana;
                     item.fechaInicioPiloto = campana.fechaInicial;
@@ -308,6 +309,41 @@ namespace sisceusi.logica
                         }                        
                     });
                 }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public bool eliminar(CampanaBE entidad)
+        {
+            bool seElimino = false;
+            try
+            {
+                cn.Open();
+                seElimino = datos.eliminar(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return seElimino;
+        }
+
+        public List<CampanaCorreoBE> obtenerListaCampanaCorreo(int idCampana, int idTipoEncuesta)
+        {
+            List<CampanaCorreoBE> lista = new List<CampanaCorreoBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampanaCorreo(idCampana, idTipoEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+        public List<CampanaCorreoBE> obtenerListaCampanaEncuestaCorreo(int idControlEncuesta)
+        {
+            List<CampanaCorreoBE> lista = new List<CampanaCorreoBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampanaEncuestaCorreo(idControlEncuesta, cn);
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;

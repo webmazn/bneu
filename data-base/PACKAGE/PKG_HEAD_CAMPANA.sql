@@ -182,6 +182,22 @@
     piOrden VARCHAR2,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_UPD_DESHABILITAR(
+    piIdCampana NUMBER,
+    poRowAffected OUT NUMBER
+  );
+  
+  PROCEDURE USP_SEL_LIST_CORREO_CAMPANA(
+    piIdCampana NUMBER,
+    piIdTipoEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_CORREO_CAMPANA(
+    piIdControlEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_CAMPANA;
 

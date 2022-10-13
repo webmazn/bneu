@@ -78,7 +78,7 @@ namespace sisceusi.logica
                     }
                     else
                     {
-
+                        x.indicadorCampanaEncuesta = datos.obtenerListaIndicadorCampanaEncuesta(new IndicadorBE { idCampana = entidad.idCampana, idCampanaEncuesta = x.idCampanaEncuesta, idTipoControl = x.idTipoControl }, cn);
                     }
                 });
             }

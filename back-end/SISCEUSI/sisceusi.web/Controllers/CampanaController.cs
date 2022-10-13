@@ -1,11 +1,15 @@
 ﻿using OfficeOpenXml;
 using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.util;
 using sisceusi.web.Filter;
 using sres.ut;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -35,12 +39,6 @@ namespace sisceusi.web.Controllers
 
         public ActionResult NuevaCampana(int? id)
         {
-            //Lista Giro
-            GiroLN logicaGiro = new GiroLN();
-            List<GiroBE> listaGiro = logicaGiro.obtenerListaGiro();
-            //Lista Ciuu
-            CiuuLN logicaCiuu = new CiuuLN();
-            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
             //Lista Empresa
             EmpresaIndustriaLN logicaEmpresa = new EmpresaIndustriaLN();
             List<EmpresaIndustriaBE> listaEmpresa = logicaEmpresa.obtenerListaEmpresa();
@@ -50,6 +48,13 @@ namespace sisceusi.web.Controllers
             //Lista TablaMaestra
             TablaMaestraLN logicaTablaMaestra = new TablaMaestraLN();
             List<TablaMaestraBE> listaTablaMaestra = logicaTablaMaestra.obtenerListaTablaMaestra();
+            //Lista Parametro - SubSector
+            ParametroLN logicaParametro = new ParametroLN();
+            List<ParametroBE> listaSubSector = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 1 }); //id Parametro = SubSector
+            //Lista Parametro - Giro
+            List<ParametroBE> listaGiro = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 6 }); //id Parametro = Giro
+            //Lista Parametro - Ciuu
+            List<ParametroBE> listaCiuu = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 10 }); //id Parametro = Ciuu
             //Objeto Campaña
             CampanaBE campana = null;
             if (id != null)
@@ -65,6 +70,7 @@ namespace sisceusi.web.Controllers
             ViewData["listaEmpresa"] = listaEmpresa;
             ViewData["listaRevisor"] = listaRevisor;
             ViewData["listaTablaMaestra"] = listaTablaMaestra;
+            ViewData["listaSubSector"] = listaSubSector;
             return View();
         }
 
@@ -137,7 +143,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Campaña", 4);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -174,7 +180,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Campaña", 4);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -188,6 +194,13 @@ namespace sisceusi.web.Controllers
             CampanaLN logica = new CampanaLN();
             campana.ipCreacion = Request.UserHostAddress.ToString().Trim();
             bool seGrabo = logica.grabarCampana(campana);
+            if (seGrabo)
+            {
+                if (campana.idEtapaPiloto == 2) enviarCorreoInicio(campana.idCampana, 1);
+                if (campana.idEtapaOficial == 2) enviarCorreoInicio(campana.idCampana, 2);
+                if (campana.idEtapaPiloto == 3) enviarCorreoFinalizacion(campana.idCampana, 1);
+                if (campana.idEtapaOficial == 3) enviarCorreoFinalizacion(campana.idCampana, 2);
+            }
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", seGrabo);
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
@@ -236,6 +249,113 @@ namespace sisceusi.web.Controllers
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
+        }
+
+        [HttpGet]
+        public JsonResult eliminar(int idCampana)
+        {
+            CampanaLN logica = new CampanaLN();
+            bool seElimino = logica.eliminar(new CampanaBE { idCampana = idCampana });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", seElimino);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        private void enviarCorreoInicio(int idCampana, int idTipoEncuesta)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaCorreoBE> lista = logica.obtenerListaCampanaCorreo(idCampana, idTipoEncuesta);
+            List<dynamic> listaEnvios = new List<dynamic>();
+            foreach (CampanaCorreoBE item in lista)
+            {
+                string fieldServer = "[SERVER]", fieldNombres = "[NOMBRES]", fieldEmpresa = "[EMPRESA]", fieldCampana = "[CAMPANA]", fieldCorreo = "[CORREO]", fieldRol = "[ROL]", fieldFecha = "[FECHAINICIO]";
+                string[] fields = new string[] { fieldServer, fieldNombres, fieldEmpresa, fieldCampana, fieldCorreo, fieldRol, fieldFecha };
+                string[] fieldsRequire = new string[] { fieldServer, fieldNombres, fieldEmpresa, fieldCampana, fieldCorreo, fieldRol, fieldFecha };
+                Dictionary<string, string> dataBody = new Dictionary<string, string>
+                {
+                    [fieldServer] = ConfigurationManager.AppSettings["Server"],
+                    [fieldNombres] = item.nombres,
+                    [fieldEmpresa] = item.nombreEmpresa,
+                    [fieldCampana] = item.denominacion,
+                    [fieldCorreo] = item.correoElectronico,
+                    [fieldRol] = item.rol,
+                    [fieldFecha] = idTipoEncuesta == 1 ? item.txtfechaFinPiloto : item.txtfechaFinOficial
+                };
+                string subject = $"Solicitud de información – {item.denominacion}";
+                MailAddressCollection mailTo = new MailAddressCollection();
+                mailTo.Add(new MailAddress(item.correoElectronico, item.nombres));
+
+                dynamic envio = new
+                {
+                    Template = Mailing.Templates.InicioCampana,
+                    Databody = dataBody,
+                    Fields = fields,
+                    FieldsRequire = fieldsRequire,
+                    Subject = subject,
+                    MailTo = mailTo
+                };
+                listaEnvios.Add(envio);
+            }
+
+            Mailing mailing = new Mailing();
+            Task.Factory.StartNew(() =>
+            {
+                if (listaEnvios.Count > 0)
+                {
+                    foreach (dynamic item in listaEnvios)
+                    {
+                        mailing.SendMail(item.Template, item.Databody, item.Fields, item.FieldsRequire, item.Subject, item.MailTo);
+                    }
+                }
+            });
+        }
+
+        private void enviarCorreoFinalizacion(int idCampana, int idTipoEncuesta)
+        {
+            CampanaLN logica = new CampanaLN();
+            List<CampanaCorreoBE> lista = logica.obtenerListaCampanaCorreo(idCampana, idTipoEncuesta);
+            List<dynamic> listaEnvios = new List<dynamic>();
+            foreach (CampanaCorreoBE item in lista)
+            {
+                string fieldServer = "[SERVER]", fieldNombres = "[NOMBRES]", fieldEmpresa = "[EMPRESA]", fieldCampana = "[CAMPANA]";
+                string[] fields = new string[] { fieldServer, fieldNombres, fieldEmpresa, fieldCampana };
+                string[] fieldsRequire = new string[] { fieldServer, fieldNombres, fieldEmpresa, fieldCampana };
+                Dictionary<string, string> dataBody = new Dictionary<string, string>
+                {
+                    [fieldServer] = ConfigurationManager.AppSettings["Server"],
+                    [fieldNombres] = item.nombres,
+                    [fieldEmpresa] = item.nombreEmpresa,
+                    [fieldCampana] = item.denominacion,
+                };
+                string subject = $"{item.denominacion.ToUpper()} FINALIZADA";
+                MailAddressCollection mailTo = new MailAddressCollection();
+                mailTo.Add(new MailAddress(item.correoElectronico, item.nombres));
+
+                dynamic envio = new
+                {
+                    Template = Mailing.Templates.FinalizacionCampana,
+                    Databody = dataBody,
+                    Fields = fields,
+                    FieldsRequire = fieldsRequire,
+                    Subject = subject,
+                    MailTo = mailTo
+                };
+                listaEnvios.Add(envio);
+            }
+
+            Mailing mailing = new Mailing();
+            Task.Factory.StartNew(() =>
+            {
+                if (listaEnvios.Count > 0)
+                {
+                    foreach (dynamic item in listaEnvios)
+                    {
+                        mailing.SendMail(item.Template, item.Databody, item.Fields, item.FieldsRequire, item.Subject, item.MailTo);
+                    }
+                }
+            });
         }
     }
 }

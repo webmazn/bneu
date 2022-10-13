@@ -43,6 +43,7 @@
     piNombres VARCHAR2,
     piCorreo VARCHAR2,
     piPassword VARCHAR2,
+    piVisualizar VARCHAR2,
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
@@ -96,6 +97,20 @@
     piIdEstado VARCHAR2,
     piColumna VARCHAR2,
     piOrden VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_REVISOR_VISUALIZAR(
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_EMPRESA_USUARIO(
+    piIdUsuario NUMBER,
+    piCorreoElectronico VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_ADMINISTRADOR(
     poRef OUT SYS_REFCURSOR
   );
 

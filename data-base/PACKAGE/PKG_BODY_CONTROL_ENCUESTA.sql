@@ -17,9 +17,11 @@
     cen.idControlEncuesta, cen.aceptaLLenarEncuesta, cen.aceptaTratamientoDatos, cen.aceptaFirmarEncuesta, cen.idSupervisor, cen.idFase, cen.numeroCuestionario,
     cam.idCampana, cam.denominacion,
     emp.idEmpresaIndustria, emp.nombreEmpresa, emp.nombreComercial, emp.ruc,
-    pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado, cen.fechahorallenado,
+    pem.idPlantaEmpresa, pem.denominacion planta, pem.idEmpresaGas, pem.numeroSuministroGas, pem.idEmpresaLuz, pem.numeroSuministroAlumbrado, cen.fechahorallenado, pem.direccion,
     usu.nombres nombreRevisor,
-    dep.departamento, pro.provincia, dis.distrito, zon.zona, pem.direccion, gas.empresagas, luz.empresaluz
+    dep.departamento, pro.provincia, dis.distrito, 
+    --zon.zona, gas.empresagas, luz.empresaluz
+    pzo.parametro zona, pga.parametro empresagas, plu.parametro empresaluz
     FROM T_GEND_CONTROL_ENCUESTA cen
     INNER JOIN T_GENM_PLANTA_EMPRESA pem ON cen.idPlantaEmpresa = pem.idPlantaEmpresa AND pem.idEstado = '1'
     INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa AND cem.idEstado = '1'
@@ -29,9 +31,12 @@
     INNER JOIN T_MAE_DEPARTAMENTO dep ON pem.idDepartamento = dep.idDepartamento
     INNER JOIN T_MAE_PROVINCIA pro ON pem.idProvincia = pro.idProvincia
     INNER JOIN T_MAE_DISTRITO dis ON pem.idDistrito = dis.idDistrito
-    INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
+    LEFT JOIN  T_GENM_PARAMETRO pzo ON pem.idZona = pzo.idParametro
+    LEFT JOIN  T_GENM_PARAMETRO pga ON pem.idEmpresaGas = pga.idParametro
+    LEFT JOIN  T_GENM_PARAMETRO plu ON pem.idEmpresaLuz = plu.idParametro    
+    /*INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
     INNER JOIN T_MAE_EMPRESA_GAS gas ON pem.idEmpresaGas = gas.idEmpresaGas
-    INNER JOIN T_MAE_EMPRESA_LUZ luz ON pem.idEmpresaLuz = luz.idEmpresaLuz 
+    INNER JOIN T_MAE_EMPRESA_LUZ luz ON pem.idEmpresaLuz = luz.idEmpresaLuz */
     INNER JOIN T_GENM_USUARIO usu ON cen.idSupervisor = usu.idUsuario
     
     WHERE   idControlEncuesta = piIdControlEncuesta;
@@ -50,18 +55,23 @@
     vNumeroCuestionario NUMBER := 0;
   BEGIN
     
-    SELECT
-    MAX(cen.numeroCuestionario) + 1 INTO vNumeroCuestionario
-    FROM    T_GEND_CONTROL_ENCUESTA cen
-    INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa
-    INNER JOIN T_GENM_CAMPANA cam ON cem.idCampana = cam.idCampana
-    WHERE cam.idCampana = piIdCampana;
+    SELECT NVL(numeroCuestionario,0) INTO vNumeroCuestionario FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta;
+    
+    IF vNumeroCuestionario = 0 THEN
+        SELECT
+        nvl(MAX(cen.numeroCuestionario),0) + 1 INTO vNumeroCuestionario
+        FROM    T_GEND_CONTROL_ENCUESTA cen
+        INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa
+        INNER JOIN T_GENM_CAMPANA cam ON cem.idCampana = cam.idCampana
+        WHERE cen.idTipoEncuesta = (SELECT idTipoEncuesta FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta) AND cam.idCampana = piIdCampana;
+    END IF;    
   
     UPDATE T_GEND_CONTROL_ENCUESTA SET
     aceptallenarencuesta = piAceptaLLenarEncuesta,
     aceptatratamientodatos = piAceptaTratamientoDatos,
     idUsuarioModificacion = piIdUsuarioCreacion,
     numeroCuestionario = vNumeroCuestionario,
+    idUsuarioResponde = piIdUsuarioCreacion,
     fechaModificacion = SYSDATE,
     ipModificacion = piIpCreacion
     WHERE 

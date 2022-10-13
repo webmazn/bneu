@@ -21,11 +21,12 @@ var arrDistrito = []
 
 var cargarDesplegables = () => {
     cargarRevisor(listaRevisor)
-    cargarCiuu(listaCiuu)
+    cargarParametros(listaSubSector, '#cbo-sub-sector', 'Seleccione un sub sector')
+    cargarParametros(listaCiuu, '#cbo-ciuu', 'Seleccione una actividad')
+    cargarParametros(listaZona, '#cbo-zona', 'Seleccione una zona')
     cargarDepartamento(listaDepartamento)
     cargarProvincia(listaProvincia)
-    cargarDistrito(listaDistrito)
-    cargarZona(listaZona)
+    cargarDistrito(listaDistrito)    
 }
 
 var cargarRevisor = (data) => {
@@ -51,10 +52,10 @@ var cargarRevisor = (data) => {
     }
 }
 
-var cargarCiuu = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idCiuu}">${x.ciuu}</option>`).join('');
-    options = `<option value="0">-Seleccione una actividad-</option>${options}`;
-    $('#cbo-ciuu').html(options);
+var cargarParametros = (data, idHtml, textoOpcion) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
+    options = `<option value="0">-${textoOpcion}-</option>${options}`;
+    $(idHtml).html(options);
 }
 
 var cargarDepartamento = (data) => {
@@ -74,13 +75,6 @@ var cargarDistrito = (data) => {
     options = `<option value="0">-Seleccione un distrito-</option>`;
     $('#cbo-distrito').html(options);
 }
-
-var cargarZona = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idZona}">${x.zona}</option>`).join('');
-    options = `<option value="0">-Seleccione una zona-</option>${options}`;
-    $('#cbo-zona').html(options);
-}
-
 
 /* ================================================
  * FIN CARGA DESPLEGABLES
@@ -338,7 +332,9 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
                                 idRolLogin == 3 && (fase < 2 || fase == 3) ? true :
                                 idRolLogin == 2 && (fase == 2 || fase == 4) ? true : false
 
-            let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && x.etapa.idEtapa == 3 //Tipo encuesta debe ser 2 = oficial
+            //let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && x.etapa.idEtapa == 3
+            //let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && ((x.etapa.idEtapa == 3 && fase == 5) || fase == 5)
+            let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && (fase == 2 || fase == 3 || fase == 4 || fase == 5)
 
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.campana.idCampana, 4)}</td>`;
@@ -350,9 +346,9 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colEtapa = `<td data-encabezado="Estado"><span>${x.etapa.etapa}</span></td>`;
             let colFase = `<td data-encabezado="Fase Enc."><span>${x.controlEncuesta.fase.fase}</span></td>`;
             //let btnDescargar = `<div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>`
-            let btnObservar = `<div class="btn btn-sm btn-success btn-table btn-observar" data-id="${x.controlEncuesta.idControlEncuesta}"><i class="fa fa-eye"></i></div>`;
+            let btnObservar = `<div class="btn btn-sm btn-success btn-table btn-observar mx-1" data-id="${x.controlEncuesta.idControlEncuesta}"><i class="fa fa-eye"></i></div>`;
             //let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${0}"><i class="fa fa-trash"></i></div>`;
-            let btnEncuesta = `<div class="btn btn-sm btn-info btn-table btn-encuesta" data-id="${x.controlEncuesta.idControlEncuesta}" data-bloque="${bloque}"><i class="fa fa-edit"></i></div>`;
+            let btnEncuesta = `<div class="btn btn-sm btn-info btn-table btn-encuesta mx-1" data-id="${x.controlEncuesta.idControlEncuesta}" data-bloque="${bloque}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${verFicha ? btnObservar : ''}${ verEncuesta ? btnEncuesta : ''}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colEmpresa}${colPlanta}${colTipoEncuesta}${colCampana}${colFecha}${colEtapa}${colFase}${colOptions}</tr>`;
             return row;

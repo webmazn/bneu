@@ -26,19 +26,22 @@ namespace sisceusi.web.Controllers
             //Lista Distrito
             DistritoLN logicaDistrito = new DistritoLN();
             List<DistritoBE> listaDistrito = logicaDistrito.obtenerListaDistrito();
-            //Lista Zona
-            ZonaLN logicaZona = new ZonaLN();
-            List<ZonaBE> listaZona = logicaZona.obtenerListaZona();
             //Lista Revisor
             UsuarioLN logicaRevisor = new UsuarioLN();
             List<UsuarioBE> listaRevisor = logicaRevisor.obtenerListaRolEspecifico(new UsuarioBE { idRol = 2 });
-            //Lista Ciuu
-            CiuuLN logicaCiuu = new CiuuLN();
-            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
+            //Parametro
+            ParametroLN logicaParametro = new ParametroLN();
+            //Lista Parametro - SubSector
+            List<ParametroBE> listaSubSector = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 1 }); //id Parametro = SubSector
+            //Lista Parametro - Ciuu
+            List<ParametroBE> listaCiuu = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 10 }); //id Parametro = Ciuu
+            //Lista Parametro - Zona
+            List<ParametroBE> listaZona = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 25 }); //id Parametro = Zona
 
             ViewData["listaDepartamento"] = listaDepartamento;
             ViewData["listaProvincia"] = listaProvincia;
             ViewData["listaDistrito"] = listaDistrito;
+            ViewData["listaSubSector"] = listaSubSector;
             ViewData["listaZona"] = listaZona;
             ViewData["listaCiuu"] = listaCiuu;
             ViewData["listaRevisor"] = listaRevisor;
@@ -202,6 +205,26 @@ namespace sisceusi.web.Controllers
             var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
+        }
+
+        public ActionResult ReporteGeneral(int idCampana)
+        {
+            ReporteLN logicaReporte = new ReporteLN();
+            List<CampanaEncuestaBE> listCampanaEncuesta = logicaReporte.obtenerListaCampanaEncuesta(new CampanaBE { idCampana = idCampana });
+
+            ControlEncuestaLN logica = new ControlEncuestaLN();
+            EncuestaLN logicaEncuesta = new EncuestaLN();
+            listCampanaEncuesta.ForEach(x =>
+            {
+                x.listaRespuesta = logica.obtenerListaRespuestaEncuesta(x);
+                x.listaRespuestaEncuestaPlanta = logicaReporte.obtenerListaRespuestaPlanta(x.idCampanaEncuesta);
+                if (x.idParametroTabla > 0)
+                {
+                    x.listaEncabezadoSecundario = logica.obtenerTablaMaestraEncabezados(new CampanaEncuestaBE { idParametroTabla = x.idParametroTabla });
+                }
+            });
+            ViewData["listCampanaEncuesta"] = listCampanaEncuesta;
+            return View();
         }
 
     }

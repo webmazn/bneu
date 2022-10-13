@@ -14,6 +14,7 @@
     $('#btn-cancelar-principal').on('click', (e) => cancelarPrincipal())
     $('#btn-cancelar-secundario').on('click', (e) => cancelarSecundario())
 
+    $('#cbo-control-respuesta').on('change', (e) => validarOpcionesTipoDato())
     $('#cbo-estado-oficial').val('1')
     cargarDatos()
     cargarDesplegables()
@@ -257,6 +258,7 @@ var limpiarEncabezadoSecundario = () => {
     $("#cbo-control-respuesta").val('0')
     $("#cbo-tipo-dato").val('0')
     $("#cbo-id-parametro").val('0')
+    validarOpcionesTipoDato()
 }
 
 /* ================================================
@@ -361,8 +363,8 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
             let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`
             let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
             let colPosicion = `<td class="text-center" data-encabezado="Posición">${x.posicion}</td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-principal" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-principal" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-principal mx-1" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-principal mx-1" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colCodigo}${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colPosicion}${colOptions}</tr>`;
             return row;
@@ -500,8 +502,8 @@ var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
             let colTipoDato = `<td class="text-center" data-encabezado="Tipo de dato">${x.tipoDato.tipoDato}</td>`;
             let colParametro = `<td class="text-center" data-encabezado="ID Parámetro">${x.parametro.parametro}</td>`;
             let colPosicion = `<td class="text-center" data-encabezado="Posición">${x.posicion}</td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-secundario" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-secundario mx-1" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-secundario mx-1" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colEncabezadoPrincipal}${colTextoAyuda}${colTipoDato}${colParametro}${colPosicion}${colOptions}</tr>`;
             return row;
@@ -641,6 +643,7 @@ var cargarDatosSecundario = (data) => {
     $("#cbo-encabezado-principal").val(data.idEncabezadoPrincipal)
     $("#cbo-orientacion").val(data.idOrientacion)
     $("#cbo-control-respuesta").val(data.idTipoControl)
+    validarOpcionesTipoDato()
     $("#cbo-tipo-dato").val(data.idTipoDato)
     $("#cbo-id-parametro").val(data.idParametro)    
 }
@@ -733,6 +736,19 @@ var cancelarSecundario = () => {
  * FIN CANCELAR
  * ================================================
  */
+
+var validarOpcionesTipoDato = () => {
+    let controlRespuesta = $('#cbo-control-respuesta').val()
+    if (controlRespuesta == 1) {
+        let options = `<option value="0">-Seleccione un tipo de dato-</option><option value="4">Correlativo</option>`;
+        $('#cbo-tipo-dato').html(options);
+    } else if (controlRespuesta == 2) {
+        let options = `<option value="0">-Seleccione un tipo de dato-</option><option value="1">Número entero</option><option value="2">Número decimal</option><option value="3">Caracter</option>`;
+        $('#cbo-tipo-dato').html(options);
+    } else {
+        $('#cbo-tipo-dato').html('<option value="0">-Seleccione un tipo de dato-</option>');
+    }
+}
 
 var posicinar = (id, number) => {
     var target_offset = $(id).offset();

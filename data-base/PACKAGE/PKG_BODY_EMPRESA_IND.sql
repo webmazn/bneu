@@ -25,12 +25,12 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_EMPRESA_INDUSTRIA ei
-                    inner join T_MAE_GIRO g on ei.idGiro = g.idGiro and g.idEstado = ''1''
+                    LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
                     WHERE (
                     LOWER(TRANSLATE(ei.ruc,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(ei.nombreEmpresa,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(ei.representanteLegal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
-                    LOWER(TRANSLATE(g.giro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' )';
+                    LOWER(TRANSLATE(p.parametro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' )';
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -43,7 +43,7 @@
     
     vPaginaInicial := vPaginaActual - 1;
     IF piColumna = 'giro' THEN
-      vColumna := 'g.giro';
+      vColumna := 'p.parametro';
     ELSE
       vColumna := 'ei.' || piColumna;
     END IF;
@@ -54,7 +54,7 @@
                                 ei.ruc,
                                 ei.nombreEmpresa,
                                 ei.representanteLegal,
-                                g.giro,
+                                p.parametro giro,
                                 ei.fechaCreacion,
                                 ei.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
@@ -63,12 +63,12 @@
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_EMPRESA_INDUSTRIA ei
-                        inner join T_MAE_GIRO g on ei.idGiro = g.idGiro and g.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
                         WHERE (
                         LOWER(TRANSLATE(ei.ruc,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(ei.nombreEmpresa,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(ei.representanteLegal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
-                        LOWER(TRANSLATE(g.giro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' )
+                        LOWER(TRANSLATE(p.parametro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' )
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -100,7 +100,7 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_EMPRESA_INDUSTRIA ei
-                    inner join T_MAE_GIRO g on ei.idGiro = g.idGiro and g.idEstado = ''1''
+                    LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
                     WHERE (
                     '||
                     case
@@ -164,7 +164,7 @@
                                 ei.ruc,
                                 ei.nombreEmpresa,
                                 ei.representanteLegal,
-                                g.giro,
+                                p.parametro giro,
                                 ei.fechaCreacion,
                                 ei.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
@@ -173,7 +173,7 @@
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_EMPRESA_INDUSTRIA ei
-                        inner join T_MAE_GIRO g on ei.idGiro = g.idGiro and g.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
                         WHERE (
                         '||
                         case
@@ -241,17 +241,17 @@
                                 ei.ruc,
                                 ei.nombreEmpresa,
                                 ei.representanteLegal,
-                                g.giro,
+                                p.parametro giro,
                                 ei.fechaCreacion,
                                 ei.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_EMPRESA_INDUSTRIA ei
-                        inner join T_MAE_GIRO g on ei.idGiro = g.idGiro and g.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
                         WHERE (
                         LOWER(TRANSLATE(ei.ruc,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(ei.nombreEmpresa,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(ei.representanteLegal,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
-                        LOWER(TRANSLATE(g.giro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' )
+                        LOWER(TRANSLATE(p.parametro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' )
                         )';
 
     OPEN poRef FOR vQuerySelect;
@@ -285,12 +285,12 @@
                                 ei.ruc,
                                 ei.nombreEmpresa,
                                 ei.representanteLegal,
-                                g.giro,
+                                p.parametro giro,
                                 ei.fechaCreacion,
                                 ei.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_EMPRESA_INDUSTRIA ei
-                        inner join T_MAE_GIRO g on ei.idGiro = g.idGiro and g.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
                         WHERE (
                         '||
                         case

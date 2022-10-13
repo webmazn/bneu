@@ -109,5 +109,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public List<ParametroBE> obtenerListaParametroHijo(ParametroBE entidad)
+        {
+            List<ParametroBE> lista = new List<ParametroBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaParametroHijo(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

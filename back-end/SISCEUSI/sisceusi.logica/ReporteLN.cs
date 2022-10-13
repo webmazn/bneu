@@ -25,5 +25,54 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public List<CampanaEncuestaBE> obtenerListaCampanaEncuesta(CampanaBE entidad)
+        {
+            List<CampanaEncuestaBE> lista = new List<CampanaEncuestaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampanaEncuesta(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<RespuestaEncuestaPlantaBE> obtenerListaRespuestaPlanta(int idCampanaEncuesta)
+        {
+            List<RespuestaEncuestaPlantaBE> lista = new List<RespuestaEncuestaPlantaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRespuestaEncuestaPlanta(idCampanaEncuesta, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<EncabezadoSecundarioBE> obtenerTablaMaestraEncabezados(CampanaEncuestaBE campanaEncuesta)
+        {
+            List<EncabezadoSecundarioBE> lista = new List<EncabezadoSecundarioBE>();
+            try
+            {
+                cn.Open();
+                ControlEncuestaDA datos = new ControlEncuestaDA();
+                lista = datos.obtenerTablaMaestraEncabezados(campanaEncuesta, cn);
+                if (lista.Count > 0)
+                {
+                    lista.ForEach(x =>
+                    {
+                        if (x.idParametro > 0)
+                        {
+                            x.listaParametro = datos.obtenerListaParametro(new ParametroBE { idParametro = x.idParametro }, cn);
+                        }
+                        EncuestaDA datosEncuesta = new EncuestaDA();
+                        x.listaRespuestaEncuestaTabla = datosEncuesta.obtenerListaRespuestaEncuestaTabla(campanaEncuesta.idControlEncuesta, x.idEncabezadoSecundario, cn);
+                    });
+                }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

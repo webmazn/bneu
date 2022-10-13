@@ -175,6 +175,43 @@
     WHERE
     ret.idEncabezadoSecundario = piIdEncabezadoSecundario AND cem.idCampana = piIdCampana AND cen.idTipoEncuesta = 2; --cAMBIAR A TIPOENCUESTA 2
   END USP_SEL_INDICADOR_ENC_SECUN;
+  
+  PROCEDURE USP_SEL_INDICADOR_CAM_ENC(
+    piIdCampana NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    piIdTipoControl NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    cem.idCampana,
+    cem.idEmpresaIndustria,
+    cen.idControlEncuesta,
+    cen.idSupervisor,
+    cen.idPlantaEmpresa,
+    pem.iddepartamento,
+    pem.idprovincia,
+    pem.iddistrito,
+    CASE piIdTipoControl
+        WHEN 1 THEN nvl(rpl.respuesta, '0')
+        WHEN 2 THEN (SELECT respuesta FROM T_GEND_RESPUESTA_ENCUESTA WHERE idRespuestaEncuesta = rpl.respuesta)
+        WHEN 4 THEN (SELECT respuesta FROM T_GEND_RESPUESTA_ENCUESTA WHERE idRespuestaEncuesta = rpl.idRespuestaEncuesta)
+        ELSE '0'
+    END respuesta
+    FROM T_GEND_RESP_ENCUESTA_PLANTA rpl
+    INNER JOIN T_GEND_CONTROL_ENCUESTA cen ON rpl.idControlEncuesta = cen.idControlEncuesta AND cen.idEstado = '1'
+    INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa AND cem.idEstado = '1'
+    INNER JOIN T_GENM_CAMPANA_ENCUESTA cae ON rpl.idCampanaEncuesta = cae.idCampanaEncuesta AND cae.idEstado = '1'
+    INNER JOIN T_GENM_PLANTA_EMPRESA pem ON cen.idplantaempresa = pem.idplantaempresa
+    WHERE
+    cae.idCampanaEncuesta = piIdCampanaEncuesta AND cem.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND rpl.respuesta = CASE piIdTipoControl
+                                                                                                                                    WHEN 1 THEN rpl.respuesta
+                                                                                                                                    WHEN 2 THEN rpl.respuesta
+                                                                                                                                    WHEN 4 THEN '1'
+                                                                                                                                    ELSE '0'
+                                                                                                                                END;
+  END USP_SEL_INDICADOR_CAM_ENC;
 
 END PKG_SISCEUSI_INDICADOR;
 

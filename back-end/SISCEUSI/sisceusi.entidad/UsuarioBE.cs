@@ -17,6 +17,7 @@ namespace sisceusi.entidad
         public string password { get; set; }
         public string dni { get; set; }
         public string telefono { get; set; }
+        public string visualizar { get; set; }
         public string idEstado { get; set; }
 
         public UsuarioBE() { }

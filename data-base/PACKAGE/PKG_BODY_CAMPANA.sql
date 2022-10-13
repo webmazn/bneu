@@ -616,7 +616,7 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_CAMPANA cam
-                    INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                    LEFT JOIN T_GENM_PARAMETRO par ON cam.idSubsector = par.idParametro
                     INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
                     WHERE (
                     LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
@@ -640,7 +640,8 @@
                         (
                         SELECT  cam.idCampana,
                                 cam.denominacion,
-                                sub.subsector,
+                                cam.idSubSector,
+                                par.parametro subsector,
                                 cam.fechaCreacion,
                                 eta.etapa,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
@@ -649,7 +650,7 @@
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_CAMPANA cam
-                        INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                        LEFT JOIN T_GENM_PARAMETRO par ON cam.idSubsector = par.idParametro
                         INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
                         WHERE (
                         LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
@@ -686,7 +687,7 @@
                     FROM T_GENM_CAMPANA cam
                     INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
                     INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
-                    INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                    LEFT JOIN T_GENM_PARAMETRO par ON cam.idSubsector = par.idParametro
                     INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
                     WHERE cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || ' AND (
                     '||
@@ -735,7 +736,8 @@
                         (
                         SELECT  cam.idCampana,
                                 cam.denominacion,
-                                sub.subsector,
+                                cam.idSubSector,
+                                par.parametro subsector,
                                 cam.fechaCreacion,
                                 eta.etapa,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila,'
@@ -746,7 +748,7 @@
                         FROM T_GENM_CAMPANA cam
                         INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
                         INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
-                        INNER JOIN T_MAE_SUBSECTOR sub ON cam.idSubsector = sub.idSubsector
+                        LEFT JOIN T_GENM_PARAMETRO par ON cam.idSubsector = par.idParametro
                         INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
                         WHERE cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || ' AND (
                         '||
@@ -782,6 +784,60 @@
 
     OPEN poRef FOR vQuerySelect;
   END USP_SEL_BUSQ_AVANZ_SUBSECTOR;
+  
+  PROCEDURE USP_UPD_DESHABILITAR(
+    piIdCampana NUMBER,
+    poRowAffected OUT NUMBER
+  )AS
+  BEGIN
+    UPDATE T_GENM_CAMPANA SET
+    idEstado = '0'
+    WHERE idCampana = piIdCampana;
+    poRowAffected := SQL%ROWCOUNT;
+  END USP_UPD_DESHABILITAR;
+  
+  PROCEDURE USP_SEL_LIST_CORREO_CAMPANA(
+    piIdCampana NUMBER,
+    piIdTipoEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  )AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    usu.nombres, usu.correoElectronico, rol.rol, emp.nombreEmpresa, emp.nombreComercial, ure.nombres revisor, ure.correoElectronico correoRevisor, cam.denominacion, cam.fechafinpiloto, cam.fechafinencuesta, cen.idTipoEncuesta, cen.idFase,
+    (SELECT nombres FROM (SELECT nombres FROM T_GENM_USUARIO WHERE idRol = 1 AND idEstado = '1' ORDER BY idUsuario DESC) WHERE ROWNUM = 1) admin,
+    (SELECT correoElectronico FROM (SELECT correoElectronico FROM T_GENM_USUARIO WHERE idRol = 1 AND idEstado = '1' ORDER BY idUsuario DESC) WHERE ROWNUM = 1) correoAdmin
+    FROM T_GENM_USUARIO usu
+    INNER JOIN T_MAE_ROL rol ON usu.idRol = rol.idRol
+    INNER JOIN T_GENM_PLANTA_EMPRESA pem ON usu.idPlantaEmpresa = pem.idPlantaEmpresa
+    INNER JOIN T_GEND_CONTROL_ENCUESTA cen ON pem.idPlantaEmpresa = cen.idPlantaEmpresa AND cen.idEstado = '1'
+    INNER JOIN T_GENM_USUARIO ure ON cen.idSupervisor = ure.idUsuario
+    INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa
+    INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria
+    INNER JOIN T_GENM_CAMPANA cam ON cem.idCampana = cam.idCampana
+    WHERE cen.idTipoEncuesta = piIdTipoEncuesta AND cam.idCampana = piIdCampana AND usu.idEstado = '1';
+  END USP_SEL_LIST_CORREO_CAMPANA;
+  
+  PROCEDURE USP_SEL_CORREO_CAMPANA(
+    piIdControlEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  )AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT
+    usu.nombres, usu.correoElectronico, rol.rol, emp.nombreEmpresa, emp.nombreComercial, ure.nombres revisor, ure.correoElectronico correoRevisor, cam.denominacion, cam.fechafinpiloto, cam.fechafinencuesta, cen.idTipoEncuesta, cen.idFase,
+    (SELECT nombres FROM (SELECT nombres FROM T_GENM_USUARIO WHERE idRol = 1 AND idEstado = '1' ORDER BY idUsuario DESC) WHERE ROWNUM = 1) admin,
+    (SELECT correoElectronico FROM (SELECT correoElectronico FROM T_GENM_USUARIO WHERE idRol = 1 AND idEstado = '1' ORDER BY idUsuario DESC) WHERE ROWNUM = 1) correoAdmin
+    FROM T_GENM_USUARIO usu
+    INNER JOIN T_MAE_ROL rol ON usu.idRol = rol.idRol
+    INNER JOIN T_GENM_PLANTA_EMPRESA pem ON usu.idPlantaEmpresa = pem.idPlantaEmpresa
+    INNER JOIN T_GEND_CONTROL_ENCUESTA cen ON pem.idPlantaEmpresa = cen.idPlantaEmpresa AND cen.idEstado = '1'
+    INNER JOIN T_GENM_USUARIO ure ON cen.idSupervisor = ure.idUsuario
+    INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cen.idCampanaEmpresa = cem.idCampanaEmpresa
+    INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria
+    INNER JOIN T_GENM_CAMPANA cam ON cem.idCampana = cam.idCampana
+    WHERE cen.idControlEncuesta = piIdControlEncuesta AND usu.idEstado = '1';
+  END USP_SEL_CORREO_CAMPANA;
 
 END PKG_SISCEUSI_CAMPANA;
 

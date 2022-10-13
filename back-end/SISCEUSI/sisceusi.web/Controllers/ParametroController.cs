@@ -111,7 +111,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Parámetro", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "NOM. PARÁMETRO", "PARENT PARÁMETROS", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "NOM. PARÁMETRO", "PARENT PARÁMETROS", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PARAMETRO_");
                 }
@@ -139,7 +139,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Parámetro", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "NOM. PARÁMETRO", "PARENT PARÁMETROS", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "NOM. PARÁMETRO", "PARENT PARÁMETROS", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PARAMETRO_");
                 }
@@ -214,6 +214,19 @@ namespace sisceusi.web.Controllers
                 i++;
             });
             return listas;
+        }
+
+        [HttpGet]
+        public JsonResult obtenerListaParametroHijo(int idParametro)
+        {
+            ParametroLN logica = new ParametroLN();
+            List<ParametroBE> lista = logica.obtenerListaParametroHijo(new ParametroBE { idParametro = idParametro });
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
+            response.Add("object", lista);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
     }

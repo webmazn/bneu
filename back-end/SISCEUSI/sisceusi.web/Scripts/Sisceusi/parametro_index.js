@@ -195,15 +195,15 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colParentParametro = `<td class="text-left" data-encabezado="Parent parámetro">${x.parentParametro}</td>`
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idParametro}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idParametro}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete mx-1" data-id="${x.idParametro}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit mx-1" data-id="${x.idParametro}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colParametro}${colParentParametro}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
     return content;
-};
+}
 
 /* ================================================
  * FIN RENDERIZAR DATOS TABLA - BUSQUEDA

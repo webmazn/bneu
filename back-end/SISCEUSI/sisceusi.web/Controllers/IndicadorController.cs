@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
-    public class IndicadorController : Controller
+    public class IndicadorController : BaseController
     {
         // GET: Indicador
         public ActionResult Index()

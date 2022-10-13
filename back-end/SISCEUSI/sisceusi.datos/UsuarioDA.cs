@@ -102,6 +102,7 @@ namespace sisceusi.datos
                 p.Add("piNombres", usuario.nombres);
                 p.Add("piCorreo", usuario.correoElectronico);
                 p.Add("piPassword", usuario.password);
+                p.Add("piVisualizar", usuario.visualizar);
                 p.Add("piIdEstado", usuario.idEstado);
                 p.Add("piIdUsuarioCreacion", usuario.idUsuarioCreacion);
                 p.Add("piIpCreacion", usuario.ipCreacion);
@@ -251,6 +252,72 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return lista;
+        }
+
+        public List<UsuarioBE> obtenerListaRevisorVisualizar(OracleConnection db)
+        {
+            List<UsuarioBE> lista = new List<UsuarioBE>();
+            try
+            {
+                string sp = $"{Package.Usuario}USP_SEL_REVISOR_VISUALIZAR";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<UsuarioBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public UsuarioBE obtenerEmpresaUsuario(UsuarioBE usuario, OracleConnection db)
+        {
+            UsuarioBE item = null;
+            try
+            {
+                string sp = $"{Package.Usuario}USP_SEL_EMPRESA_USUARIO";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdUsuario", usuario.idUsuario);
+                p.Add("piCorreoElectronico", usuario.correoElectronico);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new UsuarioBE
+                {
+                    nombres = x.NOMBRES == null ? "" : (string)x.NOMBRES,
+                    correoElectronico = x.CORREOELECTRONICO == null ? "" : (string)x.CORREOELECTRONICO,
+                    rol = new RolBE
+                    {
+                        rol = x.ROL == null ? "" : (string)x.ROL
+                    },
+                    empresaIndustria = new EmpresaIndustriaBE
+{
+                        nombreEmpresa = x.NOMBREEMPRESA == null ? "" : (string)x.NOMBREEMPRESA,
+                        nombreComercial = x.NOMBRECOMERCIAL == null ? "" : (string)x.NOMBRECOMERCIAL
+                    }
+                }).FirstOrDefault();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
+        }
+
+        public UsuarioBE obtenerAdministrador(OracleConnection db)
+        {
+            UsuarioBE item = null;
+            try
+            {
+                string sp = $"{Package.Usuario}USP_SEL_ADMINISTRADOR";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                item = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new UsuarioBE
+                {
+                    nombres = x.NOMBRES == null ? "" : (string)x.NOMBRES,
+                    correoElectronico = x.CORREOELECTRONICO == null ? "" : (string)x.CORREOELECTRONICO,
+                    empresaIndustria = new EmpresaIndustriaBE
+                    {
+                        nombreEmpresa = x.NOMBREEMPRESA == null ? "" : (string)x.NOMBREEMPRESA,
+                        nombreComercial = x.NOMBRECOMERCIAL == null ? "" : (string)x.NOMBRECOMERCIAL
+                    }
+                }).FirstOrDefault();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return item;
         }
     }
 }

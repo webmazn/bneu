@@ -5,6 +5,7 @@
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
     $('#copiaRow').on('click', (e) => copiarCampana());
+    $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     //$('#btn-buscar')[0].click();
     cargarDatosTabla(listaCampana)
 });
@@ -166,6 +167,13 @@ var cargarDatosTabla = (j) => {
             });
         });
         
+        tabla.find('.btn-delete').each(x => {
+            let elementButton = tabla.find('.btn-delete')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                eliminar(e.currentTarget);
+            });
+        });
 
     } else {
         console.log('No hay resultados');
@@ -195,9 +203,9 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colDenominacion = `<td data-encabezado="Denominación">${x.denominacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnDocumento = `<div class="btn btn-sm btn-warning btn-table text-white btn-copy" data-id="${x.idCampana}"><i class="fa fa-copy"></i></div>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idCampana}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idCampana}"><i class="fa fa-edit"></i></div>`;
+            let btnDocumento = `<div class="btn btn-sm btn-warning btn-table text-white btn-copy mx-1" data-id="${x.idCampana}"><i class="fa fa-copy"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete mx-1" data-id="${x.idCampana}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit mx-1" data-id="${x.idCampana}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}${btnDocumento}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colDenominacion}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
@@ -341,10 +349,36 @@ var copiarCampana = () => {
         console.log('Error:' + error.message);
     })
 }
-
-
-
 /* ================================================
  * FIN COPIAR CAMPAÑA
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR
+ * ================================================
+ */
+var idEliminar = 0
+var eliminar = (obj) => {
+    idEliminar = $(obj).data('id')
+    $('#modalConfirmacion').modal('show')
+}
+
+var deshabilitarRegistro = () => {
+    let url = `${baseUrl}Campana/eliminar?idCampana=${idEliminar}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('#btn-buscar')[0].click();
+            $('#modalConfirmacion').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR
  * ================================================
  */

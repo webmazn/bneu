@@ -170,7 +170,7 @@ namespace sisceusi.datos
                         }
                     },
                     filaTabla = x.FILATABLA == null ? 0 : (int)x.FILATABLA,
-                    etiqueta = x.IDPARAMETRO == 0 ? x.RESPUESTA == null ? "" : x.RESPUESTA : x.PARAMETRO == null ? "" : (string)x.PARAMETRO
+                    etiqueta = x.IDPARAMETRO == 0 ? x.RESPUESTA == null || x.RESPUESTA == "" || x.RESPUESTA == "0" ? "" : x.RESPUESTA : x.PARAMETRO == null ? "" : (string)x.PARAMETRO
                 }).ToList();
             }
             catch (Exception ex) { Log.Error(ex); }
@@ -209,6 +209,45 @@ namespace sisceusi.datos
                     },
                     filaTabla = x.FILATABLA == null ? 0 : (int)x.FILATABLA,
                     valor = x.RESPUESTA == null ? 0 : x.RESPUESTA == "" ? 0 : Decimal.TryParse(x.RESPUESTA, out number) ? number : 0
+                }).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<IndicadorCampanaEncuestaBE> obtenerListaIndicadorCampanaEncuesta(IndicadorBE entidad, OracleConnection db)
+        {
+            List<IndicadorCampanaEncuestaBE> lista = new List<IndicadorCampanaEncuestaBE>();
+            try
+            {
+                decimal number = 0;
+                string sp = $"{Package.Indicador}USP_SEL_INDICADOR_CAM_ENC";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampana", entidad.idCampana);
+                p.Add("piIdCampanaEncuesta", entidad.idCampanaEncuesta);
+                p.Add("piIdTipoControl", entidad.idTipoControl);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new IndicadorCampanaEncuestaBE
+                {
+                    campanaEmpresa = new CampanaEmpresaBE
+                    {
+                        idCampana = x.IDCAMPANA == null ? 0 : (int)x.IDCAMPANA,
+                        idEmpresaIndustria = x.IDEMPRESAINDUSTRIA == null ? 0 : (int)x.IDEMPRESAINDUSTRIA,
+                    },
+                    controlEncuesta = new ControlEncuestaBE
+                    {
+                        idControlEncuesta = x.IDCONTROLENCUESTA == null ? 0 : (int)x.IDCONTROLENCUESTA,
+                        idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
+                        plantaEmpresa = new PlantaEmpresaBE
+                        {
+                            idPlantaEmpresa = x.IDPLANTAEMPRESA == null ? 0 : (int)x.IDPLANTAEMPRESA,
+                            idDepartamento = x.IDDEPARTAMENTO == null ? "0" : (string)x.IDDEPARTAMENTO,
+                            idProvincia = x.IDPROVINCIA == null ? "0" : (string)x.IDPROVINCIA,
+                            idDistrito = x.IDDISTRITO == null ? "0" : (string)x.IDDISTRITO
+                        }
+                    },
+                    valor = entidad.idTipoControl == 1 ? x.RESPUESTA == null ? 0 : x.RESPUESTA == "" ? 0 : Decimal.TryParse(x.RESPUESTA, out number) ? number : 0 : 0,
+                    etiqueta = entidad.idTipoControl > 1 ? x.RESPUESTA == null ? "" : (string)x.RESPUESTA : ""
                 }).ToList();
             }
             catch (Exception ex) { Log.Error(ex); }

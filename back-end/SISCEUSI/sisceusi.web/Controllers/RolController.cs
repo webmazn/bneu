@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace sisceusi.web.Controllers
 {
     [LoginRequiredAttribute]
-    public class RolController : Controller
+    public class RolController : BaseController
     {
         // GET: Rol
         public ActionResult Rol()

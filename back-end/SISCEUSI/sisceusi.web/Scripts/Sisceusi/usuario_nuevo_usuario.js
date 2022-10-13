@@ -59,11 +59,11 @@ var grabar = () => {
     let dni = $("#txt-dni").val().trim()
     let password = $('#txt-pswd').val().trim()
     let telefono = $("#txt-telefono").val().trim()
-    let idRol = $("#cbo-perfil").val()
+    let idRol = $("#cbo-perfil").val()    
     let idEstado = $("#cbo-estado").val()
 
-    if (!verificadoRuc) arr.push("No ha verificado el Ruc");
-    if (validarEspaciosBlanco(ruc)) arr.push("Debe ingresar el Ruc para la validación");
+    if (!verificadoRuc) arr.push("Debe digitar el RUC de una empresa registrada en la tabla de empresas y luego hacer click en el botón verificar");
+    if (verificadoRuc) if(validarEspaciosBlanco(ruc)) arr.push("Debe ingresar el Ruc para la validación");
     else if (validarNumerico(ruc)) arr.push("El Ruc debe tener caracteres numéricos");
     else if (validarTamanioRuc(ruc)) arr.push("El Ruc debe tener 11 caracteres");
     else if (validarRuc10(ruc) && validarRuc20(ruc)) arr.push("El Ruc debe empezar con 10 o 20");
@@ -125,10 +125,11 @@ var grabarDatos = () => {
     let password = $('#txt-pswd').val().trim()
     let telefono = $("#txt-telefono").val().trim()
     let idRol = $("#cbo-perfil").val()
+    let visualizar = $('#chk-visualizar').prop('checked') ? '1' : '0'
     let idEstado = $("#cbo-estado").val()
 
     let url = `${baseUrl}Usuario/grabarUsuario`;
-    let data = { idUsuario, idEmpresaIndustria, idPlantaEmpresa, idRol, correoElectronico, nombres, dni, password, telefono, idEstado, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idUsuario, idEmpresaIndustria, idPlantaEmpresa, idRol, correoElectronico, nombres, dni, password, telefono, visualizar, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -165,7 +166,8 @@ var cargarDesplegables = () => {
 }
 
 var cargarRoles = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idRol}">${x.rol}</option>`).join('');
+    let options = data.length == 0 ? '' : data.map(x => `<option class="${x.idRol == 3 ? 'd-none' : ''}" value="${x.idRol}">${x.rol}</option>`).join('');
+    //let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idRol}">${x.rol}</option>`).join('');
     options = `<option value="0">-Seleccione un perfil de usuario-</option>${options}`;
     $('#cbo-perfil').html(options);
 }

@@ -1,6 +1,9 @@
 ﻿@using sisceusi.entidad;
 @{
     UsuarioBE usuario = Session["user"] == null ? null : (UsuarioBE)Session["user"];
+    LogoRedSocialBE logoRedSocial = Session["logoRedSocial"] == null ? null : (LogoRedSocialBE)Session["logoRedSocial"];
+    List<ParametroBE> opcionesSubSector = Session["opcionesSubSector"] == null ? new List<ParametroBE>() : (List<ParametroBE>)Session["opcionesSubSector"];
+    string numero = usuario == null ? "4" : "3";
 }
 
 <div class="container-fluid menu-nav bg-white fixed-top d-print-none p-0" id="cabecera">
@@ -9,7 +12,17 @@
             <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
                 <ul class="navbar-nav mr-md-auto">
                     <li class="nav-item align-self-center"><a class="nav-link p-1" href="https://www.gob.pe/minem" target="_blank"><img src="@Url.Content("~/images/logo_mem.svg")" height="48"></a></li>
-                    <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="@Url.Content("~/images/logo_dgee.svg")" height="48"></a></li>
+                    @if (logoRedSocial == null)
+                    {                        
+                        <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="@Url.Content("~/images/logo_dgee.svg")" height="48"></a></li>
+                    }
+                    else
+                    {
+                        string ruta = logoRedSocial.rutaManager;
+                        string nombreDgee = String.Concat(logoRedSocial.nombreArchivoGeneradoLogoDgee, "_", logoRedSocial.nombreArchivoLogoDgee);
+                        string pathFileDgee = $"~/{ruta}/{nombreDgee}";
+                        <li class="nav-item align-self-center"><a class="nav-link p-1" href="http://www.minem.gob.pe/_detalle.php?idSector=12&amp;idTitular=3011&amp;idMenu=sub3001&amp;idCateg=716" target="_blank"><img src="@Url.Content(pathFileDgee)" height="48"></a></li>
+                    }
                 </ul>
                 @if (usuario == null)
                 {
@@ -32,14 +45,36 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="@Url.Action("Index", "Inicio")"><img src="@Url.Content("~/images/logo_web.svg")" height="33"></a></li>
-                        <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-4" href="@Url.Action("Index", "Inicio")">INICIO</a></li>
+                        @if(logoRedSocial == null)
+                        {                            
+                            <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="@Url.Action("Index", "Inicio")" target="_blank"><img src="@Url.Content("~/images/logo_web.svg")" height="33"></a></li>
+                        }
+                        else
+                        {
+                            string ruta = logoRedSocial.rutaManager;
+                            string nombreWeb = String.Concat(logoRedSocial.nombreArchivoGeneradoLogoWeb, "_", logoRedSocial.nombreArchivoLogoWeb);
+                            string pathFileWeb = $"~/{ruta}/{nombreWeb}";
+                            <li class="nav-item mr-5 d-flex align-items-center mostrar-logo"><a href="@Url.Action("Index", "Inicio")" target="_blank"><img src="@Url.Content(pathFileWeb)" height="33"></a></li>
+                        }
+
+                        <li class="nav-item primer-elemento"><a class="nav-link font-weight-bold px-@numero" href="@Url.Action("Index", "Inicio")">INICIO</a></li>
+                        @if (usuario != null)
+                        {
+                            <li class="nav-item"><a class="nav-link font-weight-bold px-@numero" href="@Url.Action("Index", "iNTERNO")">CAMPAÑA</a></li>
+                        }                        
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle font-weight-bold px-4" href="#" role="button" data-toggle="dropdown" aria-expanded="true">SUB SECTOR</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="@Url.Action("Reporte", "Inicio", new { id = 1 })">Industria Minería</a><a class="dropdown-item" href="@Url.Action("Reporte", "Inicio", new { id = 2 })">Industria Pesquera</a><a class="dropdown-item" href="@Url.Action("Reporte", "Inicio", new { id = 3 })">Manufactura</a><a class="dropdown-item" href="@Url.Action("Reporte", "Inicio", new { id = 4 })">Industria</a></div>
-                        </li>
-                        @*<li class="nav-item"><a class="nav-link font-weight-bold px-4" href="./estadisticas.html">ESTADÍSTICAS</a></li>*@
-                        <li class="nav-item"><a class="nav-link font-weight-bold px-4" href="@Url.Action("contacto", "Inicio")">CONTACTO</a></li>
+                            <a class="nav-link dropdown-toggle font-weight-bold px-@numero" href="#" role="button" data-toggle="dropdown" aria-expanded="true">SUB SECTOR</a>
+                            <div class="dropdown-menu">
+                                @if (opcionesSubSector != null)
+                                {
+                                    foreach (var item in opcionesSubSector)
+                                    {
+                                        <a class="dropdown-item" href="@Url.Action("Reporte", "Inicio", new { id = item.idParametro })">@item.parametro</a>
+                                    }
+                                }
+                            </div>
+                        </li>                        
+                        <li class="nav-item"><a class="nav-link font-weight-bold px-@numero" href="@Url.Action("contacto", "Inicio")">CONTACTO</a></li>
                     </ul>
                     @if (usuario != null)
                         {
@@ -60,5 +95,15 @@
 <div class="flecha-top d-print-none"><i class="fas fa-angle-double-right fa-2x text-dark btn-slider-bottom"></i></div>
 @if (usuario == null)
 {
-    <div class="redes-sociales d-flex flex-column justify-content-around align-items-center"><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_fb.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ig.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_tw.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_yt.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_wp.svg")"></a><a href="#" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ld.svg")"></a></div>
+    if (logoRedSocial != null)
+    {
+        <div class="redes-sociales d-flex flex-column justify-content-around align-items-center">
+            <a href="@logoRedSocial.enlaceFacebook" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_fb.svg")"></a>
+            <a href="@logoRedSocial.enlaceInstangram" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ig.svg")"></a>
+            <a href="@logoRedSocial.enlaceTwiter" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_tw.svg")"></a>
+            <a href="@logoRedSocial.enlaceYoutube" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_yt.svg")"></a>
+            <a href="@logoRedSocial.enlaceWhatsApp" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_wp.svg")"></a>
+            <a href="@logoRedSocial.enlaceLinkedin" target="_blank"><img class="icon_redes" src="@Url.Content("~/images/icon_ld.svg")"></a>
+        </div>
+    }
 }

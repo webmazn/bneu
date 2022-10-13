@@ -24,5 +24,6 @@ namespace sisceusi.entidad
         public string enlaceWhatsApp { get; set; }
         public string enlaceLinkedin { get; set; }
         public string idEstado { get; set; }
+        public string rutaManager { get; set; }
     }
 }

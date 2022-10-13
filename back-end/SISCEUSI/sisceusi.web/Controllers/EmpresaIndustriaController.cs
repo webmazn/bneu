@@ -1,6 +1,7 @@
 ﻿using OfficeOpenXml;
 using sisceusi.entidad;
 using sisceusi.logica;
+using sisceusi.web.Filter;
 using sres.ut;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
+    [LoginRequiredAttribute]
     public class EmpresaIndustriaController : BaseController
     {
         // GET: Empresa
@@ -23,7 +25,7 @@ namespace sisceusi.web.Controllers
                 registros = 10,
                 pagina = 1,
                 columna = "idEmpresaIndustria",
-                orden = "ASC"
+                orden = "DESC"
             });
             Dictionary<string, object> response = new Dictionary<string, object>();
             response.Add("success", lista == null ? false : lista.Count == 0 ? false : true);
@@ -34,15 +36,13 @@ namespace sisceusi.web.Controllers
 
         public ActionResult NuevaEmpresaIndustria(int? id)
         {
-            //Lista Giro
-            GiroLN logicaGiro = new GiroLN();
-            List<GiroBE> listaGiro = logicaGiro.obtenerListaGiro();
-            //Lista GrupoEmpresa
-            GrupoEmpresaLN logicaGrupo = new GrupoEmpresaLN();
-            List<GrupoEmpresaBE> listaGrupo = logicaGrupo.obtenerListaGrupoEmpresa();
-            //Lista Ciuu
-            CiuuLN logicaCiuu = new CiuuLN();
-            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
+            ParametroLN logicaParametro = new ParametroLN();
+            //Lista Parametro - Giro
+            List<ParametroBE> listaGiro = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 6 }); //id Parametro = Giro
+            //Lista Parametro - Ciuu
+            List<ParametroBE> listaCiuu = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 10 }); //id Parametro = Ciuu
+            //Lista Parametro - Ciuu
+            List<ParametroBE> listaGrupo = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 14 }); //id Parametro = Grupo empresa
             //Objeto Campaña
             EmpresaIndustriaBE empresa = null;
             if (id != null)
@@ -121,7 +121,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Empresa", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "RUC EMPRESA", "RAZÓN SOCIAL", "REP. LEGAL", "GIRO NEGOCIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "RUC EMPRESA", "RAZÓN SOCIAL", "REP. LEGAL", "GIRO NEGOCIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -150,7 +150,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Empresa", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "CÓDIGO", "RUC EMPRESA", "RAZÓN SOCIAL", "REP. LEGAL", "GIRO NEGOCIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "RUC EMPRESA", "RAZÓN SOCIAL", "REP. LEGAL", "GIRO NEGOCIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }

@@ -34,18 +34,10 @@ namespace sisceusi.web.Controllers
             
             EmpresaIndustriaLN logica = new EmpresaIndustriaLN();
             ViewData["empresa"] = logica.obtenerEmpresa(new EmpresaIndustriaBE() { idEmpresaIndustria = id });
-            ViewData["listaPlanta"] = response;
-            return View();
-        }
 
-        public ActionResult NuevaPlanta(int? id, int? idTwo)
-        {
-            //Lista Giro
-            GiroLN logicaGiro = new GiroLN();
-            List<GiroBE> listaGiro = logicaGiro.obtenerListaGiro();
-            //Lista Ciuu
-            CiuuLN logicaCiuu = new CiuuLN();
-            List<CiuuBE> listaCiuu = logicaCiuu.obtenerListaCiuu();
+            ParametroLN logicaParametro = new ParametroLN();
+            //Lista Parametro - Ciuu
+            List<ParametroBE> listaCiuu = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 10 }); //id Parametro = Ciuu
             //Lista Departamento
             DepartamentoLN logicaDepartamento = new DepartamentoLN();
             List<DepartamentoBE> listaDepartamento = logicaDepartamento.obtenerListaDepartamento();
@@ -55,15 +47,37 @@ namespace sisceusi.web.Controllers
             //Lista Distrito
             DistritoLN logicaDistrito = new DistritoLN();
             List<DistritoBE> listaDistrito = logicaDistrito.obtenerListaDistrito();
-            //Lista Zona
-            ZonaLN logicaZona = new ZonaLN();
-            List<ZonaBE> listaZona = logicaZona.obtenerListaZona();
-            //Lista Empresa Gas
-            EmpresaGasLN logicaEmpresaGas = new EmpresaGasLN();
-            List<EmpresaGasBE> listaEmpresaGas = logicaEmpresaGas.obtenerListaEmpresaGas();
-            //Lista Empresa Luz
-            EmpresaLuzLN logicaEmpresaLuz = new EmpresaLuzLN();
-            List<EmpresaLuzBE> listaEmpresaLuz = logicaEmpresaLuz.obtenerListaEmpresaLuz();
+            ViewData["listaPlanta"] = response;
+            ViewData["listaCiuu"] = listaCiuu;
+            ViewData["listaDepartamento"] = listaDepartamento;
+            ViewData["listaProvincia"] = listaProvincia;
+            ViewData["listaDistrito"] = listaDistrito;
+            return View();
+        }
+
+        public ActionResult NuevaPlanta(int? id, int? idTwo)
+        {
+            ParametroLN logicaParametro = new ParametroLN();
+            //Lista Parametro - Giro
+            List<ParametroBE> listaGiro = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 6 }); //id Parametro = Giro
+            //Lista Parametro - Ciuu
+            List<ParametroBE> listaCiuu = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 10 }); //id Parametro = Ciuu
+            //Lista Parametro - Empresa Gas
+            List<ParametroBE> listaEmpresaGas = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 18 }); //id Parametro = Empresa Gas
+            //Lista Parametro - Empresa Luz
+            List<ParametroBE> listaEmpresaLuz = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 21 }); //id Parametro = Empresa Luz
+            //Lista Parametro - Zona
+            List<ParametroBE> listaZona = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 25 }); //id Parametro = Zona
+
+            //Lista Departamento
+            DepartamentoLN logicaDepartamento = new DepartamentoLN();
+            List<DepartamentoBE> listaDepartamento = logicaDepartamento.obtenerListaDepartamento();
+            //Lista Provincia
+            ProvinciaLN logicaProvincia = new ProvinciaLN();
+            List<ProvinciaBE> listaProvincia = logicaProvincia.obtenerListaProvincia();
+            //Lista Distrito
+            DistritoLN logicaDistrito = new DistritoLN();
+            List<DistritoBE> listaDistrito = logicaDistrito.obtenerListaDistrito();
             //Objeto Campaña
             PlantaEmpresaBE planta = null;
             if (idTwo != null)
@@ -72,7 +86,8 @@ namespace sisceusi.web.Controllers
                 planta = logica.obtenerPlantaEmpresa(new PlantaEmpresaBE { idPlantaEmpresa = idTwo.Value });                
             }
 
-            ViewData["idEmpresaIndustria"] = id;
+            EmpresaIndustriaLN logicaEmpresa = new EmpresaIndustriaLN();
+            ViewData["empresa"] = logicaEmpresa.obtenerEmpresa(new EmpresaIndustriaBE() { idEmpresaIndustria = id.Value });
             ViewData["idPlantaEmpresa"] = idTwo;
             ViewData["planta"] = planta;
             ViewData["listaGiro"] = listaGiro;
@@ -150,7 +165,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 9);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PLANTA_EMPRESA_");
                 }
@@ -179,7 +194,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 9);
-                    cabecerasReporteExcel(ws, new List<string> { "ITEM", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PLANTA_EMPRESA_");
                 }
@@ -258,6 +273,19 @@ namespace sisceusi.web.Controllers
                 i++;
             });
             return listas;
+        }
+
+        [HttpPost]
+        public JsonResult verificarDatosPlanta(PlantaEmpresaBE plantaEmpresa)
+        {
+            PlantaEmpresaLN logica = new PlantaEmpresaLN();
+            PlantaEmpresaBE planta = logica.verificarDatosPlanta(plantaEmpresa);
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            response.Add("success", planta == null ? false : plantaEmpresa.idPlantaEmpresa == planta.idPlantaEmpresa ? false : true);
+            response.Add("object", planta);
+            var jsonResult = Json(response, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
     }
 }

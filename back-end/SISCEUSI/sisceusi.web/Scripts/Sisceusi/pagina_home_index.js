@@ -251,8 +251,8 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
             let colTituloBoton = `<td class="text-center" data-encabezado="Título botón">${x.tituloBoton}</td>`
             let colEnlaceBoton = `<td class="text-center" data-encabezado="Posición">${x.enlaceBoton}</td>`;
             let colNombreArchivoBanner = `<td data-encabezado="Enlace botón" style="min-width:180px;"><div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">${x.nombreArchivoBanner}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-banner" data-id="${x.idBanner}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-banner" data-id="${x.idBanner}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-banner mx-1" data-id="${x.idBanner}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-banner mx-1" data-id="${x.idBanner}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colCodigo}${colTituloBanner}${colDescripcionBanner}${colDescripcionFija}${colTituloBoton}${colEnlaceBoton}${colNombreArchivoBanner}${colOptions}</tr>`;
             return row;
@@ -577,8 +577,8 @@ var renderizarPublicacion = (data, numberCellHeader, pagina, registros) => {
             let colTituloPublicacion = `<td data-encabezado="Título banner" scope="row"><span>${x.tituloPublicacion}</span></td>`;
             let colDescripcionPublicacion = `<td data-encabezado="Descripción banner">${x.descripcionPublicacion}</td>`;
             let colNombreArchivoPublicacion = `<td data-encabezado="Enlace botón" style="min-width:180px;"><div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">${x.nombreArchivoPublicacion}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-publicacion" data-id="${x.idPublicacion}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-publicacion" data-id="${x.idPublicacion}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-publicacion mx-1" data-id="${x.idPublicacion}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-publicacion mx-1" data-id="${x.idPublicacion}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colCodigo}${colTituloPublicacion}${colDescripcionPublicacion}${colNombreArchivoPublicacion}${colOptions}</tr>`;
             return row;
@@ -845,8 +845,8 @@ var renderizarEnlace = (data, numberCellHeader, pagina, registros) => {
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENL${pad(x.idEnlace, 4)}</td>`;
             let colTituloEnlace = `<td data-encabezado="Título enlace" scope="row"><span>${x.tituloEnlace}</span></td>`;
             let colDescripcionEnlace = `<td data-encabezado="Descripción enlace">${x.descripcionEnlace}</td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-publicacion" data-id="${x.idEnlace}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-publicacion" data-id="${x.idEnlace}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-enlace mx-1" data-id="${x.idEnlace}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-enlace mx-1" data-id="${x.idEnlace}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colCodigo}${colTituloEnlace}${colDescripcionEnlace}${colOptions}</tr>`;
             return row;
@@ -872,7 +872,7 @@ var actualizarEnlace = (obj) => {
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            cargarDatosPublicacion(j.object)
+            cargarDatosEnlace(j.object)
         } else {
             $('.seccion-enlace').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos de la publicación. Por favor, puede volver a recargar la página.'), 'carga de datos'))
         }

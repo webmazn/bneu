@@ -365,6 +365,17 @@
     FROM  T_GENM_PARAMETRO
     WHERE idEstado = '1' AND idTipoParametro = 1; 
   END USP_SEL_LISTA;
+  
+  PROCEDURE USP_SEL_PARAMETRO(
+    piIdParametro NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT  *
+    FROM  T_GENM_PARAMETRO
+    WHERE idparentparametro = piIdParametro AND idEstado = '1';
+  END USP_SEL_PARAMETRO;
 
 END PKG_SISCEUSI_PARAMETRO;
 

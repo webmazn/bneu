@@ -3,9 +3,9 @@
     ViewBag.Title = "NuevaEmpresaIndustria";
     int id = ViewData["idEmpresaIndustria"] == null ? 0 : (int)ViewData["idEmpresaIndustria"];
     EmpresaIndustriaBE empresa = ViewData["empresa"] == null ? null : (EmpresaIndustriaBE)ViewData["empresa"];
-    List<GiroBE> listaGiro = ViewData["listaGiro"] == null ? new List<GiroBE>() : (List<GiroBE>)ViewData["listaGiro"];
-    List<GrupoEmpresaBE> listaGrupo = ViewData["listaGrupo"] == null ? new List<GrupoEmpresaBE>() : (List<GrupoEmpresaBE>)ViewData["listaGrupo"];
-    List<CiuuBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<CiuuBE>() : (List<CiuuBE>)ViewData["listaCiuu"];
+    List<ParametroBE> listaGiro = ViewData["listaGiro"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaGiro"];
+    List<ParametroBE> listaGrupo = ViewData["listaGrupo"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaGrupo"];
+    List<ParametroBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaCiuu"];
 }
 
 @section scripts_footer {
@@ -18,17 +18,17 @@
         <div class="col-12">
             <div class="container m-0 px-0 py-4">
                 <div class="row">
-                    <div class="col-md-12 col-lg-9">
-                        <div class="bg-light p-4">
-                            <div class="h4 text-cyan">Mantenimiento de Empresas&nbsp;</div>
-                            <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                    <div class="col-md-12 col-lg-9 d-flex">
+                        <div class="bg-light py-4 pl-0 w-100">
+                            <div class="h3 text-cyan">Mantenimiento de Empresas&nbsp;</div>                            
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-3">
                         <div class="row">
                             <div class="col-12">
-                                <!--span(data-toggle="modal", data-target="#modal-usuario")--><a class="btn btn-azul w-100 mb-3" href="@Url.Action("Index", "EmpresaIndustria")" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Bandeja de empresas</a><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("Index", "EmpresaIndustria")">Regresar</a>
-                                <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                                <a class="btn btn-azul w-100 mb-1" href="@Url.Action("Index", "EmpresaIndustria")" data-toggle="tooltip" data-placement="top" title="Ir a la bandeja de empresas">Bandeja de empresas</a>
+                                <a class="btn btn-plomo w-100 mb-1" href="@Url.Action("Index", "EmpresaIndustria")">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-1 text-white" data-toggle="tooltip" data-placement="left" title="En este formulario usted podrá registrar el detalle de la información correspondiente a la empresa que formará parte del universo de posibles empresas a encuestar. Así mismo, luego de registrar los datos y grabar, Usted podrá grabar y luego registrar los datos de todas las plantas que formen parte de esta empresa. Recuerde que la encuesta se realiza por cada planta de una empresa registrada."><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                             </div>
                         </div>
                     </div>

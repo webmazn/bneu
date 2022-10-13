@@ -4,6 +4,7 @@
     $('#btn-exportar').on('click', (e) => exportar(e));
     $('.ir-pagina').on('change', (e) => cambiarPaginaRegistros());
     $('#number-registers').on('change', (e) => cambiarPaginaRegistros());
+    $('#eliminacionRow').on('click', (e) => deshabilitarRegistro())
     //$('#btn-buscar')[0].click();
     cargarDesplegables()
     cargarDatosTabla(listaUsuario)
@@ -145,6 +146,14 @@ var cargarDatosTabla = (j) => {
                 actualizar(e.currentTarget);
             });
         });
+
+        tabla.find('.btn-delete').each(x => {
+            let elementButton = tabla.find('.btn-delete')[x];
+            $(elementButton).on('click', (e) => {
+                e.preventDefault();
+                eliminar(e.currentTarget);
+            });
+        });
     } else {
         console.log('No hay resultados');
         $('#viewPagination').hide(); $('#view-page-result').hide();
@@ -172,8 +181,8 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colTipoUsuario = `<td data-encabezado="Tipo usuario"><span>${x.rol.rol}</span></td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idUsuario}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idUsuario}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete mx-1" data-id="${x.idUsuario}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit mx-1" data-id="${x.idUsuario}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colNombresApellidos}${colTipoUsuario}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
@@ -249,3 +258,32 @@ var cargarRoles = (data) => {
     options = `<option value="0">-Seleccione un tipo de usuario-</option>${options}`;
     $('#cbo-tipo-usuario').html(options);
 }
+
+/* ================================================
+ * INICIO ELIMINAR
+ * ================================================
+ */
+var idEliminar = 0
+var eliminar = (obj) => {
+    idEliminar = $(obj).data('id')
+    $('#modalConfirmacion').modal('show')
+}
+
+var deshabilitarRegistro = () => {
+    let url = `${baseUrl}Usuario/eliminar?idUsuario=${idEliminar}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('#btn-buscar')[0].click();
+            $('#modalConfirmacion').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR
+ * ================================================
+ */

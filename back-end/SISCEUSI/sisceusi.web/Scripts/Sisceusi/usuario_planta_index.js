@@ -189,8 +189,8 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colTipoUsuario = `<td data-encabezado="Tipo usuario"><span>${x.rol.rol}</span></td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idUsuario}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${$('#identificador').val()}-${x.idUsuario}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete mx-1" data-id="${x.idUsuario}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit mx-1" data-id="${$('#identificador').val()}-${x.idUsuario}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colNombresApellidos}${colTipoUsuario}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;

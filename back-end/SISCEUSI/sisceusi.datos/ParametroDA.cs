@@ -210,5 +210,20 @@ namespace sisceusi.datos
 
             return lista;
         }
+
+        public List<ParametroBE> obtenerListaParametroHijo(ParametroBE parametro, OracleConnection db)
+        {
+            List<ParametroBE> lista = new List<ParametroBE>();
+            try
+            {
+                string sp = $"{Package.Parametro}USP_SEL_PARAMETRO";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdParametro", parametro.idParametro);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<ParametroBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

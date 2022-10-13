@@ -27,7 +27,7 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_PLANTA_EMPRESA pem
-                    inner join T_MAE_CIUU ciu on pem.idCiuu = ciu.idCiuu and ciu.idEstado = ''1''
+                    left join T_GENM_PARAMETRO par on pem.idCiuu = par.idParametro and par.idEstado = ''1''
                     inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                     inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                     inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
@@ -35,7 +35,7 @@
                     pem.idEmpresaIndustria = '|| piIdEmpresa ||' AND
                     (
                     LOWER(TRANSLATE(pem.direccion,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
-                    LOWER(TRANSLATE(ciu.ciuu,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
+                    LOWER(TRANSLATE(par.parametro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(pem.telefono,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(dep.departamento,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                     LOWER(TRANSLATE(pro.provincia,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
@@ -61,7 +61,7 @@
                         SELECT  pem.idPlantaEmpresa,
                                 pem.idEmpresaIndustria,
                                 pem.direccion,
-                                ciu.ciuu,
+                                par.parametro ciuu,
                                 pem.telefono,
                                 pem.latitud,
                                 pem.longitud,
@@ -75,7 +75,7 @@
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_PLANTA_EMPRESA pem
-                        inner join T_MAE_CIUU ciu on pem.idCiuu = ciu.idCiuu and ciu.idEstado = ''1''
+                        left join T_GENM_PARAMETRO par on pem.idCiuu = par.idParametro and par.idEstado = ''1''
                         inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                         inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                         inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
@@ -83,7 +83,7 @@
                         pem.idEmpresaIndustria = '|| piIdEmpresa ||' AND
                         (
                         LOWER(TRANSLATE(pem.direccion,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
-                        LOWER(TRANSLATE(ciu.ciuu,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
+                        LOWER(TRANSLATE(par.parametro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(pem.telefono,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(dep.departamento,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(pro.provincia,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
@@ -121,7 +121,7 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_PLANTA_EMPRESA pem
-                    inner join T_MAE_CIUU ciu on pem.idCiuu = ciu.idCiuu and ciu.idEstado = ''1''
+                    left join T_GENM_PARAMETRO par on pem.idCiuu = par.idParametro and par.idEstado = ''1''
                     inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                     inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                     inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
@@ -136,7 +136,7 @@
                     '||
                     case
                         when piIdCiuu = 0 then ''
-                        else ' ciu.idCiuu = '|| piIdCiuu ||' AND '
+                        else ' par.idParametro = '|| piIdCiuu ||' AND '
                     end    
                     ||'
                     '||
@@ -184,7 +184,7 @@
                         SELECT  pem.idPlantaEmpresa,
                                 pem.idEmpresaIndustria,
                                 pem.direccion,
-                                ciu.ciuu,
+                                par.parametro ciuu,
                                 pem.telefono,
                                 pem.latitud,
                                 pem.longitud,
@@ -198,7 +198,7 @@
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_PLANTA_EMPRESA pem
-                        inner join T_MAE_CIUU ciu on pem.idCiuu = ciu.idCiuu and ciu.idEstado = ''1''
+                        left join T_GENM_PARAMETRO par on pem.idCiuu = par.idParametro and par.idEstado = ''1''
                         inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                         inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                         inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
@@ -213,7 +213,7 @@
                         '||
                         case
                             when piIdCiuu = 0 then ''
-                            else ' ciu.idCiuu = '|| piIdCiuu ||' AND '
+                            else ' par.idParametro = '|| piIdCiuu ||' AND '
                         end    
                         ||'
                         '||
@@ -267,7 +267,7 @@
                         SELECT  pem.idPlantaEmpresa,
                                 pem.idEmpresaIndustria,
                                 pem.direccion,
-                                ciu.ciuu,
+                                par.parametro ciuu,
                                 pem.telefono,
                                 pem.latitud,
                                 pem.longitud,
@@ -277,7 +277,7 @@
                                 pem.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_PLANTA_EMPRESA pem
-                        inner join T_MAE_CIUU ciu on pem.idCiuu = ciu.idCiuu and ciu.idEstado = ''1''
+                        left join T_GENM_PARAMETRO par on pem.idCiuu = par.idParametro and par.idEstado = ''1''
                         inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                         inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                         inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
@@ -285,7 +285,7 @@
                         pem.idEmpresaIndustria = '|| piIdEmpresa ||' AND
                         (
                         LOWER(TRANSLATE(pem.direccion,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
-                        LOWER(TRANSLATE(ciu.ciuu,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
+                        LOWER(TRANSLATE(par.parametro,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(pem.telefono,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(dep.departamento,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(pro.provincia,''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''ΑΙΝΣΪαινσϊ'',''AEIOUaeiou'')) ||''%'' OR
@@ -322,7 +322,7 @@
                         SELECT  pem.idPlantaEmpresa,
                                 pem.idEmpresaIndustria,
                                 pem.direccion,
-                                ciu.ciuu,
+                                par.parametro ciuu,
                                 pem.telefono,
                                 pem.latitud,
                                 pem.longitud,
@@ -332,7 +332,7 @@
                                 pem.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_PLANTA_EMPRESA pem
-                        inner join T_MAE_CIUU ciu on pem.idCiuu = ciu.idCiuu and ciu.idEstado = ''1''
+                        left join T_GENM_PARAMETRO par on pem.idCiuu = par.idParametro and par.idEstado = ''1''
                         inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                         inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                         inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
@@ -347,7 +347,7 @@
                         '||
                         case
                             when piIdCiuu = 0 then ''
-                            else ' ciu.idCiuu = '|| piIdCiuu ||' AND '
+                            else ' par.idParametro = '|| piIdCiuu ||' AND '
                         end    
                         ||'
                         '||
@@ -479,6 +479,26 @@
     inner join T_MAE_DISTRITO di ON pe.idDistrito = di.idDistrito
     WHERE pe.idEstado = '1';
   END USP_SEL_LISTA;
+  
+  PROCEDURE USP_SEL_VERIFICADOR_DATOS(
+    piDenominacion VARCHAR2,
+    piDireccion VARCHAR2,   
+    piLatitud VARCHAR2,
+    piLongitud VARCHAR2,
+    piNumeroSuministroGas VARCHAR2,
+    piNumeroSuministroAlumbrado VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  )AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT *
+    FROM T_GENM_PLANTA_EMPRESA	 
+    WHERE   
+    LOWER(TRANSLATE(denominacion,'ΑΙΝΣΪαινσϊ','AEIOUaeiou')) like '%'|| LOWER(TRANSLATE(piDenominacion ,'ΑΙΝΣΪαινσϊ','AEIOUaeiou')) ||'%' OR
+    LOWER(TRANSLATE(direccion,'ΑΙΝΣΪαινσϊ','AEIOUaeiou')) like '%'|| LOWER(TRANSLATE(piDireccion ,'ΑΙΝΣΪαινσϊ','AEIOUaeiou')) ||'%' OR
+    latitud = piLatitud OR longitud = piLongitud OR numeroSuministroGas = piNumeroSuministroGas OR numeroSuministroAlumbrado = piNumeroSuministroAlumbrado;
+    
+  END USP_SEL_VERIFICADOR_DATOS;
 
 END PKG_SISCEUSI_PLANTA_EMPRESA;
 

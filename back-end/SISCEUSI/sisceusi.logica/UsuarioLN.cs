@@ -179,6 +179,42 @@ namespace sisceusi.logica
 
             return esValido;
         }
+
+        public List<UsuarioBE> obtenerListaRevisorVisualizar()
+        {
+            List<UsuarioBE> lista = new List<UsuarioBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaRevisorVisualizar(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public UsuarioBE obtenerEmpresaUsuario(UsuarioBE usuario)
+        {
+            UsuarioBE entidad = null;
+            try
+            {
+                cn.Open();
+                entidad = datos.obtenerEmpresaUsuario(usuario, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return entidad;
+        }
+
+        public UsuarioBE obtenerAdministrador()
+        {
+            UsuarioBE item = null;
+            try
+            {
+                cn.Open();
+                item = datos.obtenerAdministrador(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return item;
+        }
     }
 
 }

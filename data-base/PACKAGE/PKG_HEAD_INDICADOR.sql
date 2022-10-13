@@ -50,6 +50,13 @@
     poRef OUT SYS_REFCURSOR
   );
   
+  PROCEDURE USP_SEL_INDICADOR_CAM_ENC(
+    piIdCampana NUMBER,
+    piIdCampanaEncuesta NUMBER,
+    piIdTipoControl NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
 END PKG_SISCEUSI_INDICADOR;
 
 /

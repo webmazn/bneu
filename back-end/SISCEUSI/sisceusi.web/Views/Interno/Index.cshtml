@@ -4,9 +4,10 @@
     List<DepartamentoBE> listaDepartamento = ViewData["listaDepartamento"] == null ? new List<DepartamentoBE>() : (List<DepartamentoBE>)ViewData["listaDepartamento"];
     List<ProvinciaBE> listaProvincia = ViewData["listaProvincia"] == null ? new List<ProvinciaBE>() : (List<ProvinciaBE>)ViewData["listaProvincia"];
     List<DistritoBE> listaDistrito = ViewData["listaDistrito"] == null ? new List<DistritoBE>() : (List<DistritoBE>)ViewData["listaDistrito"];
-    List<ZonaBE> listaZona = ViewData["listaZona"] == null ? new List<ZonaBE>() : (List<ZonaBE>)ViewData["listaZona"];
+    List<ParametroBE> listaSubSector = ViewData["listaSubSector"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaSubSector"];
+    List<ParametroBE> listaZona = ViewData["listaZona"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaZona"];
     List<UsuarioBE> listaRevisor = ViewData["listaRevisor"] == null ? new List<UsuarioBE>() : (List<UsuarioBE>)ViewData["listaRevisor"];
-    List<CiuuBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<CiuuBE>() : (List<CiuuBE>)ViewData["listaCiuu"];
+    List<ParametroBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaCiuu"];
     UsuarioBE usuario = ViewData["usuario"] == null ? null : (UsuarioBE)ViewData["usuario"];
 }
 
@@ -21,9 +22,9 @@
             <div class="container m-0 px-0 py-4">
                 <div class="row">
                     <div class="col-md-12 col-lg-12 d-flex">
-                        <div class="bg-light p-4">
-                            <div class="h4 text-cyan">Bandeja Principal de Campañas&nbsp;</div>
-                            <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                        <div class="bg-light py-4 pl-0 w-100">
+                            <div class="h3 text-cyan">Bandeja de encuestas por campaña&nbsp;</div>
+                            @*<p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>*@
                         </div>
                     </div>
                     @*<div class="col-md-12 col-lg-3">
@@ -42,7 +43,7 @@
                             <div class="form-group init-search">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-6">
-                                        <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Texto de ayuda"></i></label>
+                                        <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Ingrese una descripción para realizar su búsqueda"></i></label>
                                         <div class="input-group">
                                             <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
                                             <div class="input-group-append">
@@ -67,7 +68,7 @@
                                                         <div class="row">
                                                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
-                                                                    <label class="font-weight-bold" for="txt-denominacion">DENOMINACIÓN DE LA ENCUESTA</label>
+                                                                    <label class="font-weight-bold" for="txt-denominacion">DENOMINACIÓN DE LA CAMPAÑA</label>
                                                                     <input class="form-control" maxlength="150" type="text" id="txt-denominacion" placeholder="">
                                                                 </div>
                                                             </div>
@@ -142,10 +143,10 @@
                                                                     <label class="font-weight-bold" for="cbo-sub-sector">SUB SECTOR</label>
                                                                     <select class="form-control" id="cbo-sub-sector">
                                                                         <option value="0">-Seleccione un sub sector-</option>
-                                                                        <option value="1">Industria Minería</option>
+                                                                        @*<option value="1">Industria Minería</option>
                                                                         <option value="2">Industria Pesquera</option>
                                                                         <option value="3">Manufactura</option>
-                                                                        <option value="4">Industria</option>
+                                                                        <option value="4">Industria</option>*@
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -164,56 +165,16 @@
                                                                     <label class="font-weight-bold" for="cbo-revisor">SUPERVISOR</label>
                                                                     <select class="selectpicker form-control border rounded" >
                                                                         <option selected>-Filtre y seleccione un supervisor-</option>
-                                                                        <option value="Ultrasound Knee Left">Ultrasound Knee Left Sup 02</option>
+                                                                        @*<option value="Ultrasound Knee Left">Ultrasound Knee Left Sup 02</option>
                                                                         <option value="MRI Knee Right">MRI Knee Right Sup 03</option>
                                                                         <option value="MRI Knee Left">MRI Knee Left Sup 04</option>
                                                                         <option value="MRI Forearm/Elbow Right">MRI Forearm/Elbow Right Sup 04</option>
                                                                         <option value="MRI Forearm/Elbow Left">MRI Forearm/Elbow Left Sup 05</option>
                                                                         <option value="CT Knee Right">CT Knee Right Sup 06</option>
-                                                                        <option value="CT Knee Left">CT Knee Left Sup 07</option>
+                                                                        <option value="CT Knee Left">CT Knee Left Sup 07</option>*@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            @*<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label class="font-weight-bold" for="cbo-combustibles">COMBUSTIBLES</label>
-                                                                    <select class="form-control" id="cbo-combustibles">
-                                                                        <option>-Seleccione un combustibles-</option>
-                                                                        <option>Combustibles 01</option>
-                                                                        <option>Combustibles 02</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label class="font-weight-bold" for="cbo-fuente-energia">FUENTE DE ENERGÍA</label>
-                                                                    <select class="form-control" id="cbo-fuente-energia">
-                                                                        <option>-Seleccione un fuente energia-</option>
-                                                                        <option>Fuente-energia 01</option>
-                                                                        <option>Fuente-energia 02</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label class="font-weight-bold" for="cbo-tipo-transporte">TIPO DE TRANSPORTE</label>
-                                                                    <select class="form-control" id="cbo-tipo-transporte">
-                                                                        <option>-Seleccione un tipo transporte-</option>
-                                                                        <option>Tipo-transporte 01</option>
-                                                                        <option>Tipo-transporte 02</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label class="font-weight-bold" for="cbo-datos-informante">DATOS INFORMANTE</label>
-                                                                    <select class="form-control" id="cbo-datos-informante">
-                                                                        <option>-Seleccione un datos informante-</option>
-                                                                        <option>Datos informante 01</option>
-                                                                        <option>Datos informante 02</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>*@
                                                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold" for="cbo-tipo-usuario">TIPO ENCUESTA</label>
@@ -238,7 +199,7 @@
                                                             </div>
                                                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                                                 <div class="form-group">
-                                                                    <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO</label>
+                                                                    <label class="font-weight-bold" for="cbo-tipo-usuario">ESTADO DE LA ENCUESTA</label>
                                                                     <select class="form-control" id="cbo-estado">
                                                                         <option value="0">-Seleccione un estado-</option>
                                                                         <option value="1">POR INICIAR</option>
@@ -271,7 +232,7 @@
             <div class="container-fluid py-4">
                 <div class="row">
                     <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                        <div class="h5">BANDEJA DE ENCUESTAS&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                        <div class="h5">BANDEJA DE ENCUESTAS POR CAMPAÑA&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Esta lista contiene los registros de las encuestas que corresponden al filtro seleccionado arriba. Puede ordenarlas y/o gestionarlas, según su perfil"></i></div>
                     </div>
                     <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                         @*<button class="btn btn-success w-100">Descargar Excel</button>*@
@@ -285,7 +246,7 @@
                                 <thead>
                                     <tr class="bg-azul text-white">
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>N°&nbsp;</span></span></div>
                                         </th>
                                         <th scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort column-filter"  id="cam_idCampana"></i></div>
@@ -306,7 +267,7 @@
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>F. REGISTRO&nbsp;</span></span><i class="fas fa-sort column-filter" id="cen_fechaHoraLlenado"></i></div>
                                         </th>
                                         <th scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO&nbsp;</span></span><i class="fas fa-sort column-filter" id="eta_etapa"></i></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ETAPA CAM.&nbsp;</span></span><i class="fas fa-sort column-filter" id="eta_etapa"></i></div>
                                         </th>
                                         <th scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>FASE ENC.&nbsp;</span></span><i class="fas fa-sort column-filter" id="fas_fase"></i></div>
@@ -315,24 +276,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @*<tr>
-                                        <td class="text-center" data-encabezado="Item" scope="row">1</td>
-                                        <td class="text-center" data-encabezado="Código">ENC0002</td>
-                                        <td data-encabezado="Empresa encuestada">Razón social o nombre comercial</td>
-                                        <td data-encabezado="Planta">Nombre de planta</td>
-                                        <td data-encabezado="Tipo de encuesta">Piloto</td>
-                                        <td data-encabezado="Campaña">Nombre de la campaña</td>
-                                        <td class="text-center" data-encabezado="Fecha de registro">18-10-2022</td>
-                                        <td data-encabezado="Estado">
-                                            <span>Enviado</span>
-                                        </td>
-                                        <td class="text-center text-center text-xs-right" data-encabezado="Gestión">
-                                            <div class="btn btn-sm btn-warning btn-table text-white"><i class="fa fa-download"></i></div>
-                                            <div class="btn btn-sm btn-success btn-table"><i class="fa fa-eye"></i></div>
-                                            <div class="btn btn-sm btn-danger btn-table"><i class="fa fa-trash"></i></div>
-                                            <div class="btn btn-sm btn-info btn-table"><i class="fa fa-edit"></i></div>
-                                        </td>
-                                    </tr>*@
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -365,10 +308,6 @@
     </div>
 </div>
 
-@*<div id="preguntas-encuesta">
-    <a href="javascript:print()">Imprimir</a>
-</div>*@
-
 @Html.Hidden("column", "cen_idControlEncuesta")
 @Html.Hidden("order", "ASC")
 
@@ -376,6 +315,7 @@
     var listaDepartamento = @Html.Raw(Json.Encode(listaDepartamento));
     var listaProvincia = @Html.Raw(Json.Encode(listaProvincia));
     var listaDistrito = @Html.Raw(Json.Encode(listaDistrito));
+    var listaSubSector = @Html.Raw(Json.Encode(listaSubSector));
     var listaZona = @Html.Raw(Json.Encode(listaZona));
     var listaRevisor = @Html.Raw(Json.Encode(listaRevisor));
     var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));

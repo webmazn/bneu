@@ -195,8 +195,8 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colUsuario = `<td class="text-center" data-encabezado="Usuario registro">${x.usuarioRegistro.nombres}</td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;
-            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${x.idTablaMaestra}"><i class="fa fa-trash"></i></div>`;
-            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit" data-id="${x.idTablaMaestra}"><i class="fa fa-edit"></i></div>`;
+            let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete mx-1" data-id="${x.idTablaMaestra}"><i class="fa fa-trash"></i></div>`;
+            let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit mx-1" data-id="${x.idTablaMaestra}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colSubtitulo}${colUsuario}${colFechaRegistro}${colEstado}${colOptions}</tr>`;
             return row;
@@ -263,5 +263,34 @@ var actualizar = (obj) => {
 
 /* ================================================
  * FIN ACTUALIZAR
+ * ================================================
+ */
+
+/* ================================================
+ * INICIO ELIMINAR
+ * ================================================
+ */
+var idEliminar = 0
+var eliminar = (obj) => {
+    idEliminar = $(obj).data('id')
+    $('#modalConfirmacion').modal('show')
+}
+
+var deshabilitarRegistro = () => {
+    let url = `${baseUrl}TablaMaestra/eliminar?idTablaMaestra=${idEliminar}`;
+    fetch(url)
+    .then(r => r.json())
+    .then(j => {
+        if (j.success) {
+            $('#btn-buscar')[0].click();
+            $('#modalConfirmacion').modal('hide')
+        }
+    })
+    .catch(error => {
+        console.log('Error:' + error.message)
+    })
+}
+/* ================================================
+ * FIN ELIMINAR
  * ================================================
  */

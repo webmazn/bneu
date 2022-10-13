@@ -10,46 +10,16 @@
  */
 
 var cargarDesplegables = () => {
-    /*let urlGiro = `${baseUrl}Giro/obtenerListaGiro`;
-    let urlGrupoEmpresa = `${baseUrl}GrupoEmpresa/obtenerListaGrupoEmpresa`;
-    let urlCiuu = `${baseUrl}Ciuu/obtenerListaCiuu`;
-    Promise.all([
-        fetch(urlGiro),
-        fetch(urlGrupoEmpresa),
-        fetch(urlCiuu)
-    ])
-    .then(r => Promise.all(r.map(v => v.json())))
-    .then((responseAll) => {
-        jGiro = responseAll[0]
-        jGrupoEmpresa = responseAll[1]
-        jCiuu = responseAll[2]        
-        if (jGiro.success) cargarGiro(jGiro.object)
-        if (jGrupoEmpresa.success) cargarGrupoEmpresa(jGrupoEmpresa.object)
-        if (jCiuu.success) cargarCiuu(jCiuu.object)
-        cargarDatosIniciales()
-    });*/
-    cargarGiro(listaGiro)
-    cargarGrupoEmpresa(listaGrupo)
-    cargarCiuu(listaCiuu)
+    cargarParametros(listaGiro, '#cbo-giro', 'Seleccione un giro del negocio')
+    cargarParametros(listaCiuu, '#cbo-ciuu', 'Seleccione un CIUU')
+    cargarParametros(listaGrupo, '#cbo-grupo-empresarial', 'Seleccione un grupo empresarial')
     cargarDatosIniciales()
 }
 
-var cargarGiro = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idGiro}">${x.giro}</option>`).join('');
-    options = `<option value="0">-Seleccione un giro del negocio-</option>${options}`;
-    $('#cbo-giro').html(options);
-}
-
-var cargarGrupoEmpresa = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idGrupoEmpresa}">${x.grupoEmpresa}</option>`).join('');
-    options = `<option value="0">-Seleccione un grupo empresarial-</option>${options}`;
-    $('#cbo-grupo-empresarial').html(options);
-}
-
-var cargarCiuu = (data) => {
-    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idCiuu}">${x.ciuu}</option>`).join('');
-    options = `<option value="0">-Seleccione un CIUU-</option>${options}`;
-    $('#cbo-ciuu').html(options);
+var cargarParametros = (data, idHtml, textoOpcion) => {
+    let options = data.length == 0 ? '' : data.map(x => `<option value="${x.idParametro}">${x.parametro}</option>`).join('');
+    options = `<option value="0">-${textoOpcion}-</option>${options}`;
+    $(idHtml).html(options);
 }
 
 /* ================================================

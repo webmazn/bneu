@@ -15,16 +15,15 @@
             <div class="container m-0 px-0 py-4">
                 <div class="row">
                     <div class="col-md-12 col-lg-9 d-flex">
-                        <div class="bg-light p-4">
-                            <div class="h4 text-cyan">Mantenimiento de Inbdicadores&nbsp;</div>
-                            <p class="m-0 text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nostrum exercitationem, accusantium id fugit perspiciatis laboriosam, aliquam ut vero architecto cumque, placeat voluptas suscipit? Illo iusto soluta molestias fugit dolorum!</p>
+                        <div class="bg-light py-4 pl-0 w-100">
+                            <div class="h3 text-cyan">Mantenimiento de Indicadores&nbsp;</div>                            
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-3">
                         <div class="row">
                             <div class="col-12">
-                                <a class="btn btn-azul w-100 mb-3" href="./mantenimiento-de-indicadores-nuevo.html" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo usuario con un rol específico">Nuevo indicador</a><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a>
-                                <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                                <a class="btn btn-plomo w-100 mb-1" href="@Url.Action("MaestroMantenimiento", "Interno")">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-1 text-white" data-toggle="tooltip" data-placement="left" title="En este formulario usted podrá gestionar los indicadores que extraerá de una campaña predeterminada y seleccionada según sus necesidades. Puede hacer clic en Nuevo indicador para agregar un nuevo indicador a una campaña que podrá luego revisarlo en el dashboard."><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
                             </div>
                         </div>
                     </div>
@@ -36,7 +35,7 @@
                             <div class="form-group init-search">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-6">
-                                        <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Texto de ayuda"></i></label>
+                                        <label class="font-weight-bold" for="txt-buscar">INGRESE UNA DESCRIPCIÓN&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Ingrese una descripción para realizar su búsqueda"></i></label>
                                         <div class="input-group">
                                             <input class="form-control" type="text" id="txt-buscar" placeholder="Ingrese la descripción de su búsqueda" aria-describedby="inputGroup1" required>
                                             <div class="input-group-append">
@@ -123,7 +122,7 @@
             <div class="container-fluid py-4">
                 <div class="row">
                     <div class="col-xs-12 col sm-12 col-lg-10 d-flex align-items-end justify-content-left pl-0">
-                        <div class="h5">BANDEJA DE INDICADORES&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todos los usuarios registrados"></i></div>
+                        <div class="h5">BANDEJA DE INDICADORES&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Bandeja principal donde encontrará todas las campañas registradas para agregar sus indicadores"></i></div>
                     </div>
                     <div class="col-xs-12 col sm-12 col-lg-2 text-lg-right pr-0">
                         @*<button class="btn btn-success w-100">Descargar Excel</button>*@
@@ -137,7 +136,7 @@
                                 <thead>
                                     <tr class="bg-azul text-white">
                                         <th class="text-center" scope="col">
-                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ITEM&nbsp;</span></span></div>
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>N°&nbsp;</span></span></div>
                                         </th>
                                         <th scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span><i class="fas fa-sort column-filter" id="cam_idCampana"></i></div>

@@ -22,7 +22,7 @@ var validarCampos = () => {
 var sendLogin = (e) => {
     e.preventDefault();
 
-    if ($('form .form-group:last').next().hasClass('alert')) $('form .form-group:last').next().remove();
+    $('.seccion-mensaje').html('');
     if (validarCampos()) {
         iniciarSesionConCaptcha();
     }    
@@ -37,6 +37,7 @@ var iniciarSesionConCaptcha = () => {
     let url = `${baseUrl}Login/iniciarSesion`;
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
+    $('button[type="submit"]').hide()
     fetch(url, init)
     .then(r => r.json())
     .then(validarInicioSesion)
@@ -46,7 +47,8 @@ var validarInicioSesion = (data) => {
     if (data.success == true) {
         location.href = `${baseUrl}Interno/Index`;
     } else {
-        $('form .form-group:last').after(messageError(messageStringGeneric(data.message), 'acceso'));
+        $('button[type="submit"]').show()
+        $('.seccion-mensaje').html(messageError(messageStringGeneric(data.message), 'acceso'))
         grecaptcha.reset();
     }
 }

@@ -30,7 +30,7 @@
                     WHERE
                     '||
                     case
-                        when piIdPlantaEmpresa = 0 then ''
+                        when piIdPlantaEmpresa = 0 then ' u.idRol in (1,2) AND '
                         else ' u.idPlantaEmpresa = '|| piIdPlantaEmpresa ||' AND '
                     end    
                     ||'
@@ -74,7 +74,7 @@
                         WHERE 
                         '||
                         case
-                            when piIdPlantaEmpresa = 0 then ''
+                            when piIdPlantaEmpresa = 0 then ' u.idRol in (1,2) AND '
                             else ' u.idPlantaEmpresa = '|| piIdPlantaEmpresa ||' AND '
                         end    
                         ||'
@@ -119,7 +119,7 @@
                     WHERE 
                     '||
                     case
-                        when piIdPlantaEmpresa = 0 then ''
+                        when piIdPlantaEmpresa = 0 then ' u.idRol in (1,2) AND '
                         else ' u.idPlantaEmpresa = '|| piIdPlantaEmpresa ||' AND '
                     end    
                     ||'
@@ -199,7 +199,7 @@
                         WHERE 
                         '||
                         case
-                            when piIdPlantaEmpresa = 0 then ''
+                            when piIdPlantaEmpresa = 0 then ' u.idRol in (1,2) AND '
                             else ' u.idPlantaEmpresa = '|| piIdPlantaEmpresa ||' AND '
                         end    
                         ||'
@@ -259,6 +259,7 @@
     piNombres VARCHAR2,
     piCorreo VARCHAR2,
     piPassword VARCHAR2,
+    piVisualizar VARCHAR2,
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
@@ -271,9 +272,9 @@
     IF piIdUsuario = -1 THEN
       vId := SQ_GENM_USUARIO.NEXTVAL();
       INSERT INTO T_GENM_USUARIO
-      (idUsuario, idEmpresaIndustria, idPlantaEmpresa, idRol, nombres, dni, telefono, correoElectronico, password, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idUsuario, idEmpresaIndustria, idPlantaEmpresa, idRol, nombres, dni, telefono, correoElectronico, password, visualizar, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (vId, piIdEmpresaIndustria, piIdPlantaEmpresa, piIdRol, piNombres, piDni, piTelefono, piCorreo, piPassword, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (vId, piIdEmpresaIndustria, piIdPlantaEmpresa, piIdRol, piNombres, piDni, piTelefono, piCorreo, piPassword, piVisualizar, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
      IF piEditarPassword = false THEN
         SELECT password INTO vPassword FROM T_GENM_USUARIO WHERE idUsuario = piIdUsuario;
@@ -289,6 +290,7 @@
       u.nombres = piNombres,
       u.correoElectronico = piCorreo,
       u.password = vPassword,
+      u.visualizar = piVisualizar,
       u.idEstado = piIdEstado,
       u.idUsuarioModificacion = piIdUsuarioCreacion,
       u.fechaModificacion = SYSDATE,
@@ -388,7 +390,7 @@
                         WHERE 
                         '||
                         case
-                            when piIdPlantaEmpresa = 0 then ''
+                            when piIdPlantaEmpresa = 0 then ' u.idRol in (1,2) AND '
                             else ' u.idPlantaEmpresa = '|| piIdPlantaEmpresa ||' AND '
                         end    
                         ||'
@@ -439,7 +441,7 @@
                         WHERE 
                         '||
                         case
-                            when piIdPlantaEmpresa = 0 then ''
+                            when piIdPlantaEmpresa = 0 then ' u.idRol in (1,2) AND '
                             else ' u.idPlantaEmpresa = '|| piIdPlantaEmpresa ||' AND '
                         end    
                         ||'
@@ -487,6 +489,43 @@
 
     OPEN poRef FOR vQuerySelect;
   END USP_SEL_EXPORTAR_AVANZADO;
+  
+  PROCEDURE USP_SEL_REVISOR_VISUALIZAR(
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT * FROM T_GENM_USUARIO
+    WHERE nvl(visualizar,'0') = '1' AND idRol = 2 AND idEstado = '1';
+  END USP_SEL_REVISOR_VISUALIZAR;
+  
+  PROCEDURE USP_SEL_EMPRESA_USUARIO(
+    piIdUsuario NUMBER,
+    piCorreoElectronico VARCHAR2,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT usu.nombres, usu.correoElectronico, rol.rol, emp.nombreEmpresa, emp.nombreComercial
+    FROM T_GENM_USUARIO usu
+    INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON usu.idEmpresaIndustria = emp.idEmpresaIndustria
+    INNER JOIN T_MAE_ROL rol ON usu.idRol = rol.idRol
+    WHERE LOWER(TRANSLATE(usu.correoElectronico,'¡…Õ”⁄·ÈÌÛ˙','AEIOUaeiou')) = LOWER(TRANSLATE(piCorreoElectronico,'¡…Õ”⁄·ÈÌÛ˙','AEIOUaeiou')) OR usu.idUsuario = piIdUsuario;
+  END USP_SEL_EMPRESA_USUARIO;
+  
+  PROCEDURE USP_SEL_ADMINISTRADOR(
+    poRef OUT SYS_REFCURSOR
+  )AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT nombres, correoElectronico, nombreEmpresa, nombreComercial
+    FROM 
+        (SELECT usu.nombres, usu.correoElectronico, emp.nombreEmpresa, emp.nombreComercial
+        FROM T_GENM_USUARIO usu
+        INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON usu.idEmpresaIndustria = emp.idEmpresaIndustria
+        WHERE usu.idRol = 1 AND usu.idEstado = '1' ORDER BY usu.idUsuario DESC) 
+    WHERE ROWNUM = 1;
+  END USP_SEL_ADMINISTRADOR;
 
 END PKG_SISCEUSI_USUARIO;
 

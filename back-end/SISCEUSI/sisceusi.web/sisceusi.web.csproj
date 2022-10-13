@@ -172,7 +172,13 @@
     <Content Include="images\portada03.png" />
     <Content Include="Mailing\contacto.html" />
     <Content Include="Mailing\contactoBot.html" />
+    <Content Include="Mailing\culminacionSubsanacionCampana.html" />
+    <Content Include="Mailing\finalizacionCampana.html" />
+    <Content Include="Mailing\inicioCampana.html" />
+    <Content Include="Mailing\intencionParticipar.html" />
     <Content Include="Mailing\recuperarClave.html" />
+    <Content Include="Mailing\registroUsuario.html" />
+    <Content Include="Mailing\revisionEncuesta.html" />
     <Content Include="packages.config" />
     <Content Include="Scripts\Sisceusi\campana_index.js" />
     <Content Include="Scripts\Sisceusi\campana_nueva_campana.js" />
@@ -254,7 +260,7 @@
     <Content Include="Views\Encuesta\RevisarEncuesta.cshtml" />
     <Content Include="Views\PaginaHome\Index.cshtml" />
     <Content Include="Views\Interno\CambiarClave.cshtml" />
-    <Content Include="Views\Inicio\contacto.cshtml" />
+    <Content Include="Views\Inicio\Contacto.cshtml" />
     <Content Include="Views\Inicio\recuperarClave.cshtml" />
     <Content Include="Views\Inicio\ContrasenaNuevo.cshtml" />
     <Content Include="Views\Inicio\Reporte.cshtml" />
@@ -312,6 +318,7 @@
     <Compile Include="Controllers\ZonaController.cs" />
     <Compile Include="Filter\LargeJsonValueProviderFactory .cs" />
     <Compile Include="Filter\LoginRequiredAttribute.cs" />
+    <Compile Include="Filter\LogoRedSocialAttribute.cs" />
     <Compile Include="Filter\NoLoginRequiredAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
