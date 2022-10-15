@@ -16,6 +16,8 @@
 
     $('#cbo-control-respuesta').on('change', (e) => validarOpcionesTipoDato())
     $('#cbo-estado-oficial').val('1')
+    $('#cbo-estado-principal').val('1')
+    $('#cbo-estado-secundario').val('1')
     cargarDatos()
     cargarDesplegables()
 });
@@ -123,12 +125,14 @@ var grabarEncabezadoPrincipal = () => {
     let usarAbreviado = $("#exampleRadios1").prop('checked')
     let posicion = $("#txt-posicion-principal").val()
     let descripcionIconoAyuda = $("#txt-question-mark-01").val().trim()
+    let idEstado = $("#cbo-estado-principal").val()
 
     //if (validarEspaciosBlanco(tituloEncabezado)) arr.push("Debe ingresar el título del encabezado principal");
     if (usarAbreviado) if (validarEspaciosBlanco(abreviacion)) arr.push("Debe ingresar la abreviación del encabezado principal");
     if (validarEspaciosBlanco(posicion)) arr.push("Debe ingresar la posición");
     if (posicion < 0 || posicion > 100) arr.push("La posición debe ser mayor a 0 y menor a 100");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -139,7 +143,7 @@ var grabarEncabezadoPrincipal = () => {
     usarAbreviado = $("#exampleRadios1").prop('checked') ? '1' : '0'
 
     let url = `${baseUrl}TablaMaestra/grabarEncabezadoPrincipal`;
-    let data = { idEncabezadoPrincipal, idTablaMaestra, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEncabezadoPrincipal, idTablaMaestra, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -188,7 +192,8 @@ var grabarEncabezadoSecundario = () => {
     let descripcionIconoAyuda = $("#txt-question-mark-02").val().trim()
     let idTipoControl = $("#cbo-control-respuesta").val()
     let idTipoDato = $("#cbo-tipo-dato").val()
-    let idParametro = $("#cbo-id-parametro").val()    
+    let idParametro = $("#cbo-id-parametro").val()
+    let idEstado = $("#cbo-estado-secundario").val()
 
     //if (validarEspaciosBlanco(tituloEncabezado)) arr.push("Debe ingresar el título del encabezado secundario");
     if (usarAbreviado) if (validarEspaciosBlanco(abreviacion)) arr.push("Debe ingresar la abreviación del encabezado principal");
@@ -198,7 +203,8 @@ var grabarEncabezadoSecundario = () => {
     if (validarCombo(idOrientacion)) arr.push("Debe seleccionar una orientación");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
     if (validarCombo(idTipoControl)) arr.push("Debe seleccionar un tipo de control de respuesta");
-    if (idTipoControl == '1') if (idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato");    
+    if (idTipoControl == '1') if (idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato");
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -209,7 +215,7 @@ var grabarEncabezadoSecundario = () => {
     usarAbreviado = $("#exampleRadios3").prop('checked') ? '1' : '0'    
 
     let url = `${baseUrl}TablaMaestra/grabarEncabezadoSecundario`;
-    let data = { idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, idOrientacion, descripcionIconoAyuda, idTipoControl, idTipoDato, idParametro,  idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, idOrientacion, descripcionIconoAyuda, idTipoControl, idTipoDato, idParametro, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -244,6 +250,7 @@ var limpiarEncabezadoPrincipal = () => {
     $("#exampleRadios1").prop('checked', true)
     $("#exampleRadios2").prop('checked', false)
     $("#txt-question-mark-01").val('')
+    $('#cbo-estado-principal').val('1')
 }
 
 var limpiarEncabezadoSecundario = () => {
@@ -258,6 +265,7 @@ var limpiarEncabezadoSecundario = () => {
     $("#cbo-control-respuesta").val('0')
     $("#cbo-tipo-dato").val('0')
     $("#cbo-id-parametro").val('0')
+    $('#cbo-estado-secundario').val('1')
     validarOpcionesTipoDato()
 }
 
@@ -363,10 +371,11 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
             let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`
             let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
             let colPosicion = `<td class="text-center" data-encabezado="Posición">${x.posicion}</td>`;
+            let colEstado = `<td class="text-center" data-encabezado="Estado">${x.idEstado == "0" ? "Deshabilitado" : "Habilitado"}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-principal mx-1" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-principal mx-1" data-id="${x.idEncabezadoPrincipal}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colCodigo}${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colPosicion}${colOptions}</tr>`;
+            let row = `<tr>${colCodigo}${colTituloEncabezado}${colAbreviacion}${colUsarAbreviacion}${colTextoAyuda}${colPosicion}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -498,14 +507,15 @@ var renderizarSecundario = (data, numberCellHeader, pagina, registros) => {
             let colAbreviacion = `<td data-encabezado="Abreviatura">${x.abreviacion}</td>`;
             //let colUsarAbreviacion = `<td class="text-center" data-encabezado="Usar abreviatura">${x.usarAbreviado == '1' ? 'Si' : 'No'}</td>`            
             let colEncabezadoPrincipal = `<td class="text-center" data-encabezado="Encabezado principal">${x.encabezadoPrincipal.tituloEncabezado}</td>`;
-            let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
+            //let colTextoAyuda = `<td data-encabezado="Question mark">${x.descripcionIconoAyuda}</td>`;
             let colTipoDato = `<td class="text-center" data-encabezado="Tipo de dato">${x.tipoDato.tipoDato}</td>`;
             let colParametro = `<td class="text-center" data-encabezado="ID Parámetro">${x.parametro.parametro}</td>`;
             let colPosicion = `<td class="text-center" data-encabezado="Posición">${x.posicion}</td>`;
+            let colEstado = `<td class="text-center" data-encabezado="Estado">${x.idEstado == "0" ? "Deshabilitado" : "Habilitado"}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-secundario mx-1" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-secundario mx-1" data-id="${x.idEncabezadoSecundario}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colEncabezadoPrincipal}${colTextoAyuda}${colTipoDato}${colParametro}${colPosicion}${colOptions}</tr>`;
+            let row = `<tr>${colTituloEncabezado}${colAbreviacion}${colEncabezadoPrincipal}${colTipoDato}${colParametro}${colPosicion}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -531,22 +541,6 @@ var cargarDatos = () => {
 }
 
 var cargarDatosIniciales = () => {
-    /*let id = $('#identificador').val()
-    if (id > 0) {
-        let url = `${baseUrl}TablaMaestra/obtenerTablaMaestra?idTablaMaestra=${id}`;
-        fetch(url)
-        .then(r => r.json())
-        .then(j => {
-            if (j.success) {
-                cargarDatosTablaMaestra(j.object)
-            } else {
-                $('.seccion-mensaje-maestra').html(messageError(messageStringGeneric('Ocurrió un problema al cargar los datos de la tabla maestra. Por favor, puede volver a recargar la página.'), 'carga de datos'))
-            }
-        })
-        .catch(error => {
-            console.log('Error:' + error.message)
-        })
-    }*/
     cargarDatosTablaMaestra(tablaMaestra)
 }
 
@@ -601,6 +595,7 @@ var cargarDatosPrincipal = (data) => {
     $("#exampleRadios2").prop('checked', data.usarAbreviado == '0' ? true : false)
     $("#txt-posicion-principal").val(data.posicion)
     $("#txt-question-mark-01").val(data.descripcionIconoAyuda)
+    $("#cbo-estado-principal").val(data.idEstado)
 }
 
 /* ================================================
@@ -645,7 +640,8 @@ var cargarDatosSecundario = (data) => {
     $("#cbo-control-respuesta").val(data.idTipoControl)
     validarOpcionesTipoDato()
     $("#cbo-tipo-dato").val(data.idTipoDato)
-    $("#cbo-id-parametro").val(data.idParametro)    
+    $("#cbo-id-parametro").val(data.idParametro)
+    $("#cbo-estado-secundario").val(data.idEstado)
 }
 
 /* ================================================

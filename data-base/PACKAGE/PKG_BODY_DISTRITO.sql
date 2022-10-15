@@ -14,7 +14,8 @@
     OPEN poRef FOR
     SELECT  *
     FROM  T_MAE_DISTRITO
-    WHERE idEstado = '1';
+    WHERE idEstado = '1'
+    ORDER BY distrito ASC;
   END USP_SEL_LISTA;
 
 END PKG_SISCEUSI_DISTRITO;

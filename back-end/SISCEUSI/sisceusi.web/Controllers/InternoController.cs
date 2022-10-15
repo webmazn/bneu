@@ -235,7 +235,7 @@ namespace sisceusi.web.Controllers
         }
 
         [HttpGet]
-        public void exportarGeneral(int idCampana, int idTablaMaestra)
+        public void exportarGeneral(int idCampana)
         {
             Dictionary<int, string> letras = obtenerDictionaryLetra();
             ReporteLN logicaReporte = new ReporteLN();
@@ -292,7 +292,7 @@ namespace sisceusi.web.Controllers
                 }
             });
 
-            int columnaCuerpo = 36;
+            int columnaCuerpo = 31;
             List<CuerpoReporteBE> listaCuerpo = armarCuerpoGeneral(listaReporte, mayorFila);
             listaCampanaEncuesta.ForEach(x =>
             {
@@ -304,7 +304,7 @@ namespace sisceusi.web.Controllers
                     {
                         contadorCabecera++;
                         columnaCuerpo++;
-                        int filaCuerpo = 4;
+                        int filaCuerpo = 8;
                         listaReporte.ForEach(z =>
                         {                            
                             List<RespuestaEncuestaTablaBE> lista = y.listaRespuestaEncuestaTabla.FindAll(m => m.idControlEncuesta == z.idControlEncuesta);
@@ -419,23 +419,28 @@ namespace sisceusi.web.Controllers
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
-                    ExcelWorksheet ws = tituloReporteExcel(package, "REPORTE GENERAL", 8, 5);                    
+                    string campana = listaReporte == null || listaReporte.Count() == 0 ? "" : listaReporte[0].campana;
+                    string subsector = listaReporte == null || listaReporte.Count() == 0 ? "" : listaReporte[0].subsector;
+                    string fechaInicio = listaReporte == null || listaReporte.Count() == 0 ? "" : listaReporte[0].txtFechaInicioEncuesta;
+                    string fechaFin = listaReporte == null || listaReporte.Count() == 0 ? "" : listaReporte[0].txtFechaFinEncuesta;
+                    ExcelWorksheet ws = tituloReporte(package, "REPORTE GENERAL", campana, subsector, fechaInicio, fechaFin);  
+                                      
                     int letra = 0;
                     listaCabeceraPrincipal.ForEach(x =>
                     {
                         letra++;
-                        string celdaInicial = String.Concat(letras[letra], "3");
+                        string celdaInicial = String.Concat(letras[letra], "7");
                         letra = letra + x.cantidadCeldas - 1;
-                        string celdaFinal = String.Concat(letras[letra], "3");
+                        string celdaFinal = String.Concat(letras[letra], "7");
                         cabecerasReporte(ws, x.descripcion, celdaInicial, celdaFinal);
                     });
                     letra = 0;
                     listaCabeceraSecundaria.ForEach(x =>
                     {
                         letra++;
-                        string celdaInicial = String.Concat(letras[letra], "4");
+                        string celdaInicial = String.Concat(letras[letra], "8");
                         letra = letra + x.cantidadCeldas - 1;
-                        string celdaFinal = String.Concat(letras[letra], "4");
+                        string celdaFinal = String.Concat(letras[letra], "8");
                         cabecerasReporte(ws, x.descripcion, celdaInicial, celdaFinal);
                     });
                     cuerpoReporte(ws, listaCuerpo);
@@ -449,7 +454,7 @@ namespace sisceusi.web.Controllers
         private List<CabeceraPrincipalReporteBE> armarCabeceraPrincipalGeneral()
         {
             List<CabeceraPrincipalReporteBE> lista = new List<CabeceraPrincipalReporteBE>();
-            lista.Add(new CabeceraPrincipalReporteBE { descripcion = "CAMPAÑA", cantidadCeldas = 5 });
+            //lista.Add(new CabeceraPrincipalReporteBE { descripcion = "CAMPAÑA", cantidadCeldas = 5 });
             lista.Add(new CabeceraPrincipalReporteBE { descripcion = "EMPRESA", cantidadCeldas = 10 });
             lista.Add(new CabeceraPrincipalReporteBE { descripcion = "PLANTA", cantidadCeldas = 13 });
             lista.Add(new CabeceraPrincipalReporteBE { descripcion = "USUARIO RESPONDE", cantidadCeldas = 4 });
@@ -460,11 +465,11 @@ namespace sisceusi.web.Controllers
         private List<CabeceraSecundariaReporteBE> armarCabeceraSecundarioGeneral()
         {
             List<CabeceraSecundariaReporteBE> lista = new List<CabeceraSecundariaReporteBE>();
-            lista.Add(new CabeceraSecundariaReporteBE { descripcion = "CÓDIGO", cantidadCeldas = 1 });
+            /*lista.Add(new CabeceraSecundariaReporteBE { descripcion = "CÓDIGO", cantidadCeldas = 1 });
             lista.Add(new CabeceraSecundariaReporteBE { descripcion = "DENOMINACIÓN", cantidadCeldas = 1 });
             lista.Add(new CabeceraSecundariaReporteBE { descripcion = "SUB SECTOR", cantidadCeldas = 1 });
             lista.Add(new CabeceraSecundariaReporteBE { descripcion = "FECHA INICIO", cantidadCeldas = 1 });
-            lista.Add(new CabeceraSecundariaReporteBE { descripcion = "FECHA FIN", cantidadCeldas = 1 });
+            lista.Add(new CabeceraSecundariaReporteBE { descripcion = "FECHA FIN", cantidadCeldas = 1 });*/
 
             lista.Add(new CabeceraSecundariaReporteBE { descripcion = "RAZON SOCIAL", cantidadCeldas = 1 });
             lista.Add(new CabeceraSecundariaReporteBE { descripcion = "NOMBRE COMERCIAL", cantidadCeldas = 1 });
@@ -507,53 +512,128 @@ namespace sisceusi.web.Controllers
         private List<CuerpoReporteBE> armarCuerpoGeneral(List<ReporteBE> listaReporte, int mayorFila)
         {
             List<CuerpoReporteBE> listaCuerpo = new List<CuerpoReporteBE>();
-            int fila = 4;
+            int fila = 8;
             listaReporte.ForEach(x =>
             {
                 for (int i = 0; i < mayorFila; i++)
                 {
                     fila++;
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = String.Concat("ENC", x.idCampana.ToString("D4")), celda = String.Concat("A", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    /*listaCuerpo.Add(new CuerpoReporteBE { descripcion = String.Concat("ENC", x.idCampana.ToString("D4")), celda = String.Concat("A", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
                     listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.campana, celda = String.Concat("B", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
                     listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.subsector, celda = String.Concat("C", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
                     listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.txtFechaInicioEncuesta, celda = String.Concat("D", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.txtFechaFinEncuesta, celda = String.Concat("E", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.nombreEmpresa, celda = String.Concat("F", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.nombreComercial, celda = String.Concat("G", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.ruc, celda = String.Concat("H", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.giroEmpresa, celda = String.Concat("I", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.grupoEmpresa, celda = String.Concat("J", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.ciuuEmpresa, celda = String.Concat("K", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.correoEmpresarial, celda = String.Concat("L", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.direccionFiscal, celda = String.Concat("M", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.representanteLegal, celda = String.Concat("N", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.dniRepresentante, celda = String.Concat("O", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.planta, celda = String.Concat("P", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.giroPlanta, celda = String.Concat("Q", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.ciuuPlanta, celda = String.Concat("R", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.departamento, celda = String.Concat("S", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.provincia, celda = String.Concat("T", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.distrito, celda = String.Concat("U", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.zona, celda = String.Concat("V", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.direccion, celda = String.Concat("W", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.telefonoPlanta, celda = String.Concat("X", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.empresaGas, celda = String.Concat("Y", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.numeroSuministroGas, celda = String.Concat("Z", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.empresaLuz, celda = String.Concat("AA", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.numeroSuministroAlumbrado, celda = String.Concat("AB", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.encuestado, celda = String.Concat("AC", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.dniEncuestado, celda = String.Concat("AD", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.correoEncuestado, celda = String.Concat("AE", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.telefonoEncuestado, celda = String.Concat("AF", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.revisor, celda = String.Concat("AG", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.dniRevisor, celda = String.Concat("AH", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.correoRevisor, celda = String.Concat("AI", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
-                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.telefonoRevisor, celda = String.Concat("AJ", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.txtFechaFinEncuesta, celda = String.Concat("E", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });*/
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.nombreEmpresa, celda = String.Concat("A", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.nombreComercial, celda = String.Concat("B", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.ruc, celda = String.Concat("C", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.giroEmpresa, celda = String.Concat("D", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.grupoEmpresa, celda = String.Concat("E", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.ciuuEmpresa, celda = String.Concat("F", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.correoEmpresarial, celda = String.Concat("G", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.direccionFiscal, celda = String.Concat("H", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.representanteLegal, celda = String.Concat("I", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.dniRepresentante, celda = String.Concat("J", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.planta, celda = String.Concat("K", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.giroPlanta, celda = String.Concat("L", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.ciuuPlanta, celda = String.Concat("M", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.departamento, celda = String.Concat("N", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.provincia, celda = String.Concat("O", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.distrito, celda = String.Concat("P", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.zona, celda = String.Concat("Q", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.direccion, celda = String.Concat("R", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.telefonoPlanta, celda = String.Concat("S", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.empresaGas, celda = String.Concat("T", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.numeroSuministroGas, celda = String.Concat("U", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.empresaLuz, celda = String.Concat("V", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.numeroSuministroAlumbrado, celda = String.Concat("W", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.encuestado, celda = String.Concat("X", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.dniEncuestado, celda = String.Concat("Y", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.correoEncuestado, celda = String.Concat("Z", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.telefonoEncuestado, celda = String.Concat("AA", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.revisor, celda = String.Concat("AB", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.dniRevisor, celda = String.Concat("AC", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.correoRevisor, celda = String.Concat("AD", fila.ToString()), filaSeparador = i == (mayorFila - 1) });
+                    listaCuerpo.Add(new CuerpoReporteBE { descripcion = x.telefonoRevisor, celda = String.Concat("AE", fila.ToString()), filaSeparador = i == (mayorFila - 1), columnaSeparador = true });
                 }
                 
             });            
 
             return listaCuerpo;
+        }
+
+        private ExcelWorksheet tituloReporte(ExcelPackage package, string nombreTituloReporte, string campana, string subsector, string fechaInicio, string fechaFin)
+        {
+            ExcelWorksheet ws = package.Workbook.Worksheets.Add(nombreTituloReporte);
+            using (ExcelRange m = ws.Cells[1, 1, 1, 8]) //Cells[Fila1, Column1, Fila2, Column2]
+            {
+                m.Style.Font.Bold = true;
+                m.Style.WrapText = true;
+                //Border
+                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                //Alineacion
+                m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                m.Style.Font.Size = 14;
+                m.Merge = true;
+                m.Value = "Sistema de Encuesta de Consumo Final de Energía";
+            }
+
+            using (ExcelRange m = ws.Cells[3, 1, 3, 8]) //Cells[Fila1, Column1, Fila2, Column2]
+            {
+                m.Style.Font.Bold = true;
+                m.Style.WrapText = true;
+                //Border
+                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                //Alineacion
+                m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                m.Style.Font.Size = 14;
+                m.Merge = true;
+                m.Value = $"Campaña de información {campana} del subsector {subsector} del ({fechaInicio} al {fechaFin})";
+            }
+
+            using (ExcelRange m = ws.Cells[4, 1, 4, 8]) //Cells[Fila1, Column1, Fila2, Column2]
+            {
+                m.Style.Font.Bold = true;
+                m.Style.WrapText = true;
+                //Border
+                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                //Alineacion
+                m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                m.Style.Font.Size = 14;
+                m.Merge = true;
+                m.Value = $"Reporte detallado de resultados";
+            }
+
+            using (ExcelRange m = ws.Cells[6, 1, 6, 8]) //Cells[Fila1, Column1, Fila2, Column2]
+            {
+                m.Style.Font.Bold = true;
+                m.Style.WrapText = true;
+                //Border
+                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                //Alineacion
+                m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                m.Style.Font.Size = 14;
+                m.Merge = true;
+                m.Value = "Fecha de Emisión: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            }
+            //ws.View.FreezePanes(4, 1);//FreezePanes(Fila, Columna)
+            ws.View.FreezePanes(9, 1);//FreezePanes(Fila, Columna)
+            return ws;
         }
 
         private void cabecerasReporte(ExcelWorksheet ws, string value, string celdaInico, string celdaFin)
@@ -576,8 +656,8 @@ namespace sisceusi.web.Controllers
                 m.Merge = true;
                 m.Value = value;
             }
-            ws.Row(3).Height = 23;
-            ws.Row(4).Height = 23;
+            ws.Row(3).Height = 25;
+            ws.Row(4).Height = 25;
         }
 
         private void cuerpoReporte(ExcelWorksheet ws, List<CuerpoReporteBE> listaCuerpo)
@@ -601,7 +681,6 @@ namespace sisceusi.web.Controllers
                     m.AutoFitColumns(30, 40);
                     m.Value = x.descripcion;
                 }
-                //ws.Row(3).Height = 20;
             });            
         }
 

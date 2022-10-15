@@ -23,6 +23,8 @@ namespace sisceusi.entidad
         public string enlaceYoutube { get; set; }
         public string enlaceWhatsApp { get; set; }
         public string enlaceLinkedin { get; set; }
+        public string tituloNavegador { get; set; }
+        public string chatbot { get; set; }
         public string idEstado { get; set; }
         public string rutaManager { get; set; }
     }

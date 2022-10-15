@@ -16,6 +16,7 @@
     piEnlaceBoton VARCHAR2,
     piNombreArchivoBanner VARCHAR2,
     piNombreArchivoGeneradoBanner VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -43,6 +44,7 @@
     piDescripcionPublicacion VARCHAR2,
     piNombreArchivoPublicacion VARCHAR2,
     piNombreArchivoGeneradoPubli VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -68,6 +70,7 @@
     piIdEnlace NUMBER,
     piTituloEnlace VARCHAR2,
     piDescripcionEnlace VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -101,6 +104,8 @@
     piEnlaceYoutube VARCHAR2,
     piEnlaceWhatsApp VARCHAR2,
     piEnlaceLinkedin VARCHAR2,
+    piTituloNavegador VARCHAR2,
+    piChatbot VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER

@@ -16,6 +16,7 @@
     piEnlaceBoton VARCHAR2,
     piNombreArchivoBanner VARCHAR2,
     piNombreArchivoGeneradoBanner VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -25,9 +26,9 @@
     IF piIdBanner = -1 THEN
           vId := SQ_GENM_BANNER.NEXTVAL();
           INSERT INTO T_GENM_BANNER
-          (idBanner, tituloBanner, descripcionBanner, descripcionFija, tituloBoton, enlaceBoton, nombreArchivoBanner, nombreArchivoGeneradoBanner, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          (idBanner, tituloBanner, descripcionBanner, descripcionFija, tituloBoton, enlaceBoton, nombreArchivoBanner, nombreArchivoGeneradoBanner, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
           VALUES 
-          (vId, piTituloBanner, piDescripcionBanner, piDescripcionFija, piTituloBoton, piEnlaceBoton, piNombreArchivoBanner, piNombreArchivoGeneradoBanner, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+          (vId, piTituloBanner, piDescripcionBanner, piDescripcionFija, piTituloBoton, piEnlaceBoton, piNombreArchivoBanner, piNombreArchivoGeneradoBanner, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
           UPDATE T_GENM_BANNER SET
           tituloBanner = piTituloBanner,
@@ -37,6 +38,7 @@
           enlaceBoton = piEnlaceBoton,
           nombreArchivoBanner = piNombreArchivoBanner,
           nombreArchivoGeneradoBanner = piNombreArchivoGeneradoBanner,
+          idEstado = piIdEstado,
           idUsuarioModificacion = piIdUsuarioCreacion,
           fechaModificacion = SYSDATE,
           ipModificacion = piIpCreacion
@@ -59,8 +61,9 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_BANNER ban
-                    WHERE 
-                    ban.idEstado = ''1'' ';
+                    --WHERE 
+                    --ban.idEstado = ''1'' 
+                    ';
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -82,14 +85,15 @@
                                 ban.tituloBoton,
                                 ban.enlaceBoton,
                                 ban.nombreArchivoBanner,
+                                ban.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ban.idBanner ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_BANNER ban
-                        WHERE 
-                        ban.idEstado = ''1''
+                        --WHERE 
+                        --ban.idEstado = ''1''
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -124,6 +128,7 @@
     piDescripcionPublicacion VARCHAR2,
     piNombreArchivoPublicacion VARCHAR2,
     piNombreArchivoGeneradoPubli VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -133,15 +138,16 @@
     IF piIdPublicacion = -1 THEN
           vId := SQ_GENM_PUBLICACION.NEXTVAL();
           INSERT INTO T_GENM_PUBLICACION
-          (idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, nombreArchivoGeneradoPubli, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          (idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, nombreArchivoGeneradoPubli, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
           VALUES 
-          (vId, piTituloPublicacion, piDescripcionPublicacion, piNombreArchivoPublicacion, piNombreArchivoGeneradoPubli, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+          (vId, piTituloPublicacion, piDescripcionPublicacion, piNombreArchivoPublicacion, piNombreArchivoGeneradoPubli, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
           UPDATE T_GENM_PUBLICACION SET
           tituloPublicacion = piTituloPublicacion,
           descripcionPublicacion = piDescripcionPublicacion,
           nombreArchivoPublicacion = piNombreArchivoPublicacion,
           nombreArchivoGeneradoPubli = piNombreArchivoGeneradoPubli,
+          idEstado = piIdEstado,
           idUsuarioModificacion = piIdUsuarioCreacion,
           fechaModificacion = SYSDATE,
           ipModificacion = piIpCreacion
@@ -164,8 +170,9 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_PUBLICACION pub
-                    WHERE 
-                    pub.idEstado = ''1'' ';
+                    --WHERE 
+                    --pub.idEstado = ''1'' 
+                    ';
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -184,14 +191,15 @@
                                 pub.tituloPublicacion,
                                 pub.descripcionPublicacion,
                                 pub.nombreArchivoPublicacion,
+                                pub.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY pub.idPublicacion ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_PUBLICACION pub
-                        WHERE 
-                        pub.idEstado = ''1''
+                        --WHERE 
+                        --pub.idEstado = ''1''
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -224,6 +232,7 @@
     piIdEnlace NUMBER,
     piTituloEnlace VARCHAR2,
     piDescripcionEnlace VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -233,13 +242,14 @@
     IF piIdEnlace = -1 THEN
           vId := SQ_GENM_ENLACE.NEXTVAL();
           INSERT INTO T_GENM_ENLACE
-          (idEnlace, tituloEnlace, descripcionEnlace, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          (idEnlace, tituloEnlace, descripcionEnlace, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
           VALUES 
-          (vId, piTituloEnlace, piDescripcionEnlace, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+          (vId, piTituloEnlace, piDescripcionEnlace, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
           UPDATE T_GENM_ENLACE SET
           tituloEnlace = piTituloEnlace,
           descripcionEnlace = piDescripcionEnlace,
+          idEstado = piIdEstado,
           idUsuarioModificacion = piIdUsuarioCreacion,
           fechaModificacion = SYSDATE,
           ipModificacion = piIpCreacion
@@ -262,8 +272,9 @@
   BEGIN
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GENM_ENLACE enl
-                    WHERE 
-                    enl.idEstado = ''1'' ';
+                    --WHERE 
+                    --enl.idEstado = ''1'' 
+                    ';
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -281,14 +292,15 @@
                         SELECT  enl.idEnlace,
                                 enl.tituloEnlace,
                                 enl.descripcionEnlace,
+                                enl.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY enl.idEnlace ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
                                 || piRegistros || ' AS registros,'
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GENM_ENLACE enl
-                        WHERE 
-                        enl.idEstado = ''1''
+                        --WHERE 
+                        --enl.idEstado = ''1''
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -329,6 +341,8 @@
     piEnlaceYoutube VARCHAR2,
     piEnlaceWhatsApp VARCHAR2,
     piEnlaceLinkedin VARCHAR2,
+    piTituloNavegador VARCHAR2,
+    piChatbot VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -338,9 +352,9 @@
     IF piIdLogoRedSocial = -1 THEN
           vId := SQ_GENM_LOGO_RED_SOCIAL.NEXTVAL();
           INSERT INTO T_GENM_LOGO_RED_SOCIAL
-          (idLogoRedSocial, nombreArchivoLogoWeb, nombreArchivoGeneradoLogoWeb, nombreArchivoLogoDgee, nombreArchivoGeneradoLogoDgee, enlaceFacebook, enlaceTwiter, enlaceInstangram, enlaceYoutube, enlaceWhatsApp, enlaceLinkedin, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          (idLogoRedSocial, nombreArchivoLogoWeb, nombreArchivoGeneradoLogoWeb, nombreArchivoLogoDgee, nombreArchivoGeneradoLogoDgee, enlaceFacebook, enlaceTwiter, enlaceInstangram, enlaceYoutube, enlaceWhatsApp, enlaceLinkedin, tituloNavegador, chatbot, idUsuarioCreacion, fechaCreacion, ipCreacion)
           VALUES 
-          (vId, piNombreArchivoLogoWeb, piNombreArchivoGeneradoLogoWeb, piNombreArchivoLogoDgee, piNombreArchivoGeneradoLogoD, piEnlaceFacebook, piEnlaceTwiter, piEnlaceInstangram, piEnlaceYoutube, piEnlaceWhatsApp, piEnlaceLinkedin, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+          (vId, piNombreArchivoLogoWeb, piNombreArchivoGeneradoLogoWeb, piNombreArchivoLogoDgee, piNombreArchivoGeneradoLogoD, piEnlaceFacebook, piEnlaceTwiter, piEnlaceInstangram, piEnlaceYoutube, piEnlaceWhatsApp, piEnlaceLinkedin, piTituloNavegador, piChatbot, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
           UPDATE T_GENM_LOGO_RED_SOCIAL SET
           nombreArchivoLogoWeb = piNombreArchivoLogoWeb,
@@ -353,6 +367,8 @@
           enlaceYoutube = piEnlaceYoutube,
           enlaceWhatsApp = piEnlaceWhatsApp,
           enlaceLinkedin = piEnlaceLinkedin,
+          tituloNavegador = piTituloNavegador,
+          chatbot = piChatbot,
           idUsuarioModificacion = piIdUsuarioCreacion,
           fechaModificacion = SYSDATE,
           ipModificacion = piIpCreacion

@@ -145,12 +145,22 @@
                                     <input class="form-control" type="number" id="txt-posicion-principal">
                                 </div>
                             </div>
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="txt-question-mark-01">QUESTION MARK - ÍCONO DE AYUDA</label>
+                                    <label class="font-weight-bold" for="txt-question-mark-01">QUESTION MARK - ÍCON. AYUDA</label>
                                     <input class="form-control" type="text" maxlength="200" id="txt-question-mark-01" placeholder="Question mark descripción">
                                 </div>
-                            </div>
+                            </div>   
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-principal" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div>                         
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group d-none">
                                     <label class="font-weight-bold">&nbsp;</label><a id="btn-cancelar-principal" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Cancelar</a>
@@ -160,7 +170,7 @@
                                 <div class="form-group">
                                     <label class="font-weight-bold">&nbsp;</label><a id="btn-agregar-principal" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a>
                                 </div>
-                            </div>
+                            </div>                            
 
                             @*<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
@@ -203,6 +213,9 @@
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width:50px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>POSICIÓN</span></span></div>
+                                                </th>
+                                                <th class="text-center" scope="col">
+                                                    <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width:150px;">
                                                     <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
@@ -340,7 +353,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="cbo-id-parametro">ID PARÁMETRO</label>
                                     <select class="form-control" id="cbo-id-parametro">
@@ -348,9 +361,20 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-secundario" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
                         <div class="row">
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            </div>
                             <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group d-none">
                                     <label class="font-weight-bold">&nbsp;</label><a id="btn-cancelar-secundario" class="btn btn-secondary w-100 mb-3" href="javascript:void(0)">Cancelar</a>
@@ -392,9 +416,9 @@
                                                 <th class="text-center" scope="col" style="min-width: 120px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENC. PRINCIPAL</span></span></div>
                                                 </th>
-                                                <th class="text-center" scope="col">
+                                                @*<th class="text-center" scope="col">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TEXTO DE AYUDA</span></span></div>
-                                                </th>
+                                                </th>*@
                                                 <th class="text-center" scope="col" style="min-width: 90px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TPO. DATO</span></span></div>
                                                 </th>
@@ -403,6 +427,9 @@
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width:50px;">
                                                     <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>POSICIÓN</span></span></div>
+                                                </th>
+                                                <th class="text-center" scope="col">
+                                                    <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
                                                 </th>
                                                 <th class="text-center" scope="col" style="min-width: 90px;">GESTIÓN</th>
                                             </tr>

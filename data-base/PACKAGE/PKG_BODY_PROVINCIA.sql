@@ -14,7 +14,8 @@
     OPEN poRef FOR
     SELECT  *
     FROM  T_MAE_PROVINCIA
-    WHERE idEstado = '1';
+    WHERE idEstado = '1'
+    ORDER BY provincia ASC;
   END USP_SEL_LISTA;
 
 END PKG_SISCEUSI_PROVINCIA;

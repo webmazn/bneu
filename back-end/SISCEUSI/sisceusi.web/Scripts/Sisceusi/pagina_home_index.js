@@ -23,6 +23,10 @@
     $('#btn-cancelar-publicacion').on('click', (e) => cancelarPublicacion())
     $('#btn-cancelar-enlace').on('click', (e) => cancelarEnlace())
 
+    $('#cbo-estado-banner').val('1')
+    $('#cbo-estado-publicacion').val('1')
+    $('#cbo-estado-enlace').val('1')
+
     cargarDatos()
 });
 
@@ -41,6 +45,7 @@ var grabarBanner = () => {
     let tituloBoton = $("#txt-titulo-boton").val().trim()
     let enlaceBoton = $("#txt-enlace-boton").val().trim()
     let archivoContenidoBanner = $('#fle-slider-01').data('file')
+    let idEstado = $("#cbo-estado-banner").val()
 
     if (validarEspaciosBlanco(tituloBanner)) arr.push("Debe ingresar el título del banner");
     if (validarEspaciosBlanco(descripcionBanner)) arr.push("Debe ingresar la descripción del banner");
@@ -48,6 +53,7 @@ var grabarBanner = () => {
     if (validarEspaciosBlanco(tituloBoton)) arr.push("Debe ingresar el título del botón");
     if (validarEspaciosBlanco(enlaceBoton)) arr.push("Debe ingresar el enlace del botón");
     if (archivoContenidoBanner == undefined) arr.push('Debe cargar la imagen del banner')
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -58,7 +64,7 @@ var grabarBanner = () => {
     let archivoNuevoBanner = $('#fle-slider-01').data('new')
 
     let url = `${baseUrl}PaginaHome/grabarBanner`;
-    let data = { idBanner, tituloBanner, descripcionBanner, descripcionFija, tituloBoton, enlaceBoton, nombreArchivoBanner, archivoContenidoBanner, nombreArchivoGeneradoBanner, archivoNuevoBanner, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idBanner, tituloBanner, descripcionBanner, descripcionFija, tituloBoton, enlaceBoton, nombreArchivoBanner, archivoContenidoBanner, nombreArchivoGeneradoBanner, archivoNuevoBanner, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -96,6 +102,7 @@ var limpiarBanner = () => {
     $('#fle-slider-01').removeData('file')
     $('#fle-slider-01').removeData('new')
     $('#txt-slider-01').val('')
+    $('#cbo-estado-banner').val('1')
 }
 
 var nombreArchivoBanner
@@ -251,10 +258,11 @@ var renderizarPrincipal = (data, numberCellHeader, pagina, registros) => {
             let colTituloBoton = `<td class="text-center" data-encabezado="Título botón">${x.tituloBoton}</td>`
             let colEnlaceBoton = `<td class="text-center" data-encabezado="Posición">${x.enlaceBoton}</td>`;
             let colNombreArchivoBanner = `<td data-encabezado="Enlace botón" style="min-width:180px;"><div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">${x.nombreArchivoBanner}</span></td>`;
+            let colEstado = `<td class="text-center" data-encabezado="Estado">${x.idEstado == "0" ? "Deshabilitado" : "Habilitado"}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-banner mx-1" data-id="${x.idBanner}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-banner mx-1" data-id="${x.idBanner}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colCodigo}${colTituloBanner}${colDescripcionBanner}${colDescripcionFija}${colTituloBoton}${colEnlaceBoton}${colNombreArchivoBanner}${colOptions}</tr>`;
+            let row = `<tr>${colCodigo}${colTituloBanner}${colDescripcionBanner}${colDescripcionFija}${colTituloBoton}${colEnlaceBoton}${colNombreArchivoBanner}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -304,6 +312,7 @@ var cargarDatosBanner = (data) => {
     $('#fle-slider-01').data('file', data.archivoContenidoBanner)
     $('#fle-slider-01').data('new', false)
     $('#txt-slider-01').val(data.nombreArchivoBanner)
+    $('#cbo-estado-banner').val(data.idEstado)
 }
 
 /* ================================================
@@ -376,10 +385,12 @@ var grabarPublicacion = () => {
     let tituloPublicacion = $("#txt-titulo-publicacion").val().trim()
     let descripcionPublicacion = $("#txt-descripcion-publicacion").val().trim()
     let archivoContenidoPublicacion = $('#fle-publicacion-01').data('file')
+    let idEstado = $("#cbo-estado-publicacion").val()
 
     if (validarEspaciosBlanco(tituloPublicacion)) arr.push("Debe ingresar el título de la publicación");
     if (validarEspaciosBlanco(descripcionPublicacion)) arr.push("Debe ingresar la descripción de la publicación");
     if (archivoContenidoPublicacion == undefined) arr.push('Debe cargar la imagen de la publicación')
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado")
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -390,7 +401,7 @@ var grabarPublicacion = () => {
     let archivoNuevoPublicacion = $('#fle-publicacion-01').data('new')
 
     let url = `${baseUrl}PaginaHome/grabarPublicacion`;
-    let data = { idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, archivoContenidoPublicacion, nombreArchivoGeneradoPubli, archivoNuevoPublicacion, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, archivoContenidoPublicacion, nombreArchivoGeneradoPubli, archivoNuevoPublicacion, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -425,6 +436,7 @@ var limpiarPublicacion = () => {
     $('#fle-publicacion-01').removeData('file')
     $('#fle-publicacion-01').removeData('new')
     $('#txt-publicacion-01').val('')
+    $('#cbo-estado-publicacion').val('1')
 }
 
 var nombreArchivoPublicacion
@@ -577,10 +589,11 @@ var renderizarPublicacion = (data, numberCellHeader, pagina, registros) => {
             let colTituloPublicacion = `<td data-encabezado="Título banner" scope="row"><span>${x.tituloPublicacion}</span></td>`;
             let colDescripcionPublicacion = `<td data-encabezado="Descripción banner">${x.descripcionPublicacion}</td>`;
             let colNombreArchivoPublicacion = `<td data-encabezado="Enlace botón" style="min-width:180px;"><div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">${x.nombreArchivoPublicacion}</span></td>`;
+            let colEstado = `<td class="text-center" data-encabezado="Estado">${x.idEstado == "0" ? "Deshabilitado" : "Habilitado"}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-publicacion mx-1" data-id="${x.idPublicacion}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-publicacion mx-1" data-id="${x.idPublicacion}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colCodigo}${colTituloPublicacion}${colDescripcionPublicacion}${colNombreArchivoPublicacion}${colOptions}</tr>`;
+            let row = `<tr>${colCodigo}${colTituloPublicacion}${colDescripcionPublicacion}${colNombreArchivoPublicacion}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -627,6 +640,7 @@ var cargarDatosPublicacion = (data) => {
     $('#fle-publicacion-01').data('file', data.archivoContenidoPublicacion)
     $('#fle-publicacion-01').data('new', false)
     $('#txt-publicacion-01').val(data.nombreArchivoPublicacion)
+    $('#cbo-estado-publicacion').val(data.idEstado)
 }
 
 /* ================================================
@@ -699,9 +713,11 @@ var grabarEnlace = () => {
 
     let tituloEnlace = $("#txt-titulo-enlace").val().trim()
     let descripcionEnlace = $("#txt-descripcion-enlace").val().trim()
+    let idEstado = $("#cbo-estado-enlace").val()
 
     if (validarEspaciosBlanco(tituloEnlace)) arr.push("Debe ingresar el título del enlace");
     if (validarEspaciosBlanco(descripcionEnlace)) arr.push("Debe ingresar la descripción del enlace");
+    if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -711,7 +727,7 @@ var grabarEnlace = () => {
 
     let url = `${baseUrl}PaginaHome/grabarEnlace`;
     let data = {
-        idEnlace, tituloEnlace, descripcionEnlace, idUsuarioCreacion: idUsuarioLogin
+        idEnlace, tituloEnlace, descripcionEnlace, idEstado, idUsuarioCreacion: idUsuarioLogin
     };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
@@ -743,6 +759,7 @@ var grabarEnlace = () => {
 var limpiarEnlace = () => {
     $("#txt-titulo-enlace").val('')
     $("#txt-descripcion-enlace").val('')
+    $('#cbo-estado-enlace').val('1')
 }
 
 /* ================================================
@@ -845,10 +862,11 @@ var renderizarEnlace = (data, numberCellHeader, pagina, registros) => {
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENL${pad(x.idEnlace, 4)}</td>`;
             let colTituloEnlace = `<td data-encabezado="Título enlace" scope="row"><span>${x.tituloEnlace}</span></td>`;
             let colDescripcionEnlace = `<td data-encabezado="Descripción enlace">${x.descripcionEnlace}</td>`;
+            let colEstado = `<td class="text-center" data-encabezado="Estado">${x.idEstado == "0" ? "Deshabilitado" : "Habilitado"}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-enlace mx-1" data-id="${x.idEnlace}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-enlace mx-1" data-id="${x.idEnlace}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colCodigo}${colTituloEnlace}${colDescripcionEnlace}${colOptions}</tr>`;
+            let row = `<tr>${colCodigo}${colTituloEnlace}${colDescripcionEnlace}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -888,6 +906,7 @@ var cargarDatosEnlace = (data) => {
     idEnlace = data.idEnlace
     $("#txt-titulo-enlace").val(data.tituloEnlace)
     $("#txt-descripcion-enlace").val(data.descripcionEnlace)
+    $('#cbo-estado-enlace').val(data.idEstado)
 }
 
 /* ================================================
@@ -966,15 +985,17 @@ var grabarLogoRedSocial = () => {
     let enlaceYoutube = $("#txt-youtube").val().trim()
     let enlaceWhatsApp = $("#txt-whatsapp").val().trim()
     let enlaceLinkedin = $("#txt-linkedin").val().trim()
+    let tituloNavegador = $('#txt-titulo-navegador').val()
+    let chatbot = $('#chk-chatbot').prop('checked') ? '1' : '0'
     
     if (archivoContenidoLogoWeb == undefined) arr.push('Debe cargar la imagen principal de la web')
     if (archivoContenidoLogoDgee == undefined) arr.push('Debe cargar la imagen de la DGEE')
-    if (validarEspaciosBlanco(enlaceFacebook)) arr.push("Debe ingresar el enlace para Facebook");
-    if (validarEspaciosBlanco(enlaceTwiter)) arr.push("Debe ingresar el enlace para Twiter");
-    if (validarEspaciosBlanco(enlaceInstangram)) arr.push("Debe ingresar el enlace para Instangram");
-    if (validarEspaciosBlanco(enlaceYoutube)) arr.push("Debe ingresar el enlace para Youtube");
-    if (validarEspaciosBlanco(enlaceWhatsApp)) arr.push("Debe ingresar el enlace para WhatsApp");
-    if (validarEspaciosBlanco(enlaceLinkedin)) arr.push("Debe ingresar el enlace para Linkedin");
+    //if (validarEspaciosBlanco(enlaceFacebook)) arr.push("Debe ingresar el enlace para Facebook");
+    //if (validarEspaciosBlanco(enlaceTwiter)) arr.push("Debe ingresar el enlace para Twiter");
+    //if (validarEspaciosBlanco(enlaceInstangram)) arr.push("Debe ingresar el enlace para Instangram");
+    //if (validarEspaciosBlanco(enlaceYoutube)) arr.push("Debe ingresar el enlace para Youtube");
+    //if (validarEspaciosBlanco(enlaceWhatsApp)) arr.push("Debe ingresar el enlace para WhatsApp");
+    //if (validarEspaciosBlanco(enlaceLinkedin)) arr.push("Debe ingresar el enlace para Linkedin");
 
     if (arr.length > 0) {
         let error = messageArrayGeneric(arr);
@@ -990,7 +1011,7 @@ var grabarLogoRedSocial = () => {
         idLogoRedSocial,
         nombreArchivoLogoWeb, nombreArchivoGeneradoLogoWeb, archivoNuevoLogoWeb, archivoContenidoLogoWeb,
         nombreArchivoLogoDgee, nombreArchivoGeneradoLogoDgee, archivoNuevoLogoDgee, archivoContenidoLogoDgee,
-        enlaceFacebook, enlaceTwiter, enlaceInstangram, enlaceYoutube, enlaceWhatsApp, enlaceLinkedin, idUsuarioCreacion: idUsuarioLogin
+        enlaceFacebook, enlaceTwiter, enlaceInstangram, enlaceYoutube, enlaceWhatsApp, enlaceLinkedin, tituloNavegador, chatbot, idUsuarioCreacion: idUsuarioLogin
         };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 

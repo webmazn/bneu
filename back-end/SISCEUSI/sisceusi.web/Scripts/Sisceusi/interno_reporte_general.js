@@ -165,7 +165,7 @@ var generarReporte = () => {
 var cambiarCampana = () => {
     let id = $('#cbo-campana').val()
     let arr = arrListaCampanaTablaMaestra.filter(x => x.idCampana == id)
-    armarComboTablaMaestra(arr)
+    //armarComboTablaMaestra(arr)
 }
 
 var arrListaCampanaTablaMaestra = []
@@ -242,9 +242,10 @@ var armarBody = (data) => {
 }
 
 var exportarGeneral = () => {
+    let idCampana = $('#cbo-campana').val()
     if (idCampana > 0) {
-        let idTablaMaestra = $('#cbo-tabla-maestra').val()
-        let params = { idCampana, idTablaMaestra }
+        //let idTablaMaestra = $('#cbo-tabla-maestra').val()
+        let params = { idCampana }
         let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
         let url = `${baseUrl}Interno/exportarGeneral?${queryParams}`
         location.href = url

@@ -306,7 +306,8 @@
     vQueryCount := 'SELECT  COUNT(1)
                     FROM T_GEND_ENCABEZADO_PRINCIPAL enp
                     WHERE 
-                    enp.idEstado = ''1'' AND enp.idTablaMaestra = '|| piIdTablaMaestra;
+                    --enp.idEstado = ''1'' AND 
+                    enp.idTablaMaestra = '|| piIdTablaMaestra;
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -327,6 +328,7 @@
                                 enp.usarAbreviado,
                                 enp.posicion,
                                 enp.descripcionIconoAyuda,
+                                enp.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY enp.idEncabezadoPrincipal ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
@@ -334,7 +336,8 @@
                                 || vTotalRegistros || ' AS totalRegistros
                         FROM T_GEND_ENCABEZADO_PRINCIPAL enp
                         WHERE 
-                        enp.idEstado = ''1'' AND enp.idTablaMaestra = '|| piIdTablaMaestra ||'
+                        --enp.idEstado = ''1'' AND 
+                        enp.idTablaMaestra = '|| piIdTablaMaestra ||'
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -360,7 +363,8 @@
                     LEFT JOIN T_MAE_TIPO_DATO tid ON ens.idTipoDato = tid.idTipoDato
                     LEFT JOIN T_GENM_PARAMETRO par ON ens.idParametro = par.idParametro
                     WHERE 
-                    ens.idEstado = ''1'' AND enp.idTablaMaestra = '|| piIdTablaMaestra;
+                    --ens.idEstado = ''1'' AND 
+                    enp.idTablaMaestra = '|| piIdTablaMaestra;
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -390,6 +394,7 @@
                                     when ens.idParametro = 0 then ''''
                                     else par.parametro
                                 end parametro,    
+                                ens.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ens.idEncabezadoSecundario ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
                                 || vPaginaActual || ' AS pagina,'
@@ -400,7 +405,8 @@
                         LEFT JOIN T_GENM_PARAMETRO par ON ens.idParametro = par.idParametro                        
                         INNER JOIN T_GEND_ENCABEZADO_PRINCIPAL enp ON ens.idEncabezadoPrincipal = enp.idEncabezadoPrincipal and enp.idEstado = ''1''
                         WHERE 
-                        ens.idEstado = ''1'' AND enp.idTablaMaestra = '|| piIdTablaMaestra ||'
+                        --ens.idEstado = ''1'' AND 
+                        enp.idTablaMaestra = '|| piIdTablaMaestra ||'
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -456,6 +462,7 @@
     piUsarAbreviado VARCHAR2,
     piPosicion NUMBER,
     piDescripcionIconoAyuda VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -465,9 +472,9 @@
     IF piIdEncabezadoPrincipal = -1 THEN
       vId := SQ_GEND_ENCABEZADO_PRINCIPAL.NEXTVAL();
       INSERT INTO T_GEND_ENCABEZADO_PRINCIPAL
-      (idEncabezadoPrincipal, idTablaMaestra, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idEncabezadoPrincipal, idTablaMaestra, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (vId, piIdTablaMaestra, piTituloEncabezado, piAbreviacion, piUsarAbreviado, piPosicion, piDescripcionIconoAyuda, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (vId, piIdTablaMaestra, piTituloEncabezado, piAbreviacion, piUsarAbreviado, piPosicion, piDescripcionIconoAyuda, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       UPDATE T_GEND_ENCABEZADO_PRINCIPAL SET
       tituloEncabezado = piTituloEncabezado,
@@ -475,6 +482,7 @@
       usarAbreviado = piUsarAbreviado,
       posicion = piPosicion,
       descripcionIconoAyuda = piDescripcionIconoAyuda,
+      idEstado = piIdEstado,
       idUsuarioModificacion = piIdUsuarioCreacion,
       fechaModificacion = SYSDATE,
       ipModificacion = piIpCreacion
@@ -494,7 +502,8 @@
     piIdOrientacion NUMBER,
     piIdTipoControl NUMBER,
     piIdTipoDato NUMBER,
-    piIdParametro NUMBER,    
+    piIdParametro NUMBER,   
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -504,9 +513,9 @@
     IF piIdEncabezadoSecundario = -1 THEN
       vId := SQ_GEND_ENCABEZADO_SECUNDARIO.NEXTVAL();
       INSERT INTO T_GEND_ENCABEZADO_SECUNDARIO
-      (idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idOrientacion, idTipoControl, idTipoDato, idParametro, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idEncabezadoSecundario, idEncabezadoPrincipal, tituloEncabezado, abreviacion, usarAbreviado, posicion, descripcionIconoAyuda, idOrientacion, idTipoControl, idTipoDato, idParametro, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (vId, piIdEncabezadoPrincipal, piTituloEncabezado, piAbreviacion, piUsarAbreviado, piPosicion, piDescripcionIconoAyuda, piIdOrientacion, piIdTipoControl, piIdTipoDato, piIdParametro, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (vId, piIdEncabezadoPrincipal, piTituloEncabezado, piAbreviacion, piUsarAbreviado, piPosicion, piDescripcionIconoAyuda, piIdOrientacion, piIdTipoControl, piIdTipoDato, piIdParametro, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       UPDATE T_GEND_ENCABEZADO_SECUNDARIO SET
       idEncabezadoPrincipal = piIdEncabezadoPrincipal,
@@ -519,6 +528,7 @@
       idTipoControl = piIdTipoControl,
       idTipoDato = piIdTipoDato,
       idParametro = piIdParametro,  
+      idEstado = piIdEstado,
       idUsuarioModificacion = piIdUsuarioCreacion,
       fechaModificacion = SYSDATE,
       ipModificacion = piIpCreacion

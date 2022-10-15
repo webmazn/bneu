@@ -88,6 +88,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-banner" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
                         <div class="row">
                             <div class="col-6"></div>
@@ -129,6 +139,9 @@
                                         <th class="text-center" scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN DE FONDO&nbsp;</span></span></div>
                                         </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
+                                        </th>
                                         <th class="text-center" scope="col" style="min-width:150px;">
                                             <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
                                         </th>
@@ -139,7 +152,7 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros-banner">1</span><span id="view-page-result-banner">-<span class="fin-registros-banner">1</span> de <span class="total-registros-banner">1</span> registros</span></td>
-                                        <td id="viewPagination-banner" class="text-right text-xs-left pr-0" colspan="5" style="display: none">
+                                        <td id="viewPagination-banner" class="text-right text-xs-left pr-0" colspan="6" style="display: none">
                                             <span>Registros por página&nbsp;</span>
                                             <select id="number-registers-banner">
                                                 <option value="10" selected>10</option>
@@ -172,20 +185,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="txt-titulo-publicacion">TÍTULO DE LA PUBLICACIÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 350 caracteres como máximo"></i></span>
                                     <input class="form-control" maxlength="350" type="text" id="txt-titulo-publicacion" placeholder="Ingrese título">
                                 </div>
                             </div>
                             <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <label class="font-weight-bold" for="txt-descripcion-publicacion">DESCRIPCIÓN DE LA PUBLICACIÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 3500 caracteres como máximo"></i></span>
-                                    <textarea class="form-control" maxlength="3500" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción" rows="5" ></textarea>
-                                    @*<input class="form-control" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción">*@
-                                </div>
-                            </div>
-                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group text-left">
                                     <label class="font-weight-bold" for="fle-publicacion-01">IMAGEN DE LA PUBLICACIÓN</label>
                                     <div class="input-group">
@@ -197,6 +203,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-publicacion">DESCRIPCIÓN DE LA PUBLICACIÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 3500 caracteres como máximo"></i></span>
+                                    <textarea class="form-control" maxlength="3500" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción" rows="5" ></textarea>
+                                    @*<input class="form-control" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción">*@
+                                </div>
+                            </div>                            
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-publicacion" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
                         <div class="row">
                             <div class="col-6"></div>
@@ -229,6 +252,9 @@
                                         <th class="text-center" scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN&nbsp;</span></span></div>
                                         </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
+                                        </th>
                                         <th class="text-center" scope="col" style="min-width:150px;">
                                             <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
                                         </th>
@@ -239,7 +265,7 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-left pl-0" colspan="2"><span>Resultado:&nbsp;</span><span class="inicio-registros-publicacion">1</span><span id="view-page-result-publicacion">-<span class="fin-registros-publicacion">1</span> de <span class="total-registros-publicacion">1</span> registros</span></td>
-                                        <td id="viewPagination-publicacion" class="text-right text-xs-left pr-0" colspan="3" style="display: none">
+                                        <td id="viewPagination-publicacion" class="text-right text-xs-left pr-0" colspan="4" style="display: none">
                                             <span>Registros por página&nbsp;</span>
                                             <select id="number-registers-publicacion">
                                                 <option value="10" selected>10</option>
@@ -284,10 +310,20 @@
                                     <input class="form-control" maxlength="3500" type="text" id="txt-descripcion-enlace" placeholder="Ingrese descripción">
                                 </div>
                             </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-enlace" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
                         <div class="row">
                             <div class="col-6"></div>
-                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-publicacion">
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-enlace">
                             </div>
                         </div>
                         <div class="row">
@@ -313,6 +349,9 @@
                                         <th class="text-center" scope="col">
                                             <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE&nbsp;</span></span></div>
                                         </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
+                                        </th>
                                         <th class="text-center" scope="col" style="min-width:150px;">
                                             <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
                                         </th>
@@ -323,7 +362,7 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-left pl-0" colspan="2"><span>Resultado:&nbsp;</span><span class="inicio-registros-enlace">1</span><span id="view-page-result-enlace">-<span class="fin-registros-enlace">1</span> de <span class="total-registros-enlace">1</span> registros</span></td>
-                                        <td id="viewPagination-enlace" class="text-right text-xs-left pr-0" colspan="2" style="display: none">
+                                        <td id="viewPagination-enlace" class="text-right text-xs-left pr-0" colspan="3" style="display: none">
                                             <span>Registros por pág&nbsp;</span>
                                             <select id="number-registers-enlace">
                                                 <option value="10" selected>10</option>
@@ -423,6 +462,35 @@
                         <div class="input-group">
                             <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_ld.svg")"></div>
                             <input id="txt-linkedin" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">TÍTULO NAVEGADOR</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input id="txt-titulo-navegador" maxlength="500" class="form-control" type="text" placeholder="Ingresar el título del navegador">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">CHATBOT</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chk-chatbot">
+                            <label class="custom-control-label" for="chk-chatbot">¿Desea deshabilitar el chatbot?</label>
                         </div>
                     </div>
                 </div>

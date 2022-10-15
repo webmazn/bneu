@@ -29,6 +29,7 @@ namespace sisceusi.datos
                 p.Add("piEnlaceBoton", entidad.enlaceBoton);
                 p.Add("piNombreArchivoBanner", entidad.nombreArchivoBanner);
                 p.Add("piNombreArchivoGeneradoBanner", entidad.nombreArchivoGeneradoBanner);
+                p.Add("piIdEstado", entidad.idEstado);
                 p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
                 p.Add("piIpCreacion", entidad.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
@@ -59,6 +60,7 @@ namespace sisceusi.datos
                     tituloBoton = x.TITULOBOTON == null ? "" : (string)x.TITULOBOTON,
                     enlaceBoton = x.ENLACEBOTON == null ? "" : (string)x.ENLACEBOTON,
                     nombreArchivoBanner = x.NOMBREARCHIVOBANNER == null ? "" : (string)x.NOMBREARCHIVOBANNER,
+                    idEstado = x.IDESTADO == null ? "0" : (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -114,6 +116,7 @@ namespace sisceusi.datos
                 p.Add("piDescripcionPublicacion", entidad.descripcionPublicacion);
                 p.Add("piNombreArchivoPublicacion", entidad.nombreArchivoPublicacion);
                 p.Add("piNombreArchivoGeneradoPubli", entidad.nombreArchivoGeneradoPubli);
+                p.Add("piIdEstado", entidad.idEstado);
                 p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
                 p.Add("piIpCreacion", entidad.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
@@ -141,6 +144,7 @@ namespace sisceusi.datos
                     tituloPublicacion = x.TITULOPUBLICACION == null ? "" : (string)x.TITULOPUBLICACION,
                     descripcionPublicacion = x.DESCRIPCIONPUBLICACION == null ? "" : (string)x.DESCRIPCIONPUBLICACION,
                     nombreArchivoPublicacion = x.NOMBREARCHIVOPUBLICACION == null ? "" : (string)x.NOMBREARCHIVOPUBLICACION,
+                    idEstado = x.IDESTADO == null ? "0" : (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -194,6 +198,7 @@ namespace sisceusi.datos
                 p.Add("piIdEnlace", entidad.idEnlace);
                 p.Add("piTituloEnlace", entidad.tituloEnlace);
                 p.Add("piDescripcionEnlace", entidad.descripcionEnlace);
+                p.Add("piIdEstado", entidad.idEstado);
                 p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
                 p.Add("piIpCreacion", entidad.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
@@ -220,6 +225,7 @@ namespace sisceusi.datos
                     idEnlace = (int)x.IDENLACE,
                     tituloEnlace = x.TITULOENLACE == null ? "" : (string)x.TITULOENLACE,
                     descripcionEnlace = x.DESCRIPCIONENLACE == null ? "" : (string)x.DESCRIPCIONENLACE,
+                    idEstado = x.IDESTADO == null ? "0" : (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -281,6 +287,8 @@ namespace sisceusi.datos
                 p.Add("piEnlaceYoutube", entidad.enlaceYoutube);
                 p.Add("piEnlaceWhatsApp", entidad.enlaceWhatsApp);
                 p.Add("piEnlaceLinkedin", entidad.enlaceLinkedin);
+                p.Add("piTituloNavegador", entidad.tituloNavegador);
+                p.Add("piChatbot", entidad.chatbot);
                 p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
                 p.Add("piIpCreacion", entidad.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);

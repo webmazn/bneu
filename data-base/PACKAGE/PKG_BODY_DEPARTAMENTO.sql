@@ -14,7 +14,8 @@
     OPEN poRef FOR
     SELECT  *
     FROM  T_MAE_DEPARTAMENTO
-    WHERE idEstado = '1';
+    WHERE idEstado = '1'
+    ORDER BY departamento ASC;
   END USP_SEL_LISTA;
 
 END PKG_SISCEUSI_DEPARTAMENTO;

@@ -630,6 +630,8 @@ enlaceInstangram VARCHAR2(4000),
 enlaceYoutube VARCHAR2(4000),
 enlaceWhatsApp VARCHAR2(4000),
 enlaceLinkedin VARCHAR2(4000),
+tituloNavegador VARCHAR2(700),
+chatbot VARCHAR2(1),
 idEstado varchar2(1) default '1',
 idUsuarioCreacion number,
 fechaCreacion date default sysdate,
@@ -639,6 +641,12 @@ fechaModificacion date,
 ipModificacion varchar2(50),
 constraint logo_red_social_pk primary key (idLogoRedSocial)
 );
+/*
+alter table T_GENM_LOGO_RED_SOCIAL
+add tituloNavegador VARCHAR2(700);
+alter table T_GENM_LOGO_RED_SOCIAL
+add chatbot VARCHAR2(1);
+*/
 
 CREATE TABLE SISCEUSI.T_GENM_INDICADOR(
 idIndicador NUMBER,

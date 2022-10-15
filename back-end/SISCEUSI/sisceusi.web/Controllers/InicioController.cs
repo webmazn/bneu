@@ -41,7 +41,9 @@ namespace sisceusi.web.Controllers
 
         public JsonResult enviarContacto(ContactoBE contacto)
         {
-            string correoAdmin = ConfigurationManager.AppSettings["correoAdmin"];
+            UsuarioLN logica = new UsuarioLN();
+            UsuarioBE user = logica.obtenerAdministrador();
+            string correoDefecto = ConfigurationManager.AppSettings["Mailing.Mail.From.Address"];
             string fieldServer = "[SERVER]", fieldNombres = "[NOMBRES]", fieldTelefono = "[TELEFONO]", fieldCorreo = "[CORREO]", fieldMensaje = "[MENSAJE]";
             string[] fields = new string[] { fieldServer, fieldNombres, fieldTelefono, fieldCorreo, fieldMensaje };
             string[] fieldsRequire = new string[] { fieldServer, fieldNombres, fieldTelefono, fieldCorreo, fieldMensaje };
@@ -49,7 +51,7 @@ namespace sisceusi.web.Controllers
             Dictionary<string, string> dataBody = new Dictionary<string, string> {[fieldServer] = ConfigurationManager.AppSettings["Server"],[fieldNombres] = contacto.nombres, [fieldTelefono] = contacto.telefono, [fieldCorreo] = contacto.correo, [fieldMensaje] = mensaje };
             string subject = $"CONTACTO: {contacto.nombres} se ha contactado";
             MailAddressCollection mailTo = new MailAddressCollection();
-            mailTo.Add(new MailAddress(correoAdmin, contacto.nombres));
+            mailTo.Add(new MailAddress(user == null ? correoDefecto : user.correoElectronico, contacto.nombres));
 
             Mailing mailing = new Mailing();
             Task.Factory.StartNew(() => mailing.SendMail(Mailing.Templates.Contacto, dataBody, fields, fieldsRequire, subject, mailTo));
@@ -198,7 +200,9 @@ namespace sisceusi.web.Controllers
 
         public JsonResult enviarContactoBot(ContactoBE contacto)
         {
-            string correoAdmin = ConfigurationManager.AppSettings["correoAdmin"];
+            UsuarioLN logica = new UsuarioLN();
+            UsuarioBE user = logica.obtenerAdministrador();
+            string correoDefecto = ConfigurationManager.AppSettings["Mailing.Mail.From.Address"];
             string fieldServer = "[SERVER]", fieldCorreo = "[CORREO]", fieldMensaje = "[MENSAJE]";
             string[] fields = new string[] { fieldServer, fieldCorreo, fieldMensaje };
             string[] fieldsRequire = new string[] { fieldServer, fieldCorreo, fieldMensaje };
@@ -206,7 +210,7 @@ namespace sisceusi.web.Controllers
             Dictionary<string, string> dataBody = new Dictionary<string, string> {[fieldServer] = ConfigurationManager.AppSettings["Server"],[fieldCorreo] = contacto.correo,[fieldMensaje] = mensaje };
             string subject = $"CONTACTO: se han contactado a través del bot";
             MailAddressCollection mailTo = new MailAddressCollection();
-            mailTo.Add(new MailAddress(correoAdmin, contacto.correo));
+            mailTo.Add(new MailAddress(user == null ? correoDefecto : user.correoElectronico, contacto.correo));
 
             Mailing mailing = new Mailing();
             Task.Factory.StartNew(() => mailing.SendMail(Mailing.Templates.ContactoBot, dataBody, fields, fieldsRequire, subject, mailTo));

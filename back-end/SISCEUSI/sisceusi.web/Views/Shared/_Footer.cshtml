@@ -1,6 +1,7 @@
 ﻿@using sisceusi.entidad;
 @{
     UsuarioBE usuario = Session["user"] == null ? null : (UsuarioBE)Session["user"];
+    LogoRedSocialBE logoRedSocial = Session["logoRedSocial"] == null ? null : (LogoRedSocialBE)Session["logoRedSocial"];
 }
 
 <div class="modal customChatBot fade" id="modalChatBot" tabindex="-1" role="dialog" aria-labelledby="modalChatBotLabel" aria-hidden="true">
@@ -37,7 +38,14 @@
 <div class="container-fluid foot d-flex flex-row justify-content-center align-items-center d-print-none" id="pie">
     @if (usuario == null)
     {
-        <div class="chat-bot" data-toggle="modal" data-target="#modalChatBot"></div>
+        if (logoRedSocial == null)
+        {
+            <div class="chat-bot" data-toggle="modal" data-target="#modalChatBot"></div>
+        }
+        else if (logoRedSocial.chatbot == "0")
+        {
+            <div class="chat-bot" data-toggle="modal" data-target="#modalChatBot"></div>
+        }
     }    
     <footer class="container">
         <div class="row">
@@ -63,9 +71,9 @@
                     <div class="col-sm-12 col-md-4 text-white">
                         <div class="lead font-weight-bold">Más información</div>
                         <ul class="list-unstyled">
-                            <li class="py-1"><a class="text-white" href="./documentos/Manual_Usuario_MRV.pdf" download>Manual de Usuario</a></li>
-                            <li class="py-1"><a class="text-white" href="./terminos-y-condiciones.html">Términos y Condiciones</a></li>
-                            <li class="py-1"><a class="text-white" href="./mapa-del-ditio.html" target="_blank">Mapa del Sitio</a></li>
+                            <li class="py-1"><a class="text-white" href="./documentos/Manual_Usuario.pdf" download>Manual de Usuario</a></li>
+                            @*<li class="py-1"><a class="text-white" href="./terminos-y-condiciones.html">Términos y Condiciones</a></li>
+                            <li class="py-1"><a class="text-white" href="./mapa-del-ditio.html" target="_blank">Mapa del Sitio</a></li>*@
                         </ul>
                     </div>
                 </div>

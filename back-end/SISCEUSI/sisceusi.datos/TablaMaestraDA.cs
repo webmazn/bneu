@@ -157,6 +157,7 @@ namespace sisceusi.datos
                     usarAbreviado = x.USARABREVIADO == null ? "" : (string)x.USARABREVIADO,
                     posicion = x.POSICION == null ? 0 : (int)x.POSICION,
                     descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : (string)x.DESCRIPCIONICONOAYUDA,
+                    idEstado = x.IDESTADO == null ? "0" : (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -190,6 +191,7 @@ namespace sisceusi.datos
                     descripcionIconoAyuda = x.DESCRIPCIONICONOAYUDA == null ? "" : (string)x.DESCRIPCIONICONOAYUDA,
                     tipoDato = new TipoDatoBE { tipoDato = x.TIPODATO == null ? "" :(string)x.TIPODATO },
                     parametro = new ParametroBE { parametro = x.PARAMETRO == null ? "" : (string)x.PARAMETRO },
+                    idEstado = x.IDESTADO == null ? "0" : (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
                     pagina = (int)x.PAGINA,
@@ -246,6 +248,7 @@ namespace sisceusi.datos
                 p.Add("piUsarAbreviado", encabezado.usarAbreviado);
                 p.Add("piPosicion", encabezado.posicion);
                 p.Add("piDescripcionIconoAyuda", encabezado.descripcionIconoAyuda);
+                p.Add("piIdEstado", encabezado.idEstado);
                 p.Add("piIdUsuarioCreacion", encabezado.idUsuarioCreacion);
                 p.Add("piIpCreacion", encabezado.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
@@ -274,7 +277,8 @@ namespace sisceusi.datos
                 p.Add("piIdOrientacion", encabezado.idOrientacion);
                 p.Add("piIdTipoControl", encabezado.idTipoControl);
                 p.Add("piIdTipoDato", encabezado.idTipoDato);
-                p.Add("piIdParametro", encabezado.idParametro);                
+                p.Add("piIdParametro", encabezado.idParametro);
+                p.Add("piIdEstado", encabezado.idEstado);
                 p.Add("piIdUsuarioCreacion", encabezado.idUsuarioCreacion);
                 p.Add("piIpCreacion", encabezado.ipCreacion);
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);

@@ -85,6 +85,7 @@
     piUsarAbreviado VARCHAR2,
     piPosicion NUMBER,
     piDescripcionIconoAyuda VARCHAR2,
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -101,7 +102,8 @@
     piIdOrientacion NUMBER,
     piIdTipoControl NUMBER,
     piIdTipoDato NUMBER,
-    piIdParametro NUMBER,    
+    piIdParametro NUMBER,   
+    piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER

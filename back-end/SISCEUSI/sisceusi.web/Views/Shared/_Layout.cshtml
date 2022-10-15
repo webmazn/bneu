@@ -1,10 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using sisceusi.entidad
+@{ 
+    LogoRedSocialBE logoRedSocial = Session["logoRedSocial"] == null ? null : (LogoRedSocialBE)Session["logoRedSocial"];
+    string titulo = logoRedSocial == null ? "Encuesta de consumo de energía" : logoRedSocial.tituloNavegador.IsEmpty() ? "Encuesta de consumo de energía" : logoRedSocial.tituloNavegador;
+}
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Balance Nacional de Energía Útil | Ingreso</title>
+    <title>@titulo</title>
     <meta name="description" content="Balance Nacional de Energía Útil">
     <link rel="apple-touch-icon" type="image/x-icon" href="@Url.Content("~/images/favicon/apple-icon-57x57.png")" sizes="57x57">
     <link rel="apple-touch-icon" type="image/x-icon" href="@Url.Content("~/images/favicon/apple-icon-60x60.png")" sizes="60x60">
