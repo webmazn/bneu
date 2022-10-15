@@ -552,5 +552,19 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return lista;
         }
+
+        public List<CampanaBE> obtenerListaCampana(OracleConnection db)
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                string sp = $"{Package.Campana}USP_SEL_LIST_CAMPANA";
+                var p = new OracleDynamicParameters();
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<CampanaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

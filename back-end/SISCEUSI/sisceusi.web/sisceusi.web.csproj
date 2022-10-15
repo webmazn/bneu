@@ -201,6 +201,7 @@
     <Content Include="Scripts\Sisceusi\intencion_participar_index.js" />
     <Content Include="Scripts\Sisceusi\interno_cambiar_clave.js" />
     <Content Include="Scripts\Sisceusi\interno_index.js" />
+    <Content Include="Scripts\Sisceusi\interno_reporte_general.js" />
     <Content Include="Scripts\Sisceusi\pagina_home_index.js" />
     <Content Include="Scripts\Sisceusi\parametro_index.js" />
     <Content Include="Scripts\Sisceusi\parametro_nuevo_parametro.js" />
@@ -268,6 +269,7 @@
     <Content Include="Views\Indicador\Index.cshtml" />
     <Content Include="Views\Indicador\NuevoIndicador.cshtml" />
     <Content Include="Views\Interno\EncuestaFicha.cshtml" />
+    <Content Include="Views\Interno\ReporteGeneral.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

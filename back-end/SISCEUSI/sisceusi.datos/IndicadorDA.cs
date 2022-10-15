@@ -267,7 +267,6 @@ namespace sisceusi.datos
             }
             catch (Exception ex) { Log.Error(ex); }
             return item;
-        }
-
+        }        
     }
 }

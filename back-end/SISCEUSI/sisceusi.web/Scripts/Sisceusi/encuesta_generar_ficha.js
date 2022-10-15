@@ -184,7 +184,7 @@ var armarTablaMaestra = (preguntaEncuesta) => {
                                 `<div class="form-group text-right">` +
                                   `<label for="encabezado-${100}-${idEncabezado}" class="font-weight-bold text-azul">${tablaMaestra.preguntaInicial}&nbsp;</label>` +
                                   `<div class="form-check form-check-inline">` +
-                                    `<input id="encabezado-${100}-${idEncabezado}" data-control="6" class="form-check-input valor-ingresado" type="checkbox">` +
+                                    `<input id="encabezado-${100}-${idEncabezado}" data-control="6" class="form-check-input valor-ingresado" type="checkbox" disabled>` +
                                   `</div>` +
                                 `</div>` +
                               `</div>`
@@ -196,7 +196,7 @@ var armarTablaMaestra = (preguntaEncuesta) => {
                               `<div class="col-12">` +
                                 `<div class="form-group text-right m-0">` +
                                   `<div class="form-check form-check-inline m-0">` +
-                                    `<input class="form-check-input valor-ingresado" data-control="6" type="checkbox" id="encabezado-${101}-${idEncabezado}">` +
+                                    `<input class="form-check-input valor-ingresado" data-control="6" type="checkbox" id="encabezado-${101}-${idEncabezado}" disabled>` +
                                   `</div>` +
                                   `<label class="font-weight-bold text-azul m-0" for="encabezado-${101}-${idEncabezado}">${tablaMaestra.preguntaCierre}&nbsp;</label>` +
                                 `</div>` +
@@ -266,8 +266,8 @@ var armarTablaMaestra = (preguntaEncuesta) => {
                     } else if (tipoControl == 4) {
                         $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).html(a.respuesta)
                     } else if (tipoControl == 5) {
-                        let parametro = preguntaEncuesta.listaEncabezadoSecundario.find(x => x.idEncabezadoSecundario == a.idEncabezadoSecundario).listaParametro.filter(y => y.idParametro == a.respuesta)
-                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).html(parametro.parametro)
+                        let parametro = preguntaEncuesta.listaEncabezadoSecundario.find(x => x.idEncabezadoSecundario == a.idEncabezadoSecundario).listaParametro.find(y => y.idParametro == a.respuesta)
+                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).html(parametro ? parametro.parametro : '')
                     } else if (tipoControl == 6 || tipoControl == 7) {
                         $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}`).prop('checked', a.respuesta == '1' ? true : false)
                     }
@@ -278,8 +278,8 @@ var armarTablaMaestra = (preguntaEncuesta) => {
                     } else if (tipoControl == 4) {
                         $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).html(a.respuesta)
                     } else if (tipoControl == 5) {
-                        let parametro = preguntaEncuesta.listaEncabezadoSecundario.find(x => x.idEncabezadoSecundario == a.idEncabezadoSecundario).listaParametro.filter(y => y.idParametro == a.respuesta)
-                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).html(parametro.parametro)
+                        let parametro = preguntaEncuesta.listaEncabezadoSecundario.find(x => x.idEncabezadoSecundario == a.idEncabezadoSecundario).listaParametro.find(y => y.idParametro == a.respuesta)
+                        $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).html(parametro ? parametro.parametro : '')
                     } else if (tipoControl == 6 || tipoControl == 7) {
                         $(`#encabezado-${a.filaTabla}-${a.idEncabezadoSecundario}-${a.idParametro}`).prop('checked', a.respuesta == '1' ? true : false)
                     }
@@ -327,12 +327,12 @@ var armarControlCampo = (secundario, i, border) => {
         if (secundario.idOrientacion == '1') {
             return `    <td class="text-center ${border}" data-encabezado="Seleccionar">` +
                             `<div class="form-check form-check-inline"></div>` +
-                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-control="6" class="form-check-input valor-ingresado" type="checkbox">` +
+                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-control="6" class="form-check-input valor-ingresado" type="checkbox" disabled>` +
                         `</td>`
         } else {
             return `   <td class="v-top text-center ${border}" data-encabezado="${secundario.tituloEncabezado}">` +
                           `<div class="form-check form-check-inline">` +
-                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-control="6" class="form-check-input valor-ingresado" type="checkbox">` +
+                            `<input id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-control="6" class="form-check-input valor-ingresado" type="checkbox" disabled>` +
                           `</div>` +
                         `</td>`
         }
@@ -342,13 +342,13 @@ var armarControlCampo = (secundario, i, border) => {
         if (secundario.idParametro > 0) {
             opciones = secundario.listaParametro == null ? '' : secundario.listaParametro.length == 0 ? '' : secundario.listaParametro.map((x, y) => {
                 return `<div class="form-check form-check-inline">` +
-                          `<input class="form-check-input valor-ingresado" data-usuario="0" type="radio" name="enc-${i}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}" data-control="7">` +
+                          `<input class="form-check-input valor-ingresado" data-usuario="0" type="radio" name="enc-${i}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}" data-control="7" disabled>` +
                           `<label class="form-check-label ml-1" for="encabezado-${i}-${secundario.idEncabezadoSecundario}-${x.idParametro}">${x.parametro}</label>` +
                         `</div>&nbsp;`
             }).join('')
         } else {
             opciones = `<div class="form-check form-check-inline">` +
-                          `<input class="form-check-input valor-ingresado" data-usuario="0" type="radio" name="rad-${secundario.idEncabezadoSecundario}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-control="7">` +
+                          `<input class="form-check-input valor-ingresado" data-usuario="0" type="radio" name="rad-${secundario.idEncabezadoSecundario}" id="encabezado-${i}-${secundario.idEncabezadoSecundario}" data-control="7" disabled>` +
                           `<label class="form-check-label ml-1" for="encabezado-${i}-${secundario.idEncabezadoSecundario}">opcion</label>` +
                         `</div>`
         }

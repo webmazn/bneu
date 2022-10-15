@@ -1,7 +1,7 @@
 ﻿@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
-    PlantaEmpresaBE planta = ViewData["planta"] == null ? new PlantaEmpresaBE() : (PlantaEmpresaBE)ViewData["planta"];
+    PlantaEmpresaBE planta = ViewData["planta"] == null ? null : (PlantaEmpresaBE)ViewData["planta"];
     Dictionary<string, object> listaUsuarioPlanta = ViewData["listaUsuarioPlanta"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaUsuarioPlanta"];
     int id = planta.idPlantaEmpresa;
 }

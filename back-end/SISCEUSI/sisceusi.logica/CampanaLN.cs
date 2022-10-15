@@ -348,5 +348,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;
         }
+
+        public List<CampanaBE> obtenerListaCampana()
+        {
+            List<CampanaBE> lista = new List<CampanaBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampana(cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

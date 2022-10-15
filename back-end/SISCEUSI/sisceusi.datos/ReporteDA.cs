@@ -50,12 +50,28 @@ namespace sisceusi.datos
             return lista;
         }
 
+        public List<RespuestaEncuestaTablaBE> obtenerListaRespuestaEncuestaTabla(int idCampana, int idEncabezadoSecundario, OracleConnection db)
+        {
+            List<RespuestaEncuestaTablaBE> lista = new List<RespuestaEncuestaTablaBE>();
+            try
+            {
+                string sp = $"{Package.Reporte}USP_SEL_LIST_RESP_ENC_TABLA";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdCampana", idCampana);
+                p.Add("piIdEncabezadoSecundario", idEncabezadoSecundario);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<RespuestaEncuestaTablaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
         public List<CampanaEncuestaBE> obtenerListaCampanaEncuesta(CampanaBE entidad, OracleConnection db)
         {
             List<CampanaEncuestaBE> lista = new List<CampanaEncuestaBE>();
             try
             {
-                string sp = $"{Package.ControlEncuesta}USP_SEL_PREGUNTA_ENCUESTA";
+                string sp = $"{Package.Reporte}USP_SEL_PREGUNTA_ENCUESTA";
                 OracleDynamicParameters p = new OracleDynamicParameters();
                 p.Add("piIdCampana", entidad.idCampana);
                 p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
@@ -75,6 +91,40 @@ namespace sisceusi.datos
                 p.Add("piIdCampanaEncuesta", idCampanaEncuesta);
                 p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
                 lista = db.Query<RespuestaEncuestaPlantaBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
+
+        public List<ReporteBE> obtenerListaCampanaPlantaReporte(CampanaBE entidad, OracleConnection db)
+        {
+            List<ReporteBE> lista = new List<ReporteBE>();
+            try
+            {
+                string sp = $"{Package.Reporte}USP_SEL_LIST_EMP_PLA_REPORT";                
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdCampana", entidad.idCampana);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<ReporteBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return lista;
+        }
+
+        public List<CampanaTablaMaestraBE> obtenerListaCampanaTablaMaestra(CampanaBE entidad, OracleConnection db)
+        {
+            List<CampanaTablaMaestraBE> lista = new List<CampanaTablaMaestraBE>();
+            try
+            {
+                string sp = $"{Package.Reporte}USP_SEL_LIST_CAMP_TAB_MAESTRA";
+                OracleDynamicParameters p = new OracleDynamicParameters();
+                p.Add("piIdCampana", entidad.idCampana);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<CampanaTablaMaestraBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
             }
             catch (Exception ex) { Log.Error(ex); }
             return lista;

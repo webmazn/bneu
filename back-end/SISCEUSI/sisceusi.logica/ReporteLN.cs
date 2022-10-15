@@ -56,20 +56,43 @@ namespace sisceusi.logica
             try
             {
                 cn.Open();
-                ControlEncuestaDA datos = new ControlEncuestaDA();
-                lista = datos.obtenerTablaMaestraEncabezados(campanaEncuesta, cn);
+                ControlEncuestaDA datosControl = new ControlEncuestaDA();
+                lista = datosControl.obtenerTablaMaestraEncabezados(campanaEncuesta, cn);
                 if (lista.Count > 0)
                 {
                     lista.ForEach(x =>
                     {
                         if (x.idParametro > 0)
                         {
-                            x.listaParametro = datos.obtenerListaParametro(new ParametroBE { idParametro = x.idParametro }, cn);
+                            x.listaParametro = datosControl.obtenerListaParametro(new ParametroBE { idParametro = x.idParametro }, cn);
                         }
-                        EncuestaDA datosEncuesta = new EncuestaDA();
-                        x.listaRespuestaEncuestaTabla = datosEncuesta.obtenerListaRespuestaEncuestaTabla(campanaEncuesta.idControlEncuesta, x.idEncabezadoSecundario, cn);
+                        x.listaRespuestaEncuestaTabla = datos.obtenerListaRespuestaEncuestaTabla(campanaEncuesta.idCampana, x.idEncabezadoSecundario, cn);
                     });
                 }
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<ReporteBE> obtenerListaCampanaPlantaReporte(CampanaBE entidad)
+        {
+            List<ReporteBE> lista = new List<ReporteBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampanaPlantaReporte(entidad, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
+
+        public List<CampanaTablaMaestraBE> obtenerListaCampanaTablaMaestra(CampanaBE entidad)
+        {
+            List<CampanaTablaMaestraBE> lista = new List<CampanaTablaMaestraBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaCampanaTablaMaestra(entidad, cn);
             }
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return lista;

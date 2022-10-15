@@ -188,6 +188,10 @@
     poRowAffected OUT NUMBER
   );
   
+  PROCEDURE USP_SEL_LIST_CAMPANA(
+    poRef OUT SYS_REFCURSOR
+  );
+  
   PROCEDURE USP_SEL_LIST_CORREO_CAMPANA(
     piIdCampana NUMBER,
     piIdTipoEncuesta NUMBER,

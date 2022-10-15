@@ -27,6 +27,16 @@
     piIdEncabezadoSecundario NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_LIST_EMP_PLA_REPORT(
+    piIdCampana NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
+  
+  PROCEDURE USP_SEL_LIST_CAMP_TAB_MAESTRA (
+    piIdCampana NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_REPORTE;
 
