@@ -128,6 +128,9 @@
     piDescripcionPublicacion VARCHAR2,
     piNombreArchivoPublicacion VARCHAR2,
     piNombreArchivoGeneradoPubli VARCHAR2,
+    piLimiteCaracter NUMBER,
+    piTextoEnlacePublicacion VARCHAR2,
+    piEnlacePublicacion VARCHAR2,
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
@@ -138,15 +141,18 @@
     IF piIdPublicacion = -1 THEN
           vId := SQ_GENM_PUBLICACION.NEXTVAL();
           INSERT INTO T_GENM_PUBLICACION
-          (idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, nombreArchivoGeneradoPubli, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+          (idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, nombreArchivoGeneradoPubli, limiteCaracter, textoEnlacePublicacion, enlacePublicacion, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
           VALUES 
-          (vId, piTituloPublicacion, piDescripcionPublicacion, piNombreArchivoPublicacion, piNombreArchivoGeneradoPubli, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+          (vId, piTituloPublicacion, piDescripcionPublicacion, piNombreArchivoPublicacion, piNombreArchivoGeneradoPubli, piLimiteCaracter, piTextoEnlacePublicacion, piEnlacePublicacion, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
           UPDATE T_GENM_PUBLICACION SET
           tituloPublicacion = piTituloPublicacion,
           descripcionPublicacion = piDescripcionPublicacion,
           nombreArchivoPublicacion = piNombreArchivoPublicacion,
           nombreArchivoGeneradoPubli = piNombreArchivoGeneradoPubli,
+          limiteCaracter = piLimiteCaracter,
+          textoEnlacePublicacion = piTextoEnlacePublicacion,
+          enlacePublicacion = piEnlacePublicacion,
           idEstado = piIdEstado,
           idUsuarioModificacion = piIdUsuarioCreacion,
           fechaModificacion = SYSDATE,
@@ -191,6 +197,7 @@
                                 pub.tituloPublicacion,
                                 pub.descripcionPublicacion,
                                 pub.nombreArchivoPublicacion,
+                                pub.enlacePublicacion,
                                 pub.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY pub.idPublicacion ASC) AS fila,'
                                 || vTotalPaginas || ' AS totalPaginas,'
@@ -424,6 +431,9 @@
                                 pub.descripcionPublicacion,
                                 pub.nombreArchivoPublicacion,
                                 pub.nombreArchivoGeneradoPubli,
+                                pub.limiteCaracter,
+                                pub.textoEnlacePublicacion,
+                                pub.enlacePublicacion,
                                 ROW_NUMBER() OVER (ORDER BY pub.idPublicacion ASC) AS fila
                         FROM T_GENM_PUBLICACION pub
                         WHERE 

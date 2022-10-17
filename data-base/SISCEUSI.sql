@@ -594,6 +594,9 @@ tituloPublicacion VARCHAR2(400),
 descripcionPublicacion VARCHAR2(4000),
 nombreArchivoPublicacion VARCHAR2(400),
 nombreArchivoGeneradoPubli VARCHAR2(400),
+limiteCaracter NUMBER,
+textoEnlacePublicacion VARCHAR2(50),
+enlacePublicacion VARCHAR2(400),
 idEstado varchar2(1) default '1',
 idUsuarioCreacion number,
 fechaCreacion date default sysdate,
@@ -603,7 +606,14 @@ fechaModificacion date,
 ipModificacion varchar2(50),
 constraint publicacion_pk primary key (idPublicacion)
 );
-
+/*
+alter table T_GENM_PUBLICACION
+add limiteCaracter NUMBER default 300;
+alter table T_GENM_PUBLICACION
+add textoEnlacePublicacion VARCHAR2(50);
+alter table T_GENM_PUBLICACION
+add enlacePublicacion VARCHAR2(400);
+*/
 CREATE TABLE SISCEUSI.T_GENM_ENLACE(
 idEnlace NUMBER,
 tituloEnlace VARCHAR2(400),

@@ -384,11 +384,18 @@ var grabarPublicacion = () => {
 
     let tituloPublicacion = $("#txt-titulo-publicacion").val().trim()
     let descripcionPublicacion = $("#txt-descripcion-publicacion").val().trim()
+    let limiteCaracter = $("#txt-limite-caracter").val().trim()
+    let textoEnlacePublicacion = $("#txt-texto-enlace-publicacion").val().trim()
+    let enlacePublicacion = $("#txt-enlace-publicacion").val().trim()
     let archivoContenidoPublicacion = $('#fle-publicacion-01').data('file')
     let idEstado = $("#cbo-estado-publicacion").val()
 
     if (validarEspaciosBlanco(tituloPublicacion)) arr.push("Debe ingresar el título de la publicación");
     if (validarEspaciosBlanco(descripcionPublicacion)) arr.push("Debe ingresar la descripción de la publicación");
+    if (validarEspaciosBlanco(limiteCaracter)) arr.push("Debe ingresar un límite de caracter");
+    else if (limiteCaracter < 1) arr.push("El límite de caracter debe ser mayor a cero");
+    if (validarEspaciosBlanco(textoEnlacePublicacion)) arr.push("Debe ingresar un texto para el enlace");
+    if (validarEspaciosBlanco(enlacePublicacion)) arr.push("Debe ingresar un enlace para la publicación");
     if (archivoContenidoPublicacion == undefined) arr.push('Debe cargar la imagen de la publicación')
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado")
 
@@ -401,7 +408,7 @@ var grabarPublicacion = () => {
     let archivoNuevoPublicacion = $('#fle-publicacion-01').data('new')
 
     let url = `${baseUrl}PaginaHome/grabarPublicacion`;
-    let data = { idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, archivoContenidoPublicacion, nombreArchivoGeneradoPubli, archivoNuevoPublicacion, idEstado, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idPublicacion, tituloPublicacion, descripcionPublicacion, nombreArchivoPublicacion, archivoContenidoPublicacion, nombreArchivoGeneradoPubli, archivoNuevoPublicacion, limiteCaracter, textoEnlacePublicacion, enlacePublicacion, idEstado, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -436,6 +443,9 @@ var limpiarPublicacion = () => {
     $('#fle-publicacion-01').removeData('file')
     $('#fle-publicacion-01').removeData('new')
     $('#txt-publicacion-01').val('')
+    $("#txt-limite-caracter").val('300')
+    $("#txt-texto-enlace-publicacion").val('')
+    $("#txt-enlace-publicacion").val('')
     $('#cbo-estado-publicacion').val('1')
 }
 
@@ -589,11 +599,12 @@ var renderizarPublicacion = (data, numberCellHeader, pagina, registros) => {
             let colTituloPublicacion = `<td data-encabezado="Título banner" scope="row"><span>${x.tituloPublicacion}</span></td>`;
             let colDescripcionPublicacion = `<td data-encabezado="Descripción banner">${x.descripcionPublicacion}</td>`;
             let colNombreArchivoPublicacion = `<td data-encabezado="Enlace botón" style="min-width:180px;"><div class="btn btn-sm btn-info btn-table"><i class="fa fa-image"></i></div><span class="ml-2">${x.nombreArchivoPublicacion}</span></td>`;
+            let colEnlacePublicacion = `<td data-encabezado="Enlace publicación">${x.enlacePublicacion}</td>`;
             let colEstado = `<td class="text-center" data-encabezado="Estado">${x.idEstado == "0" ? "Deshabilitado" : "Habilitado"}</td>`;
             let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete-publicacion mx-1" data-id="${x.idPublicacion}"><i class="fa fa-trash"></i></div>`;
             let btnEditar = `<div class="btn btn-sm btn-info btn-table btn-edit-publicacion mx-1" data-id="${x.idPublicacion}"><i class="fa fa-edit"></i></div>`;
             let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${btnEliminar}${btnEditar}</td>`;
-            let row = `<tr>${colCodigo}${colTituloPublicacion}${colDescripcionPublicacion}${colNombreArchivoPublicacion}${colEstado}${colOptions}</tr>`;
+            let row = `<tr>${colCodigo}${colTituloPublicacion}${colDescripcionPublicacion}${colNombreArchivoPublicacion}${colEnlacePublicacion}${colEstado}${colOptions}</tr>`;
             return row;
         }).join('');
     };
@@ -640,6 +651,9 @@ var cargarDatosPublicacion = (data) => {
     $('#fle-publicacion-01').data('file', data.archivoContenidoPublicacion)
     $('#fle-publicacion-01').data('new', false)
     $('#txt-publicacion-01').val(data.nombreArchivoPublicacion)
+    $("#txt-limite-caracter").val(data.limiteCaracter)
+    $("#txt-texto-enlace-publicacion").val(data.textoEnlacePublicacion)
+    $("#txt-enlace-publicacion").val(data.enlacePublicacion)
     $('#cbo-estado-publicacion').val(data.idEstado)
 }
 

@@ -15,6 +15,9 @@ namespace sisceusi.entidad
         public string nombreArchivoGeneradoPubli { get; set; }
         public bool archivoNuevoPublicacion { get; set; }
         public byte[] archivoContenidoPublicacion { get; set; }
+        public string enlacePublicacion { get; set; }
+        public int limiteCaracter { get; set; }
+        public string textoEnlacePublicacion { get; set; }
         public string idEstado { get; set; }
     }
 }

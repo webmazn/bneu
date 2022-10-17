@@ -122,9 +122,18 @@
                         string ruta = ConfigurationManager.AppSettings.Get("rutaImagenPublicacion");
                         string nombre = String.Concat(listaPublicacion[i].nombreArchivoGeneradoPubli, "_", listaPublicacion[i].nombreArchivoPublicacion);
                         string pathFile = $"~/{ruta}/{nombre}";
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                        int tamnioPublicacion = listaPublicacion[i].descripcionPublicacion.Length;
+                        string publicacion = tamnioPublicacion < listaPublicacion[i].limiteCaracter ? listaPublicacion[i].descripcionPublicacion : listaPublicacion[i].descripcionPublicacion.Substring(0, listaPublicacion[i].limiteCaracter);
+                        @*<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
                             <img class="img-fluid w-100" src="@Url.Content(pathFile)">
                             <p class="font-weight-bold my-4">@listaPublicacion[i].tituloPublicacion</p><span class="d-block text-justify">@listaPublicacion[i].descripcionPublicacion</span>
+                        </div>*@
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 my-5">
+                            <div class="img-noticia" style="background-image: url(@Url.Content(pathFile))"></div>
+                            <p class="font-weight-bold my-4">@listaPublicacion[i].tituloPublicacion</p>
+                            <span class="d-block text-justify">
+                                <p>@publicacion<a class="lnk-leer-mas" href="@listaPublicacion[i].enlacePublicacion" target="_blank">@listaPublicacion[i].textoEnlacePublicacion</a></p>
+                            </span>
                         </div>
                     }
                 }

@@ -116,6 +116,9 @@ namespace sisceusi.datos
                 p.Add("piDescripcionPublicacion", entidad.descripcionPublicacion);
                 p.Add("piNombreArchivoPublicacion", entidad.nombreArchivoPublicacion);
                 p.Add("piNombreArchivoGeneradoPubli", entidad.nombreArchivoGeneradoPubli);
+                p.Add("piLimiteCaracter", entidad.limiteCaracter);
+                p.Add("piTextoEnlacePublicacion", entidad.textoEnlacePublicacion);
+                p.Add("piEnlacePublicacion", entidad.enlacePublicacion);
                 p.Add("piIdEstado", entidad.idEstado);
                 p.Add("piIdUsuarioCreacion", entidad.idUsuarioCreacion);
                 p.Add("piIpCreacion", entidad.ipCreacion);
@@ -144,6 +147,7 @@ namespace sisceusi.datos
                     tituloPublicacion = x.TITULOPUBLICACION == null ? "" : (string)x.TITULOPUBLICACION,
                     descripcionPublicacion = x.DESCRIPCIONPUBLICACION == null ? "" : (string)x.DESCRIPCIONPUBLICACION,
                     nombreArchivoPublicacion = x.NOMBREARCHIVOPUBLICACION == null ? "" : (string)x.NOMBREARCHIVOPUBLICACION,
+                    enlacePublicacion = x.ENLACEPUBLICACION == null ? "" : (string)x.ENLACEPUBLICACION,
                     idEstado = x.IDESTADO == null ? "0" : (string)x.IDESTADO,
                     fila = (int)x.FILA,
                     totalPaginas = (int)x.TOTALPAGINAS,
@@ -355,6 +359,9 @@ namespace sisceusi.datos
                     descripcionPublicacion = x.DESCRIPCIONPUBLICACION == null ? "" : (string)x.DESCRIPCIONPUBLICACION,
                     nombreArchivoPublicacion = x.NOMBREARCHIVOPUBLICACION == null ? "" : (string)x.NOMBREARCHIVOPUBLICACION,
                     nombreArchivoGeneradoPubli = x.NOMBREARCHIVOGENERADOPUBLI == null ? "" : (string)x.NOMBREARCHIVOGENERADOPUBLI,
+                    limiteCaracter = x.LIMITECARACTER == null ? 0 : (int)x.LIMITECARACTER,
+                    enlacePublicacion = x.ENLACEPUBLICACION == null ? "" : (string)x.ENLACEPUBLICACION,
+                    textoEnlacePublicacion = x.TEXTOENLACEPUBLICACION == null ? "" : (string)x.TEXTOENLACEPUBLICACION,
                     fila = (int)x.FILA
                 }).ToList();
             }

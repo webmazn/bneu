@@ -1,8 +1,7 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "Error - 404";
 }
-
 <div class="container-fluid map-root" id="historia"></div>
 <div class="container my-4" id="cuerpo">
     <div class="banners-degradado">
@@ -22,12 +21,13 @@
             <div class="col-md-2 d-flex flex-row justify-content-center align-items-center wrap-slider-right"><i class="fas fa-chevron-right fa-3x text-white btn-slider-right d-none"></i></div>
         </div>
         <div class="row dentro-banner rounded">
-            <div class="col-md-6 col-lg-6 p-4 bg-light rounded-right">
-                <div class="h4">Ocurrió un problema comunciarse con el Administrador del sistema</div>
+            <div class="col-md-6 col-lg-4 p-4 bg-light rounded-right">
+                <div class="h4">Página no encontrada...</div>
             </div>
-            <div class="col-md-6 col-lg-6 p-4 d-none d-md-block">
+            <div class="col-md-6 col-lg-8 p-4 d-none d-md-block">
                 <span class="text-white">Volver al </span><a class="text-white font-weight-bold" href="@Url.Action("Index","Inicio")">Inicio</a>
             </div>
         </div>
     </div>
 </div>
+
