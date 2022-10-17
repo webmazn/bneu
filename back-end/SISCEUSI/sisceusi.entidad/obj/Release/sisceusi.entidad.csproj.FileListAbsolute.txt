@@ -1,0 +1,4 @@
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.entidad\bin\Release\sisceusi.entidad.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.entidad\bin\Release\sisceusi.entidad.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.entidad\obj\Release\sisceusi.entidad.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.entidad\obj\Release\sisceusi.entidad.pdb

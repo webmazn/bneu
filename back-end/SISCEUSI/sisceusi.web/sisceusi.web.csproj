@@ -271,6 +271,7 @@
     <Content Include="Views\Interno\EncuestaFicha.cshtml" />
     <Content Include="Views\Interno\ReporteGeneral.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
+    <None Include="Properties\PublishProfiles\SISCEUSI.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,16 @@
+﻿@using sisceusi.entidad;
+@{
+    UsuarioBE usuario = Session["user"] == null ? null : (UsuarioBE)Session["user"];
+}
+
+<script src="@Url.Content("~/Scripts/Sisceusi/script_util.js")"></script>
+<script src="@Url.Content("~/Scripts/Sisceusi/script_validaciones.js")"></script>
+@if (usuario == null)
+{
+    <script src="@Url.Content("~/Scripts/Sisceusi/inicio_contacto_bot.js")"></script>
+}
+<script type="text/javascript">
+    const baseUrl = '@Url.Content("~")';
+    const idUsuarioLogin = @(usuario == null ? "null" : usuario.idUsuario.ToString());
+    const idRolLogin = @(usuario == null ? "null" : usuario.idRol.ToString());
+</script>

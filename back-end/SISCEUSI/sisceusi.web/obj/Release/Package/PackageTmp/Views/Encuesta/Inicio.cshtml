@@ -1,0 +1,163 @@
+﻿@using sisceusi.entidad
+
+@{
+    ViewBag.Title = "Inicio";
+    ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] == null ? null : (ControlEncuestaBE)ViewData["controlEncuesta"];
+    UsuarioBE usuario = Session["user"] == null ? null : (UsuarioBE)Session["user"];
+    string encCode = "ENC" + controlEncuesta.campanaEmpresa.campana.idCampana.ToString("D4");
+    string generaSuPropiaElectricidad = controlEncuesta.plantaEmpresa.idEmpresaLuz == 0 ? "no" : "si";
+    string suministroLuz = generaSuPropiaElectricidad.Equals("si") ? controlEncuesta.plantaEmpresa.numeroSuministroAlumbrado : "";
+}
+
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/encuesta_inicio.js")"></script>
+}
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container my-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 py-4">
+                <div class="row">
+                    <div class="col-12 d-flex">
+                        <div class="bg-light w-100 p-4">
+                            <div class="h4 text-cyan">@controlEncuesta.campanaEmpresa.campana.denominacion - @encCode</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-cuestionario">NÚMERO DE CUESTIONARIO</label>
+                                    <input class="form-control" type="text" id="txt-cuestionario" placeholder="Número de cuestionario" value="CUE0000" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-ruc">NÚMERO DE R.U.C.</label>
+                                    <input class="form-control" type="text" id="txt-ruc" placeholder="Número de RUC" value="@controlEncuesta.campanaEmpresa.empresaIndustria.ruc" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-razon-social">RAZÓN SOCIAL DE LA EMPRESA</label>
+                                    <input class="form-control" type="text" id="txt-razon-social" value="@controlEncuesta.campanaEmpresa.empresaIndustria.nombreEmpresa" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-nombre-comercial">NOMBRE COMERCIAL EMPRESA</label>
+                                    <input class="form-control" type="text" id="txt-nombre-comercial" value="@controlEncuesta.campanaEmpresa.empresaIndustria.nombreComercial" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-suministro">NÚMERO SUMINISTRO GAS</label>
+                                    <input class="form-control" type="text" id="txt-suministro" placeholder="Número de suministro de gas" value="@controlEncuesta.plantaEmpresa.numeroSuministroGas" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="cbo-condicion-electricidad">GENERA SU PROPIA ELECTRICIDAD</label>
+                                    <select class="form-control" id="cbo-condicion-electricidad" disabled>
+                                        <option>-Seleccione una considición-</option>
+                                        <option value="no">No tiene servicio de electricidad</option>
+                                        <option value="si">Si genera su propia electricidad</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-suministro-electrico">NÚMERO DE SUMINISTRO ELÉCTRICO</label>
+                                    <input class="form-control" type="text" id="txt-suministro-electrico" placeholder="Número de suministros eléctrico" value="@suministroLuz" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-12 d-flex">
+                        <div class="bg-light w-100 p-4">
+                            <div class="text-center text-azul font-weight-bold p-5">Buenos días / Buenas tardes: @usuario.nombres</div>
+                            <div class="row pb-5">
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
+                                    <p class="pl-md-5 pl-lg-5 text-justify"><b>F1. &nbsp;</b><span>¿Acepta usted participar en este estudio?</span></p>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios1" value="si" checked>
+                                        <label class="form-check-label" for="exampleRadios1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios2" value="no">
+                                        <label class="form-check-label" for="exampleRadios2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
+                                    <p class="pl-md-5 pl-lg-5 text-justify"><b>F2. &nbsp;</b><span>Trataremos sus respuestas como información confidencial, sin embargo sería de mucha ayuda para nuestro cliente que le facilitemos algunos datos personales de quienes participaron en esta encuesta, para la planificación de los servicios de energía. ¿Está interesado en proveer a nuestro cliente con sus datos?</span></p>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios3" value="si" checked>
+                                        <label class="form-check-label" for="exampleRadios3">Si</label>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios4" value="no">
+                                        <label class="form-check-label" for="exampleRadios4">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6"></div>
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6" id="seccion-mensaje">
+                                    @*<div class="alert alert-success d-flex align-items-stretch" role="alert">
+                                        <div class="alert-wrap mr-3">
+                                            <div class="sa">
+                                                <div class="sa-success">
+                                                    <div class="sa-success-tip"></div>
+                                                    <div class="sa-success-long"></div>
+                                                    <div class="sa-success-placeholder"></div>
+                                                    <div class="sa-success-fix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="alert-wrap">
+                                            <h6>Gracias</h6>
+                                            <hr><small class="mb-0">Los datos recopilados serán tratados de manera confidencial.</small>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider my-4"></div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                        <button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptate, repudiandae aperiam ducimus eaque cum? Ipsum, similique quae excepturi at quisquam obcaecati modi nulla debitis corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("Index", "Interno")">Salir</a></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-azul w-100 mb-3" id="btn-continuar" href="javascript:void(0)">Continuar</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="identificador" value="@controlEncuesta.idControlEncuesta" />
+<input type="hidden" id="identificador-campana" value="@controlEncuesta.campanaEmpresa.campana.idCampana" />
+<script>
+    document.getElementById("cbo-condicion-electricidad").value = '@generaSuPropiaElectricidad';
+</script>

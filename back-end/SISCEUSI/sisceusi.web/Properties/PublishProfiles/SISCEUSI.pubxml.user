@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo es utilizado por el proceso de paquete/publicación de nuestro proyecto Web. Puede personalizar el comportamiento de este proceso
+editando este archivo MSBuild. Para conocer más acerca de esto, visite http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\SISCEUSI</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>07/07/2022 11:12:05</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>09/04/2021 08:17:53</publishTime>
+    </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>06/16/2021 20:53:25</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/07/2022 11:12:01</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>07/07/2022 11:12:04</publishTime>
+    </File>
+    <File Include="bin/Oracle.DataAccess.dll">
+      <publishTime>05/24/2017 12:46:16</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>07/07/2022 11:11:09</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>07/07/2022 11:11:09</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>07/07/2022 11:11:10</publishTime>
+    </File>
+    <File Include="bin/sisceusi.datos.dll">
+      <publishTime>10/17/2022 16:23:22</publishTime>
+    </File>
+    <File Include="bin/sisceusi.entidad.dll">
+      <publishTime>10/17/2022 16:23:22</publishTime>
+    </File>
+    <File Include="bin/sisceusi.logica.dll">
+      <publishTime>10/17/2022 16:23:45</publishTime>
+    </File>
+    <File Include="bin/sisceusi.util.dll">
+      <publishTime>10/17/2022 16:23:22</publishTime>
+    </File>
+    <File Include="bin/sisceusi.web.dll">
+      <publishTime>10/17/2022 16:23:50</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>07/07/2022 11:11:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>07/07/2022 11:12:02</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>07/07/2022 11:11:57</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>07/07/2022 11:11:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>07/07/2022 11:11:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>07/07/2022 11:11:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>07/07/2022 11:11:58</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>07/07/2022 11:12:07</publishTime>
+    </File>
+    <File Include="Content/print.css">
+      <publishTime>10/06/2022 00:12:21</publishTime>
+    </File>
+    <File Include="Content/style.css">
+      <publishTime>10/16/2022 22:05:57</publishTime>
+    </File>
+    <File Include="fonts/fa-brands-400.eot">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-brands-400.svg">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-brands-400.ttf">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-brands-400.woff">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-brands-400.woff2">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-regular-400.eot">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-regular-400.svg">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-regular-400.ttf">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-regular-400.woff">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-regular-400.woff2">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-solid-900.eot">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-solid-900.svg">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-solid-900.ttf">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-solid-900.woff">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="fonts/fa-solid-900.woff2">
+      <publishTime>07/10/2022 10:50:23</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>07/07/2022 11:11:50</publishTime>
+    </File>
+    <File Include="images/9AB80567.png">
+      <publishTime>09/14/2022 00:25:14</publishTime>
+    </File>
+    <File Include="images/banner.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/bg_images_footer.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/bg_images_login.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/bg_images_recuperar.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/chatbot.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/favicon/android-chrome-192x192.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/android-chrome-256x256.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/android-icon-192x192-75626aba0d0a3865276a1848bd01f3af892dbeccf417aa1c078754d3584d8764.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/android-icon-192x192.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-114x114-a5faa45cba3b1bad7cf13c50f6b594612dfb1df7614e2730f091474f8029fefa.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-114x114.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-120x120-3586ba0b239f8b8eb12b3cd607d47cff64e1b621c19cf2ded1c8d0a0d73ef6b2.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-120x120.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-144x144-b549ad126518a15cb6392af045464b3bebfedad0d646a227add2f17dd9659a62.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-144x144.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-152x152-40aa09e34612202fdfdb351644c342db21244591929c8baa794eb775e7eacd6e.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-152x152.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-180x180-55bc650e5a1780ec2c982f237821f7ab18cd0491c07c9cc972ca51fdd6310f47.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-180x180.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-57x57-8580b1c0b58377af92ccda2506f90c8f8a11ea3cc87c0e788032ec856b5a4e0f.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-57x57.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-60x60-61eee7442ffe06019724355f923e4fde5dc285f2f259976028b126696ab89e85.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-60x60.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-72x72-47c8ab534f466f304d60ac55a62c9eea13e522f108f3bf87508680d34cb3478f.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-72x72.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-76x76-c576824f822cbf3db7e825fad4aad2e9d7df67528bfb5b739c867111e4ccf1c3.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-icon-76x76.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/apple-touch-icon.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/browserconfig.xml">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/favicon-16x16.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/favicon-32x32.png">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/favicon-ea9af20bd4a54d1aa86ee43cdb86e8acb45f9ed5f707d1bd0b60db870504489d.ico">
+      <publishTime>07/10/2022 10:42:14</publishTime>
+    </File>
+    <File Include="images/favicon/favicon.ico">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/favicon/manifest.json">
+      <publishTime>07/10/2022 10:42:14</publishTime>
+    </File>
+    <File Include="images/favicon/mstile-150x150.png">
+      <publishTime>07/10/2022 10:42:14</publishTime>
+    </File>
+    <File Include="images/favicon/safari-pinned-tab.svg">
+      <publishTime>07/10/2022 10:42:14</publishTime>
+    </File>
+    <File Include="images/favicon/site.webmanifest">
+      <publishTime>07/10/2022 10:42:14</publishTime>
+    </File>
+    <File Include="images/favicon/_manifest.json">
+      <publishTime>07/10/2022 10:42:13</publishTime>
+    </File>
+    <File Include="images/icon_fb.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/icon_ig.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/icon_ld.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/icon_tw.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/icon_wp.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/icon_yt.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/logo-minem.jpg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/logo_dgee.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/logo_mem.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/logo_web.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/logo_web.svg.bak">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/logo_web_footer.svg">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/password-level-47px.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/portada01.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/portada02.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="images/portada03.png">
+      <publishTime>09/14/2022 00:25:20</publishTime>
+    </File>
+    <File Include="Mailing/contacto.html">
+      <publishTime>09/19/2022 23:47:44</publishTime>
+    </File>
+    <File Include="Mailing/contactoBot.html">
+      <publishTime>09/21/2022 10:12:48</publishTime>
+    </File>
+    <File Include="Mailing/culminacionSubsanacionCampana.html">
+      <publishTime>10/12/2022 15:53:53</publishTime>
+    </File>
+    <File Include="Mailing/finalizacionCampana.html">
+      <publishTime>10/12/2022 21:53:38</publishTime>
+    </File>
+    <File Include="Mailing/inicioCampana.html">
+      <publishTime>10/12/2022 14:25:28</publishTime>
+    </File>
+    <File Include="Mailing/intencionParticipar.html">
+      <publishTime>10/12/2022 22:22:04</publishTime>
+    </File>
+    <File Include="Mailing/recuperarClave.html">
+      <publishTime>09/21/2022 00:51:12</publishTime>
+    </File>
+    <File Include="Mailing/registroUsuario.html">
+      <publishTime>10/12/2022 10:48:24</publishTime>
+    </File>
+    <File Include="Mailing/revisionEncuesta.html">
+      <publishTime>10/12/2022 20:18:26</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/07/2022 13:59:59</publishTime>
+    </File>
+    <File Include="Scripts/script.js">
+      <publishTime>10/16/2022 22:05:28</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/campana_index.js">
+      <publishTime>10/11/2022 12:21:47</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/campana_nueva_campana.js">
+      <publishTime>10/11/2022 23:48:28</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/empresa_index.js">
+      <publishTime>10/08/2022 11:31:29</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/empresa_nueva_empresa.js">
+      <publishTime>10/11/2022 08:32:03</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/encuesta_firma.js">
+      <publishTime>08/09/2022 02:01:04</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/encuesta_formulario.js">
+      <publishTime>08/17/2022 00:06:23</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/encuesta_generar_ficha.js">
+      <publishTime>10/15/2022 02:49:01</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/encuesta_inicio.js">
+      <publishTime>08/09/2022 00:54:16</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/encuesta_preguntaEncuesta.js">
+      <publishTime>10/13/2022 06:00:40</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/encuesta_revisar.js">
+      <publishTime>10/13/2022 06:03:30</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/indicador_index.js">
+      <publishTime>09/23/2022 23:55:16</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/indicador_nuevo_indicador.js">
+      <publishTime>10/11/2022 23:22:55</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_contacto.js">
+      <publishTime>09/19/2022 23:07:42</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_contacto_bot.js">
+      <publishTime>09/21/2022 10:50:59</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_contrasena_nuevo.js">
+      <publishTime>09/21/2022 00:43:16</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_estadistica.js">
+      <publishTime>10/13/2022 06:32:34</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_index.js">
+      <publishTime>10/02/2022 00:17:21</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_recuperar_clave.js">
+      <publishTime>09/21/2022 00:30:29</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/inicio_reporte.js">
+      <publishTime>09/21/2022 23:38:53</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/intencion_participar_index.js">
+      <publishTime>10/12/2022 23:56:52</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/interno_cambiar_clave.js">
+      <publishTime>09/18/2022 23:36:19</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/interno_index.js">
+      <publishTime>10/11/2022 21:32:17</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/interno_reporte_general.js">
+      <publishTime>10/15/2022 18:21:03</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/login_login.js">
+      <publishTime>10/12/2022 23:56:51</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/pagina_home_index.js">
+      <publishTime>10/16/2022 21:18:13</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/parametro_index.js">
+      <publishTime>10/10/2022 15:15:06</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/parametro_nuevo_parametro.js">
+      <publishTime>09/01/2022 21:25:53</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/planta_index.js">
+      <publishTime>10/10/2022 23:57:36</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/planta_nueva_planta.js">
+      <publishTime>10/11/2022 09:01:12</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/script_util.js">
+      <publishTime>09/06/2022 22:37:16</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/script_validaciones.js">
+      <publishTime>07/17/2022 01:26:00</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/tabla_maestra_index.js">
+      <publishTime>10/11/2022 11:14:12</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/tabla_maestra_nueva_tabla.js">
+      <publishTime>10/15/2022 17:21:30</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/usuario_index.js">
+      <publishTime>10/11/2022 09:55:17</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/usuario_nuevo_usuario.js">
+      <publishTime>10/10/2022 11:18:20</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/usuario_planta_index.js">
+      <publishTime>10/09/2022 22:44:24</publishTime>
+    </File>
+    <File Include="Scripts/Sisceusi/usuario_planta_nuevo_usuario.js">
+      <publishTime>10/09/2022 07:08:48</publishTime>
+    </File>
+    <File Include="Views/Campana/Index.cshtml">
+      <publishTime>10/15/2022 18:15:35</publishTime>
+    </File>
+    <File Include="Views/Campana/NuevaCampana.cshtml">
+      <publishTime>10/12/2022 23:58:38</publishTime>
+    </File>
+    <File Include="Views/EmpresaIndustria/Index.cshtml">
+      <publishTime>10/15/2022 18:13:43</publishTime>
+    </File>
+    <File Include="Views/EmpresaIndustria/NuevaEmpresaIndustria.cshtml">
+      <publishTime>10/15/2022 16:03:18</publishTime>
+    </File>
+    <File Include="Views/Encuesta/Firma.cshtml">
+      <publishTime>08/09/2022 02:01:02</publishTime>
+    </File>
+    <File Include="Views/Encuesta/Formulario.cshtml">
+      <publishTime>10/11/2022 17:01:09</publishTime>
+    </File>
+    <File Include="Views/Encuesta/Inicio.cshtml">
+      <publishTime>10/11/2022 16:39:24</publishTime>
+    </File>
+    <File Include="Views/Encuesta/PreguntaEncuesta.cshtml">
+      <publishTime>10/02/2022 11:59:01</publishTime>
+    </File>
+    <File Include="Views/Encuesta/RevisarEncuesta.cshtml">
+      <publishTime>10/11/2022 15:26:34</publishTime>
+    </File>
+    <File Include="Views/Error/Error404.cshtml">
+      <publishTime>10/16/2022 22:38:38</publishTime>
+    </File>
+    <File Include="Views/Indicador/Index.cshtml">
+      <publishTime>10/12/2022 09:26:51</publishTime>
+    </File>
+    <File Include="Views/Indicador/NuevoIndicador.cshtml">
+      <publishTime>10/12/2022 14:48:36</publishTime>
+    </File>
+    <File Include="Views/Inicio/Contacto.cshtml">
+      <publishTime>10/11/2022 23:33:02</publishTime>
+    </File>
+    <File Include="Views/Inicio/ContrasenaNuevo.cshtml">
+      <publishTime>09/21/2022 01:10:36</publishTime>
+    </File>
+    <File Include="Views/Inicio/Estadistica.cshtml">
+      <publishTime>10/11/2022 23:32:06</publishTime>
+    </File>
+    <File Include="Views/Inicio/Index.cshtml">
+      <publishTime>10/16/2022 22:43:20</publishTime>
+    </File>
+    <File Include="Views/Inicio/recuperarClave.cshtml">
+      <publishTime>09/21/2022 00:18:41</publishTime>
+    </File>
+    <File Include="Views/Inicio/Reporte.cshtml">
+      <publishTime>10/11/2022 23:25:57</publishTime>
+    </File>
+    <File Include="Views/IntencionParticipar/Index.cshtml">
+      <publishTime>10/12/2022 23:06:47</publishTime>
+    </File>
+    <File Include="Views/Interno/CambiarClave.cshtml">
+      <publishTime>09/18/2022 23:37:17</publishTime>
+    </File>
+    <File Include="Views/Interno/EncuestaFicha.cshtml">
+      <publishTime>10/05/2022 23:52:31</publishTime>
+    </File>
+    <File Include="Views/Interno/Index.cshtml">
+      <publishTime>10/15/2022 18:17:01</publishTime>
+    </File>
+    <File Include="Views/Interno/MaestroMantenimiento.cshtml">
+      <publishTime>10/13/2022 17:47:05</publishTime>
+    </File>
+    <File Include="Views/Interno/ReporteGeneral.cshtml">
+      <publishTime>10/15/2022 18:17:41</publishTime>
+    </File>
+    <File Include="Views/Login/Index.cshtml">
+      <publishTime>10/12/2022 23:55:26</publishTime>
+    </File>
+    <File Include="Views/PaginaHome/Index.cshtml">
+      <publishTime>10/16/2022 21:26:02</publishTime>
+    </File>
+    <File Include="Views/Parametro/Index.cshtml">
+      <publishTime>10/15/2022 18:14:50</publishTime>
+    </File>
+    <File Include="Views/Parametro/NuevoParametro.cshtml">
+      <publishTime>10/12/2022 09:06:12</publishTime>
+    </File>
+    <File Include="Views/PlantaEmpresa/Index.cshtml">
+      <publishTime>10/15/2022 18:14:00</publishTime>
+    </File>
+    <File Include="Views/PlantaEmpresa/NuevaPlanta.cshtml">
+      <publishTime>10/15/2022 16:06:52</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>10/16/2022 22:42:44</publishTime>
+    </File>
+    <File Include="Views/Shared/_Footer.cshtml">
+      <publishTime>10/15/2022 16:14:41</publishTime>
+    </File>
+    <File Include="Views/Shared/_Header.cshtml">
+      <publishTime>10/16/2022 22:15:13</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>10/15/2022 11:58:33</publishTime>
+    </File>
+    <File Include="Views/Shared/_Scripts.cshtml">
+      <publishTime>10/01/2022 19:42:10</publishTime>
+    </File>
+    <File Include="Views/TablaMaestra/Index.cshtml">
+      <publishTime>10/15/2022 18:16:03</publishTime>
+    </File>
+    <File Include="Views/TablaMaestra/NuevaTablaMaestra.cshtml">
+      <publishTime>10/15/2022 17:12:55</publishTime>
+    </File>
+    <File Include="Views/Usuario/Index.cshtml">
+      <publishTime>10/15/2022 18:14:16</publishTime>
+    </File>
+    <File Include="Views/Usuario/NuevoUsuario.cshtml">
+      <publishTime>10/12/2022 14:42:33</publishTime>
+    </File>
+    <File Include="Views/UsuarioPlanta/Index.cshtml">
+      <publishTime>10/15/2022 18:14:33</publishTime>
+    </File>
+    <File Include="Views/UsuarioPlanta/NuevoUsuarioPlanta.cshtml">
+      <publishTime>10/12/2022 09:21:20</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>07/07/2022 11:11:49</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>07/07/2022 11:11:47</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/17/2022 16:23:51</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

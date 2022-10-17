@@ -49,6 +49,7 @@ C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.web\bin\Oracle.DataAcces
 C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.web\bin\Dapper.dll
 C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.web\bin\sisceusi.datos.pdb
 C:\Users\juanc\Desktop\Minem\ENCUESTA\SISCEUSI\sisceusi.web\bin\Dapper.xml
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\sisceusi.datos.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\roslyn\csc.exe
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -80,7 +81,6 @@ C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\System.Web.WebPages.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\System.Web.WebPages.Razor.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\WebGrease.dll
-C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\sisceusi.datos.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\Oracle.DataAccess.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\Dapper.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\sisceusi.entidad.pdb

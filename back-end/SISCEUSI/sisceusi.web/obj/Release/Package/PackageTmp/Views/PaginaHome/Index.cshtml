@@ -1,0 +1,617 @@
+﻿@using sisceusi.entidad
+@{
+    ViewBag.Title = "Index";
+    Dictionary<string, object> listaBanner = ViewData["listaBanner"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaBanner"];
+    Dictionary<string, object> listaPublicacion = ViewData["listaPublicacion"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaPublicacion"];
+    Dictionary<string, object> listaEnlace = ViewData["listaEnlace"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaEnlace"];
+    LogoRedSocialBE logoRedSocial = ViewData["logoRedSocial"] == null ? null : (LogoRedSocialBE)ViewData["logoRedSocial"];
+    if (logoRedSocial != null) {
+        logoRedSocial.archivoContenidoLogoWeb = new byte[100];
+        logoRedSocial.archivoContenidoLogoDgee = new byte[100];
+    }
+}
+
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/pagina_home_index.js")"></script>
+}
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container my-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 py-4">
+                <div class="row">
+                    <div class="col-md-12 col-lg-9 d-flex">
+                        <div class="bg-light py-4 pl-0 w-100">
+                            <div class="h3 text-cyan">Mantenimiento del home&nbsp;</div>                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-plomo w-100 mb-1" href="@Url.Action("MaestroMantenimiento", "Interno")">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-1 text-white" data-toggle="tooltip" data-placement="left" title="En este formulario usted puede actualizar la información gráfica y textual que se muestra en la pantalla principal de la plataforma. Puede modificar información del banner principal, el botón de destino, el mensaje del banner y un único mensaje en la parte inferior del banner, así mismo puede modificar la información de los artículos, lista lateral derecha y redes sociales."><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE BANNER SLIDER PRINCIPAL</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-banner">TÍTULO DEL BANNER</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 350 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="350" type="text" id="txt-titulo-banner" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-banner">DESCRIPCIÓN DEL BANNER</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 3500 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="3500" type="text" id="txt-descripcion-banner" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-fija">DESCRIPCIÓN FIJA</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 3500 caracteres como máximo. Se tomará como descripción fija el primer registro"></i></span>
+                                    <input class="form-control" maxlength="3500" type="text" id="txt-descripcion-fija" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-boton">TÍTULO DEL BOTÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 350 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="350" type="text" id="txt-titulo-boton" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-enlace-boton">ENLACE DEL BOTÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 350 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="350" type="text" id="txt-enlace-boton" placeholder="Ingrese enlace">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group text-left">
+                                    <label class="font-weight-bold" for="fle-slider-01">IMAGEN DE LA PUBLICACIÓN</label>
+                                    <div class="input-group">
+                                        <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-slider-01" placeholder="Subir imagen" required>
+                                        <input class="d-none fil-file-control" type="file" id="fle-slider-01" accept="image/*">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text cursor-pointer badge-info" for="fle-slider-01">Seleccionar</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-banner" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-banner">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-cancelar-banner" class="btn btn-secondary w-100 mb-3 d-none" href="javascript:void(0)">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar-banner" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive tabla-principal">
+                            <table id="tbl-banner" class="table table-striped table-hover">
+                                <thead>
+                                    <tr class="bg-azul text-white">
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN PRINCIPAL&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN FIJA&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>BOTÓN&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE BOTÓN&nbsp;</span></span></div>
+                                        </th>                                        
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN DE FONDO&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col" style="min-width:150px;">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                   
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros-banner">1</span><span id="view-page-result-banner">-<span class="fin-registros-banner">1</span> de <span class="total-registros-banner">1</span> registros</span></td>
+                                        <td id="viewPagination-banner" class="text-right text-xs-left pr-0" colspan="6" style="display: none">
+                                            <span>Registros por página&nbsp;</span>
+                                            <select id="number-registers-banner">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina-banner">1</span> de <span class="total-paginas-banner">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina-banner" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaBanner(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE PUBLICACIONES Y/O ARTÍCULOS</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-publicacion">TÍTULO DE LA PUBLICACIÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 350 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="350" type="text" id="txt-titulo-publicacion" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group text-left">
+                                    <label class="font-weight-bold" for="fle-publicacion-01">IMAGEN DE LA PUBLICACIÓN</label>
+                                    <div class="input-group">
+                                        <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-publicacion-01" placeholder="Subir imagen" required>
+                                        <input class="d-none fil-file-control" type="file" id="fle-publicacion-01" accept="image/*">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text cursor-pointer badge-info" for="fle-publicacion-01">Seleccionar</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-9 col-lg-9">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-publicacion">DESCRIPCIÓN DE LA PUBLICACIÓN</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 3500 caracteres como máximo"></i></span>
+                                    <textarea class="form-control" maxlength="3500" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción" rows="5" ></textarea>
+                                    @*<input class="form-control" type="text" id="txt-descripcion-publicacion" placeholder="Ingrese descripción">*@
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-limite-caracter">LÍMITE DE CARACTERES</label>
+                                    <input class="form-control" type="number" id="txt-limite-caracter" min="1" value="300">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-texto-enlace-publicacion">TEXTO PARA EL ENLACE</label>
+                                    <input class="form-control" maxlength="45" type="text" id="txt-texto-enlace-publicacion" placeholder="Ejemplo: Leer más...">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-enlace-publicacion">LINK DESTINO DEL ENLACE</label>
+                                    <input class="form-control" maxlength="350" type="text" id="txt-enlace-publicacion" placeholder="Ejemplo: http://enlace.com/articulo">
+                                </div>
+                            </div>                        
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-publicacion" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-publicacion">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-cancelar-publicacion" class="btn btn-secondary w-100 mb-3 d-none" href="javascript:void(0)">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar-publicacion" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive tabla-principal">
+                            <table id="tbl-publicacion" class="table table-striped table-hover">
+                                <thead>
+                                    <tr class="bg-azul text-white">
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-center align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>DESCRIPCIÓN&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>IMAGEN&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>NOMBRE/ENLACE&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col" style="min-width:150px;">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="3"><span>Resultado:&nbsp;</span><span class="inicio-registros-publicacion">1</span><span id="view-page-result-publicacion">-<span class="fin-registros-publicacion">1</span> de <span class="total-registros-publicacion">1</span> registros</span></td>
+                                        <td id="viewPagination-publicacion" class="text-right text-xs-left pr-0" colspan="4" style="display: none">
+                                            <span>Registros por página&nbsp;</span>
+                                            <select id="number-registers-publicacion">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina-publicacion">1</span> de <span class="total-paginas-publicacion">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina-publicacion" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaPublicacion(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ADMINISTRACIÓN DE ENLACES DE LA COLUMNA LATERAL DERECHA</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-titulo-enlace">TÍTULO DEL ENLACE</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 350 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="350" type="text" id="txt-titulo-enlace" placeholder="Ingrese título">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="txt-descripcion-enlace">DESCRIPCIÓN DEL ENLACE</label><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-question-circle ayuda-tooltip" data-toggle="tooltip" data-placement="right" title="Solo se pueden ingresar 3500 caracteres como máximo"></i></span>
+                                    <input class="form-control" maxlength="3500" type="text" id="txt-descripcion-enlace" placeholder="Ingrese descripción">
+                                </div>
+                            </div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">ESTADO</label>
+                                    <select class="form-control" id="cbo-estado-enlace" aria-describedby="inputGroup10" required>
+                                        <option value="-1">-Seleccione un estado-</option>
+                                        <option value="1">HABILITADO</option>
+                                        <option value="0">DESHABILITADO</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-enlace">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-cancelar-enlace" class="btn btn-secondary w-100 mb-3 d-none" href="javascript:void(0)">Cancelar</a></div>
+                            <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a id="btn-grabar-enlace" class="btn btn-success w-100 mb-3" href="javascript:void(0)">Agregar</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive tabla-principal">
+                            <table id="tbl-enlace" class="table table-striped table-hover">
+                                <thead>
+                                    <tr class="bg-azul text-white">
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>CÓDIGO&nbsp;</span></span></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>TITULO&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ENLACE&nbsp;</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col">
+                                            <div class="d-flex justify-content-between align-items-center"><span class="d-flex justify-content-between align-items-center"><i class="fas fa-question-circle mr-1" data-toggle="tooltip" data-placement="right" title="Título de ayuda"></i><span>ESTADO</span></span></div>
+                                        </th>
+                                        <th class="text-center" scope="col" style="min-width:150px;">
+                                            <div class="d-flex justify-content-center align-items-center"><span class="d-flex justify-content-between align-items-center"><span>GESTIÓN</span></span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-left pl-0" colspan="2"><span>Resultado:&nbsp;</span><span class="inicio-registros-enlace">1</span><span id="view-page-result-enlace">-<span class="fin-registros-enlace">1</span> de <span class="total-registros-enlace">1</span> registros</span></td>
+                                        <td id="viewPagination-enlace" class="text-right text-xs-left pr-0" colspan="3" style="display: none">
+                                            <span>Registros por pág&nbsp;</span>
+                                            <select id="number-registers-enlace">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                            <span class="pagina-enlace">1</span> de <span class="total-paginas-enlace">75</span> páginas&nbsp;
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(1)"><i class="fas fa-angle-double-left"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(2)"><i class="fas fa-angle-left"></i></button>
+                                                <input class="ir-pagina-enlace" type="number" value="1" min="1">
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(3)"><i class="fas fa-angle-right"></i></button>
+                                                <button class="btn btn-success" type="button" onclick="cambiarPaginaEnlace(4)"><i class="fas fa-angle-double-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">LOGOS PRINCIPALES</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group text-left">
+                            <label class="font-weight-bold" for="fle-web-01">ÍCONO PRINCIPAL DE LA WEB</label>
+                            <div class="input-group">
+                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-web-01" placeholder="Subir documentos" required>
+                                <input class="d-none fil-file-control" type="file" id="fle-web-01" accept="image/*">
+                                <div class="input-group-append">
+                                    <label class="input-group-text cursor-pointer badge-info" for="fle-web-01">Seleccionar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group text-left">
+                            <label class="font-weight-bold" for="fle-dgee-01">ÍCONO DE LA DGEE</label>
+                            <div class="input-group">
+                                <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-dgee-01" placeholder="Subir documentos" required>
+                                <input class="d-none fil-file-control" type="file" id="fle-dgee-01" accept="image/*">
+                                <div class="input-group-append">
+                                    <label class="input-group-text cursor-pointer badge-info" for="fle-dgee-01">Seleccionar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">ENLACES SOCIALES</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_fb.svg")"></div>
+                            <input id="txt-facebook" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_tw.svg")"></div>
+                            <input id="txt-twiter" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_ig.svg")"></div>
+                            <input id="txt-instangram" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_yt.svg")"></div>
+                            <input id="txt-youtube" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_wp.svg")"></div>
+                            <input id="txt-whatsapp" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-append"><img class="icon_redes mr-3" src="@Url.Content("~/images/icon_ld.svg")"></div>
+                            <input id="txt-linkedin" maxlength="500" class="form-control" type="text" placeholder="Ingresar enlace">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">TÍTULO NAVEGADOR</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input id="txt-titulo-navegador" maxlength="500" class="form-control" type="text" placeholder="Ingresar el título del navegador">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold mt-5">CHATBOT</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chk-chatbot">
+                            <label class="custom-control-label" for="chk-chatbot">¿Desea deshabilitar el chatbot?</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-logo">
+                    </div>
+                </div>
+                <div class="dropdown-divider mt-5"></div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("MaestroMantenimiento", "Interno")">Regresar</a></div>
+                    <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+                        <button id="btn-grabar-logo" class="btn btn-info w-100 mb-3" href="javascript:void(0)">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalConfirmacionBanner" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabel">Confirmación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                            <div class="swal2-icon-content"><i class="fas fa-ban"></i></div>
+                        </div>
+                        <h3 class="text-center">¿Deshabilitar el registro?</h3>
+                        <p class="text-center">Por favor confirme está acción para deshabilitar el registro seleccionado a continuación.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRowBanner" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalConfirmacionPublicacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabel">Confirmación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                            <div class="swal2-icon-content"><i class="fas fa-ban"></i></div>
+                        </div>
+                        <h3 class="text-center">¿Deshabilitar el registro?</h3>
+                        <p class="text-center">Por favor confirme está acción para deshabilitar el registro seleccionado a continuación.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRowPublicacion" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalConfirmacionEnlace" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChatBotLabel">Confirmación</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="swal2-icon swal2-question swal2-icon-show" style="display: flex;">
+                            <div class="swal2-icon-content"><i class="fas fa-ban"></i></div>
+                        </div>
+                        <h3 class="text-center">¿Deshabilitar el registro?</h3>
+                        <p class="text-center">Por favor confirme está acción para deshabilitar el registro seleccionado a continuación.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger" id="eliminacionRowEnlace" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var listaBanner = @Html.Raw(Json.Encode(listaBanner));
+    var listaPublicacion = @Html.Raw(Json.Encode(listaPublicacion));
+    var listaEnlace = @Html.Raw(Json.Encode(listaEnlace));
+    var logoRedSocial = @Html.Raw(Json.Encode(logoRedSocial));
+</script>
+

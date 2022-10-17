@@ -1,0 +1,13 @@
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\obj\Release\sisceusi.logica.csprojResolveAssemblyReference.cache
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.logica.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.logica.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\Oracle.DataAccess.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.datos.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.entidad.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.util.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\Dapper.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.datos.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.entidad.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\bin\Release\sisceusi.util.pdb
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\obj\Release\sisceusi.logica.dll
+C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.logica\obj\Release\sisceusi.logica.pdb

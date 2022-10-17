@@ -1,0 +1,223 @@
+﻿@using sisceusi.entidad
+@{
+    ViewBag.Title = "NuevaPlanta";
+    int id = ViewData["idPlantaEmpresa"] == null ? 0 : (int)ViewData["idPlantaEmpresa"];
+    EmpresaIndustriaBE empresa = ViewData["empresa"] == null ? null : (EmpresaIndustriaBE)ViewData["empresa"];
+    int idEmpresaIndustria = empresa == null ? 0 : empresa.idEmpresaIndustria;
+    PlantaEmpresaBE planta = ViewData["planta"] == null ? null : (PlantaEmpresaBE)ViewData["planta"];
+    List<ParametroBE> listaGiro = ViewData["listaGiro"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaGiro"];
+    List<ParametroBE> listaCiuu = ViewData["listaCiuu"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaCiuu"];
+    List<DepartamentoBE> listaDepartamento = ViewData["listaDepartamento"] == null ? new List<DepartamentoBE>() : (List<DepartamentoBE>)ViewData["listaDepartamento"];
+    List<ProvinciaBE> listaProvincia = ViewData["listaProvincia"] == null ? new List<ProvinciaBE>() : (List<ProvinciaBE>)ViewData["listaProvincia"];
+    List<DistritoBE> listaDistrito = ViewData["listaDistrito"] == null ? new List<DistritoBE>() : (List<DistritoBE>)ViewData["listaDistrito"];
+    List<ParametroBE> listaZona = ViewData["listaZona"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaZona"];
+    List<ParametroBE> listaEmpresaGas = ViewData["listaEmpresaGas"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaEmpresaGas"];
+    List<ParametroBE> listaEmpresaLuz = ViewData["listaEmpresaLuz"] == null ? new List<ParametroBE>() : (List<ParametroBE>)ViewData["listaEmpresaLuz"];
+    if (planta != null) { planta.archivoContenido = new byte[100]; }
+}
+
+@section scripts_footer {
+    <script src="@Url.Content("~/Scripts/Sisceusi/planta_nueva_planta.js")"></script>
+}
+
+<div class="container-fluid map-root" id="historia"></div>
+<div class="container my-4" id="cuerpo">
+    <div class="row">
+        <div class="col-12">
+            <div class="container m-0 px-0 py-4">
+                <div class="row">
+                    <div class="col-md-12 col-lg-9 d-flex">
+                        <div class="bg-light py-4 pl-0 w-100">
+                            <div class="h3 text-cyan">Plantas de la Empresa -&nbsp;<b>NUEVA PLANTA</b></div>                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-azul w-100 mb-1" href="@Url.Action("Index", "PlantaEmpresa", new {id = idEmpresaIndustria })" data-toggle="tooltip" data-placement="top" title="Ir a la bandeja de plantas">Bandeja de plantas</a>
+                                <a class="btn btn-plomo w-100 mb-1" href="@Url.Action("Index", "PlantaEmpresa", new {id = idEmpresaIndustria })">Regresar</a>
+                                <button class="btn btn-warning w-100 mb-1 text-white" data-toggle="tooltip" data-placement="left" title="En este formulario, Usted puede registrar todas las plantas que forman parte de la empresa, no olvide registrar las coordenadas de la planta para ser fácilmente ubicado en un mapa georreferenciado en el que no se mostrará el detalle de la información, pero si se podrá ubicar la planta a fin de que únicamente las personas autorizadas puedan verificar los datos registrados."><i class="fas fa-question-circle pr-1"></i>Ayuda</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <form id="frm">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-codigo">DENOMINACIÓN</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control" type="text" id="txt-denominacion" maxlength="150" placeholder="Ingrese una denominación" aria-describedby="inputGroup7" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-codigo">DIRECCIÓN</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control" type="text" id="txt-direccion" maxlength="120" placeholder="Ingrese la dirección de la planta" aria-describedby="inputGroup7" required>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-ciuu">CIUU</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-ciuu" aria-describedby="inputGroup10" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-telefono">TELÉFONO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-positivo" type="text" id="txt-telefono" maxlength="20" placeholder="Ingrese un número de teléfono" aria-describedby="inputGroup6" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-latitud">UBICACIÓN - LATITUD</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-latitud-longitud" maxlength="20" type="text" id="txt-latitud" placeholder="Ingrese la latitud" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-longitud">UBICACIÓN - LONGITUD</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-latitud-longitud" maxlength="20" type="text" id="txt-longitud" placeholder="Ingrese la longitud" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-zona">ZONA</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-zona">
+                                    <option value="0">-Seleccione un zona-</option>
+                                    <option value="1">Zona 01</option>
+                                    <option value="2">Zona 02</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-departamento">DEPARTAMENTO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-departamento">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-provincia">PROVINCIA</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-provincia">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-distrito">DISTRITO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-distrito">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-empresa-gas">EMPRESA DE GAS</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-empresa-gas">
+                                    <option value="0">-Seleccione una empresa de gas-</option>
+                                    <option value="1">Empresa gas 01</option>
+                                    <option value="2">Empresa gas 02</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-suministro-gas">NRO SUMINISTRO GAS</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-positivo" maxlength="25" type="text" id="txt-suministro-gas" placeholder="Ingrese número suministro de gas" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-empresa-luz">EMPRESA DE LUZ</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-empresa-luz">
+                                    <option value="0">-Seleccione una empresa de luz-</option>
+                                    <option value="1">Empresa luz 01</option>
+                                    <option value="2">Empresa luz 02</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="txt-suministro-luz">NRO SUMINISTRO LUZ</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <input class="form-control integer-positivo" maxlength="25" type="text" id="txt-suministro-luz" placeholder="Ingrese número suministro de luz" aria-describedby="inputGroup3" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-firo">GIRO DEL NEGOCIO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-giro" aria-describedby="inputGroup10" required></select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="cbo-estado">ESTADO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <select class="form-control" id="cbo-estado" aria-describedby="inputGroup10" required>
+                                    <option value="-1">-Seleccione un estado-</option>
+                                    <option value="1">Habilitado</option>
+                                    <option value="0">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group text-left">
+                                <label class="font-weight-bold" for="fle-requisito-01">CARGAR SOLICITUD ESCANEADA DE GEN. USUARIO</label><span class="text-danger font-weight-bold">&nbsp;(*)&nbsp;</span>
+                                <div class="input-group">
+                                    <input class="form-control cursor-pointer txt-file-control" type="text" id="txt-requisito-01" placeholder="Subir documentos" required>
+                                    <input class="d-none fil-file-control" type="file" id="fle-requisito-01" accept="application/msword, application/pdf">
+                                    <div class="input-group-append">
+                                        <label class="input-group-text cursor-pointer badge-info" for="fle-requisito-01">Seleccionar</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6"></div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-mensaje">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("Index", "PlantaEmpresa", new {id = idEmpresaIndustria })">Regresar</a></div>
+                        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
+                            <button id="btn-grabar" class="btn btn-info w-100 mb-3" type="button" href="javascript:void(0)">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="identificador" value="@id" />
+<input type="hidden" id="identificador-parent" value="@idEmpresaIndustria" />
+<script type="text/javascript">
+    var planta = @Html.Raw(Json.Encode(planta));
+    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
+    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
+    var listaDepartamento = @Html.Raw(Json.Encode(listaDepartamento));
+    var listaProvincia = @Html.Raw(Json.Encode(listaProvincia));
+    var listaDistrito = @Html.Raw(Json.Encode(listaDistrito));
+    var listaZona = @Html.Raw(Json.Encode(listaZona));
+    var listaEmpresaGas = @Html.Raw(Json.Encode(listaEmpresaGas));
+    var listaEmpresaLuz = @Html.Raw(Json.Encode(listaEmpresaLuz));
+    var empresa = @Html.Raw(Json.Encode(empresa));
+</script>
+
