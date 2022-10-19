@@ -60,9 +60,9 @@ var grabar = () => {
     if (validarEspaciosBlanco(correoElectronico)) arr.push("Debe ingresar un correo electrónico");
     else if (validarCorreoElectronico(correoElectronico)) arr.push("Debe ingresar un correo electrónico válido");
     if (validarEspaciosBlanco(representanteLegal)) arr.push("Debe ingresar los nombres del representante legal");
-    if (validarEspaciosBlanco(dni)) arr.push("Debe ingresar el Dni");
-    else if (validarNumerico(dni)) arr.push("El Dni debe tener caracteres numéricos");
-    else if (validarTamanioDni(dni)) arr.push("El Dni debe tener 8 caracteres");
+    if (validarEspaciosBlanco(dni)) arr.push("Debe ingresar el número del documento del representante legal");
+    else if (validarNumerico(dni)) arr.push("El número del documento debe tener solo dígitos numéricos");
+    else if (dni.length < 8) arr.push("El número del documento del representante legal debe tener al menos 8 caracteres");
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {

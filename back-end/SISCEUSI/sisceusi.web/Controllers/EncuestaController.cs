@@ -21,8 +21,16 @@ namespace sisceusi.web.Controllers
         {
             ControlEncuestaLN logica = new ControlEncuestaLN();
             ControlEncuestaBE controlEncuesta = logica.obtenerControlEncuesta( new ControlEncuestaBE { idControlEncuesta = id });
+
+            ParametroLN logicaParametro = new ParametroLN();
+            //Lista Parametro - Empresa Gas
+            List<ParametroBE> listaEmpresaGas = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 18 }); //id Parametro = Empresa Gas
+            //Lista Parametro - Empresa Luz
+            List<ParametroBE> listaEmpresaLuz = logicaParametro.obtenerListaParametroHijo(new ParametroBE { idParametro = 21 }); //id Parametro = Empresa Luz
             Session["controlEncuesta"] = controlEncuesta;
             ViewData["controlEncuesta"] = controlEncuesta;
+            ViewData["listaEmpresaGas"] = listaEmpresaGas;
+            ViewData["listaEmpresaLuz"] = listaEmpresaLuz;
             ViewData["usuario"] = ObtenerUsuarioLogin();
             return View();
         }

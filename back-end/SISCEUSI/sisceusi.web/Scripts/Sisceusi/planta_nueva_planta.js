@@ -131,8 +131,8 @@ var grabar = () => {
     if (validarCombo(idProvincia)) arr.push("Debe seleccionar una provincia");
     if (validarCombo(idDistrito)) arr.push("Debe seleccionar un distrito");
     if (validarCombo(idZona)) arr.push("Debe seleccionar una zona");
-    if (validarCombo(idEmpresaGas)) arr.push("Debe seleccionar una empresa de gas");
-    if (validarEspaciosBlanco(numeroSuministroGas)) arr.push("Debe ingresar el número de suministro de gas");
+    //if (validarCombo(idEmpresaGas)) arr.push("Debe seleccionar una empresa de gas");
+    //if (validarEspaciosBlanco(numeroSuministroGas)) arr.push("Debe ingresar el número de suministro de gas");
     if (validarCombo(idEmpresaLuz)) arr.push("Debe seleccionar una empresa de luz");
     if (validarEspaciosBlanco(numeroSuministroAlumbrado)) arr.push("Debe ingresar el número de suministro de luz");
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");

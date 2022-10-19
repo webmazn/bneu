@@ -81,6 +81,11 @@ namespace sisceusi.datos
                 p.Add("piIdCampana", controlEncuesta.campanaEmpresa.idCampana);
                 p.Add("piAceptaLLenarEncuesta", controlEncuesta.aceptaLLenarEncuesta);
                 p.Add("piAceptaTratamientoDatos", controlEncuesta.aceptaTratamientoDatos);
+                p.Add("piIdPlantaEmpresa", controlEncuesta.plantaEmpresa.idPlantaEmpresa);
+                p.Add("piIdEmpresaGas", controlEncuesta.plantaEmpresa.idEmpresaGas);
+                p.Add("piNumeroSuministroGas", controlEncuesta.plantaEmpresa.numeroSuministroGas);
+                p.Add("piIdEmpresaLuz", controlEncuesta.plantaEmpresa.idEmpresaLuz);
+                p.Add("piNumeroSuministroAlumbrado", controlEncuesta.plantaEmpresa.numeroSuministroAlumbrado);
                 p.Add("piIdUsuarioResponde", controlEncuesta.idUsuarioResponde);
                 p.Add("piIdUsuarioCreacion", controlEncuesta.idUsuarioCreacion);
                 p.Add("piIpCreacion", controlEncuesta.ipCreacion);

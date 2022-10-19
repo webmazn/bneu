@@ -47,6 +47,11 @@
     piIdCampana NUMBER,
     piAceptaLLenarEncuesta VARCHAR2,
     piAceptaTratamientoDatos VARCHAR2,
+    piIdPlantaEmpresa NUMBER,
+    piIdEmpresaGas NUMBER,
+    piNumeroSuministroGas VARCHAR2,
+    piIdEmpresaLuz NUMBER,
+    piNumeroSuministroAlumbrado VARCHAR2,
     piIdUsuarioResponde NUMBER,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
@@ -65,6 +70,16 @@
         INNER JOIN T_GENM_CAMPANA cam ON cem.idCampana = cam.idCampana
         WHERE cen.idTipoEncuesta = (SELECT idTipoEncuesta FROM T_GEND_CONTROL_ENCUESTA WHERE idControlEncuesta = piIdControlEncuesta) AND cam.idCampana = piIdCampana;
     END IF;    
+    
+    UPDATE T_GENM_PLANTA_EMPRESA pe SET
+      pe.idEmpresaGas = piIdEmpresaGas,
+      pe.numeroSuministroGas = piNumeroSuministroGas,
+      pe.idEmpresaLuz = piIdEmpresaLuz,
+      pe.numeroSuministroAlumbrado = piNumeroSuministroAlumbrado,
+      pe.idUsuarioModificacion = piIdUsuarioCreacion,
+      pe.fechaModificacion = SYSDATE,
+      pe.ipModificacion = piIpCreacion
+      WHERE pe.IdPlantaEmpresa = piIdPlantaEmpresa;
   
     UPDATE T_GEND_CONTROL_ENCUESTA SET
     aceptallenarencuesta = piAceptaLLenarEncuesta,

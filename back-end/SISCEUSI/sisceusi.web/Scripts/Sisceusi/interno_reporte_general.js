@@ -221,8 +221,8 @@ var armarBody = (data) => {
         let colZona = `<td class="text-center" data-encabezado="Zona" scope="row">${x.zona}</td>`;
         let colDireccion = `<td class="text-center" data-encabezado="Dirección" scope="row">${x.direccion}</td>`;
         let colTelefonoPlanta = `<td class="text-center" data-encabezado="Teléfono Planta" scope="row">${x.telefonoPlanta}</td>`;
-        let colEmpresaGas = `<td class="text-center" data-encabezado="Empresa Gas" scope="row">${x.empresaGas}</td>`;
-        let colNumeroSuministroGas = `<td class="text-center" data-encabezado="Número Suministro Gas" scope="row">${x.numeroSuministroGas}</td>`;
+        let colEmpresaGas = `<td class="text-center" data-encabezado="Empresa Gas" scope="row">${x.empresaGas ? x.empresaGas : ''}</td>`;
+        let colNumeroSuministroGas = `<td class="text-center" data-encabezado="Número Suministro Gas" scope="row">${x.numeroSuministroGas ? x.numeroSuministroGas : ''}</td>`;
         let colEmpresaLuz = `<td class="text-center" data-encabezado="Empresa Luz" scope="row">${x.empresaLuz}</td>`;
         let colNumeroSuministroAlumbrado = `<td class="text-center" data-encabezado="Número Suministro Alumbrado" scope="row">${x.numeroSuministroAlumbrado}</td>`;
         let colEncuestado = `<td class="text-center" data-encabezado="Encuestado" scope="row">${x.encuestado}</td>`;
