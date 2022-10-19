@@ -1,12 +1,15 @@
-﻿using sisceusi.entidad;
+﻿using Ionic.Zip;
+using sisceusi.entidad;
 using sisceusi.logica;
 using sisceusi.util;
 using sisceusi.web.Filter;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -398,6 +401,30 @@ namespace sisceusi.web.Controllers
                     }
                 }
             });
+        }
+
+        [HttpGet]
+        public ActionResult downloadFile(string file)
+        {
+            using (ZipFile zip = new ZipFile())
+            {
+                string ruta = "Log";
+                string nombre = String.Concat("Sistema", file, ".log");
+                string pathDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ruta);
+                string pathFile = Path.Combine(pathDirectory, nombre);
+                if (System.IO.File.Exists(pathFile))
+                {
+                    var arregloBytes = System.IO.File.ReadAllBytes(pathFile);
+                    zip.AddEntry(nombre, arregloBytes);
+                }
+                var miGuid = Guid.NewGuid();
+                var nombreArchivoZip = "file_" + miGuid + ".zip";
+                using (MemoryStream output = new MemoryStream())
+                {
+                    zip.Save(output);
+                    return File(output.ToArray(), MediaTypeNames.Application.Octet, nombreArchivoZip);
+                }
+            }
         }
 
     }

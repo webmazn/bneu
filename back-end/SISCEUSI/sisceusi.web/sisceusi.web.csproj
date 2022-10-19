@@ -47,6 +47,9 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DotNetZip">
+      <HintPath>..\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="EPPlus">
       <HintPath>..\..\..\..\..\..\GIT NEW\back-end\Web Dinamico 2\MRVMinem\bin\EPPlus.dll</HintPath>
     </Reference>
