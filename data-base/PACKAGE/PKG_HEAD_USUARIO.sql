@@ -47,7 +47,7 @@
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
-    piEditarPassword BOOLEAN,
+    piEditarPassword VARCHAR2,
     poRowAffected OUT NUMBER
   );
   

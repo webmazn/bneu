@@ -106,7 +106,7 @@ namespace sisceusi.datos
                 p.Add("piIdEstado", usuario.idEstado);
                 p.Add("piIdUsuarioCreacion", usuario.idUsuarioCreacion);
                 p.Add("piIpCreacion", usuario.ipCreacion);
-                p.Add("piEditarPassword", usuario.editarPassword);
+                p.Add("piEditarPassword", usuario.editarPassword ? "1" : "0");
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);
                 db.Execute(sp, p, commandType: CommandType.StoredProcedure);
                 int filasAfectadas = (int)p.Get<dynamic>("poRowAffected").Value;

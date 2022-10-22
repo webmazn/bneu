@@ -13,7 +13,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/07/2022 11:12:05</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
-      <publishTime>09/04/2021 08:17:53</publishTime>
+      <publishTime>04/09/2021 08:17:53</publishTime>
     </File>
     <File Include="bin/DotNetZip.dll">
       <publishTime>06/16/2021 20:53:26</publishTime>
@@ -70,19 +70,19 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/07/2022 11:11:10</publishTime>
     </File>
     <File Include="bin/sisceusi.datos.dll">
-      <publishTime>10/18/2022 22:08:28</publishTime>
+      <publishTime>10/21/2022 21:42:58</publishTime>
     </File>
     <File Include="bin/sisceusi.entidad.dll">
       <publishTime>10/17/2022 16:23:22</publishTime>
     </File>
     <File Include="bin/sisceusi.logica.dll">
-      <publishTime>10/18/2022 22:08:29</publishTime>
+      <publishTime>10/21/2022 21:42:58</publishTime>
     </File>
     <File Include="bin/sisceusi.util.dll">
       <publishTime>10/17/2022 16:23:22</publishTime>
     </File>
     <File Include="bin/sisceusi.web.dll">
-      <publishTime>10/19/2022 09:10:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/07/2022 11:11:58</publishTime>
@@ -109,7 +109,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/07/2022 11:12:07</publishTime>
     </File>
     <File Include="Content/print.css">
-      <publishTime>10/06/2022 00:12:21</publishTime>
+      <publishTime>06/10/2022 00:12:21</publishTime>
     </File>
     <File Include="Content/style.css">
       <publishTime>10/19/2022 08:12:47</publishTime>
@@ -367,7 +367,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/11/2022 23:48:28</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/empresa_index.js">
-      <publishTime>10/08/2022 11:31:29</publishTime>
+      <publishTime>08/10/2022 11:31:29</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/empresa_nueva_empresa.js">
       <publishTime>10/18/2022 20:12:41</publishTime>
@@ -409,7 +409,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/13/2022 06:32:34</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/inicio_index.js">
-      <publishTime>10/02/2022 00:17:21</publishTime>
+      <publishTime>02/10/2022 00:17:21</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/inicio_recuperar_clave.js">
       <publishTime>09/21/2022 00:30:29</publishTime>
@@ -439,7 +439,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/10/2022 15:15:06</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/parametro_nuevo_parametro.js">
-      <publishTime>09/01/2022 21:25:53</publishTime>
+      <publishTime>01/09/2022 21:25:53</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/planta_index.js">
       <publishTime>10/10/2022 23:57:36</publishTime>
@@ -448,7 +448,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/18/2022 20:20:01</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/script_util.js">
-      <publishTime>09/06/2022 22:37:16</publishTime>
+      <publishTime>06/09/2022 22:37:16</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/script_validaciones.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -463,13 +463,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/11/2022 09:55:17</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/usuario_nuevo_usuario.js">
-      <publishTime>10/10/2022 11:18:20</publishTime>
+      <publishTime>10/21/2022 19:43:36</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/usuario_planta_index.js">
-      <publishTime>10/09/2022 22:44:24</publishTime>
+      <publishTime>09/10/2022 22:44:24</publishTime>
     </File>
     <File Include="Scripts/Sisceusi/usuario_planta_nuevo_usuario.js">
-      <publishTime>10/09/2022 07:08:48</publishTime>
+      <publishTime>10/21/2022 19:40:40</publishTime>
     </File>
     <File Include="Views/Campana/Index.cshtml">
       <publishTime>10/15/2022 18:15:35</publishTime>
@@ -493,7 +493,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/18/2022 21:45:55</publishTime>
     </File>
     <File Include="Views/Encuesta/PreguntaEncuesta.cshtml">
-      <publishTime>10/02/2022 11:59:01</publishTime>
+      <publishTime>02/10/2022 11:59:01</publishTime>
     </File>
     <File Include="Views/Encuesta/RevisarEncuesta.cshtml">
       <publishTime>10/11/2022 15:26:34</publishTime>
@@ -532,7 +532,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/18/2022 23:37:17</publishTime>
     </File>
     <File Include="Views/Interno/EncuestaFicha.cshtml">
-      <publishTime>10/05/2022 23:52:31</publishTime>
+      <publishTime>05/10/2022 23:52:31</publishTime>
     </File>
     <File Include="Views/Interno/Index.cshtml">
       <publishTime>10/15/2022 18:17:01</publishTime>
@@ -574,7 +574,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/15/2022 11:58:33</publishTime>
     </File>
     <File Include="Views/Shared/_Scripts.cshtml">
-      <publishTime>10/01/2022 19:42:10</publishTime>
+      <publishTime>01/10/2022 19:42:10</publishTime>
     </File>
     <File Include="Views/TablaMaestra/Index.cshtml">
       <publishTime>10/15/2022 18:16:03</publishTime>
@@ -601,7 +601,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/07/2022 11:11:47</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/17/2022 16:23:51</publishTime>
+      <publishTime>10/21/2022 21:43:01</publishTime>
     </File>
   </ItemGroup>
 </Project>

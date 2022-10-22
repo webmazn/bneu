@@ -100,4 +100,3 @@ C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\obj\Debug\sisceusi.web.csprojResolveAssemblyReference.cache
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\obj\Debug\sisceusi.web.dll
 C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\obj\Debug\sisceusi.web.pdb
-C:\Users\juanc\Desktop\Minem\GIT_SISCEUSI\Front\bneu\back-end\SISCEUSI\sisceusi.web\bin\DotNetZip.dll

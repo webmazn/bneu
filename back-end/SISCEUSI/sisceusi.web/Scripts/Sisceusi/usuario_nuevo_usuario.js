@@ -107,7 +107,7 @@ var validarDatosRegistro = (id, correo, dni) => {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('El correo electrónico y el dni ya están siendo usados'), 'registro'))
         } else if (jCorreo.success) {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('El correo electrónico ya está en uso'), 'registro'))
-        } else if (jCorreo.success) {
+        } else if (jDni.success) {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('El dni ya está en uso'), 'registro'))
         } else {
             grabarDatos()

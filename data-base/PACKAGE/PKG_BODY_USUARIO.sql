@@ -263,7 +263,7 @@
     piIdEstado VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
-    piEditarPassword BOOLEAN,
+    piEditarPassword VARCHAR2,
     poRowAffected OUT NUMBER
   )AS
     vId NUMBER;
@@ -276,7 +276,7 @@
       VALUES 
       (vId, piIdEmpresaIndustria, piIdPlantaEmpresa, piIdRol, piNombres, piDni, piTelefono, piCorreo, piPassword, piVisualizar, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
-     IF piEditarPassword = false THEN
+     IF piEditarPassword = '0' THEN
         SELECT password INTO vPassword FROM T_GENM_USUARIO WHERE idUsuario = piIdUsuario;
      ELSE
         vPassword := piPassword;

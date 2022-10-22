@@ -15,9 +15,9 @@ using System.Web.Mvc;
 
 namespace sisceusi.web.Controllers
 {
+    [LoginRequiredAttribute]
     public class UsuarioController : BaseController
-    {
-        [LoginRequiredAttribute]
+    {        
         // GET: Usuario
         public ActionResult Index()
         {

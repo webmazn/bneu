@@ -748,7 +748,7 @@ INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEst
 INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (4, 'Mínimo', '1');
 INSERT INTO SISCEUSI.T_MAE_METODO_CALCULO (idMetodoCalculo, metodoCalculo, idEstado) VALUES (5, 'Promedio', '1');
 
-INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, nombreComercial,, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
+INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, nombreComercial, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
 VALUES (1, 7, 11, 15, '20999999999', 'Ministerio de Energías y Minas', 'Ministerio de Energías y Minas', 'minem@gmail.com', 'Av Javier Prado 2563', 'Jhon Matos Guerra', '78958749', '959365203', '1');
 /*INSERT INTO SISCEUSI.T_GENM_EMPRESA_INDUSTRIA (idEmpresaIndustria, idGiro, idGrupoEmpresa, idCiuu, ruc, nombreEmpresa, correoElectronico, direccionFiscal, representanteLegal, dni, telefono, idEstado)
 VALUES (2, 2, 2, 2, '20888888888', 'Repsol S.A.', 'repsol@gmail.com', 'Av Argentina 2563', 'Mario Gonzales Paredes', '42567415', '987512369', '1');
