@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevoIndicador";
     int idCampana = ViewData["idCampana"] == null ? 0 : (int)ViewData["idCampana"];
@@ -237,8 +238,8 @@
 </div>
 <script type="text/javascript">
     var idCampana = @idCampana;
-    var listaCampanaEncuesta = @Html.Raw(Json.Encode(listaCampanaEncuesta));
-    var listaIndicador = @Html.Raw(Json.Encode(listaIndicador));
+    var listaCampanaEncuesta = @Html.Raw(JsonConvert.SerializeObject(listaCampanaEncuesta));
+    var listaIndicador = @Html.Raw(JsonConvert.SerializeObject(listaIndicador));
 </script>
 
 <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">

@@ -1,4 +1,4 @@
-﻿
+﻿@using Newtonsoft.Json;
 @{
     ViewBag.Title = "Reporte";
     Dictionary<string, object> lista = ViewData["listaCampana"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaCampana"];
@@ -197,7 +197,7 @@
 @Html.Hidden("order", "ASC")
 
 <script type="text/javascript">
-    var listaCampana = @Html.Raw(Json.Encode(lista));
+    var listaCampana = @Html.Raw(JsonConvert.SerializeObject(lista));
     var idSubSector = @idSubSector;
 </script>
 

@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevoParametro";
     int id = ViewData["idParametro"] == null ? 0 : (int)ViewData["idParametro"];
@@ -99,7 +100,7 @@
 <input type="hidden" id="identificador" value="@id" />
 
 <script type="text/javascript">
-    var parametro = @Html.Raw(Json.Encode(parametro));
-    var listaParametro = @Html.Raw(Json.Encode(listaParametro));
+    var parametro = @Html.Raw(JsonConvert.SerializeObject(parametro));
+    var listaParametro = @Html.Raw(JsonConvert.SerializeObject(listaParametro));
 </script>
 

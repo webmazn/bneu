@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaCampana";
     int id = ViewData["idCampana"] == null ? 0 : (int)ViewData["idCampana"];
@@ -355,9 +356,9 @@
         <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6 seccion-mensaje">
         </div>
     </div>
-    <div class="row">
+    <div id="seccion-botones" class="row">
         <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6"><small class="text-danger d-block"><strong>(*)&nbsp; Campos obligatorios</strong></small></div>
-        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="javascript:history.back()">Regresar</a></div>
+        <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right"><a class="btn btn-plomo w-100 mb-3" href="@Url.Action("Index", "Campana")">Regresar</a></div>
         <div class="col-xm-12 col-sm-12 col-md-3 col-lg-3 text-right">
             <button id="btn-grabar" class="btn btn-info w-100 mb-3" type="button" href="@Url.Action("Index", "Campana")">Guardar</button>
         </div>
@@ -365,13 +366,13 @@
 </div>
 <input type="hidden" id="identificador" value="@id" />
 <script type="text/javascript">
-    var campana = @Html.Raw(Json.Encode(campana));
-    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
-    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
-    var listaEmpresa = @Html.Raw(Json.Encode(listaEmpresa));
-    var listaRevisor = @Html.Raw(Json.Encode(listaRevisor));
-    var listaSubSector = @Html.Raw(Json.Encode(listaSubSector));
-    var listaTablaMaestra = @Html.Raw(Json.Encode(listaTablaMaestra));
+    var campana = @Html.Raw(JsonConvert.SerializeObject(campana));
+    var listaGiro = @Html.Raw(JsonConvert.SerializeObject(listaGiro));
+    var listaCiuu = @Html.Raw(JsonConvert.SerializeObject(listaCiuu));
+    var listaEmpresa = @Html.Raw(JsonConvert.SerializeObject(listaEmpresa));
+    var listaRevisor = @Html.Raw(JsonConvert.SerializeObject(listaRevisor));
+    var listaSubSector = @Html.Raw(JsonConvert.SerializeObject(listaSubSector));
+    var listaTablaMaestra = @Html.Raw(JsonConvert.SerializeObject(listaTablaMaestra));
 </script>
 
 

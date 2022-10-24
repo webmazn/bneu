@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaEmpresaIndustria";
     int id = ViewData["idEmpresaIndustria"] == null ? 0 : (int)ViewData["idEmpresaIndustria"];
@@ -134,9 +135,9 @@
 </div>
 <input type="hidden" id="identificador" value="@id" />
 <script type="text/javascript">
-    var empresa = @Html.Raw(Json.Encode(empresa));
-    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
-    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
-    var listaGrupo = @Html.Raw(Json.Encode(listaGrupo));
+    var empresa = @Html.Raw(JsonConvert.SerializeObject(empresa));
+    var listaGiro = @Html.Raw(JsonConvert.SerializeObject(listaGiro));
+    var listaCiuu = @Html.Raw(JsonConvert.SerializeObject(listaCiuu));
+    var listaGrupo = @Html.Raw(JsonConvert.SerializeObject(listaGrupo));
 </script>
 

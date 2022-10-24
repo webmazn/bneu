@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "NuevaPlanta";
     int id = ViewData["idPlantaEmpresa"] == null ? 0 : (int)ViewData["idPlantaEmpresa"];
@@ -209,15 +210,15 @@
 <input type="hidden" id="identificador" value="@id" />
 <input type="hidden" id="identificador-parent" value="@idEmpresaIndustria" />
 <script type="text/javascript">
-    var planta = @Html.Raw(Json.Encode(planta));
-    var listaGiro = @Html.Raw(Json.Encode(listaGiro));
-    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
-    var listaDepartamento = @Html.Raw(Json.Encode(listaDepartamento));
-    var listaProvincia = @Html.Raw(Json.Encode(listaProvincia));
-    var listaDistrito = @Html.Raw(Json.Encode(listaDistrito));
-    var listaZona = @Html.Raw(Json.Encode(listaZona));
-    var listaEmpresaGas = @Html.Raw(Json.Encode(listaEmpresaGas));
-    var listaEmpresaLuz = @Html.Raw(Json.Encode(listaEmpresaLuz));
-    var empresa = @Html.Raw(Json.Encode(empresa));
+    var planta = @Html.Raw(JsonConvert.SerializeObject(planta));
+    var listaGiro = @Html.Raw(JsonConvert.SerializeObject(listaGiro));
+    var listaCiuu = @Html.Raw(JsonConvert.SerializeObject(listaCiuu));
+    var listaDepartamento = @Html.Raw(JsonConvert.SerializeObject(listaDepartamento));
+    var listaProvincia = @Html.Raw(JsonConvert.SerializeObject(listaProvincia));
+    var listaDistrito = @Html.Raw(JsonConvert.SerializeObject(listaDistrito));
+    var listaZona = @Html.Raw(JsonConvert.SerializeObject(listaZona));
+    var listaEmpresaGas = @Html.Raw(JsonConvert.SerializeObject(listaEmpresaGas));
+    var listaEmpresaLuz = @Html.Raw(JsonConvert.SerializeObject(listaEmpresaLuz));
+    var empresa = @Html.Raw(JsonConvert.SerializeObject(empresa));
 </script>
 

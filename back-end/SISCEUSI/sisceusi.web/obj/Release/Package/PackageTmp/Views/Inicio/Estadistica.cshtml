@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "Estadistica";
     List<ControlEncuestaBE> listaControlEncuesta = ViewData["listaControlEncuesta"] == null ? new List<ControlEncuestaBE>() : (List<ControlEncuestaBE>)ViewData["listaControlEncuesta"];
@@ -285,8 +286,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    var listaControlEncuesta = @Html.Raw(Json.Encode(listaControlEncuesta));
-    var listaIndicador = @Html.Raw(Json.Encode(listaIndicador));
+    var listaControlEncuesta = @Html.Raw(JsonConvert.SerializeObject(listaControlEncuesta));
+    var listaIndicador = @Html.Raw(JsonConvert.SerializeObject(listaIndicador));
     var idPlanta = @idPlanta;
 </script>
 

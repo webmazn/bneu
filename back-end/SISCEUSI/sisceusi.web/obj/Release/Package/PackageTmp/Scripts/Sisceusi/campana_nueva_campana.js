@@ -676,9 +676,11 @@ var grabar = () => {
     let data = { idCampana, denominacion, fechaInicioPiloto, fechaFinPiloto, fechaInicioEncuesta, fechaFinEncuesta, observaciones, idGiroOficial, idCiuuOficial, idGiroPiloto, idCiuuPiloto, idEtapaPiloto, idEtapaOficial, idSubSector, idEstado, listaCampanaEmpresa: arrCampanaEmpresa, listaPregunta: arrPregunta, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
+    $('#seccion-botones').addClass('d-none')
     fetch(url, init)
     .then(r => r.json())
     .then(j => {
+        $('#seccion-botones').removeClass('d-none')
         if (j.success) {
             $('#btn-grabar').hide()
             $('.seccion-mensaje').html(messageSuccess(messageStringGeneric('Los datos ingresados fueron guardados exitosamente, verifique su bandeja para comprobarlo. Utilice el buscador para encontrar su nuevo registro.')))
@@ -690,6 +692,7 @@ var grabar = () => {
         }        
     })
     .catch(error => {
+        $('#seccion-botones').removeClass('d-none')
         console.log('Error:' + error.message);
     })
 }

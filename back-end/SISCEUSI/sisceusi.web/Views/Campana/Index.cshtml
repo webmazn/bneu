@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
     Dictionary<string, object> lista = ViewData["listaCampana"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaCampana"];
@@ -207,7 +208,7 @@
 @Html.Hidden("order", "ASC")
 
 <script type="text/javascript">
-    var listaCampana = @Html.Raw(Json.Encode(lista));
+    var listaCampana = @Html.Raw(JsonConvert.SerializeObject(lista));
 </script>
 <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
     PlantaEmpresaBE planta = ViewData["planta"] == null ? null : (PlantaEmpresaBE)ViewData["planta"];
@@ -234,6 +235,6 @@
 @Html.Hidden("order", "ASC")
 
 <script type="text/javascript">
-    var listaUsuarioPlanta = @Html.Raw(Json.Encode(listaUsuarioPlanta));
+    var listaUsuarioPlanta = @Html.Raw(JsonConvert.SerializeObject(listaUsuarioPlanta));
 </script>
 

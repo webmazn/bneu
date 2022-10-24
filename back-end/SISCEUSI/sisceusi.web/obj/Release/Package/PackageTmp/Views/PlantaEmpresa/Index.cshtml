@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
     Dictionary<string, object> lista = ViewData["listaPlanta"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaPlanta"];
@@ -241,10 +242,10 @@
 @Html.Hidden("order", "ASC")
 
 <script type="text/javascript">
-    var listaPlanta = @Html.Raw(Json.Encode(lista));
-    var listaCiuu = @Html.Raw(Json.Encode(listaCiuu));
-    var listaDepartamento = @Html.Raw(Json.Encode(listaDepartamento));
-    var listaProvincia = @Html.Raw(Json.Encode(listaProvincia));
-    var listaDistrito = @Html.Raw(Json.Encode(listaDistrito));
+    var listaPlanta = @Html.Raw(JsonConvert.SerializeObject(lista));
+    var listaCiuu = @Html.Raw(JsonConvert.SerializeObject(listaCiuu));
+    var listaDepartamento = @Html.Raw(JsonConvert.SerializeObject(listaDepartamento));
+    var listaProvincia = @Html.Raw(JsonConvert.SerializeObject(listaProvincia));
+    var listaDistrito = @Html.Raw(JsonConvert.SerializeObject(listaDistrito));
 </script>
 

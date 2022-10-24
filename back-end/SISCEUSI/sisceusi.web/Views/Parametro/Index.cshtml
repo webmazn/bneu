@@ -1,4 +1,5 @@
-﻿@using sisceusi.entidad
+﻿@using Newtonsoft.Json;
+@using sisceusi.entidad
 @{
     ViewBag.Title = "Index";
     Dictionary<string, object> listaParametro = ViewData["listaParametro"] == null ? new Dictionary<string, object>() : (Dictionary<string, object>)ViewData["listaParametro"];
@@ -242,6 +243,6 @@
 @Html.Hidden("order", "ASC")
 
 <script type="text/javascript">
-    var listaParametro = @Html.Raw(Json.Encode(listaParametro));
+    var listaParametro = @Html.Raw(JsonConvert.SerializeObject(listaParametro));
 </script>
 
