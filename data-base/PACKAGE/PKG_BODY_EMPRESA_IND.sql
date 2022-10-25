@@ -153,7 +153,7 @@
     
     vPaginaInicial := vPaginaActual - 1;
     IF piColumna = 'giro' THEN
-      vColumna := 'g.giro';
+      vColumna := 'p.parametro';
     ELSE
       vColumna := 'ei.' || piColumna;
     END IF;
@@ -230,7 +230,7 @@
     vColumna VARCHAR2(50);
   BEGIN
     IF piColumna = 'giro' THEN
-      vColumna := 'g.giro';
+      vColumna := 'p.parametro';
     ELSE
       vColumna := 'ei.' || piColumna;
     END IF;
@@ -274,7 +274,7 @@
     vColumna VARCHAR2(50);
   BEGIN
     IF piColumna = 'giro' THEN
-      vColumna := 'g.giro';
+      vColumna := 'p.parametro';
     ELSE
       vColumna := 'ei.' || piColumna;
     END IF;

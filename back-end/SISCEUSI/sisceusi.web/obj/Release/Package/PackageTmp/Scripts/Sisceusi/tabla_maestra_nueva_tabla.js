@@ -203,7 +203,7 @@ var grabarEncabezadoSecundario = () => {
     if (validarCombo(idOrientacion)) arr.push("Debe seleccionar una orientación");
     //if (validarEspaciosBlanco(descripcionIconoAyuda)) arr.push("Debe ingresar la escripción del icono de ayuda");
     if (validarCombo(idTipoControl)) arr.push("Debe seleccionar un tipo de control de respuesta");
-    if (idTipoControl == '1') if (idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato");
+    if (idTipoControl == '1' && idParametro == '0' && idTipoDato == '0') arr.push("Debe seleccionar un tipo de dato")        
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
@@ -721,11 +721,15 @@ var deshabilitarRegistroSecundario = () => {
  */
 var cancelarPrincipal = () => {
     limpiarEncabezadoPrincipal()
+    idEncabezadoPrincipal = -1
+    $('#btn-agregar-principal').html('Agregar')
     $('#btn-cancelar-principal').parent().addClass('d-none')
 }
 
 var cancelarSecundario = () => {
     limpiarEncabezadoSecundario()
+    idEncabezadoSecundario = -1
+    $('#btn-agregar-secundario').html('Agregar')
     $('#btn-cancelar-secundario').parent().addClass('d-none')
 }
 /* ================================================

@@ -1034,11 +1034,11 @@ var armarPreguntas = (x) => {
                                 `<label class="font-weight-bold d-flex justify-content-between align-items-center">` +
                                     `<div class="d-flex justify-content-between align-items-center">` +
                                         `<i class="fas fa-trash mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="right" title="" data-original-title="Eliminar" onclick="eliminarPregunta(this)"></i>` +
-                                        `<span class="tituloPregunta" data-tipo="sep">———————— (SEPARADOR PREGUNTA) ————————</span>` +
+                                        `<span class="tituloPregunta" data-tipo="sep">———————— (SEPARADOR DE SECCIÓN) ————————</span>` +
                                     `</div>` +
                                     `<i class="fas fa-sort mr-2 ayuda-tooltip cursor-pointer" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mover"></i>` +
                                 `</label>` +
-                                `<div class="input-group-text border-0 bg-warning font-weight-bold w-100">SEPARADOR DE PREGUNTAS - BOTÓN CONTINUAR (ÚLTIMO SEPARADOR FINALIZA) </div>` +
+                                `<div class="input-group-text border-0 bg-warning font-weight-bold w-100">SEPARADOR DE SECCIONES (ÚLTIMO SEPARADOR FINALIZA TODO EL CUESTIONARIO) </div>` +
                             `</div>` +
                         `</div>`
         $("#contenedorEncuesta").append(separador)

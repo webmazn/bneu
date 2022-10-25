@@ -324,7 +324,7 @@ var armarPieEncuesta = () => {
                 `<div class="container">` +
                   `<div class="row">` +
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3">` +
-                      `<button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="corrupti minima eum iusto!"><i class="fas fa-question-circle pr-1"></i>Ayuda</button>` +
+                      `<button class="btn btn-warning w-100 mb-3 text-white" data-toggle="tooltip" data-placement="top" title="Para iniciar lea detenidamente las secciones de información, y seleccione la opción que considere conveniente, luego haga click en continuar para comenzar el llenado de las respuestas, de ser el caso."><i class="fas fa-question-circle pr-1"></i>Ayuda</button>` +
                     `</div>` +
                     
                     `<div class="col-xm-12 col-sm-12 col-md-3 col-lg-3"><a class="btn btn-plomo w-100 mb-3" href="${baseUrl}Interno/Index">Salir</a></div>` +
