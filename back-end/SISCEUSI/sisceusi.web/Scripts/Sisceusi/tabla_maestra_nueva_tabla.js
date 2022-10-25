@@ -73,7 +73,7 @@ var grabarTablaMaestra = () => {
     //if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
     if (validarCombo(idEstiloTabla)) arr.push("Debe seleccionar el estilo de tabla");
     if (validarEspaciosBlanco(cantidadFilas)) arr.push("Debe ingresar la cantidad de filas");
-    if (cantidadFilas < 0 || cantidadFilas > 100) arr.push("La cantidad de filas debe ser mayor a 0 y menor a 100");
+    if (cantidadFilas <= 0 || cantidadFilas > 500) arr.push("La cantidad de filas debe ser mayor a 0 y menor o igual a 500");
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
