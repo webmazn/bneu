@@ -569,10 +569,10 @@ namespace sisceusi.web.Controllers
                 m.Style.Font.Bold = true;
                 m.Style.WrapText = true;
                 //Border
-                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Top.Style = ExcelBorderStyle.None;
+                m.Style.Border.Right.Style = ExcelBorderStyle.None;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.None;
+                m.Style.Border.Left.Style = ExcelBorderStyle.None;
                 //Alineacion
                 m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
@@ -586,10 +586,10 @@ namespace sisceusi.web.Controllers
                 m.Style.Font.Bold = true;
                 m.Style.WrapText = true;
                 //Border
-                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Top.Style = ExcelBorderStyle.None;
+                m.Style.Border.Right.Style = ExcelBorderStyle.None;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.None;
+                m.Style.Border.Left.Style = ExcelBorderStyle.None;
                 //Alineacion
                 m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
@@ -603,10 +603,10 @@ namespace sisceusi.web.Controllers
                 m.Style.Font.Bold = true;
                 m.Style.WrapText = true;
                 //Border
-                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Top.Style = ExcelBorderStyle.None;
+                m.Style.Border.Right.Style = ExcelBorderStyle.None;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.None;
+                m.Style.Border.Left.Style = ExcelBorderStyle.None;
                 //Alineacion
                 m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
@@ -620,10 +620,10 @@ namespace sisceusi.web.Controllers
                 m.Style.Font.Bold = true;
                 m.Style.WrapText = true;
                 //Border
-                m.Style.Border.Top.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Right.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Bottom.Style = ExcelBorderStyle.Thick;
-                m.Style.Border.Left.Style = ExcelBorderStyle.Thick;
+                m.Style.Border.Top.Style = ExcelBorderStyle.None;
+                m.Style.Border.Right.Style = ExcelBorderStyle.None;
+                m.Style.Border.Bottom.Style = ExcelBorderStyle.None;
+                m.Style.Border.Left.Style = ExcelBorderStyle.None;
                 //Alineacion
                 m.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 m.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;

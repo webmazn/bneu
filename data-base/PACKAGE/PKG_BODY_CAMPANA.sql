@@ -620,7 +620,9 @@
                     INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
                     WHERE (
                     LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
-                    ) AND cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector;
+                    ) AND 
+                    --cam.idEtapaOficial = 3 AND 
+                    cam.idSubSector = '|| piIdSubSector;
     EXECUTE IMMEDIATE vQueryCount INTO vTotalRegistros;
 
     vTotalPaginas := CEIL(TO_NUMBER(vTotalRegistros) / TO_NUMBER(piRegistros));
@@ -654,7 +656,9 @@
                         INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
                         WHERE (
                         LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
-                        ) AND cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || '
+                        ) AND 
+                        --cam.idEtapaOficial = 3 AND 
+                        cam.idSubSector = '|| piIdSubSector || '
                         )
                     WHERE  fila BETWEEN ' || TO_CHAR(piRegistros * vPaginaInicial + 1) || ' AND ' || TO_CHAR(piRegistros * (vPaginaInicial + 1));
 
@@ -689,7 +693,9 @@
                     INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
                     LEFT JOIN T_GENM_PARAMETRO par ON cam.idSubsector = par.idParametro
                     INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
-                    WHERE cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || ' AND (
+                    WHERE 
+                    --cam.idEtapaOficial = 3 AND 
+                    cam.idSubSector = '|| piIdSubSector || ' AND (
                     '||
                     case
                         when piDenominacion is null then ''
@@ -750,7 +756,9 @@
                         INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
                         LEFT JOIN T_GENM_PARAMETRO par ON cam.idSubsector = par.idParametro
                         INNER JOIN T_MAE_ETAPA eta ON cam.idEtapaOficial = eta.idEtapa
-                        WHERE cam.idEtapaOficial = 3 AND cam.idSubSector = '|| piIdSubSector || ' AND (
+                        WHERE 
+                        --cam.idEtapaOficial = 3 AND 
+                        cam.idSubSector = '|| piIdSubSector || ' AND (
                         '||
                         case
                             when piDenominacion is null then ''

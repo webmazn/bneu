@@ -33,7 +33,9 @@
     LEFT JOIN  T_GENM_PARAMETRO pzo ON pem.idZona = pzo.idParametro
     --INNER JOIN T_MAE_ZONA zon ON pem.idZona = zon.idZona
     
-    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND cen.idEtapa = 3 AND cen.idFase = 5 AND cen.idEstado = '1'
+    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND 
+    --cen.idEtapa = 3 AND cen.idFase = 5 AND 
+    cen.idEstado = '1'
     ORDER BY cen.idControlEncuesta, cen.numeroCuestionario ASC;
   END USP_SEL_LIST_CONTROL_ENC;
   
@@ -120,7 +122,9 @@
     LEFT JOIN T_GENM_USUARIO cee ON cen.idUsuarioResponde = cee.idUsuario
     LEFT JOIN T_GENM_USUARIO cer ON cen.idSupervisor = cer.idUsuario
     
-    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND cen.idEtapa = 3 AND cen.idFase = 5 AND cen.idEstado = '1'
+    WHERE   cam.idCampana = piIdCampana AND cen.idTipoEncuesta = 2 AND 
+    --cen.idEtapa = 3 AND cen.idFase = 5 AND 
+    cen.idEstado = '1'
     ORDER BY cen.idControlEncuesta, cen.numeroCuestionario ASC;
   END USP_SEL_LIST_EMP_PLA_REPORT;
   

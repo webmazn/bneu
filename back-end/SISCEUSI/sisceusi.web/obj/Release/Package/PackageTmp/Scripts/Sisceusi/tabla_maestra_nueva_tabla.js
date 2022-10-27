@@ -18,6 +18,7 @@
     $('#cbo-estado-oficial').val('1')
     $('#cbo-estado-principal').val('1')
     $('#cbo-estado-secundario').val('1')
+    $('#cbo-orientacion').val('1')
     cargarDatos()
     cargarDesplegables()
 });
@@ -73,7 +74,7 @@ var grabarTablaMaestra = () => {
     //if (validarEspaciosBlanco(preguntaCierre)) arr.push("Debe ingresar la pregunta de cierre");
     if (validarCombo(idEstiloTabla)) arr.push("Debe seleccionar el estilo de tabla");
     if (validarEspaciosBlanco(cantidadFilas)) arr.push("Debe ingresar la cantidad de filas");
-    if (cantidadFilas < 0 || cantidadFilas > 100) arr.push("La cantidad de filas debe ser mayor a 0 y menor a 100");
+    if (cantidadFilas <= 0 || cantidadFilas > 500) arr.push("La cantidad de filas debe ser mayor a 0 y menor o igual a 500");
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
@@ -247,8 +248,8 @@ var limpiarEncabezadoPrincipal = () => {
     $("#txt-titulo-encabezado-principal").val('')
     $("#txt-encabezado-principal-abreviado").val('')
     $('#txt-posicion-principal').val('')
-    $("#exampleRadios1").prop('checked', true)
-    $("#exampleRadios2").prop('checked', false)
+    $("#exampleRadios1").prop('checked', false)
+    $("#exampleRadios2").prop('checked', true)
     $("#txt-question-mark-01").val('')
     $('#cbo-estado-principal').val('1')
 }
@@ -256,12 +257,12 @@ var limpiarEncabezadoPrincipal = () => {
 var limpiarEncabezadoSecundario = () => {
     $("#txt-encabezado-secundario").val('')
     $("#txt-encabezado-secundario-abreviado").val('')
-    $("#exampleRadios3").prop('checked', true)
-    $("#exampleRadios4").prop('checked', false)
+    $("#exampleRadios3").prop('checked', false)
+    $("#exampleRadios4").prop('checked', true)
     $('#txt-posicion-secundario').val('')
     $("#txt-question-mark-02").val('')
     $("#cbo-encabezado-principal").val('0')
-    $("#cbo-orientacion").val('0')
+    $("#cbo-orientacion").val('1')
     $("#cbo-control-respuesta").val('0')
     $("#cbo-tipo-dato").val('0')
     $("#cbo-id-parametro").val('0')
