@@ -812,7 +812,9 @@
     SELECT
     *
     FROM T_GENM_CAMPANA
-    WHERE idEtapaOficial = 3 AND idEstado = '1';
+    WHERE 
+    --idEtapaOficial = 3 AND 
+    idEstado = '1';
   END USP_SEL_LIST_CAMPANA;
   
   PROCEDURE USP_SEL_LIST_CORREO_CAMPANA(

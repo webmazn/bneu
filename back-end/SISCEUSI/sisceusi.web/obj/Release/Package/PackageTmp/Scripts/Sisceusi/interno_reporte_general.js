@@ -205,16 +205,16 @@ var armarBody = (data) => {
         let colNombreEmrpesa = `<td class="text-center" data-encabezado="Nombre Empresa" scope="row">${x.nombreEmpresa}</td>`;
         let colNombreComercial = `<td class="text-center" data-encabezado="Nombre Comercial" scope="row">${x.nombreComercial}</td>`;
         let colRuc = `<td class="text-center" data-encabezado="Ruc" scope="row">${x.ruc}</td>`;
-        let colGiroEmpresa = `<td class="text-center" data-encabezado="Giro Empresa" scope="row">${x.giroEmpresa}</td>`;
-        let colGrupoEmpresa = `<td class="text-center" data-encabezado="Grupo Empresa" scope="row">${x.grupoEmpresa}</td>`;
-        let colCiuuEmpresa = `<td class="text-center" data-encabezado="Ciuu Empresa" scope="row">${x.ciuuEmpresa}</td>`;
+        let colGiroEmpresa = `<td class="text-center" data-encabezado="Giro Empresa" scope="row">${x.giroEmpresa ? x.giroEmpresa : ''}</td>`;
+        let colGrupoEmpresa = `<td class="text-center" data-encabezado="Grupo Empresa" scope="row">${x.grupoEmpresa ? x.grupoEmpresa : ''}</td>`;
+        let colCiuuEmpresa = `<td class="text-center" data-encabezado="Ciuu Empresa" scope="row">${x.ciuuEmpresa ? x.ciuuEmpresa : ''}</td>`;
         let colCorreoEmpresarial = `<td class="text-center" data-encabezado="Correo Empresarial" scope="row">${x.correoEmpresarial}</td>`;
         let colDireccionFiscal = `<td class="text-center" data-encabezado="Dirección fiscal" scope="row">${x.direccionFiscal}</td>`;
         let colRepresentanteLegal = `<td class="text-center" data-encabezado="Representante Legal" scope="row">${x.representanteLegal}</td>`;
         let colDniRepresentante = `<td class="text-center" data-encabezado="Dni Representante" scope="row">${x.dniRepresentante}</td>`;
         let colPlanta = `<td class="text-center" data-encabezado="Planta" scope="row">${x.planta}</td>`;
-        let colGiroPlanta = `<td class="text-center" data-encabezado="Giro Planta" scope="row">${x.giroPlanta}</td>`;
-        let colCiuuPlanta = `<td class="text-center" data-encabezado="Ciuu planta" scope="row">${x.ciuuPlanta}</td>`;
+        let colGiroPlanta = `<td class="text-center" data-encabezado="Giro Planta" scope="row">${x.giroPlanta ? x.giroPlanta : ''}</td>`;
+        let colCiuuPlanta = `<td class="text-center" data-encabezado="Ciuu planta" scope="row">${x.ciuuPlanta ? x.ciuuPlanta : ''}</td>`;
         let colDepartamento = `<td class="text-center" data-encabezado="Departamento" scope="row">${x.departamento}</td>`;
         let colProvincia = `<td class="text-center" data-encabezado="Provincia" scope="row">${x.provincia}</td>`;
         let colDistrito = `<td class="text-center" data-encabezado="Distrito" scope="row">${x.distrito}</td>`;
@@ -224,15 +224,15 @@ var armarBody = (data) => {
         let colEmpresaGas = `<td class="text-center" data-encabezado="Empresa Gas" scope="row">${x.empresaGas ? x.empresaGas : ''}</td>`;
         let colNumeroSuministroGas = `<td class="text-center" data-encabezado="Número Suministro Gas" scope="row">${x.numeroSuministroGas ? x.numeroSuministroGas : ''}</td>`;
         let colEmpresaLuz = `<td class="text-center" data-encabezado="Empresa Luz" scope="row">${x.empresaLuz}</td>`;
-        let colNumeroSuministroAlumbrado = `<td class="text-center" data-encabezado="Número Suministro Alumbrado" scope="row">${x.numeroSuministroAlumbrado}</td>`;
-        let colEncuestado = `<td class="text-center" data-encabezado="Encuestado" scope="row">${x.encuestado}</td>`;
-        let colDniEncuestado = `<td class="text-center" data-encabezado="Dni Encuestado" scope="row">${x.dniEncuestado}</td>`;
-        let colCorreoEncuestado = `<td class="text-center" data-encabezado="Correo Encuestado" scope="row">${x.correoEncuestado}</td>`;
-        let colTelefonoEncuestado = `<td class="text-center" data-encabezado="Teléfono Encuestado" scope="row">${x.telefonoEncuestado}</td>`;
-        let colRevisor = `<td class="text-center" data-encabezado="Revisor" scope="row">${x.revisor}</td>`;
-        let colDniRevisor = `<td class="text-center" data-encabezado="Dni Revisor" scope="row">${x.dniRevisor}</td>`;
-        let colCorreoRevisor = `<td class="text-center" data-encabezado="Correo Revisor" scope="row">${x.correoRevisor}</td>`;
-        let colTelefonoRevisor = `<td class="text-center" data-encabezado="Teléfono Revisor" scope="row">${x.telefonoRevisor}</td>`;
+        let colNumeroSuministroAlumbrado = `<td class="text-center" data-encabezado="Número Suministro Alumbrado" scope="row">${x.numeroSuministroAlumbrado ? x.numeroSuministroAlumbrado : ''}</td>`;
+        let colEncuestado = `<td class="text-center" data-encabezado="Encuestado" scope="row">${x.encuestado ? x.encuestado : ''}</td>`;
+        let colDniEncuestado = `<td class="text-center" data-encabezado="Dni Encuestado" scope="row">${x.dniEncuestado ? x.dniEncuestado : ''}</td>`;
+        let colCorreoEncuestado = `<td class="text-center" data-encabezado="Correo Encuestado" scope="row">${x.correoEncuestado ? x.correoEncuestado : ''}</td>`;
+        let colTelefonoEncuestado = `<td class="text-center" data-encabezado="Teléfono Encuestado" scope="row">${x.telefonoEncuestado ? x.telefonoEncuestado : ''}</td>`;
+        let colRevisor = `<td class="text-center" data-encabezado="Revisor" scope="row">${x.revisor ? x.revisor : ''}</td>`;
+        let colDniRevisor = `<td class="text-center" data-encabezado="Dni Revisor" scope="row">${x.dniRevisor ? x.dniRevisor : ''}</td>`;
+        let colCorreoRevisor = `<td class="text-center" data-encabezado="Correo Revisor" scope="row">${x.correoRevisor ? x.correoRevisor : ''}</td>`;
+        let colTelefonoRevisor = `<td class="text-center" data-encabezado="Teléfono Revisor" scope="row">${x.telefonoRevisor ? x.telefonoRevisor : ''}</td>`;
         let row = `<tr>${colCodigo}${colCampana}${colSubsector}${colFechaInicioEncuesta}${colFechaFinEncuesta}${colNombreEmrpesa}${colNombreComercial}${colRuc}${colGiroEmpresa}${colGrupoEmpresa}${colCiuuEmpresa}${colCorreoEmpresarial}${colDireccionFiscal}` +
             `${colRepresentanteLegal}${colDniRepresentante}${colPlanta}${colGiroPlanta}${colCiuuPlanta}${colDepartamento}${colProvincia}${colDistrito}${colZona}${colDireccion}${colTelefonoPlanta}${colEmpresaGas}${colNumeroSuministroGas}${colEmpresaLuz}${colNumeroSuministroAlumbrado}` +
             `${colEncuestado}${colDniEncuestado}${colCorreoEncuestado}${colTelefonoEncuestado}${colRevisor}${colDniRevisor}${colCorreoRevisor}${colTelefonoRevisor}</tr>`;

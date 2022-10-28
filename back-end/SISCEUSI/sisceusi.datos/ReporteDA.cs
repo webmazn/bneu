@@ -86,7 +86,7 @@ namespace sisceusi.datos
             List<RespuestaEncuestaPlantaBE> lista = new List<RespuestaEncuestaPlantaBE>();
             try
             {
-                string sp = $"{Package.Encuesta}USP_SEL_LIST_RESP_ENC_PLANTA";
+                string sp = $"{Package.Reporte}USP_SEL_LIST_RESP_ENC_PLANTA";
                 var p = new OracleDynamicParameters();
                 p.Add("piIdCampanaEncuesta", idCampanaEncuesta);
                 p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);

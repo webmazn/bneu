@@ -73,11 +73,20 @@ namespace sisceusi.entidad
         public string subtitulo { get; set; }
     }
 
+    public class CabeceraTablaMaestraReporteBE
+    {
+        public int idTablaMaestra { get; set; }
+        public string descripcion { get; set; }
+        public int cantidadCeldas { get; set; }
+    }
+
     public class CabeceraPrincipalReporteBE
     {
         public int idEncabezadoPrincipal { get; set; }
         public string descripcion { get; set; }
         public int cantidadCeldas { get; set; }
+        public int idTablaMaestra { get; set; }
+        public string descripcionTabla { get; set; }
     }
 
     public class CabeceraSecundariaReporteBE
