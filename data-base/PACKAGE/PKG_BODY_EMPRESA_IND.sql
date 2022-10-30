@@ -238,15 +238,26 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  ei.idEmpresaIndustria,
-                                ei.ruc,
                                 ei.nombreEmpresa,
-                                ei.representanteLegal,
+                                ei.nombreComercial,
+                                ei.ruc,
                                 p.parametro giro,
+                                ge.parametro grupoEmpresa,
+                                ci.parametro ciuu,
+                                ei.direccionfiscal,
+                                ei.correoElectronico,
+                                ei.representanteLegal,
+                                ei.dni,
+                                ei.observacionUno,
+                                ei.observacionDos,
+                                ei.observacionTres,
                                 ei.fechaCreacion,
                                 ei.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_EMPRESA_INDUSTRIA ei
                         LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO ge on ei.idGrupoEmpresa = ge.idParametro and ge.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO ci on ei.idCiuu = ci.idParametro and ci.idEstado = ''1''
                         WHERE (
                         LOWER(TRANSLATE(ei.ruc,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' OR
                         LOWER(TRANSLATE(ei.nombreEmpresa,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' OR
@@ -281,16 +292,27 @@
 
     vQuerySelect :=  'SELECT * FROM
                         (
-                        SELECT  ei.idEmpresaIndustria,
-                                ei.ruc,
+                        SELECT  ei.idEmpresaIndustria,                                
                                 ei.nombreEmpresa,
-                                ei.representanteLegal,
+                                ei.nombreComercial,
+                                ei.ruc,
                                 p.parametro giro,
+                                ge.parametro grupoEmpresa,
+                                ci.parametro ciuu,
+                                ei.direccionfiscal,
+                                ei.correoElectronico,
+                                ei.representanteLegal,
+                                ei.dni,
+                                ei.observacionUno,
+                                ei.observacionDos,
+                                ei.observacionTres,
                                 ei.fechaCreacion,
                                 ei.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_EMPRESA_INDUSTRIA ei
                         LEFT join T_GENM_PARAMETRO p on ei.idGiro = p.idParametro and p.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO ge on ei.idGrupoEmpresa = ge.idParametro and ge.idEstado = ''1''
+                        LEFT join T_GENM_PARAMETRO ci on ei.idCiuu = ci.idParametro and ci.idEstado = ''1''
                         WHERE (
                         '||
                         case
@@ -349,6 +371,9 @@
     piRepresentanteLegal VARCHAR2,
     piDni VARCHAR2, 
     piIdEstado VARCHAR2,
+    piObservacionUno VARCHAR2,
+    piObservacionDos VARCHAR2,
+    piObservacionTres VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER
@@ -358,9 +383,9 @@
     IF piIdEmpresaIndustria = -1 THEN
       vId := SQ_GENM_EMPRESA_INDUSTRIA.NEXTVAL();
       INSERT INTO T_GENM_EMPRESA_INDUSTRIA
-      (idEmpresaIndustria, nombreEmpresa, nombreComercial, ruc, idGiro, idGrupoEmpresa, idCiuu, direccionFiscal, correoElectronico, representanteLegal, dni, idEstado, idUsuarioCreacion, fechaCreacion, ipCreacion)
+      (idEmpresaIndustria, nombreEmpresa, nombreComercial, ruc, idGiro, idGrupoEmpresa, idCiuu, direccionFiscal, correoElectronico, representanteLegal, dni, idEstado, observacionUno, observacionDos, observacionTres, idUsuarioCreacion, fechaCreacion, ipCreacion)
       VALUES 
-      (vId, piNombreEmpresa, piNombreComercial, piRuc, piIdGiro, piIdGrupoEmpresa, piIdCiuu, piDireccionFiscal, piCorreo, piRepresentanteLegal, piDni, piIdEstado, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
+      (vId, piNombreEmpresa, piNombreComercial, piRuc, piIdGiro, piIdGrupoEmpresa, piIdCiuu, piDireccionFiscal, piCorreo, piRepresentanteLegal, piDni, piIdEstado, piObservacionUno, piObservacionDos, piObservacionTres, piIdUsuarioCreacion, SYSDATE, piIpCreacion);
     ELSE
       UPDATE T_GENM_EMPRESA_INDUSTRIA ei SET
       ei.nombreEmpresa = piNombreEmpresa,
@@ -374,6 +399,9 @@
       ei.representanteLegal = piRepresentanteLegal,
       ei.dni = piDni,
       ei.idEstado = piIdEstado,
+      ei.observacionUno = piObservacionUno,
+      ei.observacionDos = piObservacionDos,
+      ei.observacionTres = piObservacionTres,
       ei.idUsuarioModificacion = piIdUsuarioCreacion,
       ei.fechaModificacion = SYSDATE,
       ei.ipModificacion = piIpCreacion

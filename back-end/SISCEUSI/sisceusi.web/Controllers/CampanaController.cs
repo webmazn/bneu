@@ -143,7 +143,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Campaña", 4);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "FECHA INICIO PILOTO", "FECHA FIN PILOTO", "ETAPA PILOTO", "FECHA INICIO OFICIAL", "FECHA FIN OFICIAL", "ETAPA OFICIAL", "SUB SECTOR", "OBSERVACIONES", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -180,7 +180,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Campaña", 4);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "FECHA INICIO PILOTO", "FECHA FIN PILOTO", "ETAPA PILOTO", "FECHA INICIO OFICIAL", "FECHA FIN OFICIAL", "ETAPA OFICIAL", "SUB SECTOR", "OBSERVACIONES", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -231,6 +231,14 @@ namespace sisceusi.web.Controllers
                     (i + 1).ToString(),
                     String.Concat("ENC", c.idCampana.ToString("D4")),
                     c.denominacion,
+                    c.txtFechaInicioPiloto == "0001-01-01" ? "" : c.txtFechaInicioPiloto,
+                    c.txtFechaFinPiloto == "0001-01-01" ? "" : c.txtFechaFinPiloto,
+                    c.etapaPiloto.etapa,
+                    c.txtFechaInicioEncuesta == "0001-01-01" ? "" : c.txtFechaInicioEncuesta,
+                    c.txtFechaFinEncuesta == "0001-01-01" ? "" : c.txtFechaFinEncuesta,
+                    c.etapaOficial.etapa,
+                    c.subSector.subSector,
+                    c.observaciones,
                     c.txtFechaCreacion,
                     c.idEstado == "1" ? "Habilitado" : "Deshabilitado" });
                 i++;

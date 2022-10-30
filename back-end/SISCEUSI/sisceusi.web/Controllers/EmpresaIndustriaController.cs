@@ -121,7 +121,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Empresa", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "RUC EMPRESA", "RAZÓN SOCIAL", "REP. LEGAL", "GIRO NEGOCIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "RAZÓN SOCIAL", "NOMBRE COMERCIAL", "RUC", "GIRO NEGOCIO", "GRUPO EMPRESA", "CIUU", "DIRECCIÓN FISCAL", "CORREO ELECTRÓNICO", "REP. LEGAL", "DNI REP.", "OBS. N° 1", "OBS. N° 2", "OBS. N° 3", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -150,7 +150,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Empresa", 8);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "RUC EMPRESA", "RAZÓN SOCIAL", "REP. LEGAL", "GIRO NEGOCIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "RAZÓN SOCIAL", "NOMBRE COMERCIAL", "RUC", "GIRO NEGOCIO", "GRUPO EMPRESA", "CIUU", "DIRECCIÓN FISCAL", "CORREO ELECTRÓNICO", "REP. LEGAL", "DNI REP.", "OBS. N° 1", "OBS. N° 2", "OBS. N° 3", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_EMPRESA_");
                 }
@@ -244,10 +244,19 @@ namespace sisceusi.web.Controllers
                 listas.Add(new List<string> {
                     (i + 1).ToString(),
                     String.Concat("EMP", c.idEmpresaIndustria.ToString("D4")),
-                    c.ruc,
                     c.nombreEmpresa,
-                    c.representanteLegal,
+                    c.nombreComercial,
+                    c.ruc,
                     c.giro.giro,
+                    c.grupoEmpresa.grupoEmpresa,
+                    c.ciuu.ciuu,
+                    c.direccionFiscal,
+                    c.correoElectronico,
+                    c.representanteLegal,
+                    c.dni,
+                    c.observacionUno,
+                    c.observacionDos,
+                    c.observacionTres,
                     c.txtFechaCreacion,
                     c.idEstado == "1" ? "Habilitado" : "Deshabilitado" });
                 i++;

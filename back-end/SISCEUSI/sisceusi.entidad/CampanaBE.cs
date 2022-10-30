@@ -27,6 +27,8 @@ namespace sisceusi.entidad
         public SubSectorBE subSector { get; set; }
         public EtapaBE etapa { get; set; }
         public string idEstado { get; set; }
+        public EtapaBE etapaPiloto { get; set; }
+        public EtapaBE etapaOficial { get; set; }
 
         public string txtFechaInicioPiloto
         {

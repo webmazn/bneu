@@ -194,10 +194,10 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
     if (doRenderizar) {
         content = data.map((x, i) => {
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
-            let colDireccion = `<td data-encabezado="Dirección">${x.direccion}</td>`;
-            let colCiuu = `<td class="text-center" data-encabezado="CIUU">${x.ciuu.ciuu}</td>`;
-            let colTelefono = `<td class="text-center" data-encabezado="Teléfono">${x.telefono}</td>`
-            let colUbicacion = `<td class="text-center" data-encabezado="Ubicación">${x.latitud} <br> ${x.longitud}</td>`;
+            let colDireccion = `<td data-encabezado="Dirección">${x.direccion == null ? "" : x.direccion}</td>`;
+            let colCiuu = `<td class="text-center" data-encabezado="CIUU">${x.ciuu.ciuu == null ? "" : x.ciuu.ciuu}</td>`;
+            let colTelefono = `<td class="text-center" data-encabezado="Teléfono">${x.telefono == null ? "" : x.telefono}</td>`
+            let colUbicacion = `<td class="text-center" data-encabezado="Ubicación">${x.latitud == null ? "" : x.latitud} <br> ${x.longitud == null ? "" : x.longitud}</td>`;
             let colDepartamento = `<td data-encabezado="Departamento">${x.departamento.departamento}</td>`;
             let colProvincia = `<td data-encabezado="Provincia">${x.provincia.provincia}</td>`;
             let colDistrito = `<td data-encabezado="Distrito">${x.distrito.distrito}</td>`;

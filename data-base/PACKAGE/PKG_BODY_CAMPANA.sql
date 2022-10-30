@@ -214,10 +214,21 @@
                         (
                         SELECT  cam.idCampana,
                                 cam.denominacion,
+                                cam.fechaInicioPiloto,
+                                cam.fechaFinPiloto,
+                                etp.etapa etapaPiloto,
+                                cam.fechaInicioEncuesta,
+                                cam.fechaFinEncuesta,
+                                eto.etapa etapaOficial,
+                                sub.parametro subsector,
+                                cam.observaciones,
                                 cam.fechaCreacion,
                                 cam.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_CAMPANA cam
+                        left join T_MAE_ETAPA etp ON cam.idEtapaPiloto = etp.idEtapa
+                        left join T_MAE_ETAPA eto ON cam.idEtapaOficial = eto.idEtapa
+                        left join T_GENM_PARAMETRO sub ON cam.idSubSector = sub.idParametro
                         WHERE (
                         LOWER(TRANSLATE(cam.denominacion,''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) like ''%''|| LOWER(TRANSLATE('''|| piBuscar ||''',''¡…Õ”⁄·ÈÌÛ˙'',''AEIOUaeiou'')) ||''%'' 
                         )
@@ -249,12 +260,23 @@
                         (
                         SELECT  cam.idCampana,
                                 cam.denominacion,
+                                cam.fechaInicioPiloto,
+                                cam.fechaFinPiloto,
+                                etp.etapa etapaPiloto,
+                                cam.fechaInicioEncuesta,
+                                cam.fechaFinEncuesta,
+                                eto.etapa etapaOficial,
+                                sub.parametro subsector,
+                                cam.observaciones,
                                 cam.fechaCreacion,
                                 cam.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_CAMPANA cam
                         INNER JOIN T_GEND_CAMPANA_EMPRESA cem ON cam.idCampana = cem.idCampana AND cem.idestado = ''1''
                         INNER JOIN T_GENM_EMPRESA_INDUSTRIA emp ON cem.idEmpresaIndustria = emp.idEmpresaIndustria AND emp.idEstado = ''1''
+                        left join T_MAE_ETAPA etp ON cam.idEtapaPiloto = etp.idEtapa
+                        left join T_MAE_ETAPA eto ON cam.idEtapaOficial = eto.idEtapa
+                        left join T_GENM_PARAMETRO sub ON cam.idSubSector = sub.idParametro
                         WHERE (
                         '||
                         case
@@ -289,7 +311,7 @@
                         end
                         ||'
                         1 = 1)
-                        GROUP BY cam.idCampana, cam.denominacion, cam.fechaCreacion, cam.idEstado
+                        GROUP BY cam.idCampana, cam.denominacion, cam.fechaInicioPiloto, cam.fechaFinPiloto, etp.etapa, cam.fechaInicioEncuesta, cam.fechaFinEncuesta, eto.etapa, sub.parametro, cam.observaciones, cam.fechaCreacion, cam.idEstado
                     )';
 
     OPEN poRef FOR vQuerySelect;

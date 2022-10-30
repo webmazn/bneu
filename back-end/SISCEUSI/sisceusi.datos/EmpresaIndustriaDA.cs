@@ -100,10 +100,19 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EmpresaIndustriaBE
                 {
                     idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,
-                    ruc = (string)x.RUC,
                     nombreEmpresa = (string)x.NOMBREEMPRESA,
-                    representanteLegal = (string)x.REPRESENTANTELEGAL,
+                    nombreComercial = x.NOMBRECOMERCIAL == null ? "" : (string)x.NOMBRECOMERCIAL,
+                    ruc = (string)x.RUC,
                     giro = new GiroBE { giro = (string)x.GIRO },
+                    grupoEmpresa = new GrupoEmpresaBE { grupoEmpresa = x.GRUPOEMPRESA == null ? "" : (string)x.GRUPOEMPRESA },
+                    ciuu = new CiuuBE { ciuu = x.CIUU == null ? "" : (string)x.CIUU },
+                    direccionFiscal = x.DIRECCIONFISCAL == null ? "" : (string)x.DIRECCIONFISCAL,
+                    correoElectronico = x.CORREOELECTRONICO == null ? "" : (string)x.CORREOELECTRONICO,
+                    representanteLegal = (string)x.REPRESENTANTELEGAL,
+                    dni = x.DNI == null ? "" : (string)x.DNI,
+                    observacionUno = x.OBSERVACIONUNO == null ? "" : (string)x.OBSERVACIONUNO,
+                    observacionDos = x.OBSERVACIONDOS == null ? "" : (string)x.OBSERVACIONDOS,
+                    observacionTres = x.OBSERVACIONTRES == null ? "" : (string)x.OBSERVACIONTRES,
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO
                 }).ToList();
@@ -132,10 +141,19 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new EmpresaIndustriaBE
                 {
                     idEmpresaIndustria = (int)x.IDEMPRESAINDUSTRIA,
-                    ruc = (string)x.RUC,
                     nombreEmpresa = (string)x.NOMBREEMPRESA,
-                    representanteLegal = (string)x.REPRESENTANTELEGAL,
+                    nombreComercial = x.NOMBRECOMERCIAL == null ? "" : (string)x.NOMBRECOMERCIAL,
+                    ruc = (string)x.RUC,
                     giro = new GiroBE { giro = (string)x.GIRO },
+                    grupoEmpresa = new GrupoEmpresaBE { grupoEmpresa = x.GRUPOEMPRESA == null ? "" : (string)x.GRUPOEMPRESA },
+                    ciuu = new CiuuBE { ciuu = x.CIUU == null ? "" : (string)x.CIUU },
+                    direccionFiscal = x.DIRECCIONFISCAL == null ? "" : (string)x.DIRECCIONFISCAL,
+                    correoElectronico = x.CORREOELECTRONICO == null ? "" : (string)x.CORREOELECTRONICO,
+                    representanteLegal = (string)x.REPRESENTANTELEGAL,
+                    dni = x.DNI == null ? "" : (string)x.DNI,
+                    observacionUno = x.OBSERVACIONUNO == null ? "" : (string)x.OBSERVACIONUNO,
+                    observacionDos = x.OBSERVACIONDOS == null ? "" : (string)x.OBSERVACIONDOS,
+                    observacionTres = x.OBSERVACIONTRES == null ? "" : (string)x.OBSERVACIONTRES,
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO
                 }).ToList();
@@ -163,6 +181,9 @@ namespace sisceusi.datos
                 p.Add("piRepresentanteLegal", empresa.representanteLegal);
                 p.Add("piDni", empresa.dni);
                 p.Add("piIdEstado", empresa.idEstado);
+                p.Add("piObservacionUno", empresa.observacionUno);
+                p.Add("piObservacionDos", empresa.observacionDos);
+                p.Add("piObservacionTres", empresa.observacionTres);
                 p.Add("piIdUsuarioCreacion", empresa.idUsuarioCreacion);
                 p.Add("piIpCreacion", empresa.ipCreacion);                
                 p.Add("poRowAffected", dbType: OracleDbType.Int32, direction: ParameterDirection.Output);

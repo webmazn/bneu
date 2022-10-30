@@ -266,14 +266,21 @@
                         (
                         SELECT  pem.idPlantaEmpresa,
                                 pem.idEmpresaIndustria,
+                                pem.denominacion,
                                 pem.direccion,
                                 par.parametro ciuu,
                                 pem.telefono,
                                 pem.latitud,
                                 pem.longitud,
+                                zon.parametro zona,
                                 dep.departamento,
                                 pro.provincia,
                                 dis.distrito,
+                                emg.parametro empresaGas,
+                                pem.numeroSuministroGas,
+                                eme.parametro empresaLuz,
+                                pem.numeroSuministroAlumbrado,
+                                egi.parametro giro,                                
                                 pem.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_PLANTA_EMPRESA pem
@@ -281,6 +288,10 @@
                         inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                         inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                         inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
+                        left join T_GENM_PARAMETRO zon on pem.idZona = zon.idParametro and zon.idEstado = ''1''
+                        left join T_GENM_PARAMETRO emg on pem.idEmpresaGas = emg.idParametro and emg.idEstado = ''1''
+                        left join T_GENM_PARAMETRO eme on pem.idEmpresaLuz = eme.idParametro and eme.idEstado = ''1''
+                        left join T_GENM_PARAMETRO egi on pem.idGiro = egi.idParametro and egi.idEstado = ''1''
                         WHERE
                         pem.idEmpresaIndustria = '|| piIdEmpresa ||' AND
                         (
@@ -321,14 +332,21 @@
                         (
                         SELECT  pem.idPlantaEmpresa,
                                 pem.idEmpresaIndustria,
+                                pem.denominacion,
                                 pem.direccion,
                                 par.parametro ciuu,
                                 pem.telefono,
                                 pem.latitud,
                                 pem.longitud,
+                                zon.parametro zona,
                                 dep.departamento,
                                 pro.provincia,
                                 dis.distrito,
+                                emg.parametro empresaGas,
+                                pem.numeroSuministroGas,
+                                eme.parametro empresaLuz,
+                                pem.numeroSuministroAlumbrado,
+                                egi.parametro giro,                                
                                 pem.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_PLANTA_EMPRESA pem
@@ -336,6 +354,10 @@
                         inner join T_MAE_DEPARTAMENTO dep on pem.idDepartamento = dep.idDepartamento and dep.idEstado = ''1''
                         inner join T_MAE_PROVINCIA pro on pem.idProvincia = pro.idProvincia and pro.idEstado = ''1''
                         inner join T_MAE_DISTRITO dis on pem.idDistrito = dis.idDistrito and dis.idEstado = ''1''
+                        left join T_GENM_PARAMETRO zon on pem.idZona = zon.idParametro and zon.idEstado = ''1''
+                        left join T_GENM_PARAMETRO emg on pem.idEmpresaGas = emg.idParametro and emg.idEstado = ''1''
+                        left join T_GENM_PARAMETRO eme on pem.idEmpresaLuz = eme.idParametro and eme.idEstado = ''1''
+                        left join T_GENM_PARAMETRO egi on pem.idGiro = egi.idParametro and egi.idEstado = ''1''
                         WHERE 
                         pem.idEmpresaIndustria = '|| piIdEmpresa ||' AND (
                         '||

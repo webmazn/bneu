@@ -212,7 +212,7 @@ namespace sisceusi.web.Controllers
                     string tituloExcel = idPlantaEmpresa == 0 ? "Mantenimiento Usuario" : "Mantenimiento Usuario Planta";
                     string nombreArchivo = idPlantaEmpresa == 0 ? "MANTENIMIENTO_USUARIO_" : "MANTENIMIENTO_USUARIO_PLANTA_";
                     ExcelWorksheet ws = tituloReporteExcel(package, tituloExcel, 6);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "EMPRESA", "CORREO ELECTRÓNICO", "DNI", "NOMBRES", "TELÉFONO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, nombreArchivo);
                 }
@@ -242,7 +242,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Usuario", 6);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "NOMBRE Y APELLIDO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "EMPRESA", "CORREO ELECTRÓNICO", "DNI", "NOMBRES", "TELÉFONO", "TIPO USUARIO", "FECHA REGISTRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_USUARIO_");
                 }
@@ -259,7 +259,12 @@ namespace sisceusi.web.Controllers
                 listas.Add(new List<string> {
                     (i + 1).ToString(),
                     String.Concat("USU", c.idUsuario.ToString("D4")),
-                    c.nombres, c.rol.rol,
+                    c.empresaIndustria.nombreEmpresa,
+                    c.correoElectronico,
+                    c.dni,
+                    c.nombres,
+                    c.telefono,
+                    c.rol.rol,
                     c.txtFechaCreacion,
                     c.idEstado == "1" ? "Habilitado" : "Deshabilitado" });
                 i++;

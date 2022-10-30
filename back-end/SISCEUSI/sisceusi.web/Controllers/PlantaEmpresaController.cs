@@ -165,7 +165,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 9);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "ZONA", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "EMPRESA DE GAS", "NRO SUMINISTRO GAS", "EMPRESA DE LUZ", "NRO SUMINISTRO LUZ", "GIRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PLANTA_EMPRESA_");
                 }
@@ -194,7 +194,7 @@ namespace sisceusi.web.Controllers
                 using (ExcelPackage package = new ExcelPackage())
                 {
                     ExcelWorksheet ws = tituloReporteExcel(package, "Mantenimiento Planta Empresa", 9);
-                    cabecerasReporteExcel(ws, new List<string> { "N°", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "ESTADO" });
+                    cabecerasReporteExcel(ws, new List<string> { "N°", "CÓDIGO", "DENOMINACIÓN", "DIRECCIÓN", "CIUU", "TELÉFONO", "UBICACIÓN", "ZONA", "DEPARTAMENTO", "PROVINCIA", "DISTRITO", "EMPRESA DE GAS", "NRO SUMINISTRO GAS", "EMPRESA DE LUZ", "NRO SUMINISTRO LUZ", "GIRO", "ESTADO" });
                     cuerpoReporteExcel(ws, obtenerDatos(lista), 4);
                     exportar(package, "MANTENIMIENTO_PLANTA_EMPRESA_");
                 }
@@ -262,13 +262,21 @@ namespace sisceusi.web.Controllers
             {
                 listas.Add(new List<string> {
                     (i + 1).ToString(),
+                    String.Concat("PLA", c.idPlantaEmpresa.ToString("D4")),
+                    c.denominacion,
                     c.direccion,
                     c.ciuu.ciuu,
                     c.telefono,
                     String.Concat(c.latitud, ", ",c.longitud),
+                    c.zona.zona,
                     c.departamento.departamento,
                     c.provincia.provincia,
                     c.distrito.distrito,
+                    c.empresaGas.empresaGas,
+                    c.numeroSuministroGas,
+                    c.empresaLuz.empresaLuz,
+                    c.numeroSuministroAlumbrado,
+                    c.giro.giro,
                     c.idEstado == "1" ? "Habilitado" : "Deshabilitado"});
                 i++;
             });

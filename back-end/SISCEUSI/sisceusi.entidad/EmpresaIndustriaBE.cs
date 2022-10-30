@@ -21,7 +21,12 @@ namespace sisceusi.entidad
         public string dni { get; set; }
         public string telefono { get; set; }
         public string idEstado { get; set; }
+        public string observacionUno { get; set; }
+        public string observacionDos { get; set; }
+        public string observacionTres { get; set; }
 
-        public GiroBE giro { get; set; } 
+        public GiroBE giro { get; set; }
+        public GrupoEmpresaBE grupoEmpresa { get; set; }
+        public CiuuBE ciuu { get; set; }
     }
 }

@@ -62,8 +62,11 @@
     piDireccionFiscal VARCHAR2,
     piCorreo VARCHAR2,
     piRepresentanteLegal VARCHAR2,
-    piDni VARCHAR2, 
+    piDni VARCHAR2,     
     piIdEstado VARCHAR2,
+    piObservacionUno VARCHAR2,
+    piObservacionDos VARCHAR2,
+    piObservacionTres VARCHAR2,
     piIdUsuarioCreacion NUMBER,
     piIpCreacion VARCHAR2,
     poRowAffected OUT NUMBER

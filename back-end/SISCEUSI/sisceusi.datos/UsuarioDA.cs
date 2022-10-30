@@ -210,8 +210,11 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new UsuarioBE
                 {
                     idUsuario = (int)x.IDUSUARIO,
-                    nombres = (string)x.NOMBRES,
+                    empresaIndustria = new EmpresaIndustriaBE { nombreEmpresa = x.NOMBREEMPRESA == null ? "" : (string)x.NOMBREEMPRESA },
                     correoElectronico = (string)x.CORREOELECTRONICO,
+                    dni = x.DNI == null ? "" : (string)x.DNI,
+                    nombres = (string)x.NOMBRES,
+                    telefono = x.TELEFONO == null ? "" : (string)x.TELEFONO,
                     rol = new RolBE { rol = (string)x.ROL },
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO
@@ -242,12 +245,14 @@ namespace sisceusi.datos
                 lista = db.Query<dynamic>(sp, p, commandType: CommandType.StoredProcedure).Select(x => new UsuarioBE
                 {
                     idUsuario = (int)x.IDUSUARIO,
-                    nombres = (string)x.NOMBRES,
+                    empresaIndustria = new EmpresaIndustriaBE { nombreEmpresa = x.NOMBREEMPRESA == null ? "" : (string)x.NOMBREEMPRESA },
                     correoElectronico = (string)x.CORREOELECTRONICO,
+                    dni = x.DNI == null ? "" : (string)x.DNI,
+                    nombres = (string)x.NOMBRES,
+                    telefono = x.TELEFONO == null ? "" : (string)x.TELEFONO,
                     rol = new RolBE { rol = (string)x.ROL },
                     fechaCreacion = (DateTime)x.FECHACREACION,
-                    idEstado = (string)x.IDESTADO,
-                    fila = (int)x.FILA
+                    idEstado = (string)x.IDESTADO
                 }).ToList();
             }
             catch (Exception ex) { Log.Error(ex); }

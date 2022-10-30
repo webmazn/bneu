@@ -103,7 +103,7 @@ var cargarTablaMaestra = (data) => {
 }
 
 var listarEmpresa00 = () => {
-    let data = arrEmpresa
+    let data = arrEmpresa.slice()
     let giro = $('#cbo-giro00').val()
     let ciuu = $('#cbo-ciuu00').val()
     if (giro > 0) {
@@ -112,9 +112,23 @@ var listarEmpresa00 = () => {
     if (ciuu > 0) {
         data = data.filter(x => x.idCiuu == ciuu)
     }
+    //==
+    /*if (arrEmpresaSelect00.length > 0) {
+        arrEmpresaSelect00.forEach(x => {
+            let index = data.findIndex(y => y.idEmpresaIndustria == x.empresaIndustria.idEmpresaIndustria)
+            if (index != -1) {
+                data.splice(index, 1)
+            }
+        })        
+    }*/
+    //==
     let options = arrEmpresa.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaIndustria}">${x.nombreEmpresa}</option>`).join('');
+    //==
+    //let optionsSelect = arrEmpresaSelect00.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaIndustria}">${x.nombreEmpresa}</option>`).join('');
+    //==
     $('#tab01 .listboxswap').remove()
     $('#list00').after(`<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">${options}</select><select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>`);
+    //$('#list00').after(`<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">${options}</select><select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa">${optionsSelect}</select>`);
 
     if ($("#listSwapWrap").length) {
         $('#source00, #destination00').listswap({
@@ -321,7 +335,7 @@ var procesoSeleccion01 = () => {
  * INICIO SELECCIONAR EMPRESA
  * ================================================
  */
-$(document).on('click', '#tab01 .listboxswap .listbox_controls .add, #tab01 .listboxswap .listbox_controls .remove', function () {
+$(document).on('click', '#tab01 .listboxswap .listbox_controls .add, #tab01 .listboxswap .listbox_controls .remove, #tab01 .listboxswap .listbox_controls .add_all, #tab01 .listboxswap .listbox_controls .remove_all', function () {
     arrEmpresa00 = []
     arrEmpresaSelect00 = []
     $('#tab01 .listboxswap .source_wrapper .listbox_option').each(function () {
@@ -340,7 +354,7 @@ $(document).on('click', '#tab01 .listboxswap .listbox_controls .add, #tab01 .lis
     mostrarListaEmpresa()
 })
 
-$(document).on('click', '#tab02 .listboxswap .listbox_controls .add, #tab02 .listboxswap .listbox_controls .remove', function () {
+$(document).on('click', '#tab02 .listboxswap .listbox_controls .add, #tab02 .listboxswap .listbox_controls .remove, #tab02 .listboxswap .listbox_controls .add_all, #tab02 .listboxswap .listbox_controls .remove_all', function () {
     arrEmpresa01 = []
     arrEmpresaSelect01 = []
     $('#tab02 .listboxswap .source_wrapper .listbox_option').each(function () {
@@ -359,7 +373,7 @@ $(document).on('click', '#tab02 .listboxswap .listbox_controls .add, #tab02 .lis
     mostrarListaEmpresa()
 })
 
-$(document).on('click', '#tab03 .listboxswap .listbox_controls .add, #tab03 .listboxswap .listbox_controls .remove', function () {
+$(document).on('click', '#tab03 .listboxswap .listbox_controls .add, #tab03 .listboxswap .listbox_controls .remove, #tab03 .listboxswap .listbox_controls .add_all, #tab03 .listboxswap .listbox_controls .remove_all', function () {
     let revisor = $('#cbo-revisor').val()
     if (revisor > 0) {
         let combo = $('#cbo-tipo-empresa').val()

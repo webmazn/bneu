@@ -193,7 +193,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let colCodigo = `<td class="text-center" data-encabezado="Código">EMP${pad(x.idEmpresaIndustria, 4)}</td>`;
             let colRuc = `<td data-encabezado="Nombre y Apellido">${x.ruc}</td>`;
             let colRazonSocial = `<td data-encabezado="Tipo usuario"><span>${x.nombreEmpresa}</span></td>`
-            let colRepresentanteLegal = `<td class="text-center" data-encabezado="Fecha registro">${x.representanteLegal}</td>`;
+            let colRepresentanteLegal = `<td class="text-center" data-encabezado="Fecha registro">${x.representanteLegal == null ? '' : x.representanteLegal}</td>`;
             let colGiroNegocio = `<td class="text-center" data-encabezado="Fecha registro">${x.giro.giro}</td>`;
             let colFechaRegistro = `<td class="text-center" data-encabezado="Fecha registro">${x.txtFechaCreacion}</td>`;
             let colEstado = `<td data-encabezado="Estado"><span>${x.idEstado == '1' ? 'Habilitado' : 'Deshabilitado'}</span></td>`;

@@ -94,6 +94,14 @@ namespace sisceusi.datos
                 {
                     idCampana = (int)x.IDCAMPANA,
                     denominacion = (string)x.DENOMINACION,
+                    fechaInicioPiloto = (DateTime)x.FECHAINICIOPILOTO,
+                    fechaFinPiloto = (DateTime)x.FECHAFINPILOTO,
+                    etapaPiloto = new EtapaBE { etapa = x.ETAPAPILOTO == null ? "" : x.ETAPAPILOTO },
+                    fechaInicioEncuesta = (DateTime)x.FECHAINICIOENCUESTA,
+                    fechaFinEncuesta = (DateTime)x.FECHAFINENCUESTA,
+                    etapaOficial = new EtapaBE { etapa = x.ETAPAOFICIAL == null ? "" : x.ETAPAOFICIAL },
+                    subSector = new SubSectorBE { subSector = x.SUBSECTOR == null ? "" : x.SUBSECTOR },
+                    observaciones = x.OBSERVACIONES == null ? "" : x.OBSERVACIONES,
                     fechaCreacion = (DateTime)x.FECHACREACION,
                     idEstado = (string)x.IDESTADO
                 }).ToList();
@@ -122,8 +130,16 @@ namespace sisceusi.datos
                 {
                     idCampana = (int)x.IDCAMPANA,
                     denominacion = (string)x.DENOMINACION,
+                    fechaInicioPiloto = (DateTime)x.FECHAINICIOPILOTO,
+                    fechaFinPiloto = (DateTime)x.FECHAFINPILOTO,
+                    etapaPiloto = new EtapaBE { etapa = x.ETAPAPILOTO == null ? "" : x.ETAPAPILOTO },
+                    fechaInicioEncuesta = (DateTime)x.FECHAINICIOENCUESTA,
+                    fechaFinEncuesta = (DateTime)x.FECHAFINENCUESTA,
+                    etapaOficial = new EtapaBE { etapa = x.ETAPAOFICIAL == null ? "" : x.ETAPAOFICIAL },
+                    subSector = new SubSectorBE { subSector = x.SUBSECTOR == null ? "" : x.SUBSECTOR },
+                    observaciones = x.OBSERVACIONES == null ? "" : x.OBSERVACIONES,
                     fechaCreacion = (DateTime)x.FECHACREACION,
-                    idEstado = (string)x.IDESTADO,
+                    idEstado = (string)x.IDESTADO
                 }).ToList();
             }
             catch (Exception ex) { Log.Error(ex); }

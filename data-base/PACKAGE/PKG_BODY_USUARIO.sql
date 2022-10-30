@@ -379,14 +379,18 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  u.idUsuario,
-                                u.nombres,
+                                ei.nombreEmpresa,
                                 u.correoElectronico,
+                                u.dni,
+                                u.nombres,
+                                u.telefono,
                                 r.rol,
                                 u.fechaCreacion,
                                 u.idEstado,
                                 ROW_NUMBER() OVER (ORDER BY ' || vColumna || ' ' || piOrden ||') AS fila
                         FROM T_GENM_USUARIO U
                         inner join T_MAE_ROL r on u.idRol = r.idRol and r.idEstado = ''1''
+                        inner join T_GENM_EMPRESA_INDUSTRIA ei on u.idEmpresaIndustria = ei.idEmpresaIndustria and ei.idEstado = ''1''
                         WHERE 
                         '||
                         case
@@ -429,8 +433,11 @@
     vQuerySelect :=  'SELECT * FROM
                         (
                         SELECT  u.idUsuario,
-                                u.nombres,
+                                ei.nombreEmpresa,
                                 u.correoElectronico,
+                                u.dni,
+                                u.nombres,
+                                u.telefono,
                                 r.rol,
                                 u.fechaCreacion,
                                 u.idEstado,
