@@ -45,7 +45,7 @@ var grabar = () => {
     let correoElectronico = $("#txt-correo-empresa").val().trim()
     let representanteLegal = $('#txt-representante').val().trim()
     let dni = $("#txt-dni-representante").val().trim()
-    let idEstado = $("#cbo-estado").val()
+    let idEstado = $("#cbo-estado").val()    
 
     if (validarEspaciosBlanco(nombreEmpresa)) arr.push("Debe ingresar la razón social");
     if (validarEspaciosBlanco(nombreComercial)) arr.push("Debe ingresar el nombre comercial");
@@ -59,10 +59,12 @@ var grabar = () => {
     if (validarEspaciosBlanco(direccionFiscal)) arr.push("Debe ingresar la dirección fiscal");
     if (validarEspaciosBlanco(correoElectronico)) arr.push("Debe ingresar un correo electrónico");
     else if (validarCorreoElectronico(correoElectronico)) arr.push("Debe ingresar un correo electrónico válido");
-    if (validarEspaciosBlanco(representanteLegal)) arr.push("Debe ingresar los nombres del representante legal");
-    if (validarEspaciosBlanco(dni)) arr.push("Debe ingresar el número del documento del representante legal");
-    else if (validarNumerico(dni)) arr.push("El número del documento debe tener solo dígitos numéricos");
-    else if (dni.length < 8) arr.push("El número del documento del representante legal debe tener al menos 8 caracteres");
+    //if (validarEspaciosBlanco(representanteLegal)) arr.push("Debe ingresar los nombres del representante legal");
+    //if (validarEspaciosBlanco(dni)) arr.push("Debe ingresar el número del documento del representante legal");
+    if (dni != '') {
+        if (validarNumerico(dni)) arr.push("El número del documento debe tener solo dígitos numéricos");
+        else if (dni.length < 8) arr.push("El número del documento del representante legal debe tener al menos 8 caracteres");
+    }        
     if (validarEstado(idEstado)) arr.push("Debe seleccionar un estado");
 
     if (arr.length > 0) {
@@ -128,9 +130,12 @@ var grabarDatos = () => {
     let representanteLegal = $('#txt-representante').val().trim()
     let dni = $("#txt-dni-representante").val().trim()
     let idEstado = $("#cbo-estado").val()
+    let observacionUno = $("#txt-observacion-1").val().trim()
+    let observacionDos = $("#txt-observacion-2").val().trim()
+    let observacionTres = $("#txt-observacion-3").val().trim()
 
     let url = `${baseUrl}EmpresaIndustria/grabarEmpresaIndustria`;
-    let data = { idEmpresaIndustria, nombreEmpresa, nombreComercial, ruc, idGiro, idGrupoEmpresa, idCiuu, direccionFiscal, correoElectronico, representanteLegal, dni, idEstado, idUsuarioCreacion: idUsuarioLogin };
+    let data = { idEmpresaIndustria, nombreEmpresa, nombreComercial, ruc, idGiro, idGrupoEmpresa, idCiuu, direccionFiscal, correoElectronico, representanteLegal, dni, idEstado, observacionUno, observacionDos, observacionTres, idUsuarioCreacion: idUsuarioLogin };
     let init = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
 
     fetch(url, init)
@@ -206,6 +211,9 @@ var cargarDatos = (data) => {
     $('#txt-representante').val(data.representanteLegal)
     $("#txt-dni-representante").val(data.dni)
     $("#cbo-estado").val(data.idEstado)
+    $("#txt-observacion-1").val(data.observacionUno)
+    $("#txt-observacion-2").val(data.observacionDos)
+    $("#txt-observacion-3").val(data.observacionTres)
 }
 
 /* ================================================

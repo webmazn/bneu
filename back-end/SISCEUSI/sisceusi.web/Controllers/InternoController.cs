@@ -169,8 +169,9 @@ namespace sisceusi.web.Controllers
             ControlEncuestaLN logica = new ControlEncuestaLN();
             ControlEncuestaBE controlEncuesta = logica.obtenerControlEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
             List<CampanaEncuestaBE> listCampanaEncuesta = logica.obtenerListaCampanaEncuesta(new ControlEncuestaBE { idControlEncuesta = id });
-
             EncuestaLN logicaEncuesta = new EncuestaLN();
+            List<EncuestaComentarioBE> listaComentario = logicaEncuesta.obtenerListaEncuestaComentario(new EncuestaComentarioBE { idControlEncuesta = id });
+
             listCampanaEncuesta.ForEach(x =>
             {
                 x.listaRespuesta = logica.obtenerListaRespuestaEncuesta(x);
@@ -182,6 +183,7 @@ namespace sisceusi.web.Controllers
             });
             ViewData["controlEncuesta"] = controlEncuesta;
             ViewData["listCampanaEncuesta"] = listCampanaEncuesta;
+            ViewData["listaComentario"] = listaComentario;
             return View();
         }
 
@@ -630,7 +632,7 @@ namespace sisceusi.web.Controllers
                             });
 
                         });
-                        columnaCuerpo = columnaCuerpo + x.listaRespuesta.Count;
+                        columnaCuerpo = columnaCuerpo + x.listaRespuesta.Count - 1;
                     }
                 }                
             });
@@ -638,7 +640,7 @@ namespace sisceusi.web.Controllers
             listaCabeceraTablaMaestra.Add(new CabeceraTablaMaestraReporteBE
             {
                 descripcion = "PREGUNTA",
-                cantidadCeldas = (columnaCuerpo - 32) - 1
+                cantidadCeldas = (columnaCuerpo - 32)
             });
 
             try

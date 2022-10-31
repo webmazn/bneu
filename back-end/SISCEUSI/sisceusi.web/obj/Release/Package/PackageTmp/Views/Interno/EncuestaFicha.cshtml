@@ -4,6 +4,7 @@
     ViewBag.Title = "EncuestaFicha";
     ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] == null ? null : (ControlEncuestaBE)ViewData["controlEncuesta"];
     List<CampanaEncuestaBE> listCampanaEncuesta = ViewData["listCampanaEncuesta"] == null ? new List<CampanaEncuestaBE>() : (List<CampanaEncuestaBE>)ViewData["listCampanaEncuesta"];
+    List<EncuestaComentarioBE> listaComentario = ViewData["listaComentario"] == null ? new List<EncuestaComentarioBE>() : (List<EncuestaComentarioBE>)ViewData["listaComentario"];
 }
 
 @section scripts_header{
@@ -29,13 +30,130 @@
     <div class="row">
         <div class="col-12">
             <div class="container m-0 px-0 py-4">
-                <div class="row">
+                <div class="row mb-5">
                     <div class="col-12 d-flex">
                         <div class="bg-light w-100 p-4">
-                            <div id="titulo-ficha" class="h4 text-cyan text-center">CUE0001 CUESTIONARIO</div>
+                            <div id="titulo-ficha" class="h4 text-cyan text-center">BALANCE NACIONAL DE ENERGÍA ÚTIL SECTOR INDUSTRIA</div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">RUC</label><br />
+                            <span>@controlEncuesta.campanaEmpresa.empresaIndustria.ruc</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">NÚMERO DE CUESTIONARIO</label><br />
+                            <span>@controlEncuesta.numeroCuestionario.ToString("D4")</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">NÚMERO DE SUMINISTRO</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.numeroSuministroAlumbrado</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">RAZÓN SOCIAL</label><br />
+                            <span>@controlEncuesta.campanaEmpresa.empresaIndustria.nombreEmpresa</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">NOMBRE COMERCIAL COMERCIAL DE LA EMPRESA</label><br />
+                            <span>@controlEncuesta.campanaEmpresa.empresaIndustria.nombreComercial</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h5 class="font-weight-bold text-azul text-center">DATOS DE CONTROL</h5>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">FECHA DE LA ENCUESTA</label><br />
+                            @if (@controlEncuesta.fechaHoraLlenado != null)
+                            {
+                                <span>@controlEncuesta.fechaHoraLlenado.Value.ToString("dd/MM/yyyy")</span>
+                            }
+                            else
+                            {
+                                <span></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">HORA DE LA ENCUESTA</label><br />
+                            @if (@controlEncuesta.fechaHoraLlenado != null)
+                            {
+                                <span>@controlEncuesta.fechaHoraLlenado.Value.ToString("HH:mm")</span>
+                            }
+                            else
+                            {
+                                <span></span>
+                            }                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">DEPARTAMENTO</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.departamento.departamento</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">PROVINCIA</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.provincia.provincia</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">DISTRITO</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.distrito.distrito</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">ZONA</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.zona.zona</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">DIRECCIÓN DE LA EMPRESA O ESTABLECIMIENTO</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.direccion</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">EMPRESA QUE BRINDA SERVICIO DE LUZ</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.empresaLuz.empresaLuz</span>
+                        </div>
+                    </div>
+                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">EMPRESA QUE BRINDA SERVICIO DE GAS NATURAL</label><br />
+                            <span>@controlEncuesta.plantaEmpresa.empresaGas.empresaGas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider d-none-print"></div>
             </div>
         </div>
     </div>
@@ -44,5 +162,6 @@
 <script type="text/javascript">
     var controlEncuesta = @Html.Raw(JsonConvert.SerializeObject(controlEncuesta));
     var listCampanaEncuesta = @Html.Raw(JsonConvert.SerializeObject(listCampanaEncuesta));
+    var listaComentario = @Html.Raw(JsonConvert.SerializeObject(listaComentario));
 </script>
 

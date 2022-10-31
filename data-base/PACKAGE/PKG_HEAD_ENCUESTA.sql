@@ -72,6 +72,11 @@
     piIdCampanaEncuesta NUMBER,
     poRef OUT SYS_REFCURSOR
   );
+  
+  PROCEDURE USP_SEL_LISTA_ENCUESTA_COMEN(
+    piIdControlEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  );
 
 END PKG_SISCEUSI_ENCUESTA;
 

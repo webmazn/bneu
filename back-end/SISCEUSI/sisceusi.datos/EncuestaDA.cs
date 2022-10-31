@@ -179,5 +179,20 @@ namespace sisceusi.datos
             catch (Exception ex) { Log.Error(ex); }
             return item;
         }
+
+        public List<EncuestaComentarioBE> obtenerListaEncuestaComentario(EncuestaComentarioBE entidad, OracleConnection db)
+        {
+            List<EncuestaComentarioBE> lista = new List<EncuestaComentarioBE>();
+            try
+            {
+                string sp = $"{Package.Encuesta}USP_SEL_LISTA_ENCUESTA_COMEN";
+                var p = new OracleDynamicParameters();
+                p.Add("piIdControlEncuesta", entidad.idControlEncuesta);
+                p.Add("poRef", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+                lista = db.Query<EncuestaComentarioBE>(sp, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex) { Log.Error(ex); }
+            return lista;
+        }
     }
 }

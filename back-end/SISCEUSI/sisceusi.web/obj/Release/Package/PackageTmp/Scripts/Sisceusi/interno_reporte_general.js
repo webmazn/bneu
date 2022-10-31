@@ -2,6 +2,7 @@
     $('#btn-reporte').on('click', (e) => generarReporte())
     $('#cbo-campana').on('change', (e) => cambiarCampana())
     $('#btn-excel').on('click', (e) => exportarGeneral())
+    $('#btn-excel-simple').on('click', (e) => exportarGeneralSimple())
     cargarDatos()
 })
 
@@ -250,4 +251,15 @@ var exportarGeneral = () => {
         let url = `${baseUrl}Interno/exportarGeneral?${queryParams}`
         location.href = url
     }    
+}
+
+var exportarGeneralSimple = () => {
+    let idCampana = $('#cbo-campana').val()
+    if (idCampana > 0) {
+        //let idTablaMaestra = $('#cbo-tabla-maestra').val()
+        let params = { idCampana }
+        let queryParams = Object.keys(params).map(x => params[x] == null ? x : `${x}=${params[x]}`).join('&')
+        let url = `${baseUrl}Interno/exportarGeneralSimple?${queryParams}`
+        location.href = url
+    }
 }

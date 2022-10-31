@@ -1,12 +1,25 @@
 ﻿var seccion = ''
 var contadorSeccion = 0
+var idCampanaEncuestaTitulo = 0
 $(document).ready(() => {
-    $('#titulo-ficha').html(`CUE${pad(controlEncuesta.numeroCuestionario, 4)} CUESTIONARIO`)
+    //$('#titulo-ficha').html(`CUE${pad(controlEncuesta.numeroCuestionario, 4)} CUESTIONARIO`)
+    tituloEncuesta()
     listCampanaEncuesta.forEach(x => {
         armarPregunta(x)
     })
     armarBoton()
 })
+
+var tituloEncuesta = () => {
+    let titulo = `  <div class="container">` +
+                        `<div class="row my-4">` +
+                            `<div class="col-12">` +
+                                `<h5 class="font-weight-bold text-azul text-center">ENCUESTA</h5>` +
+                            `</div>` +
+                        `</div>` +
+                    `</div>`
+    $('#pie').prev().after(titulo)
+}
 
 var armarPregunta = (preguntaEncuesta) => {
     if (preguntaEncuesta.idTipoControl == 1) {
@@ -19,10 +32,11 @@ var armarPregunta = (preguntaEncuesta) => {
         armarOpcionUnica(preguntaEncuesta)
     } else if (preguntaEncuesta.idTipoControl == 5) {
         armarTablaMaestra(preguntaEncuesta)
-    }
+    }    
 }
 
 var armarCajaTexto = (preguntaEncuesta) => {
+    obtenerIdCampanaEncuestaComentario(preguntaEncuesta)
     let respuesta = preguntaEncuesta.listaRespuestaEncuestaPlanta[0].respuesta
 
     let componente = `<div class="container">` +
@@ -30,12 +44,13 @@ var armarCajaTexto = (preguntaEncuesta) => {
                           `<div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">` +
                             `<div class="form-group">` +
                               `<label class="font-weight-bold text-azul" for="pregunta-${preguntaEncuesta.idCampanaEncuesta}">${preguntaEncuesta.pregunta}</label></br>` +
-                              `<span>${respuesta}</span>` +
+                              `<span>${respuesta == null ? '' : respuesta}</span>` +
                             `</div>` +
                           `</div>` +
                         `</div>` +
                     `</div>`
     $('#pie').prev().after(componente)
+    validarComentario(preguntaEncuesta)
 
     if (preguntaEncuesta.separador == '1') {
         $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
@@ -43,6 +58,7 @@ var armarCajaTexto = (preguntaEncuesta) => {
 }
 
 var armarListaOpciones = (preguntaEncuesta) => {
+    obtenerIdCampanaEncuestaComentario(preguntaEncuesta)
     let respuesta = preguntaEncuesta.listaRespuestaEncuestaPlanta[0].idCampanaEncuesta
     let pregunta = preguntaEncuesta.listaRespuesta.find(x => x.idCampanaEncuesta == respuesta)
 
@@ -69,12 +85,14 @@ var armarListaOpciones = (preguntaEncuesta) => {
     }*/
     //$('#preguntas-encuesta').append(componente)
 
+    validarComentario(preguntaEncuesta)
     if (preguntaEncuesta.separador == '1') {
         $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
     }
 }
 
 var armarOpcionUnica = (preguntaEncuesta) => {
+    obtenerIdCampanaEncuestaComentario(preguntaEncuesta)
     let opciones = preguntaEncuesta.listaRespuesta == null ? `` : preguntaEncuesta.listaRespuesta.length == 0 ? '' : preguntaEncuesta.listaRespuesta.map(x =>
         `<div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">` +
            `<div class="form-group">` +
@@ -116,12 +134,14 @@ var armarOpcionUnica = (preguntaEncuesta) => {
         }        
     })
 
+    validarComentario(preguntaEncuesta)
     if (preguntaEncuesta.separador == '1') {
         $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
     }
 }
 
 var armarTablaMaestra = (preguntaEncuesta) => {
+    obtenerIdCampanaEncuestaComentario(preguntaEncuesta)
     let listaSecundario = preguntaEncuesta.listaEncabezadoSecundario
     if (listaSecundario.length > 0) {
         let tablaMaestra = listaSecundario[0].encabezadoPrincipal.tablaMaestra
@@ -253,6 +273,7 @@ var armarTablaMaestra = (preguntaEncuesta) => {
 
         $('[data-toggle="tooltip"]').tooltip()
 
+        validarComentario(preguntaEncuesta)
         if (preguntaEncuesta.separador == '1') {
             $('#pie').prev().after('<div class="dropdown-divider my-4 d-none-print"></div>')
         }
@@ -422,3 +443,27 @@ var pdf = () => {
     });
 
 }*/
+
+var obtenerIdCampanaEncuestaComentario = (preguntaEncuesta) => {
+    idCampanaEncuestaTitulo = preguntaEncuesta.titulo == '1' ? preguntaEncuesta.idCampanaEncuesta : idCampanaEncuestaTitulo;
+}
+
+var validarComentario = (pregunta) => {
+    if (pregunta.separador == '1') {
+        let preguntaComentario = listaComentario.find(x => x.idCampanaEncuesta == idCampanaEncuestaTitulo)
+
+        if (controlEncuesta.idEtapa < 3 && controlEncuesta.idFase < 5 && preguntaComentario && preguntaComentario.comentario != '') {
+            let comentario = `` +
+                      `<div class="container">` +
+                        `<div class="container p-0">` +
+                            `<div class="row">` +
+                                `<div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">` +
+                                    `<label class="text-danger"><strong>Observación: </strong>${preguntaComentario.comentario}</label>` +
+                                `</div>` +
+                            `</div>` +
+                        `</div>` +
+                    `</div>`
+            $('#pie').prev().after(comentario)
+        }        
+    }
+}

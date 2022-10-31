@@ -127,5 +127,17 @@ namespace sisceusi.logica
             finally { if (cn.State == ConnectionState.Open) cn.Close(); }
             return item;
         }
+
+        public List<EncuestaComentarioBE> obtenerListaEncuestaComentario(EncuestaComentarioBE encuestaComentario)
+        {
+            List<EncuestaComentarioBE> lista = new List<EncuestaComentarioBE>();
+            try
+            {
+                cn.Open();
+                lista = datos.obtenerListaEncuestaComentario(encuestaComentario, cn);
+            }
+            finally { if (cn.State == ConnectionState.Open) cn.Close(); }
+            return lista;
+        }
     }
 }

@@ -286,6 +286,17 @@
     FROM  T_GEND_ENCUESTA_COMENTARIO
     WHERE idControlEncuesta = piIdControlEncuesta AND idCampanaEncuesta = piIdCampanaEncuesta;
   END USP_SEL_ENCUESTA_COMENTARIO;
+  
+  PROCEDURE USP_SEL_LISTA_ENCUESTA_COMEN(
+    piIdControlEncuesta NUMBER,
+    poRef OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN poRef FOR
+    SELECT  *
+    FROM  T_GEND_ENCUESTA_COMENTARIO
+    WHERE idControlEncuesta = piIdControlEncuesta;
+  END USP_SEL_LISTA_ENCUESTA_COMEN;
 
 END PKG_SISCEUSI_ENCUESTA;
 

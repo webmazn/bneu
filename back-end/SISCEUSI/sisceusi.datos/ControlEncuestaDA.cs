@@ -36,15 +36,16 @@ namespace sisceusi.datos
                         nombres = x.NOMBREREVISOR == null ? "" : (string)x.NOMBREREVISOR
                     },
                     idSupervisor = x.IDSUPERVISOR == null ? 0 : (int)x.IDSUPERVISOR,
+                    idEtapa = x.IDETAPA == null ? 0 : (int)x.IDETAPA,
                     idFase = x.IDFASE == null ? 0 : (int)x.IDFASE,
                     plantaEmpresa = new PlantaEmpresaBE {
                         idPlantaEmpresa = (int)x.IDPLANTAEMPRESA,
                         denominacion = (string)x.PLANTA,
                         direccion = x.DIRECCION == null ? "" : (string)x.DIRECCION,
                         idEmpresaGas = (int)x.IDEMPRESAGAS,
-                        numeroSuministroGas = (string)x.NUMEROSUMINISTROGAS,
+                        numeroSuministroGas = x.NUMEROSUMINISTROGAS == null ? "" :(string)x.NUMEROSUMINISTROGAS,
                         idEmpresaLuz = (int)x.IDEMPRESALUZ,
-                        numeroSuministroAlumbrado = (string)x.NUMEROSUMINISTROALUMBRADO,
+                        numeroSuministroAlumbrado = x.NUMEROSUMINISTROALUMBRADO == null ? "" : (string)x.NUMEROSUMINISTROALUMBRADO,
                         departamento = new DepartamentoBE { departamento = (string)x.DEPARTAMENTO },
                         provincia = new ProvinciaBE { provincia = (string)x.PROVINCIA },
                         distrito = new DistritoBE { distrito = (string)x.DISTRITO },
