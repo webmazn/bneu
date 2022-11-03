@@ -113,22 +113,22 @@ var listarEmpresa00 = () => {
         data = data.filter(x => x.idCiuu == ciuu)
     }
     //==
-    if (arrEmpresaSelect00.length > 0) {
+    /*if (arrEmpresaSelect00.length > 0) {
         arrEmpresaSelect00.forEach(x => {
             let index = data.findIndex(y => y.idEmpresaIndustria == x.empresaIndustria.idEmpresaIndustria)
             if (index != -1) {
                 data.splice(index, 1)
             }
         })        
-    }
+    }*/
     //==
     let options = arrEmpresa.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaIndustria}">${x.nombreEmpresa}</option>`).join('');
     //==
-    let optionsSelect = arrEmpresaSelect00.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaIndustria}">${x.nombreEmpresa}</option>`).join('');
+    //let optionsSelect = arrEmpresaSelect00.length == 0 ? '' : data.map(x => `<option value="${x.idEmpresaIndustria}">${x.nombreEmpresa}</option>`).join('');
     //==
     $('#tab01 .listboxswap').remove()
-    //$('#list00').after(`<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">${options}</select><select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>`);
-    $('#list00').after(`<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">${options}</select><select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa">${optionsSelect}</select>`);
+    $('#list00').after(`<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">${options}</select><select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa"></select>`);
+    //$('#list00').after(`<select id="source00" data-text="Empresas para seleccionar" data-search="Buscar empresa">${options}</select><select id="destination00" data-text="Empresas seleccionadas" data-search="Buscar empresa">${optionsSelect}</select>`);
 
     if ($("#listSwapWrap").length) {
         $('#source00, #destination00').listswap({
