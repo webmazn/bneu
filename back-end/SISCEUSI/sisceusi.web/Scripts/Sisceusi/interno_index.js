@@ -26,7 +26,7 @@ var cargarDesplegables = () => {
     cargarParametros(listaZona, '#cbo-zona', 'Seleccione una zona')
     cargarDepartamento(listaDepartamento)
     cargarProvincia(listaProvincia)
-    cargarDistrito(listaDistrito)    
+    cargarDistrito(listaDistrito)
 }
 
 var cargarRevisor = (data) => {
@@ -321,7 +321,8 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
                 //Encuestado
                 x.controlEncuesta.aceptaLLenarEncuesta === '' ? 1 :
                 x.controlEncuesta.aceptaLLenarEncuesta === '0' ? 0 : 
-                x.controlEncuesta.aceptaFirmarEncuesta === '' ? 2 : 
+                x.controlEncuesta.aceptaFirmarEncuesta === '' ? 2 :
+                x.controlEncuesta.aceptaFirmarEncuesta === '0' ? 0 :
                 x.controlEncuesta.fechaHoraLlenado == null ? 3 : 4
                 :
                 //Revisor
@@ -332,9 +333,13 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
                                 idRolLogin == 3 && (fase < 2 || fase == 3) ? true :
                                 idRolLogin == 2 && (fase == 2 || fase == 4) ? true : false
 
+            let verEncuestaNoFirma = bloque == 0 ? false : verEncuesta
+
             //let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && x.etapa.idEtapa == 3
             //let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && ((x.etapa.idEtapa == 3 && fase == 5) || fase == 5)
-            let verFicha = x.tipoEncuesta.idTipoEncuesta == 2 && (fase == 2 || fase == 3 || fase == 4 || fase == 5)
+            let verFicha = (x.tipoEncuesta.idTipoEncuesta == 1 && x.tipoEncuesta.idTipoEncuesta == 2) && (fase == 2 || fase == 3 || fase == 4 || fase == 5)
+
+            let verFichaNoFirma = bloque == 0 ? true : verFicha
 
             let colNro = `<td class="text-center" data-encabezado="Item" scope="row">${(pagina - 1) * registros + (i + 1)}</td>`;
             let colCodigo = `<td class="text-center" data-encabezado="Código">ENC${pad(x.campana.idCampana, 4)}</td>`;
@@ -349,7 +354,7 @@ var renderizar = (data, numberCellHeader, pagina, registros) => {
             let btnObservar = `<div class="btn btn-sm btn-success btn-table btn-observar mx-1" data-id="${x.controlEncuesta.idControlEncuesta}"><i class="fa fa-eye"></i></div>`;
             //let btnEliminar = `<div class="btn btn-sm btn-danger btn-table btn-delete" data-id="${0}"><i class="fa fa-trash"></i></div>`;
             let btnEncuesta = `<div class="btn btn-sm btn-info btn-table btn-encuesta mx-1" data-id="${x.controlEncuesta.idControlEncuesta}" data-bloque="${bloque}"><i class="fa fa-edit"></i></div>`;
-            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${verFicha ? btnObservar : ''}${ verEncuesta ? btnEncuesta : ''}</td>`;
+            let colOptions = `<td class="text-center text-center text-xs-right" data-encabezado="Gestión">${verFichaNoFirma ? btnObservar : ''}${verEncuestaNoFirma ? btnEncuesta : ''}</td>`;
             let row = `<tr>${colNro}${colCodigo}${colEmpresa}${colPlanta}${colTipoEncuesta}${colCampana}${colFecha}${colEtapa}${colFase}${colOptions}</tr>`;
             return row;
         }).join('');

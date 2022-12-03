@@ -5,6 +5,15 @@
     ControlEncuestaBE controlEncuesta = ViewData["controlEncuesta"] == null ? null : (ControlEncuestaBE)ViewData["controlEncuesta"];
     List<CampanaEncuestaBE> listCampanaEncuesta = ViewData["listCampanaEncuesta"] == null ? new List<CampanaEncuestaBE>() : (List<CampanaEncuestaBE>)ViewData["listCampanaEncuesta"];
     List<EncuestaComentarioBE> listaComentario = ViewData["listaComentario"] == null ? new List<EncuestaComentarioBE>() : (List<EncuestaComentarioBE>)ViewData["listaComentario"];
+    UsuarioBE usuario = Session["user"] == null ? null : (UsuarioBE)Session["user"];
+    int hora = int.Parse(DateTime.Now.ToString("HH"));
+    string saludo = hora < 12 ? "Buenos días" : hora < 19 ? "Buenas tardes" : "Buenas noches";
+    string sif1 = controlEncuesta.aceptaLLenarEncuesta.Equals("1") ? "checked" : "";
+    string nof1 = controlEncuesta.aceptaLLenarEncuesta.Equals("0") ? "checked" : "";
+    string sif2 = controlEncuesta.aceptaTratamientoDatos.Equals("1") ? "checked" : "";
+    string nof2 = controlEncuesta.aceptaTratamientoDatos.Equals("0") ? "checked" : "";
+    string sif3 = controlEncuesta.aceptaFirmarEncuesta.Equals("1") ? "checked" : "";
+    string nof3 = controlEncuesta.aceptaFirmarEncuesta.Equals("0") ? "checked" : "";
 }
 
 @section scripts_header{
@@ -71,89 +80,186 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="dropdown-divider"></div>
                 <div class="row mt-4">
                     <div class="col-12">
-                        <h5 class="font-weight-bold text-azul text-center">DATOS DE CONTROL</h5>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">FECHA DE LA ENCUESTA</label><br />
-                            @if (@controlEncuesta.fechaHoraLlenado != null)
-                            {
-                                <span>@controlEncuesta.fechaHoraLlenado.Value.ToString("dd/MM/yyyy")</span>
-                            }
-                            else
-                            {
-                                <span></span>
-                            }
-                        </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">HORA DE LA ENCUESTA</label><br />
-                            @if (@controlEncuesta.fechaHoraLlenado != null)
-                            {
-                                <span>@controlEncuesta.fechaHoraLlenado.Value.ToString("HH:mm")</span>
-                            }
-                            else
-                            {
-                                <span></span>
-                            }                            
-                        </div>
+                        <h5 class="font-weight-bold text-azul text-center">PRESENTACIÓN</h5>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">DEPARTAMENTO</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.departamento.departamento</span>
-                        </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">PROVINCIA</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.provincia.provincia</span>
-                        </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">DISTRITO</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.distrito.distrito</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">ZONA</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.zona.zona</span>
-                        </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">DIRECCIÓN DE LA EMPRESA O ESTABLECIMIENTO</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.direccion</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">EMPRESA QUE BRINDA SERVICIO DE LUZ</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.empresaLuz.empresaLuz</span>
-                        </div>
-                    </div>
-                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-azul" for="txt-hora-encuesta">EMPRESA QUE BRINDA SERVICIO DE GAS NATURAL</label><br />
-                            <span>@controlEncuesta.plantaEmpresa.empresaGas.empresaGas</span>
+                    <div class="col-12 d-flex">
+                        <div class="w-100 p-4">
+                            <div class="text-center text-azul font-weight-bold p-5">@saludo: @usuario.nombres</div>
+                            <div class="row pb-5">
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
+                                    <p class="pl-md-5 pl-lg-5 text-justify"><b>F1. &nbsp;</b><span>¿Acepta usted participar en este estudio?</span></p>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios1" value="si" disabled @sif1>
+                                        <label class="form-check-label" for="exampleRadios1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta01" id="exampleRadios2" value="no" disabled @nof1>
+                                        <label class="form-check-label" for="exampleRadios2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
+                                    <p class="pl-md-5 pl-lg-5 text-justify"><b>F2. &nbsp;</b><span>Trataremos sus respuestas como información confidencial, sin embargo sería de mucha ayuda para nuestro cliente que le facilitemos algunos datos personales de quienes participaron en esta encuesta, para la planificación de los servicios de energía. ¿Está interesado en proveer a nuestro cliente con sus datos?</span></p>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios3" value="si" disabled @sif2>
+                                        <label class="form-check-label" for="exampleRadios3">Si</label>
+                                    </div>
+                                </div>
+                                <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pregunta02" id="exampleRadios4" value="no" disabled @nof2>
+                                        <label class="form-check-label" for="exampleRadios4">No</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="dropdown-divider d-none-print"></div>
+
+                @if (sif2.Equals("checked"))
+                {
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            <div class="w-100 p-4">
+                                <div class="row pb-5">
+                                    <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
+                                        <p class="px-md-5 px-lg-5 text-justify"><span>Conforme a la Ley Nº 29733, Ley de Protección de Datos Personales, le informamos que la información que usted nos brinde en esta encuesta, será archivada y protegida por el Ministerio de Energía y Minas. Tenga la confianza que sus datos serán conservados de manera segura. Al colocar su firma en este documento, usted nos permite realizar un tratamiento de sus datos personales, eso quiere decir que podremos recopilar, registrar, organizar, almacenar, conservar, elaborar, modificar, extraer, consultar, utilizar, bloquear, suprimir, transferir, difundir o cualquier otra forma de procesamiento que facilite el acceso de los datos personales que usted nos haya brindado respondiendo este cuestionario. Esta base de datos será compartida con el ministerio.</span></p>
+                                        <p class="px-md-5 px-lg-5 text-justify"><span>En el momento que usted desee puede solicitar:</span></p>
+                                        <ul class="px-md-5 px-lg-5 text-justify">
+                                            <li class="ml-5">Conocer qué datos personales suyos se encuentran en nuestra base de datos</li>
+                                            <li class="ml-5">Que se rectifique (se actualice o se incluya) cualquier dato que nos indique</li>
+                                            <li class="ml-5">Que se cancelen o se borren sus datos de nuestros archivos</li>
+                                            <li class="ml-5">Oponerse a ser parte de nuestro banco de datos o al uso de sus datos personales en cualquier momento.</li>
+                                        </ul>
+                                        <p class="px-md-5 px-lg-5 text-justify"><span> Si tuviese alguna consulta puede comunicarse al correo electrónico @System.Configuration.ConfigurationManager.AppSettings["correoAdmin"]</span></p>
+                                    </div>
+                                </div>
+                                <div class="row pb-5">
+                                    <div class="col-xm-12 col-sm-12 col-md-6 col-lg-7">
+                                        <p class="pl-md-5 pl-lg-5 text-justify"><b>F3. &nbsp;</b><span>¿Acepta firmalo?</span></p>
+                                    </div>
+                                    <div class="col-xm-12 col-sm-12 col-md-1 col-lg-1"></div>
+                                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pregunta03" id="exampleRadios5" value="si" disabled @sif3>
+                                            <label class="form-check-label" for="exampleRadios1">Si</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xm-12 col-sm-12 col-md-2 col-lg-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pregunta03" id="exampleRadios6" value="no" disabled @nof3>
+                                            <label class="form-check-label" for="exampleRadios2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+
+                @if (sif2.Equals("checked") && sif3.Equals("checked"))
+                {
+                    <div class="dropdown-divider d-none-print"></div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5 class="font-weight-bold text-azul text-center">DATOS DE CONTROL</h5>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">FECHA DE LA ENCUESTA</label><br />
+                                @if (@controlEncuesta.fechaHoraLlenado != null)
+                                {
+                                    <span>@controlEncuesta.fechaHoraLlenado.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                                else
+                                {
+                                    <span></span>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-hora-encuesta">HORA DE LA ENCUESTA</label><br />
+                                @if (@controlEncuesta.fechaHoraLlenado != null)
+                                {
+                                    <span>@controlEncuesta.fechaHoraLlenado.Value.ToString("HH:mm")</span>
+                                }
+                                else
+                                {
+                                    <span></span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">DEPARTAMENTO</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.departamento.departamento</span>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-hora-encuesta">PROVINCIA</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.provincia.provincia</span>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-hora-encuesta">DISTRITO</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.distrito.distrito</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">ZONA</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.zona.zona</span>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-hora-encuesta">DIRECCIÓN DE LA EMPRESA O ESTABLECIMIENTO</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.direccion</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-fecha-encuesta">EMPRESA QUE BRINDA SERVICIO DE LUZ</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.empresaLuz.empresaLuz</span>
+                            </div>
+                        </div>
+                        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-azul" for="txt-hora-encuesta">EMPRESA QUE BRINDA SERVICIO DE GAS NATURAL</label><br />
+                                <span>@controlEncuesta.plantaEmpresa.empresaGas.empresaGas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider d-none-print"></div>
+                }
+                
             </div>
         </div>
     </div>
@@ -163,5 +269,7 @@
     var controlEncuesta = @Html.Raw(JsonConvert.SerializeObject(controlEncuesta));
     var listCampanaEncuesta = @Html.Raw(JsonConvert.SerializeObject(listCampanaEncuesta));
     var listaComentario = @Html.Raw(JsonConvert.SerializeObject(listaComentario));
+    var siAceptaf2 = @Html.Raw(JsonConvert.SerializeObject(sif2));
+    var siAceptaf3 = @Html.Raw(JsonConvert.SerializeObject(sif3));
 </script>
 

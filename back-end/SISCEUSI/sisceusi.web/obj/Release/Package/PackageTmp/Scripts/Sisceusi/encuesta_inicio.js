@@ -48,7 +48,8 @@ var validarContinuar = () => {
     .then(r => r.json())
     .then(j => {
         if (j.success) {
-            if (!aceptaLLenarEncuesta) location.href = `${baseUrl}Encuesta/Finalizar`
+            //if (!aceptaLLenarEncuesta) location.href = `${baseUrl}Encuesta/Finalizar`
+            if (aceptaLLenarEncuesta == '0') location.href = `${baseUrl}Interno/Index`
             else location.href = `${baseUrl}Encuesta/Firma/${$('#identificador').val()}`
         } else {
             $('.seccion-mensaje').html(messageError(messageStringGeneric('Ocurrió un problema al guardar los datos, reintente nuevamente.'), 'registro'))

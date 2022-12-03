@@ -3,10 +3,13 @@ var contadorSeccion = 0
 var idCampanaEncuestaTitulo = 0
 $(document).ready(() => {
     //$('#titulo-ficha').html(`CUE${pad(controlEncuesta.numeroCuestionario, 4)} CUESTIONARIO`)
-    tituloEncuesta()
-    listCampanaEncuesta.forEach(x => {
-        armarPregunta(x)
-    })
+    
+    if (siAceptaf2 == 'checked' && siAceptaf3 == 'checked') {
+        tituloEncuesta()
+        listCampanaEncuesta.forEach(x => {
+            armarPregunta(x)
+        })
+    }    
     armarBoton()
 })
 

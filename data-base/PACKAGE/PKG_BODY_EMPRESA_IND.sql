@@ -441,6 +441,8 @@
     FROM  T_GENM_EMPRESA_INDUSTRIA ei
     WHERE
     (SELECT COUNT(*) FROM T_GENM_PLANTA_EMPRESA WHERE idEmpresaIndustria = ei.idEmpresaIndustria AND idEstado = '1') > 0 AND
+    (SELECT COUNT(*) FROM T_GENM_USUARIO WHERE idEstado = '1' AND idPlantaEmpresa in (
+        SELECT idPlantaEmpresa FROM T_GENM_PLANTA_EMPRESA WHERE idEmpresaIndustria = ei.idEmpresaIndustria AND idEstado = '1')) > 0 AND
     ei.idEstado = '1';
   END USP_SEL_LISTA;
   
